@@ -15,7 +15,8 @@ export const getPartialStaticMetadata = (
 
   if (
     action.event.type === 'INITIAL_PURCHASE' ||
-    action.event.type == 'NON_RENEWING_PURCHASE'
+    action.event.type == 'NON_RENEWING_PURCHASE' ||
+    action.event.type == 'RENEWAL'
   ) {
     metadata.premium = true;
   }
