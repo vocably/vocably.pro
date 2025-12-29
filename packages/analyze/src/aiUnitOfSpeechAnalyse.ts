@@ -19,7 +19,7 @@ import {
   Tense,
 } from '@vocably/model';
 import { isSafeObject, sanitizeTranscript } from '@vocably/sulna';
-import { isArray, omit } from 'lodash-es';
+import { isArray, isString, omit } from 'lodash-es';
 import { ChatModel } from 'openai/resources';
 import { ChatCompletionMessageParam } from 'openai/resources/chat/completions';
 import { config } from './config';
@@ -215,7 +215,7 @@ export const sanitizeAiAnalyseResult = (
     output.tense = result.tense;
   }
 
-  if (result.pastTenses && ['en', 'en-GB'].includes(language)) {
+  if (isString(result.pastTenses) && ['en', 'en-GB'].includes(language)) {
     output.pastTenses = sanitizeEnglishPastTenses(
       result.pastTenses,
       !!result.isIrregular
