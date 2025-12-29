@@ -55,7 +55,7 @@ export class VocablyCardSource {
         )}
         {this.card.data.tense !== 'past' && this.card.data.pastTenses && (
           <span class="vocably-muted vocably-small vocably-translation-margin-left">
-            (in past: {this.card.data.pastTenses})
+            (past: {this.card.data.pastTenses})
           </span>
         )}
       </Host>
