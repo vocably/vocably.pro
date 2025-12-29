@@ -11,5 +11,11 @@ export const CardBack: FC<{ card: CardItem }> = ({ card }) => {
       </Text>
     );
   }
-  return <CardDefinition card={card.data} textStyle={{ fontSize: 24 }} />;
+  return (
+    <CardDefinition
+      card={card.data}
+      textStyle={{ fontSize: 24 }}
+      showInflections={true}
+    />
+  );
 };

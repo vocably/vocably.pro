@@ -135,7 +135,11 @@ export const MultiChoice: FC<Props> = ({
           )}
           {direction === 'front' && (
             <>
-              <CardFront card={card} autoPlay={autoPlay} />
+              <CardFront
+                card={card}
+                autoPlay={autoPlay}
+                showInflections={true}
+              />
             </>
           )}
           <View

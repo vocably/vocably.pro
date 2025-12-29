@@ -9,9 +9,14 @@ import { PlaySound } from '../../PlaySound';
 type Props = {
   card: CardItem;
   autoPlay: boolean;
+  showInflections?: boolean;
 };
 
-export const CardFront: FC<Props> = ({ card, autoPlay }) => {
+export const CardFront: FC<Props> = ({
+  card,
+  autoPlay,
+  showInflections = false,
+}) => {
   const theme = useTheme();
 
   const [isAutoPlayed, setIsAutoPlayed] = useState(false);
@@ -82,7 +87,12 @@ export const CardFront: FC<Props> = ({ card, autoPlay }) => {
           </Text>
         </Text>
       </View>
-      {(card.data.ipa || card.data.partOfSpeech || card.data.g) && (
+      {(card.data.ipa ||
+        card.data.partOfSpeech ||
+        card.data.g ||
+        (showInflections &&
+          card.data.tense === 'present' &&
+          card.data.pastTenses)) && (
         <View
           style={{
             flexDirection: 'row',
@@ -102,6 +112,13 @@ export const CardFront: FC<Props> = ({ card, autoPlay }) => {
           {card.data.partOfSpeech && (
             <Text style={{ marginRight: 8 }}>{card.data.partOfSpeech}</Text>
           )}
+          {showInflections &&
+            card.data.tense === 'present' &&
+            card.data.pastTenses && (
+              <Text style={{ marginRight: 8 }}>
+                (past: {card.data.pastTenses})
+              </Text>
+            )}
         </View>
       )}
       {card.data.example && (

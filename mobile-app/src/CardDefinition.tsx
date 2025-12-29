@@ -9,12 +9,14 @@ type Props = {
   card: Card;
   textStyle?: StyleProp<Text>;
   maskSource?: boolean;
+  showInflections?: boolean;
 };
 
 export const CardDefinition: FC<Props> = ({
   card,
   textStyle,
   maskSource = false,
+  showInflections = false,
 }) => {
   const theme = useTheme();
 
@@ -53,6 +55,21 @@ export const CardDefinition: FC<Props> = ({
           <Text style={item.style}>{`\u2022 ${item.text}`}</Text>
         </Text>
       ))}
+      {showInflections && card.tense === 'present' && card.pastTenses && (
+        <Text
+          style={[
+            textStyle,
+            {
+              marginTop: 16,
+            },
+          ]}
+        >
+          Past:{' '}
+          <Text style={{ color: theme.colors.secondary }}>
+            {card.pastTenses}
+          </Text>
+        </Text>
+      )}
     </>
   );
 };

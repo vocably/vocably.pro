@@ -12,7 +12,7 @@ export const makeCards = (analysis: Analysis): Card[] => {
       example: join(item.examples ?? []),
       translation: item.translation,
       partOfSpeech: item.partOfSpeech ?? '',
-      ...pick(item, ['g']),
+      ...pick(item, ['g', 'tense', 'pastTenses', 'number', 'pluralForm']),
       tags: [],
     }));
   }

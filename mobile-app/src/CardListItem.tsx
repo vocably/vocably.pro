@@ -125,6 +125,7 @@ export const CardListItem: FC<Props> = ({
                 <Pressable
                   hitSlop={10}
                   onPress={() => {
+                    // @ts-ignore
                     navigation.navigate('ChatWithCardModal', {
                       card,
                     });
@@ -174,6 +175,15 @@ export const CardListItem: FC<Props> = ({
                 {' '}
                 <View style={{ transform: textTransform }}>
                   <Text style={{ lineHeight }}>{card.partOfSpeech}</Text>
+                </View>
+              </>
+            )}
+
+            {card.tense === 'present' && card.pastTenses && (
+              <>
+                {' '}
+                <View style={{ transform: textTransform }}>
+                  <Text style={{ lineHeight }}>(past: {card.pastTenses})</Text>
                 </View>
               </>
             )}

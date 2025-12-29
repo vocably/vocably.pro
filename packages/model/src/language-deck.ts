@@ -1,4 +1,5 @@
 import { isObject, isString } from 'lodash-es';
+import { AnalysisNumber, Tense } from './analysis';
 
 export type Tag = {
   title: string;
@@ -58,8 +59,8 @@ export type Card = {
   source: string;
   ipa?: string;
   g?: string;
-  number?: 'plural' | 'singular';
-  tense?: string;
+  number?: AnalysisNumber;
+  tense?: Tense;
   pastTenses?: string;
   pluralForm?: string;
   example?: string;
