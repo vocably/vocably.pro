@@ -75,6 +75,30 @@ describe('translateUnitOfSpeech', () => {
     expect(translationResult.value[1]).toEqual('берег');
   }, 60_000);
 
+  it('trims article before translation', async () => {
+    const translationResult = await translateUnitOfSpeechNoCache({
+      source: 'het pad',
+      partOfSpeech: 'noun',
+      sourceLanguage: 'nl',
+      targetLanguage: 'en',
+      definitions: [
+        'Een smalle weg voor wandelaars of fietsers.',
+        'Een traject of koers die men volgt.',
+        'Een amfibie uit de familie Bufonidae.',
+      ],
+    });
+    expect(translationResult.success).toEqual(true);
+    if (translationResult.success === false) {
+      return;
+    }
+
+    console.log(translationResult.value);
+
+    expect(translationResult.value.every((v) => !v.startsWith('the'))).toEqual(
+      true
+    );
+  }, 60_000);
+
   it('tailor', async () => {
     const translationResult = await translateUnitOfSpeechNoCache({
       source: 'tailor',

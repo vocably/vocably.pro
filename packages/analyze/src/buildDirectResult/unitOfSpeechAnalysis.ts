@@ -7,7 +7,7 @@ import {
   ValidAnalysisItems,
 } from '@vocably/model';
 
-import { trimArticle } from '@vocably/sulna';
+import { trimSenselessArticle } from '@vocably/sulna';
 import { analyseAndTranslate } from '../analyseAndTranslate';
 import { buildDirectAnalyseBatch } from '../buildDirectAnalyseBatch';
 import { getPartsOfSpeech, PartOfSpeech } from '../getPartsOfSpeech';
@@ -27,7 +27,7 @@ export const unitOfSpeechAnalysis = async ({
   targetLanguage,
   predefinedPartsOfSpeech = [],
 }: Payload): Promise<Result<DirectAnalysis>> => {
-  const trimmedSource = trimArticle(sourceLanguage, source).source;
+  const trimmedSource = trimSenselessArticle(sourceLanguage, source);
 
   const translationResult = await googleTranslate(source, null, targetLanguage);
 

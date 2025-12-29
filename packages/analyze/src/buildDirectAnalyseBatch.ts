@@ -1,4 +1,5 @@
 import { Translation } from '@vocably/model';
+import { trimArticle } from '@vocably/sulna';
 import { AnalyseAndTranslatePayload } from './analyseAndTranslate';
 import { PartOfSpeech } from './getPartsOfSpeech';
 type Payload = {
@@ -17,7 +18,10 @@ export const buildDirectAnalyseBatch = ({
         (partOfSpeech.partOfSpeech.toLowerCase() !==
           partOfSpeech.lemmaPos.toLowerCase() ||
           partOfSpeech.lemma.toLowerCase() !==
-            partOfSpeech.headword.toLowerCase())
+            trimArticle(
+              translation.sourceLanguage,
+              partOfSpeech.headword
+            ).source.toLowerCase())
       ) {
         return [
           ...acc,

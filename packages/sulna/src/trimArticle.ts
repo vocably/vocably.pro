@@ -40,3 +40,14 @@ export const trimArticle = (
     source,
   };
 };
+
+export const trimSenselessArticle = (
+  language: string,
+  source: string
+): string => {
+  if (language !== 'en') {
+    return source;
+  }
+
+  return trimArticle(language, source).source;
+};

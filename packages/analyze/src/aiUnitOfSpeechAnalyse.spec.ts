@@ -282,6 +282,34 @@ describe('unit of speech analyze', () => {
       expect(result.value.source).toEqual('backwash');
     }, 10_000_000);
 
+    it('does not provide gender', async () => {
+      const result = await geminiAnalyse({
+        source: 'pad',
+        partOfSpeech: 'noun',
+        sourceLanguage: 'nl',
+      });
+      expect(result.success).toBeTruthy();
+
+      if (!result.success) {
+        return;
+      }
+      expect(result.value.gender).toBeUndefined();
+    }, 10_000_000);
+
+    it('considers de/net', async () => {
+      const result = await geminiAnalyse({
+        source: 'de pad',
+        partOfSpeech: 'noun',
+        sourceLanguage: 'nl',
+      });
+      expect(result.success).toBeTruthy();
+
+      if (!result.success) {
+        return;
+      }
+      expect(result.value.gender).toEqual('common');
+    }, 10_000_000);
+
     it('avoid decapitalization when necessary', async () => {
       const result = await geminiAnalyse({
         source: 'wednesday',

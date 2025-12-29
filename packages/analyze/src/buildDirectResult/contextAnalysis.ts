@@ -12,7 +12,7 @@ import {
   AnalyseAndTranslatePayload,
 } from '../analyseAndTranslate';
 
-import { trimArticle } from '@vocably/sulna';
+import { trimSenselessArticle } from '@vocably/sulna';
 import { translateFromContext } from '../translateFromContext';
 import { translationToAnalysisItem } from '../translationToAnalyzeItem';
 
@@ -33,7 +33,7 @@ export const directContextAnalysis = async ({
   inputType,
 }: Payload): Promise<Result<DirectAnalysis>> => {
   const source = ['word', 'compound word'].includes(inputType)
-    ? trimArticle(sourceLanguage, rawSource).source
+    ? trimSenselessArticle(sourceLanguage, rawSource).trim()
     : rawSource.trim();
 
   const contextAnalysisResult = await translateFromContext({

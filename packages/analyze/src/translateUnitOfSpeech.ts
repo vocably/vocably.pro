@@ -12,6 +12,7 @@ import {
   Result,
   resultify,
 } from '@vocably/model';
+import { trimArticle } from '@vocably/sulna';
 import { isArray, isObject, uniq } from 'lodash-es';
 import { config } from './config';
 import { fallback, FallbackResult } from './fallback';
@@ -216,8 +217,13 @@ export const translateUnitOfSpeechChatGpt = async ({
 export const translateUnitOfSpeechNoCache = async (
   payload: Payload
 ): Promise<FallbackResult<string[]>> => {
-  return fallback(translateUnitOfSpeechGemini(payload), () =>
-    translateUnitOfSpeechChatGpt(payload)
+  const trimmedPayload = {
+    ...payload,
+    source: trimArticle(payload.sourceLanguage, payload.source).source,
+  };
+
+  return fallback(translateUnitOfSpeechGemini(trimmedPayload), () =>
+    translateUnitOfSpeechChatGpt(trimmedPayload)
   );
 };
 

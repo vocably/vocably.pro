@@ -356,7 +356,7 @@ const getGeminiGenerateContentParameters = ({
   });
 
   return {
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3-flash-preview',
     contents: createUserContent([source]),
     config: {
       systemInstruction: [
