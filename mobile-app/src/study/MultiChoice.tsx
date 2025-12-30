@@ -1,4 +1,4 @@
-import { CardItem, GoogleLanguage } from '@vocably/model';
+import { CardItem, GoogleLanguage, isGoogleTTSLanguage } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { sanitizeTranscript } from '@vocably/sulna';
 import { shuffle } from 'lodash-es';
@@ -235,28 +235,30 @@ export const MultiChoice: FC<Props> = ({
                           </Text>
                         )}
                     </Text>
-                    {card.id === answerCard.id && direction === 'back' && (
-                      <PlaySound
-                        size={24} // size is needed for the translateY
-                        ref={(el) => (playSoundRef.current = el)}
-                        style={{
-                          position: 'absolute',
-                          left: 0,
-                          top: '50%',
-                          display: playSoundIconVisible ? 'flex' : 'none',
-                          transform: [
-                            { translateY: -12 }, // half of the size
-                          ],
-                        }}
-                        color={
-                          correct === answerCard.id
-                            ? theme.colors.onPrimary
-                            : theme.colors.onBackground
-                        }
-                        text={answerCard.data.source}
-                        language={answerCard.data.language}
-                      />
-                    )}
+                    {card.id === answerCard.id &&
+                      direction === 'back' &&
+                      isGoogleTTSLanguage(answerCard.data.language) && (
+                        <PlaySound
+                          size={24} // size is needed for the translateY
+                          ref={(el) => (playSoundRef.current = el)}
+                          style={{
+                            position: 'absolute',
+                            left: 0,
+                            top: '50%',
+                            display: playSoundIconVisible ? 'flex' : 'none',
+                            transform: [
+                              { translateY: -12 }, // half of the size
+                            ],
+                          }}
+                          color={
+                            correct === answerCard.id
+                              ? theme.colors.onPrimary
+                              : theme.colors.onBackground
+                          }
+                          text={answerCard.data.source}
+                          language={answerCard.data.language}
+                        />
+                      )}
                   </View>
                 </TouchableRipple>
               </View>
