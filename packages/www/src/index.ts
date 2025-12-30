@@ -236,24 +236,22 @@ initializePaddle({
     : 'production',
   debug: window['paddleClientSideToken'].startsWith('test'),
 }).then(async (Paddle) => {
-  const [{ data }] = await Promise.all([
-    Paddle.PricePreview({
-      items: [
-        {
-          priceId: window['paddleMonthlyPriceId'],
-          quantity: 1,
-        },
-        {
-          priceId: window['paddleYearlyPriceId'],
-          quantity: 1,
-        },
-        {
-          priceId: window['paddleLifetimePriceId'],
-          quantity: 1,
-        },
-      ],
-    }),
-  ]);
+  const { data } = await Paddle.PricePreview({
+    items: [
+      {
+        priceId: window['paddleMonthlyPriceId'],
+        quantity: 1,
+      },
+      {
+        priceId: window['paddleYearlyPriceId'],
+        quantity: 1,
+      },
+      {
+        priceId: window['paddleLifetimePriceId'],
+        quantity: 1,
+      },
+    ],
+  });
 
   const {
     details: {

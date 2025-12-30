@@ -3,8 +3,8 @@ import { getPaddleInstance } from '@paddle/paddle-js';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
 import {
+  getSubscriptionProducts,
   SubscriptionProduct,
-  subscriptionProducts,
 } from '../../subscription-products';
 
 @Component({
@@ -15,11 +15,15 @@ import {
 export class MembershipSelectorComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
-  subscriptionProducts = subscriptionProducts;
+  subscriptionProducts: SubscriptionProduct[] | null = null;
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    getSubscriptionProducts().then((products) => {
+      this.subscriptionProducts = products;
+    });
+  }
 
   onSelect(product: SubscriptionProduct) {
     this.authService.fetchUserData$

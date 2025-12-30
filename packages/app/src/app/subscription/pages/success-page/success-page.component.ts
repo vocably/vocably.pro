@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
+  getSubscriptionProducts,
   SubscriptionProduct,
-  subscriptionProducts,
 } from '../../../subscription-products';
 
 type ProductResult =
@@ -29,13 +29,15 @@ export class SuccessPageComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params) => {
+    this.route.paramMap.subscribe(async (params) => {
       const priceId = params.get('priceId');
       if (!priceId) {
         console.error('No priceId');
         this.productResult = { status: 'error', error: 'No priceId' };
         return;
       }
+
+      const subscriptionProducts = await getSubscriptionProducts();
 
       const product = subscriptionProducts.find((p) => p.priceId === priceId);
 

@@ -177,7 +177,7 @@
       real-world language practice.
     </div>
   </div>
-  <div class="cards mb-2">
+  <div class="cards mb-2" *ngIf="subscriptionProducts">
     <button
       class="card flex-1"
       *ngFor="let product of subscriptionProducts"
