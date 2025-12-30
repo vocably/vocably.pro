@@ -56,11 +56,9 @@ export const setContents = async ({
     translation.phrase = source;
     translation.playAudioPronunciation = playAudioPronunciation;
     translation.extensionPlatform = extensionPlatform;
-    (translation.premiumCtaSuffix =
-      contentScriptConfiguration.premiumCtaSuffix),
-      (translation.canCongratulate =
-        contentScriptConfiguration.allowFirstTranslationCongratulation &&
-        !userKnowsHowToAdd);
+    translation.canCongratulate =
+      contentScriptConfiguration.allowFirstTranslationCongratulation &&
+      !userKnowsHowToAdd;
 
     type AnalyzePayload = {
       sourceLanguage?: GoogleLanguage;

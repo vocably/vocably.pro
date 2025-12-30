@@ -3,7 +3,6 @@ export type ContentScriptConfiguration = {
   displayMobileLookupButton: boolean;
   allowFirstTranslationCongratulation: boolean;
   webPaymentLink: string;
-  premiumCtaSuffix: string;
 };
 
 export let contentScriptConfiguration: ContentScriptConfiguration = {
@@ -11,7 +10,6 @@ export let contentScriptConfiguration: ContentScriptConfiguration = {
   displayMobileLookupButton: false,
   allowFirstTranslationCongratulation: false,
   webPaymentLink: 'https://app.vocably.pro/subscribe',
-  premiumCtaSuffix: '',
 };
 
 export const configureContentScript = (

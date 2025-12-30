@@ -397,7 +397,6 @@ registerContentScript({
     displayMobileLookupButton: false,
     allowFirstTranslationCongratulation: true,
     webPaymentLink: 'http://localhost:8030/subscribe',
-    premiumCtaSuffix: ' (from $2.50/month)',
   },
 }).then();
 

@@ -102,7 +102,6 @@ export class VocablyTranslation {
   @Prop() hideChatGpt: boolean = false;
   @Prop() maxCards: number | 'unlimited' = 'unlimited';
   @Prop() paymentLink: string = '';
-  @Prop() premiumCtaSuffix: string = '';
   @Prop() explanation: ComponentExplanationState = { state: 'none' };
   @Prop() explanationAnimationDelay = 0;
   @Prop() isRetrying = false;
@@ -538,7 +537,7 @@ export class VocablyTranslation {
                               this.watchMePaying.emit();
                             }}
                           >
-                            Upgrade to Premium{this.premiumCtaSuffix}
+                            Upgrade to Premium
                           </a>
                         </div>
                       </div>

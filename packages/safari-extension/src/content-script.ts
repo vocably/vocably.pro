@@ -10,6 +10,5 @@ registerContentScript({
     displayMobileLookupButton: false,
     allowFirstTranslationCongratulation: true,
     webPaymentLink: process.env.APP_BASE_URL + '/subscribe',
-    premiumCtaSuffix: ' (from $2.50/month)',
   },
 }).then();
