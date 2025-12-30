@@ -5,6 +5,10 @@ module.exports = {
     baseUrl: '${local.www_base_url}',
     umamiWebsiteId: '${var.umami_website_id}',
     publicApiBaseUrl: 'https://${local.public_api_domain}',
+    paddleClientSideToken: '${var.paddle_client_side_token}',
+    paddleMonthlyPriceId: '${var.paddle_monthly_premium_id}',
+    paddleYearlyPriceId: '${var.paddle_yearly_premium_id}',
+    paddleLifetimePriceId: '${var.paddle_lifetime_premium_id}',
   },
 };
   EOT

@@ -97,20 +97,32 @@
           <td><i class="bi bi-check"></i></td>
         </tr>
         <tr>
-          <td>Price<br /><small style="font-size: 0.9rem; line-height: 1rem;display: inline-block">Taxes in your country may apply.</small></td>
+          <td>Price</td>
           <td>&nbsp;</td>
           <td>
             <table style="margin: 0 auto; white-space: nowrap;" class="smaller-on-tiny-screens">
               <tr>
-                <td class="text-end">$4.99</td>
+                <td class="text-end" style="min-width: 5rem;" data-monthly-price>
+                  <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
                 <td class="text-start" style="white-space: nowrap">/month</td>
               </tr>
               <tr>
-                <td class="text-end">or $29.99</td>
+                <td class="text-end" style="min-width: 5rem;" data-yearly-price>
+                  <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
                 <td class="text-start" style="">/year</td>
               </tr>
               <tr>
-                <td class="text-end">or $69.99</td>
+                <td class="text-end" style="min-width: 5rem;" data-lifetime-price>
+                  <div class="spinner-border spinner-border-sm" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </td>
                 <td class="text-start">&nbsp;lifetime</td>
               </tr>
             </table>

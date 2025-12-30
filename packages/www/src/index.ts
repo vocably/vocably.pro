@@ -1,3 +1,4 @@
+import { initializePaddle } from '@paddle/paddle-js';
 import '@sneas/telephone/iphone-16-max';
 import '@sneas/telephone/pixel-9-pro';
 import { isGoogleLanguage } from '@vocably/model';
@@ -226,4 +227,55 @@ document.querySelectorAll('#searchForm').forEach((searchForm) => {
 
       setLabel();
     });
+});
+
+initializePaddle({
+  token: window['paddleClientSideToken'],
+  environment: window['paddleClientSideToken'].startsWith('test')
+    ? 'sandbox'
+    : 'production',
+  debug: window['paddleClientSideToken'].startsWith('test'),
+}).then(async (Paddle) => {
+  const [{ data }] = await Promise.all([
+    Paddle.PricePreview({
+      items: [
+        {
+          priceId: window['paddleMonthlyPriceId'],
+          quantity: 1,
+        },
+        {
+          priceId: window['paddleYearlyPriceId'],
+          quantity: 1,
+        },
+        {
+          priceId: window['paddleLifetimePriceId'],
+          quantity: 1,
+        },
+      ],
+    }),
+  ]);
+
+  const {
+    details: {
+      lineItems: [monthlyItem, yearlyItem, lifetimeItem],
+    },
+  } = data;
+
+  document
+    .querySelectorAll('[data-monthly-price]')
+    .forEach(
+      (element) => (element.innerHTML = monthlyItem.formattedTotals.total)
+    );
+
+  document
+    .querySelectorAll('[data-yearly-price]')
+    .forEach(
+      (element) => (element.innerHTML = yearlyItem.formattedTotals.total)
+    );
+
+  document
+    .querySelectorAll('[data-lifetime-price]')
+    .forEach(
+      (element) => (element.innerHTML = lifetimeItem.formattedTotals.total)
+    );
 });
