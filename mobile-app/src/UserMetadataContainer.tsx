@@ -51,22 +51,20 @@ const loadUserMetadataFromStorage = async (): Promise<UserMetadata> => {
 
   const key = `${userSubResult.value}.userMetadata`;
 
-  // ToDo: remove this after a while
-  const oldKey = 'userMetadata';
-  const oldValues = await asyncAppStorage.getItem(oldKey);
-  if (oldValues) {
-    await asyncAppStorage.removeItem(oldKey);
-    await asyncAppStorage.setItem(key, oldValues);
-  }
-  // EndOfToDo
-
   const userMetadata = await asyncAppStorage.getItem(key);
 
-  if (!userMetadata) {
+  if (userMetadata) {
+    return JSON.parse(userMetadata);
+  }
+
+  const userMetadataResult = await apiGetUserMetadata();
+
+  if (!userMetadataResult.success) {
     return defaultUserMetadata;
   }
 
-  return JSON.parse(userMetadata);
+  await saveUserMetadataToStorage(userMetadataResult.value);
+  return userMetadataResult.value;
 };
 
 const saveUserMetadataToStorage = async (userMetadata: UserMetadata) => {
@@ -88,22 +86,21 @@ const loadUserStaticMetadataFromStorage =
 
     const key = `${userSubResult.value}.userStaticMetadata`;
 
-    // ToDo: remove this after a while
-    const oldKey = 'userStaticMetadata';
-    const oldValues = await asyncAppStorage.getItem(oldKey);
-    if (oldValues) {
-      await asyncAppStorage.removeItem(oldKey);
-      await asyncAppStorage.setItem(key, oldValues);
-    }
-    // EndOfToDo
-
     const userStaticMetadata = await asyncAppStorage.getItem(key);
 
-    if (!userStaticMetadata) {
+    if (userStaticMetadata) {
+      return JSON.parse(userStaticMetadata);
+    }
+
+    const userStaticMetadataResult = await apiGetUserStaticMetadata();
+
+    if (!userStaticMetadataResult.success) {
       return defaultUserStaticMetadata;
     }
 
-    return JSON.parse(userStaticMetadata);
+    await saveUserStaticMetadataToStorage(userStaticMetadataResult.value);
+
+    return userStaticMetadataResult.value;
   };
 
 const saveUserStaticMetadataToStorage = async (
@@ -126,22 +123,21 @@ export const loadStudyStreakFromStorage = async (): Promise<StudyStreak> => {
 
   const key = `${userSubResult.value}.studyStreak`;
 
-  // ToDo: remove this after a while
-  const oldKey = 'studyStreak';
-  const oldValues = await asyncAppStorage.getItem(oldKey);
-  if (oldValues) {
-    await asyncAppStorage.removeItem(oldKey);
-    await asyncAppStorage.setItem(key, oldValues);
-  }
-  // EndOfToDo
-
   const studyStreak = await asyncAppStorage.getItem(key);
 
-  if (!studyStreak) {
+  if (studyStreak) {
+    return JSON.parse(studyStreak);
+  }
+
+  const studyStreakResult = await fetchStudyStreak();
+
+  if (!studyStreakResult.success) {
     return defaultStudyStreak;
   }
 
-  return JSON.parse(studyStreak);
+  await saveStudyStreakToStorage(studyStreakResult.value);
+
+  return studyStreakResult.value;
 };
 
 const saveStudyStreakToStorage = async (studyStreak: StudyStreak) => {
