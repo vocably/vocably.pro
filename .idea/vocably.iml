@@ -31,6 +31,8 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/analyze/dist" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/cache-batch-analyse/glossa" />
       <excludeFolder url="file://$MODULE_DIR$/packages/extension-content-ui/.stencil" />
+      <excludeFolder url="file://$MODULE_DIR$/dashboard/cache-batch-analyse" />
+      <excludeFolder url="file://$MODULE_DIR$/dashboard/user-state" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
