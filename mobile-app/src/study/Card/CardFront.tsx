@@ -96,29 +96,18 @@ export const CardFront: FC<Props> = ({
         <View
           style={{
             flexDirection: 'row',
-            flexWrap: 'nowrap',
+            flexWrap: 'wrap',
             marginLeft: 8,
             marginTop: 6,
+            gap: 8,
           }}
         >
-          {card.data.ipa && (
-            <Text style={{ marginRight: 8 }}>
-              /{sanitizeTranscript(card.data.ipa)}/
-            </Text>
-          )}
-          {card.data.g && (
-            <Text style={{ marginRight: 8 }}>({card.data.g})</Text>
-          )}
-          {card.data.partOfSpeech && (
-            <Text style={{ marginRight: 8 }}>{card.data.partOfSpeech}</Text>
-          )}
+          {card.data.ipa && <Text>/{sanitizeTranscript(card.data.ipa)}/</Text>}
+          {card.data.g && <Text>({card.data.g})</Text>}
+          {card.data.partOfSpeech && <Text>{card.data.partOfSpeech}</Text>}
           {showInflections &&
             card.data.tense === 'present' &&
-            card.data.pastTenses && (
-              <Text style={{ marginRight: 8 }}>
-                (past: {card.data.pastTenses})
-              </Text>
-            )}
+            card.data.pastTenses && <Text>(past: {card.data.pastTenses})</Text>}
         </View>
       )}
       {card.data.example && (

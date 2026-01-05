@@ -130,6 +130,7 @@ export const Card: FC<Props> = ({ card, autoPlay, direction }) => {
               ...styles.cardBack,
               ...flipToFrontStyle,
               display: 'flex',
+              maxWidth: '100%',
             }}
             pointerEvents={!isFlipped ? 'none' : 'auto'}
           >
