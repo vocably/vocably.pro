@@ -12,6 +12,7 @@ import {
   setHorizontalDisplacement,
   setupTransform,
 } from './styling';
+import { iframeManager } from './iframe-manager';
 
 const buttonId = 'translation-extension-button';
 
@@ -74,6 +75,47 @@ export const createButton = async (
   event: MouseEvent | null = null
 ) => {
   const isTouchscreen = event === null;
+  
+  // Detect browser environment
+  const isFirefox = typeof (window as any).wrappedJSObject !== 'undefined';
+  
+  if (isFirefox) {
+    // Firefox: Use iframe isolation to avoid DeadObject compartment issue
+    console.log('[Button] Using iframe approach for Firefox');
+    
+    // Ensure iframe is created
+    await iframeManager.createFrame();
+    
+    const detectedLanguage = await detectLanguage(selection);
+    const context =
+      detectedLanguage && contextLanguages.includes(detectedLanguage)
+        ? getContext(selection)
+        : undefined;
+
+    const position: Position | null = event
+      ? await getPosition(selection, event)
+      : {
+          left: window.scrollX + window.innerWidth / 2,
+          bottom: window.scrollY + window.innerHeight - 96,
+        };
+
+    if (position === null) {
+      return;
+    }
+
+    // Show translation via iframe
+    iframeManager.showTranslation({
+      text: getText(selection),
+      detectedLanguage,
+      context,
+      position,
+      isTouchscreen,
+    });
+    
+    return;
+  }
+  
+  // Chrome/Other browsers: Original approach with custom elements
   const button = document.createElement(
     isTouchscreen ? 'vocably-mobile-button' : 'vocably-button'
   );

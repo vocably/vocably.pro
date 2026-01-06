@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "build": "webpack --env production",
+    "build:firefox": "TARGET_BROWSER=firefox webpack --env production && sed -i '' \"s/new Function('return this')()/globalThis/g\" dist-firefox/*.js",
     "start": "webpack --watch --env development",
+    "start:firefox": "TARGET_BROWSER=firefox webpack --watch --env development",
     "test": "echo '@vocably/extension has no tests.'",
     "extension": "npm start"
   },
@@ -13,6 +15,7 @@
     "type": "git",
     "url": "https://github.com/vocably-pro/vocably.git"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "string-replace-loader": "^3.3.0"
+  }
 }

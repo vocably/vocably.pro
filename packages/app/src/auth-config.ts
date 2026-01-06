@@ -1,7 +1,9 @@
 import { AppAuthStorage } from '@vocably/pontis';
 import { merge } from 'lodash-es';
+import { isFirefox } from './browser';
 import { environment } from './environments/environment';
 import { extensionId } from './extension';
+import { FirefoxAppAuthStorage } from './firefox-auth-storage';
 
 export const autoSignInPath = 'hands-free';
 
@@ -26,8 +28,13 @@ const constructRedirectSignInUrl = (): string => {
   return basePath + `/${manualSignInConfirmationPath}`;
 };
 
+// Firefox doesn't support externally_connectable, so we use a content script bridge
+const storage = isFirefox
+  ? new FirefoxAppAuthStorage()
+  : new AppAuthStorage(extensionId);
+
 export const authConfig = {
-  storage: new AppAuthStorage(extensionId),
+  storage,
   ...merge(
     {
       oauth: {

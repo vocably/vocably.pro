@@ -33,10 +33,14 @@ export class IndexPageComponent implements OnInit {
   }
 
   private async getInitialLanguageInputValue(): Promise<GoogleLanguage> {
-    const proxyLanguage = await getProxyLanguage(extensionId);
-
-    if (proxyLanguage) {
-      return proxyLanguage;
+    try {
+      const proxyLanguage = await getProxyLanguage(extensionId);
+      if (proxyLanguage) {
+        return proxyLanguage;
+      }
+    } catch (e) {
+      // Firefox doesn't support externally_connectable, ignore error
+      console.log('[IndexPage] getProxyLanguage failed (expected in Firefox):', e);
     }
 
     return detectTargetLanguage();

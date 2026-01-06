@@ -19,8 +19,8 @@ async function Highlander() {
     alivePort = browserEnv.runtime.connect({ name: 'whatever' });
 
     alivePort.onDisconnect.addListener(() => {
-      if (chrome.runtime.lastError) {
-        // This peace of code is to avoid the error message that appears when the port is disconnected
+      if (browserEnv.runtime.lastError) {
+        // This piece of code is to avoid the error message that appears when the port is disconnected
       }
       alivePort = null;
     });
@@ -37,7 +37,7 @@ async function Highlander() {
   }
 }
 
-chrome.runtime.onInstalled.addListener(async () => {
+browserEnv.runtime.onInstalled.addListener(async () => {
   console.log('Stay alive: extension installed');
   stayAlive();
 });
@@ -51,7 +51,7 @@ browserEnv.windows.onRemoved.addListener((windowId) => {
   }
 });
 
-chrome.windows.onCreated.addListener(async () => {
+browserEnv.windows.onCreated.addListener(async () => {
   console.log('Stay alive: window created');
   stayAlive();
 });

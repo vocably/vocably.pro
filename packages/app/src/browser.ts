@@ -35,6 +35,12 @@ export const isChrome = !!browser.satisfies({
   },
 });
 
+export const isFirefox = !!browser.satisfies({
+  desktop: {
+    firefox: '>0',
+  },
+});
+
 export const isDesktop = browser.getPlatformType() === 'desktop';
 
 export const browserType: 'desktop-safari' | 'ios-safari' | 'normal' =

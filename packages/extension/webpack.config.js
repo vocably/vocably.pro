@@ -12,13 +12,32 @@ const webpack = require('webpack');
 
 const environmentVariables = getEnvironmentVariables();
 
+// Support for building Firefox extension via TARGET_BROWSER env variable
+const targetBrowser = process.env.TARGET_BROWSER || 'chrome';
+const isFirefox = targetBrowser === 'firefox';
+const manifestFile = isFirefox
+  ? 'manifest.firefox.json.txt'
+  : 'manifest.json.txt';
+const outputDir = isFirefox ? 'dist-firefox' : 'dist';
+
+// Firefox needs external-bridge for web page ↔ extension communication
+// (Chrome uses externally_connectable instead)
+const baseEntries = {
+  'content-script': './src/content-script.ts',
+  'service-worker': './src/service-worker.ts',
+  'play-audio': './src/play-audio.ts',
+};
+
+const firefoxEntries = {
+  ...baseEntries,
+  'external-bridge': './src/external-bridge.ts',
+  'firefox-polyfill': './src/firefox-polyfill.ts',
+  'popup-frame': './src/popup-frame/popup-frame.ts',
+};
+
 const prodConfig = {
   mode: 'production',
-  entry: {
-    'content-script': './src/content-script.ts',
-    'service-worker': './src/service-worker.ts',
-    'play-audio': './src/play-audio.ts',
-  },
+  entry: isFirefox ? firefoxEntries : baseEntries,
   module: {
     rules: [
       {
@@ -30,14 +49,55 @@ const prodConfig = {
         test: /\.html?$/,
         loader: 'html-loader',
       },
+      // Firefox CSP fix: Replace Function('return this')() with globalThis
+      // This is used by lodash-es and webpack runtime to get global object
+      ...(isFirefox
+        ? [
+            {
+              test: /\.(m?js|ts)$/,
+              loader: 'string-replace-loader',
+              options: {
+                search: "Function('return this')()",
+                replace: 'globalThis',
+              },
+            },
+            {
+              test: /\.(m?js|ts)$/,
+              loader: 'string-replace-loader',
+              options: {
+                search: "new Function('return this')()",
+                replace: 'globalThis',
+              },
+            },
+          ]
+        : []),
     ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.mjs'],
+    // Firefox CSP fix: Replace lodash-es _root.js which uses Function('return this')()
+    // with a CSP-safe version that uses globalThis
+    alias: isFirefox
+      ? {
+          'lodash-es/_root.js': path.resolve(
+            __dirname,
+            'src/lodash-root-fix.ts'
+          ),
+        }
+      : {},
   },
   output: {
+    path: path.join(__dirname, outputDir),
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    clean: true,
+    // Firefox CSP fix: use globalThis instead of Function('return this')()
+    ...(isFirefox
+      ? {
+          globalObject: 'globalThis',
+          // Fix: Explicit publicPath for Firefox extension
+          publicPath: '/',
+        }
+      : {}),
   },
   plugins: [
     new webpack.BannerPlugin(
@@ -63,7 +123,7 @@ const prodConfig = {
         },
         { from: '.', to: '.', context: 'assets' },
         {
-          from: 'manifest.json.txt',
+          from: manifestFile,
           to: 'manifest.json',
           context: 'src',
           transform(content) {
@@ -74,10 +134,29 @@ const prodConfig = {
           },
         },
         { from: 'play-audio.html', to: 'play-audio.html', context: 'src' },
+        // Firefox iframe isolation: copy popup-frame.html
+        ...(isFirefox
+          ? [
+              {
+                from: 'popup-frame/popup-frame.html',
+                to: 'popup-frame.html',
+                context: 'src',
+              },
+            ]
+          : []),
       ],
       options: {},
     }),
     new webpack.DefinePlugin(environmentVariables.stringified),
+    // Firefox CSP fix: Replace lodash-es _root.js which uses Function('return this')()
+    ...(isFirefox
+      ? [
+          new webpack.NormalModuleReplacementPlugin(
+            /lodash-es\/_root\.js$/,
+            path.resolve(__dirname, 'src/lodash-root-fix.ts')
+          ),
+        ]
+      : []),
   ],
   performance: {
     hints: false,

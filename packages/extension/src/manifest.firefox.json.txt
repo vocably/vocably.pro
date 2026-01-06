@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "{{ process.env.NAME }}: Translate and Learn with Flashcards",
+  "description": "AI translator and dictionary. Translate on any website or YouTube. Learn your translations on mobile. Expand your vocabulary.",
+  "version": "{{ process.env.VERSION }}",
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "vocably-extension@vocably.pro",
+      "strict_min_version": "109.0"
+    }
+  },
+
+  "icons": {
+    "16": "images/icon-16x16.png",
+    "32": "images/icon-32x32.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128x128.png"
+  },
+
+  "action": {
+    "default_icon": {
+      "16": "images/icon-16x16.png",
+      "32": "images/icon-32x32.png",
+      "48": "images/icon-48x48.png",
+      "128": "images/icon-128x128.png"
+    },
+    "default_popup": "popup/index.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["firefox-polyfill.js", "external-bridge.js", "content-script.js", "play-audio.js"],
+      "all_frames": true
+    }
+  ],
+
+  "permissions": ["storage", "contextMenus"{{ process.env.EXTRA_PERMISSIONS }}],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["popup-frame.html", "popup-frame.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+
+  {{ process.env.HOST_PERMISSIONS }}
+  "background": {
+    "scripts": ["service-worker.js"]
+  }
+}

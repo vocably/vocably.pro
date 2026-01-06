@@ -254,7 +254,7 @@ export const registerContentScript = async (
   }
 ) => {
   configureApi(apiOptions);
-  defineCustomElements();
+  await defineCustomElements();
   initYoutube(youTubeOptions);
   configureContentScript(contentScript);
   document.addEventListener('mouseup', onMouseUp);
