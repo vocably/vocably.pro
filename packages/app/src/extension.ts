@@ -1,7 +1,9 @@
 import { isChrome, isIOSSafari, isMacSafari } from './browser';
 import { environment } from './environments/environment';
+import { isFirefox } from './firefox';
 
-export const canExtensionBeInstalled = isIOSSafari || isMacSafari || isChrome;
+export const canExtensionBeInstalled =
+  isIOSSafari || isMacSafari || isChrome || isFirefox;
 
 const iosSafariExtensionId =
   localStorage.getItem('ios-extension-id') ?? environment.iosSafariExtensionId;

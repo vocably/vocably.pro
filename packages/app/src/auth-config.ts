@@ -2,6 +2,8 @@ import { AppAuthStorage } from '@vocably/pontis';
 import { merge } from 'lodash-es';
 import { environment } from './environments/environment';
 import { extensionId } from './extension';
+import { isFirefox } from './firefox';
+import { FirefoxAppAuthStorage } from './firefox-auth-storage';
 
 export const autoSignInPath = 'hands-free';
 
@@ -27,7 +29,9 @@ const constructRedirectSignInUrl = (): string => {
 };
 
 export const authConfig = {
-  storage: new AppAuthStorage(extensionId),
+  storage: isFirefox
+    ? new FirefoxAppAuthStorage()
+    : new AppAuthStorage(extensionId),
   ...merge(
     {
       oauth: {

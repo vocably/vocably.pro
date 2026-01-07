@@ -11,6 +11,9 @@ import { maintainAppSize } from './app-size';
 import { AppModule } from './app/app.module';
 import { authConfig } from './auth-config';
 import { environment } from './environments/environment';
+import { setupFirefoxVariables } from './firefox';
+
+setupFirefoxVariables();
 
 initializePaddle({
   token: environment.paddleClientSideToken,

@@ -7,6 +7,7 @@ import {
 } from '@vocably/extension-messages';
 import { GoogleLanguage, sortedTargetLanguages } from '@vocably/model';
 import { extensionId } from '../../../../extension';
+import { isFirefox } from '../../../../firefox';
 import { HowToMultilangComponent } from '../../how-to-multilang/how-to-multilang.component';
 import { detectTargetLanguage } from './detectTargetLanguage';
 
@@ -33,7 +34,9 @@ export class IndexPageComponent implements OnInit {
   }
 
   private async getInitialLanguageInputValue(): Promise<GoogleLanguage> {
-    const proxyLanguage = await getProxyLanguage(extensionId);
+    const proxyLanguage = isFirefox
+      ? null
+      : await getProxyLanguage(extensionId);
 
     if (proxyLanguage) {
       return proxyLanguage;
