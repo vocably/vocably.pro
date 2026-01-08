@@ -27,6 +27,7 @@ export * from './study-stats';
 export * from './subscription';
 export * from './text-to-speech';
 export * from './translation-cards';
+export * from './units-of-speech-generation';
 export * from './user';
 export * from './user-metadata';
 export * from './user-static-metadata';

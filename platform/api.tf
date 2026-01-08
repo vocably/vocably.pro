@@ -77,6 +77,8 @@ resource "aws_api_gateway_deployment" "deployment" {
     redeployment = sha1(jsonencode([
       md5(file("${path.module}/api.tf")),
       md5(file("${path.module}/api-analyze.tf")),
+      md5(file("${path.module}/api-analyze-units-of-speech.tf")),
+      md5(file("${path.module}/api-generate-units-of-speech.tf")),
       md5(file("${path.module}/api-bulk-analyze.tf")),
       md5(file("${path.module}/api-explain.tf")),
       md5(file("${path.module}/api-onboard.tf")),
@@ -90,6 +92,8 @@ resource "aws_api_gateway_deployment" "deployment" {
       md5(file("${path.module}/api-generate-mnemonic.tf")),
       md5(file("${path.module}/api-chat-with-card.tf")),
       aws_lambda_function.analyze.last_modified,
+      aws_lambda_function.analyze_units_of_speech.last_modified,
+      aws_lambda_function.generate_units_of_speech.last_modified,
       aws_lambda_function.bulk_analyze.last_modified,
       aws_lambda_function.explain.last_modified,
       aws_lambda_function.onboard.last_modified,
@@ -105,6 +109,8 @@ resource "aws_api_gateway_deployment" "deployment" {
   }
   depends_on = [
     aws_api_gateway_integration.analyze,
+    aws_api_gateway_integration.analyze_units_of_speech,
+    aws_api_gateway_integration.generate_units_of_speech,
     aws_api_gateway_integration.bulk_analyze,
     aws_api_gateway_integration.explain,
     aws_api_gateway_integration.onboard,
@@ -136,6 +142,8 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_integration.generate_mnemonic,
     aws_api_gateway_integration.chat_with_card,
     aws_lambda_function.analyze,
+    aws_lambda_function.analyze_units_of_speech,
+    aws_lambda_function.generate_units_of_speech,
     aws_lambda_function.bulk_analyze,
     aws_lambda_function.explain,
     aws_lambda_function.onboard,
