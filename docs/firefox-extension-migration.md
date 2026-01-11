@@ -2518,3 +2518,630 @@ Dev 環境（localhost:8030）認證正常，但 production 環境（app.vocably
 - `PR_INSTRUCTIONS.md` - PR 操作指示（繁體中文）
 - `docs/firefox-extension-migration.md` - 詳細實作記錄
 
+## 12/26 Dmytro 回應
+詳如 `/Users/gjrobert/NAS/Obsidian/Main/創作/程式/Firefox extension/Vocably → Fx.md` 裡的 `### Dmytro 20251226` 一節
+
+為此，12/27 我開新對話（Opus 4.5）來問：
+- [ ] 他說的符合我們接下來測試開發的需求嗎？
+- [ ] 如何引導他看我們需要什麼？
+  - [ ] 繼續寫 PR comment？
+  - [ ] 回信給他講什麼？
+
+---
+
+## 🎯 Dmytro 回應分析 (2025-12-27)
+
+### 問題 1：他說的符合我們接下來測試開發的需求嗎？
+
+**✅ 大致符合，但需要確認細節。**
+
+Dmytro 說：
+> *"My plan for next week is to update and release app.vocably.com so you can log in to production using your Gmail account and enjoy your newly created Firefox extension with your regular Vocably account."*
+
+**這正是我們需要的！** 根據 [FIREFOX_PR_GUIDE.md](file:///Users/gjrobert/NAS/projects/Vocably-language-learning-tool/FIREFOX_PR_GUIDE.md) 的 **⚠️ Production Authentication Blocker** 章節：
+
+| 需求 | Dmytro 的計劃 | 狀態 |
+|-----|-------------|------|
+| 部署 `firefox-auth-storage.ts` | "update and release app.vocably.com" | ✅ 應該包含 |
+| 部署 Firefox 檢測邏輯 (`auth-config.ts`) | 同上 | ✅ 應該包含 |
+| Production API 連接測試 | 他說我們可以 "enjoy" extension | ⚠️ 待驗證 |
+
+**關鍵確認點：**
+1. 他說的 "update" 是否包含我們 PR 中的 `packages/app/` 變更？
+   - 需要確認他會部署哪些檔案
+   - 如果他只部署 app.vocably.com 而沒有我們的 Firefox auth 代碼，認證仍會失敗
+
+2. 時間線：
+   - 他說 "next week"（2025-12-30 左右）
+   - 這給我們足夠時間準備測試
+
+**結論：方向正確，但需要確認 "update" 的具體內容。**
+
+---
+
+### 問題 2：如何引導他看我們需要什麼？
+
+#### 選項 A：回信給他（推薦 ⭐）
+
+**建議回信內容（禮貌、簡潔、技術性）：**
+
+```
+Hi Dmytro,
+
+Thanks for the update! I hope you're enjoying the holiday season with your family. 🎄
+
+That sounds great! I'm happy to wait for the app.vocably.com update.
+
+Just to make sure the Firefox auth will work, could you confirm the update will include:
+
+1. firefox-auth-storage.ts (sends auth tokens to extension)
+2. The Firefox detection in auth-config.ts
+
+These files are in packages/app/src/ in the PR. Without them, the extension won't receive login tokens.
+
+Quick way to verify after deploy: After logging in on app.vocably.com with Firefox, the browser console should show:
+- [FirefoxAuthStorage] Bridge ready
+- [Vocably Bridge] Received message: authStorage.setItem
+
+Happy holidays! Looking forward to testing.
+
+Cheers,
+Robert
+```
+
+**這封信的策略：**
+- ✅ 表達感謝和耐心
+- ✅ 明確列出技術需求（2 個檔案）
+- ✅ 提供驗證方法（console 訊息）
+- ✅ 避免長篇大論
+- ✅ 節日問候，保持友好
+
+---
+
+#### 選項 B：在 PR 留言
+
+**適合時機：** 如果他在 PR 上回應，或需要技術討論
+
+**建議 PR comment：**
+```markdown
+Thanks for checking out the PR! No rush with the holidays.
+
+When you update app.vocably.com, please make sure to include:
+- `packages/app/src/firefox-auth-storage.ts`
+- `packages/app/src/auth-config.ts` (Firefox detection logic)
+
+These are essential for the extension to receive auth tokens.
+
+Let me know if you need any clarification on the iframe architecture!
+```
+
+---
+
+### 建議行動順序
+
+1. **現在：回信** - 使用上面的選項 A 模板
+2. **下週（他部署後）：測試** - 按照 FIREFOX_PR_GUIDE.md 的驗證步驟
+3. **測試成功後：PR comment** - 確認一切正常，請求 merge
+4. **若測試失敗：PR comment** - 提供具體錯誤訊息，協助 debug
+
+---
+
+### 關於「hesitant about iFrame route」
+
+Dmytro 提到對 iframe 方案有疑慮。這是合理的技術關切。
+
+**但他也說：**
+> *"I am also busy and have no other ideas for a Firefox extension."*
+
+**這表示：**
+- 他理解 Firefox 限制的困難
+- 他暫時接受 iframe 作為可行方案
+- 未來可能會要求重構（方案 2：原生 DOM）
+
+**建議態度：**
+- 不需要主動辯護 iframe 方案
+- 如果他問起，可以解釋這是唯一能保留 Stencil.js 的方法
+- 強調 Chrome 完全不受影響（條件式邏輯）
+
+---
+
+### 📋 TODO 更新建議
+
+```markdown
+- [x] 他說的符合我們接下來測試開發的需求嗎？ → **是，但需確認部署內容**
+- [/] 如何引導他看我們需要什麼？ → **回信確認技術細節**
+  - [ ] 繼續寫 PR comment？ → **暫時不需要，先回信**
+  - [x] 回信給他講什麼？ → **確認 2 個 auth 檔案會被部署**
+```
+
+## 12/27 Robert 已回信
+8:00 已將上面 Opus 擬的信寄出，等回信。
+
+## 2026/1/7 Dmytro 回信
+☞ https://github.com/vocably/getvocably/pull/73#issuecomment-3718260206
+2026/1/7 17:00 請 Opus 分析其意義，寫進文件，並且甚至你分析一下他說的 commit ，是否符合我們的需求？不要只看他說什麼吧。
+
+### Opus 分析
+
+#### ✅ 結論：完全符合需求！
+
+Dmytro 實作的 commit [770140f](https://github.com/vocably/getvocably/commit/770140f274da8eee9e3939163af2c5ba87da39c5) **完全符合**我們 extension 所需的認證機制。
+
+---
+
+#### 📦 Commit 內容分析（7 個檔案）
+
+| 檔案 | 功能 | 與我們 PR 的對應 |
+|-----|------|-----------------|
+| `firefox.ts` ⭐ **新增** | Firefox 檢測邏輯、`isFirefox` 變數 | 對應我們設計，但用 `?firefox` 手動啟用而非 UA 偵測 |
+| `firefox-auth-storage.ts` ⭐ **新增** | 146 行，完整的 `FirefoxAppAuthStorage` class | ✅ **這正是我們需要的** |
+| `auth-config.ts` | 條件式使用 `FirefoxAppAuthStorage` | ✅ 符合我們的架構 |
+| `extension.ts` | 加入 `isFirefox` 到 `canExtensionBeInstalled` | ✅ Firefox 現在被視為支援平台 |
+| `main.ts` | App 啟動時呼叫 `setupFirefoxVariables()` | ✅ 初始化 Firefox 相關設定 |
+
+---
+
+#### 🔍 `firefox-auth-storage.ts` 詳細分析
+
+這是最關鍵的檔案。Dmytro 寫的實作：
+
+```typescript
+// 核心結構
+export class FirefoxAppAuthStorage {
+  private bridgeReady = false;
+  private pendingMessages: Array<() => void> = [];
+
+  // 監聽 extension 的 ready 訊號
+  constructor() {
+    window.addEventListener('message', (event) => {
+      if (event.data?.target === 'vocably-extension-ready') {
+        console.log('[FirefoxAuthStorage] Bridge ready');
+        this.bridgeReady = true;
+        // 處理排隊中的訊息
+        this.pendingMessages.forEach((fn) => fn());
+      }
+    });
+  }
+
+  // 核心方法
+  setItem(key, value) { ... sendWhenReady('authStorage.setItem', {key, value}) }
+  removeItem(key) { ... sendWhenReady('authStorage.removeItem', key) }
+  clear() { ... sendWhenReady('authStorage.clear', undefined) }
+  sync() { ... sendToExtension('authStorage.getAll', undefined) }
+}
+```
+
+**與我們 extension 的 `external-bridge.ts` 對接：**
+
+| 網頁端 (Dmytro 寫的) | Extension 端 (我們 PR) | 狀態 |
+|---------------------|----------------------|------|
+| `target: 'vocably-extension'` | `external-bridge.ts` 監聽此 target | ✅ 相符 |
+| `authStorage.setItem` | `service-worker.ts` 處理此 identifier | ✅ 相符 |
+| `authStorage.removeItem` | 同上 | ✅ 相符 |
+| `authStorage.clear` | 同上 | ✅ 相符 |
+| 等待 `vocably-extension-ready` | `external-bridge.ts` 發送此訊號 | ✅ 相符 |
+
+---
+
+#### 🤔 設計差異觀察
+
+Dmytro 沒有用瀏覽器 UA 自動偵測 Firefox，而是用 **手動啟用機制**：
+
+```typescript
+// firefox.ts
+export let isFirefox = localStorage.getItem('allowFirefox') === 'true';
+
+export const setupFirefoxVariables = () => {
+  if (location.search.includes('firefox')) {
+    localStorage.setItem('allowFirefox', 'true');
+    isFirefox = true;
+  }
+  if (location.search.includes('firethefox')) {
+    localStorage.removeItem('allowFirefox');
+    isFirefox = false;
+  }
+};
+```
+
+**為什麼這樣設計？**（推測）
+- 🛡️ **保守策略**：避免自動偵測可能的 edge cases（例如使用者裝了 UA 偽裝套件）
+- 🧪 **方便測試**：團隊可以在任何瀏覽器測試 Firefox 模式
+- ⚠️ **「don't get excited」**：commit 訊息說「firefox is not supported yet」，表示他還在觀望
+
+---
+
+#### 📋 測試前準備
+
+**必做步驟：**
+1. 用 Firefox 打開 `https://app.vocably.pro?firefox`（一次性啟用）
+2. 確認 console 顯示 `[isFirefox] Firefox detected`
+3. 登入 Gmail
+4. 確認 console 顯示：
+   - `[FirefoxAuthStorage] Bridge ready`
+   - `[FirefoxAuthStorage] Sending: authStorage.setItem`
+5. 測試 extension 翻譯功能
+
+**如需停用：**
+- 打開 `https://app.vocably.pro?firethefox`
+
+---
+
+#### 🎉 結論
+
+| 問題 | 答案 |
+|-----|------|
+| Commit 是否包含我們需要的 `firefox-auth-storage.ts`？ | ✅ 是，且是完整實作 |
+| Message protocol 是否與我們的 `external-bridge.ts` 相容？ | ✅ 完全相符 |
+| 是否需要我們做任何修改？ | ❌ 不需要 |
+| 可以直接測試嗎？ | ✅ 是，先訪問 `?firefox` 啟用即可 |
+
+**下一步：進行 production 測試！**
+
+## Production 測試
+
+#Robert ：好的，現在我們在這個 branch，而且是在 local copy，請規劃你要怎麼做 production 測試。
+- 你要做的
+- 我要配合的
+
+### 規劃
+
+#### 🤖 Opus 要做的
+
+1. **建構 Production 版本 Extension**
+   ```bash
+   # Step 1: 備份目前的 dev 設定
+   cp packages/extension/.env packages/extension/.env.dev.backup
+   cp packages/extension-popup/src/environments/environmentLocal.ts \
+      packages/extension-popup/src/environments/environmentLocal.ts.backup
+   
+   # Step 2: 切換到 production 環境
+   cp packages/extension/.env.prod packages/extension/.env
+   cp packages/extension-popup/src/environments/environmentLocal.prod.ts \
+      packages/extension-popup/src/environments/environmentLocal.ts
+   
+   # Step 3: 建構 popup
+   cd packages/extension-popup && NODE_ENV=prod npm run build
+   
+   # Step 4: 建構 Firefox extension
+   cd ../extension
+   rm -f dist-firefox/manifest.json  # 確保重新生成
+   NODE_ENV=prod TARGET_BROWSER=firefox npm run build:firefox
+   ```
+
+2. **驗證 Build 輸出**
+   - 確認 `dist-firefox/` 目錄存在
+   - 確認 `manifest.json` 的 API URL 指向 `api.vocably.pro`（不是 dev）
+
+3. **提供載入指示**
+
+---
+
+#### 👤 Robert 要配合的
+
+1. **在 Firefox 載入 Extension**
+   - 開 `about:debugging#/runtime/this-firefox`
+   - 點「載入暫時性附加元件」
+   - 選 `/Users/gjrobert/NAS/projects/Vocably-language-learning-tool/packages/extension/dist-firefox/manifest.json`
+
+2. **啟用 Firefox Auth（一次性）**
+   - 用 Firefox 打開 `https://app.vocably.pro?firefox`
+   - 確認 console 顯示 `[isFirefox] Firefox detected`
+
+3. **登入測試**
+   - 點擊 extension toolbar icon
+   - 登入 Gmail
+   - 確認 console 顯示：
+     - `[FirefoxAuthStorage] Bridge ready`
+     - `[FirefoxAuthStorage] Sending: authStorage.setItem`
+   - 確認 toolbar icon 變成「已登入」狀態
+
+4. **翻譯功能測試**
+   - 到任意英文網頁
+   - 選取一個單字
+   - 確認翻譯 popup 出現且顯示結果
+   - 測試「+ Learn」功能
+
+5. **回報結果**
+   - ✅ 成功：告訴我，我們可以更新 PR
+   - ❌ 失敗：貼 console 錯誤訊息，我來 debug
+
+---
+
+#### ⏱️ 預估時間
+- Opus 建構：2-3 分鐘
+- Robert 測試：5-10 分鐘
+
+---
+
+**準備好了嗎？我現在開始執行 Build！**
+
+### Robert 測試
+耶～久違的暫時性附加元件測試～（2026/1/11 17:15）
+1. 載入暫時性附加元件 ✅
+2. https://app.vocably.pro/?firefox 專用 auth ✅
+3. 登入 Gmail ✅
+4. 網頁選字詞 popup、翻譯、編輯釋義、「+Learn」、加 tag ✅ 有出現在 deck 中，也有出現在手機上了！♥
+
+### 下一步
+我想要
+1. 照 Opus 擬的 PR 留言（我會去做）
+2. 我還是覺得 popup 不夠寬，不是我們預留空間不夠大，而是它自己就沒有把寬度撐出來，不知為什麼？
+   這部分想繼續開發，請你記下還原 dev 環境的步驟，我給 Gemini 3 Flash 執行？
+
+---
+
+### Opus 回應
+
+#### 1️⃣ PR 留言草稿（複製貼上用）
+
+```
+Hi Dmytro,
+
+Great news! I tested with the `?firefox` parameter and everything works perfectly:
+
+✅ Firefox auth storage working  
+✅ Login via Gmail  
+✅ Translation popup  
+✅ + Learn functionality  
+✅ Tags working  
+✅ Cards synced to mobile app!
+
+Thank you for implementing the auth storage on the web app side. The extension is ready for Firefox users now.
+
+Let me know if you'd like any changes to the PR before merging.
+
+Cheers,
+Robert
+```
+
+---
+
+#### 2️⃣ 還原 Dev 環境步驟
+
+給 Gemini 3 Flash 執行：
+
+```bash
+# 還原 dev 環境設定
+cd /Users/gjrobert/NAS/projects/Vocably-language-learning-tool
+
+# 還原 .env
+cp packages/extension/.env.dev.backup packages/extension/.env
+
+# 還原 environmentLocal.ts
+cp packages/extension-popup/src/environments/environmentLocal.ts.backup \
+   packages/extension-popup/src/environments/environmentLocal.ts
+
+# 驗證還原成功
+echo "=== .env 內容 ==="
+head -5 packages/extension/.env
+
+echo "=== environmentLocal.ts 內容 ==="
+head -10 packages/extension-popup/src/environments/environmentLocal.ts
+```
+
+還原後重建 dev 版：
+```bash
+cd packages/extension-popup && npm run build
+cd ../extension && TARGET_BROWSER=firefox npm run build:firefox
+```
+
+---
+
+#### 3️⃣ Popup 寬度問題 - 開發線索
+
+**已知資訊：**
+- iframe 預留空間在 `iframe-manager.ts` 設定
+- popup 自己沒有撐開到足夠寬度
+
+**可能原因：**
+1. `vocably-popup` 或 `vocably-translation` 的 CSS `max-width` 或 `width` 設定
+2. iframe 內的樣式隔離問題
+3. Stencil.js 元件的響應式設計
+
+**建議檢查檔案：**
+- `packages/extension/src/popup-frame/popup-frame.ts` - iframe 內 popup 的建立邏輯
+- `packages/extension-content-script/src/iframe-manager.ts` - iframe 大小控制（`RESIZE_FRAME` message）
+- `packages/extension-content-ui/` - Stencil.js 元件樣式
+
+**Debug 方法：**
+1. 在 Firefox DevTools 檢查 iframe 內的 `vocably-popup` 元素
+2. 看它的 computed width 和 max-width
+3. 檢查是否有 `width: fit-content` 或 `max-width` 限制
+
+### 未來
+（本段也都是請 Opus 提供資訊）
+
+#### 如何繼續開發（完整版）
+
+因為我們沒有 Vocably 官方的遠端 dev 環境權限，開發時需要用 **localhost** 跑本地 web app。
+
+---
+
+##### 🔧 Dev 環境設定（localhost）
+
+**Step 1：啟動本地 Web App**
+
+```bash
+cd /Users/gjrobert/NAS/projects/Vocably-language-learning-tool
+
+# 安裝依賴（如果還沒做過）
+npm install
+
+# 啟動 web app 開發伺服器
+cd packages/app
+npx ng serve --host 0.0.0.0 --port 8030
+# 會在 http://localhost:8030 啟動
+# ⚠️ 注意：必須加 --host 0.0.0.0，否則只會 listen IPv6，瀏覽器連不上
+```
+
+**Step 2：設定 Extension 指向 localhost**
+
+```bash
+cd /Users/gjrobert/NAS/projects/Vocably-language-learning-tool
+
+# .env 應該已經是 dev 版（指向 localhost:8030）
+# 確認內容：
+cat packages/extension/.env | grep APP_BASE_URL
+# 應該顯示：APP_BASE_URL="http://localhost:8030"
+
+# 設定 environmentLocal.ts 指向 localhost
+cat > packages/extension-popup/src/environments/environmentLocal.ts << 'EOF'
+export const environmentLocal = {
+  appBaseUrl: 'http://localhost:8030',
+};
+EOF
+```
+
+**Step 3：重建 Extension**
+
+```bash
+cd packages/extension-popup && npm run build
+cd ../extension && TARGET_BROWSER=firefox npm run build:firefox
+```
+
+**Step 4：載入 Extension 並測試**
+
+1. Firefox → `about:debugging` → 載入暫時性附加元件
+2. 選取 `packages/extension/dist-firefox/manifest.json`
+3. 選取任意文字，點擊 Vocably 按鈕
+4. 應該會跳出登入畫面（指向 localhost）
+
+---
+
+##### 🚀 切換到 Prod 環境（測試認證/同步）
+
+```bash
+cd /Users/gjrobert/NAS/projects/Vocably-language-learning-tool
+
+# 切換 .env 到 prod
+cp packages/extension/.env.prod packages/extension/.env
+
+# 切換 environmentLocal.ts 到 prod
+cp packages/extension-popup/src/environments/environmentLocal.prod.ts \
+   packages/extension-popup/src/environments/environmentLocal.ts
+
+# 重建
+cd packages/extension-popup && npm run build
+cd ../extension && TARGET_BROWSER=firefox npm run build:firefox
+```
+
+Prod 環境測試時記得：
+- 先在 Firefox 打開 `https://app.vocably.pro?firefox` 啟用 Firefox auth
+- 卡片會真的同步到手機 app
+
+---
+
+##### 🔄 切換回 Dev 環境
+
+```bash
+cd /Users/gjrobert/NAS/projects/Vocably-language-learning-tool
+
+# 切換 .env 回 dev（如果有備份）
+# 或者直接確認 .env 內容正確
+
+# 切換 environmentLocal.ts 回 localhost
+cat > packages/extension-popup/src/environments/environmentLocal.ts << 'EOF'
+export const environmentLocal = {
+  appBaseUrl: 'http://localhost:8030',
+};
+EOF
+
+# 記得也要啟動本地 web app
+cd packages/app && npm run start
+
+# 重建 extension
+cd ../extension-popup && npm run build
+cd ../extension && TARGET_BROWSER=firefox npm run build:firefox
+```
+
+---
+
+##### 📋 環境切換總結
+
+| 情境 | Web App | Extension 指向 | 需要 `?firefox`？ |
+|-----|---------|---------------|-------------------|
+| **Dev（開發）** | `npm run start`（localhost:8030） | `http://localhost:8030` | 不需要 |
+| **Prod（測試認證/同步）** | 不用跑 | `https://app.vocably.pro` | ✅ 需要先啟用 |
+
+---
+
+#### 如何封裝 Firefox Extension（XPI）
+（Robert：發表到 Firefox Add-ons 這個我大致會，只需要知道怎樣做 XPI 即可）
+
+**方法 1：直接 ZIP（最簡單）**
+
+```bash
+cd packages/extension/dist-firefox
+zip -r ../vocably-firefox.xpi ./*
+```
+
+XPI 就是 ZIP，只是副檔名不同。Firefox Add-ons 接受兩者。
+
+**方法 2：使用 web-ext（推薦，有驗證）**
+
+```bash
+# 安裝 web-ext（如果沒有）
+npm install -g web-ext
+
+# 建構並打包
+cd packages/extension/dist-firefox
+web-ext build
+
+# 輸出：web-ext-artifacts/vocably_extension-X.X.X.zip
+```
+
+`web-ext build` 會自動：
+- 驗證 manifest.json
+- 排除不需要的檔案
+- 產生版本號命名的 zip
+
+**提交到 Firefox Add-ons：**
+1. 到 https://addons.mozilla.org/developers/
+2. 上傳 `.xpi` 或 `.zip`
+3. 填寫 extension 資訊
+4. 等審核（通常 1-3 天）
+
+**注意：** 如果要發布，可能需要 Dmytro 授權或使用不同的 extension ID。
+
+#### 想修改 Firefox Extension 適合在自己 GH fork 開 issue 或新 branch 嗎
+
+**建議工作流程：**
+
+| 修改類型 | 建議做法 |
+|---------|---------|
+| **Bug fix / 小改進**（如 popup 寬度） | 直接在 fork 的 `main` 或現有 feature branch 修改，之後同一個 PR 更新 |
+| **大功能 / 實驗性改動** | fork 上開新 branch，例如 `fix/popup-width` |
+| **討論性質 / 需要上游意見** | 在**上游** repo 開 issue（`vocably/getvocably`） |
+
+---
+
+**實際建議（你的情況）：**
+
+1. **popup 寬度問題** → 直接在現有 branch 修改
+   - 因為這是 Firefox 支援的一部分
+   - 可以在同一個 PR #73 加 commit
+
+2. **不需要在自己 fork 開 issue**
+   - fork 的 issue 通常沒人會看
+   - 如果需要討論，直接在 PR #73 留言或上游開 issue
+
+3. **新 branch 的時機**
+   - 如果想嘗試很大的重構（如改用原生 DOM）
+   - 或想保留多個版本對比
+
+---
+
+**精簡版：**
+> popup 寬度這種小修改，直接在現有 branch 改就好，commit 後 push，PR 會自動更新。
+
+## 改 popup 寬度
+
+20260111 18:50 請 Flash：
+1. 還原 dev 環境
+2. 試著找 popup 寬度問題
+
+結果 Opus 審核 Implementation Plan 給的建議是修 1 行就好，另外也修正了要用 localhost 來測試，改到上面「如何繼續開發（完整版）」↑
+
+後來發現 localhost 沒有 listen IPv4，Opus 再修改了。popup 運作正常，
+
+- [ ] 改好後，dev 環境要測試，也要切回 prod 環境測試嗎？

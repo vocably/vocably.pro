@@ -155,6 +155,7 @@ async function showPopup(params: {
   // Override default max-height (48vh) which is too small inside iframe
   popup.style.setProperty('--max-height', '480px');
   popup.style.setProperty('--max-width', '380px');
+  popup.style.setProperty('min-width', '350px');
   popup.appendChild(translation);
   
   // Create overlay
