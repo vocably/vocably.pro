@@ -3142,6 +3142,40 @@ web-ext build
 
 結果 Opus 審核 Implementation Plan 給的建議是修 1 行就好，另外也修正了要用 localhost 來測試，改到上面「如何繼續開發（完整版）」↑
 
-後來發現 localhost 沒有 listen IPv4，Opus 再修改了。popup 運作正常，
+後來發現 localhost 沒有 listen IPv4，Opus 再修改了指令加入 `--host 0.0.0.0`。popup 運作正常，寬度我也暫可接受（之後再到 450px 也許會更像官版 Chrome 體驗）。
 
-- [ ] 改好後，dev 環境要測試，也要切回 prod 環境測試嗎？
+- [x] 改好後，dev 環境要測試，也要切回 prod 環境測試嗎？ → **已完成，兩者都測試通過**
+
+### 20260111 測試結果總結
+
+| 環境 | 測試項目 | 結果 |
+|-----|---------|------|
+| **Dev (localhost)** | popup 顯示、翻譯功能 | ✅ 通過 |
+| **Prod** | popup 顯示、翻譯、+Learn、同步手機 | ✅ 通過 |
+
+**已 commit：**
+- `5b6c43cc` - fix(extension): set min-width on Firefox popup to prevent narrow display
+
+**下一步：**
+- [x] `git push` 推到 GitHub
+- [x] 在 PR #73 留言告知測試成功
+- [x] 回信給 Dmytro
+- ⛰️🔵 用 web-ext 包好勢 v0.0.0 个 ZIP 張上自家个 Zen，工具列撳鈕有跈等接上認證，做得直接用吔！萬歲！
+
+## file:/// 協定無法用？
+
+我用 Firefox extension 讓 Firefox 能開啟本機 Markdown 筆記，因為裡面有可以學習的語文。但是 popup 不會跳出來，是因為目前 extension 有限制嗎？
+
+### 測試結果與結論
+
+嘗試修改 manifest 加入 `file://` 支援並授權後，發現 content script 仍然無法在 file:// 頁面順利運作（Service Worker Console 無反應），可能是 Firefox 對於 MV3 或 content script 的嚴格限制。
+
+**最終解決方案：**
+不強求原生 `file://` 支援。我改用簡單的 Python HTTP server 來服務本地 Markdown 檔案：
+
+```bash
+# 在筆記資料夾開啟 server
+python3 -m http.server 8000
+```
+
+然後用瀏覽器套件將 Markdown 算繪成網頁，這樣 Vocably 就能正常運作了！🚀
