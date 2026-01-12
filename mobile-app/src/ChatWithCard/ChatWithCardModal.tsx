@@ -9,10 +9,10 @@ import { Appbar, Button, Surface, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChatTextInput, ChatTextInputRef } from '../Chat/ChatTextInput';
 import { Message } from '../Chat/Message';
+import { Thinking } from '../Chat/Thinking';
 import { mainPadding } from '../styles';
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { getInitialMessage } from './getInitialMessage';
-import { Thinking } from './Thinking';
 
 export type ChatWithCardParams = {
   card: ChatCard;

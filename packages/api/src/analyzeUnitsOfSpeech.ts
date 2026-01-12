@@ -10,7 +10,7 @@ export const analyzeUnitsOfSpeech = async (
   abortController?: AbortController
 ): Promise<Result<BatchUnitOfSpeechAnalysis>> => {
   try {
-    return await request('/generate-units-of-speech', {
+    return await request('/analyze-units-of-speech', {
       method: 'POST',
       body: JSON.stringify(payload),
       signal: abortController?.signal,

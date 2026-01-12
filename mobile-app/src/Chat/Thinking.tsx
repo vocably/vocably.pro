@@ -2,9 +2,11 @@ import { FC } from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator, Text, useTheme } from 'react-native-paper';
 
-type Props = {};
+type Props = {
+  message?: string;
+};
 
-export const Thinking: FC<Props> = () => {
+export const Thinking: FC<Props> = ({ message = 'Thinking...' }) => {
   const theme = useTheme();
   return (
     <View
@@ -20,7 +22,7 @@ export const Thinking: FC<Props> = () => {
       }}
     >
       <ActivityIndicator color={theme.colors.onSurface} />
-      <Text style={{ fontSize: 16 }}>Thinking...</Text>
+      <Text style={{ fontSize: 16 }}>{message}</Text>
     </View>
   );
 };
