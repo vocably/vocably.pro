@@ -16,6 +16,7 @@ import {
   NewTag,
   TagItem,
 } from '@vocably/model';
+import { isString } from 'lodash-es';
 import posthog from 'posthog-js';
 import {
   combineLatest,
@@ -296,10 +297,12 @@ export class ImportPageComponent implements OnInit, OnDestroy {
 
     const importResult = await importCsv({
       language,
-      csvCards: csvData.map((csvData, index) => ({
-        ...csvData,
-        partOfSpeech: this.csvPos[index],
-      })),
+      csvCards: csvData
+        .map((csvData, index) => ({
+          ...csvData,
+          partOfSpeech: this.csvPos[index],
+        }))
+        .filter((c) => isString(c.partOfSpeech)),
       tags: this.selectedTags,
     });
 
