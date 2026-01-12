@@ -7,11 +7,11 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Appbar, Button, Surface, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ChatTextInput, ChatTextInputRef } from '../Chat/ChatTextInput';
+import { Message } from '../Chat/Message';
 import { mainPadding } from '../styles';
 import { ScreenLayout } from '../ui/ScreenLayout';
-import { ChatTextInput, ChatTextInputRef } from './ChatTextInput';
 import { getInitialMessage } from './getInitialMessage';
-import { Message } from './Message';
 import { Thinking } from './Thinking';
 
 export type ChatWithCardParams = {

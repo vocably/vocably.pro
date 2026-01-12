@@ -1,12 +1,7 @@
-import Clipboard from '@react-native-clipboard/clipboard';
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
-import { Platform, TextInput, View } from 'react-native';
-import { IconButton, useTheme } from 'react-native-paper';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { Animated, Platform, TextInput } from 'react-native';
+import { IconButton } from 'react-native-paper';
+import { useAppTheme } from '../ThemeProvider';
 
 type Props = {
   value: string;
@@ -16,7 +11,6 @@ type Props = {
   disabled?: boolean;
   multiline?: boolean;
   pasteFromClipboard?: boolean;
-  maxHeight?: number;
 };
 
 export type ChatTextInputRef = {
@@ -32,47 +26,55 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
       onSubmit,
       disabled = false,
       multiline = false,
-      pasteFromClipboard = false,
-      maxHeight = 200,
     },
     ref
   ) => {
-    const [isFocused, setIsFocused] = useState(false);
-    const [clipboardHasText, setClipboardHasText] = useState(false);
-    const theme = useTheme();
+    const theme = useAppTheme();
     const inputRef = useRef<TextInput>(null);
+    const focusAnimation = useRef(new Animated.Value(0)).current;
+
+    const handleFocus = () => {
+      Animated.timing(focusAnimation, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    };
+
+    const handleBlur = () => {
+      Animated.timing(focusAnimation, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
+    };
 
     useImperativeHandle(ref, () => ({
       focus: () => {
         if (inputRef.current) {
-          inputRef.current.focus();
+          setTimeout(() => {
+            inputRef.current && inputRef.current.focus();
+          }, 100);
         }
       },
     }));
 
-    Clipboard.hasString().then((hasText) => setClipboardHasText(hasText));
-
-    const setTextFromClipboard = async () => {
-      const clipboardText = await Clipboard.getString();
-      onChange(clipboardText);
-    };
+    const backgroundColor = focusAnimation.interpolate({
+      inputRange: [0, 1],
+      outputRange: [theme.colors.inputBg, theme.colors.inputBgFocused],
+    });
 
     const isSearchDisabled = value === '';
     return (
-      <View
+      <Animated.View
         style={{
           width: '100%',
           flexDirection: 'row',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           justifyContent: 'center',
-          borderStyle: 'solid',
-          borderWidth: 1,
-          borderColor: isFocused
-            ? theme.colors.onSurface
-            : theme.colors.tertiary,
-          borderRadius: 12,
+          borderRadius: 16,
           opacity: disabled ? 0.5 : 1,
-          backgroundColor: 'transparent',
+          backgroundColor: backgroundColor,
           paddingLeft: 12,
         }}
       >
@@ -83,20 +85,24 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
             color: theme.colors.secondary,
             fontSize: 18,
             minHeight: 24,
-            paddingTop: Platform.OS === 'android' ? 11 : 16,
+            paddingTop: Platform.OS === 'android' ? 11 : 12,
             paddingBottom: 10,
-            alignSelf: 'flex-start',
-            maxHeight,
           }}
           multiline={multiline}
+          numberOfLines={1}
           editable={!disabled}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
+          onFocus={() => {
+            handleFocus();
+          }}
+          onBlur={() => {
+            handleBlur();
+          }}
           value={value}
           autoCapitalize={'none'}
           onChangeText={onChange}
           placeholder={placeholder}
           placeholderTextColor={theme.colors.tertiary}
+          returnKeyType={'search'}
           onSubmitEditing={() => onSubmit(value)}
         />
         <IconButton
@@ -111,7 +117,7 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
           onPress={() => onSubmit(value)}
           disabled={isSearchDisabled}
         />
-      </View>
+      </Animated.View>
     );
   }
 );

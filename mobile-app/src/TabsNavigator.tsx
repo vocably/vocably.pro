@@ -4,6 +4,7 @@ import { FC, useEffect } from 'react';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DeckStack } from './DeckStack';
+import { GenerateCardsModal } from './GenerateCards/GenerateCardsModal';
 import { LookUpScreen } from './LookUpScreen';
 import { SettingsStack } from './Settings/SettingsStack';
 import { TipsStack } from './Tips/TipsStack';
@@ -52,6 +53,17 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
           },
         }}
       >
+        <Tabs.Screen
+          name="GenerateModal"
+          options={{
+            headerShown: false,
+            title: 'GenerateCards',
+            tabBarIcon: ({ color }) => (
+              <Icon name="card-multiple-outline" color={color} size={24} />
+            ),
+          }}
+          component={GenerateCardsModal}
+        />
         <Tabs.Screen
           name="DeckScreen"
           options={{

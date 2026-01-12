@@ -15,6 +15,7 @@ type Props = {
   onChange: (preset: Preset) => void;
   languagePairs: LanguagePairs;
   style?: StyleProp<ViewStyle>;
+  compact?: boolean;
 };
 
 export const TargetLanguageButton: FC<Props> = ({
@@ -23,6 +24,7 @@ export const TargetLanguageButton: FC<Props> = ({
   onChange,
   languagePairs,
   style,
+  compact = false,
 }) => {
   const onTranslationSelection = (translationLanguage: string) => {
     onChange({
@@ -59,7 +61,26 @@ export const TargetLanguageButton: FC<Props> = ({
   };
 
   return (
-    <Button style={style} mode="outlined" onPress={selectTranslationLanguage}>
+    <Button
+      style={style}
+      contentStyle={
+        compact && {
+          height: 'auto',
+          paddingVertical: 0,
+          paddingHorizontal: 8,
+        }
+      }
+      labelStyle={
+        compact && {
+          marginVertical: 2,
+          marginHorizontal: 0,
+          fontSize: 12,
+        }
+      }
+      mode="outlined"
+      onPress={selectTranslationLanguage}
+      compact={false}
+    >
       {preset.translationLanguage
         ? languageList[preset.translationLanguage as GoogleLanguage]
         : 'Select'}

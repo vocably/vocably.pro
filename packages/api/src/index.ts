@@ -1,8 +1,10 @@
 export { analyze } from './analyze';
+export * from './analyzeUnitsOfSpeech';
 export { bulkAnalyze } from './bulkAnalyze';
 export * from './chat-with-card';
 export { configureApi } from './config';
 export { explain } from './explain';
+export * from './generateUnitsOfSpeech';
 export {
   deleteLanguageDeck,
   deleteTag,
