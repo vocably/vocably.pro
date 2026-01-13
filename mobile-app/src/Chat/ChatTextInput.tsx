@@ -108,11 +108,9 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
         <IconButton
           icon={'arrow-up-thin'}
           mode="contained"
-          iconColor={theme.colors.onPrimary}
+          iconColor={theme.colors.inputIconColor}
           style={{
-            backgroundColor: isSearchDisabled
-              ? 'transparent'
-              : theme.colors.onSurface,
+            backgroundColor: 'transparent',
           }}
           onPress={() => onSubmit(value)}
           disabled={isSearchDisabled}

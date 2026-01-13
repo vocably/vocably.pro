@@ -204,114 +204,121 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     >
       <ScreenLayout
         content={
-          <View
-            style={{
-              flex: 1,
-              marginTop: insets.top + padding,
-              marginBottom: 8,
-              marginLeft: insets.left + padding,
-              marginRight: insets.right + padding,
-              borderRadius: 16,
-              overflow: 'hidden',
+          <ScrollView
+            contentContainerStyle={{
+              flexGrow: 1,
+              paddingTop: insets.top + padding,
             }}
           >
-            <ScrollView
-              contentContainerStyle={{
-                flexGrow: 1,
-              }}
+            <TouchableWithoutFeedback
+              onPress={Keyboard.dismiss}
+              accessible={false}
             >
-              <TouchableWithoutFeedback
-                onPress={Keyboard.dismiss}
-                accessible={false}
+              <View
+                style={{
+                  flex: 1,
+                  gap: 8,
+                }}
               >
-                <View style={{ flex: 1, gap: 8 }}>
-                  <View
-                    style={{
-                      alignSelf: 'flex-start',
-                      backgroundColor: theme.colors.elevation.level5,
-                      borderRadius: 16,
-                      paddingHorizontal: 16,
-                      paddingVertical: 16,
-                      marginTop: 24,
-                      gap: 8,
-                    }}
-                  >
-                    <Text style={styles.infoText}>
-                      Welcome to the card generator. You can generate any card
-                      set with it.
-                    </Text>
-                    <Text style={styles.infoText}>
-                      This is an experimental feature.
-                    </Text>
-                    <Text style={styles.infoText}>Some examples to try:</Text>
+                <View
+                  style={{
+                    alignSelf: 'flex-start',
+                    backgroundColor: theme.colors.elevation.level5,
+                    borderRadius: 16,
+                    paddingHorizontal: 16,
+                    paddingVertical: 16,
+                    marginTop: 24,
+                    gap: 8,
+                    marginLeft: insets.left + padding,
+                    marginRight: insets.right + padding,
+                  }}
+                >
+                  <Text style={styles.infoText}>
+                    Welcome to the card generator. You can generate any card set
+                    with it.
+                  </Text>
+                  <Text style={styles.infoText}>
+                    This is an experimental feature.
+                  </Text>
+                  <Text style={styles.infoText}>Some examples to try:</Text>
 
-                    <Text style={styles.infoText}>
-                      -{' '}
-                      <Text
-                        style={styles.queryExamples}
-                        onPress={runExample('irregular verbs')}
+                  <Text style={styles.infoText}>
+                    -{' '}
+                    <Text
+                      style={styles.queryExamples}
+                      onPress={runExample('irregular verbs')}
+                    >
+                      irregular verbs
+                    </Text>
+                  </Text>
+                  <Text style={styles.infoText} onPress={runExample('animals')}>
+                    - <Text style={styles.queryExamples}>animals</Text>
+                  </Text>
+                  <Text
+                    style={styles.infoText}
+                    onPress={runExample('popular idioms')}
+                  >
+                    - <Text style={styles.queryExamples}>popular idioms</Text>
+                  </Text>
+                </View>
+                {messages.map((message, index) => (
+                  <View key={index}>
+                    {message.role === 'user' && (
+                      <View
+                        style={{
+                          paddingLeft: insets.left + padding,
+                          paddingRight: insets.left + padding,
+                        }}
                       >
-                        irregular verbs
-                      </Text>
-                    </Text>
-                    <Text
-                      style={styles.infoText}
-                      onPress={runExample('animals')}
-                    >
-                      - <Text style={styles.queryExamples}>animals</Text>
-                    </Text>
-                    <Text
-                      style={styles.infoText}
-                      onPress={runExample('popular idioms')}
-                    >
-                      - <Text style={styles.queryExamples}>popular idioms</Text>
-                    </Text>
-                  </View>
-                  {messages.map((message, index) => (
-                    <View key={index}>
-                      {message.role === 'user' && (
                         <Message direction="toAi" message={message.message} />
-                      )}
-                      {message.role === 'assistant' && (
-                        <AnalyzeResult
-                          cardsLimit={'unlimited'}
-                          leftInset={insets.left}
-                          rightInset={insets.right}
-                          style={{
-                            flex: 1,
-                            width: '100%',
-                            marginRight: 8,
-                          }}
-                          analysis={{
-                            // @ts-ignore
-                            items: message.items,
+                      </View>
+                    )}
+                    {message.role === 'assistant' && (
+                      <AnalyzeResult
+                        cardsLimit={'unlimited'}
+                        leftInset={insets.left}
+                        rightInset={insets.right}
+                        style={{
+                          flex: 1,
+                          width: '100%',
+                          marginRight: 8,
+                        }}
+                        analysis={{
+                          // @ts-ignore
+                          items: message.items,
+                          sourceLanguage: translationPresetState.preset
+                            .sourceLanguage as GoogleLanguage,
+                          targetLanguage: translationPresetState.preset
+                            .sourceLanguage as GoogleLanguage,
+                          source: '',
+                          translation: {
                             sourceLanguage: translationPresetState.preset
                               .sourceLanguage as GoogleLanguage,
                             targetLanguage: translationPresetState.preset
                               .sourceLanguage as GoogleLanguage,
                             source: '',
-                            translation: {
-                              sourceLanguage: translationPresetState.preset
-                                .sourceLanguage as GoogleLanguage,
-                              targetLanguage: translationPresetState.preset
-                                .sourceLanguage as GoogleLanguage,
-                              source: '',
-                              target: '',
-                            },
-                          }}
-                          cards={deck.deck.cards}
-                          onAdd={(card) => {
-                            return onAdd(card);
-                          }}
-                          onRemove={onRemove}
-                          onTagsChange={onTagsChange}
-                          deck={deck}
-                          isSharedLookup={false}
-                        />
-                      )}
-                    </View>
-                  ))}
-                  {thinkingStage !== 'done' && (
+                            target: '',
+                          },
+                        }}
+                        cards={deck.deck.cards}
+                        onAdd={(card) => {
+                          return onAdd(card);
+                        }}
+                        onRemove={onRemove}
+                        onTagsChange={onTagsChange}
+                        deck={deck}
+                        isSharedLookup={false}
+                      />
+                    )}
+                  </View>
+                ))}
+                {thinkingStage !== 'done' && (
+                  <View
+                    style={{
+                      paddingLeft: insets.left + padding,
+                      paddingRight: insets.left + padding,
+                    }}
+                  >
                     <Thinking
                       message={
                         thinkingStage === 'generating-list'
@@ -319,11 +326,11 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                           : 'Creating cards...'
                       }
                     />
-                  )}
-                </View>
-              </TouchableWithoutFeedback>
-            </ScrollView>
-          </View>
+                  </View>
+                )}
+              </View>
+            </TouchableWithoutFeedback>
+          </ScrollView>
         }
         footer={
           <Surface
@@ -348,6 +355,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
               placeholder="What would you like to generate?"
               onSubmit={send}
               disabled={thinkingStage !== 'done'}
+              multiline={true}
             />
           </Surface>
         }
