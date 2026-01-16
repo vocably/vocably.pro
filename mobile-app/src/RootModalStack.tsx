@@ -47,7 +47,13 @@ export const RootModalStack = () => {
             },
           }}
         />
-        <Stack.Screen name="Study" component={StudyScreen} />
+        <Stack.Screen
+          name="Study"
+          component={StudyScreen}
+          options={{
+            headerShown: true,
+          }}
+        />
         <Stack.Screen
           name="EditCardModal"
           component={EditCardScreen}
@@ -58,7 +64,7 @@ export const RootModalStack = () => {
               minHeight: 48,
             },
             headerTitleStyle: {
-              fontSize: 22,
+              fontSize: 20,
               color: theme.colors.onBackground,
             },
             headerTitleAlign: 'left',

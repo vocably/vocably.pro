@@ -4,7 +4,13 @@ import { grade, slice, SrsScore } from '@vocably/srs';
 import { setBadgeCount } from 'aws-amplify/push-notifications';
 import { shuffle } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, {
+  FC,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import { Alert, View } from 'react-native';
 import { Button, IconButton, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -216,30 +222,22 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
   const insets = useSafeAreaInsets();
 
-  if (
-    loadDeckStatus === 'loading' ||
-    cards === undefined ||
-    isRandomizerEnabledResult.status !== 'loaded' ||
-    autoPlayResult.status !== 'loaded' ||
-    maximumCardsPerSessionResult.status !== 'loaded' ||
-    streakHasShownToday.status !== 'loaded'
-  ) {
-    return <Loader>Loading...</Loader>;
-  }
+  useLayoutEffect(() => {
+    if (
+      loadDeckStatus === 'loading' ||
+      cards === undefined ||
+      isRandomizerEnabledResult.status !== 'loaded' ||
+      autoPlayResult.status !== 'loaded' ||
+      maximumCardsPerSessionResult.status !== 'loaded' ||
+      streakHasShownToday.status !== 'loaded'
+    ) {
+      return;
+    }
 
-  return (
-    <ScreenLayout
-      header={
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingLeft: insets.left + 8,
-            paddingRight: insets.right + 8,
-            paddingVertical: 16,
-          }}
-        >
+    navigation.setOptions({
+      headerTitle: '',
+      headerLeft: () => (
+        <>
           <IconButton
             icon={autoPlayResult.value ? 'volume-high' : 'volume-variant-off'}
             size={24}
@@ -278,17 +276,41 @@ export const StudyScreen: Props = ({ route, navigation }) => {
               />
             </>
           )}
-          <View style={{ flex: 1, alignItems: 'flex-end' }}>
-            <Button
-              textColor={theme.colors.onBackground}
-              onPress={() => navigation.goBack()}
-              buttonColor={theme.colors.background}
-            >
-              Done
-            </Button>
-          </View>
-        </View>
-      }
+        </>
+      ),
+      headerRight: () => (
+        <Button
+          onPress={() => navigation.goBack()}
+          textColor={theme.colors.onBackground}
+          buttonColor={theme.colors.background}
+          style={{ marginRight: 8 }}
+        >
+          Done
+        </Button>
+      ),
+    });
+  }, [
+    cards,
+    autoPlayResult,
+    loadDeckStatus,
+    isRandomizerEnabledResult,
+    maximumCardsPerSessionResult,
+    streakHasShownToday,
+  ]);
+
+  if (
+    loadDeckStatus === 'loading' ||
+    cards === undefined ||
+    isRandomizerEnabledResult.status !== 'loaded' ||
+    autoPlayResult.status !== 'loaded' ||
+    maximumCardsPerSessionResult.status !== 'loaded' ||
+    streakHasShownToday.status !== 'loaded'
+  ) {
+    return <Loader>Loading...</Loader>;
+  }
+
+  return (
+    <ScreenLayout
       content={
         <View
           style={{
