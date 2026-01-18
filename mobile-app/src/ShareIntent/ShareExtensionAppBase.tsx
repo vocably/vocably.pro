@@ -50,7 +50,7 @@ export const ShareIntentAppBase: FC<Props> = ({ os }) => {
                             name="LanguageSelector"
                             component={LanguageSelectorModal}
                             options={{
-                              headerShown: false,
+                              headerShown: true,
                               presentation: 'modal',
                               gestureEnabled: true,
                             }}

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
-import { IconButton, useTheme } from 'react-native-paper';
+import { Appbar, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
 import { EditCardScreen } from './EditCardScreen';
@@ -40,13 +40,10 @@ export const RootModalStack = () => {
           headerTitleAlign: 'left',
           headerRightContainerStyle: {},
           headerLeft: () => (
-            <IconButton
-              icon={'chevron-left'}
-              size={24}
-              onPress={() => navigation.goBack()}
-              style={{
-                backgroundColor: 'transparent',
-              }}
+            <Appbar.BackAction
+              onPress={navigation.goBack}
+              size={18}
+              style={{ backgroundColor: 'transparent' }}
             />
           ),
           headerRight: () => <></>,
