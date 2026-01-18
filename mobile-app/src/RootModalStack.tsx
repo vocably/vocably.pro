@@ -87,6 +87,10 @@ export const RootModalStack = () => {
         <Stack.Screen
           name="PaymentSuccessModal"
           component={PaymentSuccessModal}
+          options={{
+            headerShown: true,
+            headerTitle: '',
+          }}
         />
         <Stack.Screen
           name="LanguageSelector"

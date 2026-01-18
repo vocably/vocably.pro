@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useContext } from 'react';
 import { Linking, View } from 'react-native';
-import { Appbar, Button, Text, useTheme } from 'react-native-paper';
+import { Button, Text, useTheme } from 'react-native-paper';
 import {
   mobilePlatform,
   mobileStoreName,
@@ -37,19 +37,6 @@ export const PaymentSuccessModal: FC<Props> = () => {
 
   return (
     <>
-      <Appbar.Header
-        statusBarHeight={0}
-        elevated={true}
-        style={{ backgroundColor: 'transparent' }}
-      >
-        <Appbar.Content title="" />
-        <Appbar.Action
-          icon={'close'}
-          size={24}
-          onPress={() => navigation.goBack()}
-          style={{ backgroundColor: 'transparent' }}
-        />
-      </Appbar.Header>
       <CustomScrollView
         automaticallyAdjustKeyboardInsets={true}
         contentContainerStyle={{
@@ -64,25 +51,25 @@ export const PaymentSuccessModal: FC<Props> = () => {
             variant="headlineMedium"
             style={{ textAlign: 'center', color: theme.colors.secondary }}
           >
-            Thank you for purchasing Vocably Premium.
+            Thank{'\u00A0'}you{'\u00A0'}for giving{'\u00A0'}Vocably{'\u00A0'}a
+            {'\u00A0'}chance. Your{'\u00A0'}support means{'\u00A0'}a{'\u00A0'}
+            lot.
           </Text>
-        </View>
-        <View>
-          <Text style={{ textAlign: 'center' }}>Do you like Vocably?</Text>
         </View>
         <View style={{ alignSelf: 'stretch' }}>
           <Button mode={'contained'} onPress={rateClick}>
-            Rate it on {mobileStoreName}
+            Rate Vocably on {mobileStoreName}
           </Button>
         </View>
         <View>
           <Text style={{ textAlign: 'center' }}>
-            If you are missing or don't like something, you can always{' '}
+            If you are missing or don't like anything, you can always let me
+            know in Discord, Telegram, or{' '}
             <Text
               style={{ color: theme.colors.primary }}
               onPress={() => navigation.navigate('Feedback')}
             >
-              let me know
+              right in the app
             </Text>
             . I take every feedback seriously.
           </Text>
