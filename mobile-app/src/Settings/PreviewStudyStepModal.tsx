@@ -2,9 +2,8 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import { CardItem } from '@vocably/model';
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { Button, Text, useTheme } from 'react-native-paper';
+import { Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ArrangeByLetters } from '../study/ArrangeByLetters';
 import { Card } from '../study/Card';
 import { ImmediateStep } from '../study/craftTheStrategy';
@@ -36,43 +35,6 @@ export const PreviewStudyStepModal: FC<Props> = ({ route, navigation }) => {
 
   return (
     <ScreenLayout
-      header={
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingLeft: insets.left + 8,
-            paddingRight: insets.right + 8,
-            paddingVertical: 16,
-          }}
-        >
-          <View
-            style={{
-              paddingLeft: 8,
-              flexDirection: 'row',
-              gap: 8,
-              alignItems: 'center',
-            }}
-          >
-            <Icon
-              name="eye-outline"
-              color={theme.colors.onBackground}
-              size={16}
-            />
-            <Text style={{ fontSize: 16 }}>Preview mode</Text>
-          </View>
-          <View style={{ flex: 1, alignItems: 'flex-end' }}>
-            <Button
-              textColor={theme.colors.onBackground}
-              onPress={() => navigation.goBack()}
-              buttonColor={theme.colors.background}
-            >
-              Done
-            </Button>
-          </View>
-        </View>
-      }
       content={
         <View
           style={{

@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const ScreenLayout: FC<Props> = ({ header, content, footer }) => {
-  const [headerHeight, setHeaderHeight] = useState(64);
+  const [headerHeight, setHeaderHeight] = useState(header ? 64 : 0);
   const [footerHeight, setFooterHeight] = useState(0);
 
   return (

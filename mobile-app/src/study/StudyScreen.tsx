@@ -12,7 +12,7 @@ import React, {
   useState,
 } from 'react';
 import { Alert, View } from 'react-native';
-import { Button, IconButton, Text, useTheme } from 'react-native-paper';
+import { IconButton, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   getAutoPlayFromStorage,
@@ -236,19 +236,22 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
     navigation.setOptions({
       headerTitle: '',
-      headerLeft: () => (
+      headerRight: () => (
         <>
-          <IconButton
-            icon={autoPlayResult.value ? 'volume-high' : 'volume-variant-off'}
-            size={24}
-            animated={true}
-            onPress={() => setAutoPlay(!autoPlayResult.value)}
-            style={{
-              backgroundColor: theme.colors.background,
-            }}
-          />
           {cards.length > 0 && (
             <>
+              <IconButton
+                icon={'creation'}
+                size={24}
+                onPress={() =>
+                  navigation.navigate('ChatWithCardModal', {
+                    card: cards[0].data,
+                  })
+                }
+                style={{
+                  backgroundColor: theme.colors.background,
+                }}
+              />
               <IconButton
                 icon={'pencil'}
                 size={24}
@@ -261,32 +264,29 @@ export const StudyScreen: Props = ({ route, navigation }) => {
                   backgroundColor: theme.colors.background,
                 }}
               />
-              <IconButton
-                icon={'creation'}
-                size={24}
-                onPress={() =>
-                  navigation.navigate('ChatWithCardModal', {
-                    card: cards[0].data,
-                  })
-                }
-                style={{
-                  transform: [{ translateX: -9 }],
-                  backgroundColor: theme.colors.background,
-                }}
-              />
             </>
           )}
+          <IconButton
+            icon={autoPlayResult.value ? 'volume-high' : 'volume-variant-off'}
+            size={24}
+            animated={true}
+            onPress={() => setAutoPlay(!autoPlayResult.value)}
+            style={{
+              transform: [{ translateX: -9 }],
+              backgroundColor: theme.colors.background,
+            }}
+          />
         </>
       ),
-      headerRight: () => (
-        <Button
+      headerLeft: () => (
+        <IconButton
+          icon={'close'}
+          size={24}
           onPress={() => navigation.goBack()}
-          textColor={theme.colors.onBackground}
-          buttonColor={theme.colors.background}
-          style={{ marginRight: 8 }}
-        >
-          Done
-        </Button>
+          style={{
+            backgroundColor: 'transparent',
+          }}
+        />
       ),
     });
   }, [

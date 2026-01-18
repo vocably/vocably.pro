@@ -2,13 +2,11 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import { sendUserFeedback } from '@vocably/api';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { Alert, Platform, View } from 'react-native';
-import { Appbar, Button, Text, useTheme } from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Button, Text, useTheme } from 'react-native-paper';
 import { useUserEmail } from './auth/useUserEmail';
 import { useTranslationPreset } from './TranslationPreset/useTranslationPreset';
 import { CustomScrollView } from './ui/CustomScrollView';
 import { FormText } from './ui/FormText';
-import { ScreenLayout } from './ui/ScreenLayout';
 
 type Props = {
   route: Route<string, any>;
@@ -72,66 +70,37 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
     });
   }, [text, sendFeedback, isSending]);
 
-  const insets = useSafeAreaInsets();
-
   return (
-    <ScreenLayout
-      header={
-        <Appbar.Header elevated={true} statusBarHeight={0}>
-          <Appbar.Action
-            icon={'close'}
-            onPress={navigation.goBack}
-            style={{ backgroundColor: 'transparent' }}
-          />
-          <Appbar.Content
-            style={{ alignItems: 'flex-start' }}
-            title={'Feedback'}
-          />
-          <Button
-            disabled={text.trim().length === 0 || isSending}
-            onPress={sendFeedback}
-            loading={isSending}
-            style={{ marginRight: 8 }}
-          >
-            Send
-          </Button>
-        </Appbar.Header>
-      }
-      content={
-        <CustomScrollView automaticallyAdjustKeyboardInsets={true}>
-          <View style={{ gap: 16, marginBottom: 16 }}>
-            <Text>
-              Missing any crucial features? Have questions or want to share your
-              thoughts on Vocably? I'd love to hear from you!
-            </Text>
-            <Text>
-              I personally respond to every user, usually within a couple of
-              days.
-            </Text>
-            {userEmail && (
+    <CustomScrollView automaticallyAdjustKeyboardInsets={true}>
+      <View style={{ gap: 16, marginBottom: 16 }}>
+        <Text>
+          Missing any crucial features? Have questions or want to share your
+          thoughts on Vocably? I'd love to hear from you!
+        </Text>
+        <Text>
+          I personally respond to every user, usually within a couple of days.
+        </Text>
+        {userEmail && (
+          <Text>
+            I'll reply to you at your email address{' '}
+            <Text style={{ fontWeight: 'bold' }}>{userEmail}</Text>.
+            {userEmail.includes('privaterelay') && (
               <Text>
-                I'll reply to you at your email address{' '}
-                <Text style={{ fontWeight: 'bold' }}>{userEmail}</Text>.
-                {userEmail.includes('privaterelay') && (
-                  <Text>
-                    {' '}
-                    It looks like you shared a private Apple email with me
-                    during registration, but no worries — it should work just
-                    fine.
-                  </Text>
-                )}
+                {' '}
+                It looks like you shared a private Apple email with me during
+                registration, but no worries — it should work just fine.
               </Text>
             )}
-          </View>
-          <FormText
-            label="Your message"
-            multiline
-            inputStyle={{ minHeight: 128 }}
-            onChangeText={setText}
-            value={text}
-          />
-        </CustomScrollView>
-      }
-    />
+          </Text>
+        )}
+      </View>
+      <FormText
+        label="Your message"
+        multiline
+        inputStyle={{ minHeight: 128 }}
+        onChangeText={setText}
+        value={text}
+      />
+    </CustomScrollView>
   );
 };

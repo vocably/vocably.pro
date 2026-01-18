@@ -5,9 +5,8 @@ import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
-import { Appbar, Button, Surface, useTheme } from 'react-native-paper';
+import { Button, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { mainPadding } from '../styles';
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { ChatTextInput, ChatTextInputRef } from './ChatTextInput';
 import { getInitialMessage } from './getInitialMessage';
@@ -110,26 +109,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
       keyboardVerticalOffset={30}
     >
       <ScreenLayout
-        header={
-          <Surface
-            elevation={0}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingLeft: insets.left + mainPadding,
-              paddingRight: insets.right + 8,
-              paddingVertical: 6,
-            }}
-          >
-            <Appbar.Content title="Chat with the card" />
-            <Appbar.Action
-              icon={'close'}
-              size={24}
-              onPress={() => navigation.goBack()}
-              style={{ backgroundColor: 'transparent' }}
-            />
-          </Surface>
-        }
         content={
           <View
             style={{

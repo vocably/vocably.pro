@@ -68,7 +68,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
           disabled={isUpdating}
           onPress={onUpdate}
           style={{ marginRight: 8 }}
-          textColor={theme.colors.onBackground}
+          textColor={theme.colors.primary}
           buttonColor={theme.colors.background}
         >
           Save
