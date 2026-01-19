@@ -29,7 +29,7 @@ for (let fileName of batchFilesToSend) {
   }
 
   const batchJob = await ai.batches.create({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3-flash-preview',
     src: uploadedFile.name,
   });
 
