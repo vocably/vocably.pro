@@ -58,6 +58,12 @@ export class VocablyCardSource {
             (past: {this.card.data.pastTenses})
           </span>
         )}
+
+        {this.card.data.number === 'singular' && this.card.data.pluralForm && (
+          <span class="vocably-muted vocably-small vocably-translation-margin-left">
+            (plural: {this.card.data.pluralForm})
+          </span>
+        )}
       </Host>
     );
   }
