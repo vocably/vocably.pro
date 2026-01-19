@@ -8,7 +8,7 @@ import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import { Button, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenLayout } from '../ui/ScreenLayout';
-import { ChatTextInput, ChatTextInputRef } from './ChatTextInput';
+import { ChatTextInput } from './ChatTextInput';
 import { getInitialMessage } from './getInitialMessage';
 import { Message } from './Message';
 import { Thinking } from './Thinking';
@@ -31,7 +31,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
   const [messages, setMessages] = useState<ChatWithCardMessage[]>([]);
   const [lastMessageError, setLastMessageError] = useState<string | null>(null);
   const [isThinking, setIsThinking] = useState(false);
-  const inputRef = useRef<ChatTextInputRef>(null);
   const theme = useTheme();
   const posthog = usePostHog();
 
@@ -48,9 +47,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
   }, [messages]);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
     posthog.capture('chat-with-card-modal-opened', {
       card,
     });
@@ -224,7 +220,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               </Button>
             </View>
             <ChatTextInput
-              ref={inputRef}
               disabled={isThinking}
               value={inputValue}
               placeholder={
@@ -235,6 +230,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               multiline={true}
               onChange={setInputValue}
               onSubmit={() => send()}
+              autoFocus={true}
             />
           </View>
         }
