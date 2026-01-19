@@ -187,6 +187,17 @@ export const CardListItem: FC<Props> = ({
                 </View>
               </>
             )}
+
+            {card.number === 'singular' && card.pluralForm && (
+              <>
+                {' '}
+                <View style={{ transform: textTransform }}>
+                  <Text style={{ lineHeight }}>
+                    (plural: {card.pluralForm})
+                  </Text>
+                </View>
+              </>
+            )}
           </Text>
         </View>
       </View>

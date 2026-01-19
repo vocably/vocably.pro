@@ -70,6 +70,22 @@ export const CardDefinition: FC<Props> = ({
           </Text>
         </Text>
       )}
+
+      {showInflections && card.number === 'singular' && card.pluralForm && (
+        <Text
+          style={[
+            textStyle,
+            {
+              marginTop: 16,
+            },
+          ]}
+        >
+          Plural:{' '}
+          <Text style={{ color: theme.colors.secondary }}>
+            {card.pluralForm}
+          </Text>
+        </Text>
+      )}
     </>
   );
 };

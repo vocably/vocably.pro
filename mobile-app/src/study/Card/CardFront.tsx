@@ -108,6 +108,11 @@ export const CardFront: FC<Props> = ({
           {showInflections &&
             card.data.tense === 'present' &&
             card.data.pastTenses && <Text>(past: {card.data.pastTenses})</Text>}
+          {showInflections &&
+            card.data.number === 'singular' &&
+            card.data.pluralForm && (
+              <Text>(plural: {card.data.pluralForm})</Text>
+            )}
         </View>
       )}
       {card.data.example && (
