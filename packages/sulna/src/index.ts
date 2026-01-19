@@ -2,6 +2,7 @@ export * from './calculateDays';
 export * from './date';
 export * from './extractTranslation';
 export * from './getAttributeValue';
+export * from './isGoodPlural';
 export * from './isSafeObject';
 export * from './isToday';
 export * from './queue';
