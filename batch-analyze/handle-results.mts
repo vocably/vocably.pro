@@ -33,6 +33,17 @@ for (let file of files) {
 
   for (let { key: payloadString, response } of items) {
     const payload = JSON.parse(payloadString);
+
+    if (
+      !response ||
+      !response.candidates ||
+      !response.candidates[0]?.content?.parts[0]?.text
+    ) {
+      console.error(`Unable to read candidates text`);
+      deletePoorlyProcessedFile(payload);
+      continue;
+    }
+
     const content = response.candidates[0].content.parts[0].text;
     const parseResult = parseJson(content);
     if (!parseResult.success) {
