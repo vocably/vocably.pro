@@ -106,7 +106,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ flex: 1 }}
-      keyboardVerticalOffset={30}
+      keyboardVerticalOffset={90}
     >
       <ScreenLayout
         content={
