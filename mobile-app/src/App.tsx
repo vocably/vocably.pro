@@ -1,6 +1,7 @@
 import { API_BASE_URL, API_CARDS_BUCKET, API_REGION } from '@env';
 import { configureApi } from '@vocably/api';
 import { fetchAuthSession } from 'aws-amplify/auth';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthContainer } from './auth/AuthContainer';
 import { Login } from './auth/Login';
@@ -28,29 +29,31 @@ configureApi({
 const App = () => {
   configurePurchases();
   return (
-    <ThemeProvider>
-      <NavigationContainer>
-        <PostHogProvider>
-          <AuthContainer>
-            <Login>
-              <CustomerInfoContainer>
-                <NotificationsContainer>
-                  <UserMetadataContainer>
-                    <LanguagesContainer refreshLanguagesOnActive={true}>
-                      <TranslationPresetContainer>
-                        <SafeAreaProvider>
-                          <RootModalStack />
-                        </SafeAreaProvider>
-                      </TranslationPresetContainer>
-                    </LanguagesContainer>
-                  </UserMetadataContainer>
-                </NotificationsContainer>
-              </CustomerInfoContainer>
-            </Login>
-          </AuthContainer>
-        </PostHogProvider>
-      </NavigationContainer>
-    </ThemeProvider>
+    <KeyboardProvider>
+      <ThemeProvider>
+        <NavigationContainer>
+          <PostHogProvider>
+            <AuthContainer>
+              <Login>
+                <CustomerInfoContainer>
+                  <NotificationsContainer>
+                    <UserMetadataContainer>
+                      <LanguagesContainer refreshLanguagesOnActive={true}>
+                        <TranslationPresetContainer>
+                          <SafeAreaProvider>
+                            <RootModalStack />
+                          </SafeAreaProvider>
+                        </TranslationPresetContainer>
+                      </LanguagesContainer>
+                    </UserMetadataContainer>
+                  </NotificationsContainer>
+                </CustomerInfoContainer>
+              </Login>
+            </AuthContainer>
+          </PostHogProvider>
+        </NavigationContainer>
+      </ThemeProvider>
+    </KeyboardProvider>
   );
 };
 

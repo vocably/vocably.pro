@@ -4,7 +4,8 @@ import { ChatCard, ChatWithCardMessage } from '@vocably/model';
 import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Button, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenLayout } from '../ui/ScreenLayout';
@@ -100,9 +101,9 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ flex: 1 }}
-      keyboardVerticalOffset={90}
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === 'android' ? 64 : 94}
     >
       <ScreenLayout
         content={
