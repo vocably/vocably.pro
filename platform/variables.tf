@@ -166,3 +166,13 @@ variable "paddle_webhook_secret_key" {
   type      = string
   sensitive = true
 }
+
+variable "public_api_throttle_rate_limit" {
+  type    = string
+  default = 20
+}
+
+variable "public_api_throttle_burst_limit" {
+  type    = string
+  default = 20
+}

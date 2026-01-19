@@ -38,6 +38,11 @@ resource "aws_apigatewayv2_stage" "public_api" {
   name        = "v1"
   auto_deploy = true
 
+  default_route_settings {
+    throttling_burst_limit = var.public_api_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_throttle_rate_limit
+  }
+
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.public_api.arn
 
