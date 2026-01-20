@@ -42,10 +42,6 @@ const styles = StyleSheet.create({
   infoText: {
     fontSize: 16,
   },
-  queryExamples: {
-    textDecorationStyle: 'dotted',
-    textDecorationLine: 'underline',
-  },
 });
 
 type ThinkingStage = 'generating-list' | 'creating-cards' | 'done';
@@ -61,6 +57,22 @@ type MessageAssistant = {
 };
 
 type GenerateCardsMessage = MessageUser | MessageAssistant;
+
+const languagesWithIrregularVerbs = [
+  'pt-PT',
+  'pt',
+  'af',
+  'nl',
+  'da',
+  'no',
+  'it',
+  'fr',
+  'es',
+  'de',
+  'sv',
+  'en',
+  'en-GB',
+];
 
 export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   const insets = useSafeAreaInsets();
@@ -197,6 +209,10 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     return <Loader>Loading translation preset...</Loader>;
   }
 
+  const linkStyle = {
+    color: theme.colors.primary,
+  };
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -234,31 +250,43 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                   }}
                 >
                   <Text style={styles.infoText}>
-                    Welcome to the card generator. You can generate any card set
-                    with it.
+                    Welcome to the card generator. Type what you need, and
+                    Vocably will generate cards for you.
                   </Text>
                   <Text style={styles.infoText}>
-                    This is an experimental feature.
+                    This is an experimental feature. It works pretty poorly, but
+                    I'm improving it.{' '}
+                    <Text
+                      style={linkStyle}
+                      onPress={() => navigation.navigate('Feedback')}
+                    >
+                      Let me know
+                    </Text>{' '}
+                    if you find any bugs or have any suggestions.
                   </Text>
                   <Text style={styles.infoText}>Some examples to try:</Text>
 
-                  <Text style={styles.infoText}>
-                    -{' '}
-                    <Text
-                      style={styles.queryExamples}
-                      onPress={runExample('irregular verbs')}
-                    >
-                      irregular verbs
+                  {languagesWithIrregularVerbs.includes(
+                    translationPresetState.preset.sourceLanguage
+                  ) && (
+                    <Text style={styles.infoText}>
+                      -{' '}
+                      <Text
+                        style={linkStyle}
+                        onPress={runExample('irregular verbs')}
+                      >
+                        irregular verbs
+                      </Text>
                     </Text>
-                  </Text>
+                  )}
                   <Text style={styles.infoText} onPress={runExample('animals')}>
-                    - <Text style={styles.queryExamples}>animals</Text>
+                    - <Text style={linkStyle}>animals</Text>
                   </Text>
                   <Text
                     style={styles.infoText}
                     onPress={runExample('popular idioms')}
                   >
-                    - <Text style={styles.queryExamples}>popular idioms</Text>
+                    - <Text style={linkStyle}>popular idioms</Text>
                   </Text>
                 </View>
                 {messages.map((message, index) => (
