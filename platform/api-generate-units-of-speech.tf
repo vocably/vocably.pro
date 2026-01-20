@@ -59,7 +59,7 @@ resource "aws_lambda_function" "generate_units_of_speech" {
   handler          = "generate-units-of-speech.generateUnitsOfSpeech"
   source_code_hash = data.archive_file.backend_build.output_base64sha256
   runtime          = "nodejs22.x"
-  timeout          = 10
+  timeout          = 120
 }
 
 resource "aws_lambda_permission" "generate_units_of_speech" {
