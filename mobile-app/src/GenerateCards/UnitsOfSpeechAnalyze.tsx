@@ -8,8 +8,9 @@ import {
   UnitOfSpeech,
 } from '@vocably/model';
 import { chunk } from 'lodash-es';
-import { FC, useEffect, useState } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import React, { FC, useEffect, useState } from 'react';
+import { StyleProp, View, ViewStyle } from 'react-native';
+import { Thinking } from '../Chat/Thinking';
 import { Deck } from '../languageDeck/useLanguageDeck';
 import { AnalyzeResult } from '../LookUpScreen/AnalyzeResult';
 import { AssociatedCard } from '../LookUpScreen/associateCards';
@@ -26,7 +27,7 @@ type Props = {
   deck: Deck;
 };
 
-export const UnitsOfSpeechAnalyze: FC<Props> = ({
+const UnitsOfSpeechAnalyze: FC<Props> = ({
   unitsOfSpeech,
   wrapperStyle = {},
   sourceLanguage,
@@ -38,6 +39,7 @@ export const UnitsOfSpeechAnalyze: FC<Props> = ({
   deck,
 }) => {
   const [analysisItems, setAnalysisItems] = useState<AnalysisItem[]>([]);
+  const [unitsToProcess, setUnitsToProcess] = useState(unitsOfSpeech);
 
   useEffect(() => {
     const chunks = chunk(unitsOfSpeech, 5);
@@ -50,7 +52,9 @@ export const UnitsOfSpeechAnalyze: FC<Props> = ({
           targetLanguage,
         });
 
-        console.log(result);
+        setUnitsToProcess((unitsToProcess) =>
+          unitsToProcess.filter((u) => !subUnitsOfSpeech.includes(u))
+        );
 
         if (result.success === false) {
           continue;
@@ -66,19 +70,27 @@ export const UnitsOfSpeechAnalyze: FC<Props> = ({
   }, []);
 
   return (
-    <AnalyzeResult
-      cards={cards}
-      onAdd={onAdd}
-      onRemove={onRemove}
-      onTagsChange={onTagsChange}
-      isSharedLookup={false}
-      deck={deck}
-      analysis={{
-        sourceLanguage,
-        targetLanguage,
-        // @ts-ignore
-        items: analysisItems,
-      }}
-    />
+    <>
+      <AnalyzeResult
+        cards={cards}
+        onAdd={onAdd}
+        onRemove={onRemove}
+        onTagsChange={onTagsChange}
+        isSharedLookup={false}
+        deck={deck}
+        analysis={{
+          sourceLanguage,
+          targetLanguage,
+          // @ts-ignore
+          items: analysisItems,
+        }}
+      />
+      {unitsToProcess.length > 0 && (
+        <View style={wrapperStyle}>
+          <Thinking message="Generating cards..." />
+        </View>
+      )}
+    </>
   );
 };
+export default UnitsOfSpeechAnalyze;

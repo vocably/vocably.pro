@@ -20,7 +20,7 @@ import { useTranslationPreset } from '../TranslationPreset/useTranslationPreset'
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { useAnalyzeOperations } from '../useAnalyzeOperations';
 import { GenerateTranslationPresetForm } from './GenerateTranslationPresetForm';
-import { UnitsOfSpeechAnalyze } from './UnitsOfSpeechAnalyze';
+import UnitsOfSpeechAnalyze from './UnitsOfSpeechAnalyze';
 
 type Props = {
   route: Route<string, any>;
@@ -227,7 +227,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                 </View>
               </View>
               {messages.map((message, index) => (
-                <View key={index}>
+                <View key={index} style={{ gap: 8 }}>
                   {message.role === 'user' && (
                     <View style={messageWrapperStyle}>
                       <Message direction="toAi" message={message.text} />
@@ -254,44 +254,10 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                           onRemove={onRemove}
                           onAdd={onAdd}
                           onTagsChange={onTagsChange}
+                          wrapperStyle={messageWrapperStyle}
                         />
                       )}
                     </>
-                    // <AnalyzeResult
-                    //   cardsLimit={'unlimited'}
-                    //   leftInset={insets.left}
-                    //   rightInset={insets.right}
-                    //   style={{
-                    //     flex: 1,
-                    //     width: '100%',
-                    //     marginRight: 8,
-                    //   }}
-                    //   analysis={{
-                    //     // @ts-ignore
-                    //     items: message.items,
-                    //     sourceLanguage: translationPresetState.preset
-                    //       .sourceLanguage as GoogleLanguage,
-                    //     targetLanguage: translationPresetState.preset
-                    //       .sourceLanguage as GoogleLanguage,
-                    //     source: '',
-                    //     translation: {
-                    //       sourceLanguage: translationPresetState.preset
-                    //         .sourceLanguage as GoogleLanguage,
-                    //       targetLanguage: translationPresetState.preset
-                    //         .sourceLanguage as GoogleLanguage,
-                    //       source: '',
-                    //       target: '',
-                    //     },
-                    //   }}
-                    //   cards={deck.deck.cards}
-                    //   onAdd={(card) => {
-                    //     return onAdd(card);
-                    //   }}
-                    //   onRemove={onRemove}
-                    //   onTagsChange={onTagsChange}
-                    //   deck={deck}
-                    //   isSharedLookup={false}
-                    // />
                   )}
                 </View>
               ))}
