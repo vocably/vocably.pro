@@ -47,15 +47,37 @@ export const generateUnitsOfSpeech = async ({
         systemInstruction: [
           `You are a ${languageList[sourceLanguage]} dictionary.`,
           `User asks you to generate the collection of ${languageList[sourceLanguage]} words or phrases.`,
-          `Always response with JSON array. Each item is an object with the following fields:`,
-          `-headword - a word or phrase`,
-          `-partOfSpeech - part of speech of the word or phrase in English`,
         ],
         thinkingConfig: {
           thinkingBudget: 0, // Disables thinking
         },
         temperature: 0,
         responseMimeType: 'application/json',
+        responseJsonSchema: {
+          type: 'object',
+          properties: {
+            modelResponse: {
+              type: 'string',
+              description: 'An extremely concise response',
+            },
+            unitsOfSpeech: {
+              type: 'array',
+              description: 'An array of units of speech',
+              items: {
+                type: 'object',
+                properties: {
+                  headword: { type: 'string' },
+                  partOfSpeech: {
+                    type: 'string',
+                    description: 'Part of speech in English',
+                  },
+                },
+                required: ['headword', 'partOfSpeech'],
+              },
+            },
+          },
+          required: ['modelResponse', 'unitsOfSpeech'],
+        },
       },
     }),
     {
@@ -73,15 +95,16 @@ export const generateUnitsOfSpeech = async ({
     return parseResult;
   }
 
-  if (!isArray(parseResult.value)) {
+  if (!isArray(parseResult.value?.unitsOfSpeech)) {
     return {
       success: false,
-      reason: 'The provided result is not an array',
+      reason: 'Has no units of speech',
       extra: { result: parseResult.value },
     };
   }
 
-  const validUnitsOfSpeech = parseResult.value.filter(isUnitOfSpeech);
+  const validUnitsOfSpeech =
+    parseResult.value.unitsOfSpeech.filter(isUnitOfSpeech);
 
   if (!validUnitsOfSpeech) {
     return {
@@ -95,6 +118,7 @@ export const generateUnitsOfSpeech = async ({
     success: true,
     value: {
       role: 'assistant',
+      text: parseResult.value['modelResponse'] ?? '',
       unitsOfSpeech: validUnitsOfSpeech,
     },
   };

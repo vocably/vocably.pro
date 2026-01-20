@@ -27,9 +27,31 @@ describe('generateUnitsOfSpeech', () => {
       throw new Error('Failed to generate cards');
     }
 
-    console.log('Units of speech', inspect(result.value.unitsOfSpeech));
+    console.log('Returned value', inspect(result.value));
 
     expect(result.value.unitsOfSpeech.length).toBeGreaterThanOrEqual(10);
+  });
+
+  it('expect further input', async () => {
+    const result = await generateUnitsOfSpeech({
+      sourceLanguage: 'en',
+      messages: [
+        {
+          role: 'user',
+          text: 'I am going to provide different sentences. Extract words.',
+        },
+      ],
+    });
+
+    if (!result.success) {
+      console.log({ inappropriateResult: result });
+      throw new Error('Failed to generate cards');
+    }
+
+    console.log('Returned value', inspect(result.value));
+
+    expect(result.value.unitsOfSpeech.length).toEqual(0);
+    expect(result.value.text.length).toBeGreaterThan(0);
   });
 
   it('avoids duplicates', async () => {
@@ -53,6 +75,7 @@ describe('generateUnitsOfSpeech', () => {
         },
         {
           role: 'assistant',
+          text: '',
           unitsOfSpeech: previous,
         },
         {
@@ -94,7 +117,7 @@ describe('generateUnitsOfSpeech', () => {
       throw new Error('Failed to generate cards');
     }
 
-    console.log('Units of speech', inspect(result.value.unitsOfSpeech));
+    console.log('Units of speech', inspect(result.value));
 
     expect(result.value.unitsOfSpeech.length).toBeGreaterThanOrEqual(10);
     expect(

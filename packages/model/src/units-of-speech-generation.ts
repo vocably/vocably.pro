@@ -1,4 +1,5 @@
 import { isSafeObject } from '@vocably/sulna';
+import { isObject, isString } from 'lodash-es';
 import { AnalysisItem } from './analysis';
 import { GoogleLanguage, isGoogleLanguage } from './language';
 
@@ -17,6 +18,7 @@ export const isUnitOfSpeech = (data: any): data is UnitOfSpeech => {
 
 export type UnitOfSpeechGenerationMessageAssistant = {
   role: 'assistant';
+  text: string;
   unitsOfSpeech: UnitOfSpeech[];
 };
 
@@ -24,7 +26,9 @@ export const isUnitOfSpeechGenerationMessageAssistant = (
   message: any
 ): message is UnitOfSpeechGenerationMessageAssistant => {
   return (
+    isObject(message) &&
     message['role'] === 'assistant' &&
+    isString(message['text']) &&
     Array.isArray(message['unitsOfSpeech']) &&
     message['unitsOfSpeech'].every(isUnitOfSpeech)
   );
