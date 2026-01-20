@@ -1,7 +1,6 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { analyzeUnitsOfSpeech, generateUnitsOfSpeech } from '@vocably/api';
+import { generateUnitsOfSpeech } from '@vocably/api';
 import {
-  AnalysisItem,
   GoogleLanguage,
   isGoogleLanguage,
   UnitOfSpeechGenerationMessage,
@@ -17,11 +16,11 @@ import { Message } from '../Chat/Message';
 import { Thinking } from '../Chat/Thinking';
 import { useLanguageDeck } from '../languageDeck/useLanguageDeck';
 import { Loader } from '../loaders/Loader';
-import { AnalyzeResult } from '../LookUpScreen/AnalyzeResult';
 import { useTranslationPreset } from '../TranslationPreset/useTranslationPreset';
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { useAnalyzeOperations } from '../useAnalyzeOperations';
 import { GenerateTranslationPresetForm } from './GenerateTranslationPresetForm';
+import { UnitsOfSpeechAnalyze } from './UnitsOfSpeechAnalyze';
 
 type Props = {
   route: Route<string, any>;
@@ -35,20 +34,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-type ThinkingStage = 'generating-list' | 'creating-cards' | 'done';
-
-type MessageUser = {
-  role: 'user';
-  message: string;
-};
-
-type MessageAssistant = {
-  role: 'assistant';
-  items: AnalysisItem[];
-};
-
-type GenerateCardsMessage = MessageUser | MessageAssistant;
 
 const languagesWithIrregularVerbs = [
   'pt-PT',
@@ -86,8 +71,8 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   });
 
   const [lastMessageError, setLastMessageError] = useState<string | null>(null);
-  const [thinkingStage, setThinkingStage] = useState<ThinkingStage>('done');
-  const [messages, setMessages] = useState<GenerateCardsMessage[]>([]);
+  const [isThinking, setIsThinking] = useState<boolean>(false);
+  const [messages, setMessages] = useState<UnitOfSpeechGenerationMessage[]>([]);
 
   const send = async (message: string) => {
     if (!message) {
@@ -112,86 +97,41 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
 
     setLastMessageError(null);
 
-    const newMessages: GenerateCardsMessage[] = [
+    const newMessages: UnitOfSpeechGenerationMessage[] = [
       ...messages,
       {
         role: 'user',
-        message: message,
+        text: message,
       },
     ];
     setMessages(newMessages);
 
     setInputText('');
-    setThinkingStage('generating-list');
+    setIsThinking(true);
 
     const generateUnitsOfSpeechResult = await generateUnitsOfSpeech({
       sourceLanguage: sourceLanguage,
-      messages: newMessages.map((message): UnitOfSpeechGenerationMessage => {
-        if (message.role === 'user') {
-          return {
-            role: 'user',
-            text: message.message,
-          };
-        } else {
-          return {
-            role: 'assistant',
-            unitsOfSpeech: message.items.map((item) => ({
-              headword: item.source,
-              partOfSpeech: item.partOfSpeech ?? '',
-            })),
-          };
-        }
-      }),
+      messages: newMessages,
     });
+
+    console.log('Generation result', generateUnitsOfSpeechResult);
 
     if (generateUnitsOfSpeechResult.success === false) {
       setLastMessageError('Unable to generate cards. Please try again.');
       const lastMessage = last(newMessages);
       if (lastMessage?.role === 'assistant') {
-        setThinkingStage('done');
+        setIsThinking(false);
         return;
       }
-      lastMessage && setInputText(lastMessage.message);
+      lastMessage && setInputText(lastMessage.text);
       setMessages(newMessages.slice(0, -1));
-      setThinkingStage('done');
+      setIsThinking(false);
 
       return;
     }
 
-    console.log(generateUnitsOfSpeechResult.value.unitsOfSpeech);
-
-    setThinkingStage('creating-cards');
-
-    const analyzeUnitsOfSpeechResult = await analyzeUnitsOfSpeech({
-      unitsOfSpeech: generateUnitsOfSpeechResult.value.unitsOfSpeech,
-      sourceLanguage,
-      targetLanguage,
-    });
-
-    console.log(analyzeUnitsOfSpeechResult);
-
-    if (analyzeUnitsOfSpeechResult.success === false) {
-      setLastMessageError('Unable to generate cards. Please try again.');
-      const lastMessage = last(newMessages);
-      if (lastMessage?.role === 'assistant') {
-        setThinkingStage('done');
-        return;
-      }
-      lastMessage && setInputText(lastMessage.message);
-      setMessages(newMessages.slice(0, -1));
-      setThinkingStage('done');
-
-      return;
-    }
-
-    setMessages([
-      ...newMessages,
-      {
-        role: 'assistant',
-        items: analyzeUnitsOfSpeechResult.value.items,
-      },
-    ]);
-    setThinkingStage('done');
+    setMessages([...newMessages, generateUnitsOfSpeechResult.value]);
+    setIsThinking(false);
   };
 
   const runExample = (message: string) => async () => {
@@ -206,6 +146,11 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     color: theme.colors.primary,
   };
 
+  const messageWrapperStyle = {
+    paddingLeft: insets.left + padding,
+    paddingRight: insets.left + padding,
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -218,9 +163,6 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
             style={{
               flex: 1,
               marginBottom: 8,
-              marginLeft: insets.left + 16,
-              marginRight: insets.right + 16,
-              borderRadius: 16,
               overflow: 'hidden',
             }}
           >
@@ -232,124 +174,130 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
               }}
               ref={scrollViewRef}
             >
-              <View
-                style={{
-                  alignSelf: 'flex-start',
-                  backgroundColor: theme.colors.elevation.level5,
-                  borderRadius: 16,
-                  paddingHorizontal: 16,
-                  paddingVertical: 16,
-                  marginTop: 24,
-                  gap: 8,
-                  marginLeft: insets.left + padding,
-                  marginRight: insets.right + padding,
-                }}
-              >
-                <Text style={styles.infoText}>
-                  Welcome to the card generator. Type what you need, and Vocably
-                  will generate cards for you.
-                </Text>
-                <Text style={styles.infoText}>
-                  This is an experimental feature. It works pretty poorly, but
-                  I'm improving it.{' '}
-                  <Text
-                    style={linkStyle}
-                    onPress={() => navigation.navigate('Feedback')}
-                  >
-                    Let me know
-                  </Text>{' '}
-                  if you find any bugs or have any suggestions.
-                </Text>
-                <Text style={styles.infoText}>Some examples to try:</Text>
-
-                {languagesWithIrregularVerbs.includes(
-                  translationPresetState.preset.sourceLanguage
-                ) && (
+              <View style={messageWrapperStyle}>
+                <View
+                  style={{
+                    alignSelf: 'flex-start',
+                    backgroundColor: theme.colors.elevation.level5,
+                    borderRadius: 16,
+                    paddingHorizontal: 16,
+                    paddingVertical: 16,
+                    gap: 8,
+                  }}
+                >
                   <Text style={styles.infoText}>
-                    -{' '}
+                    Welcome to the card generator. Type what you need, and
+                    Vocably will generate cards for you.
+                  </Text>
+                  <Text style={styles.infoText}>
+                    This is an experimental feature. It works pretty poorly, but
+                    I'm improving it.{' '}
                     <Text
                       style={linkStyle}
-                      onPress={runExample('irregular verbs')}
+                      onPress={() => navigation.navigate('Feedback')}
                     >
-                      irregular verbs
-                    </Text>
+                      Let me know
+                    </Text>{' '}
+                    if you find any bugs or have any suggestions.
                   </Text>
-                )}
-                <Text style={styles.infoText} onPress={runExample('animals')}>
-                  - <Text style={linkStyle}>animals</Text>
-                </Text>
-                <Text
-                  style={styles.infoText}
-                  onPress={runExample('popular idioms')}
-                >
-                  - <Text style={linkStyle}>popular idioms</Text>
-                </Text>
+                  <Text style={styles.infoText}>Some examples to try:</Text>
+
+                  {languagesWithIrregularVerbs.includes(
+                    translationPresetState.preset.sourceLanguage
+                  ) && (
+                    <Text style={styles.infoText}>
+                      -{' '}
+                      <Text
+                        style={linkStyle}
+                        onPress={runExample('irregular verbs')}
+                      >
+                        irregular verbs
+                      </Text>
+                    </Text>
+                  )}
+                  <Text style={styles.infoText} onPress={runExample('animals')}>
+                    - <Text style={linkStyle}>animals</Text>
+                  </Text>
+                  <Text
+                    style={styles.infoText}
+                    onPress={runExample('popular idioms')}
+                  >
+                    - <Text style={linkStyle}>popular idioms</Text>
+                  </Text>
+                </View>
               </View>
               {messages.map((message, index) => (
                 <View key={index}>
                   {message.role === 'user' && (
-                    <View
-                      style={{
-                        paddingLeft: insets.left + padding,
-                        paddingRight: insets.left + padding,
-                      }}
-                    >
-                      <Message direction="toAi" message={message.message} />
+                    <View style={messageWrapperStyle}>
+                      <Message direction="toAi" message={message.text} />
                     </View>
                   )}
                   {message.role === 'assistant' && (
-                    <AnalyzeResult
-                      cardsLimit={'unlimited'}
-                      leftInset={insets.left}
-                      rightInset={insets.right}
-                      style={{
-                        flex: 1,
-                        width: '100%',
-                        marginRight: 8,
-                      }}
-                      analysis={{
-                        // @ts-ignore
-                        items: message.items,
-                        sourceLanguage: translationPresetState.preset
-                          .sourceLanguage as GoogleLanguage,
-                        targetLanguage: translationPresetState.preset
-                          .sourceLanguage as GoogleLanguage,
-                        source: '',
-                        translation: {
-                          sourceLanguage: translationPresetState.preset
-                            .sourceLanguage as GoogleLanguage,
-                          targetLanguage: translationPresetState.preset
-                            .sourceLanguage as GoogleLanguage,
-                          source: '',
-                          target: '',
-                        },
-                      }}
-                      cards={deck.deck.cards}
-                      onAdd={(card) => {
-                        return onAdd(card);
-                      }}
-                      onRemove={onRemove}
-                      onTagsChange={onTagsChange}
-                      deck={deck}
-                      isSharedLookup={false}
-                    />
+                    <>
+                      <View style={messageWrapperStyle}>
+                        <Message direction="fromAi" message={message.text} />
+                      </View>
+                      {message.unitsOfSpeech.length > 0 && (
+                        <UnitsOfSpeechAnalyze
+                          sourceLanguage={
+                            translationPresetState.preset
+                              .sourceLanguage as GoogleLanguage
+                          }
+                          targetLanguage={
+                            translationPresetState.preset
+                              .translationLanguage as GoogleLanguage
+                          }
+                          unitsOfSpeech={message.unitsOfSpeech}
+                          cards={deck.deck.cards}
+                          deck={deck}
+                          onRemove={onRemove}
+                          onAdd={onAdd}
+                          onTagsChange={onTagsChange}
+                        />
+                      )}
+                    </>
+                    // <AnalyzeResult
+                    //   cardsLimit={'unlimited'}
+                    //   leftInset={insets.left}
+                    //   rightInset={insets.right}
+                    //   style={{
+                    //     flex: 1,
+                    //     width: '100%',
+                    //     marginRight: 8,
+                    //   }}
+                    //   analysis={{
+                    //     // @ts-ignore
+                    //     items: message.items,
+                    //     sourceLanguage: translationPresetState.preset
+                    //       .sourceLanguage as GoogleLanguage,
+                    //     targetLanguage: translationPresetState.preset
+                    //       .sourceLanguage as GoogleLanguage,
+                    //     source: '',
+                    //     translation: {
+                    //       sourceLanguage: translationPresetState.preset
+                    //         .sourceLanguage as GoogleLanguage,
+                    //       targetLanguage: translationPresetState.preset
+                    //         .sourceLanguage as GoogleLanguage,
+                    //       source: '',
+                    //       target: '',
+                    //     },
+                    //   }}
+                    //   cards={deck.deck.cards}
+                    //   onAdd={(card) => {
+                    //     return onAdd(card);
+                    //   }}
+                    //   onRemove={onRemove}
+                    //   onTagsChange={onTagsChange}
+                    //   deck={deck}
+                    //   isSharedLookup={false}
+                    // />
                   )}
                 </View>
               ))}
-              {thinkingStage !== 'done' && (
-                <View
-                  style={{
-                    paddingLeft: insets.left + padding,
-                    paddingRight: insets.left + padding,
-                  }}
-                >
-                  <Thinking
-                    message={
-                      thinkingStage === 'generating-list'
-                        ? 'Generating the list of items...'
-                        : 'Creating cards...'
-                    }
-                  />
+              {isThinking && (
+                <View style={messageWrapperStyle}>
+                  <Thinking message={'Thinking...'} />
                 </View>
               )}
             </ScrollView>
@@ -375,7 +323,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
               onChange={setInputText}
               placeholder="What would you like to generate?"
               onSubmit={send}
-              disabled={thinkingStage !== 'done'}
+              disabled={isThinking}
               multiline={true}
               autoFocus={true}
             />
