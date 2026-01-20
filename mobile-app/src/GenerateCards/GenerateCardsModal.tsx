@@ -6,10 +6,10 @@ import {
   UnitOfSpeechGenerationMessage,
 } from '@vocably/model';
 import { last } from 'lodash-es';
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
-import { useTheme } from 'react-native-paper';
+import { Appbar, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChatTextInput } from '../Chat/ChatTextInput';
 import { Message } from '../Chat/Message';
@@ -73,6 +73,14 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   const [lastMessageError, setLastMessageError] = useState<string | null>(null);
   const [isThinking, setIsThinking] = useState<boolean>(false);
   const [messages, setMessages] = useState<UnitOfSpeechGenerationMessage[]>([]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Appbar.Action icon={'reload'} onPress={() => setMessages([])} />
+      ),
+    });
+  }, []);
 
   const send = async (message: string) => {
     if (!message) {
