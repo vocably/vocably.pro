@@ -8,11 +8,11 @@ import { Platform, ScrollView, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Button, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ChatTextInput } from '../Chat/ChatTextInput';
+import { Message } from '../Chat/Message';
+import { Thinking } from '../Chat/Thinking';
 import { ScreenLayout } from '../ui/ScreenLayout';
-import { ChatTextInput } from './ChatTextInput';
 import { getInitialMessage } from './getInitialMessage';
-import { Message } from './Message';
-import { Thinking } from './Thinking';
 
 export type ChatWithCardParams = {
   card: ChatCard;

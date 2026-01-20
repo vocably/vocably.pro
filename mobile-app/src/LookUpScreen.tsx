@@ -1,7 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
 import { analyze } from '@vocably/api';
-import { AnalyzePayload, GoogleLanguage, languageList } from '@vocably/model';
-import { trimLanguage } from '@vocably/sulna';
+import { AnalyzePayload, GoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useRef, useState } from 'react';
 import {
@@ -31,18 +30,6 @@ import { useAnalyzeOperations } from './useAnalyzeOperations';
 import { useCardsLimit } from './useCardsLimit';
 
 const padding = 16;
-
-const getLoadingText = (translationPreset: Preset) => {
-  const fromLanguage = translationPreset.isReverse
-    ? translationPreset.translationLanguage
-    : translationPreset.sourceLanguage;
-
-  const fromLanguageLabel = trimLanguage(
-    languageList[fromLanguage as GoogleLanguage]
-  );
-
-  return `Creating ${fromLanguageLabel} cards...`;
-};
 
 type Props = {
   navigation: NavigationProp<any>;

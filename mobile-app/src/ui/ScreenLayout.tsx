@@ -2,8 +2,8 @@ import { FC, useState } from 'react';
 import { View } from 'react-native';
 
 type Props = {
-  header?: React.ReactNode;
   content: React.ReactNode;
+  header?: React.ReactNode;
   footer?: React.ReactNode;
 };
 
