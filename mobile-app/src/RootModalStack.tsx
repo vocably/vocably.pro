@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
 import { EditCardScreen } from './EditCardScreen';
 import { FeedbackModal } from './FeedbackModal';
+import { GenerateCardsModal } from './GenerateCards/GenerateCardsModal';
 import { LanguageSelectorModal } from './LanguageSelectorModal';
 import { PaymentSuccessModal } from './PaymentSuccessModal';
 import { PreviewStudyStepModal } from './Settings/PreviewStudyStepModal';
@@ -83,6 +84,11 @@ export const RootModalStack = () => {
             headerShown: true,
             headerTitle: 'Chat about the card',
           }}
+        />
+        <Stack.Screen
+          name={'GenerateCards'}
+          component={GenerateCardsModal}
+          options={{ headerShown: true, title: '' }}
         />
         <Stack.Screen
           name="PaymentSuccessModal"
