@@ -46,6 +46,7 @@
     "react-native-device-info": "^13.1.0",
     "react-native-gesture-handler": "^2.20.0",
     "react-native-get-random-values": "1.11.0",
+    "react-native-keyboard-controller": "^1.20.6",
     "react-native-linear-gradient": "2.8.3",
     "react-native-localize": "^3.4.1",
     "react-native-markdown-display": "^7.0.2",

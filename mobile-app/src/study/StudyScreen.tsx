@@ -4,9 +4,15 @@ import { grade, slice, SrsScore } from '@vocably/srs';
 import { setBadgeCount } from 'aws-amplify/push-notifications';
 import { shuffle } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
-import React, { FC, useContext, useEffect, useState } from 'react';
+import React, {
+  FC,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import { Alert, View } from 'react-native';
-import { Button, IconButton, Text, useTheme } from 'react-native-paper';
+import { IconButton, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   getAutoPlayFromStorage,
@@ -216,6 +222,82 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
   const insets = useSafeAreaInsets();
 
+  useLayoutEffect(() => {
+    if (
+      loadDeckStatus === 'loading' ||
+      cards === undefined ||
+      isRandomizerEnabledResult.status !== 'loaded' ||
+      autoPlayResult.status !== 'loaded' ||
+      maximumCardsPerSessionResult.status !== 'loaded' ||
+      streakHasShownToday.status !== 'loaded'
+    ) {
+      return;
+    }
+
+    navigation.setOptions({
+      headerTitle: '',
+      headerRight: () => (
+        <>
+          {cards.length > 0 && (
+            <>
+              <IconButton
+                icon={'creation'}
+                size={24}
+                onPress={() =>
+                  navigation.navigate('ChatWithCardModal', {
+                    card: cards[0].data,
+                  })
+                }
+                style={{
+                  backgroundColor: theme.colors.background,
+                }}
+              />
+              <IconButton
+                icon={'pencil'}
+                size={24}
+                onPress={() =>
+                  navigation.navigate('EditCardModal', {
+                    card: cards[0],
+                  })
+                }
+                style={{
+                  backgroundColor: theme.colors.background,
+                }}
+              />
+            </>
+          )}
+          <IconButton
+            icon={autoPlayResult.value ? 'volume-high' : 'volume-variant-off'}
+            size={24}
+            animated={true}
+            onPress={() => setAutoPlay(!autoPlayResult.value)}
+            style={{
+              transform: [{ translateX: -9 }],
+              backgroundColor: theme.colors.background,
+            }}
+          />
+        </>
+      ),
+      headerLeft: () => (
+        <IconButton
+          icon={'close'}
+          size={24}
+          onPress={() => navigation.goBack()}
+          style={{
+            backgroundColor: 'transparent',
+          }}
+        />
+      ),
+    });
+  }, [
+    cards,
+    autoPlayResult,
+    loadDeckStatus,
+    isRandomizerEnabledResult,
+    maximumCardsPerSessionResult,
+    streakHasShownToday,
+  ]);
+
   if (
     loadDeckStatus === 'loading' ||
     cards === undefined ||
@@ -229,66 +311,6 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
   return (
     <ScreenLayout
-      header={
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingLeft: insets.left + 8,
-            paddingRight: insets.right + 8,
-            paddingVertical: 16,
-          }}
-        >
-          <IconButton
-            icon={autoPlayResult.value ? 'volume-high' : 'volume-variant-off'}
-            size={24}
-            animated={true}
-            onPress={() => setAutoPlay(!autoPlayResult.value)}
-            style={{
-              backgroundColor: theme.colors.background,
-            }}
-          />
-          {cards.length > 0 && (
-            <>
-              <IconButton
-                icon={'pencil'}
-                size={24}
-                onPress={() =>
-                  navigation.navigate('EditCardModal', {
-                    card: cards[0],
-                  })
-                }
-                style={{
-                  backgroundColor: theme.colors.background,
-                }}
-              />
-              <IconButton
-                icon={'creation'}
-                size={24}
-                onPress={() =>
-                  navigation.navigate('ChatWithCardModal', {
-                    card: cards[0].data,
-                  })
-                }
-                style={{
-                  transform: [{ translateX: -9 }],
-                  backgroundColor: theme.colors.background,
-                }}
-              />
-            </>
-          )}
-          <View style={{ flex: 1, alignItems: 'flex-end' }}>
-            <Button
-              textColor={theme.colors.onBackground}
-              onPress={() => navigation.goBack()}
-              buttonColor={theme.colors.background}
-            >
-              Done
-            </Button>
-          </View>
-        </View>
-      }
       content={
         <View
           style={{

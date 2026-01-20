@@ -5,7 +5,7 @@ import {
   Result,
   TranslationCard,
 } from '@vocably/model';
-import { sanitizeTranscript } from '@vocably/sulna';
+import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 
 @Component({
   tag: 'vocably-card-source',
@@ -58,6 +58,13 @@ export class VocablyCardSource {
             (past: {this.card.data.pastTenses})
           </span>
         )}
+
+        {this.card.data.number === 'singular' &&
+          isGoodPlural(this.card.data.pluralForm) && (
+            <span class="vocably-muted vocably-small vocably-translation-margin-left">
+              (plural: {this.card.data.pluralForm})
+            </span>
+          )}
       </Host>
     );
   }

@@ -1,5 +1,5 @@
 import { Card } from '@vocably/model';
-import { explode } from '@vocably/sulna';
+import { explode, isGoodPlural } from '@vocably/sulna';
 import React, { FC } from 'react';
 import { StyleProp } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
@@ -70,6 +70,24 @@ export const CardDefinition: FC<Props> = ({
           </Text>
         </Text>
       )}
+
+      {showInflections &&
+        card.number === 'singular' &&
+        isGoodPlural(card.pluralForm) && (
+          <Text
+            style={[
+              textStyle,
+              {
+                marginTop: 16,
+              },
+            ]}
+          >
+            Plural:{' '}
+            <Text style={{ color: theme.colors.secondary }}>
+              {card.pluralForm}
+            </Text>
+          </Text>
+        )}
     </>
   );
 };

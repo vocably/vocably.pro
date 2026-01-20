@@ -13,7 +13,7 @@ import {
   resultify,
 } from '@vocably/model';
 import { trimArticle } from '@vocably/sulna';
-import { isArray, isObject, uniq } from 'lodash-es';
+import { first, isArray, isObject, uniq } from 'lodash-es';
 import { config } from './config';
 import { fallback, FallbackResult } from './fallback';
 import { timeout } from './timeout';
@@ -27,14 +27,32 @@ type Payload = {
   definitions?: string[];
 };
 
-type AiTranslation =
-  | {
-      translation: string;
-    }
-  | string;
+type AtLeastOne<T> = {
+  [K in keyof T]: Pick<T, K> & Partial<T>;
+}[keyof T];
+
+type AiTranslation = AtLeastOne<Record<string, string>> | string;
 
 const isAiTranslation = (translation: any): translation is AiTranslation => {
-  return typeof translation === 'string' || 'translation' in translation;
+  if (typeof translation === 'string') {
+    return true;
+  }
+
+  if (!isObject(translation)) {
+    return false;
+  }
+
+  const entries = Object.entries(translation);
+
+  if (entries.length !== 1) {
+    return false;
+  }
+
+  if (typeof entries[0][1] !== 'string') {
+    return false;
+  }
+
+  return true;
 };
 
 /**
@@ -42,11 +60,27 @@ const isAiTranslation = (translation: any): translation is AiTranslation => {
  * but sometimes it returns an array of objects with a single `translation` field.
  */
 const mapGeminiTranslation = (translation: AiTranslation): string => {
-  if (isObject(translation) && 'translation' in translation) {
-    return translation.translation;
+  if (!isObject(translation)) {
+    return translation;
   }
 
-  return translation;
+  const translationValue = first(Object.values(translation));
+
+  if (!translationValue) {
+    return '';
+  }
+
+  return translationValue;
+};
+
+export const getExpectedNumberOfTranslations = (
+  definitions: string[]
+): number => {
+  if (definitions.length <= 1) {
+    return 2;
+  }
+
+  return definitions.length;
 };
 
 export const translateUnitOfSpeechGemini = async ({
@@ -77,7 +111,9 @@ export const translateUnitOfSpeechGemini = async ({
             `User provides ${safeSourceLanguage} ${partOfSpeech}${
               definitions?.length > 0 ? ' and its definitions' : ''
             }.`,
-            `Give several relevant translations into ${safeTargetLanguage}${
+            `Give up to ${getExpectedNumberOfTranslations(
+              definitions
+            )} relevant translations into ${safeTargetLanguage}${
               definitions?.length > 0 ? ' in the context of definitions' : ''
             }.`,
             `Respond in JSON array with each translation on a separate line`,
@@ -167,7 +203,9 @@ export const translateUnitOfSpeechChatGpt = async ({
           `User provides ${safeSourceLanguage} ${partOfSpeech}${
             definitions?.length > 0 ? ' and its definitions' : ''
           }.`,
-          `Give several relevant translations into ${safeTargetLanguage}${
+          `Give up to ${getExpectedNumberOfTranslations(
+            definitions
+          )} relevant translations into ${safeTargetLanguage}${
             definitions?.length > 0 ? ' in the context of definitions' : ''
           }.`,
           `Only respond in text format with each translation on a separate line`,

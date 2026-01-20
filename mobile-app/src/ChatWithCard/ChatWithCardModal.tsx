@@ -4,13 +4,13 @@ import { ChatCard, ChatWithCardMessage } from '@vocably/model';
 import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
-import { Appbar, Button, Surface, useTheme } from 'react-native-paper';
+import { Platform, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { Button, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ChatTextInput, ChatTextInputRef } from '../Chat/ChatTextInput';
+import { ChatTextInput } from '../Chat/ChatTextInput';
 import { Message } from '../Chat/Message';
 import { Thinking } from '../Chat/Thinking';
-import { mainPadding } from '../styles';
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { getInitialMessage } from './getInitialMessage';
 
@@ -32,7 +32,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
   const [messages, setMessages] = useState<ChatWithCardMessage[]>([]);
   const [lastMessageError, setLastMessageError] = useState<string | null>(null);
   const [isThinking, setIsThinking] = useState(false);
-  const inputRef = useRef<ChatTextInputRef>(null);
   const theme = useTheme();
   const posthog = usePostHog();
 
@@ -49,9 +48,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
   }, [messages]);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
     posthog.capture('chat-with-card-modal-opened', {
       card,
     });
@@ -105,31 +101,11 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ flex: 1 }}
-      keyboardVerticalOffset={30}
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === 'android' ? 64 : 94}
     >
       <ScreenLayout
-        header={
-          <Surface
-            elevation={0}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingLeft: insets.left + mainPadding,
-              paddingRight: insets.right + 8,
-              paddingVertical: 6,
-            }}
-          >
-            <Appbar.Content title="Chat with the card" />
-            <Appbar.Action
-              icon={'close'}
-              size={24}
-              onPress={() => navigation.goBack()}
-              style={{ backgroundColor: 'transparent' }}
-            />
-          </Surface>
-        }
         content={
           <View
             style={{
@@ -245,7 +221,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               </Button>
             </View>
             <ChatTextInput
-              ref={inputRef}
               disabled={isThinking}
               value={inputValue}
               placeholder={
@@ -256,6 +231,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               multiline={true}
               onChange={setInputValue}
               onSubmit={() => send()}
+              autoFocus={true}
             />
           </View>
         }

@@ -14,4 +14,6 @@ chrome_extension_id                              = "baocigmmhhdemijfjnjdidbkfgpg
 alarm_email                               = "prod@vocably.pro"
 sentry_environment                        = "prod"
 endtest_latest_env_suite                  = "non-existing"
-umami_website_id                                  = "8792afdd-a74f-4780-8dde-9b48b3963c44"
+umami_website_id                          = "8792afdd-a74f-4780-8dde-9b48b3963c44"
+public_api_throttle_rate_limit            = 60
+public_api_throttle_burst_limit           = 20

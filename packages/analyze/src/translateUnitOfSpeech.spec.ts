@@ -27,9 +27,11 @@ describe('translateUnitOfSpeech', () => {
         'A set or series of similar or related things, particularly in a row or tier.',
       ],
     });
-    expect(translationResult.success).toEqual(true);
 
     if (translationResult.success === false) {
+      console.log(translationResult);
+      //@ts-ignore
+      expect(translationResult.success).toEqual(true);
       return;
     }
 
@@ -252,8 +254,10 @@ describe('translateUnitOfSpeech', () => {
       sourceLanguage: 'en',
       targetLanguage: 'ru',
       definitions: [
-        'to lower the head or body quickly to avoid being hit or seen',
-        'to evade or avoid a task, responsibility, or difficult situation',
+        'To lower the head or the body quickly to avoid a blow or so as not to be seen.',
+        "To push someone's head under water.",
+        'To quickly go somewhere, especially to avoid being seen.',
+        'To avoid a duty, an unpleasant task, etc.',
       ],
     });
 

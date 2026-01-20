@@ -68,7 +68,8 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
           disabled={isUpdating}
           onPress={onUpdate}
           style={{ marginRight: 8 }}
-          labelStyle={{ fontSize: 16 }}
+          textColor={theme.colors.primary}
+          buttonColor={theme.colors.background}
         >
           Save
         </Button>

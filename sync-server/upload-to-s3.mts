@@ -21,7 +21,9 @@ const repoPath = normalize(`${__dirname}/../../vocably-languages/${language}`);
 if (!existsSync(repoPath)) {
   throw new Error(`Repo path ${repoPath} does not exist`);
 }
-const s3BucketPath = `vocably-prod-units-of-speech/${language.toLowerCase()}`;
+const s3BucketPath = `${
+  process.env.UNITS_OF_SPEECH_BUCKET
+}/${language.toLowerCase()}`;
 const s3Path = `s3://${s3BucketPath}`;
 
 await execute(`aws s3 sync units-of-speech ${s3Path}/units-of-speech`, {

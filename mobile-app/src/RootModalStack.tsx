@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
-import { Button, IconButton, useTheme } from 'react-native-paper';
+import { Appbar, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
 import { EditCardScreen } from './EditCardScreen';
@@ -33,6 +33,20 @@ export const RootModalStack = () => {
           animation: Platform.OS === 'android' ? 'fade' : undefined,
           detachInactiveScreens: false,
           statusBarTranslucent: true,
+          headerTitleStyle: {
+            fontSize: 18,
+            color: theme.colors.onBackground,
+          },
+          headerTitleAlign: 'left',
+          headerRightContainerStyle: {},
+          headerLeft: () => (
+            <Appbar.BackAction
+              onPress={navigation.goBack}
+              size={18}
+              style={{ backgroundColor: 'transparent' }}
+            />
+          ),
+          headerRight: () => <></>,
         }}
       >
         <Stack.Screen
@@ -47,77 +61,63 @@ export const RootModalStack = () => {
             },
           }}
         />
-        <Stack.Screen name="Study" component={StudyScreen} />
+        <Stack.Screen
+          name="Study"
+          component={StudyScreen}
+          options={{
+            headerShown: true,
+          }}
+        />
         <Stack.Screen
           name="EditCardModal"
           component={EditCardScreen}
           options={{
             headerShown: true,
             headerTitle: 'Edit card',
-            headerStyle: {
-              minHeight: 48,
-            },
-            headerTitleStyle: {
-              fontSize: 22,
-              color: theme.colors.onBackground,
-            },
-            headerTitleAlign: 'left',
-            headerLeft: () => (
-              <IconButton
-                icon={'close'}
-                onPress={() => navigation.goBack()}
-                style={{
-                  marginLeft: 8,
-                }}
-              />
-            ),
           }}
         />
-        <Stack.Screen name="ChatWithCardModal" component={ChatWithCardModal} />
+        <Stack.Screen
+          name="ChatWithCardModal"
+          component={ChatWithCardModal}
+          options={{
+            headerShown: true,
+            headerTitle: 'Chat about the card',
+          }}
+        />
         <Stack.Screen
           name="PaymentSuccessModal"
           component={PaymentSuccessModal}
+          options={{
+            headerShown: true,
+            headerTitle: '',
+          }}
         />
         <Stack.Screen
           name="LanguageSelector"
           component={LanguageSelectorModal}
+          options={{
+            headerShown: true,
+          }}
         />
         <Stack.Screen
           name={'Feedback'}
           component={FeedbackModal}
-          options={{ headerShown: false, presentation: 'modal' }}
+          options={{ headerShown: true, title: 'Feedback' }}
         />
         <Stack.Screen
           name="PreviewStudyStepModal"
           component={PreviewStudyStepModal}
+          options={{
+            headerShown: true,
+            title: 'Preview study step',
+          }}
         />
         <Stack.Screen
           name="StudySettingsModal"
           component={StudySettingsScreen}
           options={{
             headerShown: true,
-            presentation: 'modal',
             title: 'Study settings',
-            headerStyle: {},
-            headerTitleStyle: {
-              fontSize: 18,
-              marginLeft: 8,
-              color: theme.colors.onBackground,
-            },
-            headerTitleAlign: 'left',
-            headerLeft: () => <></>,
-            headerRight: () => (
-              <Button
-                textColor={theme.colors.onBackground}
-                onPress={() => navigation.goBack()}
-                buttonColor={theme.colors.background}
-                style={{
-                  marginRight: 8,
-                }}
-              >
-                Done
-              </Button>
-            ),
           }}
         />
       </Stack.Group>

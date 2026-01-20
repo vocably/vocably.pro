@@ -11,6 +11,8 @@ type Props = {
   disabled?: boolean;
   multiline?: boolean;
   pasteFromClipboard?: boolean;
+  maxHeight?: number;
+  autoFocus?: boolean;
 };
 
 export type ChatTextInputRef = {
@@ -26,6 +28,8 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
       onSubmit,
       disabled = false,
       multiline = false,
+      maxHeight = 200,
+      autoFocus = false,
     },
     ref
   ) => {
@@ -104,6 +108,7 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
           placeholderTextColor={theme.colors.tertiary}
           returnKeyType={'search'}
           onSubmitEditing={() => onSubmit(value)}
+          autoFocus={autoFocus}
         />
         <IconButton
           icon={'arrow-up-thin'}

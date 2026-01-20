@@ -1,5 +1,5 @@
 import { CardItem, isGoogleTTSLanguage } from '@vocably/model';
-import { sanitizeTranscript } from '@vocably/sulna';
+import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { PixelRatio, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
@@ -108,6 +108,11 @@ export const CardFront: FC<Props> = ({
           {showInflections &&
             card.data.tense === 'present' &&
             card.data.pastTenses && <Text>(past: {card.data.pastTenses})</Text>}
+          {showInflections &&
+            card.data.number === 'singular' &&
+            isGoodPlural(card.data.pluralForm) && (
+              <Text>(plural: {card.data.pluralForm})</Text>
+            )}
         </View>
       )}
       {card.data.example && (

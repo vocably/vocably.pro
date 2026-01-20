@@ -1,13 +1,7 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { FC, useCallback, useState } from 'react';
-import { ListRenderItem, Pressable, SectionList, View } from 'react-native';
-import {
-  Divider,
-  IconButton,
-  Surface,
-  Text,
-  useTheme,
-} from 'react-native-paper';
+import { FC, useCallback, useLayoutEffect, useState } from 'react';
+import { ListRenderItem, Pressable, SectionList } from 'react-native';
+import { Divider, Surface, Text, useTheme } from 'react-native-paper';
 import { EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { SearchInput } from '../SearchInput';
@@ -92,10 +86,17 @@ export const LanguageSelectorModal: LanguageSelectorModal = ({
     [onSelect]
   );
 
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: title,
+    });
+  }, [title]);
+
   return (
     <ScreenLayout
       header={
         <Surface
+          elevation={0}
           style={{
             paddingLeft: insets.left + mainPadding,
             paddingTop: 8,
@@ -103,20 +104,6 @@ export const LanguageSelectorModal: LanguageSelectorModal = ({
             paddingBottom: mainPadding,
           }}
         >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginBottom: 8,
-            }}
-          >
-            <Text style={{ flexGrow: 1, fontSize: 18 }}>{title}</Text>
-            <IconButton
-              icon={'close'}
-              onPress={() => navigation.goBack()}
-              style={{ backgroundColor: 'transparent', marginRight: -8 }}
-            />
-          </View>
           <SearchInput
             value={searchText}
             placeholder="Search"
