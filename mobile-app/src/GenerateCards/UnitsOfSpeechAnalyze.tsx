@@ -90,6 +90,7 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
         <View style={[wrapperStyle, { gap: 16 }]}>
           <Thinking message="Generating cards..." />
           <View style={{ paddingLeft: 16, gap: 4 }}>
+            <Text>The following cards will be generated:</Text>
             {unitsToProcess.map((unitOfSpeech) => (
               <Text key={unitOfSpeech.headword + unitOfSpeech.partOfSpeech}>
                 - {unitOfSpeech.headword}

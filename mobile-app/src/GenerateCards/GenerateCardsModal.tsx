@@ -114,6 +114,12 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     ];
     setMessages(newMessages);
 
+    setTimeout(() => {
+      if (scrollViewRef.current) {
+        scrollViewRef.current.scrollToEnd({ animated: true });
+      }
+    }, 200);
+
     setInputText('');
     setIsThinking(true);
 
@@ -121,8 +127,6 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
       sourceLanguage: sourceLanguage,
       messages: newMessages,
     });
-
-    console.log('Generation result', generateUnitsOfSpeechResult);
 
     if (generateUnitsOfSpeechResult.success === false) {
       setLastMessageError('Unable to generate cards. Please try again.');
@@ -140,6 +144,12 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
 
     setMessages([...newMessages, generateUnitsOfSpeechResult.value]);
     setIsThinking(false);
+
+    setTimeout(() => {
+      if (scrollViewRef.current) {
+        scrollViewRef.current.scrollToEnd({ animated: true });
+      }
+    }, 200);
   };
 
   const runExample = (message: string) => async () => {
