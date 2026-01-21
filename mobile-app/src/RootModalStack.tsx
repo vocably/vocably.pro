@@ -86,7 +86,7 @@ export const RootModalStack = () => {
         <Stack.Screen
           name={'GenerateCards'}
           component={GenerateCardsModal}
-          options={{ headerShown: true, title: 'Cards generator' }}
+          options={{ headerShown: true, title: 'Card generator' }}
         />
         <Stack.Screen
           name="PaymentSuccessModal"

@@ -21,6 +21,7 @@ type Props = {
 
 export type SearchInputRef = {
   focus: () => void;
+  blur: () => void;
 };
 
 export const SearchInput = forwardRef<SearchInputRef, Props>(
@@ -70,6 +71,11 @@ export const SearchInput = forwardRef<SearchInputRef, Props>(
             inputRef.current.focus();
           }
         }, 100);
+      },
+      blur: () => {
+        if (inputRef.current) {
+          inputRef.current.blur();
+        }
       },
     }));
 

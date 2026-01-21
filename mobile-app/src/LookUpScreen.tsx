@@ -38,6 +38,7 @@ export const LookUpScreen: FC<Props> = ({
 }) => {
   const translationPresetState = useTranslationPreset();
   const [lookUpText, setLookUpText] = useState(initialText);
+  const [generateIsOpened, setGenerateIsOpened] = useState(false);
   const [isAnalyzingPreset, setIsAnalyzingPreset] = useState<Preset | false>(
     false
   );
@@ -71,11 +72,13 @@ export const LookUpScreen: FC<Props> = ({
 
   useEffect(() => {
     return navigation.addListener('focus', () => {
-      if (searchInputRef.current) {
+      if (searchInputRef.current && !generateIsOpened) {
         searchInputRef.current.focus();
       }
+
+      setGenerateIsOpened(false);
     });
-  }, []);
+  }, [generateIsOpened]);
 
   useEffect(() => {
     if (lookUpText === '') {
@@ -242,7 +245,6 @@ export const LookUpScreen: FC<Props> = ({
             contentContainerStyle={{
               paddingBottom: insets.bottom + padding - 2,
             }}
-            keyboardShouldPersistTaps={'handled'}
           >
             {!isAnalyzingPreset && !lookUpResult && (
               <View
@@ -272,9 +274,15 @@ export const LookUpScreen: FC<Props> = ({
                       borderColor: theme.colors.onBackground,
                     }}
                     mode={'outlined'}
-                    onPress={() => navigation.navigate('GenerateCards')}
+                    onPress={() => {
+                      setGenerateIsOpened(true);
+                      if (searchInputRef.current) {
+                        searchInputRef.current.blur();
+                      }
+                      navigation.navigate('GenerateCards');
+                    }}
                   >
-                    Try the new AI cards generator
+                    Try the new AI card generator
                   </Button>
                   <Text style={{ textAlign: 'center', marginTop: 24 }}>
                     Questions or suggestions?
