@@ -52,13 +52,13 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
         targetLanguage,
       });
 
-      setUnitsToProcess((unitsToProcess) =>
-        unitsToProcess.filter((u) => !unitsToProcess.includes(u))
-      );
-
       if (result.success === false) {
         return false;
       }
+
+      setUnitsToProcess((unitsToProcess) =>
+        unitsToProcess.filter((u) => !unitsToProcess.includes(u))
+      );
 
       setAnalysisItems((items) => {
         return [...items, ...result.value.items];
@@ -78,6 +78,9 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
         const smallerChunks = chunk(unitsOfSpeech, 3);
         for (let smallChunk of smallerChunks) {
           await processUnitsOfSpeech(smallChunk);
+          setUnitsToProcess((unitsToProcess) =>
+            unitsToProcess.filter((u) => !smallChunk.includes(u))
+          );
         }
       }
     };

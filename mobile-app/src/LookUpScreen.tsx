@@ -270,6 +270,7 @@ export const LookUpScreen: FC<Props> = ({
                     Want to generate a list of cards for a specific topic?
                   </Text>
                   <Button
+                    icon={'plus-circle-multiple-outline'}
                     textColor={theme.colors.onBackground}
                     style={{
                       borderColor: theme.colors.onBackground,
