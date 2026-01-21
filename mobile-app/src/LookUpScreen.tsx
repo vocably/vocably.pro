@@ -267,6 +267,19 @@ export const LookUpScreen: FC<Props> = ({
                   }}
                 >
                   <Text style={{ textAlign: 'center' }}>
+                    Want to generate a list of cards for a specific topic?
+                  </Text>
+                  <Button
+                    textColor={theme.colors.onBackground}
+                    style={{
+                      borderColor: theme.colors.onBackground,
+                    }}
+                    mode={'outlined'}
+                    onPress={() => navigation.navigate('GenerateCards')}
+                  >
+                    Try the new AI cards generator
+                  </Button>
+                  <Text style={{ textAlign: 'center', marginTop: 24 }}>
                     Questions or suggestions?
                   </Text>
                   <Button

@@ -1,4 +1,3 @@
-import { GENERATE_CARDS } from '@env';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp } from '@react-navigation/native';
 import { byDate, CardItem, TagItem } from '@vocably/model';
@@ -375,14 +374,6 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                   />
                 )}
                 <View style={{ flexGrow: 1 }}></View>
-                {GENERATE_CARDS === 'true' && (
-                  <Appbar.Action
-                    icon={'plus'}
-                    onPress={() => navigation.navigate('GenerateCards')}
-                    size={22 * fontScale}
-                    style={{ backgroundColor: 'transparent' }}
-                  />
-                )}
                 <Appbar.Action
                   icon={'pencil-outline'}
                   onPress={() => navigation.navigate('EditDeck')}
