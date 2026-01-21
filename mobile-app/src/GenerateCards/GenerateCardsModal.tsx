@@ -337,7 +337,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
             <ChatTextInput
               value={inputText}
               onChange={setInputText}
-              placeholder="Any topic"
+              placeholder={messages.length === 0 ? 'Just anything...' : ''}
               onSubmit={send}
               disabled={isThinking}
               multiline={true}
