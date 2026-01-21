@@ -43,31 +43,48 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
   const [unitsToProcess, setUnitsToProcess] = useState(unitsOfSpeech);
 
   useEffect(() => {
-    const chunks = chunk(unitsOfSpeech, 5);
+    const processUnitsOfSpeech = async (
+      unitsOfSpeech: UnitOfSpeech[]
+    ): Promise<boolean> => {
+      const result = await analyzeUnitsOfSpeech({
+        unitsOfSpeech: unitsOfSpeech,
+        sourceLanguage,
+        targetLanguage,
+      });
 
-    const processChunks = async () => {
-      for (let subUnitsOfSpeech of chunks) {
-        const result = await analyzeUnitsOfSpeech({
-          unitsOfSpeech: subUnitsOfSpeech,
-          sourceLanguage,
-          targetLanguage,
-        });
+      setUnitsToProcess((unitsToProcess) =>
+        unitsToProcess.filter((u) => !unitsToProcess.includes(u))
+      );
 
-        setUnitsToProcess((unitsToProcess) =>
-          unitsToProcess.filter((u) => !subUnitsOfSpeech.includes(u))
-        );
+      if (result.success === false) {
+        return false;
+      }
 
-        if (result.success === false) {
+      setAnalysisItems((items) => {
+        return [...items, ...result.value.items];
+      });
+
+      return true;
+    };
+
+    const processChunks = async (chunks: Array<UnitOfSpeech[]>) => {
+      for (let unitsOfSpeech of chunks) {
+        const success = await processUnitsOfSpeech(unitsOfSpeech);
+        if (success) {
           continue;
         }
 
-        setAnalysisItems((items) => {
-          return [...items, ...result.value.items];
-        });
+        // Attempting to recover from the unsuccessful generation
+        const smallerChunks = chunk(unitsOfSpeech, 3);
+        for (let smallChunk of smallerChunks) {
+          await processUnitsOfSpeech(smallChunk);
+        }
       }
     };
 
-    processChunks();
+    const chunks = chunk(unitsOfSpeech, 5);
+
+    processChunks(chunks);
   }, []);
 
   return (
