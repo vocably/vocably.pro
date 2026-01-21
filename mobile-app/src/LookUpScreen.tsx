@@ -3,7 +3,14 @@ import { analyze } from '@vocably/api';
 import { AnalyzePayload, GoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useRef, useState } from 'react';
-import { Alert, Keyboard, Linking, ScrollView, View } from 'react-native';
+import {
+  Alert,
+  Keyboard,
+  Linking,
+  Platform,
+  ScrollView,
+  View,
+} from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Button, Surface, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
@@ -232,7 +239,9 @@ export const LookUpScreen: FC<Props> = ({
         </Surface>
       }
       content={
-        <KeyboardAvoidingView>
+        <KeyboardAvoidingView
+          keyboardVerticalOffset={Platform.OS === 'android' ? 64 : 94}
+        >
           <ScrollView
             contentContainerStyle={{
               paddingBottom: insets.bottom + padding - 2,

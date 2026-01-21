@@ -106,12 +106,12 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
           onChangeText={onChange}
           placeholder={placeholder}
           placeholderTextColor={theme.colors.tertiary}
-          returnKeyType={'search'}
+          returnKeyType={multiline ? 'search' : 'default'}
           onSubmitEditing={() => onSubmit(value)}
           autoFocus={autoFocus}
         />
         <IconButton
-          icon={'arrow-up-thin'}
+          icon={'arrow-up-circle'}
           mode="contained"
           iconColor={theme.colors.inputIconColor}
           style={{
