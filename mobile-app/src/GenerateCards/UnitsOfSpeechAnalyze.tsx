@@ -10,6 +10,7 @@ import {
 import { chunk } from 'lodash-es';
 import React, { FC, useEffect, useState } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
+import { Text } from 'react-native-paper';
 import { Thinking } from '../Chat/Thinking';
 import { Deck } from '../languageDeck/useLanguageDeck';
 import { AnalyzeResult } from '../LookUpScreen/AnalyzeResult';
@@ -86,8 +87,15 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
         }}
       />
       {unitsToProcess.length > 0 && (
-        <View style={wrapperStyle}>
+        <View style={[wrapperStyle, { gap: 16 }]}>
           <Thinking message="Generating cards..." />
+          <View style={{ paddingLeft: 16, gap: 4 }}>
+            {unitsToProcess.map((unitOfSpeech) => (
+              <Text key={unitOfSpeech.headword + unitOfSpeech.partOfSpeech}>
+                - {unitOfSpeech.headword}
+              </Text>
+            ))}
+          </View>
         </View>
       )}
     </>
