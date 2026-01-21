@@ -340,7 +340,7 @@ export const LookUpScreen: FC<Props> = ({
               cards={deck.deck.cards}
               onAdd={(card) => {
                 posthog.capture('mobileCardAdded', {
-                  card,
+                  card: card.card,
                 });
                 return onAdd(card);
               }}

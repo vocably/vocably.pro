@@ -6,6 +6,7 @@ import {
   UnitOfSpeechGenerationMessage,
 } from '@vocably/model';
 import { last } from 'lodash-es';
+import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
@@ -57,6 +58,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   const theme = useTheme();
   const [inputText, setInputText] = useState('');
   const scrollViewRef = useRef<ScrollView>(null);
+  const posthog = usePostHog();
 
   const deck = useLanguageDeck({
     language:
@@ -77,13 +79,23 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Appbar.Action icon={'reload'} onPress={() => setMessages([])} />
+        <Appbar.Action
+          icon={'refresh'}
+          onPress={() => {
+            setMessages([]);
+            posthog.capture('generator-refresh');
+          }}
+        />
       ),
     });
   }, []);
 
   const send = async (message: string) => {
     if (!message) {
+      return;
+    }
+
+    if (isThinking) {
       return;
     }
 
@@ -102,6 +114,12 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     if (!isGoogleLanguage(targetLanguage)) {
       return;
     }
+
+    posthog.capture('generator-message', {
+      sourceLanguage,
+      targetLanguage,
+      message,
+    });
 
     setLastMessageError(null);
 
@@ -272,7 +290,12 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                           cards={deck.deck.cards}
                           deck={deck}
                           onRemove={onRemove}
-                          onAdd={onAdd}
+                          onAdd={(card) => {
+                            posthog.capture('generator-add', {
+                              card: card.card,
+                            });
+                            return onAdd(card);
+                          }}
                           onTagsChange={onTagsChange}
                           wrapperStyle={messageWrapperStyle}
                         />
@@ -285,6 +308,13 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                 <View style={messageWrapperStyle}>
                   <Thinking message={'Thinking...'} />
                 </View>
+              )}
+              {lastMessageError && (
+                <Message
+                  direction="fromAi"
+                  message={lastMessageError}
+                  error={true}
+                />
               )}
             </ScrollView>
           </View>

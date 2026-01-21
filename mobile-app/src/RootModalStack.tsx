@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
 import { Appbar, useTheme } from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
 import { EditCardScreen } from './EditCardScreen';
 import { FeedbackModal } from './FeedbackModal';
@@ -20,7 +19,6 @@ const Stack = createStackNavigator();
 export const RootModalStack = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
 
   return (
     <Stack.Navigator>
@@ -88,7 +86,7 @@ export const RootModalStack = () => {
         <Stack.Screen
           name={'GenerateCards'}
           component={GenerateCardsModal}
-          options={{ headerShown: true, title: '' }}
+          options={{ headerShown: true, title: 'Cards generator' }}
         />
         <Stack.Screen
           name="PaymentSuccessModal"
