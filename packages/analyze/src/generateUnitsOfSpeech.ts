@@ -45,8 +45,9 @@ export const generateUnitsOfSpeech = async ({
       }),
       config: {
         systemInstruction: [
-          `You are a ${languageList[sourceLanguage]} dictionary.`,
-          `User asks you to generate the collection of ${languageList[sourceLanguage]} words or phrases.`,
+          `You are a ${languageList[sourceLanguage]} dictionary`,
+          `User asks you to generate the collection of ${languageList[sourceLanguage]} words or phrases`,
+          `Interpret user request as the starting point for generation of collections of units of speech unless instructed otherwise`,
         ],
         thinkingConfig: {
           thinkingBudget: 0, // Disables thinking

@@ -124,4 +124,25 @@ describe('generateUnitsOfSpeech', () => {
       result.value.unitsOfSpeech.find((u) => u.headword === 'zijn')
     ).not.toBeUndefined();
   });
+
+  it('interprets words as instructions', async () => {
+    const result = await generateUnitsOfSpeech({
+      sourceLanguage: 'nl',
+      messages: [
+        {
+          role: 'user',
+          text: 'doctor appointment',
+        },
+      ],
+    });
+
+    if (!result.success) {
+      console.log({ inappropriateResult: result });
+      throw new Error('Failed to generate cards');
+    }
+
+    console.log('Units of speech', inspect(result.value));
+
+    expect(result.value.unitsOfSpeech.length).toBeGreaterThanOrEqual(5);
+  });
 });
