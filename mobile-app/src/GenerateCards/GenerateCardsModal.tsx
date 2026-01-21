@@ -337,7 +337,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
             <ChatTextInput
               value={inputText}
               onChange={setInputText}
-              placeholder="What would you like to generate?"
+              placeholder="Any topic"
               onSubmit={send}
               disabled={isThinking}
               multiline={true}
