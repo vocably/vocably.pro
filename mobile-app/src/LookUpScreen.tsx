@@ -3,14 +3,8 @@ import { analyze } from '@vocably/api';
 import { AnalyzePayload, GoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useRef, useState } from 'react';
-import {
-  Alert,
-  Keyboard,
-  Linking,
-  ScrollView,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Alert, Keyboard, Linking, ScrollView, View } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Button, Surface, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -238,17 +232,14 @@ export const LookUpScreen: FC<Props> = ({
         </Surface>
       }
       content={
-        <ScrollView
-          contentContainerStyle={{
-            paddingBottom: insets.bottom + padding - 2,
-            minHeight: '100%',
-          }}
-        >
-          {!isAnalyzingPreset && !lookUpResult && (
-            <TouchableWithoutFeedback
-              onPress={Keyboard.dismiss}
-              accessible={false}
-            >
+        <KeyboardAvoidingView>
+          <ScrollView
+            contentContainerStyle={{
+              paddingBottom: insets.bottom + padding - 2,
+            }}
+            keyboardShouldPersistTaps={'handled'}
+          >
+            {!isAnalyzingPreset && !lookUpResult && (
               <View
                 style={{
                   width: '100%',
@@ -326,45 +317,45 @@ export const LookUpScreen: FC<Props> = ({
                   </Button>
                 </View>
               </View>
-            </TouchableWithoutFeedback>
-          )}
-          {isAnalyzingPreset && (
-            <Animated.View
-              entering={FadeIn}
-              exiting={FadeOut.duration(50)}
-              style={{
-                padding: padding + 8,
-                paddingTop: mainPadding + 4,
-              }}
-            >
-              <CardSkeletonLoader />
-            </Animated.View>
-          )}
-          {!isAnalyzingPreset && lookUpResult && lookUpResult.success && (
-            <AnalyzeResult
-              cardsLimit={cardsLimit}
-              leftInset={insets.left}
-              rightInset={insets.right}
-              style={{
-                flex: 1,
-                width: '100%',
-                marginRight: 8,
-              }}
-              analysis={lookUpResult.value}
-              cards={deck.deck.cards}
-              onAdd={(card) => {
-                posthog.capture('mobileCardAdded', {
-                  card: card.card,
-                });
-                return onAdd(card);
-              }}
-              onRemove={onRemove}
-              onTagsChange={onTagsChange}
-              deck={deck}
-              isSharedLookup={isSharedLookUp}
-            />
-          )}
-        </ScrollView>
+            )}
+            {isAnalyzingPreset && (
+              <Animated.View
+                entering={FadeIn}
+                exiting={FadeOut.duration(50)}
+                style={{
+                  padding: padding + 8,
+                  paddingTop: mainPadding + 4,
+                }}
+              >
+                <CardSkeletonLoader />
+              </Animated.View>
+            )}
+            {!isAnalyzingPreset && lookUpResult && lookUpResult.success && (
+              <AnalyzeResult
+                cardsLimit={cardsLimit}
+                leftInset={insets.left}
+                rightInset={insets.right}
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  marginRight: 8,
+                }}
+                analysis={lookUpResult.value}
+                cards={deck.deck.cards}
+                onAdd={(card) => {
+                  posthog.capture('mobileCardAdded', {
+                    card: card.card,
+                  });
+                  return onAdd(card);
+                }}
+                onRemove={onRemove}
+                onTagsChange={onTagsChange}
+                deck={deck}
+                isSharedLookup={isSharedLookUp}
+              />
+            )}
+          </ScrollView>
+        </KeyboardAvoidingView>
       }
     />
   );
