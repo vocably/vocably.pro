@@ -3,14 +3,7 @@ import { analyze } from '@vocably/api';
 import { AnalyzePayload, GoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useRef, useState } from 'react';
-import {
-  Alert,
-  Keyboard,
-  Linking,
-  Platform,
-  ScrollView,
-  View,
-} from 'react-native';
+import { Alert, Keyboard, Linking, ScrollView, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Button, Surface, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
@@ -171,77 +164,80 @@ export const LookUpScreen: FC<Props> = ({
   }
 
   return (
-    <ScreenLayout
-      header={
-        <Surface
-          elevation={1}
-          style={{
-            paddingTop: insets.top,
-            paddingLeft: insets.left,
-            paddingRight: insets.right,
-            paddingBottom: 24,
-          }}
-        >
-          {isSharedLookUp && (
-            <View
-              style={{
-                flexDirection: 'row',
-                paddingLeft: padding + 8,
-                paddingRight: padding - 8,
-                paddingTop: padding,
-                alignItems: 'center',
-              }}
-            >
-              <Text style={{ fontSize: 18 }}>Vocably</Text>
-              <Button
-                style={{ marginLeft: 'auto' }}
-                onPress={async () => {
-                  exitSharedScreen();
+    <KeyboardAvoidingView
+      style={{
+        flex: 1,
+      }}
+      behavior="padding"
+    >
+      <ScreenLayout
+        header={
+          <Surface
+            elevation={1}
+            style={{
+              paddingTop: insets.top,
+              paddingLeft: insets.left,
+              paddingRight: insets.right,
+              paddingBottom: 24,
+            }}
+          >
+            {isSharedLookUp && (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  paddingLeft: padding + 8,
+                  paddingRight: padding - 8,
+                  paddingTop: padding,
+                  alignItems: 'center',
                 }}
               >
-                Done
-              </Button>
+                <Text style={{ fontSize: 18 }}>Vocably</Text>
+                <Button
+                  style={{ marginLeft: 'auto' }}
+                  onPress={async () => {
+                    exitSharedScreen();
+                  }}
+                >
+                  Done
+                </Button>
+              </View>
+            )}
+            <View
+              style={{
+                padding: padding,
+                width: '100%',
+                paddingBottom: 12,
+              }}
+            >
+              <TranslationPresetForm
+                navigation={navigation}
+                languagePairs={translationPresetState.languagePairs}
+                preset={translationPresetState.preset}
+                onChange={translationPresetState.setPreset}
+              />
             </View>
-          )}
-          <View
-            style={{
-              padding: padding,
-              width: '100%',
-              paddingBottom: 12,
-            }}
-          >
-            <TranslationPresetForm
-              navigation={navigation}
-              languagePairs={translationPresetState.languagePairs}
-              preset={translationPresetState.preset}
-              onChange={translationPresetState.setPreset}
-            />
-          </View>
-          <View
-            style={{
-              paddingHorizontal: padding,
-            }}
-          >
-            <SearchInput
-              ref={searchInputRef}
-              value={lookUpText}
-              multiline={false}
-              placeholder={'Any word in any language'}
-              onChange={setLookUpText}
-              onSubmit={lookUp}
-              pasteFromClipboard={true}
-              disabled={
-                !translationPresetState.preset.sourceLanguage ||
-                !translationPresetState.preset.translationLanguage
-              }
-            />
-          </View>
-        </Surface>
-      }
-      content={
-        <KeyboardAvoidingView
-          keyboardVerticalOffset={Platform.OS === 'android' ? 64 : 94}
-        >
+            <View
+              style={{
+                paddingHorizontal: padding,
+              }}
+            >
+              <SearchInput
+                ref={searchInputRef}
+                value={lookUpText}
+                multiline={false}
+                placeholder={'Any word in any language'}
+                onChange={setLookUpText}
+                onSubmit={lookUp}
+                pasteFromClipboard={true}
+                disabled={
+                  !translationPresetState.preset.sourceLanguage ||
+                  !translationPresetState.preset.translationLanguage
+                }
+              />
+            </View>
+          </Surface>
+        }
+        content={
           <ScrollView
             contentContainerStyle={{
               paddingBottom: insets.bottom + padding - 2,
@@ -364,8 +360,8 @@ export const LookUpScreen: FC<Props> = ({
               />
             )}
           </ScrollView>
-        </KeyboardAvoidingView>
-      }
-    />
+        }
+      />
+    </KeyboardAvoidingView>
   );
 };
