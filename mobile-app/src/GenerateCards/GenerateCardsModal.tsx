@@ -243,9 +243,11 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                   )}
                   {message.role === 'assistant' && (
                     <>
-                      <View style={messageWrapperStyle}>
-                        <Message direction="fromAi" message={message.text} />
-                      </View>
+                      {message.text && (
+                        <View style={messageWrapperStyle}>
+                          <Message direction="fromAi" message={message.text} />
+                        </View>
+                      )}
                       {message.unitsOfSpeech.length > 0 && (
                         <UnitsOfSpeechAnalyze
                           sourceLanguage={
