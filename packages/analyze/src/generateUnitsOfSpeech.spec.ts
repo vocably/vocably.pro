@@ -145,4 +145,25 @@ describe('generateUnitsOfSpeech', () => {
 
     expect(result.value.unitsOfSpeech.length).toBeGreaterThanOrEqual(5);
   });
+
+  it('avoids direct translations', async () => {
+    const result = await generateUnitsOfSpeech({
+      sourceLanguage: 'en',
+      messages: [
+        {
+          role: 'user',
+          text: 'kitchen',
+        },
+      ],
+    });
+
+    if (!result.success) {
+      console.log({ inappropriateResult: result });
+      throw new Error('Failed to generate cards');
+    }
+
+    console.log('Units of speech', inspect(result.value));
+
+    expect(result.value.unitsOfSpeech.length).toBeGreaterThanOrEqual(5);
+  });
 });
