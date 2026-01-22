@@ -36,6 +36,14 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
   const posthog = usePostHog();
 
   useEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: theme.colors.elevation.level1,
+      },
+    });
+  }, []);
+
+  useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (scrollViewRef.current) {
         scrollViewRef.current.scrollToEnd({ animated: true });
@@ -107,42 +115,34 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
     >
       <ScreenLayout
         content={
-          <View
-            style={{
-              flex: 1,
+          <ScrollView
+            contentContainerStyle={{
               marginTop: 16,
               marginBottom: 8,
               marginLeft: insets.left + 16,
               marginRight: insets.right + 16,
-              borderRadius: 16,
-              overflow: 'hidden',
+              flexGrow: 1,
+              gap: 8,
             }}
+            ref={scrollViewRef}
           >
-            <ScrollView
-              contentContainerStyle={{
-                flexGrow: 1,
-                gap: 8,
-              }}
-              ref={scrollViewRef}
-            >
-              <Message direction="fromAi" message={getInitialMessage(card)} />
-              {messages.map((message) => (
-                <Message
-                  key={message.timestamp}
-                  message={message.message}
-                  direction={message.role === 'assistant' ? 'fromAi' : 'toAi'}
-                />
-              ))}
-              {isThinking && <Thinking />}
-              {lastMessageError && (
-                <Message
-                  direction="fromAi"
-                  message={lastMessageError}
-                  error={true}
-                />
-              )}
-            </ScrollView>
-          </View>
+            <Message direction="fromAi" message={getInitialMessage(card)} />
+            {messages.map((message) => (
+              <Message
+                key={message.timestamp}
+                message={message.message}
+                direction={message.role === 'assistant' ? 'fromAi' : 'toAi'}
+              />
+            ))}
+            {isThinking && <Thinking />}
+            {lastMessageError && (
+              <Message
+                direction="fromAi"
+                message={lastMessageError}
+                error={true}
+              />
+            )}
+          </ScrollView>
         }
         footer={
           <View
@@ -150,6 +150,10 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               paddingBottom: insets.bottom + 16,
               paddingLeft: insets.left + 16,
               paddingRight: insets.right + 16,
+              paddingTop: 8,
+              backgroundColor: theme.colors.elevation.level1,
+              borderTopWidth: 0.5,
+              borderTopColor: theme.colors.elevation.level5,
             }}
           >
             <View
@@ -162,11 +166,11 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               <Button
                 mode="outlined"
                 compact={true}
-                textColor={theme.colors.outlineVariant}
+                textColor={theme.colors.onSurface}
                 style={{
                   borderColor: isThinking
                     ? theme.colors.surfaceDisabled
-                    : theme.colors.outlineVariant,
+                    : theme.colors.onSurface,
                 }}
                 labelStyle={{
                   marginHorizontal: 8,
@@ -182,11 +186,11 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               <Button
                 mode="outlined"
                 compact={true}
-                textColor={theme.colors.outlineVariant}
+                textColor={theme.colors.onSurface}
                 style={{
                   borderColor: isThinking
                     ? theme.colors.surfaceDisabled
-                    : theme.colors.outlineVariant,
+                    : theme.colors.onSurface,
                 }}
                 labelStyle={{
                   marginHorizontal: 8,
@@ -202,11 +206,11 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               <Button
                 mode="outlined"
                 compact={true}
-                textColor={theme.colors.outlineVariant}
+                textColor={theme.colors.onSurface}
                 style={{
                   borderColor: isThinking
                     ? theme.colors.surfaceDisabled
-                    : theme.colors.outlineVariant,
+                    : theme.colors.onSurface,
                 }}
                 labelStyle={{
                   marginHorizontal: 8,
