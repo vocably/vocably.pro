@@ -1,7 +1,13 @@
 import { Result, TagItem } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Alert, PixelRatio, Pressable, View } from 'react-native';
+import {
+  Alert,
+  PixelRatio,
+  Pressable,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import {
   ActivityIndicator,
   Button,
@@ -76,6 +82,8 @@ export const TagsMenu: FC<Props> = ({
   const [editTag, setEditTag] = useState<Tag | null>(null);
   const theme = useTheme();
   const postHog = usePostHog();
+
+  const { height } = useWindowDimensions();
 
   useEffect(() => {
     setSelectedTags(value);
@@ -243,6 +251,7 @@ export const TagsMenu: FC<Props> = ({
         }}
         contentStyle={{
           width: MENU_WIDTH,
+          maxHeight: height * 0.5,
         }}
         anchor={
           <TagMenuAnchor
@@ -410,52 +419,58 @@ export const TagsMenu: FC<Props> = ({
             )}
             leftOpenValue={SWIPE_MENU_BUTTON_SIZE}
             rightOpenValue={-SWIPE_MENU_BUTTON_SIZE}
-          />
-          {showNoTags && (
-            <>
-              <Divider />
-              <TouchableRipple
-                style={{ backgroundColor: theme.colors.elevation.level2 }}
-                onPress={() => onNoTagsCheck(!noTagsChecked)}
-              >
-                <View
-                  style={{
-                    padding: 12,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    // This is to prevent the swipe menu
-                    // from flashing occasionally
-                    borderWidth: 1,
-                    borderColor: 'transparent',
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: ITEM_FONT_SIZE,
-                      marginRight: 6,
-                      flexGrow: 1,
-                    }}
+            ListFooterComponent={() => {
+              if (!showNoTags) {
+                return <></>;
+              }
+
+              return (
+                <>
+                  <Divider />
+                  <TouchableRipple
+                    style={{ backgroundColor: theme.colors.elevation.level2 }}
+                    onPress={() => onNoTagsCheck(!noTagsChecked)}
                   >
-                    Cards with no tags
-                  </Text>
-                  <Icon
-                    name={
-                      noTagsChecked
-                        ? 'checkbox-marked'
-                        : 'checkbox-blank-outline'
-                    }
-                    size={24}
-                    color={
-                      noTagsChecked
-                        ? theme.colors.primary
-                        : theme.colors.onBackground
-                    }
-                  />
-                </View>
-              </TouchableRipple>
-            </>
-          )}
+                    <View
+                      style={{
+                        padding: 12,
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        // This is to prevent the swipe menu
+                        // from flashing occasionally
+                        borderWidth: 1,
+                        borderColor: 'transparent',
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: ITEM_FONT_SIZE,
+                          marginRight: 6,
+                          flexGrow: 1,
+                        }}
+                      >
+                        Cards with no tags
+                      </Text>
+                      <Icon
+                        name={
+                          noTagsChecked
+                            ? 'checkbox-marked'
+                            : 'checkbox-blank-outline'
+                        }
+                        size={24}
+                        color={
+                          noTagsChecked
+                            ? theme.colors.primary
+                            : theme.colors.onBackground
+                        }
+                      />
+                    </View>
+                  </TouchableRipple>
+                </>
+              );
+            }}
+          />
           {tags.length === 1 && (
             <>
               <Divider />

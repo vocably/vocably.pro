@@ -1,0 +1,19 @@
+diff --git a/node_modules/react-native-paper/src/components/Menu/Menu.tsx b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
+index 55922c1..3ad787f 100644
+--- a/node_modules/react-native-paper/src/components/Menu/Menu.tsx
++++ b/node_modules/react-native-paper/src/components/Menu/Menu.tsx
+@@ -677,13 +677,7 @@ const Menu = ({
+                 theme={theme}
+                 container
+               >
+-                {(scrollableMenuHeight && (
+-                  <ScrollView
+-                    keyboardShouldPersistTaps={keyboardShouldPersistTaps}
+-                  >
+-                    {children}
+-                  </ScrollView>
+-                )) || <React.Fragment>{children}</React.Fragment>}
++                <React.Fragment>{children}</React.Fragment>
+               </Surface>
+             </Animated.View>
+           </View>
