@@ -1,4 +1,9 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { Animated, Platform, TextInput } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { useAppTheme } from '../ThemeProvider';
@@ -11,13 +16,14 @@ type Props = {
   disabled?: boolean;
   multiline?: boolean;
   pasteFromClipboard?: boolean;
-  maxHeight?: number;
   autoFocus?: boolean;
 };
 
 export type ChatTextInputRef = {
   focus: () => void;
 };
+
+const initialMinHeight = 24;
 
 export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
   (
@@ -28,7 +34,6 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
       onSubmit,
       disabled = false,
       multiline = false,
-      maxHeight = 200,
       autoFocus = false,
     },
     ref
@@ -63,6 +68,8 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
       },
     }));
 
+    const [minHeight, setMinHeight] = useState(initialMinHeight);
+
     const backgroundColor = focusAnimation.interpolate({
       inputRange: [0, 1],
       outputRange: [theme.colors.inputBg, theme.colors.inputBgFocused],
@@ -88,12 +95,16 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
             flex: 1,
             color: theme.colors.secondary,
             fontSize: 18,
-            minHeight: 24,
+            minHeight: minHeight,
             paddingTop: Platform.OS === 'android' ? 11 : 12,
             paddingBottom: 10,
           }}
           multiline={multiline}
-          numberOfLines={1}
+          onContentSizeChange={(event) => {
+            if (Platform.OS === 'android') {
+              setMinHeight(event.nativeEvent.contentSize.height);
+            }
+          }}
           editable={!disabled}
           onFocus={() => {
             handleFocus();
