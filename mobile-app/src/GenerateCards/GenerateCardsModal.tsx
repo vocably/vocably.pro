@@ -8,7 +8,7 @@ import {
 import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Platform, ScrollView, Text, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Appbar, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -29,12 +29,6 @@ type Props = {
 };
 
 const padding = 16;
-
-const styles = StyleSheet.create({
-  infoText: {
-    fontSize: 16,
-  },
-});
 
 const languagesWithIrregularVerbs = [
   'pt-PT',
@@ -78,6 +72,9 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
 
   useEffect(() => {
     navigation.setOptions({
+      headerStyle: {
+        backgroundColor: theme.colors.elevation.level1,
+      },
       headerRight: () => (
         <Appbar.Action
           icon={'refresh'}
@@ -187,6 +184,11 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     paddingRight: insets.left + padding,
   };
 
+  const infoTextStyle = {
+    fontSize: 16,
+    color: theme.colors.onBackground,
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -195,53 +197,46 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     >
       <ScreenLayout
         content={
-          <View
-            style={{
-              flex: 1,
-              marginBottom: 8,
-              overflow: 'hidden',
+          <ScrollView
+            keyboardShouldPersistTaps={'handled'}
+            contentContainerStyle={{
+              flexGrow: 1,
+              gap: 8,
+              paddingTop: 16,
             }}
+            ref={scrollViewRef}
           >
-            <ScrollView
-              keyboardShouldPersistTaps={'handled'}
-              contentContainerStyle={{
-                flexGrow: 1,
-                gap: 8,
-              }}
-              ref={scrollViewRef}
-            >
-              <View style={messageWrapperStyle}>
-                <View
-                  style={{
-                    alignSelf: 'flex-start',
-                    backgroundColor: theme.colors.elevation.level5,
-                    borderRadius: 16,
-                    paddingHorizontal: 16,
-                    paddingVertical: 16,
-                    gap: 8,
-                  }}
-                >
-                  <Text style={styles.infoText}>
-                    Welcome to the card generator. Type what you need, and
-                    Vocably will generate cards for you.
-                  </Text>
-                  <Text style={styles.infoText}>
-                    This is an experimental feature. It works pretty poorly, but
-                    I'm improving it.{' '}
-                    <Text
-                      style={linkStyle}
-                      onPress={() => navigation.navigate('Feedback')}
-                    >
-                      Let me know
-                    </Text>{' '}
-                    if you find any bugs or have any suggestions.
-                  </Text>
-                  <Text style={styles.infoText}>Some examples to try:</Text>
+            <View style={messageWrapperStyle}>
+              <View
+                style={{
+                  alignSelf: 'flex-start',
+                  backgroundColor: theme.colors.elevation.level5,
+                  borderRadius: 16,
+                  paddingHorizontal: 16,
+                  paddingVertical: 16,
+                  gap: 8,
+                }}
+              >
+                <Text style={infoTextStyle}>
+                  Type what you need, and Vocably will generate cards for you.
+                </Text>
+                <Text style={infoTextStyle}>
+                  This is an experimental feature.{' '}
+                  <Text
+                    style={linkStyle}
+                    onPress={() => navigation.navigate('Feedback')}
+                  >
+                    Let me know
+                  </Text>{' '}
+                  if you find any bugs or have any suggestions.
+                </Text>
+                <Text style={infoTextStyle}>Some examples to try:</Text>
 
+                <View style={{ gap: 4 }}>
                   {languagesWithIrregularVerbs.includes(
                     translationPresetState.preset.sourceLanguage
                   ) && (
-                    <Text style={styles.infoText}>
+                    <Text style={infoTextStyle}>
                       -{' '}
                       <Text
                         style={linkStyle}
@@ -251,73 +246,73 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                       </Text>
                     </Text>
                   )}
-                  <Text style={styles.infoText} onPress={runExample('animals')}>
+                  <Text style={infoTextStyle} onPress={runExample('animals')}>
                     - <Text style={linkStyle}>animals</Text>
                   </Text>
                   <Text
-                    style={styles.infoText}
+                    style={infoTextStyle}
                     onPress={runExample('popular idioms')}
                   >
                     - <Text style={linkStyle}>popular idioms</Text>
                   </Text>
                 </View>
               </View>
-              {messages.map((message, index) => (
-                <View key={index} style={{ gap: 8 }}>
-                  {message.role === 'user' && (
-                    <View style={messageWrapperStyle}>
-                      <Message direction="toAi" message={message.text} />
-                    </View>
-                  )}
-                  {message.role === 'assistant' && (
-                    <>
-                      {message.text && (
-                        <View style={messageWrapperStyle}>
-                          <Message direction="fromAi" message={message.text} />
-                        </View>
-                      )}
-                      {message.unitsOfSpeech.length > 0 && (
-                        <UnitsOfSpeechAnalyze
-                          sourceLanguage={
-                            translationPresetState.preset
-                              .sourceLanguage as GoogleLanguage
-                          }
-                          targetLanguage={
-                            translationPresetState.preset
-                              .translationLanguage as GoogleLanguage
-                          }
-                          unitsOfSpeech={message.unitsOfSpeech}
-                          cards={deck.deck.cards}
-                          deck={deck}
-                          onRemove={onRemove}
-                          onAdd={(card) => {
-                            posthog.capture('generator-add', {
-                              card: card.card,
-                            });
-                            return onAdd(card);
-                          }}
-                          onTagsChange={onTagsChange}
-                          wrapperStyle={messageWrapperStyle}
-                        />
-                      )}
-                    </>
-                  )}
-                </View>
-              ))}
-              {isThinking && (
-                <View style={messageWrapperStyle}>
-                  <Thinking message={'Thinking...'} />
-                </View>
-              )}
-              {lastMessageError && (
-                <Message
-                  direction="fromAi"
-                  message={lastMessageError}
-                  error={true}
-                />
-              )}
-            </ScrollView>
-          </View>
+            </View>
+            {messages.map((message, index) => (
+              <View key={index} style={{ gap: 8 }}>
+                {message.role === 'user' && (
+                  <View style={messageWrapperStyle}>
+                    <Message direction="toAi" message={message.text} />
+                  </View>
+                )}
+                {message.role === 'assistant' && (
+                  <>
+                    {message.text && (
+                      <View style={messageWrapperStyle}>
+                        <Message direction="fromAi" message={message.text} />
+                      </View>
+                    )}
+                    {message.unitsOfSpeech.length > 0 && (
+                      <UnitsOfSpeechAnalyze
+                        sourceLanguage={
+                          translationPresetState.preset
+                            .sourceLanguage as GoogleLanguage
+                        }
+                        targetLanguage={
+                          translationPresetState.preset
+                            .translationLanguage as GoogleLanguage
+                        }
+                        unitsOfSpeech={message.unitsOfSpeech}
+                        cards={deck.deck.cards}
+                        deck={deck}
+                        onRemove={onRemove}
+                        onAdd={(card) => {
+                          posthog.capture('generator-add', {
+                            card: card.card,
+                          });
+                          return onAdd(card);
+                        }}
+                        onTagsChange={onTagsChange}
+                        wrapperStyle={messageWrapperStyle}
+                      />
+                    )}
+                  </>
+                )}
+              </View>
+            ))}
+            {isThinking && (
+              <View style={messageWrapperStyle}>
+                <Thinking message={'Thinking...'} />
+              </View>
+            )}
+            {lastMessageError && (
+              <Message
+                direction="fromAi"
+                message={lastMessageError}
+                error={true}
+              />
+            )}
+          </ScrollView>
         }
         footer={
           <View
@@ -325,7 +320,11 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
               paddingBottom: insets.bottom + 16,
               paddingLeft: insets.left + 16,
               paddingRight: insets.right + 16,
+              paddingTop: 8,
               gap: 8,
+              backgroundColor: theme.colors.elevation.level1,
+              borderTopWidth: 0.5,
+              borderTopColor: theme.colors.elevation.level5,
             }}
           >
             <GenerateTranslationPresetForm

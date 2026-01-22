@@ -106,7 +106,7 @@ export const GenerateTranslationPresetForm: FC<Props> = ({
           languagePairs={languagePairs}
           compact={true}
         />
-        <Icon name="menu-right" size={16} />
+        <Icon name="menu-right" size={16} color={theme.colors.onBackground} />
         <TargetLanguageButton
           navigation={navigation}
           preset={preset}

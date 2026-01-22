@@ -265,7 +265,7 @@ export const LookUpScreen: FC<Props> = ({
                   }}
                 >
                   <Text style={{ textAlign: 'center' }}>
-                    Want to generate a list of cards for a specific topic?
+                    Want to generate a list of cards on a specific topic?
                   </Text>
                   <Button
                     icon={'plus-circle-multiple-outline'}

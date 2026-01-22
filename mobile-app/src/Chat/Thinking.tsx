@@ -21,8 +21,10 @@ export const Thinking: FC<Props> = ({ message = 'Thinking...' }) => {
         gap: 16,
       }}
     >
-      <ActivityIndicator color={theme.colors.onSurface} />
-      <Text style={{ fontSize: 16 }}>{message}</Text>
+      <ActivityIndicator color={theme.colors.onBackground} />
+      <Text style={{ fontSize: 16, color: theme.colors.onBackground }}>
+        {message}
+      </Text>
     </View>
   );
 };

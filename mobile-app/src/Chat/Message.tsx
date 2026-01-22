@@ -17,12 +17,12 @@ export const Message: FC<Props> = ({ message, direction, error = false }) => {
       color: error
         ? theme.colors.error
         : direction === 'fromAi'
-        ? theme.colors.onSurface
+        ? theme.colors.onBackground
         : theme.colors.onPrimary,
       fontSize: 16,
     },
     hr: {
-      backgroundColor: theme.colors.onSurface,
+      backgroundColor: theme.colors.onBackground,
     },
   };
 
