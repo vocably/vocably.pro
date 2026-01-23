@@ -508,6 +508,19 @@ export const geminiAnalyse = async (
     return result;
   }
 
+  if (
+    result.value.promptFeedback &&
+    result.value.promptFeedback.blockReason === 'PROHIBITED_CONTENT'
+  ) {
+    return {
+      success: false,
+      errorCode: 'PROHIBITED_CONTENT',
+      reason:
+        'The Gemini request responded with the prohibited content response',
+      extra: result.value,
+    };
+  }
+
   if (!result.value.text) {
     return {
       success: false,
@@ -586,7 +599,8 @@ export const aiAnalyse = async (
 
   if (
     isSourceValid &&
-    !analyseResult.fallenBack &&
+    (!analyseResult.fallenBack ||
+      analyseResult.errorCode === 'PROHIBITED_CONTENT') &&
     analyseResult.value.exists === true
   ) {
     const putResult = await nodePutS3File(

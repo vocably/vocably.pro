@@ -2,6 +2,7 @@ import { Result, ResultError, ResultSuccess } from '@vocably/model';
 
 type FallbackSuccess<T> = ResultSuccess<T> & {
   fallenBack: boolean;
+  errorCode?: string;
 };
 
 export type FallbackResult<T> = FallbackSuccess<T> | ResultError;
@@ -27,6 +28,7 @@ export const fallback = async <T>(
     return {
       ...fallbackResult,
       fallenBack: true,
+      errorCode: result.errorCode,
     };
   }
 
