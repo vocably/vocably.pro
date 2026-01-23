@@ -938,4 +938,19 @@ describe('integration check for translate lambda', () => {
       'utvärderade, har utvärderat'
     );
   });
+
+  it('bypass gemini filters', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'nl',
+      targetLanguage: 'de',
+      source: 'onderdompelen',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    expect(result.value.items.length).toBeGreaterThanOrEqual(1);
+    expect(result.value.items[0].tense).toEqual('present');
+  });
 });

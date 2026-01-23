@@ -2,6 +2,8 @@ import {
   createUserContent,
   GenerateContentParameters,
   GoogleGenAI,
+  HarmBlockThreshold,
+  HarmCategory,
 } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
@@ -263,6 +265,7 @@ export const getGptAnalyseChatGptBody = ({
     `lemmaPos - part of speech of the lemma in English`,
     `synonyms - short list of ${partOfSpeech} synonyms`,
     `number - plural or singular English only`,
+    `exists - does the ${partOfSpeech} exist in ${languageName}? true or false`,
     ...Object.entries(inflections).map(([key, value]) => `${key} - ${value}`),
     genders.length > 0 ? `gender - ${genders.join(', ')}, or other` : ``,
   ]
@@ -315,7 +318,7 @@ export const gptAnalyse = async ({
 }: AiAnalysePayload): Promise<Result<AiAnalysis>> => {
   const responseResult = await chatGptRequest({
     ...getGptAnalyseChatGptBody({ source, partOfSpeech, sourceLanguage }),
-    timeoutMs: 100000,
+    timeoutMs: 6000,
   });
 
   if (!responseResult.success) {
@@ -359,6 +362,24 @@ const getGeminiGenerateContentParameters = ({
     model: 'gemini-3-flash-preview',
     contents: createUserContent([source]),
     config: {
+      safetySettings: [
+        {
+          category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+          threshold: HarmBlockThreshold.BLOCK_NONE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+          threshold: HarmBlockThreshold.BLOCK_NONE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+          threshold: HarmBlockThreshold.BLOCK_NONE,
+        },
+        {
+          category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+          threshold: HarmBlockThreshold.BLOCK_NONE,
+        },
+      ],
       systemInstruction: [
         `You are a language dictionary.`,
         `User provides a ${partOfSpeech} in ${languageName}.${
@@ -487,7 +508,15 @@ export const geminiAnalyse = async (
     return result;
   }
 
-  return handleGeminiResponse(result.value.text ?? '', payload);
+  if (!result.value.text) {
+    return {
+      success: false,
+      reason: 'The Gemini request responded with the empty response',
+      extra: result.value,
+    };
+  }
+
+  return handleGeminiResponse(result.value.text, payload);
 };
 
 // End of Gemini
