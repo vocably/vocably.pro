@@ -275,6 +275,48 @@ describe('translateUnitOfSpeech', () => {
     );
   });
 
+  it('gemeni consider plurals', async () => {
+    const translationResult = await translateUnitOfSpeechGemini({
+      source: 'balken',
+      partOfSpeech: 'noun',
+      sourceLanguage: 'nl',
+      targetLanguage: 'ru',
+      number: 'plural',
+      definitions: [
+        'Lange, zware stukken bewerkt hout, metaal of beton gebruikt in de bouw.',
+        'Horizontale steunstukken in een constructie.',
+      ],
+    });
+
+    expect(translationResult.success).toEqual(true);
+    if (!translationResult.success) {
+      return;
+    }
+
+    expect(translationResult.value[0]).toEqual('балки');
+  });
+
+  it('chatgpt consider plurals', async () => {
+    const translationResult = await translateUnitOfSpeechChatGpt({
+      source: 'balken',
+      partOfSpeech: 'noun',
+      sourceLanguage: 'nl',
+      targetLanguage: 'ru',
+      number: 'plural',
+      definitions: [
+        'Lange, zware stukken bewerkt hout, metaal of beton gebruikt in de bouw.',
+        'Horizontale steunstukken in een constructie.',
+      ],
+    });
+
+    expect(translationResult.success).toEqual(true);
+    if (!translationResult.success) {
+      return;
+    }
+
+    expect(translationResult.value[0]).toEqual('балки');
+  });
+
   it('gemini avoids insane tranlations', async () => {
     const translationResult = await translateUnitOfSpeechGemini({
       source: 'afslaan',

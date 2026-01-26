@@ -48,6 +48,7 @@ export const analyseAndTranslate = async (
       targetLanguage: payload.targetLanguage,
       partOfSpeech: payload.partOfSpeech,
       definitions: aiAnalyseResult.value.definitions,
+      number: aiAnalyseResult.value.number,
     });
 
     if (translationResult.success === false) {

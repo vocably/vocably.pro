@@ -25,6 +25,7 @@ type Payload = {
   partOfSpeech: string;
   source: string;
   definitions?: string[];
+  number?: string;
 };
 
 type AtLeastOne<T> = {
@@ -89,6 +90,7 @@ export const translateUnitOfSpeechGemini = async ({
   source,
   partOfSpeech,
   definitions = [],
+  number,
 }: Payload): Promise<Result<string[]>> => {
   const genAI = new GoogleGenAI({
     apiKey: config.geminiApiKey,
@@ -120,6 +122,7 @@ export const translateUnitOfSpeechGemini = async ({
             partOfSpeech.includes('verb')
               ? `Consider tense of the provided ${partOfSpeech}`
               : '',
+            number === 'plural' ? 'This is plural.' : '',
             `Omit explanations`,
             `Sort results by commonality`,
           ],
@@ -190,6 +193,7 @@ export const translateUnitOfSpeechChatGpt = async ({
   source,
   partOfSpeech,
   definitions = [],
+  number,
 }: Payload): Promise<Result<string[]>> => {
   const safeSourceLanguage = languageList[sourceLanguage];
   const safeTargetLanguage = languageList[targetLanguage];
@@ -212,6 +216,7 @@ export const translateUnitOfSpeechChatGpt = async ({
           partOfSpeech.includes('verb')
             ? `Consider tense of the provided ${partOfSpeech}`
             : '',
+          number === 'plural' ? 'This is plural' : '',
           `Omit explanations`,
           `Sort results by commonality`,
         ].join('\n'),
