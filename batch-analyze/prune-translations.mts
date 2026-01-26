@@ -9,7 +9,7 @@ import { execute, listFiles } from './utils.js';
 
 config();
 
-const languages = ['de'];
+const languages = ['nl'];
 
 for (const language of languages) {
   const langDir = `../../vocably-languages/${language}`;
@@ -36,6 +36,14 @@ for (const language of languages) {
     const unitOfSpeech = JSON.parse(
       readFileSync(unitOfSpeechFilename).toString()
     );
+
+    if (
+      unitOfSpeech.number === 'plural' &&
+      unitOfSpeech.partOfSpeech === 'noun'
+    ) {
+      unlinkSync(file);
+      continue;
+    }
 
     const expectedNumberOfTranslations = getExpectedNumberOfTranslations(
       unitOfSpeech.definitions

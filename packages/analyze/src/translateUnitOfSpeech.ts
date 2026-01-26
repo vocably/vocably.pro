@@ -127,7 +127,9 @@ export const translateUnitOfSpeechGemini = async ({
             partOfSpeech.includes('verb')
               ? `Consider tense of the provided ${partOfSpeech}`
               : '',
-            number === 'plural' ? 'This is plural.' : '',
+            number === 'plural' && partOfSpeech === 'noun'
+              ? 'This is plural.'
+              : '',
             `Omit explanations`,
             `Sort results by commonality`,
           ],
@@ -227,7 +229,9 @@ export const translateUnitOfSpeechChatGpt = async ({
           partOfSpeech.includes('verb')
             ? `Consider tense of the provided ${partOfSpeech}`
             : '',
-          number === 'plural' ? 'This is plural' : '',
+          number === 'plural' && partOfSpeech === 'noun'
+            ? 'This is plural'
+            : '',
           `Omit explanations`,
           `Sort results by commonality`,
         ].join('\n'),
