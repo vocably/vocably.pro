@@ -102,6 +102,9 @@ export const translateUnitOfSpeechGemini = async ({
   const abortController = new AbortController();
   const abortSignal = abortController.signal;
 
+  const expectedNumberOfTranslations =
+    getExpectedNumberOfTranslations(definitions);
+
   const result = await resultify(
     timeout(
       genAI.models.generateContent({
@@ -113,11 +116,13 @@ export const translateUnitOfSpeechGemini = async ({
             `User provides ${safeSourceLanguage} ${partOfSpeech}${
               definitions?.length > 0 ? ' and its definitions' : ''
             }.`,
-            `Give up to ${getExpectedNumberOfTranslations(
-              definitions
-            )} relevant translations into ${safeTargetLanguage}${
+            `Give up to ${expectedNumberOfTranslations} relevant translations into ${safeTargetLanguage}${
               definitions?.length > 0 ? ' in the context of definitions' : ''
-            }.`,
+            }.${
+              expectedNumberOfTranslations === 2
+                ? ' Only include a second if it is a common, high-frequency usage.'
+                : ''
+            }`,
             `Respond in JSON array with each translation on a separate line`,
             partOfSpeech.includes('verb')
               ? `Consider tense of the provided ${partOfSpeech}`
@@ -131,6 +136,12 @@ export const translateUnitOfSpeechGemini = async ({
           },
           temperature: 0,
           responseMimeType: 'application/json',
+          responseJsonSchema: {
+            type: 'array',
+            items: {
+              type: 'string',
+            },
+          },
           abortSignal,
         },
       }),
