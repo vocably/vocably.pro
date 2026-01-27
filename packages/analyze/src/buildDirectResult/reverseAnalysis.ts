@@ -12,6 +12,7 @@ export const reverseAnalysis = async ({ payload, inputAnalysis }: Payload) => {
     source: payload.target,
     sourceLanguage: payload.targetLanguage,
     targetLanguage: payload.sourceLanguage,
+    inputType: inputAnalysis.type,
   });
 
   if (!reverseTranslateResult.success) {

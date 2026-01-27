@@ -2,6 +2,7 @@ import { createUserContent, GoogleGenAI } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import { chatGptRequest, GPT_4O } from '@vocably/lambda-shared';
 import {
+  DetectedInputType,
   GoogleLanguage,
   languageList,
   Result,
@@ -20,14 +21,15 @@ type Payload = {
   source: string;
   sourceLanguage: GoogleLanguage;
   targetLanguage: GoogleLanguage;
+  inputType?: DetectedInputType;
 };
 
 type AiTranslationVariant = {
   translation: string;
-  partOfSpeech: string;
-  transcript: string;
-  lemma: string;
-  lemmaPos: string;
+  partOfSpeech?: string;
+  transcript?: string;
+  lemma?: string;
+  lemmaPos?: string;
 };
 
 type AiTranslationResult = [AiTranslationVariant, ...AiTranslationVariant[]];
@@ -46,32 +48,67 @@ export const translateWithGemini = async (
 
   const source = secureSource(payload.source);
 
+  const type = payload.inputType ?? 'word, phrase, or sentence';
+
+  let responseSchema: any = {
+    type: 'array',
+    items: {
+      type: 'object',
+      properties: {
+        translation: {
+          type: 'string',
+          description: `the translation of the ${type} into ${
+            languageList[payload.targetLanguage]
+          }`,
+        },
+      },
+    },
+  };
+
+  if (!isCompound(payload.inputType)) {
+    responseSchema = {
+      ...responseSchema,
+      items: {
+        ...responseSchema.items,
+        properties: {
+          ...responseSchema.items.properties,
+          partOfSpeech: {
+            type: 'string',
+            description: 'the part of speech of the translation in English',
+          },
+          transcript: {
+            type: 'string',
+            description: getTranscriptionName(payload.targetLanguage),
+          },
+          lemma: { type: 'string', description: 'lemma of translation' },
+          lemmaPos: {
+            type: 'string',
+            description: 'part of speech of lemma in English',
+          },
+        },
+      },
+    };
+  }
+
   const result = await resultify(
     genAI.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: createUserContent(source),
       config: {
         systemInstruction: [
-          `User provides a word or phrase in any language, but most likely in ${
+          `User provides a ${type} in any language, but most likely in ${
             languageList[payload.sourceLanguage]
           }.`,
           `Provide possible translations into ${
             languageList[payload.targetLanguage]
-          }.`,
-          `Avoid splitting.`,
-          `Response JSON array. Each item:`,
-          `- translation - the translation of the word/phrase into ${
-            languageList[payload.targetLanguage]
-          }`,
-          `- partOfSpeech - the part of speech. Should be in English`,
-          `- transcript - ${getTranscriptionName(payload.targetLanguage)}`,
-          `- lemma - lemma of translation`,
-          `- lemmaPos - part of speech of lemma in English`,
+          } and only in ${languageList[payload.targetLanguage]}.`,
+          `Avoid splitting. Don't split. Translate it as single unit of speech.`,
         ],
         thinkingConfig: {
           thinkingBudget: 0, // Disables thinking
         },
         responseMimeType: 'application/json',
+        responseJsonSchema: responseSchema,
       },
     }),
     {
@@ -96,10 +133,11 @@ export const translateWithChatGpt = async (
   payload: Payload
 ): Promise<Result<AiTranslationResult>> => {
   const source = secureSource(payload.source);
+  const type = payload.inputType ?? 'word, phrase, or sentence';
   const prompt = [
     `Provide all the possible translations of the ${
       languageList[payload.targetLanguage]
-    } word/phrase`,
+    } ${type}`,
     `<input>${source}</input>`,
     `into ${languageList[payload.targetLanguage]}.`,
     `Response in JSON object with translations array. Each item:`,
@@ -166,9 +204,9 @@ const isTranslationVariant = (data: any): data is AiTranslationVariant => {
   return (
     isSafeObject(data) &&
     typeof data['translation'] === 'string' &&
-    typeof data['partOfSpeech'] === 'string' &&
-    typeof data['lemma'] === 'string' &&
-    typeof data['lemmaPos'] === 'string'
+    (!data['partOfSpeech'] || typeof data['partOfSpeech'] === 'string') &&
+    (!data['lemma'] || typeof data['lemma'] === 'string') &&
+    (!data['lemmaPos'] || typeof data['lemmaPos'] === 'string')
   );
 };
 
@@ -182,12 +220,20 @@ const sanitizeTranslationVariant =
       return {
         ...translationVariant,
         translation: translationVariant.translation.replace(/to /i, ''),
-        transcript: translationVariant.transcript.replace(/tu /i, ''),
+        transcript: (translationVariant.transcript ?? '').replace(/tu /i, ''),
       };
     }
 
     return translationVariant;
   };
+
+const isCompound = (
+  detectedInputType: DetectedInputType | undefined
+): boolean => {
+  return ['phrase', 'sentence', 'idiom'].includes(
+    detectedInputType as DetectedInputType
+  );
+};
 
 export const aiFetchPossibleTranslations = async (
   payload: Payload
@@ -209,9 +255,9 @@ export const aiFetchPossibleTranslations = async (
         targetLanguage: payload.targetLanguage,
         target: translationVariant.translation,
         partOfSpeech: sanitizePartOfSpeech(
-          translationVariant.partOfSpeech ?? ''
+          translationVariant.partOfSpeech ?? payload.inputType ?? ''
         ),
-        transcript: sanitizeTranscript(translationVariant.transcript),
+        transcript: sanitizeTranscript(translationVariant.transcript ?? ''),
         lemma: translationVariant.lemma,
         lemmaPos: sanitizePartOfSpeech(translationVariant.lemmaPos ?? ''),
       }))

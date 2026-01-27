@@ -1,4 +1,9 @@
-import { GoogleLanguage, Result, Translation } from '@vocably/model';
+import {
+  DetectedInputType,
+  GoogleLanguage,
+  Result,
+  Translation,
+} from '@vocably/model';
 import { aiFetchPossibleTranslations } from './aiFetchPossibleTranslations';
 import { googleTranslate } from './googleTranslate';
 
@@ -6,6 +11,7 @@ type Payload = {
   source: string;
   sourceLanguage: GoogleLanguage;
   targetLanguage: GoogleLanguage;
+  inputType?: DetectedInputType;
 };
 
 export type ValidTranslations = [Translation, ...Translation[]];

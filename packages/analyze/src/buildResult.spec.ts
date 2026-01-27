@@ -953,4 +953,25 @@ describe('integration check for translate lambda', () => {
     expect(result.value.items.length).toBeGreaterThanOrEqual(1);
     expect(result.value.items[0].tense).toEqual('present');
   });
+
+  it('question', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'nl',
+      targetLanguage: 'en',
+      source: 'Geerda, can you give us the bed of Grover this time?',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    expect(result.value.items.length).toBeGreaterThanOrEqual(1);
+    expect(result.value.detectedInputType).toEqual('sentence');
+    expect(result.value.items[0].source).toEqual(
+      'Geerda, kun je ons deze keer het bed van Grover geven?'
+    );
+    expect(result.value.items[0].translation).toEqual(
+      'Geerda, can you give us the bed of Grover this time?'
+    );
+  });
 });

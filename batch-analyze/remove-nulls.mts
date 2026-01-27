@@ -31,7 +31,10 @@ for (const language of languages) {
 
   const langDir = `../../vocably-languages/${language}`;
 
-  await execute(`./sync.mts ${language}`, { cwd: syncDir });
+  await execute(`./sync.mts ${language}`, {
+    cwd: syncDir,
+    maxBuffer: 10 * 1024 * 10240,
+  });
 
   const unitsOfSpeechFiles = await listFiles(langDir + '/units-of-speech');
 
@@ -54,5 +57,8 @@ for (const language of languages) {
     await execute('git push', { cwd: langDir });
   }
 
-  await execute(`./sync.mts ${language}`, { cwd: syncDir });
+  await execute(`./sync.mts ${language}`, {
+    cwd: syncDir,
+    maxBuffer: 10 * 1024 * 10240,
+  });
 }

@@ -102,6 +102,8 @@ export const buildReverseResultYes = async (
       target: payload.target,
       sourceLanguage: payload.sourceLanguage,
       targetLanguage: payload.targetLanguage,
+      isDirect: inputAnalysis.isDirect,
+      detectedInputType: inputAnalysis.type,
       translation: {
         source: reverseTranslations[0].target,
         target: payload.target,
