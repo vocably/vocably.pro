@@ -37,10 +37,7 @@ for (const language of languages) {
       readFileSync(unitOfSpeechFilename).toString()
     );
 
-    if (
-      unitOfSpeech.number === 'plural' &&
-      unitOfSpeech.partOfSpeech === 'noun'
-    ) {
+    if (unitOfSpeech.number === 'plural' && partOfSpeech === 'noun') {
       unlinkSync(file);
       continue;
     }
