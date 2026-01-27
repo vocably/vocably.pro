@@ -1,5 +1,6 @@
 .env.local
 .env.development
+.env.development.local
 deck.json
 deck*.json
 metadata*.json

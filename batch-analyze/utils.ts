@@ -6,6 +6,16 @@ import { writeFileSync } from 'node:fs';
 import { readdir, stat } from 'node:fs/promises';
 import { join } from 'node:path';
 
+export const checkEnvironment = () => {
+  console.log(`AWS_PROFILE: ${process.env.AWS_PROFILE}`);
+  console.log(`UNITS_OF_SPEECH bucket: ${process.env.UNITS_OF_SPEECH_BUCKET}`);
+
+  if (process.env.UNITS_OF_SPEECH_BUCKET !== 'vocably-prod-units-of-speech') {
+    console.log('This is a non-prod environment. Skipping sync.');
+    process.exit(1);
+  }
+};
+
 export const execute = async (
   command: string,
   options?: ExecOptions

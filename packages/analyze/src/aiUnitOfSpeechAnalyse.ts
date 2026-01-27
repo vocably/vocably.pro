@@ -224,6 +224,14 @@ export const sanitizeAiAnalyseResult = (
     );
   }
 
+  if (output.pluralForm === 'null') {
+    delete output.pluralForm;
+  }
+
+  if (output.pastTenses === 'null') {
+    delete output.pastTenses;
+  }
+
   return output;
 };
 

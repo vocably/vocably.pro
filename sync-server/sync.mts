@@ -1,6 +1,6 @@
 #!/usr/bin/env -S npx vite-node
 
-import { isGoogleLanguage } from '@vocably/model';
+import { isGoogleLanguage, languageList } from '@vocably/model';
 import { readFileSync } from 'fs';
 import { existsSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -12,6 +12,15 @@ const language = process.argv.at(-1) ?? '';
 
 if (!isGoogleLanguage(language)) {
   throw new Error(`Invalid language ${language}`);
+}
+
+console.log(`Syncing ${languageList[language]}...`);
+console.log(`AWS_PROFILE: ${process.env.AWS_PROFILE}`);
+console.log(`UNITS_OF_SPEECH bucket: ${process.env.UNITS_OF_SPEECH_BUCKET}`);
+
+if (process.env.UNITS_OF_SPEECH_BUCKET !== 'vocably-prod-units-of-speech') {
+  console.log('This is a non-prod environment. Skipping sync.');
+  process.exit(1);
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -28,10 +37,10 @@ const s3Path = `s3://${s3BucketPath}/`;
 
 let stats = await getStats();
 
-if (stats.isSyncing) {
-  console.log('Already syncing');
-  process.exit(0);
-}
+// if (stats.isSyncing) {
+//   console.log('Already syncing');
+//   process.exit(0);
+// }
 
 stats.isSyncing = true;
 await saveStats(stats);

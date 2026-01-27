@@ -236,6 +236,22 @@ describe('unit of speech analyze', () => {
   });
 
   describe('gemini', () => {
+    it('plural form is null', async () => {
+      const result = await geminiAnalyse({
+        source: 'Diets',
+        partOfSpeech: 'noun',
+        sourceLanguage: 'nl',
+      });
+      expect(result.success).toBeTruthy();
+
+      if (!result.success) {
+        return;
+      }
+
+      expect(result.value.source).toEqual('Diets');
+      expect(result.value.pluralForm).toBeUndefined();
+    }, 10_000_000);
+
     it('respects identical tense of irregular verb', async () => {
       const result = await geminiAnalyse({
         source: 'bring',
