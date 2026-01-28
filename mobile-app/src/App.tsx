@@ -4,7 +4,7 @@ import { fetchAuthSession } from 'aws-amplify/auth';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthContainer } from './auth/AuthContainer';
-import { Login } from './auth/Login';
+import { AuthFlow } from './auth/AuthFlow';
 import { configurePurchases } from './configurePurchases';
 import { CustomerInfoContainer } from './CustomerInfoContainer';
 import { LanguagesContainer } from './languages/LanguagesContainer';
@@ -34,7 +34,7 @@ const App = () => {
         <NavigationContainer>
           <PostHogProvider>
             <AuthContainer>
-              <Login>
+              <AuthFlow>
                 <CustomerInfoContainer>
                   <NotificationsContainer>
                     <UserMetadataContainer>
@@ -48,7 +48,7 @@ const App = () => {
                     </UserMetadataContainer>
                   </NotificationsContainer>
                 </CustomerInfoContainer>
-              </Login>
+              </AuthFlow>
             </AuthContainer>
           </PostHogProvider>
         </NavigationContainer>

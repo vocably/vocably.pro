@@ -36,6 +36,9 @@ export type AuthStatus =
       status: 'not-logged-in';
     }
   | {
+      status: 'anonymous-logged-in';
+    }
+  | {
       status: 'logged-in';
       sub: string;
       email: string;

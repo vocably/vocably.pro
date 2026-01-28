@@ -1,9 +1,8 @@
 import { NavigationProp } from '@react-navigation/native';
 import { GoogleLanguage, languageList } from '@vocably/model';
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
-import { LanguagesContext } from './languages/LanguagesContainer';
 import { Preset } from './LookUpScreen/TranslationPresetForm';
 import { LanguagePairs } from './TranslationPreset/useLanguagePairs';
 
@@ -12,6 +11,7 @@ type Props = {
   preset: Preset;
   onChange: (preset: Preset) => void;
   languagePairs: LanguagePairs;
+  existingLanguages: string[];
   emptyText?: string;
   style?: StyleProp<ViewStyle>;
   compact?: boolean;
@@ -19,6 +19,7 @@ type Props = {
 
 export const popularLanguages = [
   'en',
+  'en-GB',
   'de',
   'pt',
   'es',
@@ -54,9 +55,8 @@ export const SourceLanguageButton: FC<Props> = ({
   emptyText = 'Select',
   style,
   compact = false,
+  existingLanguages,
 }) => {
-  const { languages: existingDeckLanguages } = useContext(LanguagesContext);
-
   const onSourceSelection = (sourceLanguage: string) => {
     onChange(setSourceLanguage(sourceLanguage, preset, languagePairs));
   };
@@ -66,13 +66,9 @@ export const SourceLanguageButton: FC<Props> = ({
       title: 'Study Language',
       selected: preset.sourceLanguage,
       preferred:
-        existingDeckLanguages.length === 0
-          ? popularLanguages
-          : existingDeckLanguages,
+        existingLanguages.length === 0 ? popularLanguages : existingLanguages,
       preferredTitle:
-        existingDeckLanguages.length > 0
-          ? 'Your languages'
-          : 'Popular Languages',
+        existingLanguages.length > 0 ? 'Your languages' : 'Popular Languages',
       onSelect: onSourceSelection,
     });
   };

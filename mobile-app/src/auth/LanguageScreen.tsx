@@ -1,49 +1,46 @@
 import { useNavigation } from '@react-navigation/native';
-import { FC, useContext } from 'react';
-import { View } from 'react-native';
-import { Divider, Text, useTheme } from 'react-native-paper';
+import React, { FC, useState } from 'react';
+import { ScrollView, View } from 'react-native';
+import { Button, Divider, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
-import { LanguagesContext } from '../languages/LanguagesContainer';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SourceLanguageButton } from '../SourceLanguageButton';
+import { mainPadding } from '../styles';
 import { TargetLanguageButton } from '../TargetLanguageButton';
 import { Preset } from '../TranslationPreset/TranslationPresetContainer';
-import { useWelcomeTranslationPreset } from './useWelcomeTranslationPreset';
-import { WelcomeScrollView } from './WelcomeScrollView';
 
 type Props = {};
 
-export const WelcomeForm: FC<Props> = () => {
+export const LanguageScreen: FC<Props> = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const translationPresetState = useWelcomeTranslationPreset();
-  const { languages, selectLanguage, addNewLanguage } =
-    useContext(LanguagesContext);
+  const insets = useSafeAreaInsets();
 
-  if (translationPresetState.status === 'unknown') {
-    return <></>;
-  }
+  const [sourceLanguage, setSourceLanguage] = useState('');
+  const [targetLanguage, setTargetLanguage] = useState('');
 
   const onSourceLanguageChange = async (preset: Preset) => {
-    await translationPresetState.setPreset(preset);
-    if (languages.includes(preset.sourceLanguage)) {
-      await selectLanguage(preset.sourceLanguage);
-      return;
-    }
-
-    return addNewLanguage(preset.sourceLanguage);
+    setSourceLanguage(preset.sourceLanguage);
+  };
+  const onTargetLanguageChange = async (preset: Preset) => {
+    setTargetLanguage(preset.translationLanguage);
   };
 
   return (
-    <WelcomeScrollView>
+    <ScrollView
+      contentContainerStyle={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: insets.left + mainPadding,
+        paddingRight: insets.right + mainPadding,
+      }}
+    >
       <View
         style={{
           gap: 16,
         }}
       >
-        <Text style={{ textAlign: 'center', fontSize: 24, marginBottom: 24 }}>
-          To get started, please answer a few questions.
-        </Text>
-
         <View
           style={{
             alignItems: 'center',
@@ -52,7 +49,7 @@ export const WelcomeForm: FC<Props> = () => {
         >
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 24,
               color: theme.colors.onBackground,
             }}
           >
@@ -61,21 +58,25 @@ export const WelcomeForm: FC<Props> = () => {
           <View style={{ width: '100%' }}>
             <SourceLanguageButton
               navigation={navigation}
-              preset={translationPresetState.preset}
+              existingLanguages={[]}
+              preset={{
+                sourceLanguage: sourceLanguage,
+                translationLanguage: '',
+                isReverse: false,
+              }}
               onChange={onSourceLanguageChange}
-              languagePairs={translationPresetState.languagePairs}
+              languagePairs={{}}
               emptyText="Select"
-              existingLanguages={languages}
             />
           </View>
         </View>
         <View style={{ alignItems: 'flex-end' }}>
-          <Text>
+          <Text style={{ textAlign: 'center' }}>
             You can learn multiple languages. For now, just pick one to get
             started.
           </Text>
         </View>
-        {translationPresetState.preset.sourceLanguage && (
+        {sourceLanguage && (
           <Animated.View
             entering={FadeInDown}
             style={{
@@ -91,7 +92,7 @@ export const WelcomeForm: FC<Props> = () => {
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 24,
                   color: theme.colors.onBackground,
                 }}
               >
@@ -100,15 +101,37 @@ export const WelcomeForm: FC<Props> = () => {
               <View style={{ width: '100%' }}>
                 <TargetLanguageButton
                   navigation={navigation}
-                  preset={translationPresetState.preset}
-                  onChange={translationPresetState.setPreset}
-                  languagePairs={translationPresetState.languagePairs}
+                  preset={{
+                    sourceLanguage: sourceLanguage,
+                    translationLanguage: targetLanguage,
+                    isReverse: false,
+                  }}
+                  onChange={onTargetLanguageChange}
+                  languagePairs={{}}
                 />
               </View>
             </View>
           </Animated.View>
         )}
+        {targetLanguage && (
+          <Animated.View
+            entering={FadeInDown}
+            style={{
+              marginTop: 24,
+              gap: 32,
+            }}
+          >
+            <Divider style={{ width: '100%' }} />
+            <Button
+              mode="elevated"
+              elevation={2}
+              onPress={() => navigation.navigate('survey')}
+            >
+              Next
+            </Button>
+          </Animated.View>
+        )}
       </View>
-    </WelcomeScrollView>
+    </ScrollView>
   );
 };
