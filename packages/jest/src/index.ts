@@ -21,23 +21,10 @@ expect.extend({
     received: string,
     expected: string | string[]
   ): jest.CustomMatcherResult {
-    if (Array.isArray(expected)) {
-      const pass = expected.includes(received);
-
-      return {
-        pass,
-        message: () => {
-          return pass
-            ? ''
-            : `The received value '${received}' has more values than expected:\n${expected.join(
-                '\n'
-              )}`;
-        },
-      };
-    }
-
     const receivedArray = received.split(',').map((s) => s.trim());
-    const expectedArray = expected.split(',').map((s) => s.trim());
+    const expectedArray = Array.isArray(expected)
+      ? expected
+      : expected.split(',').map((s) => s.trim());
 
     const pass = difference(receivedArray, expectedArray).length === 0;
 
