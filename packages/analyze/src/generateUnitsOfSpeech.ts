@@ -53,6 +53,7 @@ export const generateUnitsOfSpeech = async ({
         thinkingConfig: {
           thinkingBudget: 0, // Disables thinking
         },
+        maxOutputTokens: 2500,
         temperature: 0,
         responseMimeType: 'application/json',
         responseJsonSchema: {
