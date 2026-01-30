@@ -89,7 +89,6 @@ resource "aws_api_gateway_deployment" "deployment" {
       md5(file("${path.module}/user-feedback.tf")),
       md5(file("${path.module}/api-notification-time.tf")),
       md5(file("${path.module}/api-recalibrate-notifications.tf")),
-      md5(file("${path.module}/api-generate-mnemonic.tf")),
       md5(file("${path.module}/api-chat-with-card.tf")),
       aws_lambda_function.analyze.last_modified,
       aws_lambda_function.analyze_units_of_speech.last_modified,
@@ -103,7 +102,6 @@ resource "aws_api_gateway_deployment" "deployment" {
       aws_lambda_function.set_notification_time.last_modified,
       aws_lambda_function.delete_notification_time.last_modified,
       aws_lambda_function.recalibrate_notifications.last_modified,
-      aws_lambda_function.generate_mnemonic.last_modified,
       aws_lambda_function.chat_with_card.last_modified,
     ]))
   }
@@ -139,7 +137,6 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_api_gateway_integration.get_static_user_file,
     aws_api_gateway_integration_response.get_static_user_file_200,
     aws_api_gateway_integration_response.get_static_user_file_4xx,
-    aws_api_gateway_integration.generate_mnemonic,
     aws_api_gateway_integration.chat_with_card,
     aws_lambda_function.analyze,
     aws_lambda_function.analyze_units_of_speech,
@@ -153,7 +150,6 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_lambda_function.set_notification_time,
     aws_lambda_function.delete_notification_time,
     aws_lambda_function.recalibrate_notifications,
-    aws_lambda_function.generate_mnemonic,
     aws_lambda_function.chat_with_card,
   ]
   lifecycle {

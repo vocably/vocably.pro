@@ -9,7 +9,6 @@ export * from './language';
 export * from './language-deck';
 export * from './language-list';
 export * from './language-pairs';
-export * from './mnemonics';
 export * from './mobile-onboarding';
 export * from './notifications';
 export * from './onboarding';
