@@ -140,7 +140,7 @@ describe('detectInputTypeGemini', () => {
   it('compound word', async () => {
     const responseResult = await detectInputTypeGemini({
       language: 'ru',
-      source: 'лопатка для готовки',
+      source: 'машинное масло',
     });
 
     console.log(inspect(responseResult));
@@ -150,6 +150,22 @@ describe('detectInputTypeGemini', () => {
       return;
     }
     expect(responseResult.value.type).toEqual('compound word');
+    expect(responseResult.value.isDirect).toEqual(true);
+  });
+
+  it('detects weird word (mismoedig)', async () => {
+    const responseResult = await detectInputTypeGemini({
+      language: 'nl',
+      source: 'mismoedig',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
     expect(responseResult.value.isDirect).toEqual(true);
   });
 });
