@@ -1,4 +1,5 @@
 import { buildResult, configureAnalyzer } from '@vocably/analyze';
+import { sanitizeAnalyzePayload } from '@vocably/lambda-shared';
 import {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
@@ -43,6 +44,7 @@ export const analyze = async (
   return lastValueFrom(
     of(event).pipe(
       map(extractPayload),
+      map(sanitizeAnalyzePayload),
       mergeMap((payload) => {
         return buildResult(payload);
       }),
