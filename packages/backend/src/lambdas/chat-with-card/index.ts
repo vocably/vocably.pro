@@ -5,6 +5,7 @@ import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
 import { chatWithCard } from './chatWithCard';
 import { extractPayload } from './extractPayload';
+import { sanitizePayload } from './sanitizePayload';
 
 export const chatWithCardFunction = async (
   event: APIGatewayProxyEvent
@@ -12,6 +13,7 @@ export const chatWithCardFunction = async (
   lastValueFrom(
     of(event).pipe(
       map(extractPayload),
+      map(sanitizePayload),
       mergeMap(async (payloadResult) => {
         if (payloadResult.success === false) {
           return payloadResult;
