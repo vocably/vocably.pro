@@ -9,6 +9,7 @@ import { catchError, map } from 'rxjs/operators';
 import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
 import { extractPayload } from './extractPayload';
+import { sanitizePayload } from './sanitizePayload';
 
 configureAnalyzer({
   googleProjectId: process.env.GOOGLE_PROJECT_ID as string,
@@ -24,6 +25,7 @@ export const explain = async (
   lastValueFrom(
     of(event).pipe(
       map(extractPayload),
+      map(sanitizePayload),
       mergeMap((payload) => {
         const source = trimArticle(
           payload.sourceLanguage,

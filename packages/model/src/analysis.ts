@@ -36,7 +36,7 @@ export const isDirectAnalyzePayload = (o: any): o is DirectAnalyzePayload => {
   return !(!o || !o.source || !o.targetLanguage);
 };
 
-export const isReverseAnalyzePayload = (o: any): o is DirectAnalyzePayload => {
+export const isReverseAnalyzePayload = (o: any): o is ReverseAnalyzePayload => {
   return !(!o || !o.target || !o.sourceLanguage || !o.targetLanguage);
 };
 

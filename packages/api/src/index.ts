@@ -13,7 +13,6 @@ export {
   saveLanguageDeck,
   updateTag,
 } from './languageDecks';
-export * from './mnemonics';
 export * from './notifications';
 export * from './onboarding';
 export * from './parseJson';

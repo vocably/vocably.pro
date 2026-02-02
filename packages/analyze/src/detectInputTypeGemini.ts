@@ -21,17 +21,27 @@ export const detectInputTypeGemini = async ({
       model: 'gemini-2.5-flash',
       contents: createUserContent([source]),
       config: {
-        systemInstruction: [
-          `User provides an input`,
-          `Respond with an object`,
-          `- type - can be ${inputTypes.join(', ')}`,
-          `- isDirect - true if the input is ${languageList[language]}`,
-        ],
+        systemInstruction: [`Detect unit of speech type`],
         thinkingConfig: {
           thinkingBudget: 0, // Disables thinking
         },
         temperature: 0,
         responseMimeType: 'application/json',
+        responseJsonSchema: {
+          type: 'object',
+          properties: {
+            type: {
+              type: 'string',
+              enum: inputTypes,
+              description: 'Type of input',
+            },
+            isDirect: {
+              type: 'boolean',
+              description: `true if the input is ${languageList[language]}`,
+            },
+          },
+          required: ['type', 'isDirect'],
+        },
       },
     }),
     {

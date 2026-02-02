@@ -18,7 +18,7 @@ export const chatWithCard = async (
   } catch (e) {
     return {
       success: false,
-      reason: 'The mnemonic generation request has failed.',
+      reason: 'The chat with card request has failed.',
       extra: e,
     };
   }

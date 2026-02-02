@@ -5,6 +5,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { lastValueFrom, mergeMap, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
+import { sanitizeAudioPronunciationPayload } from '@vocably/lambda-shared';
 import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
 import { extractPayload } from './extractPayload';
@@ -20,6 +21,7 @@ export const playSound = async (
   lastValueFrom(
     of(event).pipe(
       map(extractPayload),
+      map(sanitizeAudioPronunciationPayload),
       mergeMap(async (payload): Promise<Result<Buffer>> => {
         const request: ISynthesizeSpeechRequest = {
           input: { text: payload.text },

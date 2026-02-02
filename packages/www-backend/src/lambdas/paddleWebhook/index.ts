@@ -64,6 +64,7 @@ export const paddleWebhook = async (
           subResult.value,
           process.env.STATIC_USER_FILES_BUCKET,
           {
+            premium: true,
             management_url: portalSession.urls.general.overview,
           }
         );
