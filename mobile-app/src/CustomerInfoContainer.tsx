@@ -38,9 +38,16 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     });
 
   useEffect(() => {
-    if (authStatus['status'] !== 'logged-in') {
+    console.log('Auth status', authStatus);
+    if (
+      authStatus['status'] !== 'logged-in' &&
+      authStatus['status'] !== 'anonymous-logged-in'
+    ) {
       return;
     }
+
+    const customerId =
+      authStatus['status'] === 'logged-in' ? authStatus.email : authStatus.id;
 
     const customerInfoRefreshed = (customerInfo: CustomerInfo) => {
       setCustomerInfoStatus({
@@ -50,7 +57,7 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     };
 
     Purchases.addCustomerInfoUpdateListener(customerInfoRefreshed);
-    Purchases.logIn(authStatus.email).then(({ customerInfo }) => {
+    Purchases.logIn(customerId).then(({ customerInfo }) => {
       setCustomerInfoStatus({
         status: 'loaded',
         customerInformation: customerInfo,

@@ -11,7 +11,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { Alert } from 'react-native';
 import * as asyncAppStorage from '../asyncAppStorage';
+import { clearAll, getAll } from '../asyncAppStorage';
 import { Sentry } from '../BetterSentry';
 import { facility } from '../facility';
 import { forcefulSignOut } from '../forcefulSignOut';
@@ -37,6 +39,7 @@ export type AuthStatus =
     }
   | {
       status: 'anonymous-logged-in';
+      id: string;
     }
   | {
       status: 'logged-in';
@@ -52,7 +55,6 @@ type AuthErrorCode =
   | 'FETCHED_SESSION_HAS_NO_TOKENS';
 
 export type ExtendedAuthStatus = {
-  getIdentityId: () => Promise<string | undefined>;
   createAnonymousUser: () => Promise<void>;
   error: AuthErrorCode | null;
 } & {
@@ -65,7 +67,6 @@ export const AuthContext = createContext<ExtendedAuthStatus>({
     reason: 'undefined',
   },
   error: null,
-  getIdentityId: async () => undefined,
   createAnonymousUser: async () => {},
 });
 
@@ -157,8 +158,27 @@ export const AuthContainer: FC<{
   };
 
   const createAnonymousUser = async () => {
+    const id = await getIdentityId();
+
+    if (id === undefined) {
+      Alert.alert(
+        'Unable to create anonymous user',
+        'A critical error while creating an anonymous user occurred.'
+      );
+      Sentry.captureException(
+        new Error('Unable to create anonymous user'),
+        await getAll()
+      );
+      await clearAll();
+      await setAuthStatus({
+        status: 'undefined',
+      });
+      return;
+    }
+
     await setAuthStatus({
       status: 'anonymous-logged-in',
+      id: id,
     });
   };
 
@@ -252,14 +272,8 @@ export const AuthContainer: FC<{
     }
 
     if (authStatusResult.value.status === 'anonymous-logged-in') {
-      getIdentityId().then((id) => {
-        if (!id) {
-          return;
-        }
-
-        posthog.identify(id, {
-          anonymous: true,
-        });
+      posthog.identify(authStatusResult.value.id, {
+        anonymous: true,
       });
     }
 
@@ -370,7 +384,6 @@ export const AuthContainer: FC<{
   return (
     <AuthContext.Provider
       value={{
-        getIdentityId,
         createAnonymousUser,
         ...authStatusResult.value,
         login: loginStatusResult.value,

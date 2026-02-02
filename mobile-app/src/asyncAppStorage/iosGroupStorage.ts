@@ -7,7 +7,7 @@ const appGroupId = 'group.vocably.app';
 
 type AllGroupStorageValues = Record<string, string>;
 
-const getAllValues = async (): Promise<AllGroupStorageValues> => {
+export const getAllValues = async (): Promise<AllGroupStorageValues> => {
   return SharedGroupPreferences.getItem(appGroupStorageKey, appGroupId)
     .then((values) => {
       return values ? JSON.parse(values) : {};
