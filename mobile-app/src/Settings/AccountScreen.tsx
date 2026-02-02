@@ -1,8 +1,10 @@
 import { deleteUser, signOut } from '@aws-amplify/auth';
-import { FC, useCallback, useContext } from 'react';
+import { FC, useContext } from 'react';
 import { Alert, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { clearAll } from '../asyncAppStorage';
+import { AuthContext } from '../auth/AuthContainer';
 import { useUserEmail } from '../auth/useUserEmail';
 import { LanguagesContext } from '../languages/LanguagesContainer';
 import { CustomScrollView } from '../ui/CustomScrollView';
@@ -15,13 +17,14 @@ export const AccountScreen: FC<Props> = () => {
   const theme = useTheme();
   const userEmail = useUserEmail();
   const { syncDecks } = useContext(LanguagesContext);
+  const { status: authStatus } = useContext(AuthContext);
 
   const onSignOut = async () => {
     await syncDecks();
     await signOut();
   };
 
-  const onDelete = useCallback(() => {
+  const onAccountDelete = () => {
     Alert.alert('Delete your account?', 'This operation cannot be undone.', [
       {
         text: 'Delete',
@@ -35,7 +38,25 @@ export const AccountScreen: FC<Props> = () => {
         text: 'Cancel',
       },
     ]);
-  }, []);
+  };
+
+  const onDataDelete = () => {
+    Alert.alert('Delete your data?', 'This operation cannot be undone.', [
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await clearAll();
+          await signOut();
+        },
+      },
+      {
+        text: 'Cancel',
+      },
+    ]);
+  };
+
+  const onCreateAccount = async () => {};
 
   return (
     <CustomScrollView>
@@ -53,21 +74,48 @@ export const AccountScreen: FC<Props> = () => {
           color={theme.colors.onBackground}
           size={24}
         />
-        <Text style={{ fontSize: 16 }}>{userEmail}</Text>
+        <Text style={{ fontSize: 16 }}>
+          {authStatus === 'logged-in' ? userEmail : 'Anonymous'}
+        </Text>
       </View>
 
-      <CustomSurface style={{ marginBottom: 16 }}>
-        <ListItem title="Sign out" onPress={onSignOut} leftIcon="logout" />
-      </CustomSurface>
+      {authStatus === 'logged-in' && (
+        <>
+          <CustomSurface style={{ marginBottom: 16 }}>
+            <ListItem title="Sign out" onPress={onSignOut} leftIcon="logout" />
+          </CustomSurface>
 
-      <CustomSurface style={{ marginBottom: 16 }}>
-        <ListItem
-          title="Delete your account"
-          onPress={onDelete}
-          color={theme.colors.error}
-          leftIcon="trash-can-outline"
-        ></ListItem>
-      </CustomSurface>
+          <CustomSurface style={{ marginBottom: 16 }}>
+            <ListItem
+              title="Delete my account"
+              onPress={onAccountDelete}
+              color={theme.colors.error}
+              leftIcon="trash-can-outline"
+            ></ListItem>
+          </CustomSurface>
+        </>
+      )}
+
+      {authStatus === 'anonymous-logged-in' && (
+        <>
+          <CustomSurface style={{ marginBottom: 16 }}>
+            <ListItem
+              title="Create an account"
+              onPress={onCreateAccount}
+              leftIcon="plus"
+            />
+          </CustomSurface>
+
+          <CustomSurface style={{ marginBottom: 16 }}>
+            <ListItem
+              title="Delete my data"
+              onPress={onDataDelete}
+              color={theme.colors.error}
+              leftIcon="trash-can-outline"
+            ></ListItem>
+          </CustomSurface>
+        </>
+      )}
     </CustomScrollView>
   );
 };

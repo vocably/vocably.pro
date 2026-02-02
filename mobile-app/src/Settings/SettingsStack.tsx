@@ -32,7 +32,7 @@ export const SettingsStack: FC = () => {
         <Stack.Screen
           options={{
             header: MainMenuHeader,
-            title: 'Your account',
+            title: 'My account',
           }}
           name="AccountMenu"
           component={AccountScreen}

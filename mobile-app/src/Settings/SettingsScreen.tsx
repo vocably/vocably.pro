@@ -69,7 +69,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
         <ListItem
           order="first"
           leftIcon="account-circle-outline"
-          title="Your account"
+          title="My account"
           onPress={() => navigation.navigate('AccountMenu')}
         />
         <Divider />
