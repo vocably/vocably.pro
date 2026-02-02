@@ -1,13 +1,22 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { FC, useState } from 'react';
+import { isGoogleLanguage } from '@vocably/model';
+import React, { FC, useContext, useState } from 'react';
 import { ScrollView } from 'react-native';
 import { Button, Divider, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  createDefaultLanguageContainerDeck,
+  saveDecksToStorage,
+  saveSelectedLanguageToStorage,
+} from '../languages/LanguagesContainer';
 import { SourceLanguageButton } from '../SourceLanguageButton';
 import { mainPadding } from '../styles';
 import { TargetLanguageButton } from '../TargetLanguageButton';
 import { Preset } from '../TranslationPreset/TranslationPresetContainer';
+import { storeLanguagePairs } from '../TranslationPreset/useLanguagePairs';
+import { storeSelectedLanguage } from '../TranslationPreset/useTranslationPresetSelectedLanguage';
+import { AuthContext } from './AuthContainer';
 
 type Props = {};
 
@@ -15,6 +24,7 @@ export const LanguageScreen: FC<Props> = () => {
   const theme = useTheme();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
+  const { createAnonymousUser } = useContext(AuthContext);
 
   const [sourceLanguage, setSourceLanguage] = useState('');
   const [targetLanguage, setTargetLanguage] = useState('');
@@ -24,6 +34,23 @@ export const LanguageScreen: FC<Props> = () => {
   };
   const onTargetLanguageChange = async (preset: Preset) => {
     setTargetLanguage(preset.translationLanguage);
+  };
+
+  const createAnonymousAccount = async () => {
+    await storeSelectedLanguage(sourceLanguage);
+    await saveSelectedLanguageToStorage(sourceLanguage);
+    if (isGoogleLanguage(sourceLanguage) && isGoogleLanguage(targetLanguage))
+      await storeLanguagePairs({
+        [sourceLanguage]: {
+          translationLanguage: targetLanguage,
+          availableLanguages: [targetLanguage],
+        },
+      });
+
+    await createAnonymousUser();
+    await saveDecksToStorage({
+      [sourceLanguage]: createDefaultLanguageContainerDeck(sourceLanguage),
+    });
   };
 
   return (
@@ -109,7 +136,7 @@ export const LanguageScreen: FC<Props> = () => {
           <Button
             mode="elevated"
             elevation={2}
-            onPress={() => navigation.navigate('survey')}
+            onPress={createAnonymousAccount}
           >
             Next
           </Button>

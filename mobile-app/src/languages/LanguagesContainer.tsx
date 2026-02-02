@@ -30,7 +30,7 @@ import {
   LanguageDeckTransformation,
 } from '../deckTransformations';
 import { Error } from '../Error';
-import { getCurrentUserSub } from '../getCurrentUserSub';
+import { getStorageId } from '../getStorageId';
 import { Loader } from '../loaders/Loader';
 import { useAsync } from '../useAsync';
 import { useLanguageTransformations } from './useLanguageTransformations';
@@ -40,7 +40,7 @@ const selectedLanguageStorageKey = 'languagesContainerSelectedLanguage';
 const loadSelectedLanguageStorage = (): Promise<string> =>
   asyncAppStorage.getItem(selectedLanguageStorageKey).then((res) => res ?? '');
 
-const saveSelectedLanguageToStorage = (language: string) =>
+export const saveSelectedLanguageToStorage = (language: string) =>
   asyncAppStorage.setItem(selectedLanguageStorageKey, language);
 
 export type LanguageContainerDeck = {
@@ -58,22 +58,22 @@ const createDefaultLanguageDeck = (language: string): LanguageDeck => ({
   tags: [],
 });
 
+export const createDefaultLanguageContainerDeck = (
+  language: string
+): LanguageContainerDeck => ({
+  status: 'initial',
+  deck: createDefaultLanguageDeck(language),
+  selectedTags: [],
+  noTags: false,
+});
+
 const loadDecksFromStorage = async (): Promise<DecksCollection> => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return {};
   }
 
   const key = `${userSubResult.value}.languageDecks`;
-
-  // ToDo: remove this after a while
-  const oldKey = 'languageDecks';
-  const oldDecks = await asyncAppStorage.getItem(oldKey);
-  if (oldDecks) {
-    await asyncAppStorage.removeItem(oldKey);
-    await asyncAppStorage.setItem(key, oldDecks);
-  }
-  // EndOfToDo
 
   const decks = await asyncAppStorage.getItem(key);
   if (!decks) {
@@ -83,8 +83,8 @@ const loadDecksFromStorage = async (): Promise<DecksCollection> => {
   return JSON.parse(decks);
 };
 
-const saveDecksToStorage = async (decks: DecksCollection) => {
-  const userSubResult = await getCurrentUserSub();
+export const saveDecksToStorage = async (decks: DecksCollection) => {
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return;
   }

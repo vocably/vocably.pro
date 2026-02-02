@@ -7,7 +7,7 @@ const loadSelectedLanguage = async (): Promise<string | undefined> => {
   return asyncAppStorage.getItem('translationPresetSelectedLanguage');
 };
 
-const storeSelectedLanguage = async (
+export const storeSelectedLanguage = async (
   language: string | undefined
 ): Promise<void> => {
   if (language === undefined) {

@@ -3,6 +3,7 @@ import { buildTagMap } from '@vocably/model-operations';
 import { createSrsItem } from '@vocably/srs';
 import { useCallback, useContext, useMemo } from 'react';
 import {
+  createDefaultLanguageContainerDeck,
   LanguageContainerDeck,
   LanguagesContext,
 } from '../languages/LanguagesContainer';
@@ -40,16 +41,8 @@ export const useLanguageDeck = ({ language, autoReload }: Options): Deck => {
     removeTag: collectionRemoveTag,
   } = useContext(LanguagesContext);
 
-  const deck: LanguageContainerDeck = decks[language] ?? {
-    status: 'initial',
-    deck: {
-      language,
-      cards: [],
-      tags: [],
-    },
-    selectedTags: [],
-    transformations: [],
-  };
+  const deck: LanguageContainerDeck =
+    decks[language] ?? createDefaultLanguageContainerDeck(language);
 
   const add = async (card: Card): Promise<Result<CardItem>> => {
     return collectionAddCard(language, {

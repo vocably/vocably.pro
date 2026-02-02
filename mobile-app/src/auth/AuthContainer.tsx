@@ -52,6 +52,8 @@ type AuthErrorCode =
   | 'FETCHED_SESSION_HAS_NO_TOKENS';
 
 export type ExtendedAuthStatus = {
+  getIdentityId: () => Promise<string | undefined>;
+  createAnonymousUser: () => Promise<void>;
   error: AuthErrorCode | null;
 } & {
   login: LoginStatus;
@@ -63,6 +65,8 @@ export const AuthContext = createContext<ExtendedAuthStatus>({
     reason: 'undefined',
   },
   error: null,
+  getIdentityId: async () => undefined,
+  createAnonymousUser: async () => {},
 });
 
 const getAttributes = async (): Promise<
@@ -142,6 +146,21 @@ export const AuthContainer: FC<{
   const [error, setError] = useState<AuthErrorCode | null>(null);
 
   const posthog = usePostHog();
+
+  const getIdentityId = async () => {
+    try {
+      const { identityId } = await fetchAuthSession();
+      return identityId;
+    } catch (err) {
+      console.log('Error fetching session:', err);
+    }
+  };
+
+  const createAnonymousUser = async () => {
+    await setAuthStatus({
+      status: 'anonymous-logged-in',
+    });
+  };
 
   const defineAuthStatus = async () => {
     const currentUserResult = await resultify(getCurrentUser(), {
@@ -232,9 +251,22 @@ export const AuthContainer: FC<{
       });
     }
 
+    if (authStatusResult.value.status === 'anonymous-logged-in') {
+      getIdentityId().then((id) => {
+        if (!id) {
+          return;
+        }
+
+        posthog.identify(id, {
+          anonymous: true,
+        });
+      });
+    }
+
     if (
       authStatusResult.value.status !== 'logged-in' &&
-      authStatusResult.value.status !== 'not-logged-in'
+      authStatusResult.value.status !== 'not-logged-in' &&
+      authStatusResult.value.status !== 'anonymous-logged-in'
     ) {
       defineAuthStatus();
     }
@@ -338,6 +370,8 @@ export const AuthContainer: FC<{
   return (
     <AuthContext.Provider
       value={{
+        getIdentityId,
+        createAnonymousUser,
         ...authStatusResult.value,
         login: loginStatusResult.value,
         error,

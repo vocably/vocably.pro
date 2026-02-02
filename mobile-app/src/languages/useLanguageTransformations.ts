@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as asyncAppStorage from '../asyncAppStorage';
 import { LanguageDeckTransformation } from '../deckTransformations';
-import { getCurrentUserSub } from '../getCurrentUserSub';
+import { getStorageId } from '../getStorageId';
 import { useAsync } from '../useAsync';
 
 type TransformationsCollection = {
@@ -10,7 +10,7 @@ type TransformationsCollection = {
 
 export const loadTransformationsFromStorage =
   async (): Promise<TransformationsCollection> => {
-    const userSubResult = await getCurrentUserSub();
+    const userSubResult = await getStorageId();
     if (!userSubResult.success) {
       return {};
     }
@@ -38,7 +38,7 @@ export const loadTransformationsFromStorage =
 const saveTransformationsToStorage = async (
   collection: TransformationsCollection
 ) => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
 
   if (userSubResult.success === false) {
     return;
