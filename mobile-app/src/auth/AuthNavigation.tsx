@@ -6,7 +6,6 @@ import { Appbar, Button, useTheme } from 'react-native-paper';
 import { LanguageSelectorModal } from '../LanguageSelectorModal';
 import { LanguageScreen } from './LanguageScreen';
 import { LoginScreen } from './LoginScreen';
-import { SurveyScreen } from './SurveyScreen';
 
 const Stack = createStackNavigator();
 
@@ -53,13 +52,6 @@ export const AuthNavigation: FC<Props> = () => {
         options={{
           title: 'Sign in or Register',
           headerRight: () => <></>,
-        }}
-      />
-      <Stack.Screen
-        name="survey"
-        component={SurveyScreen}
-        options={{
-          title: '',
         }}
       />
       <Stack.Group
