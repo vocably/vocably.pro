@@ -1,5 +1,4 @@
 import { NavigationProp } from '@react-navigation/native';
-import { analyze } from '@vocably/api';
 import { AnalyzePayload, GoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useRef, useState } from 'react';
@@ -9,6 +8,7 @@ import { Button, Surface, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome6';
+import { analyze } from './api';
 import { CardSkeletonLoader } from './CardSkeletonLoader';
 import { exitSharedScreen } from './exitSharedScreen';
 import { useLanguageDeck } from './languageDeck/useLanguageDeck';

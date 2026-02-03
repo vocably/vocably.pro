@@ -1,10 +1,12 @@
 import {
+  analyze as apiAnalyze,
   deleteLanguageDeck as deleteLanguageDeckApi,
   fetchStudyStreak as apiFetchStudyStreak,
   getUserMetadata as apiGetUserMetadata,
   getUserStaticMetadata as apiGetUserStaticMetadata,
   listLanguages as listLanguagesApi,
   loadLanguageDeck as loadLanguageDeckApi,
+  publicAnalyze,
   putStudyStreak as apiPutStudyStreak,
   saveLanguageDeck as saveLanguageDeckApi,
   saveUserMetadata as apiSaveUserMetadata,
@@ -147,4 +149,15 @@ export const saveLanguageDeck = async (
   }
 
   return saveLanguageDeckApi(...params);
+};
+
+export const analyze = async (
+  ...params: Parameters<typeof apiAnalyze>
+): ReturnType<typeof apiAnalyze> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return publicAnalyze(...params);
+  }
+
+  return apiAnalyze(...params);
 };

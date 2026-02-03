@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as asyncAppStorage from '../asyncAppStorage';
 import { LanguageDeckTransformation } from '../deckTransformations';
-import { getStorageId } from '../getStorageId';
+import { getStorageId, isAnonymousUser } from '../getStorageId';
 import { useAsync } from '../useAsync';
 
 type TransformationsCollection = {
@@ -10,21 +10,12 @@ type TransformationsCollection = {
 
 export const loadTransformationsFromStorage =
   async (): Promise<TransformationsCollection> => {
-    const userSubResult = await getStorageId();
-    if (!userSubResult.success) {
+    const storageIdResult = await getStorageId();
+    if (!storageIdResult.success) {
       return {};
     }
 
-    const key = `${userSubResult.value}.languageTransformations`;
-
-    // ToDo: remove this after a while
-    const oldKey = 'languageTransformations';
-    const oldDecks = await asyncAppStorage.getItem(oldKey);
-    if (oldDecks) {
-      await asyncAppStorage.removeItem(oldKey);
-      await asyncAppStorage.setItem(key, oldDecks);
-    }
-    // EndOfToDo
+    const key = `${storageIdResult.value}.languageTransformations`;
 
     const collection = await asyncAppStorage.getItem(key);
 
@@ -38,13 +29,13 @@ export const loadTransformationsFromStorage =
 const saveTransformationsToStorage = async (
   collection: TransformationsCollection
 ) => {
-  const userSubResult = await getStorageId();
+  const storageIdResult = await getStorageId();
 
-  if (userSubResult.success === false) {
+  if (storageIdResult.success === false) {
     return;
   }
 
-  const key = `${userSubResult.value}.languageTransformations`;
+  const key = `${storageIdResult.value}.languageTransformations`;
 
   await asyncAppStorage.setItem(key, JSON.stringify(collection));
 };
@@ -78,10 +69,24 @@ export const useLanguageTransformations = (): Return => {
 
       return transformationsRef.current[language];
     },
-    saveTransformations: () =>
-      saveTransformationsToStorage(transformationsRef.current),
-    deleteTransformations: (language: string) => {
+    saveTransformations: async () => {
+      const isAnonymous = await isAnonymousUser();
+
+      if (isAnonymous) {
+        return;
+      }
+
+      return saveTransformationsToStorage(transformationsRef.current);
+    },
+    deleteTransformations: async (language: string) => {
       transformationsRef.current[language] = [];
+
+      const isAnonymous = await isAnonymousUser();
+
+      if (isAnonymous) {
+        return;
+      }
+
       return saveTransformationsToStorage(transformationsRef.current);
     },
   };
