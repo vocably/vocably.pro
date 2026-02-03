@@ -1,20 +1,3 @@
-resource "aws_dynamodb_table" "user_feedback" {
-  name         = "vocably-${terraform.workspace}-user-feedback"
-  billing_mode = "PAY_PER_REQUEST"
-  hash_key     = "Username"
-  range_key    = "Timestamp"
-
-  attribute {
-    name = "Username"
-    type = "S"
-  }
-
-  attribute {
-    name = "Timestamp"
-    type = "S"
-  }
-}
-
 resource "aws_iam_role" "user_feedback_lambda_execution" {
   name               = "vocably-${terraform.workspace}-user-feedback-lambda-execution"
   assume_role_policy = <<EOF
@@ -57,18 +40,6 @@ resource "aws_iam_policy" "user_feedback_lambda_execution" {
           "ses:SendRawEmail"
         ],
         "Resource" : "*"
-      },
-      {
-        "Sid" : "UserFeedbackTableAccess",
-        "Effect" : "Allow",
-        "Action" : [
-          "dynamodb:Get*",
-          "dynamodb:UpdateItem",
-          "dynamodb:PutItem",
-          "dynamodb:DeleteItem",
-          "dynamodb:Query"
-        ],
-        "Resource" : "${aws_dynamodb_table.user_feedback.arn}*"
       }
     ]
   })

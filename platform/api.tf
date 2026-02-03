@@ -86,7 +86,7 @@ resource "aws_api_gateway_deployment" "deployment" {
       md5(file("${path.module}/api-user-files.tf")),
       md5(file("${path.module}/api-user-static-files.tf")),
       md5(file("${path.module}/api-play-sound.tf")),
-      md5(file("${path.module}/user-feedback.tf")),
+      md5(file("${path.module}/api-user-feedback.tf")),
       md5(file("${path.module}/api-notification-time.tf")),
       md5(file("${path.module}/api-recalibrate-notifications.tf")),
       md5(file("${path.module}/api-chat-with-card.tf")),
