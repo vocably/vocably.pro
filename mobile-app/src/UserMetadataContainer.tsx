@@ -1,11 +1,4 @@
 import {
-  fetchStudyStreak,
-  getUserMetadata as apiGetUserMetadata,
-  getUserStaticMetadata as apiGetUserStaticMetadata,
-  putStudyStreak,
-  saveUserMetadata as apiSaveUserMetadata,
-} from '@vocably/api';
-import {
   defaultStudyStreak,
   defaultUserMetadata,
   defaultUserStaticMetadata,
@@ -20,6 +13,13 @@ import { dateToString } from '@vocably/sulna';
 import { createContext, FC, PropsWithChildren, useEffect, useRef } from 'react';
 import { AppState } from 'react-native';
 import { getTimeZone } from 'react-native-localize';
+import {
+  fetchStudyStreak,
+  getUserMetadata as apiGetUserMetadata,
+  getUserStaticMetadata as apiGetUserStaticMetadata,
+  putStudyStreak,
+  saveUserMetadata as apiSaveUserMetadata,
+} from './api';
 import * as asyncAppStorage from './asyncAppStorage';
 import { getStorageId } from './getStorageId';
 import { Loader } from './loaders/Loader';

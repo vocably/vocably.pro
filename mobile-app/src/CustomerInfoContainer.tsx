@@ -38,7 +38,6 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     });
 
   useEffect(() => {
-    console.log('Auth status', authStatus);
     if (
       authStatus['status'] !== 'logged-in' &&
       authStatus['status'] !== 'anonymous-logged-in'

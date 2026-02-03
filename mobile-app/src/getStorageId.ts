@@ -1,6 +1,11 @@
 import { Result } from '@vocably/model';
 import { loadAuthStatusFromStorage } from './auth/AuthContainer';
 
+export const isAnonymousUser = async (): Promise<boolean> => {
+  const authStatus = await loadAuthStatusFromStorage();
+  return authStatus.status === 'anonymous-logged-in';
+};
+
 export const getStorageId = async (): Promise<Result<string>> => {
   const authStatus = await loadAuthStatusFromStorage();
 
