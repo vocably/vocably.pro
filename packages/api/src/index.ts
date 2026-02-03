@@ -17,6 +17,7 @@ export * from './notifications';
 export * from './onboarding';
 export * from './parseJson';
 export { playSound } from './playSound';
+export * from './publicUserFeedback';
 export * from './studyStats';
 export { sendUserFeedback } from './userFeedback';
 export { getUserMetadata, saveUserMetadata } from './userMetadata';

@@ -1,5 +1,5 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { sendUserFeedback } from '@vocably/api';
+import { sendPublicUserFeedback } from '@vocably/api';
 import { FC, useEffect, useState } from 'react';
 import { Alert, Platform, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
@@ -26,7 +26,7 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
 
   const reallySend = async () => {
     setIsSending(true);
-    const res = await sendUserFeedback({
+    const res = await sendPublicUserFeedback({
       feedback: text,
       metadata: {
         platform: 'mobile',
@@ -41,9 +41,7 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
       const hasEmail = userEmail || containsEmail(text);
       Alert.alert(
         'Thank you for your feedback.',
-        `I appreciate your input${
-          hasEmail ? ' and will follow up with you via email shortly.' : '.'
-        }`,
+        hasEmail ? 'I will follow up with you via email shortly.' : '',
         [
           {
             text: 'Go back',

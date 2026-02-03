@@ -1,4 +1,9 @@
-import { API_BASE_URL, API_CARDS_BUCKET, API_REGION } from '@env';
+import {
+  API_BASE_URL,
+  API_CARDS_BUCKET,
+  API_REGION,
+  PUBLIC_API_BASE_URL,
+} from '@env';
 import { configureApi } from '@vocably/api';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
@@ -16,7 +21,10 @@ import { ThemeProvider } from './ThemeProvider';
 import { TranslationPresetContainer } from './TranslationPreset/TranslationPresetContainer';
 import { UserMetadataContainer } from './UserMetadataContainer';
 
+console.log({ PUBLIC_API_BASE_URL });
+
 configureApi({
+  publicBaseUrl: PUBLIC_API_BASE_URL,
   baseUrl: API_BASE_URL,
   region: API_REGION,
   cardsBucket: API_CARDS_BUCKET,

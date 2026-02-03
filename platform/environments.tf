@@ -1,7 +1,8 @@
 data "aws_region" "current" {}
 
 locals {
-  api_base_url = "https://${aws_api_gateway_domain_name.api.domain_name}"
+  api_base_url        = "https://${aws_api_gateway_domain_name.api.domain_name}"
+  public_api_base_url = "https://${aws_apigatewayv2_domain_name.public_api.domain_name}"
 }
 
 locals {
@@ -31,6 +32,7 @@ export const environmentLocal = {
   },
   api: {
     baseUrl: '${local.api_base_url}',
+    publicBaseUrl: '${local.public_api_base_url}',
     region: '${data.aws_region.current.name}',
     cardsBucket: '${aws_s3_bucket.cards.bucket}'
   },
