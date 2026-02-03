@@ -1,8 +1,12 @@
 import {
+  deleteLanguageDeck as deleteLanguageDeckApi,
   fetchStudyStreak as apiFetchStudyStreak,
   getUserMetadata as apiGetUserMetadata,
   getUserStaticMetadata as apiGetUserStaticMetadata,
+  listLanguages as listLanguagesApi,
+  loadLanguageDeck as loadLanguageDeckApi,
   putStudyStreak as apiPutStudyStreak,
+  saveLanguageDeck as saveLanguageDeckApi,
   saveUserMetadata as apiSaveUserMetadata,
 } from '@vocably/api';
 import { isAnonymousUser } from './getStorageId';
@@ -83,4 +87,64 @@ export const saveUserMetadata = async (
   }
 
   return apiSaveUserMetadata(...params);
+};
+
+export const deleteLanguageDeck = async (
+  ...params: Parameters<typeof deleteLanguageDeckApi>
+): ReturnType<typeof deleteLanguageDeckApi> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return {
+      success: false,
+      errorCode,
+      reason,
+    };
+  }
+
+  return deleteLanguageDeckApi(...params);
+};
+
+export const listLanguages = async (
+  ...params: Parameters<typeof listLanguagesApi>
+): ReturnType<typeof listLanguagesApi> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return {
+      success: false,
+      errorCode,
+      reason,
+    };
+  }
+
+  return listLanguagesApi(...params);
+};
+
+export const loadLanguageDeck = async (
+  ...params: Parameters<typeof loadLanguageDeckApi>
+): ReturnType<typeof loadLanguageDeckApi> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return {
+      success: false,
+      errorCode,
+      reason,
+    };
+  }
+
+  return loadLanguageDeckApi(...params);
+};
+
+export const saveLanguageDeck = async (
+  ...params: Parameters<typeof saveLanguageDeckApi>
+): ReturnType<typeof saveLanguageDeckApi> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return {
+      success: false,
+      errorCode,
+      reason,
+    };
+  }
+
+  return saveLanguageDeckApi(...params);
 };
