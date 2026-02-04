@@ -6,6 +6,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { Divider, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Sentry } from '../BetterSentry';
 import {
   DecksCollection,
   LanguagesContext,
@@ -62,15 +63,38 @@ export const LoginModal: FC<Props> = ({ route }) => {
       setSynchronizing(true);
 
       if (anonymousDecks) {
-        await syncDecks(Object.values(anonymousDecks).map((d) => d.deck));
+        const result = await syncDecks(
+          Object.values(anonymousDecks).map((d) => d.deck)
+        );
+        if (result.success === false) {
+          console.error('Unable to sync decks', result);
+          Sentry.setExtras({
+            deckSyncResult: result,
+          });
+          Sentry.captureException(new Error('Unable to sync decks'));
+        }
       }
 
       if (anonymousMetadata) {
-        await syncUserMetadata(anonymousMetadata);
+        const result = await syncUserMetadata(anonymousMetadata);
+        if (result.success === false) {
+          console.error('Unable to sync metadata', result);
+          Sentry.setExtras({
+            metadataSyncResult: result,
+          });
+          Sentry.captureException(new Error('Unable to sync metadata'));
+        }
       }
 
       if (anonymousStudyStreak) {
-        await syncStudyStreak(anonymousStudyStreak);
+        const result = await syncStudyStreak(anonymousStudyStreak);
+        if (result.success === false) {
+          console.error('Unable to sync study streak', result);
+          Sentry.setExtras({
+            studySyncResult: result,
+          });
+          Sentry.captureException(new Error('Unable to sync study streak'));
+        }
       }
 
       await Promise.all([refreshLanguages(), refresh()]);
