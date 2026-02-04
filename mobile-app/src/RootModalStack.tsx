@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
 import { Appbar, useTheme } from 'react-native-paper';
+import { LoginModal } from './auth/LoginModal';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
 import { EditCardScreen } from './EditCardScreen';
 import { FeedbackModal } from './FeedbackModal';
@@ -107,6 +108,14 @@ export const RootModalStack = () => {
           name={'Feedback'}
           component={FeedbackModal}
           options={{ headerShown: true, title: 'Feedback' }}
+        />
+        <Stack.Screen
+          name="LoginModal"
+          component={LoginModal}
+          options={{
+            headerShown: true,
+            title: 'Create an account',
+          }}
         />
         <Stack.Screen
           name="PreviewStudyStepModal"

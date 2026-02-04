@@ -1,4 +1,5 @@
 import { deleteUser, signOut } from '@aws-amplify/auth';
+import { useNavigation } from '@react-navigation/native';
 import { FC, useContext } from 'react';
 import { Alert, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
@@ -18,6 +19,7 @@ export const AccountScreen: FC<Props> = () => {
   const userEmail = useUserEmail();
   const { syncDecks } = useContext(LanguagesContext);
   const { status: authStatus } = useContext(AuthContext);
+  const navigation = useNavigation();
 
   const onSignOut = async () => {
     await syncDecks();
@@ -56,7 +58,9 @@ export const AccountScreen: FC<Props> = () => {
     ]);
   };
 
-  const onCreateAccount = async () => {};
+  const onCreateAccount = async () => {
+    navigation.navigate('LoginModal');
+  };
 
   return (
     <CustomScrollView>
