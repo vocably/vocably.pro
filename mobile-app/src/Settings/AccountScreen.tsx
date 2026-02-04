@@ -59,7 +59,12 @@ export const AccountScreen: FC<Props> = () => {
   };
 
   const onCreateAccount = async () => {
-    navigation.navigate('LoginModal');
+    navigation.navigate('LoginModal', {
+      onLogin: () => {
+        navigation.goBack();
+        navigation.navigate('DeckScreen');
+      },
+    });
   };
 
   return (

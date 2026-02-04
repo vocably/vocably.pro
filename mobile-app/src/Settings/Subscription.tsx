@@ -39,8 +39,6 @@ export const Subscription: FC<Props> = ({
     authStatus.status === 'logged-in' &&
     authStatus.isPaidGroup;
 
-  console.log('is lifetime premium', authStatus);
-
   if (isLifetimePremium) {
     return <PaidAccount style={style} />;
   }

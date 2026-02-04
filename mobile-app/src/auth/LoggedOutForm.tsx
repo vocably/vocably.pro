@@ -4,7 +4,7 @@ import { Platform, ScrollView } from 'react-native';
 import { Button, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { mainPadding } from '../styles';
-import { signIn, signInWithAnIdioticCognitoFlow } from './signInfFunctions';
+import { signIn, signInWithAnIdioticCognitoFlow } from './logInFunctions';
 
 type Props = {};
 

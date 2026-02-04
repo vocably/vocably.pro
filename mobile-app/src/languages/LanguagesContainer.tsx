@@ -50,7 +50,7 @@ export type LanguageContainerDeck = {
   noTags: boolean;
 };
 
-type DecksCollection = Record<string, LanguageContainerDeck>;
+export type DecksCollection = Record<string, LanguageContainerDeck>;
 
 const createDefaultLanguageDeck = (language: string): LanguageDeck => ({
   language,

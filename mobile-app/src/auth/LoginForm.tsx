@@ -1,11 +1,13 @@
 import { FC } from 'react';
 import { Linking, Platform, View } from 'react-native';
 import { Button, Text, useTheme } from 'react-native-paper';
-import { signIn, signInWithAnIdioticCognitoFlow } from './signInfFunctions';
+import { signIn, signInWithAnIdioticCognitoFlow } from './logInFunctions';
 
-type Props = {};
+type Props = {
+  loading?: boolean;
+};
 
-export const LoginForm: FC<Props> = () => {
+export const LoginForm: FC<Props> = ({ loading = false }) => {
   const theme = useTheme();
   return (
     <View
@@ -19,6 +21,7 @@ export const LoginForm: FC<Props> = () => {
         mode="contained"
         onPress={signIn}
         style={{ alignSelf: 'stretch' }}
+        loading={loading}
       >
         Sign in or Create an account
       </Button>
