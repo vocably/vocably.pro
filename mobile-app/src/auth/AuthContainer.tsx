@@ -272,8 +272,10 @@ export const AuthContainer: FC<{
     }
 
     if (authStatusResult.value.status === 'anonymous-logged-in') {
-      posthog.identify(authStatusResult.value.id, {
-        anonymous: true,
+      posthog.capture('$set', {
+        $set: {
+          anonymousId: authStatusResult.value.id,
+        },
       });
     }
 
@@ -312,6 +314,7 @@ export const AuthContainer: FC<{
       }
 
       if (event.payload.event === 'signedOut') {
+        posthog.reset();
         setError(null);
         await setAuthStatus({
           status: 'undefined',

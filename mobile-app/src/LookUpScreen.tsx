@@ -356,9 +356,7 @@ export const LookUpScreen: FC<Props> = ({
                 analysis={lookUpResult.value}
                 cards={deck.deck.cards}
                 onAdd={(card) => {
-                  posthog.capture('mobileCardAdded', {
-                    card: card.card,
-                  });
+                  posthog.capture('mobileCardAdded', card.card);
                   return onAdd(card);
                 }}
                 onRemove={onRemove}

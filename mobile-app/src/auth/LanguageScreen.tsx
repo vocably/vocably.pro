@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { isGoogleLanguage } from '@vocably/model';
+import { usePostHog } from 'posthog-react-native';
 import React, { FC, useContext, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { Platform, ScrollView } from 'react-native';
 import { Button, Divider, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -25,6 +26,7 @@ export const LanguageScreen: FC<Props> = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const { createAnonymousUser } = useContext(AuthContext);
+  const posthog = usePostHog();
 
   const [sourceLanguage, setSourceLanguage] = useState('');
   const [targetLanguage, setTargetLanguage] = useState('');
@@ -50,6 +52,13 @@ export const LanguageScreen: FC<Props> = () => {
     await createAnonymousUser();
     await saveDecksToStorage({
       [sourceLanguage]: createDefaultLanguageContainerDeck(sourceLanguage),
+    });
+    posthog.capture('$set', {
+      $set: {
+        nativeLanguage: targetLanguage,
+        studyLanguage: sourceLanguage,
+        mobileOS: Platform.OS,
+      },
     });
   };
 
