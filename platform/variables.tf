@@ -176,3 +176,65 @@ variable "public_api_throttle_burst_limit" {
   type    = string
   default = 20
 }
+
+# Public API route-specific throttle limits
+
+variable "public_api_analyze_throttle_rate_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_analyze_throttle_burst_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_audio_throttle_rate_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_audio_throttle_burst_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_feedback_throttle_rate_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_feedback_throttle_burst_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_generate_units_of_speech_throttle_rate_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_generate_units_of_speech_throttle_burst_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_analyze_units_of_speech_throttle_rate_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_analyze_units_of_speech_throttle_burst_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_chat_with_card_throttle_rate_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_chat_with_card_throttle_burst_limit" {
+  type    = number
+  default = 20
+}

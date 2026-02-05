@@ -17,3 +17,17 @@ endtest_latest_env_suite                  = "non-existing"
 umami_website_id                          = "8792afdd-a74f-4780-8dde-9b48b3963c44"
 public_api_throttle_rate_limit            = 60
 public_api_throttle_burst_limit           = 20
+
+# Public API route-specific throttle limits
+public_api_analyze_throttle_rate_limit                   = 60
+public_api_analyze_throttle_burst_limit                  = 20
+public_api_audio_throttle_rate_limit                     = 60
+public_api_audio_throttle_burst_limit                    = 20
+public_api_feedback_throttle_rate_limit                  = 20
+public_api_feedback_throttle_burst_limit                 = 20
+public_api_generate_units_of_speech_throttle_rate_limit  = 0
+public_api_generate_units_of_speech_throttle_burst_limit = 20
+public_api_analyze_units_of_speech_throttle_rate_limit   = 0
+public_api_analyze_units_of_speech_throttle_burst_limit  = 20
+public_api_chat_with_card_throttle_rate_limit            = 0
+public_api_chat_with_card_throttle_burst_limit           = 20
