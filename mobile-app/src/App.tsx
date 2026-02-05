@@ -21,8 +21,6 @@ import { ThemeProvider } from './ThemeProvider';
 import { TranslationPresetContainer } from './TranslationPreset/TranslationPresetContainer';
 import { UserMetadataContainer } from './UserMetadataContainer';
 
-console.log({ PUBLIC_API_BASE_URL });
-
 configureApi({
   publicBaseUrl: PUBLIC_API_BASE_URL,
   baseUrl: API_BASE_URL,

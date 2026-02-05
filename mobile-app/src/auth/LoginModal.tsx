@@ -1,12 +1,13 @@
 import { Route } from '@react-navigation/native';
 import { StudyStreak, UserMetadata } from '@vocably/model';
-import { Hub } from 'aws-amplify/utils';
+import { safeStringify } from '@vocably/sulna';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { Divider, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Sentry } from '../BetterSentry';
+import { CustomerInfoContext } from '../CustomerInfoContainer';
 import {
   DecksCollection,
   LanguagesContext,
@@ -35,6 +36,7 @@ export const LoginModal: FC<Props> = ({ route }) => {
 
   const [synchronizing, setSynchronizing] = useState(false);
 
+  const { restore } = useContext(CustomerInfoContext);
   const { decks, refreshLanguages } = useContext(LanguagesContext);
   const { userMetadata, studyStreak, refresh } =
     useContext(UserMetadataContext);
@@ -55,12 +57,20 @@ export const LoginModal: FC<Props> = ({ route }) => {
   }, [decks, status]);
 
   useEffect(() => {
-    return Hub.listen('auth', async (event) => {
-      if (event.payload.event !== 'signedIn') {
-        return;
-      }
+    if (synchronizing) {
+      return;
+    }
 
-      setSynchronizing(true);
+    if (status !== 'logged-in') {
+      return;
+    }
+
+    setSynchronizing(true);
+
+    const synchronize = async () => {
+      // Wait for one second to make sure the shit went through
+      // ToDo: delete this nonsense
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (anonymousDecks) {
         const result = await syncDecks(
@@ -69,7 +79,10 @@ export const LoginModal: FC<Props> = ({ route }) => {
         if (result.success === false) {
           console.error('Unable to sync decks', result);
           Sentry.setExtras({
-            deckSyncResult: result,
+            deckSyncResult: {
+              ...result,
+              extra: safeStringify(result.extra),
+            },
           });
           Sentry.captureException(new Error('Unable to sync decks'));
         }
@@ -80,7 +93,10 @@ export const LoginModal: FC<Props> = ({ route }) => {
         if (result.success === false) {
           console.error('Unable to sync metadata', result);
           Sentry.setExtras({
-            metadataSyncResult: result,
+            metadataSyncResult: {
+              ...result,
+              extra: safeStringify(result.extra),
+            },
           });
           Sentry.captureException(new Error('Unable to sync metadata'));
         }
@@ -91,22 +107,31 @@ export const LoginModal: FC<Props> = ({ route }) => {
         if (result.success === false) {
           console.error('Unable to sync study streak', result);
           Sentry.setExtras({
-            studySyncResult: result,
+            studySyncResult: {
+              ...result,
+              extra: safeStringify(result.extra),
+            },
           });
           Sentry.captureException(new Error('Unable to sync study streak'));
         }
       }
 
-      await Promise.all([refreshLanguages(), refresh()]);
+      await Promise.all([refreshLanguages(), refresh(), restore()]);
 
       onLogin && onLogin();
-    });
+    };
+
+    synchronize();
   }, [
+    synchronizing,
+    setSynchronizing,
+    status,
+    refresh,
+    refreshLanguages,
+    restore,
     anonymousDecks,
     anonymousMetadata,
     anonymousStudyStreak,
-    refresh,
-    refreshLanguages,
   ]);
 
   const listColor = theme.colors.onBackground;

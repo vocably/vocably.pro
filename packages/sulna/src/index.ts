@@ -6,6 +6,7 @@ export * from './isGoodPlural';
 export * from './isSafeObject';
 export * from './isToday';
 export * from './queue';
+export * from './safeStringify';
 export * from './sanitizeTranscript';
 export * from './stringArray';
 export * from './tokenize';

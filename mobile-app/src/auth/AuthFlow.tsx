@@ -13,8 +13,6 @@ export const AuthFlow: FC<{
     return <Loader>Authenticating...</Loader>;
   }
 
-  console.log(authStatus);
-
   if (
     authStatus.status === 'logged-in' ||
     authStatus.status === 'anonymous-logged-in'
