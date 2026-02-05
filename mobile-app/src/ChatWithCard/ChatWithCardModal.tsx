@@ -1,5 +1,4 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { chatWithCard } from '@vocably/api';
 import { ChatCard, ChatWithCardMessage } from '@vocably/model';
 import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
@@ -8,6 +7,7 @@ import { Platform, ScrollView, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Button, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { chatWithCard } from '../api';
 import { ChatTextInput } from '../Chat/ChatTextInput';
 import { Message } from '../Chat/Message';
 import { Thinking } from '../Chat/Thinking';

@@ -1,12 +1,18 @@
 import {
   analyze as apiAnalyze,
+  analyzeUnitsOfSpeech as apiAnalyzeUnitsOfSpeech,
+  chatWithCard as apiChatWithCard,
   deleteLanguageDeck as deleteLanguageDeckApi,
   fetchStudyStreak as apiFetchStudyStreak,
+  generateUnitsOfSpeech as apiGenerateUnitsOfSpeech,
   getUserMetadata as apiGetUserMetadata,
   getUserStaticMetadata as apiGetUserStaticMetadata,
   listLanguages as listLanguagesApi,
   loadLanguageDeck as loadLanguageDeckApi,
   publicAnalyze,
+  publicAnalyzeUnitsOfSpeech,
+  publicChatWithCard,
+  publicGenerateUnitsOfSpeech,
   putStudyStreak as apiPutStudyStreak,
   saveLanguageDeck as saveLanguageDeckApi,
   saveUserMetadata as apiSaveUserMetadata,
@@ -160,4 +166,37 @@ export const analyze = async (
   }
 
   return apiAnalyze(...params);
+};
+
+export const analyzeUnitsOfSpeech = async (
+  ...params: Parameters<typeof apiAnalyzeUnitsOfSpeech>
+): ReturnType<typeof apiAnalyzeUnitsOfSpeech> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return publicAnalyzeUnitsOfSpeech(...params);
+  }
+
+  return apiAnalyzeUnitsOfSpeech(...params);
+};
+
+export const chatWithCard = async (
+  ...params: Parameters<typeof apiChatWithCard>
+): ReturnType<typeof apiChatWithCard> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return publicChatWithCard(...params);
+  }
+
+  return apiChatWithCard(...params);
+};
+
+export const generateUnitsOfSpeech = async (
+  ...params: Parameters<typeof apiGenerateUnitsOfSpeech>
+): ReturnType<typeof apiGenerateUnitsOfSpeech> => {
+  const isAnonymous = await isAnonymousUser();
+  if (isAnonymous) {
+    return publicGenerateUnitsOfSpeech(...params);
+  }
+
+  return apiGenerateUnitsOfSpeech(...params);
 };
