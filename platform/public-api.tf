@@ -43,6 +43,42 @@ resource "aws_apigatewayv2_stage" "public_api" {
     throttling_rate_limit  = var.public_api_throttle_rate_limit
   }
 
+  route_settings {
+    route_key              = "POST /analyze"
+    throttling_burst_limit = var.public_api_analyze_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_analyze_throttle_rate_limit
+  }
+
+  route_settings {
+    route_key              = "GET /audio"
+    throttling_burst_limit = var.public_api_audio_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_audio_throttle_rate_limit
+  }
+
+  route_settings {
+    route_key              = "POST /feedback"
+    throttling_burst_limit = var.public_api_feedback_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_feedback_throttle_rate_limit
+  }
+
+  route_settings {
+    route_key              = "POST /generate-units-of-speech"
+    throttling_burst_limit = var.public_api_generate_units_of_speech_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_generate_units_of_speech_throttle_rate_limit
+  }
+
+  route_settings {
+    route_key              = "POST /analyze-units-of-speech"
+    throttling_burst_limit = var.public_api_analyze_units_of_speech_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_analyze_units_of_speech_throttle_rate_limit
+  }
+
+  route_settings {
+    route_key              = "POST /chat-with-card"
+    throttling_burst_limit = var.public_api_chat_with_card_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_chat_with_card_throttle_rate_limit
+  }
+
   access_log_settings {
     destination_arn = aws_cloudwatch_log_group.public_api.arn
 
