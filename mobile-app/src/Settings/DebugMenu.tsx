@@ -30,7 +30,6 @@ export const DebugMenu: FC<Props> = () => {
         gap: 12,
         width: '100%',
         padding: 24,
-        marginTop: 32,
       }}
     >
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>

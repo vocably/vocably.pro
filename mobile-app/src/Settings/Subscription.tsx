@@ -1,19 +1,18 @@
 import { FC, useContext } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { CustomerInfo } from 'react-native-purchases';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AuthContext } from '../auth/AuthContainer';
 import { CustomerInfoContext } from '../CustomerInfoContainer';
 import { InlineLoader } from '../loaders/InlineLoader';
-import { CustomSurface } from '../ui/CustomSurface';
 import { ListItem } from '../ui/ListItem';
 import { usePresentPaywall } from '../usePresentPaywall';
 import { PaidAccount } from './PaidAccount';
 import { Premium } from './Premium';
 
 type Props = {
-  style?: StyleProp<ViewStyle>;
+  isInGroup?: boolean;
   isRefreshing?: boolean;
   onRefresh?: () => void;
 };
@@ -23,7 +22,7 @@ const isPremium = (customerInfo: CustomerInfo): boolean => {
 };
 
 export const Subscription: FC<Props> = ({
-  style,
+  isInGroup = false,
   isRefreshing = false,
   onRefresh = () => null,
 }) => {
@@ -40,11 +39,11 @@ export const Subscription: FC<Props> = ({
     authStatus.isPaidGroup;
 
   if (isLifetimePremium) {
-    return <PaidAccount style={style} />;
+    return <PaidAccount />;
   }
 
   return (
-    <CustomSurface style={style}>
+    <>
       {customerInfoStatus.status === 'undefined' && (
         <View style={{ padding: 16 }}>
           <InlineLoader center={false}>Loading customer status</InlineLoader>
@@ -76,6 +75,7 @@ export const Subscription: FC<Props> = ({
           )}
           {!isPremium(customerInfoStatus.customerInformation) && (
             <ListItem
+              order={isInGroup ? 'last' : 'single'}
               leftIcon="crown-outline"
               rightIcon=""
               title="Go Premium"
@@ -84,6 +84,6 @@ export const Subscription: FC<Props> = ({
           )}
         </>
       )}
-    </CustomSurface>
+    </>
   );
 };

@@ -1,14 +1,19 @@
+import { deleteUser, signOut } from '@aws-amplify/auth';
 import { NavigationProp } from '@react-navigation/native';
 import React, { FC, useContext, useState } from 'react';
-import { Pressable, RefreshControl, View } from 'react-native';
-import { Divider, Text } from 'react-native-paper';
+import { Alert, Pressable, RefreshControl, View } from 'react-native';
+import { Divider, Text, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import VersionNumber from 'react-native-version-number';
 // @ts-ignore
 import { ENV_SUFFIX, SHOW_DEBUG_MENU } from '@env';
 import { languageList } from '@vocably/model';
 import { trimLanguage } from '@vocably/sulna';
 import { get } from 'lodash-es';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { clearAll } from '../asyncAppStorage';
+import { AuthContext } from '../auth/AuthContainer';
+import { useUserEmail } from '../auth/useUserEmail';
 import { CustomerInfoContext } from '../CustomerInfoContainer';
 import { LanguagesContext } from '../languages/LanguagesContainer';
 import { CustomScrollView } from '../ui/CustomScrollView';
@@ -24,16 +29,65 @@ type Props = {
 
 export const SettingsScreen: FC<Props> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
+  const theme = useTheme();
+  const userEmail = useUserEmail();
   const { refresh: refreshCustomerInfo } = useContext(CustomerInfoContext);
   const { refresh: refreshUserMetadata } = useContext(UserMetadataContext);
+  const { status: authStatus } = useContext(AuthContext);
 
-  const { selectedLanguage, languages } = useContext(LanguagesContext);
+  const { selectedLanguage, languages, syncDecks } =
+    useContext(LanguagesContext);
 
   const languageName = trimLanguage(get(languageList, selectedLanguage, ''));
 
   const [refreshing, setRefreshing] = useState(false);
 
   const [versionPressedTimes, setVersionPressedTimes] = useState(0);
+
+  const onSignOut = async () => {
+    await syncDecks();
+    await signOut();
+  };
+
+  const onAccountDelete = () => {
+    Alert.alert('Delete your account?', 'This operation cannot be undone.', [
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await deleteUser();
+          await signOut();
+        },
+      },
+      {
+        text: 'Cancel',
+      },
+    ]);
+  };
+
+  const onDataDelete = () => {
+    Alert.alert('Delete your data?', 'This operation cannot be undone.', [
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await clearAll();
+          await signOut();
+        },
+      },
+      {
+        text: 'Cancel',
+      },
+    ]);
+  };
+
+  const onCreateAccount = async () => {
+    navigation.navigate('LoginModal', {
+      onLogin: () => {
+        navigation.navigate('DeckScreen');
+      },
+    });
+  };
 
   const onRefresh = async () => {
     setRefreshing(true);
@@ -55,6 +109,8 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
     });
   };
 
+  const marginBottom = 24;
+
   // @ts-ignore
   return (
     <CustomScrollView
@@ -65,27 +121,51 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
         paddingTop: insets.top + 32,
       }}
     >
-      <CustomSurface style={{ marginBottom: 16 }}>
-        <ListItem
-          order="first"
-          leftIcon="account-circle-outline"
-          title="My account"
-          onPress={() => navigation.navigate('AccountMenu')}
+      <View
+        style={{
+          marginBottom: marginBottom,
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 8,
+          marginLeft: 8,
+        }}
+      >
+        <Icon
+          name="account-circle-outline"
+          color={theme.colors.onBackground}
+          size={24}
         />
-        <Divider />
+        <Text style={{ fontSize: 16 }}>
+          {authStatus === 'logged-in' ? userEmail : 'Not registered yet.'}
+        </Text>
+      </View>
+
+      <CustomSurface style={{ marginBottom: marginBottom }}>
+        {authStatus === 'anonymous-logged-in' && (
+          <>
+            <ListItem
+              order="first"
+              title="Create an account"
+              onPress={onCreateAccount}
+              leftIcon="plus"
+            />
+            <Divider />
+          </>
+        )}
+        <Subscription
+          isInGroup={authStatus === 'anonymous-logged-in'}
+          isRefreshing={customerInfoRefreshing}
+          onRefresh={customerInfoRefresh}
+        />
+      </CustomSurface>
+
+      <CustomSurface style={{ marginBottom: marginBottom }}>
         <ListItem
-          order="last"
           leftIcon="school-outline"
           title="Study settings"
           onPress={() => navigation.navigate('StudySettings')}
         />
       </CustomSurface>
-
-      <Subscription
-        style={{ marginBottom: 16 }}
-        isRefreshing={customerInfoRefreshing}
-        onRefresh={customerInfoRefresh}
-      />
 
       {selectedLanguage && (
         <>
@@ -119,24 +199,59 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
         />
       </CustomSurface>
 
-      <View style={{ paddingHorizontal: 16 }}>
+      <View style={{ paddingHorizontal: 16, marginBottom: marginBottom }}>
         <Text>
           Are you missing any crucial feature or simply want to share your
           opinion about Vocably with me? I would love to hear from you!
         </Text>
       </View>
 
-      {(SHOW_DEBUG_MENU === 'true' || versionPressedTimes > 2) && <DebugMenu />}
+      {authStatus === 'logged-in' && (
+        <CustomSurface style={{ marginBottom: marginBottom }}>
+          <ListItem
+            order="first"
+            title="Sign out"
+            onPress={onSignOut}
+            leftIcon="logout"
+          />
+          <Divider />
+          <ListItem
+            order="last"
+            title="Delete my account"
+            onPress={onAccountDelete}
+            color={theme.colors.error}
+            leftIcon="trash-can-outline"
+            rightIcon=""
+          ></ListItem>
+        </CustomSurface>
+      )}
+
+      {authStatus === 'anonymous-logged-in' && (
+        <CustomSurface style={{ marginBottom: marginBottom }}>
+          <ListItem
+            title="Delete my data"
+            onPress={onDataDelete}
+            color={theme.colors.error}
+            leftIcon="trash-can-outline"
+            rightIcon=""
+          ></ListItem>
+        </CustomSurface>
+      )}
+
+      {(SHOW_DEBUG_MENU === 'true' || versionPressedTimes > 2) && (
+        <View style={{ marginBottom: marginBottom }}>
+          <DebugMenu />
+        </View>
+      )}
 
       {VersionNumber.appVersion && (
         <View
           style={{
             paddingHorizontal: 16,
-            marginBottom: 16,
+            marginBottom: marginBottom,
             gap: 16,
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: 48,
           }}
         >
           <Pressable
