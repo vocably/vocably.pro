@@ -153,7 +153,7 @@ export const AuthContainer: FC<{
       const { identityId } = await fetchAuthSession();
       return identityId;
     } catch (err) {
-      console.log('Error fetching session:', err);
+      console.error('Error fetching session:', err);
     }
   };
 

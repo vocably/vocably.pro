@@ -11,13 +11,6 @@ export const request = async (
       Accept: 'application/json',
     };
 
-    console.log({
-      url,
-      headers: merge(init, {
-        headers,
-      }),
-    });
-
     const response = await fetch(
       url,
       merge(init, {
