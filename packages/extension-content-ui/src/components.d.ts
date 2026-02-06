@@ -8,44 +8,23 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, DeleteTagPayload, DetachTagPayload, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
 import { SearchValues } from "./components/search-form/types";
 import { ComponentExplanationState } from "./components/translation/translation";
-export { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, DeleteTagPayload, DetachTagPayload, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
-export { SearchValues } from "./components/search-form/types";
-export { ComponentExplanationState } from "./components/translation/translation";
 export namespace Components {
     interface VocablyAnimatedContentWrapper {
-        /**
-          * @default 0
-         */
         "delay": number;
     }
     interface VocablyButton {
     }
     interface VocablyCardCounter {
         "collectionLength": number;
-        /**
-          * @default 30
-         */
         "maxCards": number;
-        /**
-          * @default ''
-         */
         "paymentLink": string;
     }
     interface VocablyCardCounterExplanation {
-        /**
-          * @default 30
-         */
         "maxCards": number;
-        /**
-          * @default ''
-         */
         "paymentLink": string;
     }
     interface VocablyCardDefinitions {
         "card": TranslationCard;
-        /**
-          * @default false
-         */
         "isLightweight": boolean;
         "updateCard": (
     data: Partial<Card>
@@ -62,9 +41,6 @@ export namespace Components {
     }
     interface VocablyCardTranslation {
         "card": TranslationCard;
-        /**
-          * @default false
-         */
         "disableEditing": boolean;
         "updateCard": (
     data: Partial<Card>
@@ -76,17 +52,11 @@ export namespace Components {
         "card": TranslationCard;
     }
     interface VocablyHintSelector {
-        /**
-          * @default false
-         */
         "disabled": boolean;
         "hint": string;
         "optionGroups": Array<
     [groupLabel: string, options: Array<[value: string, label: string]>]
   >;
-        /**
-          * @default false
-         */
         "shrinkSmall": boolean;
         "value": string;
     }
@@ -133,7 +103,6 @@ export namespace Components {
         "duration"?: number;
         /**
           * If `true`, the spinner's animation will be paused.
-          * @default false
          */
         "paused": boolean;
     }
@@ -147,9 +116,6 @@ export namespace Components {
     interface VocablyMobileButton {
     }
     interface VocablyOverlay {
-        /**
-          * @default ['Escape']
-         */
         "closeKeyCode": string[];
         "hide": () => Promise<void>;
     }
@@ -169,37 +135,13 @@ export namespace Components {
         "platform": { name: string; url: string };
     }
     interface VocablySearchForm {
-        /**
-          * @default false
-         */
         "autoFocus": boolean;
-        /**
-          * @default false
-         */
         "disabled": boolean;
-        /**
-          * @default []
-         */
         "existingSourceLanguages": GoogleLanguage[];
-        /**
-          * @default []
-         */
         "existingTargetLanguages": GoogleLanguage[];
-        /**
-          * @default false
-         */
         "hideHint": boolean;
-        /**
-          * @default {}
-         */
         "languagePairs": LanguagePairs;
-        /**
-          * @default false
-         */
         "loading": boolean;
-        /**
-          * @default {     text: '',     sourceLanguage: 'de',     targetLanguage: 'en',     isReversed: false,   }
-         */
         "values": SearchValues;
     }
     interface VocablySignIn {
@@ -209,48 +151,27 @@ export namespace Components {
     interface VocablySpinner {
     }
     interface VocablySubscribe {
-        /**
-          * @default false
-         */
         "trial": boolean;
     }
     interface VocablyTagForm {
         "deleteTag"?: (tag: TagItem) => Promise<Result<unknown>>;
         "saveTag"?: (tag: TagCandidate) => Promise<Result<unknown>>;
-        /**
-          * @default null
-         */
         "tagItem": TagItem | null;
     }
     interface VocablyTagsMenu {
         "attachTag": (tag: TagItem) => Promise<Result<unknown>>;
         "deleteTag": (tag: TagItem) => Promise<Result<unknown>>;
         "detachTag": (tag: TagItem) => Promise<Result<unknown>>;
-        /**
-          * @default false
-         */
         "disabled": boolean;
-        /**
-          * @default []
-         */
         "existingItems": TagItem[];
         "saveTag": (tag: TagCandidate) => Promise<Result<unknown>>;
-        /**
-          * @default []
-         */
         "selectedItems": string[];
     }
     interface VocablyTranslation {
-        /**
-          * @default false
-         */
         "askForRating": boolean;
         "attachTag": (
     data: AttachTagPayload
   ) => Promise<Result<TranslationCards>>;
-        /**
-          * @default false
-         */
         "canCongratulate": boolean;
         "deleteTag": (
     data: DeleteTagPayload
@@ -258,25 +179,10 @@ export namespace Components {
         "detachTag": (
     data: DetachTagPayload
   ) => Promise<Result<TranslationCards>>;
-        /**
-          * @default false
-         */
         "disabled": boolean;
-        /**
-          * @default []
-         */
         "existingSourceLanguages": GoogleLanguage[];
-        /**
-          * @default []
-         */
         "existingTargetLanguages": GoogleLanguage[];
-        /**
-          * @default { state: 'none' }
-         */
         "explanation": ComponentExplanationState;
-        /**
-          * @default 0
-         */
         "explanationAnimationDelay": number;
         "extensionPlatform": {
     name: string;
@@ -284,54 +190,21 @@ export namespace Components {
     platform: 'chromeExtension' | 'safariExtension' | 'iosSafariExtension';
     paymentLink: string | false;
   };
-        /**
-          * @default false
-         */
         "hideChatGpt": boolean;
-        /**
-          * @default false
-         */
         "isLightweight": boolean;
-        /**
-          * @default false
-         */
         "isRetrying": boolean;
-        /**
-          * @default null
-         */
         "isUpdating": TranslationCard | null;
-        /**
-          * @default false
-         */
         "loading": boolean;
-        /**
-          * @default 'unlimited'
-         */
         "maxCards": number | 'unlimited';
-        /**
-          * @default ''
-         */
         "paymentLink": string;
         "phrase": string;
         "play": () => Promise<void>;
         "playAudioPronunciation": (
     payload: AudioPronunciationPayload
   ) => Promise<Result<true>>;
-        /**
-          * @default null
-         */
         "result": Result<TranslationCards> | null;
-        /**
-          * @default true
-         */
         "showLanguages": boolean;
-        /**
-          * @default ''
-         */
         "sourceLanguage": string;
-        /**
-          * @default ''
-         */
         "targetLanguage": string;
         "updateCard": (
     payload: UpdateCardPayload
@@ -390,18 +263,7 @@ export interface VocablyTranslationCustomEvent<T> extends CustomEvent<T> {
     target: HTMLVocablyTranslationElement;
 }
 declare global {
-    interface HTMLVocablyAnimatedContentWrapperElementEventMap {
-        "close": void;
-    }
     interface HTMLVocablyAnimatedContentWrapperElement extends Components.VocablyAnimatedContentWrapper, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyAnimatedContentWrapperElementEventMap>(type: K, listener: (this: HTMLVocablyAnimatedContentWrapperElement, ev: VocablyAnimatedContentWrapperCustomEvent<HTMLVocablyAnimatedContentWrapperElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyAnimatedContentWrapperElementEventMap>(type: K, listener: (this: HTMLVocablyAnimatedContentWrapperElement, ev: VocablyAnimatedContentWrapperCustomEvent<HTMLVocablyAnimatedContentWrapperElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyAnimatedContentWrapperElement: {
         prototype: HTMLVocablyAnimatedContentWrapperElement;
@@ -419,19 +281,7 @@ declare global {
         prototype: HTMLVocablyCardCounterElement;
         new (): HTMLVocablyCardCounterElement;
     };
-    interface HTMLVocablyCardCounterExplanationElementEventMap {
-        "closeExplanation": void;
-        "paymentClicked": void;
-    }
     interface HTMLVocablyCardCounterExplanationElement extends Components.VocablyCardCounterExplanation, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyCardCounterExplanationElementEventMap>(type: K, listener: (this: HTMLVocablyCardCounterExplanationElement, ev: VocablyCardCounterExplanationCustomEvent<HTMLVocablyCardCounterExplanationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyCardCounterExplanationElementEventMap>(type: K, listener: (this: HTMLVocablyCardCounterExplanationElement, ev: VocablyCardCounterExplanationCustomEvent<HTMLVocablyCardCounterExplanationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyCardCounterExplanationElement: {
         prototype: HTMLVocablyCardCounterExplanationElement;
@@ -461,18 +311,7 @@ declare global {
         prototype: HTMLVocablyCardTranslationElement;
         new (): HTMLVocablyCardTranslationElement;
     };
-    interface HTMLVocablyCloseButtonElementEventMap {
-        "close": void;
-    }
     interface HTMLVocablyCloseButtonElement extends Components.VocablyCloseButton, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyCloseButtonElementEventMap>(type: K, listener: (this: HTMLVocablyCloseButtonElement, ev: VocablyCloseButtonCustomEvent<HTMLVocablyCloseButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyCloseButtonElementEventMap>(type: K, listener: (this: HTMLVocablyCloseButtonElement, ev: VocablyCloseButtonCustomEvent<HTMLVocablyCloseButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyCloseButtonElement: {
         prototype: HTMLVocablyCloseButtonElement;
@@ -484,18 +323,7 @@ declare global {
         prototype: HTMLVocablyFirstTranslationCongratulationElement;
         new (): HTMLVocablyFirstTranslationCongratulationElement;
     };
-    interface HTMLVocablyHintSelectorElementEventMap {
-        "choose": string;
-    }
     interface HTMLVocablyHintSelectorElement extends Components.VocablyHintSelector, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyHintSelectorElementEventMap>(type: K, listener: (this: HTMLVocablyHintSelectorElement, ev: VocablyHintSelectorCustomEvent<HTMLVocablyHintSelectorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyHintSelectorElementEventMap>(type: K, listener: (this: HTMLVocablyHintSelectorElement, ev: VocablyHintSelectorCustomEvent<HTMLVocablyHintSelectorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyHintSelectorElement: {
         prototype: HTMLVocablyHintSelectorElement;
@@ -615,21 +443,7 @@ declare global {
         prototype: HTMLVocablyInlineLoaderElement;
         new (): HTMLVocablyInlineLoaderElement;
     };
-    interface HTMLVocablyLanguageElementEventMap {
-        "confirm": {
-    sourceLanguage: string;
-    targetLanguage: string;
-  };
-    }
     interface HTMLVocablyLanguageElement extends Components.VocablyLanguage, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyLanguageElementEventMap>(type: K, listener: (this: HTMLVocablyLanguageElement, ev: VocablyLanguageCustomEvent<HTMLVocablyLanguageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyLanguageElementEventMap>(type: K, listener: (this: HTMLVocablyLanguageElement, ev: VocablyLanguageCustomEvent<HTMLVocablyLanguageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyLanguageElement: {
         prototype: HTMLVocablyLanguageElement;
@@ -659,18 +473,7 @@ declare global {
         prototype: HTMLVocablyPlaySoundElement;
         new (): HTMLVocablyPlaySoundElement;
     };
-    interface HTMLVocablyPopupElementEventMap {
-        "close": void;
-    }
     interface HTMLVocablyPopupElement extends Components.VocablyPopup, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyPopupElementEventMap>(type: K, listener: (this: HTMLVocablyPopupElement, ev: VocablyPopupCustomEvent<HTMLVocablyPopupElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyPopupElementEventMap>(type: K, listener: (this: HTMLVocablyPopupElement, ev: VocablyPopupCustomEvent<HTMLVocablyPopupElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyPopupElement: {
         prototype: HTMLVocablyPopupElement;
@@ -682,53 +485,19 @@ declare global {
         prototype: HTMLVocablyQrCodeElement;
         new (): HTMLVocablyQrCodeElement;
     };
-    interface HTMLVocablyRateElementEventMap {
-        "userSelected": 'review' | 'later' | 'never' | 'feedback';
-    }
     interface HTMLVocablyRateElement extends Components.VocablyRate, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyRateElementEventMap>(type: K, listener: (this: HTMLVocablyRateElement, ev: VocablyRateCustomEvent<HTMLVocablyRateElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyRateElementEventMap>(type: K, listener: (this: HTMLVocablyRateElement, ev: VocablyRateCustomEvent<HTMLVocablyRateElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyRateElement: {
         prototype: HTMLVocablyRateElement;
         new (): HTMLVocablyRateElement;
     };
-    interface HTMLVocablySearchFormElementEventMap {
-        "valuesChange": SearchValues;
-        "formSubmit": SearchValues;
-    }
     interface HTMLVocablySearchFormElement extends Components.VocablySearchForm, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablySearchFormElementEventMap>(type: K, listener: (this: HTMLVocablySearchFormElement, ev: VocablySearchFormCustomEvent<HTMLVocablySearchFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablySearchFormElementEventMap>(type: K, listener: (this: HTMLVocablySearchFormElement, ev: VocablySearchFormCustomEvent<HTMLVocablySearchFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablySearchFormElement: {
         prototype: HTMLVocablySearchFormElement;
         new (): HTMLVocablySearchFormElement;
     };
-    interface HTMLVocablySignInElementEventMap {
-        "confirm": any;
-    }
     interface HTMLVocablySignInElement extends Components.VocablySignIn, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablySignInElementEventMap>(type: K, listener: (this: HTMLVocablySignInElement, ev: VocablySignInCustomEvent<HTMLVocablySignInElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablySignInElementEventMap>(type: K, listener: (this: HTMLVocablySignInElement, ev: VocablySignInCustomEvent<HTMLVocablySignInElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablySignInElement: {
         prototype: HTMLVocablySignInElement;
@@ -746,35 +515,13 @@ declare global {
         prototype: HTMLVocablySpinnerElement;
         new (): HTMLVocablySpinnerElement;
     };
-    interface HTMLVocablySubscribeElementEventMap {
-        "confirm": any;
-    }
     interface HTMLVocablySubscribeElement extends Components.VocablySubscribe, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablySubscribeElementEventMap>(type: K, listener: (this: HTMLVocablySubscribeElement, ev: VocablySubscribeCustomEvent<HTMLVocablySubscribeElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablySubscribeElementEventMap>(type: K, listener: (this: HTMLVocablySubscribeElement, ev: VocablySubscribeCustomEvent<HTMLVocablySubscribeElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablySubscribeElement: {
         prototype: HTMLVocablySubscribeElement;
         new (): HTMLVocablySubscribeElement;
     };
-    interface HTMLVocablyTagFormElementEventMap {
-        "hide": void;
-    }
     interface HTMLVocablyTagFormElement extends Components.VocablyTagForm, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyTagFormElementEventMap>(type: K, listener: (this: HTMLVocablyTagFormElement, ev: VocablyTagFormCustomEvent<HTMLVocablyTagFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyTagFormElementEventMap>(type: K, listener: (this: HTMLVocablyTagFormElement, ev: VocablyTagFormCustomEvent<HTMLVocablyTagFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyTagFormElement: {
         prototype: HTMLVocablyTagFormElement;
@@ -786,24 +533,7 @@ declare global {
         prototype: HTMLVocablyTagsMenuElement;
         new (): HTMLVocablyTagsMenuElement;
     };
-    interface HTMLVocablyTranslationElementEventMap {
-        "ratingInteraction": RateInteractionPayload;
-        "changeSourceLanguage": string;
-        "changeTargetLanguage": string;
-        "retry": void;
-        "removeCard": RemoveCardPayload;
-        "addCard": AddCardPayload;
-        "watchMePaying": void;
-    }
     interface HTMLVocablyTranslationElement extends Components.VocablyTranslation, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLVocablyTranslationElementEventMap>(type: K, listener: (this: HTMLVocablyTranslationElement, ev: VocablyTranslationCustomEvent<HTMLVocablyTranslationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLVocablyTranslationElementEventMap>(type: K, listener: (this: HTMLVocablyTranslationElement, ev: VocablyTranslationCustomEvent<HTMLVocablyTranslationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVocablyTranslationElement: {
         prototype: HTMLVocablyTranslationElement;
@@ -860,9 +590,6 @@ declare global {
 }
 declare namespace LocalJSX {
     interface VocablyAnimatedContentWrapper {
-        /**
-          * @default 0
-         */
         "delay"?: number;
         "onClose"?: (event: VocablyAnimatedContentWrapperCustomEvent<void>) => void;
     }
@@ -870,32 +597,17 @@ declare namespace LocalJSX {
     }
     interface VocablyCardCounter {
         "collectionLength"?: number;
-        /**
-          * @default 30
-         */
         "maxCards"?: number;
-        /**
-          * @default ''
-         */
         "paymentLink"?: string;
     }
     interface VocablyCardCounterExplanation {
-        /**
-          * @default 30
-         */
         "maxCards"?: number;
         "onCloseExplanation"?: (event: VocablyCardCounterExplanationCustomEvent<void>) => void;
         "onPaymentClicked"?: (event: VocablyCardCounterExplanationCustomEvent<void>) => void;
-        /**
-          * @default ''
-         */
         "paymentLink"?: string;
     }
     interface VocablyCardDefinitions {
         "card"?: TranslationCard;
-        /**
-          * @default false
-         */
         "isLightweight"?: boolean;
         "updateCard"?: (
     data: Partial<Card>
@@ -912,9 +624,6 @@ declare namespace LocalJSX {
     }
     interface VocablyCardTranslation {
         "card"?: TranslationCard;
-        /**
-          * @default false
-         */
         "disableEditing"?: boolean;
         "updateCard"?: (
     data: Partial<Card>
@@ -927,18 +636,12 @@ declare namespace LocalJSX {
         "card"?: TranslationCard;
     }
     interface VocablyHintSelector {
-        /**
-          * @default false
-         */
         "disabled"?: boolean;
         "hint"?: string;
         "onChoose"?: (event: VocablyHintSelectorCustomEvent<string>) => void;
         "optionGroups"?: Array<
     [groupLabel: string, options: Array<[value: string, label: string]>]
   >;
-        /**
-          * @default false
-         */
         "shrinkSmall"?: boolean;
         "value"?: string;
     }
@@ -985,7 +688,6 @@ declare namespace LocalJSX {
         "duration"?: number;
         /**
           * If `true`, the spinner's animation will be paused.
-          * @default false
          */
         "paused"?: boolean;
     }
@@ -1003,9 +705,6 @@ declare namespace LocalJSX {
     interface VocablyMobileButton {
     }
     interface VocablyOverlay {
-        /**
-          * @default ['Escape']
-         */
         "closeKeyCode"?: string[];
     }
     interface VocablyPlaySound {
@@ -1025,39 +724,15 @@ declare namespace LocalJSX {
         "platform"?: { name: string; url: string };
     }
     interface VocablySearchForm {
-        /**
-          * @default false
-         */
         "autoFocus"?: boolean;
-        /**
-          * @default false
-         */
         "disabled"?: boolean;
-        /**
-          * @default []
-         */
         "existingSourceLanguages"?: GoogleLanguage[];
-        /**
-          * @default []
-         */
         "existingTargetLanguages"?: GoogleLanguage[];
-        /**
-          * @default false
-         */
         "hideHint"?: boolean;
-        /**
-          * @default {}
-         */
         "languagePairs"?: LanguagePairs;
-        /**
-          * @default false
-         */
         "loading"?: boolean;
         "onFormSubmit"?: (event: VocablySearchFormCustomEvent<SearchValues>) => void;
         "onValuesChange"?: (event: VocablySearchFormCustomEvent<SearchValues>) => void;
-        /**
-          * @default {     text: '',     sourceLanguage: 'de',     targetLanguage: 'en',     isReversed: false,   }
-         */
         "values"?: SearchValues;
     }
     interface VocablySignIn {
@@ -1069,49 +744,28 @@ declare namespace LocalJSX {
     }
     interface VocablySubscribe {
         "onConfirm"?: (event: VocablySubscribeCustomEvent<any>) => void;
-        /**
-          * @default false
-         */
         "trial"?: boolean;
     }
     interface VocablyTagForm {
         "deleteTag"?: (tag: TagItem) => Promise<Result<unknown>>;
         "onHide"?: (event: VocablyTagFormCustomEvent<void>) => void;
         "saveTag"?: (tag: TagCandidate) => Promise<Result<unknown>>;
-        /**
-          * @default null
-         */
         "tagItem"?: TagItem | null;
     }
     interface VocablyTagsMenu {
         "attachTag"?: (tag: TagItem) => Promise<Result<unknown>>;
         "deleteTag"?: (tag: TagItem) => Promise<Result<unknown>>;
         "detachTag"?: (tag: TagItem) => Promise<Result<unknown>>;
-        /**
-          * @default false
-         */
         "disabled"?: boolean;
-        /**
-          * @default []
-         */
         "existingItems"?: TagItem[];
         "saveTag"?: (tag: TagCandidate) => Promise<Result<unknown>>;
-        /**
-          * @default []
-         */
         "selectedItems"?: string[];
     }
     interface VocablyTranslation {
-        /**
-          * @default false
-         */
         "askForRating"?: boolean;
         "attachTag"?: (
     data: AttachTagPayload
   ) => Promise<Result<TranslationCards>>;
-        /**
-          * @default false
-         */
         "canCongratulate"?: boolean;
         "deleteTag"?: (
     data: DeleteTagPayload
@@ -1119,25 +773,10 @@ declare namespace LocalJSX {
         "detachTag"?: (
     data: DetachTagPayload
   ) => Promise<Result<TranslationCards>>;
-        /**
-          * @default false
-         */
         "disabled"?: boolean;
-        /**
-          * @default []
-         */
         "existingSourceLanguages"?: GoogleLanguage[];
-        /**
-          * @default []
-         */
         "existingTargetLanguages"?: GoogleLanguage[];
-        /**
-          * @default { state: 'none' }
-         */
         "explanation"?: ComponentExplanationState;
-        /**
-          * @default 0
-         */
         "explanationAnimationDelay"?: number;
         "extensionPlatform"?: {
     name: string;
@@ -1145,29 +784,11 @@ declare namespace LocalJSX {
     platform: 'chromeExtension' | 'safariExtension' | 'iosSafariExtension';
     paymentLink: string | false;
   };
-        /**
-          * @default false
-         */
         "hideChatGpt"?: boolean;
-        /**
-          * @default false
-         */
         "isLightweight"?: boolean;
-        /**
-          * @default false
-         */
         "isRetrying"?: boolean;
-        /**
-          * @default null
-         */
         "isUpdating"?: TranslationCard | null;
-        /**
-          * @default false
-         */
         "loading"?: boolean;
-        /**
-          * @default 'unlimited'
-         */
         "maxCards"?: number | 'unlimited';
         "onAddCard"?: (event: VocablyTranslationCustomEvent<AddCardPayload>) => void;
         "onChangeSourceLanguage"?: (event: VocablyTranslationCustomEvent<string>) => void;
@@ -1176,29 +797,14 @@ declare namespace LocalJSX {
         "onRemoveCard"?: (event: VocablyTranslationCustomEvent<RemoveCardPayload>) => void;
         "onRetry"?: (event: VocablyTranslationCustomEvent<void>) => void;
         "onWatchMePaying"?: (event: VocablyTranslationCustomEvent<void>) => void;
-        /**
-          * @default ''
-         */
         "paymentLink"?: string;
         "phrase"?: string;
         "playAudioPronunciation"?: (
     payload: AudioPronunciationPayload
   ) => Promise<Result<true>>;
-        /**
-          * @default null
-         */
         "result"?: Result<TranslationCards> | null;
-        /**
-          * @default true
-         */
         "showLanguages"?: boolean;
-        /**
-          * @default ''
-         */
         "sourceLanguage"?: string;
-        /**
-          * @default ''
-         */
         "targetLanguage"?: string;
         "updateCard"?: (
     payload: UpdateCardPayload
