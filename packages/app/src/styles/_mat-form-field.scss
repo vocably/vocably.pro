@@ -15,4 +15,8 @@ mat-form-field[nolabel] {
     padding: 0 !important;
     margin: 0 !important;
   }
+
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
 }

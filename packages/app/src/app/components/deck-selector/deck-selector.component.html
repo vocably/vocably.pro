@@ -8,18 +8,18 @@
       >language</mat-icon
     ></span
   >
-  <mat-select
-    *ngIf="languages.length > 1"
-    class="select"
-    [value]="value"
-    (valueChange)="onChange($event)"
-    [disabled]="disabled"
-    data-test="deck-selector"
-  >
-    <mat-option *ngFor="let language of languages" [value]="language">{{
-      language | language
-    }}</mat-option>
-  </mat-select>
+  <ng-container *ngIf="languages.length > 1">
+    <mat-select
+      value="{{ value }}"
+      (selectionChange)="onChange($event.value)"
+      [panelWidth]="null"
+      class="select"
+    >
+      @for (language of languages; track language) {
+      <mat-option [value]="language">{{ language | language }}</mat-option>
+      }
+    </mat-select>
+  </ng-container>
   <span
     *ngIf="languages.length === 1"
     style="margin-top: 2px"

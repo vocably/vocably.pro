@@ -4,6 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-expansion',
   templateUrl: './expansion.component.html',
   styleUrls: ['./expansion.component.scss'],
+  standalone: false,
 })
 export class ExpansionComponent implements OnInit {
   @Input() label: string = '';

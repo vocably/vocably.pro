@@ -21,6 +21,7 @@ let nextId = 0;
 
 @Directive({
   selector: '[appTooltipTriggerFor]',
+  standalone: false,
 })
 export class TooltipTriggerForDirective implements OnInit, AfterViewInit {
   private overlayRef!: OverlayRef;

@@ -11,6 +11,7 @@ import { Answer } from '../card/card.component';
   selector: 'app-srs-card-options',
   templateUrl: './card-options.component.html',
   styleUrls: ['./card-options.component.scss'],
+  standalone: false,
 })
 export class CardOptionsComponent implements OnInit {
   @Output() flip = new EventEmitter();

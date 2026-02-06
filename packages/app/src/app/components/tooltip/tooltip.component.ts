@@ -5,6 +5,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
   selector: 'app-tooltip',
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss'],
+  standalone: false,
   animations: [
     trigger('tooltip', [
       transition(':enter', [

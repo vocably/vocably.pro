@@ -14,6 +14,7 @@ import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/
   selector: 'app-edit-page',
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.scss'],
+  standalone: false,
 })
 export class EditPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

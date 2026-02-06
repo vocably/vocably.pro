@@ -11,6 +11,7 @@ import {
   selector: 'app-mnual-sign-in-success-page',
   templateUrl: './manual-sign-in-success-page.component.html',
   styleUrls: ['./manual-sign-in-success-page.component.scss'],
+  standalone: false,
 })
 export class ManualSignInSuccessPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

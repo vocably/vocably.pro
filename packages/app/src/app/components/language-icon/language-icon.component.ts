@@ -6,6 +6,7 @@ import { GoogleLanguage } from '@vocably/model';
   selector: 'app-language-icon',
   template: `<img [src]="url" alt="Flag" />`,
   styleUrls: ['./language-icon.component.scss'],
+  standalone: false,
 })
 export class LanguageIconComponent implements OnInit {
   @Input() language!: GoogleLanguage;

@@ -60,6 +60,7 @@ const onboardTargetLanguage = async (targetLanguage: string) => {
   selector: 'app-second-page',
   templateUrl: './second-page.component.html',
   styleUrls: ['./second-page.component.scss'],
+  standalone: false,
 })
 export class SecondPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

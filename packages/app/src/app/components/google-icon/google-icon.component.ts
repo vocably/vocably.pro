@@ -8,6 +8,7 @@ const googleLogoURL = 'assets/google.svg';
   selector: 'app-google-icon',
   templateUrl: './google-icon.component.html',
   styleUrls: ['./google-icon.component.scss'],
+  standalone: false,
 })
 export class GoogleIconComponent implements OnInit {
   constructor(

@@ -4,9 +4,9 @@
     Are you sure you want to delete your account? This action cannot be undone.
   </p>
 </div>
-<div mat-dialog-actions>
+<mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="true" data-test="yes-please">
     Yes
   </button>
   <button mat-button (click)="onNoClick()">No, thanks</button>
-</div>
+</mat-dialog-actions>

@@ -73,6 +73,7 @@ const detectImportDeck = async (): Promise<GoogleLanguage | ''> => {
   selector: 'app-import-page',
   templateUrl: './import-page.component.html',
   styleUrls: ['./import-page.component.scss'],
+  standalone: false,
 })
 export class ImportPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

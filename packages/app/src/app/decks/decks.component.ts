@@ -16,6 +16,7 @@ import { DeckListStoreService } from './deck-list-store.service';
 @Component({
   selector: 'app-decks',
   templateUrl: './decks.component.html',
+  standalone: false,
 })
 export class DecksComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
@@ -41,7 +42,7 @@ export class DecksComponent implements OnInit, OnDestroy {
           refreshService.unregister('decks-list');
           this.isLoading = false;
           if (!result.success) {
-            throw new Error(result.reason);
+            throw new Error((result as any).reason);
           }
           decksListStore.store(result.value as GoogleLanguage[]);
         },

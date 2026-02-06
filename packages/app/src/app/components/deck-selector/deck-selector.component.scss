@@ -1,4 +1,4 @@
-@import '~@vocably/styles/variables';
+@import '@vocably/styles/variables';
 
 :host {
   display: flex;
@@ -10,8 +10,10 @@
 
 .select {
   ::ng-deep {
-    .mat-select-min-line {
-      font-size: $v-small-font;
+    .mat-mdc-select-trigger {
+      gap: 0.5rem;
+      color: var(--emphasize-color);
+      font-weight: 400;
     }
   }
 }

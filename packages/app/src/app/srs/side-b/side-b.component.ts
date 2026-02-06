@@ -10,6 +10,7 @@ type DefinitionItem = {
   selector: '[app-side-b]',
   templateUrl: './side-b.component.html',
   styleUrls: ['./side-b.component.scss'],
+  standalone: false,
 })
 export class SideBComponent implements OnInit {
   private _definition: string = '';

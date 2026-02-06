@@ -20,6 +20,7 @@ export type GradeResult = {
   selector: 'app-srs-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
+  standalone: false,
   animations: [
     trigger('displayComponent', [
       transition(':enter', [

@@ -16,6 +16,7 @@ import { prepareColumn } from './prepareColumn';
   selector: 'app-export-page',
   templateUrl: './export-page.component.html',
   styleUrls: ['./export-page.component.scss'],
+  standalone: false,
 })
 export class ExportPageComponent implements OnInit, OnDestroy {
   public cards: CardItem[] = [];

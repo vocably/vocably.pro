@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-ios-extension',
   templateUrl: './ios-extension.component.html',
   styleUrls: ['./ios-extension.component.scss'],
+  standalone: false,
 })
 export class IosExtensionComponent implements OnInit {
   constructor() {}

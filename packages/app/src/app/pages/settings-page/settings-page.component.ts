@@ -8,6 +8,7 @@ import { DeleteAccountConfirmationComponent } from './delete-account-confirmatio
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss'],
+  standalone: false,
 })
 export class SettingsPageComponent implements OnInit {
   constructor(public dialog: MatDialog, public loader: LoaderService) {}

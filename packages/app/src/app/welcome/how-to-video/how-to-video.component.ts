@@ -6,6 +6,7 @@ import posthog from 'posthog-js';
   selector: 'app-how-to-video',
   templateUrl: './how-to-video.component.html',
   styleUrls: ['./how-to-video.component.scss'],
+  standalone: false,
 })
 export class HowToVideoComponent implements OnInit {
   @Input() public targetLanguage!: GoogleLanguage;

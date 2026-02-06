@@ -5,6 +5,7 @@ import { CardItem } from '@vocably/model';
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  standalone: false,
 })
 export class CardComponent implements OnInit {
   @Input() item!: CardItem;

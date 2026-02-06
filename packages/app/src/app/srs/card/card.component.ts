@@ -35,6 +35,7 @@ export type Answer = 'strong' | 'weak' | 'somewhat';
   selector: 'app-srs-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+  standalone: false,
   animations: [
     trigger('card', [
       state(

@@ -10,6 +10,7 @@ import { AuthService } from '../../auth.service';
   selector: 'app-hands-free-page',
   templateUrl: './hands-free-page.component.html',
   styleUrls: ['./hands-free-page.component.scss'],
+  standalone: false,
 })
 export class HandsFreePageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

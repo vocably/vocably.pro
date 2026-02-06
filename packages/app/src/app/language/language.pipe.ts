@@ -3,6 +3,7 @@ import { getFullLanguageName } from '@vocably/model';
 
 @Pipe({
   name: 'language',
+  standalone: false,
 })
 export class LanguagePipe implements PipeTransform {
   transform(code: string): string {

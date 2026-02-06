@@ -5,6 +5,7 @@ import posthog from 'posthog-js';
   selector: 'app-uninstall',
   templateUrl: './uninstall.component.html',
   styleUrls: ['./uninstall.component.scss'],
+  standalone: false,
 })
 export class UninstallComponent implements OnInit {
   constructor() {}

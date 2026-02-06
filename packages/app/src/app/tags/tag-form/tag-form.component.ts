@@ -1,8 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogRef,
-  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { isTagItem, NewTag, TagItem } from '@vocably/model';
 import { Subject, takeUntil } from 'rxjs';
@@ -31,6 +31,7 @@ export type TagFormAction = TagFormActionDelete | TagFormActionSave;
   selector: 'app-tag-form',
   templateUrl: './tag-form.component.html',
   styleUrls: ['./tag-form.component.scss'],
+  standalone: false,
 })
 export class TagFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

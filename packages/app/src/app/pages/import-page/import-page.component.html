@@ -181,10 +181,9 @@
                       Add tags
                     </button></app-tags-selector
                   >
-                  <mat-chip-list [selectable]="false">
+                  <mat-chip-set>
                     <mat-chip
                       *ngFor="let tag of selectedTags"
-                      [selectable]="false"
                       [disableRipple]="true"
                     >
                       {{ tag.data.title }}
@@ -196,7 +195,7 @@
                         <mat-icon>cancel</mat-icon>
                       </button>
                     </mat-chip>
-                  </mat-chip-list>
+                  </mat-chip-set>
                 </div>
                 <div class="mt-1 text-center">
                   <span *ngIf="isAnalyzing"

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   selector: 'app-import-failure-dialog',
   templateUrl: './import-failure-dialog.component.html',
   styleUrls: ['./import-failure-dialog.component.scss'],
+  standalone: false,
 })
 export class ImportFailureDialogComponent implements OnInit {
   constructor(

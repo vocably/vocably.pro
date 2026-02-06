@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   selector: 'app-mobile-app-encourager',
   templateUrl: './mobile-app-encourager.component.html',
   styleUrls: ['./mobile-app-encourager.component.scss'],
+  standalone: false,
 })
 export class MobileAppEncouragerComponent implements OnInit {
   loaded = true;

@@ -6,6 +6,7 @@ import { DeckListStoreService } from '../../deck-list-store.service';
   selector: 'app-no-decks-page',
   templateUrl: './no-decks-page.component.html',
   styleUrls: ['./no-decks-page.component.scss'],
+  standalone: false,
 })
 export class NoDecksPageComponent implements OnInit {
   constructor(

@@ -5,6 +5,7 @@ import { GoogleLanguage } from '@vocably/model';
   selector: 'app-generic-instruction',
   templateUrl: './generic-instruction.component.html',
   styleUrls: ['./generic-instruction.component.scss'],
+  standalone: false,
 })
 export class GenericInstructionComponent implements OnInit {
   @Input() sourceLanguage!: GoogleLanguage;
