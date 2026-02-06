@@ -1,8 +1,9 @@
 import { NavigationProp } from '@react-navigation/native';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { FC, useContext, useEffect, useRef, useState } from 'react';
 import { Animated, useWindowDimensions, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LanguagesContext } from '../languages/LanguagesContainer';
 import { SourceLanguageButton } from '../SourceLanguageButton';
 import { TargetLanguageButton } from '../TargetLanguageButton';
 import { Preset } from '../TranslationPreset/TranslationPresetContainer';
@@ -24,13 +25,7 @@ export const GenerateTranslationPresetForm: FC<Props> = ({
   languagePairs,
 }) => {
   const theme = useTheme();
-
-  const clickReverse = useCallback(() => {
-    onChange({
-      ...preset,
-      isReverse: !preset.isReverse,
-    });
-  }, [preset]);
+  const { languages: existingDeckLanguages } = useContext(LanguagesContext);
 
   const { width: windowWidth } = useWindowDimensions();
   const [presetContainerWidth, setPresetContainerWidth] = useState(
@@ -105,6 +100,7 @@ export const GenerateTranslationPresetForm: FC<Props> = ({
           onChange={onChange}
           languagePairs={languagePairs}
           compact={true}
+          existingLanguages={existingDeckLanguages}
         />
         <Icon name="menu-right" size={16} color={theme.colors.onBackground} />
         <TargetLanguageButton

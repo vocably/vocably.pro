@@ -1,11 +1,4 @@
 import {
-  fetchStudyStreak,
-  getUserMetadata as apiGetUserMetadata,
-  getUserStaticMetadata as apiGetUserStaticMetadata,
-  putStudyStreak,
-  saveUserMetadata as apiSaveUserMetadata,
-} from '@vocably/api';
-import {
   defaultStudyStreak,
   defaultUserMetadata,
   defaultUserStaticMetadata,
@@ -20,8 +13,15 @@ import { dateToString } from '@vocably/sulna';
 import { createContext, FC, PropsWithChildren, useEffect, useRef } from 'react';
 import { AppState } from 'react-native';
 import { getTimeZone } from 'react-native-localize';
+import {
+  fetchStudyStreak,
+  getUserMetadata as apiGetUserMetadata,
+  getUserStaticMetadata as apiGetUserStaticMetadata,
+  putStudyStreak,
+  saveUserMetadata as apiSaveUserMetadata,
+} from './api';
 import * as asyncAppStorage from './asyncAppStorage';
-import { getCurrentUserSub } from './getCurrentUserSub';
+import { getStorageId } from './getStorageId';
 import { Loader } from './loaders/Loader';
 import { useAsync } from './useAsync';
 
@@ -44,7 +44,7 @@ export const UserMetadataContext = createContext<UserMetadataContextValues>({
 });
 
 const loadUserMetadataFromStorage = async (): Promise<UserMetadata> => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return defaultUserMetadata;
   }
@@ -68,7 +68,7 @@ const loadUserMetadataFromStorage = async (): Promise<UserMetadata> => {
 };
 
 const saveUserMetadataToStorage = async (userMetadata: UserMetadata) => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return;
   }
@@ -79,7 +79,7 @@ const saveUserMetadataToStorage = async (userMetadata: UserMetadata) => {
 
 const loadUserStaticMetadataFromStorage =
   async (): Promise<UserStaticMetadata> => {
-    const userSubResult = await getCurrentUserSub();
+    const userSubResult = await getStorageId();
     if (!userSubResult.success) {
       return defaultUserStaticMetadata;
     }
@@ -106,7 +106,7 @@ const loadUserStaticMetadataFromStorage =
 const saveUserStaticMetadataToStorage = async (
   userStaticMetadata: UserStaticMetadata
 ) => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return;
   }
@@ -116,7 +116,7 @@ const saveUserStaticMetadataToStorage = async (
 };
 
 export const loadStudyStreakFromStorage = async (): Promise<StudyStreak> => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return defaultStudyStreak;
   }
@@ -141,7 +141,7 @@ export const loadStudyStreakFromStorage = async (): Promise<StudyStreak> => {
 };
 
 const saveStudyStreakToStorage = async (studyStreak: StudyStreak) => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return;
   }

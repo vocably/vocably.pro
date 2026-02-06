@@ -2,7 +2,6 @@ import { FC } from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { View } from 'react-native';
-import { AccountScreen } from './AccountScreen';
 import { MainMenuHeader } from './MainMenuHeader';
 import { SettingsScreen } from './SettingsScreen';
 import { StudySettingsScreen } from './StudySettingsScreen';
@@ -29,15 +28,6 @@ export const SettingsStack: FC = () => {
           }}
           component={SettingsScreen}
         />
-        <Stack.Screen
-          options={{
-            header: MainMenuHeader,
-            title: 'Your account',
-          }}
-          name="AccountMenu"
-          component={AccountScreen}
-        />
-
         <Stack.Screen
           options={{
             header: MainMenuHeader,

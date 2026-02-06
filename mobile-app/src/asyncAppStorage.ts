@@ -44,3 +44,22 @@ export const clearAll = async (): Promise<void> => {
   );
   await AsyncStorage.multiRemove(allKeys);
 };
+
+export const getAll = async (): Promise<Record<string, string>> => {
+  if (Platform.OS === 'ios') {
+    return iosGroupStorage.getAllValues();
+  }
+
+  const allKeys = await AsyncStorage.getAllKeys();
+  let allValues: Record<string, string> = {};
+
+  for (const key of allKeys) {
+    const item = await AsyncStorage.getItem(key);
+    if (item === null) {
+      continue;
+    }
+    allValues[key] = item;
+  }
+
+  return allValues;
+};

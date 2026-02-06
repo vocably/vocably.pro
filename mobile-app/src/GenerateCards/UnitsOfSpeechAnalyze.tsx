@@ -1,4 +1,3 @@
-import { analyzeUnitsOfSpeech } from '@vocably/api';
 import {
   AnalysisItem,
   CardItem,
@@ -11,6 +10,7 @@ import { chunk } from 'lodash-es';
 import React, { FC, useEffect, useState } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import { Text } from 'react-native-paper';
+import { analyzeUnitsOfSpeech } from '../api';
 import { Thinking } from '../Chat/Thinking';
 import { Deck } from '../languageDeck/useLanguageDeck';
 import { AnalyzeResult } from '../LookUpScreen/AnalyzeResult';

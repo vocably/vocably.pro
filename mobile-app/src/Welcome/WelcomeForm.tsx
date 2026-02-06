@@ -65,6 +65,7 @@ export const WelcomeForm: FC<Props> = () => {
               onChange={onSourceLanguageChange}
               languagePairs={translationPresetState.languagePairs}
               emptyText="Select"
+              existingLanguages={languages}
             />
           </View>
         </View>

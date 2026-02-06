@@ -20,11 +20,15 @@ export type CustomerInfoStatus =
       customerInformation: CustomerInfo;
     };
 
-export const CustomerInfoContext = createContext<
-  CustomerInfoStatus & { refresh: () => Promise<unknown> }
->({
+type CustomerInfoContext = CustomerInfoStatus & {
+  refresh: () => Promise<unknown>;
+  restore: () => Promise<unknown>;
+};
+
+export const CustomerInfoContext = createContext<CustomerInfoContext>({
   status: 'undefined',
   refresh: async () => null,
+  restore: async () => null,
 });
 
 export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
@@ -38,9 +42,15 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     });
 
   useEffect(() => {
-    if (authStatus['status'] !== 'logged-in') {
+    if (
+      authStatus['status'] !== 'logged-in' &&
+      authStatus['status'] !== 'anonymous-logged-in'
+    ) {
       return;
     }
+
+    const customerId =
+      authStatus['status'] === 'logged-in' ? authStatus.email : authStatus.id;
 
     const customerInfoRefreshed = (customerInfo: CustomerInfo) => {
       setCustomerInfoStatus({
@@ -50,7 +60,7 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     };
 
     Purchases.addCustomerInfoUpdateListener(customerInfoRefreshed);
-    Purchases.logIn(authStatus.email).then(({ customerInfo }) => {
+    Purchases.logIn(customerId).then(({ customerInfo }) => {
       setCustomerInfoStatus({
         status: 'loaded',
         customerInformation: customerInfo,
@@ -75,11 +85,24 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     }
   };
 
+  const restore = async () => {
+    try {
+      const customerInformation = await Purchases.restorePurchases();
+      setCustomerInfoStatus({
+        status: 'loaded',
+        customerInformation,
+      });
+    } catch (e) {
+      console.error(`Can't restore customer purchases`, e);
+    }
+  };
+
   return (
     <CustomerInfoContext.Provider
       value={{
         ...customerInfoStatus,
         refresh,
+        restore,
       }}
     >
       {children}

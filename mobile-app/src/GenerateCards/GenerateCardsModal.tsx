@@ -1,5 +1,4 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { generateUnitsOfSpeech } from '@vocably/api';
 import {
   GoogleLanguage,
   isGoogleLanguage,
@@ -12,6 +11,7 @@ import { Platform, ScrollView, Text, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Appbar, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { generateUnitsOfSpeech } from '../api';
 import { ChatTextInput } from '../Chat/ChatTextInput';
 import { Message } from '../Chat/Message';
 import { Thinking } from '../Chat/Thinking';

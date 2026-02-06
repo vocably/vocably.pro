@@ -1,9 +1,3 @@
-import {
-  deleteLanguageDeck,
-  listLanguages,
-  loadLanguageDeck,
-  saveLanguageDeck,
-} from '@vocably/api';
 import { makeCreate } from '@vocably/crud';
 import {
   CardItem,
@@ -23,6 +17,12 @@ import React, {
   useState,
 } from 'react';
 import { AppState } from 'react-native';
+import {
+  deleteLanguageDeck,
+  listLanguages,
+  loadLanguageDeck,
+  saveLanguageDeck,
+} from '../api';
 import * as asyncAppStorage from '../asyncAppStorage';
 import {
   applyTransformation,
@@ -30,7 +30,7 @@ import {
   LanguageDeckTransformation,
 } from '../deckTransformations';
 import { Error } from '../Error';
-import { getCurrentUserSub } from '../getCurrentUserSub';
+import { getStorageId, isAnonymousUser } from '../getStorageId';
 import { Loader } from '../loaders/Loader';
 import { useAsync } from '../useAsync';
 import { useLanguageTransformations } from './useLanguageTransformations';
@@ -40,7 +40,7 @@ const selectedLanguageStorageKey = 'languagesContainerSelectedLanguage';
 const loadSelectedLanguageStorage = (): Promise<string> =>
   asyncAppStorage.getItem(selectedLanguageStorageKey).then((res) => res ?? '');
 
-const saveSelectedLanguageToStorage = (language: string) =>
+export const saveSelectedLanguageToStorage = (language: string) =>
   asyncAppStorage.setItem(selectedLanguageStorageKey, language);
 
 export type LanguageContainerDeck = {
@@ -50,7 +50,7 @@ export type LanguageContainerDeck = {
   noTags: boolean;
 };
 
-type DecksCollection = Record<string, LanguageContainerDeck>;
+export type DecksCollection = Record<string, LanguageContainerDeck>;
 
 const createDefaultLanguageDeck = (language: string): LanguageDeck => ({
   language,
@@ -58,22 +58,22 @@ const createDefaultLanguageDeck = (language: string): LanguageDeck => ({
   tags: [],
 });
 
+export const createDefaultLanguageContainerDeck = (
+  language: string
+): LanguageContainerDeck => ({
+  status: 'initial',
+  deck: createDefaultLanguageDeck(language),
+  selectedTags: [],
+  noTags: false,
+});
+
 const loadDecksFromStorage = async (): Promise<DecksCollection> => {
-  const userSubResult = await getCurrentUserSub();
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return {};
   }
 
   const key = `${userSubResult.value}.languageDecks`;
-
-  // ToDo: remove this after a while
-  const oldKey = 'languageDecks';
-  const oldDecks = await asyncAppStorage.getItem(oldKey);
-  if (oldDecks) {
-    await asyncAppStorage.removeItem(oldKey);
-    await asyncAppStorage.setItem(key, oldDecks);
-  }
-  // EndOfToDo
 
   const decks = await asyncAppStorage.getItem(key);
   if (!decks) {
@@ -83,8 +83,8 @@ const loadDecksFromStorage = async (): Promise<DecksCollection> => {
   return JSON.parse(decks);
 };
 
-const saveDecksToStorage = async (decks: DecksCollection) => {
-  const userSubResult = await getCurrentUserSub();
+export const saveDecksToStorage = async (decks: DecksCollection) => {
+  const userSubResult = await getStorageId();
   if (!userSubResult.success) {
     return;
   }
@@ -210,8 +210,22 @@ export const LanguagesContainer: FC<Props> = ({
     });
   };
 
-  const deleteLanguage = async (language: string) =>
-    deleteLanguageDeck(language).then(async (result) => {
+  const deleteLanguage = async (language: string) => {
+    const isAnonymous = await isAnonymousUser();
+
+    if (isAnonymous) {
+      if (decks.status !== 'loaded') {
+        return;
+      }
+
+      const { [language]: _, ...newDecks } = decks.value;
+      await setDecks(newDecks);
+      await deleteTransformations(language);
+
+      return;
+    }
+
+    return deleteLanguageDeck(language).then(async (result) => {
       if (result.success === false) {
         return result;
       }
@@ -226,6 +240,7 @@ export const LanguagesContainer: FC<Props> = ({
 
       return result;
     });
+  };
 
   const isSyncing = useRef(false);
 
@@ -366,6 +381,32 @@ export const LanguagesContainer: FC<Props> = ({
         success: false,
         reason: 'Unable to add new language because it is already added.',
       };
+    }
+
+    const isAnonymous = await isAnonymousUser();
+
+    if (isAnonymous) {
+      const emptyDeck: LanguageDeck = {
+        language,
+        cards: [],
+        tags: [],
+      };
+
+      const setDecksResult = await setDecks({
+        ...decks.value,
+        [language]: {
+          status: 'loaded',
+          deck: emptyDeck,
+          selectedTags: [],
+          noTags: false,
+        },
+      });
+
+      if (!setDecksResult.success) {
+        return setDecksResult;
+      }
+
+      return selectLanguage(language);
     }
 
     const loadResult = await loadLanguageDeck(language);

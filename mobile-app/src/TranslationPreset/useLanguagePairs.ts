@@ -21,7 +21,7 @@ const loadLanguagePairs = async (): Promise<LanguagePairs> => {
     });
 };
 
-const storeLanguagePairs = async (languagePairs: LanguagePairs) => {
+export const storeLanguagePairs = async (languagePairs: LanguagePairs) => {
   return asyncAppStorage.setItem(
     'languagePairs',
     JSON.stringify(languagePairs)

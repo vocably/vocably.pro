@@ -11,7 +11,9 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { Alert } from 'react-native';
 import * as asyncAppStorage from '../asyncAppStorage';
+import { clearAll, getAll } from '../asyncAppStorage';
 import { Sentry } from '../BetterSentry';
 import { facility } from '../facility';
 import { forcefulSignOut } from '../forcefulSignOut';
@@ -36,6 +38,10 @@ export type AuthStatus =
       status: 'not-logged-in';
     }
   | {
+      status: 'anonymous-logged-in';
+      id: string;
+    }
+  | {
       status: 'logged-in';
       sub: string;
       email: string;
@@ -49,6 +55,7 @@ type AuthErrorCode =
   | 'FETCHED_SESSION_HAS_NO_TOKENS';
 
 export type ExtendedAuthStatus = {
+  createAnonymousUser: () => Promise<void>;
   error: AuthErrorCode | null;
 } & {
   login: LoginStatus;
@@ -60,6 +67,7 @@ export const AuthContext = createContext<ExtendedAuthStatus>({
     reason: 'undefined',
   },
   error: null,
+  createAnonymousUser: async () => {},
 });
 
 const getAttributes = async (): Promise<
@@ -139,6 +147,40 @@ export const AuthContainer: FC<{
   const [error, setError] = useState<AuthErrorCode | null>(null);
 
   const posthog = usePostHog();
+
+  const getIdentityId = async () => {
+    try {
+      const { identityId } = await fetchAuthSession();
+      return identityId;
+    } catch (err) {
+      console.error('Error fetching session:', err);
+    }
+  };
+
+  const createAnonymousUser = async () => {
+    const id = await getIdentityId();
+
+    if (id === undefined) {
+      Alert.alert(
+        'Unable to create anonymous user',
+        'A critical error while creating an anonymous user occurred.'
+      );
+      Sentry.captureException(
+        new Error('Unable to create anonymous user'),
+        await getAll()
+      );
+      await clearAll();
+      await setAuthStatus({
+        status: 'undefined',
+      });
+      return;
+    }
+
+    await setAuthStatus({
+      status: 'anonymous-logged-in',
+      id: id,
+    });
+  };
 
   const defineAuthStatus = async () => {
     const currentUserResult = await resultify(getCurrentUser(), {
@@ -229,9 +271,18 @@ export const AuthContainer: FC<{
       });
     }
 
+    if (authStatusResult.value.status === 'anonymous-logged-in') {
+      posthog.capture('$set', {
+        $set: {
+          anonymousId: authStatusResult.value.id,
+        },
+      });
+    }
+
     if (
       authStatusResult.value.status !== 'logged-in' &&
-      authStatusResult.value.status !== 'not-logged-in'
+      authStatusResult.value.status !== 'not-logged-in' &&
+      authStatusResult.value.status !== 'anonymous-logged-in'
     ) {
       defineAuthStatus();
     }
@@ -263,6 +314,7 @@ export const AuthContainer: FC<{
       }
 
       if (event.payload.event === 'signedOut') {
+        posthog.reset();
         setError(null);
         await setAuthStatus({
           status: 'undefined',
@@ -335,6 +387,7 @@ export const AuthContainer: FC<{
   return (
     <AuthContext.Provider
       value={{
+        createAnonymousUser,
         ...authStatusResult.value,
         login: loginStatusResult.value,
         error,

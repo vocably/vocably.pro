@@ -47,6 +47,7 @@ export const ListItem: FC<Props> = ({
           borderBottomLeftRadius:
             order === 'single' || order === 'last' ? BORDER_RADIUS : 0,
           paddingVertical: 16,
+          opacity: disabled ? 0.4 : 1,
         },
         style,
       ]}

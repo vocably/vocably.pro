@@ -1,8 +1,16 @@
 import { NavigationProp } from '@react-navigation/native';
-import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import {
+  FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Animated, useWindowDimensions, View } from 'react-native';
 import { IconButton, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LanguagesContext } from '../languages/LanguagesContainer';
 import { SourceLanguageButton } from '../SourceLanguageButton';
 import { TargetLanguageButton } from '../TargetLanguageButton';
 import { Preset } from '../TranslationPreset/TranslationPresetContainer';
@@ -24,6 +32,8 @@ export const TranslationPresetForm: FC<Props> = ({
   languagePairs,
 }) => {
   const theme = useTheme();
+
+  const { languages: existingDeckLanguages } = useContext(LanguagesContext);
 
   const clickReverse = useCallback(() => {
     onChange({
@@ -133,6 +143,7 @@ export const TranslationPresetForm: FC<Props> = ({
           }}
         >
           <SourceLanguageButton
+            existingLanguages={existingDeckLanguages}
             navigation={navigation}
             preset={preset}
             onChange={onChange}

@@ -1,4 +1,5 @@
 type ApiOptions = {
+  publicBaseUrl: string;
   baseUrl: string;
   region: string;
   cardsBucket: string;
@@ -6,6 +7,7 @@ type ApiOptions = {
 };
 
 export let apiOptions: ApiOptions = {
+  publicBaseUrl: '',
   baseUrl: '',
   region: '',
   cardsBucket: '',

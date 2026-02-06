@@ -23,6 +23,7 @@ export const environmentLocal = {
     },
   },
   api: {
+    publicBaseUrl: 'https://public-api.dev.env.vocably.pro',
     baseUrl: 'https://api.dev.env.vocably.pro',
     region: 'eu-central-1',
     cardsBucket: 'vocably-dev-cards',

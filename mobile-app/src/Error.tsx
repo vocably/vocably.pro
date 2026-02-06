@@ -1,15 +1,8 @@
+import { signOut } from '@aws-amplify/auth';
 import { FC, PropsWithChildren, useCallback, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 32,
-  },
-});
+import { clearAll } from './asyncAppStorage';
 
 type Error = FC<
   PropsWithChildren<{
@@ -33,8 +26,38 @@ export const Error: Error = ({ children, onRetry }) => {
       }, 1000);
     });
   }, [onRetry, nRetries, nRetriesSet]);
+
+  const clearStorageAndLogOut = async () => {
+    Alert.alert(
+      'Clear the app data?',
+      'Clearing app data will permanently delete all progress for unregistered users. Proceed?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: async () => {
+            await clearAll();
+            await signOut();
+          },
+          style: 'destructive',
+        },
+      ]
+    );
+  };
+
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        paddingHorizontal: 32,
+        gap: 16,
+      }}
+    >
       <Text style={{ textAlign: 'center' }}>{children}</Text>
       {onRetry && (
         <Button
@@ -46,6 +69,9 @@ export const Error: Error = ({ children, onRetry }) => {
           Try {nRetries >= 2 ? 'harder!' : 'again'}
         </Button>
       )}
+      <Button mode="text" onPress={clearStorageAndLogOut}>
+        Clear the app data and sign out
+      </Button>
     </View>
   );
 };

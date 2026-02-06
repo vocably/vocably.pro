@@ -1,10 +1,15 @@
-import { API_BASE_URL, API_CARDS_BUCKET, API_REGION } from '@env';
+import {
+  API_BASE_URL,
+  API_CARDS_BUCKET,
+  API_REGION,
+  PUBLIC_API_BASE_URL,
+} from '@env';
 import { configureApi } from '@vocably/api';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthContainer } from './auth/AuthContainer';
-import { Login } from './auth/Login';
+import { AuthFlow } from './auth/AuthFlow';
 import { configurePurchases } from './configurePurchases';
 import { CustomerInfoContainer } from './CustomerInfoContainer';
 import { LanguagesContainer } from './languages/LanguagesContainer';
@@ -17,6 +22,7 @@ import { TranslationPresetContainer } from './TranslationPreset/TranslationPrese
 import { UserMetadataContainer } from './UserMetadataContainer';
 
 configureApi({
+  publicBaseUrl: PUBLIC_API_BASE_URL,
   baseUrl: API_BASE_URL,
   region: API_REGION,
   cardsBucket: API_CARDS_BUCKET,
@@ -34,7 +40,7 @@ const App = () => {
         <NavigationContainer>
           <PostHogProvider>
             <AuthContainer>
-              <Login>
+              <AuthFlow>
                 <CustomerInfoContainer>
                   <NotificationsContainer>
                     <UserMetadataContainer>
@@ -48,7 +54,7 @@ const App = () => {
                     </UserMetadataContainer>
                   </NotificationsContainer>
                 </CustomerInfoContainer>
-              </Login>
+              </AuthFlow>
             </AuthContainer>
           </PostHogProvider>
         </NavigationContainer>

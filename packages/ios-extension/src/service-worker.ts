@@ -13,6 +13,7 @@ registerServiceWorker({
     storage,
   },
   api: {
+    publicBaseUrl: process.env.PUBLIC_API_BASE_URL,
     baseUrl: process.env.API_BASE_URL,
     region: process.env.API_REGION,
     cardsBucket: process.env.API_CARDS_BUCKET,

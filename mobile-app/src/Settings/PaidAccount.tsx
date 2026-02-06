@@ -4,7 +4,6 @@ import { Linking, StyleProp, View, ViewStyle } from 'react-native';
 import { Button, Dialog, Portal, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { mobileStoreName, mobileStoreUrl } from '../mobilePlatform';
-import { CustomSurface } from '../ui/CustomSurface';
 
 type Props = {
   style?: StyleProp<ViewStyle>;
@@ -18,32 +17,30 @@ export const PaidAccount: FC<Props> = ({ style }) => {
 
   return (
     <>
-      <CustomSurface style={style}>
-        <View style={{ padding: 16 }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              gap: 16,
-              alignItems: 'center',
+      <View style={{ padding: 16 }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            gap: 16,
+            alignItems: 'center',
+          }}
+        >
+          <Icon
+            name={'crown-outline'}
+            size={24}
+            color={theme.colors.onSurface}
+          />
+          <Text style={{ fontSize: 16 }}>You are a Premium user</Text>
+          <Button
+            onPress={() => {
+              posthog.capture('premiumExplanationClicked');
+              setExplanationVisible(true);
             }}
           >
-            <Icon
-              name={'crown-outline'}
-              size={24}
-              color={theme.colors.onSurface}
-            />
-            <Text style={{ fontSize: 16 }}>You are a Premium user</Text>
-            <Button
-              onPress={() => {
-                posthog.capture('premiumExplanationClicked');
-                setExplanationVisible(true);
-              }}
-            >
-              Why?
-            </Button>
-          </View>
+            Why?
+          </Button>
         </View>
-      </CustomSurface>
+      </View>
       <Portal>
         <Dialog visible={explanationVisible}>
           <Dialog.Content style={{ gap: 12, paddingRight: 32 }}>
