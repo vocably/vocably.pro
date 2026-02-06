@@ -111,6 +111,8 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
 
   const marginBottom = 24;
 
+  const isRegisteredUser = authStatus === 'logged-in';
+
   // @ts-ignore
   return (
     <CustomScrollView
@@ -136,12 +138,12 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
           size={24}
         />
         <Text style={{ fontSize: 16 }}>
-          {authStatus === 'logged-in' ? userEmail : 'Not registered yet.'}
+          {isRegisteredUser ? userEmail : 'Not registered yet.'}
         </Text>
       </View>
 
       <CustomSurface style={{ marginBottom: marginBottom }}>
-        {authStatus === 'anonymous-logged-in' && (
+        {!isRegisteredUser && (
           <>
             <ListItem
               order="first"
@@ -153,7 +155,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
           </>
         )}
         <Subscription
-          isInGroup={authStatus === 'anonymous-logged-in'}
+          isInGroup={!isRegisteredUser}
           isRefreshing={customerInfoRefreshing}
           onRefresh={customerInfoRefresh}
         />
@@ -174,17 +176,30 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
               leftIcon="bell-outline"
               title="Study reminders"
               onPress={goToStudyReminders}
+              disabled={!isRegisteredUser}
             />
           </CustomSurface>
           <View style={{ paddingHorizontal: 16, marginBottom: 32, gap: 8 }}>
-            <Text>
-              Study reminders are sent once a day to remind you to review your{' '}
-              <Text style={{ fontWeight: 'bold' }}>{languageName}</Text> cards.
-            </Text>
-            {languages.length > 1 && (
+            {isRegisteredUser && (
+              <>
+                <Text>
+                  Study reminders are sent once a day to remind you to review
+                  your{' '}
+                  <Text style={{ fontWeight: 'bold' }}>{languageName}</Text>{' '}
+                  cards.
+                </Text>
+                {languages.length > 1 && (
+                  <Text>
+                    Every language has it's own reminder settings available in
+                    the "Edit deck" screen.
+                  </Text>
+                )}
+              </>
+            )}
+            {!isRegisteredUser && (
               <Text>
-                Every language has it's own reminder settings available in the
-                "Edit deck" screen.
+                Study reminders are temporarily disabled for unregistered users.
+                I am working to resolve this.
               </Text>
             )}
           </View>
@@ -206,13 +221,14 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
         </Text>
       </View>
 
-      {authStatus === 'logged-in' && (
+      {isRegisteredUser && (
         <CustomSurface style={{ marginBottom: marginBottom }}>
           <ListItem
             order="first"
             title="Sign out"
             onPress={onSignOut}
             leftIcon="logout"
+            rightIcon=""
           />
           <Divider />
           <ListItem
@@ -226,7 +242,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
         </CustomSurface>
       )}
 
-      {authStatus === 'anonymous-logged-in' && (
+      {!isRegisteredUser && (
         <CustomSurface style={{ marginBottom: marginBottom }}>
           <ListItem
             title="Delete my data"

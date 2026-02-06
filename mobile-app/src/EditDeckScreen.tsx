@@ -1,8 +1,9 @@
 import { NavigationProp } from '@react-navigation/native';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { View } from 'react-native';
 import { Divider, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AuthContext } from './auth/AuthContainer';
 import { DeleteDeckButton } from './DeleteDeckButton';
 import { useSelectedDeck } from './languageDeck/useSelectedDeck';
 import { CustomScrollView } from './ui/CustomScrollView';
@@ -18,6 +19,9 @@ export const EditDeckScreen: FC<Props> = ({ navigation }) => {
   const languageName = useCurrentLanguageName();
   const deck = useSelectedDeck({ autoReload: false });
   const theme = useTheme();
+  const { status: authStatus } = useContext(AuthContext);
+
+  const isRegisteredUser = authStatus === 'logged-in';
 
   return (
     <CustomScrollView>
@@ -58,13 +62,22 @@ export const EditDeckScreen: FC<Props> = ({ navigation }) => {
           leftIcon="bell-outline"
           rightIcon="menu-right"
           order="last"
+          disabled={!isRegisteredUser}
         ></ListItem>
       </CustomSurface>
       <View style={{ paddingHorizontal: 16, marginBottom: 32, gap: 8 }}>
-        <Text>
-          Study reminders are sent once a day to remind you to review your{' '}
-          <Text style={{ fontWeight: 'bold' }}>{languageName}</Text> cards.
-        </Text>
+        {isRegisteredUser && (
+          <Text>
+            Study reminders are sent once a day to remind you to review your{' '}
+            <Text style={{ fontWeight: 'bold' }}>{languageName}</Text> cards.
+          </Text>
+        )}
+        {!isRegisteredUser && (
+          <Text>
+            Study reminders are temporarily disabled for unregistered users. I
+            am working to resolve this.
+          </Text>
+        )}
       </View>
 
       <CustomSurface style={{ marginBottom: 32 }}>
