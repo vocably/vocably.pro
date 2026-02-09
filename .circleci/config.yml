@@ -5,12 +5,9 @@ main_only: &main_only
       only: main
 
 parameters:
-  killDev:
-    type: boolean
-    default: false
-  resurrectDev:
-    type: boolean
-    default: false
+  action:
+    enum: ['none', 'kill dev', 'resurrect dev', 'kill prod', 'resurrect prod']
+    default: 'none'
 
 new_version_only: &new_version_only
   filters:
@@ -88,15 +85,19 @@ jobs:
 workflows:
   version: 2
   killDev:
-    when: << pipeline.parameters.killDev >>
+    when:
+      equal: ['kill dev', << pipeline.parameters.action >>]
     jobs:
       - killDev
   resurrectDev:
-    when: << pipeline.parameters.resurrectDev >>
+    when:
+      equal: ['resurrect dev', << pipeline.parameters.action >>]
     jobs:
       - resurrectDev
 
   bumpNewVersion:
+    unless:
+      equal: ['none', << pipeline.parameters.action >>]
     max_auto_reruns: 3
     jobs:
       - bumpNewVersion:
