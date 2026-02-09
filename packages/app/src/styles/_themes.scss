@@ -24,6 +24,8 @@
   // Letter spacing on buttons
   --mdc-text-button-label-text-tracking: 0;
 
+  --mat-option-selected-state-label-text-color: var(--color-emphasize);
+
   @media (max-width: $md) {
     --container-padding: #{$container-padding-sm};
   }
