@@ -9,7 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "emitBOM": true,
-    "charset": "utf8",
     "strict": true
   },
   "include": ["src/index.ts"],

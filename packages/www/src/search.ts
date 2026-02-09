@@ -92,7 +92,7 @@ updateRepoUrls(initialSearchValues.sourceLanguage);
 searchContainer.appendChild(searchForm);
 searchContainer.appendChild(resultsContainer);
 
-searchForm.addEventListener('valuesChange', (e) => {
+searchForm.addEventListener('valuesChange', (e: CustomEvent<SearchValues>) => {
   if (isSearchValues(e.detail)) {
     searchForm.values = e.detail;
   }
@@ -173,21 +173,27 @@ const loadSearchValues = async (searchValues: SearchValues) => {
   });
 };
 
-searchForm.addEventListener('formSubmit', async (e) => {
-  if (isSearchValues(e.detail)) {
-    saveSearchValues(e.detail);
+searchForm.addEventListener(
+  'formSubmit',
+  async (e: CustomEvent<SearchValues>) => {
+    if (isSearchValues(e.detail)) {
+      saveSearchValues(e.detail);
+    }
+
+    await loadSearchValues(e.detail);
   }
+);
 
-  await loadSearchValues(e.detail);
-});
+searchForm.addEventListener(
+  'valuesChange',
+  async (e: CustomEvent<SearchValues>) => {
+    if (!isSearchValues(e.detail)) {
+      return;
+    }
 
-searchForm.addEventListener('valuesChange', async (e) => {
-  if (!isSearchValues(e.detail)) {
-    return;
+    updateRepoUrls(e.detail.sourceLanguage);
   }
-
-  updateRepoUrls(e.detail.sourceLanguage);
-});
+);
 
 if (searchForm.values.text.length) {
   loadSearchValues(searchForm.values).then();

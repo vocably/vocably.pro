@@ -32,8 +32,8 @@
   <ng-container *ngIf="!needsOnboarding">
     <vocably-search-form
       class="block"
-      (valuesChange)="onSearchValuesChanged($event.detail)"
-      (formSubmit)="onSearchFormSubmit($event.detail)"
+      (valuesChange)="onSearchValuesChanged($any($event).detail)"
+      (formSubmit)="onSearchFormSubmit($any($event).detail)"
       [values]="searchValues"
       [loading]="isSearching"
       [hideHint]="isSearching || !!searchResult"

@@ -58,6 +58,7 @@ AUTH_USER_POOL_ID="${aws_cognito_user_pool.users.id}"
 AUTH_USER_POOL_WEB_CLIENT_ID="${aws_cognito_user_pool_client.client.id}"
 APP_BASE_URL="${local.app_url}"
 API_BASE_URL="${local.api_base_url}"
+PUBLIC_API_BASE_URL="${local.public_api_base_url}"
 API_REGION="${data.aws_region.current.name}"
 API_CARDS_BUCKET="${aws_s3_bucket.cards.bucket}"
 CONTENT_SCRIPT_EXCLUDED_MATCHES='${var.extension_content_script_excluded_matches}'
