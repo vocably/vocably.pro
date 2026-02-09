@@ -11,6 +11,7 @@ import {
   selector: 'app-membership-selector',
   templateUrl: './membership-selector.component.html',
   styleUrls: ['./membership-selector.component.scss'],
+  standalone: false,
 })
 export class MembershipSelectorComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

@@ -22,6 +22,7 @@ import { DeckStoreService } from '../deck-store.service';
   selector: 'app-selected-deck',
   templateUrl: './selected-deck.component.html',
   styleUrls: ['./selected-deck.component.scss'],
+  standalone: false,
 })
 export class SelectedDeckComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

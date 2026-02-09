@@ -1,19 +1,20 @@
-<div class="text-right" style="margin-top: -0.75rem; margin-right: -0.75rem">
-  <button class="unstyled" mat-dialog-close><mat-icon>close</mat-icon></button>
-</div>
-<h1>I don't know</h1>
+<h1 mat-dialog-title>I don't know</h1>
+<mat-dialog-content>
+  <p>Possible reasons are:</p>
 
-<p>Possible reasons are:</p>
+  <ul class="mb-1">
+    <li>You are one of the first active users of Vocably</li>
+    <li>I like you</li>
+  </ul>
 
-<ul class="mb-1">
-  <li>You are one of the first active users of Vocably</li>
-  <li>I like you</li>
-</ul>
+  <p>Anyway, enjoy your Premium.</p>
 
-<p>Anyway, enjoy your Premium.</p>
-
-<p *ngIf="this.platform">
-  Want to help this project? Rate it on
-  <a [href]="this.platform.url" target="_blank">{{ this.platform.name }}</a
-  >.
-</p>
+  <p *ngIf="this.platform">
+    Want to help this project? Rate it on
+    <a [href]="this.platform.url" target="_blank">{{ this.platform.name }}</a
+    >.
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="button" [mat-dialog-close]="true">Close</button>
+</mat-dialog-actions>

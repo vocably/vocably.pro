@@ -9,6 +9,7 @@ export type LoaderComponentOptions = {
   selector: 'app-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss'],
+  standalone: false,
 })
 export class LoaderComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: LoaderComponentOptions) {}

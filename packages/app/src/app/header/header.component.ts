@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: false,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

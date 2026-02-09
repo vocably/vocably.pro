@@ -46,7 +46,7 @@ export const nodeFetchS3File = async (
   }
 
   const stream = response.Body as Readable;
-  const chunks: Buffer[] = [];
+  const chunks: Uint8Array[] = [];
 
   for await (const chunk of stream) {
     chunks.push(chunk);

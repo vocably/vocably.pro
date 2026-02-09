@@ -16,6 +16,7 @@ import { map, Observable, startWith, Subject } from 'rxjs';
   selector: 'app-language-input',
   templateUrl: './language-input.component.html',
   styleUrls: ['./language-input.component.scss'],
+  standalone: false,
 })
 export class LanguageInputComponent implements OnInit, OnDestroy, OnChanges {
   private destroy$ = new Subject();

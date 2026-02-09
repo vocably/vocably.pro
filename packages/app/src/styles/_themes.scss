@@ -18,6 +18,14 @@
     var(--header-items-height) + var(--header-padding-bottom)
   );
 
+  --mdc-outlined-text-field-container-shape: 8px;
+  --mdc-filled-text-field-container-shape: 8px;
+
+  // Letter spacing on buttons
+  --mdc-text-button-label-text-tracking: 0;
+
+  --mat-option-selected-state-label-text-color: var(--color-emphasize);
+
   @media (max-width: $md) {
     --container-padding: #{$container-padding-sm};
   }
@@ -28,43 +36,77 @@ body {
   background: var(--body-bg);
 }
 
-$mat-vocably-primary-palette: mat.define-palette(mat.$grey-palette);
-$mat-vocably-light-accent-palette: mat.define-palette(
+// Typography Definitions (Moved before Theme definitions)
+$vocably-body-font: mat.m2-define-typography-level(
+  $font-family: Roboto,
+  $font-weight: 300,
+  $font-size: 1rem,
+  $line-height: 1.5,
+  $letter-spacing: normal,
+);
+
+$vocably-typography-config: mat.m2-define-typography-config(
+  $body-1: $vocably-body-font,
+  $body-2: $vocably-body-font,
+  $headline-6:
+    mat.m2-define-typography-level(
+      $font-family: Ruda,
+      $font-weight: 500,
+      $font-size: 1.1rem,
+    ),
+  $headline-5:
+    mat.m2-define-typography-level(
+      $font-family: Ruda,
+      $font-weight: 500,
+      $font-size: 2rem,
+    ),
+  $headline-4:
+    mat.m2-define-typography-level(
+      $font-family: Ruda,
+      $font-weight: 500,
+      $font-size: 2.5rem,
+    ),
+);
+
+$mat-vocably-primary-palette: mat.m2-define-palette(mat.$m2-grey-palette);
+$mat-vocably-light-accent-palette: mat.m2-define-palette(
   generatePalette($v-light-color-primary),
   A200,
   A100,
   A400
 );
-$mat-vocably-dark-accent-palette: mat.define-palette(
+$mat-vocably-dark-accent-palette: mat.m2-define-palette(
   generatePalette($v-dark-color-primary),
   A200,
   A100,
   A400
 );
-$mat-vocably-light-warn-palette: mat.define-palette(
+$mat-vocably-light-warn-palette: mat.m2-define-palette(
   generatePalette($v-light-color-danger)
 );
-$mat-vocably-dark-warn-palette: mat.define-palette(
+$mat-vocably-dark-warn-palette: mat.m2-define-palette(
   generatePalette($v-dark-color-danger)
 );
 
-$mat-vocably-light-theme: mat.define-light-theme(
+$mat-vocably-light-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $mat-vocably-primary-palette,
       accent: $mat-vocably-light-accent-palette,
       warn: $mat-vocably-light-warn-palette,
     ),
+    typography: $vocably-typography-config,
   )
 );
 
-$mat-vocably-dark-theme: mat.define-dark-theme(
+$mat-vocably-dark-theme: mat.m2-define-dark-theme(
   (
     color: (
       primary: $mat-vocably-primary-palette,
       accent: $mat-vocably-dark-accent-palette,
       warn: $mat-vocably-dark-warn-palette,
     ),
+    typography: $vocably-typography-config,
   )
 );
 
@@ -80,35 +122,5 @@ html {
   }
 }
 
-$vocably-body-font: mat.define-typography-level(
-  $font-family: Roboto,
-  $font-weight: 300,
-  $font-size: 1rem,
-  $line-height: 1.5,
-  $letter-spacing: normal,
-);
-
-$vocably-typography-config: mat.define-typography-config(
-  $body-1: $vocably-body-font,
-  $body-2: $vocably-body-font,
-  $title:
-    mat.define-typography-level(
-      $font-family: Ruda,
-      $font-weight: 500,
-      $font-size: 1.1rem,
-    ),
-  $headline:
-    mat.define-typography-level(
-      $font-family: Ruda,
-      $font-weight: 500,
-      $font-size: 2rem,
-    ),
-  $display-1:
-    mat.define-typography-level(
-      $font-family: Ruda,
-      $font-weight: 500,
-      $font-size: 2.5rem,
-    ),
-);
-
-@include mat.core($vocably-typography-config);
+@include mat.core();
+@include mat.typography-hierarchy($mat-vocably-light-theme);

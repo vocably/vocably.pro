@@ -22,6 +22,7 @@ type ProductResult =
   selector: 'app-success-page',
   templateUrl: './success-page.component.html',
   styleUrls: ['./success-page.component.scss'],
+  standalone: false,
 })
 export class SuccessPageComponent implements OnInit {
   public productResult: ProductResult = { status: 'loading' };

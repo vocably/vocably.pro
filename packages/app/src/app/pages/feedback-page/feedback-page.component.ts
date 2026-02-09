@@ -6,6 +6,7 @@ import { AuthService } from '../../auth/auth.service';
   selector: 'app-feedback-page',
   templateUrl: './feedback-page.component.html',
   styleUrls: ['./feedback-page.component.scss'],
+  standalone: false,
 })
 export class FeedbackPageComponent implements OnInit {
   feedback = '';

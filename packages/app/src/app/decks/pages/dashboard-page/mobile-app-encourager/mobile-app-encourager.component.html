@@ -1,4 +1,4 @@
-<div style="max-width: 400px">
+<mat-dialog-content style="max-width: 400px">
   <div
     style="
       display: flex;
@@ -29,9 +29,7 @@
       <app-app-qr-code style="width: 160px"></app-app-qr-code>
     </div>
   </div>
-  <div style="margin-top: 2rem">
-    <button class="button outline block" (click)="dialogRef.close()">
-      Close
-    </button>
-  </div>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="button" [mat-dialog-close]="false">Close</button>
+</mat-dialog-actions>

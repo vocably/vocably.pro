@@ -5,6 +5,7 @@ import { GoogleLanguage } from '@vocably/model';
   selector: 'app-deck-selector',
   templateUrl: './deck-selector.component.html',
   styleUrls: ['./deck-selector.component.scss'],
+  standalone: false,
 })
 export class DeckSelectorComponent implements OnInit {
   @Input() languages: GoogleLanguage[] = [];

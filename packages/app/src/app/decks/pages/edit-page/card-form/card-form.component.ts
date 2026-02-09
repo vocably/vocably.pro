@@ -11,6 +11,7 @@ export type CardFormEntity = Pick<
   selector: 'app-card-form',
   templateUrl: './card-form.component.html',
   styleUrls: ['./card-form.component.scss'],
+  standalone: false,
 })
 export class CardFormComponent implements OnInit {
   @Input() item!: CardItem;

@@ -1,4 +1,4 @@
-<div style="max-width: 400px">
+<mat-dialog-content style="max-width: 400px">
   <p>Vocably was built before the AI era.</p>
   <p>
     Back then, the only way to offer quality flashcards was through a paid
@@ -13,7 +13,7 @@
     Cards created before October 27, 2025 can’t be exported due to legal
     restrictions.
   </p>
-  <div style="margin-top: 2rem; text-align: right">
-    <button mat-button color="accent" (click)="dialogRef.close()">Close</button>
-  </div>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="button" [mat-dialog-close]="false">Close</button>
+</mat-dialog-actions>

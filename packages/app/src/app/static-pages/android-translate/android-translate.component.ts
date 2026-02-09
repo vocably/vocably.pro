@@ -19,6 +19,7 @@ import {
   selector: 'app-android-translate',
   templateUrl: './android-translate.component.html',
   styleUrls: ['./android-translate.component.scss'],
+  standalone: false,
 })
 export class AndroidTranslateComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

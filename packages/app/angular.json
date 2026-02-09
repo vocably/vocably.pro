@@ -132,10 +132,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "vocably:build:production"
+              "buildTarget": "vocably:build:production"
             },
             "development": {
-              "browserTarget": "vocably:build:development"
+              "buildTarget": "vocably:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -143,7 +143,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "vocably:build"
+            "buildTarget": "vocably:build"
           }
         },
         "test": {

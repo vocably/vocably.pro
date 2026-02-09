@@ -8,6 +8,7 @@ import { clearIntendedDestination } from '../../intendedDestination';
   selector: 'app-auto-sign-in-success-page',
   templateUrl: './auto-sign-in-success-page.component.html',
   styleUrls: ['./auto-sign-in-success-page.component.scss'],
+  standalone: false,
 })
 export class AutoSignInSuccessPageComponent implements OnInit {
   private destroy$ = new Subject();

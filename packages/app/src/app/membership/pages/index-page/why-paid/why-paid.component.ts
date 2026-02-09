@@ -28,6 +28,7 @@ const getPlatform = (): Platform | null => {
   selector: 'app-why-paid',
   templateUrl: './why-paid.component.html',
   styleUrls: ['./why-paid.component.scss'],
+  standalone: false,
 })
 export class WhyPaidComponent implements OnInit {
   platform: Platform | null = getPlatform();

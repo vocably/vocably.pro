@@ -1,4 +1,4 @@
-@import '~@vocably/styles/mixins/underline';
+@import '@vocably/styles/mixins/underline';
 
 @mixin link($important: '') {
   @include underline($important);

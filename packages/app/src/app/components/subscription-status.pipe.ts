@@ -3,6 +3,7 @@ import { UserData } from '@vocably/model';
 
 @Pipe({
   name: 'subscriptionStatus',
+  standalone: false,
 })
 export class SubscriptionStatusPipe implements PipeTransform {
   transform(userData: UserData, ...args: unknown[]): string {

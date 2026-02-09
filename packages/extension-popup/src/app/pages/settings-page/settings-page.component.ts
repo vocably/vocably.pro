@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss'],
+  standalone: false,
 })
 export class SettingsPageComponent implements OnInit {
   showQRCode = false;

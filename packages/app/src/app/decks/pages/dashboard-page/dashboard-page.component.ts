@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { byDate, CardItem } from '@vocably/model';
-import { isBoolean } from 'lodash-es';
 import { Subject, takeUntil } from 'rxjs';
 import { isDesktop } from '../../../../browser';
 import { DeckStoreService } from '../../deck-store.service';
@@ -12,6 +11,7 @@ import { MobileAppEncouragerComponent } from './mobile-app-encourager/mobile-app
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
+  standalone: false,
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
@@ -45,15 +45,15 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       .afterClosed()
       .pipe(takeUntil(this.destroy$))
       .subscribe(async (result) => {
-        if (!isBoolean(result)) {
-          return;
-        }
-
-        if (result === true) {
-          localStorage.setItem('skip-mobile-app-encourager', 'true');
-        }
-
-        await this.router.navigate(['study'], { relativeTo: this.route });
+        // if (!isBoolean(result)) {
+        //   return;
+        // }
+        //
+        // if (result === true) {
+        //   localStorage.setItem('skip-mobile-app-encourager', 'true');
+        // }
+        //
+        // await this.router.navigate(['study'], { relativeTo: this.route });
       });
   }
 }

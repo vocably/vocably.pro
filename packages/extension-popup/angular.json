@@ -82,10 +82,10 @@
           "builder": "ngx-build-plus:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "extension-popup:build:production"
+              "buildTarget": "extension-popup:build:production"
             },
             "development": {
-              "browserTarget": "extension-popup:build:development"
+              "buildTarget": "extension-popup:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -93,7 +93,7 @@
         "extract-i18n": {
           "builder": "ngx-build-plus:extract-i18n",
           "options": {
-            "browserTarget": "extension-popup:build"
+            "buildTarget": "extension-popup:build"
           }
         }
       }

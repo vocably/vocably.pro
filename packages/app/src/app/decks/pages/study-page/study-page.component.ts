@@ -10,6 +10,7 @@ import { DeckService } from '../../deck.service';
   selector: 'app-study-page',
   templateUrl: './study-page.component.html',
   styleUrls: ['./study-page.component.scss'],
+  standalone: false,
 })
 export class StudyPageComponent implements OnInit, OnDestroy {
   public cards: CardItem[] = [];

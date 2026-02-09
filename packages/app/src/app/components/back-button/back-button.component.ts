@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-back-button',
   templateUrl: './back-button.component.html',
   styleUrls: ['./back-button.component.scss'],
+  standalone: false,
 })
 export class BackButtonComponent implements OnInit {
   @Input() label = true;

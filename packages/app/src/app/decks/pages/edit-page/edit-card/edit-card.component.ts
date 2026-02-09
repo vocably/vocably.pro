@@ -15,6 +15,7 @@ const animationSpeed = '0.2s';
   selector: 'app-edit-card',
   templateUrl: './edit-card.component.html',
   styleUrls: ['./edit-card.component.scss'],
+  standalone: false,
   animations: [
     trigger('card', [
       state(

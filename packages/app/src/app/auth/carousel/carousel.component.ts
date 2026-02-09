@@ -5,6 +5,7 @@ import { isIOS } from '../../../browser';
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
+  standalone: false,
 })
 export class CarouselComponent implements OnInit {
   isIOS = isIOS();

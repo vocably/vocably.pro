@@ -25,6 +25,7 @@ const lastUsedSearchValuesKey = 'lastUsedSearchValues_01';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
+  standalone: false,
 })
 export class HomePageComponent implements OnInit {
   welcomeUrl = `${environment.appBaseUrl}/welcome`;
@@ -64,7 +65,10 @@ export class HomePageComponent implements OnInit {
       this.languagePairsLoaded = true;
       this.needsOnboarding = Object.keys(languagePairs).length === 0;
 
-      if (this.searchValues !== null || languagePairs === {}) {
+      if (
+        this.searchValues !== null ||
+        Object.keys(languagePairs).length === 0
+      ) {
         return;
       }
 

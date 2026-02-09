@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { GoogleLanguage } from '@vocably/model';
 
@@ -11,6 +11,7 @@ export type ImportSuccessDialogData = {
   selector: 'app-import-success-dialog',
   templateUrl: './import-success-dialog.component.html',
   styleUrls: ['./import-success-dialog.component.scss'],
+  standalone: false,
 })
 export class ImportSuccessDialogComponent implements OnInit {
   constructor(

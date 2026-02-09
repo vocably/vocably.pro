@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
+  standalone: false,
 })
 export class SignInComponent implements OnInit {
   public wwwBaseUrl = environment.wwwBaseUrl;

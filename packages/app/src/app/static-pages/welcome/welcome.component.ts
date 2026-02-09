@@ -7,6 +7,7 @@ import { AuthService } from '../../auth/auth.service';
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
+  standalone: false,
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export type DeleteConfirmationDialogData = {
   fullLanguage: string;
@@ -9,6 +9,7 @@ export type DeleteConfirmationDialogData = {
   selector: 'app-delete-confirmation-dialog',
   templateUrl: './delete-confirmation-dialog.component.html',
   styleUrls: ['./delete-confirmation-dialog.component.scss'],
+  standalone: false,
 })
 export class DeleteConfirmationDialogComponent implements OnInit {
   constructor(

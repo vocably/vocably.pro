@@ -31,7 +31,7 @@ const calculatePosition = (
   const top = globalRect.top - window.scrollY;
   const bottom = top + globalRect.height;
   const selectionContextMenuHeight = Math.ceil(
-    50 / window.visualViewport.scale
+    50 / (window?.visualViewport?.scale ?? 1)
   );
 
   if (bottom < window.innerHeight / 2) {
@@ -105,7 +105,10 @@ export const createPopup = async (options: PopupOptions) => {
   const position = calculatePosition(options.globalRect, options.isTouchscreen);
 
   popup.style.setProperty('--max-height', calculateMaxHeight(position));
-  popup.style.setProperty('--max-width', `${window.visualViewport.width}px`);
+  popup.style.setProperty(
+    '--max-width',
+    `${window?.visualViewport?.width ?? 200}px`
+  );
   applyPosition(popup, position);
   setupTransform(popup);
   show(popup);

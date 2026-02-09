@@ -19,6 +19,7 @@ import {
   selector: 'app-tags-selector',
   templateUrl: './tags-selector.component.html',
   styleUrls: ['./tags-selector.component.scss'],
+  standalone: false,
 })
 export class TagsSelectorComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

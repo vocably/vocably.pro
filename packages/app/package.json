@@ -12,7 +12,7 @@
     "app": "npm start"
   },
   "dependencies": {
-    "@ionic/angular": "^6.1.9",
+    "@ionic/angular": "^8.0.0",
     "pulltorefreshjs": "^0.1.22"
   },
   "devDependencies": {
