@@ -4,6 +4,14 @@ main_only: &main_only
     branches:
       only: main
 
+parameters:
+  killDev:
+    type: boolean
+    default: false
+  resurrectDev:
+    type: boolean
+    default: false
+
 new_version_only: &new_version_only
   filters:
     branches:
@@ -32,6 +40,18 @@ commands:
             - .npm
 
 jobs:
+  killDev:
+    docker:
+      - image: cimg/node:22.18
+    steps:
+      - checkout
+      - run: echo "Kill dev environment"
+  resurrectDev:
+    docker:
+      - image: cimg/node:22.18
+    steps:
+      - checkout
+      - run: echo "Resurrect dev environment"
   bumpNewVersion:
     working_directory: ~/repo
     docker:
@@ -67,6 +87,15 @@ jobs:
       - run: npx zx ./scripts/build-extension.mjs
 workflows:
   version: 2
+  killDev:
+    when: << pipeline.parameters.killDev >>
+    jobs:
+      - killDev
+  resurrectDev:
+    when: << pipeline.parameters.resurrectDev >>
+    jobs:
+      - resurrectDev
+
   bumpNewVersion:
     max_auto_reruns: 3
     jobs:
