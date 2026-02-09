@@ -97,8 +97,8 @@ workflows:
       - resurrectDev
 
   bumpNewVersion:
-    unless:
-      equal: ['none', << pipeline.parameters.action >>]
+    when:
+      equal: ['webhook', << pipeline.trigger_source >>]
     max_auto_reruns: 3
     jobs:
       - bumpNewVersion:
