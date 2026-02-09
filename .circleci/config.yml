@@ -6,6 +6,7 @@ main_only: &main_only
 
 parameters:
   action:
+    type: enum
     enum: ['none', 'kill dev', 'resurrect dev', 'kill prod', 'resurrect prod']
     default: 'none'
 
