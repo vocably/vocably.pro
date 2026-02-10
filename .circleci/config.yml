@@ -63,6 +63,8 @@ jobs:
       ENV_NAME: << parameters.env_name >>
     steps:
       - checkout
+      - install_npm_dependencies
+      - run: npx zx ./scripts/build-packages.mjs
       - run: bash ./scripts/install-build-dependencies.sh
       - run: bash ./scripts/declare-variables.sh
       - run: bash ./scripts/apis-resurrect.sh
