@@ -18,7 +18,10 @@ export const Login: FC<PropsWithChildren<Props>> = ({ children, os }) => {
     return <Loader>Authenticating...</Loader>;
   }
 
-  if (authStatus.status === 'logged-in') {
+  if (
+    authStatus.status === 'logged-in' ||
+    authStatus.status === 'anonymous-logged-in'
+  ) {
     return <>{children}</>;
   }
 

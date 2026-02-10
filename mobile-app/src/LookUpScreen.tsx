@@ -246,7 +246,7 @@ export const LookUpScreen: FC<Props> = ({
               paddingBottom: insets.bottom + padding - 2,
             }}
           >
-            {!isAnalyzingPreset && !lookUpResult && (
+            {!isAnalyzingPreset && !lookUpResult && !isSharedLookUp && (
               <View
                 style={{
                   width: '100%',
