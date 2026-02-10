@@ -115,7 +115,18 @@ workflows:
     jobs:
       - resurrectApis:
           env_name: DEV
-
+  killProd:
+    when:
+      equal: ['kill prod', << pipeline.parameters.action >>]
+    jobs:
+      - killApis:
+          env_name: PROD
+  resurrectProd:
+    when:
+      equal: ['resurrect prod', << pipeline.parameters.action >>]
+    jobs:
+      - resurrectApis:
+          env_name: PROD
   bumpNewVersion:
     when:
       equal: ['webhook', << pipeline.trigger_source >>]
