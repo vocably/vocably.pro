@@ -1,5 +1,6 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import '@sneas/telephone/iphone-16-max';
 
 import { Auth } from '@aws-amplify/auth';
 import { initializePaddle } from '@paddle/paddle-js';
