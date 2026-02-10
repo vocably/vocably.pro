@@ -38,18 +38,34 @@ commands:
             - .npm
 
 jobs:
-  killDev:
+  killApis:
+    parameters:
+      env_name:
+        type: string
+        default: 'DEV'
     docker:
       - image: cimg/node:22.18
+    environment:
+      ENV_NAME: << parameters.env_name >>
     steps:
       - checkout
-      - run: echo "Kill dev environment"
-  resurrectDev:
+      - run: bash ./scripts/install-build-dependencies.sh
+      - run: bash ./scripts/declare-variables.sh
+      - run: bash ./scripts/apis-kill.sh
+  resurrectApis:
+    parameters:
+      env_name:
+        type: string
+        default: 'DEV'
     docker:
       - image: cimg/node:22.18
+    environment:
+      ENV_NAME: << parameters.env_name >>
     steps:
       - checkout
-      - run: echo "Resurrect dev environment"
+      - run: bash ./scripts/install-build-dependencies.sh
+      - run: bash ./scripts/declare-variables.sh
+      - run: bash ./scripts/apis-resurrect.sh
   bumpNewVersion:
     working_directory: ~/repo
     docker:
@@ -89,12 +105,14 @@ workflows:
     when:
       equal: ['kill dev', << pipeline.parameters.action >>]
     jobs:
-      - killDev
+      - killApis:
+          env_name: DEV
   resurrectDev:
     when:
       equal: ['resurrect dev', << pipeline.parameters.action >>]
     jobs:
-      - resurrectDev
+      - resurrectApis:
+          env_name: DEV
 
   bumpNewVersion:
     when:
