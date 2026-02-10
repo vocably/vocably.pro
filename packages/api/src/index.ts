@@ -22,6 +22,7 @@ export * from './publicAnalyzeUnitsOfSpeech';
 export * from './publicChatWithCard';
 export * from './publicGenerateUnitsOfSpeech';
 export * from './publicPlaySound';
+export * from './publicPredefinedOptions';
 export * from './publicUserFeedback';
 export * from './studyStats';
 export { sendUserFeedback } from './userFeedback';
