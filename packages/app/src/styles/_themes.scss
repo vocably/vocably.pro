@@ -66,6 +66,12 @@ $vocably-typography-config: mat.m2-define-typography-config(
       $font-weight: 500,
       $font-size: 2.5rem,
     ),
+  $headline-1:
+    mat.m2-define-typography-level(
+      $font-family: Ruda,
+      $font-weight: 500,
+      $font-size: 2.5rem,
+    ),
 );
 
 $mat-vocably-primary-palette: mat.m2-define-palette(mat.$m2-grey-palette);
