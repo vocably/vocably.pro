@@ -1,9 +1,12 @@
 import { animate, style, transition, trigger } from '@angular/animations';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardItem } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { Subject } from 'rxjs';
-import { Answer } from '../card/card.component';
+import { CardOptionsComponent } from '../card-options/card-options.component';
+import { Answer, CardComponent } from '../card/card.component';
+import { SuccessComponent } from '../success/success.component';
 
 const gradeMap: Record<Answer, SrsScore> = {
   weak: 0,
@@ -20,7 +23,6 @@ export type GradeResult = {
   selector: 'app-srs-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
-  standalone: false,
   animations: [
     trigger('displayComponent', [
       transition(':enter', [
@@ -29,6 +31,7 @@ export type GradeResult = {
       ]),
     ]),
   ],
+  imports: [NgFor, CardComponent, NgIf, CardOptionsComponent, SuccessComponent],
 })
 export class ListComponent {
   @Input() cards!: CardItem[];

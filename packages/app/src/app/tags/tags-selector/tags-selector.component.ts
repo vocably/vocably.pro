@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -6,7 +7,11 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatDivider } from '@angular/material/divider';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { NewTag, TagItem } from '@vocably/model';
 import { Subject, takeUntil } from 'rxjs';
 import {
@@ -19,7 +24,16 @@ import {
   selector: 'app-tags-selector',
   templateUrl: './tags-selector.component.html',
   styleUrls: ['./tags-selector.component.scss'],
-  standalone: false,
+  imports: [
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+    NgIf,
+    MatDivider,
+    NgFor,
+    MatIcon,
+    MatIconButton,
+  ],
 })
 export class TagsSelectorComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

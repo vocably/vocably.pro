@@ -1,16 +1,27 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import {
   canExtensionBeInstalled,
   extensionInstallationUrl,
 } from '../../extension';
+import { AppQrCodeComponent } from '../components/app-qr-code/app-qr-code.component';
+import { ExpansionComponent } from '../components/expansion/expansion.component';
+import { HeaderComponent } from '../header/header.component';
 import { isExtensionInstalled$ } from '../isExtensionInstalled';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
-  standalone: false,
+  imports: [
+    HeaderComponent,
+    NgIf,
+    ExpansionComponent,
+    AppQrCodeComponent,
+    RouterOutlet,
+  ],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

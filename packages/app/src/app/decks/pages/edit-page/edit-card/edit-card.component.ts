@@ -5,9 +5,15 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { CardItem } from '@vocably/model';
-import { CardFormEntity } from '../card-form/card-form.component';
+import { CardComponent } from '../../../card/card.component';
+import {
+  CardFormComponent,
+  CardFormEntity,
+} from '../card-form/card-form.component';
 
 const animationSpeed = '0.2s';
 
@@ -15,7 +21,6 @@ const animationSpeed = '0.2s';
   selector: 'app-edit-card',
   templateUrl: './edit-card.component.html',
   styleUrls: ['./edit-card.component.scss'],
-  standalone: false,
   animations: [
     trigger('card', [
       state(
@@ -32,7 +37,6 @@ const animationSpeed = '0.2s';
       ),
       transition('* => *', [animate(animationSpeed)]),
     ]),
-
     trigger('form', [
       transition(':enter', [
         style({
@@ -55,6 +59,7 @@ const animationSpeed = '0.2s';
       ]),
     ]),
   ],
+  imports: [NgIf, CardFormComponent, MatIcon, CardComponent],
 })
 export class EditCardComponent implements OnInit {
   @Input() item!: CardItem;

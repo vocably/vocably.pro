@@ -13,9 +13,7 @@ import { IonicModule } from '@ionic/angular';
 import * as Sentry from '@sentry/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
-import { ComponentsModule } from './components/components.module';
-import { HeaderModule } from './header/header.module';
+
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
 import { ImportFailureDialogComponent } from './pages/import-page/import-failure-dialog/import-failure-dialog.component';
 import { ImportPageComponent } from './pages/import-page/import-page.component';
@@ -23,26 +21,13 @@ import { ImportSuccessDialogComponent } from './pages/import-page/import-success
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { DeleteAccountConfirmationComponent } from './pages/settings-page/delete-account-confirmation/delete-account-confirmation.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { TagsModule } from './tags/tags.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundPageComponent,
-    SettingsPageComponent,
-    DeleteAccountConfirmationComponent,
-    FeedbackPageComponent,
-    ImportPageComponent,
-    ImportSuccessDialogComponent,
-    ImportFailureDialogComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AuthModule,
-    HeaderModule,
-    ComponentsModule,
     FormsModule,
     IonicModule.forRoot({
       mode: 'md',
@@ -54,7 +39,13 @@ import { TagsModule } from './tags/tags.module';
     MatButtonModule,
     MatDividerModule,
     MatChipsModule,
-    TagsModule,
+    NotFoundPageComponent,
+    SettingsPageComponent,
+    DeleteAccountConfirmationComponent,
+    FeedbackPageComponent,
+    ImportPageComponent,
+    ImportSuccessDialogComponent,
+    ImportFailureDialogComponent,
   ],
   providers: [
     {

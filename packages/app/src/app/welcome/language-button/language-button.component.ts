@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatRipple } from '@angular/material/core';
 import { GoogleLanguage } from '@vocably/model';
 
 @Component({
   selector: 'app-language-button',
   templateUrl: './language-button.component.html',
   styleUrls: ['./language-button.component.scss'],
-  standalone: false,
+  imports: [MatRipple],
 })
 export class LanguageButtonComponent implements OnInit {
   @Output() onSelected = new EventEmitter<GoogleLanguage>();

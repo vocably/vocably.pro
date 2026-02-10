@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-expansion',
   templateUrl: './expansion.component.html',
   styleUrls: ['./expansion.component.scss'],
-  standalone: false,
+  imports: [MatIcon],
 })
 export class ExpansionComponent implements OnInit {
   @Input() label: string = '';

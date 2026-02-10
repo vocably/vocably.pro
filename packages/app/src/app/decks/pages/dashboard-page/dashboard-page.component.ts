@@ -1,9 +1,12 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { byDate, CardItem } from '@vocably/model';
 import { Subject, takeUntil } from 'rxjs';
 import { isDesktop } from '../../../../browser';
+import { CardComponent } from '../../card/card.component';
 import { DeckStoreService } from '../../deck-store.service';
 import { MobileAppEncouragerComponent } from './mobile-app-encourager/mobile-app-encourager.component';
 
@@ -11,7 +14,7 @@ import { MobileAppEncouragerComponent } from './mobile-app-encourager/mobile-app
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
-  standalone: false,
+  imports: [NgIf, NgFor, CardComponent, IonicModule, RouterLink],
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

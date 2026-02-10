@@ -1,3 +1,4 @@
+import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { GoogleLanguage, languageList } from '@vocably/model';
 import posthog from 'posthog-js';
@@ -6,7 +7,7 @@ import posthog from 'posthog-js';
   selector: 'app-how-to-video',
   templateUrl: './how-to-video.component.html',
   styleUrls: ['./how-to-video.component.scss'],
-  standalone: false,
+  imports: [NgIf],
 })
 export class HowToVideoComponent implements OnInit {
   @Input() public targetLanguage!: GoogleLanguage;

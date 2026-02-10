@@ -1,12 +1,23 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { sendUserFeedback } from '@vocably/api';
 import { AuthService } from '../../auth/auth.service';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-feedback-page',
   templateUrl: './feedback-page.component.html',
   styleUrls: ['./feedback-page.component.scss'],
-  standalone: false,
+  imports: [
+    HeaderComponent,
+    NgIf,
+    ReactiveFormsModule,
+    FormsModule,
+    IonicModule,
+    AsyncPipe,
+  ],
 })
 export class FeedbackPageComponent implements OnInit {
   feedback = '';

@@ -1,4 +1,12 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { isChrome, isMacSafari } from '../../../../../browser';
 
 type Platform = {
@@ -28,7 +36,14 @@ const getPlatform = (): Platform | null => {
   selector: 'app-why-paid',
   templateUrl: './why-paid.component.html',
   styleUrls: ['./why-paid.component.scss'],
-  standalone: false,
+  imports: [
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    NgIf,
+    MatDialogActions,
+    MatDialogClose,
+  ],
 })
 export class WhyPaidComponent implements OnInit {
   platform: Platform | null = getPlatform();

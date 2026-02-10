@@ -1,4 +1,6 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import {
   getSubscriptionProducts,
@@ -22,7 +24,7 @@ type ProductResult =
   selector: 'app-success-page',
   templateUrl: './success-page.component.html',
   styleUrls: ['./success-page.component.scss'],
-  standalone: false,
+  imports: [MatIcon, NgIf],
 })
 export class SuccessPageComponent implements OnInit {
   public productResult: ProductResult = { status: 'loading' };

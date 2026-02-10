@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CardItem } from '@vocably/model';
 import { grade, slice } from '@vocably/srs';
 import { Subject, takeUntil } from 'rxjs';
-import { GradeResult } from '../../../srs/list/list.component';
+import { BackButtonComponent } from '../../../components/back-button/back-button.component';
+import { GradeResult, ListComponent } from '../../../srs/list/list.component';
 import { DeckStoreService } from '../../deck-store.service';
 import { DeckService } from '../../deck.service';
 
@@ -10,7 +11,7 @@ import { DeckService } from '../../deck.service';
   selector: 'app-study-page',
   templateUrl: './study-page.component.html',
   styleUrls: ['./study-page.component.scss'],
-  standalone: false,
+  imports: [ListComponent, BackButtonComponent],
 })
 export class StudyPageComponent implements OnInit, OnDestroy {
   public cards: CardItem[] = [];

@@ -1,4 +1,6 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { getPaddleInstance } from '@paddle/paddle-js';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
@@ -11,7 +13,7 @@ import {
   selector: 'app-membership-selector',
   templateUrl: './membership-selector.component.html',
   styleUrls: ['./membership-selector.component.scss'],
-  standalone: false,
+  imports: [MatIcon, NgIf, NgFor],
 })
 export class MembershipSelectorComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

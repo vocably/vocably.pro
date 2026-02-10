@@ -19,10 +19,7 @@ export declare type TooltipPosition = 'top';
 
 let nextId = 0;
 
-@Directive({
-  selector: '[appTooltipTriggerFor]',
-  standalone: false,
-})
+@Directive({ selector: '[appTooltipTriggerFor]' })
 export class TooltipTriggerForDirective implements OnInit, AfterViewInit {
   private overlayRef!: OverlayRef;
   private portal!: TemplatePortal<any>;

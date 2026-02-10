@@ -1,9 +1,6 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
-@Directive({
-  selector: '[appTextLength]',
-  standalone: false,
-})
+@Directive({ selector: '[appTextLength]' })
 export class TextLengthDirective implements AfterViewInit {
   constructor(private el: ElementRef<HTMLElement>) {}
 

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardItem, SrsCard } from '@vocably/model';
 import { pick } from 'lodash-es';
 
@@ -11,7 +12,7 @@ export type CardFormEntity = Pick<
   selector: 'app-card-form',
   templateUrl: './card-form.component.html',
   styleUrls: ['./card-form.component.scss'],
-  standalone: false,
+  imports: [ReactiveFormsModule, FormsModule],
 })
 export class CardFormComponent implements OnInit {
   @Input() item!: CardItem;

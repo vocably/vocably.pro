@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { postOnboardingAction } from '@vocably/api';
 import {
   setProxyLanguage,
@@ -11,6 +13,7 @@ import posthog from 'posthog-js';
 import {
   catchError,
   filter,
+  from,
   Observable,
   of,
   Subject,
@@ -21,6 +24,10 @@ import {
 } from 'rxjs';
 import { extensionId } from '../../../../extension';
 import { getFacility } from '../../../getFacility';
+import { LanguagePipe } from '../../../language/language.pipe';
+import { GenericInstructionComponent } from '../../generic-instruction/generic-instruction.component';
+import { HighlightComponent } from '../../highlight/highlight.component';
+import { HowToVideoComponent } from '../../how-to-video/how-to-video.component';
 
 const getOnboardedTargetLanguages = (): string[] => {
   return JSON.parse(localStorage.getItem('onboardedLanguages') ?? '[]');
@@ -60,7 +67,15 @@ const onboardTargetLanguage = async (targetLanguage: string) => {
   selector: 'app-second-page',
   templateUrl: './second-page.component.html',
   styleUrls: ['./second-page.component.scss'],
-  standalone: false,
+  imports: [
+    NgIf,
+    IonicModule,
+    HowToVideoComponent,
+    HighlightComponent,
+    MatIcon,
+    GenericInstructionComponent,
+    LanguagePipe,
+  ],
 })
 export class SecondPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
@@ -72,11 +87,7 @@ export class SecondPageComponent implements OnInit, OnDestroy {
   public sourceLanguage: GoogleLanguage | undefined = undefined;
   public targetLanguage: GoogleLanguage | undefined = undefined;
 
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {}
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -231,11 +242,15 @@ export class SecondPageComponent implements OnInit, OnDestroy {
             return throwError(() => new Error('No example available'));
           }
 
-          return this.httpClient.get(
-            `/assets/language-text-examples/${params['sourceLanguage']}.html`,
-            {
-              responseType: 'text',
-            }
+          return from(
+            fetch(
+              `/assets/language-text-examples/${params['sourceLanguage']}.html`
+            ).then((res) => {
+              if (!res.ok) {
+                throw new Error('No example available');
+              }
+              return res.text();
+            })
           );
         }),
         takeUntil(this.destroy$),

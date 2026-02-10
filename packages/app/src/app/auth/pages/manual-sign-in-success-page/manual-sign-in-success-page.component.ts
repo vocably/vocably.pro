@@ -1,6 +1,9 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { from, Subject, takeUntil } from 'rxjs';
+import { HeaderComponent } from '../../../header/header.component';
 import { AuthService } from '../../auth.service';
 import {
   clearIntendedDestination,
@@ -11,7 +14,7 @@ import {
   selector: 'app-mnual-sign-in-success-page',
   templateUrl: './manual-sign-in-success-page.component.html',
   styleUrls: ['./manual-sign-in-success-page.component.scss'],
-  standalone: false,
+  imports: [HeaderComponent, NgIf, IonicModule],
 })
 export class ManualSignInSuccessPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

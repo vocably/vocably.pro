@@ -1,6 +1,9 @@
+import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { from, Subject, takeUntil } from 'rxjs';
+import { HeaderComponent } from '../../../header/header.component';
 import { AuthService } from '../../auth.service';
 import { clearIntendedDestination } from '../../intendedDestination';
 
@@ -8,7 +11,7 @@ import { clearIntendedDestination } from '../../intendedDestination';
   selector: 'app-auto-sign-in-success-page',
   templateUrl: './auto-sign-in-success-page.component.html',
   styleUrls: ['./auto-sign-in-success-page.component.scss'],
-  standalone: false,
+  imports: [HeaderComponent, NgIf, IonicModule],
 })
 export class AutoSignInSuccessPageComponent implements OnInit {
   private destroy$ = new Subject();

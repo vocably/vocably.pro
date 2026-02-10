@@ -9,10 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { IonicModule } from '@ionic/angular';
-import { ComponentsModule } from '../components/components.module';
-import { HeaderModule } from '../header/header.module';
-import { LanguageModule } from '../language/language.module';
-import { SrsModule } from '../srs/srs.module';
+
 import { CardComponent } from './card/card.component';
 import { DecksRoutingModule } from './decks-routing.module';
 import { DecksComponent } from './decks.component';
@@ -29,7 +26,18 @@ import { StudyPageComponent } from './pages/study-page/study-page.component';
 import { SelectedDeckComponent } from './selected-deck/selected-deck.component';
 
 @NgModule({
-  declarations: [
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    DecksRoutingModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+    MatRadioModule,
+    MatInputModule,
+    MatCheckboxModule,
     DecksComponent,
     DashboardPageComponent,
     NoDecksPageComponent,
@@ -43,23 +51,6 @@ import { SelectedDeckComponent } from './selected-deck/selected-deck.component';
     CardComponent,
     MobileAppEncouragerComponent,
     LexicalaExplanationDialogComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HeaderModule,
-    DecksRoutingModule,
-    LanguageModule,
-    SrsModule,
-    ComponentsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatIconModule,
-    MatRadioModule,
-    MatInputModule,
-    MatCheckboxModule,
   ],
   exports: [],
 })

@@ -1,11 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GoogleLanguage, isGoogleLanguage } from '@vocably/model';
 
+import { NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { IonicModule } from '@ionic/angular';
 import {
   catchError,
   filter,
+  from,
   Observable,
   of,
   Subject,
@@ -14,12 +17,13 @@ import {
   tap,
   throwError,
 } from 'rxjs';
+import { LogoComponent } from '../../header/logo/logo.component';
 
 @Component({
   selector: 'app-android-translate',
   templateUrl: './android-translate.component.html',
   styleUrls: ['./android-translate.component.scss'],
-  standalone: false,
+  imports: [LogoComponent, NgIf, IonicModule, MatIcon],
 })
 export class AndroidTranslateComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
@@ -29,10 +33,7 @@ export class AndroidTranslateComponent implements OnInit, OnDestroy {
   public sourceLanguage: GoogleLanguage | undefined;
   public hasNoExample = false;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private httpClient: HttpClient
-  ) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -161,11 +162,15 @@ export class AndroidTranslateComponent implements OnInit, OnDestroy {
             return throwError(() => new Error('No example available'));
           }
 
-          return this.httpClient.get(
-            `/assets/language-text-examples/${params['sourceLanguage']}.html`,
-            {
-              responseType: 'text',
-            }
+          return from(
+            fetch(
+              `/assets/language-text-examples/${params['sourceLanguage']}.html`
+            ).then((res) => {
+              if (!res.ok) {
+                throw new Error('No example available');
+              }
+              return res.text();
+            })
           );
         }),
         takeUntil(this.destroy$),

@@ -2,12 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
+import { CarouselComponent } from '../../auth/carousel/carousel.component';
+import { SignInComponent } from '../../auth/sign-in/sign-in.component';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss'],
-  standalone: false,
+  imports: [HeaderComponent, CarouselComponent, SignInComponent],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

@@ -13,7 +13,7 @@ import {
   autoSignInConfirmationPath,
   manualSignInConfirmationPath,
 } from '../auth-config';
-import { AuthModule } from './auth/auth.module';
+
 import { CognitoAuthGuard } from './auth/cognito-auth.guard';
 import { AutoSignInSuccessPageComponent } from './auth/pages/auto-sign-in-success-page/auto-sign-in-success-page.component';
 import { HandsFreePageComponent } from './auth/pages/hands-free-page/hands-free-page.component';
@@ -126,7 +126,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), AuthModule],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
   providers: [{ provide: TitleStrategy, useClass: TemplatePageTitleStrategy }],
 })

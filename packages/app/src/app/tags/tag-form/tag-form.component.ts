@@ -1,8 +1,15 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgIf } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
+  MatDialogActions,
+  MatDialogContent,
   MatDialogRef,
+  MatDialogTitle,
 } from '@angular/material/dialog';
 import { isTagItem, NewTag, TagItem } from '@vocably/model';
 import { Subject, takeUntil } from 'rxjs';
@@ -31,7 +38,16 @@ export type TagFormAction = TagFormActionDelete | TagFormActionSave;
   selector: 'app-tag-form',
   templateUrl: './tag-form.component.html',
   styleUrls: ['./tag-form.component.scss'],
-  standalone: false,
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    MatDialogTitle,
+    CdkScrollable,
+    MatDialogContent,
+    MatDialogActions,
+    NgIf,
+    MatButton,
+  ],
 })
 export class TagFormComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

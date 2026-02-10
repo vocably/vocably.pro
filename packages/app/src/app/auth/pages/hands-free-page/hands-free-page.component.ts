@@ -1,8 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { browserType } from '../../../../browser';
+import { ExpansionComponent } from '../../../components/expansion/expansion.component';
+import { HeaderComponent } from '../../../header/header.component';
 import { isExtensionInstalled$ } from '../../../isExtensionInstalled';
 import { AuthService } from '../../auth.service';
 
@@ -10,7 +14,7 @@ import { AuthService } from '../../auth.service';
   selector: 'app-hands-free-page',
   templateUrl: './hands-free-page.component.html',
   styleUrls: ['./hands-free-page.component.scss'],
-  standalone: false,
+  imports: [HeaderComponent, NgIf, ExpansionComponent, IonicModule],
 })
 export class HandsFreePageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

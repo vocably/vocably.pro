@@ -1,5 +1,12 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { DomSanitizer } from '@angular/platform-browser';
 import { byDate, CardItem, languageList } from '@vocably/model';
 import { languageToLexicalaLanguage } from '@vocably/model-operations';
@@ -16,7 +23,18 @@ import { prepareColumn } from './prepareColumn';
   selector: 'app-export-page',
   templateUrl: './export-page.component.html',
   styleUrls: ['./export-page.component.scss'],
-  standalone: false,
+  imports: [
+    MatRadioGroup,
+    ReactiveFormsModule,
+    FormsModule,
+    MatRadioButton,
+    MatIcon,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton,
+    NgIf,
+  ],
 })
 export class ExportPageComponent implements OnInit, OnDestroy {
   public cards: CardItem[] = [];

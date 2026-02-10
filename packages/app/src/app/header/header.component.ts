@@ -1,12 +1,29 @@
+import { NgIf } from '@angular/common';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { MatDivider } from '@angular/material/divider';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { LogoComponent } from './logo/logo.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  standalone: false,
+  imports: [
+    NgIf,
+    IonicModule,
+    RouterLink,
+    LogoComponent,
+    MatMenuTrigger,
+    MatIcon,
+    MatMenu,
+    MatMenuItem,
+    MatDivider,
+  ],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

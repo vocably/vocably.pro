@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { LogoComponent } from '../../header/logo/logo.component';
 
 @Component({
   selector: 'app-ios-extension',
   templateUrl: './ios-extension.component.html',
   styleUrls: ['./ios-extension.component.scss'],
-  standalone: false,
+  imports: [LogoComponent, IonicModule],
 })
 export class IosExtensionComponent implements OnInit {
   constructor() {}

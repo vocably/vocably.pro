@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderComponent } from '../../../header/header.component';
 import { DeckListStoreService } from '../../deck-list-store.service';
 
 @Component({
   selector: 'app-no-decks-page',
   templateUrl: './no-decks-page.component.html',
   styleUrls: ['./no-decks-page.component.scss'],
-  standalone: false,
+  imports: [HeaderComponent],
 })
 export class NoDecksPageComponent implements OnInit {
   constructor(

@@ -1,6 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
+import { IonicModule } from '@ionic/angular';
 import * as Sentry from '@sentry/browser';
 import {
   deleteTag,
@@ -31,8 +37,12 @@ import {
 } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { extensionId } from '../../../extension';
+import { DeckSelectorComponent } from '../../components/deck-selector/deck-selector.component';
+import { LanguageInputComponent } from '../../components/language-input/language-input.component';
+import { HeaderComponent } from '../../header/header.component';
 import { columnLabels } from '../../importExport';
 import { isExtensionInstalled$ } from '../../isExtensionInstalled';
+import { TagsSelectorComponent } from '../../tags/tags-selector/tags-selector.component';
 import { bulkAnalyzeSources } from './bulkAnalyzeSources';
 import { csvToArray } from './csvToArray';
 import { CsvData, getCsvData } from './getCsvData';
@@ -73,7 +83,23 @@ const detectImportDeck = async (): Promise<GoogleLanguage | ''> => {
   selector: 'app-import-page',
   templateUrl: './import-page.component.html',
   styleUrls: ['./import-page.component.scss'],
-  standalone: false,
+  imports: [
+    HeaderComponent,
+    NgIf,
+    IonicModule,
+    LanguageInputComponent,
+    DeckSelectorComponent,
+    MatIcon,
+    MatButton,
+    ReactiveFormsModule,
+    FormsModule,
+    NgFor,
+    TagsSelectorComponent,
+    MatChipSet,
+    MatChip,
+    MatChipRemove,
+    AsyncPipe,
+  ],
 })
 export class ImportPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

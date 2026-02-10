@@ -1,9 +1,13 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { IonicModule } from '@ionic/angular';
 import { EntitlementInfo, Purchases } from '@revenuecat/purchases-js';
 import { getUserStaticMetadata } from '@vocably/api';
 import { startWith, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { AuthService } from '../../../auth/auth.service';
+import { MembershipSelectorComponent } from '../../../components/membership-selector/membership-selector.component';
+import { HeaderComponent } from '../../../header/header.component';
 import { WhyPaidComponent } from './why-paid/why-paid.component';
 
 type MembershipStatus =
@@ -31,7 +35,7 @@ type MembershipStatus =
   selector: 'app-index-page',
   templateUrl: './index-page.component.html',
   styleUrls: ['./index-page.component.scss'],
-  standalone: false,
+  imports: [HeaderComponent, NgIf, IonicModule, MembershipSelectorComponent],
 })
 export class IndexPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

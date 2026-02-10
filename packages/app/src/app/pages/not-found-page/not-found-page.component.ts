@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-not-found-page',
   templateUrl: './not-found-page.component.html',
   styleUrls: ['./not-found-page.component.scss'],
-  standalone: false,
+  imports: [HeaderComponent],
 })
 export class NotFoundPageComponent implements OnInit {
   constructor() {}

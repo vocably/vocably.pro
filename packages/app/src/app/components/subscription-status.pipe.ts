@@ -1,10 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { UserData } from '@vocably/model';
 
-@Pipe({
-  name: 'subscriptionStatus',
-  standalone: false,
-})
+@Pipe({ name: 'subscriptionStatus' })
 export class SubscriptionStatusPipe implements PipeTransform {
   transform(userData: UserData, ...args: unknown[]): string {
     if (!userData.status) {

@@ -1,4 +1,7 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { listLanguages } from '@vocably/api';
 import { GoogleLanguage } from '@vocably/model';
 import {
@@ -16,7 +19,7 @@ import { DeckListStoreService } from './deck-list-store.service';
 @Component({
   selector: 'app-decks',
   templateUrl: './decks.component.html',
-  standalone: false,
+  imports: [NgIf, IonicModule, RouterOutlet],
 })
 export class DecksComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

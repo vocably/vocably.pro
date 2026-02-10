@@ -1,5 +1,12 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterOutlet,
+} from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { loadLanguageDeck } from '@vocably/api';
 import { GoogleLanguage } from '@vocably/model';
 import {
@@ -14,6 +21,8 @@ import {
   tap,
   withLatestFrom,
 } from 'rxjs';
+import { DeckSelectorComponent } from '../../components/deck-selector/deck-selector.component';
+import { HeaderComponent } from '../../header/header.component';
 import { RouterParamsService } from '../../router-params.service';
 import { DeckListStoreService } from '../deck-list-store.service';
 import { DeckStoreService } from '../deck-store.service';
@@ -22,7 +31,14 @@ import { DeckStoreService } from '../deck-store.service';
   selector: 'app-selected-deck',
   templateUrl: './selected-deck.component.html',
   styleUrls: ['./selected-deck.component.scss'],
-  standalone: false,
+  imports: [
+    NgIf,
+    HeaderComponent,
+    DeckSelectorComponent,
+    IonicModule,
+    RouterOutlet,
+    AsyncPipe,
+  ],
 })
 export class SelectedDeckComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

@@ -1,20 +1,31 @@
+import { NgFor } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { deleteLanguageDeck } from '@vocably/api';
 import { byDate, CardItem, getFullLanguageName } from '@vocably/model';
 import { omit } from 'lodash-es';
 import { Subject, takeUntil } from 'rxjs';
+import { BackButtonComponent } from '../../../components/back-button/back-button.component';
 import { LoaderService } from '../../../components/loader.service';
 import { DeckListStoreService } from '../../deck-list-store.service';
 import { DeckStoreService } from '../../deck-store.service';
 import { DeckService } from '../../deck.service';
 import { DeleteConfirmationDialogComponent } from './delete-confirmation-dialog/delete-confirmation-dialog.component';
+import { EditCardComponent } from './edit-card/edit-card.component';
 
 @Component({
   selector: 'app-edit-page',
   templateUrl: './edit-page.component.html',
   styleUrls: ['./edit-page.component.scss'],
-  standalone: false,
+  imports: [
+    BackButtonComponent,
+    IonicModule,
+    RouterLink,
+    NgFor,
+    EditCardComponent,
+  ],
 })
 export class EditPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

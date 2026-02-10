@@ -5,13 +5,16 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { TooltipTriggerForDirective } from '../../components/tooltip/tooltip-trigger-for.directive';
+import { TooltipComponent } from '../../components/tooltip/tooltip.component';
 import { Answer } from '../card/card.component';
 
 @Component({
   selector: 'app-srs-card-options',
   templateUrl: './card-options.component.html',
   styleUrls: ['./card-options.component.scss'],
-  standalone: false,
+  imports: [TooltipComponent, MatIcon, TooltipTriggerForDirective],
 })
 export class CardOptionsComponent implements OnInit {
   @Output() flip = new EventEmitter();

@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { explode } from '@vocably/sulna';
 
@@ -10,7 +11,7 @@ type DefinitionItem = {
   selector: '[app-side-b]',
   templateUrl: './side-b.component.html',
   styleUrls: ['./side-b.component.scss'],
-  standalone: false,
+  imports: [NgFor],
 })
 export class SideBComponent implements OnInit {
   private _definition: string = '';

@@ -4,9 +4,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
-import { ComponentsModule } from '../components/components.module';
-import { HeaderModule } from '../header/header.module';
-import { LanguageModule } from '../language/language.module';
+
 import { GenericInstructionComponent } from './generic-instruction/generic-instruction.component';
 import { HighlightComponent } from './highlight/highlight.component';
 import { HowToMultilangComponent } from './how-to-multilang/how-to-multilang.component';
@@ -18,7 +16,13 @@ import { WelcomeRoutingModule } from './welcome-routing.module';
 import { WelcomeComponent } from './welcome.component';
 
 @NgModule({
-  declarations: [
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatRippleModule,
+    WelcomeRoutingModule,
+    IonicModule,
+    MatDialogModule,
     WelcomeComponent,
     IndexPageComponent,
     SecondPageComponent,
@@ -27,17 +31,6 @@ import { WelcomeComponent } from './welcome.component';
     GenericInstructionComponent,
     HowToVideoComponent,
     HowToMultilangComponent,
-  ],
-  imports: [
-    CommonModule,
-    LanguageModule,
-    ComponentsModule,
-    MatIconModule,
-    MatRippleModule,
-    WelcomeRoutingModule,
-    IonicModule,
-    MatDialogModule,
-    HeaderModule,
   ],
 })
 export class WelcomeModule {}

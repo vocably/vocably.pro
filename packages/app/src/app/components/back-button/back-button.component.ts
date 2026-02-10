@@ -1,11 +1,14 @@
+import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { MatIcon } from '@angular/material/icon';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-back-button',
   templateUrl: './back-button.component.html',
   styleUrls: ['./back-button.component.scss'],
-  standalone: false,
+  imports: [IonicModule, RouterLink, MatIcon, NgIf],
 })
 export class BackButtonComponent implements OnInit {
   @Input() label = true;

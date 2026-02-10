@@ -14,8 +14,12 @@ import {
   Output,
 } from '@angular/core';
 
+import { NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 import { CardItem } from '@vocably/model';
 import { Subject, takeUntil } from 'rxjs';
+import { SideBComponent } from '../side-b/side-b.component';
+import { TextLengthDirective } from '../text-length.directive';
 
 type Point = {
   x: number;
@@ -35,7 +39,6 @@ export type Answer = 'strong' | 'weak' | 'somewhat';
   selector: 'app-srs-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  standalone: false,
   animations: [
     trigger('card', [
       state(
@@ -64,7 +67,6 @@ export type Answer = 'strong' | 'weak' | 'somewhat';
       ),
       transition('* => *', [animate('0.4s')]),
     ]),
-
     trigger('operation', [
       state(
         'unknown',
@@ -83,6 +85,7 @@ export type Answer = 'strong' | 'weak' | 'somewhat';
       transition('* => *', [animate('0.3s')]),
     ]),
   ],
+  imports: [TextLengthDirective, NgIf, SideBComponent, MatIcon],
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() item!: CardItem;
