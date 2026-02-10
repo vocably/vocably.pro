@@ -67,7 +67,7 @@ jobs:
       - run: npx zx ./scripts/build-packages.mjs
       - run: bash ./scripts/install-build-dependencies.sh
       - run: bash ./scripts/declare-variables.sh
-      - run: bash ./scripts/apis-resurrect.sh
+      - run: bash ./scripts/run-terraform.sh
   bumpNewVersion:
     working_directory: ~/repo
     docker:
