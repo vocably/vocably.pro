@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { ExtensionSettings } from '@vocably/extension-messages';
 import { ReplaySubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -7,7 +11,8 @@ import { environment } from '../../../environments/environment';
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss'],
-  standalone: false,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [IonicModule, RouterLink, MatIcon, NgIf, AsyncPipe],
 })
 export class SettingsPageComponent implements OnInit {
   showQRCode = false;

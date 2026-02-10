@@ -13,7 +13,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, SettingsPageComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +23,8 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
       mode: 'md',
       statusTap: true,
     }),
+    HomePageComponent,
+    SettingsPageComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

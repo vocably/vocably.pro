@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { detectExtensionPlatform } from '@vocably/browser';
 import { SearchValues } from '@vocably/extension-content-ui/src/components/search-form/types';
 import {
@@ -25,7 +29,8 @@ const lastUsedSearchValuesKey = 'lastUsedSearchValues_01';
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
-  standalone: false,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [NgIf, IonicModule, RouterLink, MatIcon],
 })
 export class HomePageComponent implements OnInit {
   welcomeUrl = `${environment.appBaseUrl}/welcome`;
