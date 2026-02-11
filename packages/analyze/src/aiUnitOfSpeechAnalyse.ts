@@ -443,6 +443,7 @@ export const getGeminiBatchItem = (payload: AiAnalysePayload) => {
     params?.config?.systemInstruction.join('\n') ?? '';
 
   delete params?.config?.systemInstruction;
+  delete params?.config?.safetySettings;
 
   return {
     key: JSON.stringify(payload),

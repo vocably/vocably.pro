@@ -1,4 +1,8 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import {
+  createUserContent,
+  GenerateContentParameters,
+  GoogleGenAI,
+} from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
   chatGptRequest,
@@ -84,72 +88,77 @@ export const getExpectedNumberOfTranslations = (
   return definitions.length;
 };
 
-export const translateUnitOfSpeechGemini = async ({
+export const getGeminiTranslationGenerationContentParams = ({
   sourceLanguage,
   targetLanguage,
   source,
   partOfSpeech,
   definitions = [],
   number,
-}: Payload): Promise<Result<string[]>> => {
-  const genAI = new GoogleGenAI({
-    apiKey: config.geminiApiKey,
-  });
-
+}: Payload): GenerateContentParameters => {
   const safeSourceLanguage = languageList[sourceLanguage];
   const safeTargetLanguage = languageList[targetLanguage];
-
-  const abortController = new AbortController();
-  const abortSignal = abortController.signal;
 
   const expectedNumberOfTranslations =
     getExpectedNumberOfTranslations(definitions);
 
-  const result = await resultify(
-    timeout(
-      genAI.models.generateContent({
-        model: 'gemini-2.5-flash',
-        contents: createUserContent([source, ...definitions]),
-        config: {
-          systemInstruction: [
-            `You are ${safeSourceLanguage}-${safeTargetLanguage} dictionary`,
-            `User provides ${safeSourceLanguage} ${partOfSpeech}${
-              definitions?.length > 0 ? ' and its definitions' : ''
-            }.`,
-            `Give up to ${expectedNumberOfTranslations} relevant translations into ${safeTargetLanguage}${
-              definitions?.length > 0 ? ' in the context of definitions' : ''
-            }.${
-              expectedNumberOfTranslations === 2
-                ? ' Only include a second if it is a common, high-frequency usage.'
-                : ''
-            }`,
-            `Respond in JSON array with each translation on a separate line`,
-            partOfSpeech.includes('verb')
-              ? `Consider tense of the provided ${partOfSpeech}`
-              : '',
-            number === 'plural' && partOfSpeech === 'noun'
-              ? 'This is plural.'
-              : '',
-            `Omit explanations`,
-            `Sort results by commonality`,
-          ],
-          thinkingConfig: {
-            thinkingBudget: 0, // Disables thinking
-          },
-          temperature: 0,
-          responseMimeType: 'application/json',
-          responseJsonSchema: {
-            type: 'array',
-            items: {
-              type: 'string',
-            },
-          },
-          abortSignal,
+  return {
+    model: 'gemini-2.5-flash',
+    contents: createUserContent([source, ...definitions]),
+    config: {
+      systemInstruction: [
+        `You are ${safeSourceLanguage}-${safeTargetLanguage} dictionary`,
+        `User provides ${safeSourceLanguage} ${partOfSpeech}${
+          definitions?.length > 0 ? ' and its definitions' : ''
+        }.`,
+        `Give up to ${expectedNumberOfTranslations} relevant translations into ${safeTargetLanguage}${
+          definitions?.length > 0 ? ' in the context of definitions' : ''
+        }.${
+          expectedNumberOfTranslations === 2
+            ? ' Only include a second if it is a common, high-frequency usage.'
+            : ''
+        }`,
+        `Respond in JSON array with each translation on a separate line`,
+        partOfSpeech.includes('verb')
+          ? `Consider tense of the provided ${partOfSpeech}`
+          : '',
+        number === 'plural' && partOfSpeech === 'noun' ? 'This is plural.' : '',
+        `Omit explanations`,
+        `Sort results by commonality`,
+      ],
+      thinkingConfig: {
+        thinkingBudget: 0, // Disables thinking
+      },
+      temperature: 0,
+      responseMimeType: 'application/json',
+      responseJsonSchema: {
+        type: 'array',
+        items: {
+          type: 'string',
         },
-      }),
-      abortController,
-      4000
-    ),
+      },
+    },
+  };
+};
+
+export const translateUnitOfSpeechGemini = async (
+  payload: Payload
+): Promise<Result<string[]>> => {
+  const genAI = new GoogleGenAI({
+    apiKey: config.geminiApiKey,
+  });
+
+  const abortController = new AbortController();
+  const abortSignal = abortController.signal;
+
+  const params = getGeminiTranslationGenerationContentParams(payload);
+  params.config = {
+    ...params.config,
+    abortSignal,
+  };
+
+  const result = await resultify(
+    timeout(genAI.models.generateContent(params), abortController, 4000),
     {
       reason: 'Unable to perform Gemini translation.',
     }
