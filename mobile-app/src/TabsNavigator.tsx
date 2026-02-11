@@ -20,12 +20,17 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
   const theme = useTheme();
 
   useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
     if (
       welcomeIsRequiredResult.status === 'loaded' &&
       welcomeIsRequiredResult.value
     ) {
-      setTimeout(() => navigation.navigate('Welcome'), 50);
+      timer = setTimeout(() => navigation.navigate('Welcome'), 50);
     }
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [welcomeIsRequiredResult]);
 
   if (
