@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "test": "echo '@vocably/public-backend has no tests.'"
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "devDependencies": {}
 }

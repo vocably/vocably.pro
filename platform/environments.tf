@@ -193,6 +193,7 @@ locals {
 OPENAI_API_KEY="${var.openai_api_key}"
 GEMINI_API_KEY="${var.gemini_api_key}"
 UNITS_OF_SPEECH_BUCKET="${aws_s3_bucket.units_of_speech.bucket}"
+PUBLIC_STATIC_FILES_BUCKET="${aws_s3_bucket.public_static_files.bucket}"
 GOOGLE_APPLICATION_CREDENTIALS="${local.google_key_filename}"
 GOOGLE_PROJECT_ID="${var.gcloud_project_id}"
   EOT

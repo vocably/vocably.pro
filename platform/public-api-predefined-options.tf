@@ -43,6 +43,18 @@ resource "aws_iam_policy" "public_predefined_options_lambda" {
           "${aws_s3_bucket.units_of_speech.arn}/*",
         ]
       },
+      {
+        "Sid" : "PublicStaticFilesBucket",
+        "Effect" : "Allow",
+        "Action" : [
+          "s3:GetObject",
+          "s3:PutObject"
+        ],
+        "Resource" : [
+          aws_s3_bucket.public_static_files.arn,
+          "${aws_s3_bucket.public_static_files.arn}/*",
+        ]
+      },
     ]
   })
 }

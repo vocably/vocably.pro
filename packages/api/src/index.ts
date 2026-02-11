@@ -23,6 +23,7 @@ export * from './publicChatWithCard';
 export * from './publicGenerateUnitsOfSpeech';
 export * from './publicPlaySound';
 export * from './publicPredefinedOptions';
+export * from './publicStaticFile';
 export * from './publicUserFeedback';
 export * from './studyStats';
 export { sendUserFeedback } from './userFeedback';
