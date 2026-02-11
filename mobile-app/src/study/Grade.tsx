@@ -1,9 +1,8 @@
 import { CardItem, StudyFlowType } from '@vocably/model';
-import { SrsScore } from '@vocably/srs';
+import { craftTheStrategy, SrsScore } from '@vocably/srs';
 import React, { FC } from 'react';
 import { ArrangeByLetters } from './ArrangeByLetters';
 import { Card } from './Card';
-import { craftTheStrategy } from './craftTheStrategy';
 import { MultiChoice } from './MultiChoice';
 import { SwipeGrade } from './SwipeGrade';
 

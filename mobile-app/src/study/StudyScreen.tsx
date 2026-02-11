@@ -1,6 +1,6 @@
 import { NavigationProp, Route } from '@react-navigation/native';
 import { CardItem, GoogleLanguage } from '@vocably/model';
-import { grade, slice, SrsScore } from '@vocably/srs';
+import { craftTheStrategy, grade, slice, SrsScore } from '@vocably/srs';
 import { setBadgeCount } from 'aws-amplify/push-notifications';
 import { shuffle } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
@@ -29,11 +29,10 @@ import { ScreenLayout } from '../ui/ScreenLayout';
 import { useAsync } from '../useAsync';
 import { UserMetadataContext } from '../UserMetadataContainer';
 import { useStudySteps } from '../useStudySteps';
-import { useCardsAnsweredToday } from './cardsAnsweredToday';
 import { Completed } from './Completed';
-import { craftTheStrategy } from './craftTheStrategy';
 import { getPredefinedMultiChoiceOptions } from './getPredefinedMultiChoiceOptions';
 import { Grade } from './Grade';
+import { useCardsAnsweredToday } from './useCardsAnsweredToday';
 import { useStreakHasBeenShown } from './useStreakHasBeenShown';
 import { useTranslationLanguage } from './useTranslationLanguage';
 

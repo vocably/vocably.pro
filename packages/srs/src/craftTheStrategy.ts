@@ -1,7 +1,7 @@
 import { CardItem, StudyFlowType, StudyStrategy } from '@vocably/model';
-import { spreadStrategy } from '@vocably/srs/dist/esm/spreadStrategy';
 import { getMultiChoice } from './getMultiChoice';
 import { isSuitableForArrangingByLetters } from './isSuitableForArrangingByLetters';
+import { spreadStrategy } from './spreadStrategy';
 
 type SwipeFront = {
   step: 'sf';

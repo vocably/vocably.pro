@@ -11,12 +11,12 @@ import Sortable, {
   SortableGridRenderItem,
 } from 'react-native-sortables';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ImmediateStep } from '../../../packages/srs/src/craftTheStrategy';
+import { getMultiChoice } from '../../../packages/srs/src/getMultiChoice';
+import { isSuitableForArrangingByLetters } from '../../../packages/srs/src/isSuitableForArrangingByLetters';
 import { defaultStudyFlow, getDefaultValues } from '../defaultStudyFlow';
 import { useSelectedDeck } from '../languageDeck/useSelectedDeck';
-import { ImmediateStep } from '../study/craftTheStrategy';
-import { getMultiChoice } from '../study/getMultiChoice';
 import { getPredefinedMultiChoiceOptions } from '../study/getPredefinedMultiChoiceOptions';
-import { isSuitableForArrangingByLetters } from '../study/isSuitableForArrangingByLetters';
 import { useTranslationLanguage } from '../study/useTranslationLanguage';
 import { CustomSurface } from '../ui/CustomSurface';
 import { PressableScale } from '../ui/PressableScale';
