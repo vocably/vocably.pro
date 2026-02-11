@@ -141,6 +141,82 @@ const getGeminiGenerationContentParams = ({
   };
 };
 
+export const getGeminiTranslationBatchItem = (payload: Payload) => {
+  const params = getGeminiGenerationContentParams(payload);
+
+  if (!isArray(params?.config?.systemInstruction)) {
+    throw new Error('Gemini system instruction is empty');
+  }
+
+  const systemInstructionText =
+    params?.config?.systemInstruction.join('\n') ?? '';
+
+  delete params?.config?.systemInstruction;
+  delete params?.config?.safetySettings;
+
+  return {
+    key: JSON.stringify(payload),
+    request: {
+      model: `models/${params.model}`,
+      contents: params.contents,
+      generation_config: {
+        ...params.config,
+      },
+      system_instruction: {
+        parts: [
+          {
+            text: systemInstructionText,
+          },
+        ],
+      },
+    },
+  };
+};
+
+export const handleGeminiTranslationResponse = (
+  text: string
+): Result<string[]> => {
+  const parseResult = parseJson(text ?? '');
+  if (!parseResult.success) {
+    return parseResult;
+  }
+
+  if (
+    !isArray(parseResult.value) ||
+    !parseResult.value.every(isAiTranslation)
+  ) {
+    return {
+      success: false,
+      reason: `The provided result is not an array of valid AI translations.`,
+      extra: {
+        result: text,
+      },
+    };
+  }
+
+  const translations = uniq(
+    parseResult.value
+      .map(mapGeminiTranslation)
+      .map((r) => r.toString().trim())
+      .filter((r) => !!r)
+  ) as string[];
+
+  if (translations.length === 0) {
+    return {
+      success: false,
+      reason: `The translations list is empty`,
+      extra: {
+        result: text,
+      },
+    };
+  }
+
+  return {
+    success: true,
+    value: translations.length > 10 ? translations.slice(0, 5) : translations,
+  };
+};
+
 export const translateUnitOfSpeechGemini = async (
   payload: Payload
 ): Promise<Result<string[]>> => {
@@ -168,45 +244,7 @@ export const translateUnitOfSpeechGemini = async (
     return result;
   }
 
-  const parseResult = parseJson(result.value.text ?? '');
-  if (!parseResult.success) {
-    return parseResult;
-  }
-
-  if (
-    !isArray(parseResult.value) ||
-    !parseResult.value.every(isAiTranslation)
-  ) {
-    return {
-      success: false,
-      reason: `The provided result is not an array of valid AI translations.`,
-      extra: {
-        result: result.value.text,
-      },
-    };
-  }
-
-  const translations = uniq(
-    parseResult.value
-      .map(mapGeminiTranslation)
-      .map((r) => r.toString().trim())
-      .filter((r) => !!r)
-  ) as string[];
-
-  if (translations.length === 0) {
-    return {
-      success: false,
-      reason: `The translations list is empty`,
-      extra: {
-        result: result.value.text,
-      },
-    };
-  }
-
-  return {
-    success: true,
-    value: translations.length > 10 ? translations.slice(0, 5) : translations,
-  };
+  return handleGeminiTranslationResponse(result.value.text ?? '');
 };
 
 export const translateUnitOfSpeechChatGpt = async ({

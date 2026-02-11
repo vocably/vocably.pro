@@ -12,5 +12,9 @@ export { configureAnalyzer } from './config';
 export { explainSentence } from './explainSentence';
 export * from './generateUnitsOfSpeech';
 export { isVerb } from './isVerb';
-export { getExpectedNumberOfTranslations } from './translateUnitOfSpeech';
+export {
+  getExpectedNumberOfTranslations,
+  getGeminiTranslationBatchItem,
+  handleGeminiTranslationResponse,
+} from './translateUnitOfSpeech';
 export { validateSource } from './validateSource';
