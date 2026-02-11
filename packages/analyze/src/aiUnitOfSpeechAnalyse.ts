@@ -432,7 +432,7 @@ const getGeminiGenerateContentParameters = ({
   };
 };
 
-export const getGeminiBatchItem = (payload: AiAnalysePayload) => {
+export const getGeminiAnalyzeBatchItem = (payload: AiAnalysePayload) => {
   const params = getGeminiGenerateContentParameters(payload);
 
   if (!isArray(params?.config?.systemInstruction)) {
@@ -464,7 +464,7 @@ export const getGeminiBatchItem = (payload: AiAnalysePayload) => {
   };
 };
 
-export const handleGeminiResponse = (
+export const handleGeminiAnalyzeResponse = (
   text: string,
   { sourceLanguage, partOfSpeech }: AiAnalysePayload
 ): Result<AiAnalysis> => {
@@ -538,7 +538,7 @@ export const geminiAnalyse = async (
     };
   }
 
-  return handleGeminiResponse(result.value.text, payload);
+  return handleGeminiAnalyzeResponse(result.value.text, payload);
 };
 
 // End of Gemini

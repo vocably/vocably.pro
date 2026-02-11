@@ -1,6 +1,6 @@
 #!/usr/bin/env -S npx vite-node
 
-import { getGeminiBatchItem } from '@vocably/analyze';
+import { getGeminiAnalyzeBatchItem } from '@vocably/analyze';
 import { GoogleLanguage } from '@vocably/model';
 import { config } from 'dotenv-flow';
 import { writeFileSync } from 'fs';
@@ -2881,7 +2881,7 @@ let rows = [];
 for (const [language, option] of Object.entries(predefinedPartsOfSpeech)) {
   for (const { headword: source, partOfSpeech } of option) {
     rows.push(
-      getGeminiBatchItem({
+      getGeminiAnalyzeBatchItem({
         source,
         partOfSpeech,
         sourceLanguage: language as GoogleLanguage,

@@ -2,7 +2,7 @@
 
 import {
   getAnalyseCacheFileName,
-  handleGeminiResponse,
+  handleGeminiAnalyzeResponse,
 } from '@vocably/analyze';
 import { parseJson } from '@vocably/api';
 import { config } from 'dotenv-flow';
@@ -53,7 +53,7 @@ for (let file of files) {
       deletePoorlyProcessedFile(payload);
       continue;
     }
-    const aiAnalysisResult = handleGeminiResponse(content, payload);
+    const aiAnalysisResult = handleGeminiAnalyzeResponse(content, payload);
     if (!aiAnalysisResult.success) {
       console.error(
         `Error handling response response ${payloadString}. Deleting file`,

@@ -1,6 +1,6 @@
 #!/usr/bin/env -S npx vite-node
 
-import { getGeminiBatchItem } from '@vocably/analyze';
+import { getGeminiAnalyzeBatchItem } from '@vocably/analyze';
 import { config } from 'dotenv-flow';
 import { readFileSync, writeFileSync } from 'fs';
 import 'zx/globals';
@@ -42,7 +42,7 @@ for (const file of unitsOfSpeechFiles) {
   console.log('Adding', unitOfSpeech);
 
   rows.push(
-    getGeminiBatchItem({
+    getGeminiAnalyzeBatchItem({
       source,
       partOfSpeech,
       sourceLanguage: language,

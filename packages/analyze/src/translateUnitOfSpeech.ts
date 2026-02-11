@@ -88,7 +88,7 @@ export const getExpectedNumberOfTranslations = (
   return definitions.length;
 };
 
-export const getGeminiTranslationGenerationContentParams = ({
+const getGeminiGenerationContentParams = ({
   sourceLanguage,
   targetLanguage,
   source,
@@ -151,7 +151,7 @@ export const translateUnitOfSpeechGemini = async (
   const abortController = new AbortController();
   const abortSignal = abortController.signal;
 
-  const params = getGeminiTranslationGenerationContentParams(payload);
+  const params = getGeminiGenerationContentParams(payload);
   params.config = {
     ...params.config,
     abortSignal,

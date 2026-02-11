@@ -1,9 +1,9 @@
 export {
   getAnalyseCacheFileName,
-  getGeminiBatchItem,
+  getGeminiAnalyzeBatchItem,
   getGptAnalyseChatGptBody,
   getGptAnalyseResult,
-  handleGeminiResponse,
+  handleGeminiAnalyzeResponse,
 } from './aiUnitOfSpeechAnalyse';
 export * from './batchUnitOfSpeechAnalyse';
 export { buildBulkAnalysisResult } from './buildBulkAnalysisResult';
