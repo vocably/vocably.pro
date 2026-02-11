@@ -109,7 +109,7 @@ module "public_static_files_cors" {
 resource "aws_api_gateway_resource" "public_static_file" {
   rest_api_id = aws_api_gateway_rest_api.rest_api.id
   parent_id   = aws_api_gateway_resource.public_static_files.id
-  path_part   = "{file}"
+  path_part   = "{proxy+}"
 }
 
 module "public_static_file_cors" {
@@ -129,7 +129,7 @@ resource "aws_api_gateway_method" "get_public_static_file" {
   authorization = "NONE"
 
   request_parameters = {
-    "method.request.path.file" = true
+    "method.request.path.proxy" = true
   }
 }
 
@@ -179,7 +179,7 @@ resource "aws_api_gateway_integration" "get_public_static_file" {
   credentials             = aws_iam_role.public_static_files_api_bucket.arn
 
   request_parameters = {
-    "integration.request.path.file" = "method.request.path.file"
+    "integration.request.path.file" = "method.request.path.proxy"
   }
 }
 
