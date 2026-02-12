@@ -41,12 +41,9 @@
   }
 
   .strong-icon,
-  .somewhat-icon {
-    color: var(--primary-color);
-  }
-
+  .somewhat-icon,
   .weak-icon {
-    color: var(--danger-color);
+    color: var(--primary-color);
   }
 
   &.strong {
@@ -81,8 +78,8 @@
   transform: rotateY(180deg);
 }
 
-.side-a,
-.definition {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -93,14 +90,44 @@
   text-align: center;
 }
 
-.definition {
+.back {
   transform: rotateY(180deg);
 }
 
-.pos {
-  font-size: 40%;
-}
-
-.p-1 {
+.control-elements {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
   padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .rate {
+    display: flex;
+    gap: 0.5rem;
+    button {
+      background-color: var(--body-bg);
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 12rem;
+      padding: 0.5rem;
+
+      &:first-child {
+        border-radius: 0.5rem 0 0 0.5rem;
+      }
+
+      &:last-child {
+        border-radius: 0 0.5rem 0.5rem 0;
+      }
+    }
+
+    mat-icon {
+      font-size: 2rem;
+    }
+  }
 }

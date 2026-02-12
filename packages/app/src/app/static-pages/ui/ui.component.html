@@ -1,0 +1,20 @@
+@switch (componentName) {
+  @case ('sf') {
+    <app-card-sf [card]="card"></app-card-sf>
+  }
+  @case ('sb') {
+    Swipe back
+  }
+  @case ('mf') {
+    Multichoice front
+  }
+  @case ('mb') {
+    Multichoice back
+  }
+  @case ('ab') {
+    Type to respond
+  }
+  @default {
+    Unrecognized component {{ componentName }}
+  }
+}

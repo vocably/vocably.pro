@@ -1,43 +1,23 @@
 <div
   class="card"
   [class.flip]="isFlipped"
-  (touchstart)="onTouchStart($event)"
-  (touchmove)="onTouchMove($event)"
-  (touchend)="onTouchEnd()"
-  [style.transform]="'translate(' + displaceX + 'px, ' + displaceY + 'px)'"
   [@card]="userAnswer"
+  (click)="onFlip()"
 >
   <div class="card-inner">
-    <div appTextLength class="side side-a">
-      <span class="text-emphasize">{{ item.data.source }}</span>
-      <span
-        *ngIf="item.data.partOfSpeech"
-        class="pos muted inline-block ml-0_5"
-        >{{ item.data.partOfSpeech }}</span
-      >
+    <div appTextLength class="side front">
+      <ng-content select="[front]"></ng-content>
     </div>
-    <div appTextLength class="side definition">
-      <ul
-        app-side-b
-        [definition]="item.data.definition"
-        [translation]="item.data.translation"
-      ></ul>
+    <div appTextLength class="side back">
+      <ng-content select="[back]"></ng-content>
     </div>
   </div>
 </div>
 <div
   class="operation"
-  [style.opacity]="toFixedState"
-  [style.transform]="'scale(' + toFixedState + ')'"
-  [class.somewhat]="
-    userAnswer === 'somewhat' || (!isHorizontalMovement && displaceY > 0)
-  "
-  [class.weak]="
-    userAnswer === 'weak' || (isHorizontalMovement && displaceX < 0)
-  "
-  [class.strong]="
-    userAnswer === 'strong' || (isHorizontalMovement && displaceX > 0)
-  "
+  [class.somewhat]="userAnswer === 3"
+  [class.weak]="userAnswer === 1"
+  [class.strong]="userAnswer === 5"
   [@operation]="userAnswer === 'unknown' ? 'unknown' : 'known'"
   (@operation.done)="onSelectionAnimationCompleted()"
 >
@@ -62,4 +42,23 @@
     class="operation-icon weak-icon"
     >close</mat-icon
   >
+</div>
+<div class="control-elements">
+  <div class="rate">
+    <button (click)="userAnswer = 1">
+      <mat-icon aria-hidden="false" aria-label="Weak" inline="true"
+        >close</mat-icon
+      ><span>Not yet</span>
+    </button>
+    <button (click)="userAnswer = 3">
+      <mat-icon aria-hidden="false" aria-label="Somewhat" inline="true"
+        >done</mat-icon
+      ><span>Almost</span>
+    </button>
+    <button (click)="userAnswer = 5">
+      <mat-icon aria-hidden="false" aria-label="Strong" inline="true"
+        >done_all</mat-icon
+      ><span>Got it</span>
+    </button>
+  </div>
 </div>

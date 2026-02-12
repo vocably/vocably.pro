@@ -1,18 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CardItem } from '@vocably/model';
+import { CardItem, StudyFlowType } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { Subject } from 'rxjs';
-import { CardOptionsComponent } from '../card-options/card-options.component';
-import { Answer, CardComponent } from '../card/card.component';
+import { GradeComponent } from '../grade/grade.component';
 import { SuccessComponent } from '../success/success.component';
-
-const gradeMap: Record<Answer, SrsScore> = {
-  weak: 0,
-  somewhat: 3,
-  strong: 5,
-};
 
 export type GradeResult = {
   cardItem: CardItem;
@@ -31,20 +24,20 @@ export type GradeResult = {
       ]),
     ]),
   ],
-  imports: [NgFor, CardComponent, NgIf, CardOptionsComponent, SuccessComponent],
+  imports: [NgFor, GradeComponent, NgIf, SuccessComponent],
 })
 export class ListComponent {
+  @Input() allCards!: CardItem[];
+  @Input() prerenderedCards!: CardItem[];
+  @Input() studySteps!: StudyFlowType[];
   @Input() cards!: CardItem[];
   @Output() grade = new EventEmitter<GradeResult>();
   @Output() oneMoreRound = new EventEmitter();
 
-  flip$ = new Subject();
-  answer$ = new Subject<Answer>();
-
-  onAnswer(answer: Answer) {
+  onAnswer(score: SrsScore) {
     this.grade.emit({
       cardItem: this.cards[0],
-      score: gradeMap[answer],
+      score,
     });
     this.cards = this.cards.slice(1);
   }

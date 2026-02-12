@@ -1,16 +1,11 @@
-<app-srs-card
+<app-srs-grade
   *ngFor="let card of cards.slice(0, 1)"
-  [item]="card"
-  [flip$]="flip$"
-  [answer$]="answer$"
-  (answer)="onAnswer($event)"
-  @displayComponent
-></app-srs-card>
-<app-srs-card-options
-  *ngIf="cards.length > 0"
-  (flip)="flip$.next(null)"
-  (answer)="answer$.next($event)"
-></app-srs-card-options>
+  [card]="card"
+  [allCards]="cards"
+  [studySteps]="studySteps"
+  [prerenderedCards]="prerenderedCards"
+  (grade)="onAnswer($event)"
+></app-srs-grade>
 <app-srs-success
   *ngIf="cards.length === 0"
   (oneMoreRound)="oneMoreRound.emit()"

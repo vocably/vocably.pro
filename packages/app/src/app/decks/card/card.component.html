@@ -19,10 +19,9 @@
   </div>
 </div>
 <div class="pl-1_5">
-  <ul
-    class="outside"
-    app-side-b
-    [definition]="item.data.definition"
-    [translation]="item.data.translation"
-  ></ul>
+  <ul class="outside" text-list [text]="item.data.definition">
+    @if (item.data.translation) {
+      <li class="text-emphasize">{{ item.data.translation }}</li>
+    }
+  </ul>
 </div>
