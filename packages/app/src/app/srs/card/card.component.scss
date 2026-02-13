@@ -1,27 +1,26 @@
 :host {
-  --aspect-ratio: calc(var(--screen-height-px) / var(--screen-width-px));
-
   display: block;
   height: 100%;
   overflow: hidden;
   position: relative;
 }
 
+.inner {
+  display: block;
+  height: 100%;
+}
+
 .card {
   height: 100%;
+  // ToDo: fix the control elements position
+  padding-bottom: 94px;
   perspective: 1000px;
   will-change: transform;
   user-select: none;
 }
 
 .side {
-  --inner-text-length: 30;
   padding: 1.5rem;
-  font-size: clamp(
-    1vw + 2vh,
-    (1200vh + 500vw) / var(--inner-text-length),
-    5vw * var(--aspect-ratio)
-  );
 }
 
 .operation {
@@ -41,12 +40,9 @@
   }
 
   .strong-icon,
-  .somewhat-icon {
-    color: var(--primary-color);
-  }
-
+  .somewhat-icon,
   .weak-icon {
-    color: var(--danger-color);
+    color: var(--primary-color);
   }
 
   &.strong {
@@ -81,8 +77,8 @@
   transform: rotateY(180deg);
 }
 
-.side-a,
-.definition {
+.front,
+.back {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -93,14 +89,53 @@
   text-align: center;
 }
 
-.definition {
+.back {
   transform: rotateY(180deg);
 }
 
-.pos {
-  font-size: 40%;
-}
-
-.p-1 {
+.control-elements {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
   padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .rate {
+    --border-radius: 0.5rem;
+
+    display: flex;
+    gap: 0.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--body-bg);
+    max-width: 100%;
+
+    button {
+      display: flex;
+      gap: 0.3rem;
+      align-items: center;
+      justify-content: center;
+      width: 12rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 0;
+
+      &:first-child {
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
+      }
+
+      &:last-child {
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      }
+    }
+
+    mat-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
+  }
 }

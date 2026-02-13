@@ -1,0 +1,26 @@
+@switch (componentName) {
+  @case ('sf') {
+    <app-srs-card-sf [card]="card"></app-srs-card-sf>
+  }
+  @case ('sb') {
+    <app-srs-card-sb [card]="card"></app-srs-card-sb>
+  }
+  @case ('mf') {
+    <app-srs-card-mf
+      [card]="card"
+      [wrongOptions]="wrongOptions"
+    ></app-srs-card-mf>
+  }
+  @case ('mb') {
+    <app-srs-card-mb
+      [card]="card"
+      [wrongOptions]="wrongOptions"
+    ></app-srs-card-mb>
+  }
+  @case ('ab') {
+    <app-srs-card-ab [card]="card"></app-srs-card-ab>
+  }
+  @default {
+    Unrecognized component {{ componentName }}
+  }
+}

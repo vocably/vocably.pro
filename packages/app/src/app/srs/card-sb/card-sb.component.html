@@ -1,0 +1,6 @@
+<app-srs-card [card]="card" (grade)="grade.emit($event)">
+  <div front><app-srs-reverse-front [card]="card" /></div>
+  <div back>
+    <app-srs-front [card]="card" />
+  </div>
+</app-srs-card>

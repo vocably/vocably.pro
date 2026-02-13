@@ -1,0 +1,9 @@
+.srs-card-font {
+  --aspect-ratio: calc(var(--screen-height-px) / var(--screen-width-px));
+  --inner-text-length: 30;
+  font-size: clamp(
+    1vw + 2vh,
+    (1200vh + 500vw) / var(--inner-text-length),
+    5vw * var(--aspect-ratio)
+  );
+}

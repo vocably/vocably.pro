@@ -5,6 +5,7 @@ import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.co
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
 import { ExportPageComponent } from './pages/export-page/export-page.component';
 import { NoDecksPageComponent } from './pages/no-decks-page/no-decks-page.component';
+import { StudyPageComponent } from './pages/study-page/study-page.component';
 import { SelectedDeckComponent } from './selected-deck/selected-deck.component';
 
 const routes: Routes = [
@@ -25,6 +26,16 @@ const routes: Routes = [
             path: '',
             title: 'Dashboard',
             component: DashboardPageComponent,
+          },
+          {
+            path: 'study',
+            title: 'Study',
+            component: StudyPageComponent,
+            data: {
+              title: 'Study',
+              cleanScreen: true,
+            },
+            children: [],
           },
           {
             path: 'edit',

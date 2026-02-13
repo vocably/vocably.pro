@@ -1,13 +1,14 @@
 import { NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { CardItem } from '@vocably/model';
-import { SideBComponent } from '../../srs/side-b/side-b.component';
+import { TextListComponent } from '../../srs/text-list/text-list.component';
+import { sanitizeTranscript } from '@vocably/sulna';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
-  imports: [NgIf, SideBComponent],
+  imports: [NgIf, TextListComponent],
 })
 export class CardComponent implements OnInit {
   @Input() item!: CardItem;
@@ -15,4 +16,6 @@ export class CardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  protected readonly sanitizeTranscript = sanitizeTranscript;
 }

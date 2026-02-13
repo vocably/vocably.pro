@@ -1,0 +1,37 @@
+@switch (step.step) {
+  @case ('sf') {
+    <app-srs-card-sf
+      [card]="card"
+      (grade)="grade.emit($event)"
+    ></app-srs-card-sf>
+  }
+  @case ('sb') {
+    <app-srs-card-sb
+      [card]="card"
+      (grade)="grade.emit($event)"
+    ></app-srs-card-sb>
+  }
+  @case ('mf') {
+    <app-srs-card-mf
+      [card]="card"
+      [wrongOptions]="step.multiChoice"
+      (grade)="grade.emit($event)"
+    ></app-srs-card-mf>
+  }
+  @case ('mb') {
+    <app-srs-card-mb
+      [card]="card"
+      [wrongOptions]="step.multiChoice"
+      (grade)="grade.emit($event)"
+    ></app-srs-card-mb>
+  }
+  @case ('ab') {
+    <app-srs-card-ab
+      [card]="card"
+      (grade)="grade.emit($event)"
+    ></app-srs-card-ab>
+  }
+  @default {
+    Unrecognized step.
+  }
+}

@@ -1,0 +1,38 @@
+<div class="inner" [@hide]="correct" (@hide.done)="onHideAnimationCompleted()">
+  <app-srs-reverse-front
+    class="srs-card-font"
+    [card]="card"
+    expectedAction="Type in"
+  ></app-srs-reverse-front>
+  <div class="answer" [@shake]="wrong">
+    @for (letterIndex of answer; track $index) {
+      <button
+        class="letter"
+        [disabled]="letterIndex === false"
+        (click)="unuseLetter($index)"
+      >
+        {{ letterIndex !== false ? letters[letterIndex] : '&nbsp;' }}
+      </button>
+    }
+  </div>
+  <div class="answer options">
+    @for (letter of letters; track $index) {
+      @let isUsed = answer.includes($index);
+      <button class="letter" [disabled]="isUsed" (click)="useLetter($index)">
+        {{ letter }}
+      </button>
+    }
+  </div>
+  <div class="text-center hint">
+    <div class="hint-text" [class.visible]="answerDisplayed">
+      {{ correctAnswer }}
+    </div>
+    <button
+      class="unstyled link hint-button"
+      (click)="answerDisplayed = true"
+      [disabled]="answerDisplayed"
+    >
+      Show me the answer
+    </button>
+  </div>
+</div>

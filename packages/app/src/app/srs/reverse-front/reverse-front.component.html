@@ -1,0 +1,23 @@
+<div class="text-left">
+  <span style="font-size: 80%"
+    >{{ expectedAction }} the
+    @if (card.data.partOfSpeech) {
+      <span class="text-emphasize">{{ card.data.partOfSpeech }}</span
+      >:
+    } @else {
+      meaning:
+    }
+  </span>
+  <ul
+    class="text-left"
+    style="font-size: 60%"
+    text-list
+    [text]="card.data.definition"
+  >
+    @if (card.data.translation) {
+      <li class="text-emphasize">
+        <span style="font-size: 160%">{{ card.data.translation }}</span>
+      </li>
+    }
+  </ul>
+</div>

@@ -1,10 +1,32 @@
 <div class="study-container">
-  <app-srs-list
-    class="study-list"
-    [cards]="this.cards"
-    (grade)="onGrade($event)"
-    (oneMoreRound)="reloadCards()"
-  ></app-srs-list>
+  @if (necessaryData.isLoading()) {
+    <div class="hero max">
+      <div class="hero-body text-center">
+        <ion-spinner name="dots" class="mr-1"></ion-spinner>Study session...
+      </div>
+    </div>
+  } @else if (necessaryData.error()) {
+    <div class="hero max">
+      <div class="hero-body text-center">
+        <div style="font-size: 5rem" class="text-danger">
+          <mat-icon class="error-icon" inline>error</mat-icon>
+        </div>
+        <p>{{ necessaryData.error() }}</p>
+        <p>Please reload the page to try again.</p>
+      </div>
+    </div>
+  } @else {
+    <app-srs-list
+      class="study-list"
+      [studySteps]="necessaryData.value().studySteps"
+      [allCards]="allCards"
+      [cards]="cards"
+      [total]="total"
+      [prerenderedCards]="[]"
+      (grade)="onGrade($event)"
+      (oneMoreRound)="reloadCards()"
+    ></app-srs-list>
+  }
   <div class="nav">
     <app-back-button></app-back-button>
   </div>

@@ -1,0 +1,17 @@
+<app-srs-card [card]="card" (grade)="grade.emit($event)">
+  <div front>
+    <app-srs-front [card]="card" />
+  </div>
+  <div back>
+    <ul
+      class="text-left"
+      style="font-size: 60%"
+      text-list
+      [text]="card.data.definition"
+    >
+      @if (card.data.translation) {
+        <li class="text-emphasize">{{ card.data.translation }}</li>
+      }
+    </ul>
+  </div>
+</app-srs-card>

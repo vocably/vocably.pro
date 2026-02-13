@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { ImmediateStep } from '../../../packages/srs/src/craftTheStrategy';
 import { getMultiChoice } from '../../../packages/srs/src/getMultiChoice';
 import { isSuitableForArrangingByLetters } from '../../../packages/srs/src/isSuitableForArrangingByLetters';
-import { defaultStudyFlow, getDefaultValues } from '../defaultStudyFlow';
+import { getDefaultValues } from '../defaultStudyFlow';
 import { useSelectedDeck } from '../languageDeck/useSelectedDeck';
 import { getPredefinedMultiChoiceOptions } from '../study/getPredefinedMultiChoiceOptions';
 import { useTranslationLanguage } from '../study/useTranslationLanguage';
@@ -24,6 +24,7 @@ import { usePremium } from '../usePremium';
 import { usePresentPaywall } from '../usePresentPaywall';
 import { UserMetadataContext } from '../UserMetadataContainer';
 import { StudyStepSwitch } from './StudyStepSwitch';
+import { defaultStudyFlow } from '@vocably/srs';
 
 type PreviewStep = {
   card: CardItem;

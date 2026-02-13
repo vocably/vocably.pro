@@ -1,11 +1,17 @@
 .study-container {
+  --nav-height: 48px;
+
   height: var(--app-height);
   position: relative;
 }
 
 .study-list {
   display: block;
-  height: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--nav-height);
+  bottom: 0;
 }
 
 .nav {
@@ -14,4 +20,5 @@
   right: 0;
   text-align: center;
   top: var(--container-padding);
+  height: var(--nav-height);
 }
