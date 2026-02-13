@@ -10,4 +10,5 @@ import { TextListComponent } from '../text-list/text-list.component';
 })
 export class ReverseFrontComponent {
   @Input() card!: CardItem;
+  @Input() expectedAction = 'Guess';
 }

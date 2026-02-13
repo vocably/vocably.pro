@@ -1,6 +1,4 @@
 :host {
-  --aspect-ratio: calc(var(--screen-height-px) / var(--screen-width-px));
-
   display: flex;
   flex-direction: column;
   justify-content: center;

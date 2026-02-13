@@ -5,10 +5,17 @@ import { CardItem } from '@vocably/model';
 import { CardSbComponent } from '../../srs/card-sb/card-sb.component';
 import { CardMfComponent } from '../../srs/card-mf/card-mf.component';
 import { CardMbComponent } from '../../srs/card-mb/card-mb.component';
+import { CardAbComponent } from '../../srs/card-ab/card-ab.component';
 
 @Component({
   selector: 'app-ui',
-  imports: [CardSfComponent, CardSbComponent, CardMfComponent, CardMbComponent],
+  imports: [
+    CardSfComponent,
+    CardSbComponent,
+    CardMfComponent,
+    CardMbComponent,
+    CardAbComponent,
+  ],
   templateUrl: './ui.component.html',
   styleUrl: './ui.component.scss',
 })

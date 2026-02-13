@@ -6,6 +6,7 @@ import { FrontComponent } from '../front/front.component';
 import { shuffle } from 'lodash-es';
 import {
   animate,
+  keyframes,
   state,
   style,
   transition,
@@ -20,21 +21,16 @@ import { ReverseFrontComponent } from '../reverse-front/reverse-front.component'
   styleUrl: './multichoice.component.scss',
   animations: [
     trigger('correct', [
-      state(
-        'not-yet',
-        style({
-          transform: 'scale(1)',
-          opacity: '1',
-        })
-      ),
-      state(
-        'yes',
-        style({
-          transform: 'scale(1.5)',
-          opacity: '0',
-        })
-      ),
-      transition('* => *', [animate('0.3s')]),
+      state('true', style({ transform: 'scale(1.5)', opacity: '0' })),
+      transition('false => true', [
+        animate(
+          '0.3s',
+          keyframes([
+            style({ transform: 'scale(1)', opacity: '1' }),
+            style({ transform: 'scale(1.5)', opacity: '0' }),
+          ])
+        ),
+      ]),
     ]),
   ],
 })
@@ -45,7 +41,7 @@ export class CardMultichoiceComponent implements OnInit {
 
   @Input() reverse: boolean = false;
 
-  correct: 'not-yet' | 'yes' = 'not-yet';
+  correct: boolean = false;
 
   options: CardItem[];
 
@@ -58,7 +54,7 @@ export class CardMultichoiceComponent implements OnInit {
   protected readonly sanitizeTranscript = sanitizeTranscript;
 
   onOptionClick = (option: CardItem) => {
-    if (this.correct === 'yes') {
+    if (this.correct) {
       return;
     }
 
@@ -67,7 +63,7 @@ export class CardMultichoiceComponent implements OnInit {
       return;
     }
 
-    this.correct = 'yes';
+    this.correct = true;
   };
 
   onCorrectAnimationCompleted = () => {
