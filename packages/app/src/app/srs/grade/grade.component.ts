@@ -35,7 +35,5 @@ export class GradeComponent implements OnInit {
       allCards: this.allCards,
       prerenderedCards: this.prerenderedCards,
     }).immediateStep;
-
-    console.log('grade init', this.card.id, this.step);
   }
 }

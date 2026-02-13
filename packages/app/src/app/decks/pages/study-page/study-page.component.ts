@@ -74,13 +74,6 @@ export class StudyPageComponent implements OnInit, OnDestroy {
   }
 
   onGrade(gradeResult: GradeResult) {
-    console.log(
-      'Grade',
-      gradeResult.cardItem.id,
-      gradeResult.score,
-      gradeResult.cardItem.data.state
-    );
-
     if (!this.necessaryData.hasValue()) {
       return;
     }
