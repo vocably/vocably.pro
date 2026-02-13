@@ -1,11 +1,15 @@
-<app-srs-grade
-  *ngFor="let card of cards.slice(0, 1)"
-  [card]="card"
-  [allCards]="cards"
-  [studySteps]="studySteps"
-  [prerenderedCards]="prerenderedCards"
-  (grade)="onAnswer($event)"
-></app-srs-grade>
+<div class="grade" *ngFor="let card of cards.slice(0, 1)">
+  <div class="grade-container">
+    <app-srs-grade
+      [card]="card"
+      [allCards]="cards"
+      [studySteps]="studySteps"
+      [prerenderedCards]="prerenderedCards"
+      (grade)="onAnswer($event)"
+    ></app-srs-grade>
+  </div>
+  <div class="grade-nav">{{ total - cards.length + 1 }} / {{ total }}</div>
+</div>
 <app-srs-success
   *ngIf="cards.length === 0"
   (oneMoreRound)="oneMoreRound.emit()"

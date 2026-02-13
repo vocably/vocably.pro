@@ -97,7 +97,7 @@ export class CardComponent {
   @Output() flip = new EventEmitter<boolean>();
 
   @HostListener('document:keydown.space', ['$event'])
-  onEscape(event: KeyboardEvent) {
+  onSpace(event: KeyboardEvent) {
     event.preventDefault();
     this.onFlip();
   }

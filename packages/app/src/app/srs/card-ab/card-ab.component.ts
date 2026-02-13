@@ -130,6 +130,8 @@ export class CardAbComponent implements OnInit {
   }
 
   onHideAnimationCompleted = () => {
-    this.grade.emit(this.hadErrors || this.answerDisplayed ? 3 : 5);
+    if (this.correct) {
+      this.grade.emit(this.hadErrors || this.answerDisplayed ? 3 : 5);
+    }
   };
 }

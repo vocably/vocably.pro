@@ -31,6 +31,7 @@ export class ListComponent {
   @Input() prerenderedCards!: CardItem[];
   @Input() studySteps!: StudyFlowType[];
   @Input() cards!: CardItem[];
+  @Input() total = 0;
   @Output() grade = new EventEmitter<GradeResult>();
   @Output() oneMoreRound = new EventEmitter();
 

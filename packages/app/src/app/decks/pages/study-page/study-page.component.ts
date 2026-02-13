@@ -2,8 +2,14 @@ import { Component, OnDestroy, OnInit, resource } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
 import { getUserMetadata, getUserStaticMetadata } from '@vocably/api';
-import { CardItem } from '@vocably/model';
-import { defaultStudyFlow, filterStudyFlow, grade, slice } from '@vocably/srs';
+import { CardItem, StudyStrategy } from '@vocably/model';
+import {
+  craftTheStrategy,
+  defaultStudyFlow,
+  filterStudyFlow,
+  grade,
+  slice,
+} from '@vocably/srs';
 import { Subject, takeUntil } from 'rxjs';
 import { BackButtonComponent } from '../../../components/back-button/back-button.component';
 import { GradeResult, ListComponent } from '../../../srs/list/list.component';
@@ -18,6 +24,7 @@ import { DeckService } from '../../deck.service';
 })
 export class StudyPageComponent implements OnInit, OnDestroy {
   public cards: CardItem[] = [];
+  public total = 0;
 
   private destroy$ = new Subject();
 
@@ -61,22 +68,35 @@ export class StudyPageComponent implements OnInit, OnDestroy {
   }
 
   reloadCards() {
-    this.cards = slice(new Date(), 10, this.deckStore.deck$.value.cards);
     this.allCards = this.deckStore.deck$.value.cards;
+    this.cards = slice(new Date(), 10, this.deckStore.deck$.value.cards);
+    this.total = this.cards.length;
   }
 
   onGrade(gradeResult: GradeResult) {
-    // Keep the current state because web app does not support strategies yet
-    const currentState = gradeResult.cardItem.data.state;
-    const item = grade(gradeResult.cardItem.data, gradeResult.score, [
-      {
-        step: 'sf',
-        allowedFailures: null,
-      },
-    ]);
-    if (currentState) {
-      item.state = currentState;
+    console.log(
+      'Grade',
+      gradeResult.cardItem.id,
+      gradeResult.score,
+      gradeResult.cardItem.data.state
+    );
+
+    if (!this.necessaryData.hasValue()) {
+      return;
     }
+
+    const strategy = craftTheStrategy({
+      studySteps: this.necessaryData.value().studySteps,
+      card: gradeResult.cardItem,
+      allCards: this.cards,
+      prerenderedCards: [],
+    });
+
+    const item = grade(
+      gradeResult.cardItem.data,
+      gradeResult.score,
+      strategy.strategy
+    );
 
     this.deckService
       .update(gradeResult.cardItem.id, item)

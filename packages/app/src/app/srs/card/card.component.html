@@ -1,8 +1,4 @@
-<div
-  class="inner"
-  [@hide]="userAnswer !== 'unknown'"
-  (@hide.done)="onHideAnimationCompleted()"
->
+<div class="inner" [@hide]="userAnswer !== 'unknown'">
   <div
     class="card"
     [class.flip]="isFlipped"
@@ -24,6 +20,7 @@
     [class.weak]="userAnswer === 1"
     [class.strong]="userAnswer === 5"
     [@operation]="userAnswer === 'unknown' ? 'unknown' : 'known'"
+    (@operation.done)="onHideAnimationCompleted()"
   >
     <mat-icon
       aria-hidden="false"

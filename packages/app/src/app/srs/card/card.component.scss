@@ -12,6 +12,8 @@
 
 .card {
   height: 100%;
+  // ToDo: fix the control elements position
+  padding-bottom: 94px;
   perspective: 1000px;
   will-change: transform;
   user-select: none;
@@ -108,11 +110,13 @@
     gap: 0.5rem;
     border-radius: var(--border-radius);
     background-color: var(--body-bg);
+    max-width: 100%;
 
     button {
       display: flex;
-      flex-direction: column;
+      gap: 0.3rem;
       align-items: center;
+      justify-content: center;
       width: 12rem;
       padding: 0.5rem;
       cursor: pointer;
@@ -128,7 +132,10 @@
     }
 
     mat-icon {
-      font-size: 1.3rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
     }
   }
 }

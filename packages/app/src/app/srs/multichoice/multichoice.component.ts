@@ -47,6 +47,10 @@ export class CardMultichoiceComponent implements OnInit {
   };
 
   onHideAnimationCompleted = () => {
+    if (!this.correct) {
+      return;
+    }
+
     if (this.wrongfullySelected.length > 0) {
       this.grade.emit(3);
       return;
