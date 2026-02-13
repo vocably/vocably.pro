@@ -1,9 +1,13 @@
 import {
   animate,
+  animateChild,
+  keyframes,
   state,
   style,
   transition,
   trigger,
+  group,
+  query,
 } from '@angular/animations';
 import {
   Component,
@@ -67,6 +71,23 @@ import { SrsScore } from '@vocably/srs';
       ),
       transition('* => *', [animate('0.3s')]),
     ]),
+    trigger('hide', [
+      state('true', style({ transform: 'scale(1.5)', opacity: '0' })),
+      transition('false => true', [
+        group([
+          // Parent animation
+          animate(
+            '0.3s',
+            keyframes([
+              style({ transform: 'scale(1)', opacity: '1', offset: 0 }),
+              style({ transform: 'scale(1.5)', opacity: '0', offset: 1 }),
+            ])
+          ),
+          // Force child animations to run simultaneously
+          query('@card, @operation', [animateChild()], { optional: true }),
+        ]),
+      ]),
+    ]),
   ],
   imports: [TextLengthDirective, MatIcon],
 })
@@ -102,7 +123,7 @@ export class CardComponent {
 
   constructor() {}
 
-  onSelectionAnimationCompleted() {
+  onHideAnimationCompleted() {
     if (this.userAnswer !== 'unknown') {
       this.grade.emit(this.userAnswer);
     }

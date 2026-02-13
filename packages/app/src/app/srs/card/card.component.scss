@@ -5,6 +5,11 @@
   position: relative;
 }
 
+.inner {
+  display: block;
+  height: 100%;
+}
+
 .card {
   height: 100%;
   perspective: 1000px;

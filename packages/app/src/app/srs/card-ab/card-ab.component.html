@@ -1,8 +1,4 @@
-<div
-  class="inner"
-  [@correct]="correct"
-  (@correct.done)="onCorrectAnimationCompleted()"
->
+<div class="inner" [@hide]="correct" (@hide.done)="onHideAnimationCompleted()">
   <app-srs-reverse-front
     class="srs-card-font"
     [card]="card"

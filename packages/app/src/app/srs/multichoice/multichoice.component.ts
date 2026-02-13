@@ -4,35 +4,15 @@ import { SrsScore } from '@vocably/srs';
 import { sanitizeTranscript } from '@vocably/sulna';
 import { FrontComponent } from '../front/front.component';
 import { shuffle } from 'lodash-es';
-import {
-  animate,
-  keyframes,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { ReverseFrontComponent } from '../reverse-front/reverse-front.component';
+import { hideAnimation } from '../hide-animation';
 
 @Component({
   selector: 'app-srs-multichoice',
   imports: [FrontComponent, ReverseFrontComponent],
   templateUrl: './multichoice.component.html',
   styleUrl: './multichoice.component.scss',
-  animations: [
-    trigger('correct', [
-      state('true', style({ transform: 'scale(1.5)', opacity: '0' })),
-      transition('false => true', [
-        animate(
-          '0.3s',
-          keyframes([
-            style({ transform: 'scale(1)', opacity: '1' }),
-            style({ transform: 'scale(1.5)', opacity: '0' }),
-          ])
-        ),
-      ]),
-    ]),
-  ],
+  animations: [hideAnimation],
 })
 export class CardMultichoiceComponent implements OnInit {
   @Input() card!: CardItem;
@@ -66,7 +46,7 @@ export class CardMultichoiceComponent implements OnInit {
     this.correct = true;
   };
 
-  onCorrectAnimationCompleted = () => {
+  onHideAnimationCompleted = () => {
     if (this.wrongfullySelected.length > 0) {
       this.grade.emit(3);
       return;

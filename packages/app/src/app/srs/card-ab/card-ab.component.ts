@@ -13,11 +13,11 @@ import { shuffle } from 'lodash-es';
 import {
   animate,
   keyframes,
-  state,
   style,
   transition,
   trigger,
 } from '@angular/animations';
+import { hideAnimation } from '../hide-animation';
 
 @Component({
   selector: 'app-srs-card-ab',
@@ -40,18 +40,7 @@ import {
         ),
       ]),
     ]),
-    trigger('correct', [
-      state('true', style({ transform: 'scale(1.5)', opacity: '0' })),
-      transition('false => true', [
-        animate(
-          '0.3s',
-          keyframes([
-            style({ transform: 'scale(1)', opacity: '1' }),
-            style({ transform: 'scale(1.5)', opacity: '0' }),
-          ])
-        ),
-      ]),
-    ]),
+    hideAnimation,
   ],
 })
 export class CardAbComponent implements OnInit {
@@ -140,7 +129,7 @@ export class CardAbComponent implements OnInit {
     this.wrong = false;
   }
 
-  onCorrectAnimationCompleted = () => {
+  onHideAnimationCompleted = () => {
     this.grade.emit(this.hadErrors || this.answerDisplayed ? 3 : 5);
   };
 }

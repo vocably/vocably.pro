@@ -1,64 +1,69 @@
 <div
-  class="card"
-  [class.flip]="isFlipped"
-  [@card]="userAnswer"
-  (click)="onFlip()"
+  class="inner"
+  [@hide]="userAnswer !== 'unknown'"
+  (@hide.done)="onHideAnimationCompleted()"
 >
-  <div class="card-inner">
-    <div appTextLength class="side front srs-card-font">
-      <ng-content select="[front]"></ng-content>
-    </div>
-    <div appTextLength class="side back srs-card-font">
-      <ng-content select="[back]"></ng-content>
+  <div
+    class="card"
+    [class.flip]="isFlipped"
+    [@card]="userAnswer"
+    (click)="onFlip()"
+  >
+    <div class="card-inner">
+      <div appTextLength class="side front srs-card-font">
+        <ng-content select="[front]"></ng-content>
+      </div>
+      <div appTextLength class="side back srs-card-font">
+        <ng-content select="[back]"></ng-content>
+      </div>
     </div>
   </div>
-</div>
-<div
-  class="operation"
-  [class.somewhat]="userAnswer === 3"
-  [class.weak]="userAnswer === 1"
-  [class.strong]="userAnswer === 5"
-  [@operation]="userAnswer === 'unknown' ? 'unknown' : 'known'"
-  (@operation.done)="onSelectionAnimationCompleted()"
->
-  <mat-icon
-    aria-hidden="false"
-    aria-label="Strong"
-    inline="true"
-    class="operation-icon strong-icon"
-    >done_all</mat-icon
+  <div
+    class="operation"
+    [class.somewhat]="userAnswer === 3"
+    [class.weak]="userAnswer === 1"
+    [class.strong]="userAnswer === 5"
+    [@operation]="userAnswer === 'unknown' ? 'unknown' : 'known'"
   >
-  <mat-icon
-    aria-hidden="false"
-    aria-label="Somewhat"
-    inline="true"
-    class="operation-icon somewhat-icon"
-    >done</mat-icon
-  >
-  <mat-icon
-    aria-hidden="false"
-    aria-label="Weak"
-    inline="true"
-    class="operation-icon weak-icon"
-    >close</mat-icon
-  >
-</div>
-<div class="control-elements">
-  <div class="rate">
-    <button class="button outline" (click)="userAnswer = 1">
-      <mat-icon aria-hidden="false" aria-label="Weak" inline="true"
-        >close</mat-icon
-      ><span>Not yet</span>
-    </button>
-    <button class="button outline" (click)="userAnswer = 3">
-      <mat-icon aria-hidden="false" aria-label="Somewhat" inline="true"
-        >done</mat-icon
-      ><span>Almost</span>
-    </button>
-    <button class="button outline" (click)="userAnswer = 5">
-      <mat-icon aria-hidden="false" aria-label="Strong" inline="true"
-        >done_all</mat-icon
-      ><span>Got it</span>
-    </button>
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Strong"
+      inline="true"
+      class="operation-icon strong-icon"
+      >done_all</mat-icon
+    >
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Somewhat"
+      inline="true"
+      class="operation-icon somewhat-icon"
+      >done</mat-icon
+    >
+    <mat-icon
+      aria-hidden="false"
+      aria-label="Weak"
+      inline="true"
+      class="operation-icon weak-icon"
+      >close</mat-icon
+    >
+  </div>
+  <div class="control-elements">
+    <div class="rate">
+      <button class="button outline" (click)="userAnswer = 1">
+        <mat-icon aria-hidden="false" aria-label="Weak" inline="true"
+          >close</mat-icon
+        ><span>Not yet</span>
+      </button>
+      <button class="button outline" (click)="userAnswer = 3">
+        <mat-icon aria-hidden="false" aria-label="Somewhat" inline="true"
+          >done</mat-icon
+        ><span>Almost</span>
+      </button>
+      <button class="button outline" (click)="userAnswer = 5">
+        <mat-icon aria-hidden="false" aria-label="Strong" inline="true"
+          >done_all</mat-icon
+        ><span>Got it</span>
+      </button>
+    </div>
   </div>
 </div>
