@@ -1,15 +1,21 @@
 @switch (componentName) {
   @case ('sf') {
-    <app-card-sf [card]="card"></app-card-sf>
+    <app-srs-card-sf [card]="card"></app-srs-card-sf>
   }
   @case ('sb') {
-    <app-card-sb [card]="card"></app-card-sb>
+    <app-srs-card-sb [card]="card"></app-srs-card-sb>
   }
   @case ('mf') {
-    Multichoice front
+    <app-srs-card-mf
+      [card]="card"
+      [wrongOptions]="wrongOptions"
+    ></app-srs-card-mf>
   }
   @case ('mb') {
-    Multichoice back
+    <app-srs-card-mb
+      [card]="card"
+      [wrongOptions]="wrongOptions"
+    ></app-srs-card-mb>
   }
   @case ('ab') {
     Type to respond

@@ -1,6 +1,4 @@
 :host {
-  --aspect-ratio: calc(var(--screen-height-px) / var(--screen-width-px));
-
   display: block;
   height: 100%;
   overflow: hidden;
@@ -15,13 +13,7 @@
 }
 
 .side {
-  --inner-text-length: 30;
   padding: 1.5rem;
-  font-size: clamp(
-    1vw + 2vh,
-    (1200vh + 500vw) / var(--inner-text-length),
-    5vw * var(--aspect-ratio)
-  );
 }
 
 .operation {
@@ -105,25 +97,28 @@
   align-items: center;
 
   .rate {
+    --border-radius: 0.5rem;
+
     display: flex;
     gap: 0.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--body-bg);
+
     button {
-      background-color: var(--body-bg);
-      border: 1px solid var(--primary-color);
-      color: var(--primary-color);
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 12rem;
       padding: 0.5rem;
       cursor: pointer;
+      border-radius: 0;
 
       &:first-child {
-        border-radius: 0.5rem 0 0 0.5rem;
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
       }
 
       &:last-child {
-        border-radius: 0 0.5rem 0.5rem 0;
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
       }
     }
 

@@ -1,1 +1,5 @@
-<p>card-mf works!</p>
+<app-srs-multichoice
+  [card]="card"
+  [wrongOptions]="wrongOptions"
+  (grade)="grade.emit($event)"
+></app-srs-multichoice>

@@ -13,10 +13,8 @@ import {
   Output,
 } from '@angular/core';
 
-import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { CardItem } from '@vocably/model';
-import { TextListComponent } from '../text-list/text-list.component';
 import { TextLengthDirective } from '../text-length.directive';
 import { SrsScore } from '@vocably/srs';
 
@@ -70,7 +68,7 @@ import { SrsScore } from '@vocably/srs';
       transition('* => *', [animate('0.3s')]),
     ]),
   ],
-  imports: [TextLengthDirective, NgIf, TextListComponent, MatIcon],
+  imports: [TextLengthDirective, MatIcon],
 })
 export class CardComponent {
   @Input() card!: CardItem;

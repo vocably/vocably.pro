@@ -6,7 +6,7 @@ import { sanitizeTranscript } from '@vocably/sulna';
 import { TextListComponent } from '../text-list/text-list.component';
 
 @Component({
-  selector: 'app-card-sb',
+  selector: 'app-srs-card-sb',
   imports: [CardComponent, TextListComponent],
   templateUrl: './card-sb.component.html',
   styleUrl: './card-sb.component.scss',

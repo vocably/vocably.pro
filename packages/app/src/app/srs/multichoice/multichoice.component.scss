@@ -1,0 +1,32 @@
+:host {
+  --aspect-ratio: calc(var(--screen-height-px) / var(--screen-width-px));
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;
+  padding: 1.5rem;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.wrong {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+  color: var(--body-bg);
+}

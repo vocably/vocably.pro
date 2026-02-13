@@ -5,10 +5,10 @@
   (click)="onFlip()"
 >
   <div class="card-inner">
-    <div appTextLength class="side front">
+    <div appTextLength class="side front srs-card-font">
       <ng-content select="[front]"></ng-content>
     </div>
-    <div appTextLength class="side back">
+    <div appTextLength class="side back srs-card-font">
       <ng-content select="[back]"></ng-content>
     </div>
   </div>
@@ -45,17 +45,17 @@
 </div>
 <div class="control-elements">
   <div class="rate">
-    <button (click)="userAnswer = 1">
+    <button class="button outline" (click)="userAnswer = 1">
       <mat-icon aria-hidden="false" aria-label="Weak" inline="true"
         >close</mat-icon
       ><span>Not yet</span>
     </button>
-    <button (click)="userAnswer = 3">
+    <button class="button outline" (click)="userAnswer = 3">
       <mat-icon aria-hidden="false" aria-label="Somewhat" inline="true"
         >done</mat-icon
       ><span>Almost</span>
     </button>
-    <button (click)="userAnswer = 5">
+    <button class="button outline" (click)="userAnswer = 5">
       <mat-icon aria-hidden="false" aria-label="Strong" inline="true"
         >done_all</mat-icon
       ><span>Got it</span>
