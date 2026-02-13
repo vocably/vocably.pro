@@ -1,1 +1,45 @@
-<p>card-sb works!</p>
+<app-srs-card [card]="card" (grade)="grade.emit($event)">
+  <div front>
+    <div class="text-left">
+      <span style="font-size: 80%"
+        >Guess the
+        @if (card.data.partOfSpeech) {
+          <span class="text-emphasize">{{ card.data.partOfSpeech }}</span
+          >:
+        } @else {
+          meaning:
+        }
+      </span>
+      <ul
+        class="text-left"
+        style="font-size: 60%"
+        text-list
+        [text]="card.data.definition"
+      >
+        @if (card.data.translation) {
+          <li class="text-emphasize">
+            <span style="font-size: 160%">{{ card.data.translation }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+  <div back>
+    <div class="text-left">
+      <span class="text-emphasize">{{ card.data.source }}</span>
+      @if (card.data.partOfSpeech) {
+        <span class="pos muted inline-block ml-0_5">{{
+          card.data.partOfSpeech
+        }}</span>
+      }
+      @if (card.data.ipa) {
+        <span class="pos inline-block ml-0_5"
+          >/{{ sanitizeTranscript(card.data.ipa) }}/</span
+        >
+      }
+      @if (card.data.example) {
+        <ul style="font-size: 60%" text-list [text]="card.data.example"></ul>
+      }
+    </div>
+  </div>
+</app-srs-card>

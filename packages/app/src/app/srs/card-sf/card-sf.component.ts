@@ -3,6 +3,7 @@ import { CardItem } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { CardComponent } from '../card/card.component';
 import { TextListComponent } from '../text-list/text-list.component';
+import { sanitizeTranscript } from '@vocably/sulna';
 
 @Component({
   selector: 'app-card-sf',
@@ -13,4 +14,5 @@ import { TextListComponent } from '../text-list/text-list.component';
 export class CardSfComponent {
   @Input() card!: CardItem;
   @Output() grade = new EventEmitter<SrsScore>();
+  protected readonly sanitizeTranscript = sanitizeTranscript;
 }

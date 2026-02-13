@@ -116,6 +116,7 @@
       align-items: center;
       width: 12rem;
       padding: 0.5rem;
+      cursor: pointer;
 
       &:first-child {
         border-radius: 0.5rem 0 0 0.5rem;
@@ -127,7 +128,7 @@
     }
 
     mat-icon {
-      font-size: 2rem;
+      font-size: 1.3rem;
     }
   }
 }

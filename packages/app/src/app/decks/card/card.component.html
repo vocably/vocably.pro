@@ -5,7 +5,7 @@
 
   <div *ngIf="item.data.ipa" class="small inline-block ml-0_5">
     <span class="inline-block invisible-space">&nbsp;</span>
-    [{{ item.data.ipa }}]
+    /{{ sanitizeTranscript(item.data.ipa) }}/
   </div>
 
   <div *ngIf="item.data.g" class="small inline-block ml-0_5">

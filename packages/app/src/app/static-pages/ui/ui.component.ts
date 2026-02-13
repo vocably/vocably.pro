@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CardSfComponent } from '../../srs/card-sf/card-sf.component';
 import { CardItem } from '@vocably/model';
+import { CardSbComponent } from '../../srs/card-sb/card-sb.component';
 
 @Component({
   selector: 'app-ui',
-  imports: [CardSfComponent],
+  imports: [CardSfComponent, CardSbComponent],
   templateUrl: './ui.component.html',
   styleUrl: './ui.component.scss',
 })
