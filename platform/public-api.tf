@@ -74,15 +74,15 @@ resource "aws_apigatewayv2_stage" "public_api" {
   }
 
   route_settings {
-    route_key              = "POST /predefined-options"
-    throttling_burst_limit = var.public_api_predefined_options_throttle_burst_limit
-    throttling_rate_limit  = var.public_api_predefined_options_throttle_rate_limit
+    route_key              = "POST /chat-with-card"
+    throttling_burst_limit = var.public_api_chat_with_card_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_chat_with_card_throttle_rate_limit
   }
 
   route_settings {
-    route_key              = "GET /audio"
-    throttling_burst_limit = var.public_api_audio_throttle_burst_limit
-    throttling_rate_limit  = var.public_api_audio_throttle_rate_limit
+    route_key              = "GET /predefined-options"
+    throttling_burst_limit = var.public_api_predefined_options_throttle_burst_limit
+    throttling_rate_limit  = var.public_api_predefined_options_throttle_rate_limit
   }
 
   access_log_settings {
