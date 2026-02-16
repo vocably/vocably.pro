@@ -28,10 +28,11 @@ export class UiComponent {
     created: 1764155743640,
     data: {
       language: 'en',
-      source: 'integrity',
+      source:
+        'The antique dealer’s eyes widened at the tarnished silver bowl. To the widow selling it, it was a $50 heirloom for rent. To him, the hallmark hidden under the grime signaled a masterwork worth thousands. He looked at her frayed coat and then at his empty ledger. The widow gasped as he wrote a check for the full market value, leaving himself no profit but a clear conscience. He watched her leave, her burden lifted. Integrity, he realized, was the only currency that never devalued.',
       ipa: 'ɪnˈtɛɡrɪti',
       example:
-        "* She is known for her integrity.\n* The building's integrity was compromised.",
+        "* She is known for her integrity.\n* The building's integrity was compromised.\n* The widow gasped as he wrote a check for the full market value, leaving himself no profit but a clear conscience. He watched her leave, her burden lifted. Integrity, he realized, was the only currency that never devalued.",
       definition:
         '* adherence to moral and ethical principles; soundness of moral character\n* the state of being whole, entire, or undiminished',
       translation: 'честность, целостность',

@@ -1,26 +1,125 @@
 :host {
   display: block;
   height: 100%;
-  overflow: hidden;
   position: relative;
 }
 
 .inner {
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
 .card {
-  height: 100%;
-  // ToDo: fix the control elements position
-  padding-bottom: 94px;
+  flex: 1;
   perspective: 1000px;
-  will-change: transform;
   user-select: none;
+  transform: translateZ(0);
+  overflow: hidden;
 }
 
 .side {
   padding: 1.5rem;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.side {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.side::-webkit-scrollbar {
+  width: 8px; /* Vertical scrollbar width */
+  display: block !important;
+}
+
+/* The track (background) */
+.side::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.side::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.side .side-content {
+  margin-top: auto;
+  margin-bottom: auto;
+  flex-shrink: 0;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.control-elements {
+  flex-shrink: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  .rate {
+    --border-radius: 0.5rem;
+
+    display: flex;
+    gap: 0.5rem;
+    border-radius: var(--border-radius);
+    background-color: var(--body-bg);
+    max-width: 100%;
+
+    button {
+      display: flex;
+      gap: 0.3rem;
+      align-items: center;
+      justify-content: center;
+      width: 12rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      border-radius: 0;
+
+      &:first-child {
+        border-radius: var(--border-radius) 0 0 var(--border-radius);
+      }
+
+      &:last-child {
+        border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      }
+    }
+
+    mat-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
+  }
 }
 
 .operation {
@@ -60,82 +159,6 @@
   &.weak {
     .weak-icon {
       display: inline-block;
-    }
-  }
-}
-
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.card.flip .card-inner {
-  transform: rotateY(180deg);
-}
-
-.front,
-.back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.back {
-  transform: rotateY(180deg);
-}
-
-.control-elements {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .rate {
-    --border-radius: 0.5rem;
-
-    display: flex;
-    gap: 0.5rem;
-    border-radius: var(--border-radius);
-    background-color: var(--body-bg);
-    max-width: 100%;
-
-    button {
-      display: flex;
-      gap: 0.3rem;
-      align-items: center;
-      justify-content: center;
-      width: 12rem;
-      padding: 0.5rem;
-      cursor: pointer;
-      border-radius: 0;
-
-      &:first-child {
-        border-radius: var(--border-radius) 0 0 var(--border-radius);
-      }
-
-      &:last-child {
-        border-radius: 0 var(--border-radius) var(--border-radius) 0;
-      }
-    }
-
-    mat-icon {
-      width: 1.5rem;
-      height: 1.5rem;
-      font-size: 1.5rem;
-      line-height: 1.5rem;
     }
   }
 }

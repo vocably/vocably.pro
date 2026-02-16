@@ -1,27 +1,22 @@
 .grade {
-  --nav-height: 48px;
-
   height: 100%;
   width: 100%;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .grade-container {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: var(--nav-height);
-  overflow: scroll;
+  flex: 1;
+  width: 100%;
+  max-width: 820px;
 }
 
 .grade-nav {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: var(--nav-height);
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
 }

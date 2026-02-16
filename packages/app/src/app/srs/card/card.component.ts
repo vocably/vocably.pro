@@ -21,6 +21,7 @@ import { MatIcon } from '@angular/material/icon';
 import { CardItem } from '@vocably/model';
 import { TextLengthDirective } from '../text-length.directive';
 import { SrsScore } from '@vocably/srs';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-srs-card',
@@ -89,7 +90,7 @@ import { SrsScore } from '@vocably/srs';
       ]),
     ]),
   ],
-  imports: [TextLengthDirective, MatIcon],
+  imports: [TextLengthDirective, MatIcon, MatTooltip],
 })
 export class CardComponent {
   @Input() card!: CardItem;
