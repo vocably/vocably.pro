@@ -21,8 +21,8 @@ public_api_throttle_burst_limit           = 20
 # Public API route-specific throttle limits
 public_api_analyze_throttle_rate_limit                   = 30
 public_api_analyze_throttle_burst_limit                  = 20
-public_api_audio_throttle_rate_limit                     = 0
-public_api_audio_throttle_burst_limit                    = 0
+public_api_audio_throttle_rate_limit                     = 20
+public_api_audio_throttle_burst_limit                    = 10
 public_api_feedback_throttle_rate_limit                  = 0
 public_api_feedback_throttle_burst_limit                 = 0
 public_api_generate_units_of_speech_throttle_rate_limit  = 0
