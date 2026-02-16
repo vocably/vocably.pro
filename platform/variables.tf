@@ -238,3 +238,13 @@ variable "public_api_chat_with_card_throttle_burst_limit" {
   type    = number
   default = 20
 }
+
+variable "public_api_predefined_options_throttle_rate_limit" {
+  type    = number
+  default = 20
+}
+
+variable "public_api_predefined_options_throttle_burst_limit" {
+  type    = number
+  default = 20
+}

@@ -40,7 +40,7 @@ export const authPostConfirmation = async (
     const addContactResult = await addContact({ email });
 
     if (addContactResult.success === false) {
-      console.error('Brevo add contact error', addContactResult);
+      console.error('Brevo failed to add contact', addContactResult);
     }
 
     const saveMetadataResult = await nodeSaveUserMetadata(
