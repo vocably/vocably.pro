@@ -66,11 +66,11 @@ import { MatTooltip } from '@angular/material/tooltip';
       state(
         'known',
         style({
-          transform: 'scale(1.5)',
+          transform: 'scale(1.2)',
           opacity: '1',
         })
       ),
-      transition('* => *', [animate('0.3s')]),
+      transition('* => *', [animate('0.2s')]),
     ]),
     trigger('hide', [
       state('true', style({ transform: 'scale(1.5)', opacity: '0' })),
@@ -78,7 +78,7 @@ import { MatTooltip } from '@angular/material/tooltip';
         group([
           // Parent animation
           animate(
-            '0.3s',
+            '0.5s',
             keyframes([
               style({ transform: 'scale(1)', opacity: '1', offset: 0 }),
               style({ transform: 'scale(1.5)', opacity: '0', offset: 1 }),

@@ -7,3 +7,9 @@
     5vw * var(--aspect-ratio)
   );
 }
+
+.show-answer-button {
+  @include unstyled();
+  text-decoration: 1px underline dotted;
+  text-underline-offset: 0.2rem;
+}

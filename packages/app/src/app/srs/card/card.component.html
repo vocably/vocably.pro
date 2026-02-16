@@ -20,13 +20,9 @@
   </div>
   <div class="control-elements">
     <button
-      class="unstyled"
+      class="show-answer-button"
       matTooltip="Space on the keyboard"
       matTooltipPosition="above"
-      style="
-        text-decoration: 1px underline dotted;
-        text-underline-offset: 0.2rem;
-      "
       (click)="onFlip()"
     >
       {{ isFlipped ? 'Show the question' : 'Show the answer' }}

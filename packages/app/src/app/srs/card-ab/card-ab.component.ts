@@ -42,6 +42,10 @@ import { hideAnimation } from '../hide-animation';
     ]),
     hideAnimation,
   ],
+  host: {
+    '[@hide]': 'correct',
+    '(@hide.done)': 'onHideAnimationCompleted()',
+  },
 })
 export class CardAbComponent implements OnInit {
   @Input() card!: CardItem;
@@ -134,4 +138,8 @@ export class CardAbComponent implements OnInit {
       this.grade.emit(this.hadErrors || this.answerDisplayed ? 3 : 5);
     }
   };
+
+  accessibleLetter(letter: string): string {
+    return letter === ' ' ? '_' : letter;
+  }
 }

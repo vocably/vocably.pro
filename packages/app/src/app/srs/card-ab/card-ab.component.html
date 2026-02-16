@@ -1,4 +1,4 @@
-<div class="inner" [@hide]="correct" (@hide.done)="onHideAnimationCompleted()">
+<div class="inner">
   <app-srs-reverse-front
     class="srs-card-font"
     [card]="card"
@@ -11,7 +11,11 @@
         [disabled]="letterIndex === false"
         (click)="unuseLetter($index)"
       >
-        {{ letterIndex !== false ? letters[letterIndex] : '&nbsp;' }}
+        {{
+          letterIndex !== false
+            ? accessibleLetter(letters[letterIndex])
+            : '&nbsp;'
+        }}
       </button>
     }
   </div>
@@ -19,7 +23,7 @@
     @for (letter of letters; track $index) {
       @let isUsed = answer.includes($index);
       <button class="letter" [disabled]="isUsed" (click)="useLetter($index)">
-        {{ letter }}
+        {{ accessibleLetter(letter) }}
       </button>
     }
   </div>
@@ -28,11 +32,11 @@
       {{ correctAnswer }}
     </div>
     <button
-      class="unstyled link hint-button"
+      class="show-answer-button hint-button"
       (click)="answerDisplayed = true"
       [disabled]="answerDisplayed"
     >
-      Show me the answer
+      Show the answer
     </button>
   </div>
 </div>

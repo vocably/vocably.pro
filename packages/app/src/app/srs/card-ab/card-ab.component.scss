@@ -1,13 +1,14 @@
 :host {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100%;
   padding: 1.5rem;
+  overflow: auto;
 }
 
 .inner {
+  margin: auto 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,6 +20,7 @@
   padding: 1rem;
   border-radius: 1rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 0.3rem;
@@ -70,7 +72,6 @@
   }
   .hint-button {
     transform: translateY(-100%);
-    text-decoration: none !important;
 
     &:disabled {
       opacity: 0;
