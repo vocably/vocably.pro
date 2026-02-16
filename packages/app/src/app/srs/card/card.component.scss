@@ -34,6 +34,10 @@
   transform: rotateY(180deg);
 }
 
+.card.flip .back {
+  pointer-events: auto;
+}
+
 .side {
   position: absolute;
   width: 100%;
@@ -46,23 +50,6 @@
   overflow-y: auto;
 }
 
-.side::-webkit-scrollbar {
-  width: 8px; /* Vertical scrollbar width */
-  display: block !important;
-}
-
-/* The track (background) */
-.side::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-}
-
-.side::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  cursor: pointer;
-}
-
 .side .side-content {
   margin-top: auto;
   margin-bottom: auto;
@@ -71,6 +58,7 @@
 
 .back {
   transform: rotateY(180deg);
+  pointer-events: none;
 }
 
 .control-elements {
