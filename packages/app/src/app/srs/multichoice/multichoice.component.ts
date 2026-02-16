@@ -13,6 +13,10 @@ import { hideAnimation } from '../hide-animation';
   templateUrl: './multichoice.component.html',
   styleUrl: './multichoice.component.scss',
   animations: [hideAnimation],
+  host: {
+    '[@hide]': 'correct',
+    '(@hide.done)': 'onHideAnimationCompleted()',
+  },
 })
 export class CardMultichoiceComponent implements OnInit {
   @Input() card!: CardItem;
