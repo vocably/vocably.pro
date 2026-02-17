@@ -32,7 +32,7 @@ const getWeek = (country: string): number[] => {
   return [1, 2, 3, 4, 5, 6, 0];
 };
 
-export const getDays = (
+export const getStreakDays = (
   consecutiveDays: number,
   today: Date,
   country: string

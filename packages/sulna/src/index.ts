@@ -12,3 +12,4 @@ export * from './stringArray';
 export * from './tokenize';
 export * from './trimArticle';
 export * from './trimLanguage';
+export * from './getStreakDays';

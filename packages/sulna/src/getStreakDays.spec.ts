@@ -1,9 +1,9 @@
-import { getDays } from './getDays';
+import { getStreakDays } from './getStreakDays';
 
 const wednesday = new Date(2025, 3, 16);
 describe('streakDays', () => {
   it('works with zero streak days', () => {
-    const days = getDays(0, wednesday, 'US');
+    const days = getStreakDays(0, wednesday, 'US');
     expect(days).toEqual([
       { day: 0, checked: false },
       { day: 1, checked: false },
@@ -16,7 +16,7 @@ describe('streakDays', () => {
   });
 
   it('works with streak days less than one week US', () => {
-    const days = getDays(5, wednesday, 'US');
+    const days = getStreakDays(5, wednesday, 'US');
     expect(days).toEqual([
       { day: 6, checked: true },
       { day: 0, checked: true },
@@ -29,7 +29,7 @@ describe('streakDays', () => {
   });
 
   it('works with streak days more than one week US', () => {
-    const days = getDays(8, wednesday, 'US');
+    const days = getStreakDays(8, wednesday, 'US');
     expect(days).toEqual([
       { day: 0, checked: true },
       { day: 1, checked: true },
@@ -42,7 +42,7 @@ describe('streakDays', () => {
   });
 
   it('works with streak days more than one week DE', () => {
-    const days = getDays(8, wednesday, 'DE');
+    const days = getStreakDays(8, wednesday, 'DE');
     expect(days).toEqual([
       { day: 1, checked: true },
       { day: 2, checked: true },

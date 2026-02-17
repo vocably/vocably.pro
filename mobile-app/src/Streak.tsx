@@ -3,7 +3,7 @@ import { FC, useEffect, useRef } from 'react';
 import { Animated, View } from 'react-native';
 import { getCountry } from 'react-native-localize';
 import { Text, useTheme } from 'react-native-paper';
-import { getDays, StreakDay } from './streak/getDays';
+import { getStreakDays, StreakDay } from '@vocably/sulna';
 
 type Props = {
   consecutiveDays: number;
@@ -32,7 +32,7 @@ const isLastChecked = (index: number, days: StreakDay[]): boolean => {
 export const Streak: FC<Props> = ({ consecutiveDays, hasBeenShown }) => {
   const theme = useTheme();
 
-  const days = getDays(consecutiveDays, new Date(), getCountry());
+  const days = getStreakDays(consecutiveDays, new Date(), getCountry());
   const dayScale = useRef(new Animated.Value(1)).current;
 
   const previousNumberOpacity = useRef(
