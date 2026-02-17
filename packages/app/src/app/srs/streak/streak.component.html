@@ -1,0 +1,35 @@
+<div class="streak-container">
+  <div class="numbers-wrapper">
+    <div class="number previous" *ngIf="showPrevious" @slideOut>
+      {{ previousValue }}
+    </div>
+
+    <div
+      class="number current"
+      *ngIf="showCurrent"
+      [@.disabled]="hasBeenShown"
+      @slideIn
+    >
+      {{ currentValue }}
+    </div>
+  </div>
+
+  <div class="subtitle">
+    consecutive day{{ currentValue === 1 ? '' : 's' }}.
+  </div>
+
+  <div class="days-list">
+    <div
+      class="day-item"
+      *ngFor="let day of days; let i = index"
+      [class.checked]="day.checked"
+      [class.last-checked]="isLastChecked(i)"
+      [@pop]
+      [@.disabled]="!isLastChecked(i)"
+    >
+      <div class="day-circle">
+        <span class="day-text">{{ dayToString(day.day) }}</span>
+      </div>
+    </div>
+  </div>
+</div>
