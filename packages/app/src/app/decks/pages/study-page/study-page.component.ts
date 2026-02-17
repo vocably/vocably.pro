@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit, resource } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
 import { getUserMetadata, getUserStaticMetadata } from '@vocably/api';
-import { CardItem, StudyStrategy } from '@vocably/model';
+import { CardItem } from '@vocably/model';
 import {
   craftTheStrategy,
   defaultStudyFlow,
@@ -10,11 +10,13 @@ import {
   grade,
   slice,
 } from '@vocably/srs';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil, tap } from 'rxjs';
 import { BackButtonComponent } from '../../../components/back-button/back-button.component';
 import { GradeResult, ListComponent } from '../../../srs/list/list.component';
 import { DeckStoreService } from '../../deck-store.service';
 import { DeckService } from '../../deck.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AlertComponent } from '../../../components/alert/alert.component';
 
 @Component({
   selector: 'app-study-page',
@@ -60,7 +62,8 @@ export class StudyPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private deckStore: DeckStoreService,
-    private deckService: DeckService
+    private deckService: DeckService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -93,8 +96,31 @@ export class StudyPageComponent implements OnInit, OnDestroy {
 
     this.deckService
       .update(gradeResult.cardItem.id, item)
+      .pipe(
+        tap((saveResult) => {
+          if (saveResult.success === false) {
+            this.showSaveError();
+          }
+        })
+      )
       .pipe(takeUntil(this.destroy$))
       .subscribe();
+  }
+
+  showSaveError() {
+    this.dialog
+      .open(AlertComponent, {
+        disableClose: true,
+        data: {
+          message:
+            'Something went wrong while saving your progress. Please try again.',
+          confirmationButtonLabel: 'Reload this page',
+        },
+      })
+      .afterClosed()
+      .subscribe(() => {
+        location.reload();
+      });
   }
 
   ngOnDestroy(): void {
