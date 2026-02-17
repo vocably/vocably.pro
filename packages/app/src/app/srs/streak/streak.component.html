@@ -1,15 +1,10 @@
 <div class="streak-container">
   <div class="numbers-wrapper">
-    <div class="number previous" *ngIf="showPrevious" @slideOut>
+    <div class="number previous" @slideOut [@.disabled]="hasBeenShown">
       {{ previousValue }}
     </div>
 
-    <div
-      class="number current"
-      *ngIf="showCurrent"
-      [@.disabled]="hasBeenShown"
-      @slideIn
-    >
+    <div class="number current" @slideIn [@.disabled]="hasBeenShown">
       {{ currentValue }}
     </div>
   </div>

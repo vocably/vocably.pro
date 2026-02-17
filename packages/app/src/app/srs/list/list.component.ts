@@ -1,4 +1,12 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  animateChild,
+  group,
+  query,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardItem, StudyFlowType } from '@vocably/model';
@@ -20,7 +28,10 @@ export type GradeResult = {
     trigger('displayComponent', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.95)' }),
-        animate('300ms', style({ opacity: 1, transform: 'scale(1)' })),
+        group([
+          animate('300ms', style({ opacity: 1, transform: 'scale(1)' })),
+          query('@*', [animateChild()], { optional: true }),
+        ]),
       ]),
     ]),
   ],

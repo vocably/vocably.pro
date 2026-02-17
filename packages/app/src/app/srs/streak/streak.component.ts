@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { getStreakDays, StreakDay } from '@vocably/sulna';
 import {
@@ -11,7 +11,7 @@ import {
 import { get } from 'lodash-es';
 
 @Component({
-  selector: 'app-streak',
+  selector: 'app-srs-streak',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './streak.component.html',
@@ -21,13 +21,13 @@ import { get } from 'lodash-es';
       transition(':enter', [
         style({ transform: 'translateY(100%)', opacity: 0 }),
         animate(
-          '1000ms cubic-bezier(0.25, 0.8, 0.25, 1)',
+          '1500ms cubic-bezier(0.25, 0.8, 0.25, 1)',
           style({ transform: 'translateY(0)', opacity: 1 })
         ),
       ]),
     ]),
     trigger('slideOut', [
-      transition(':leave', [
+      transition(':enter', [
         style({
           transform: 'translateY(0)',
           opacity: 1,
@@ -52,45 +52,19 @@ import { get } from 'lodash-es';
     ]),
   ],
 })
-export class StreakComponent implements OnChanges {
+export class StreakComponent implements OnInit {
   @Input() consecutiveDays: number = 0;
   @Input() hasBeenShown: boolean = false;
 
   days: StreakDay[] = [];
-  showPrevious: boolean = false;
-  showCurrent: boolean = true;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['consecutiveDays']) {
-      this.updateDays();
-    }
-
-    // Logic to trigger animation if hasBeenShown is false
-    if (changes['consecutiveDays'] || changes['hasBeenShown']) {
-      this.handleAnimation();
-    }
+  ngOnInit(): void {
+    this.updateDays();
   }
 
   private updateDays(): void {
     const country = this.getCountry();
     this.days = getStreakDays(this.consecutiveDays, new Date(), country);
-  }
-
-  private handleAnimation(): void {
-    if (!this.hasBeenShown) {
-      // Setup initial state for animation
-      this.showPrevious = true;
-      this.showCurrent = false;
-
-      // Trigger animation in next tick
-      setTimeout(() => {
-        this.showPrevious = false;
-        this.showCurrent = true;
-      }, 50); // Small delay to ensure initial state is rendered
-    } else {
-      this.showPrevious = false;
-      this.showCurrent = true;
-    }
   }
 
   getCountry(): string {

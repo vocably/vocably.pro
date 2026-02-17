@@ -1,18 +1,22 @@
-<span class="big-icon"
-  ><mat-icon
-    aria-hidden="false"
-    aria-label="Done"
-    class="icon text-primary"
-    inline="true"
-    >check_circle</mat-icon
-  ></span
->
-<div class="text-center">
-  <button
-    class="unstyled text-emphasize underline track-click"
-    (click)="oneMoreRound.emit()"
-    id="practice-again-button"
+@if (lastStreak.days > 0) {
+  <app-srs-streak
+    style="margin-bottom: 2rem"
+    [consecutiveDays]="lastStreak.days"
+    [hasBeenShown]="streakAnimationShown"
+  ></app-srs-streak>
+} @else {
+  <span class="big-icon"
+    ><mat-icon
+      aria-hidden="false"
+      aria-label="Done"
+      class="icon text-primary"
+      inline="true"
+      >check_circle</mat-icon
+    ></span
   >
+}
+<div class="text-center">
+  <button class="button outline" (click)="oneMoreRound.emit()">
     Take one more round
   </button>
 </div>

@@ -22,7 +22,10 @@
       <app-srs-card-ab [card]="card"></app-srs-card-ab>
     }
     @case ('streak') {
-      <app-streak [consecutiveDays]="10" [hasBeenShown]="false"></app-streak>
+      <app-srs-streak
+        [consecutiveDays]="10"
+        [hasBeenShown]="false"
+      ></app-srs-streak>
     }
     @default {
       Unrecognized component {{ componentName }}
