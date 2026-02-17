@@ -1,9 +1,9 @@
-import { Result } from '@vocably/model';
+import { Result, StudyStreak } from '@vocably/model';
 import { fetchStudyStreak, putStudyStreak } from '@vocably/api';
 import { dateToString } from '@vocably/sulna';
 import { setStreak } from '@vocably/model-operations';
 
-export const increaseStudyStreak = async (): Promise<Result<unknown>> => {
+export const increaseStudyStreak = async (): Promise<Result<StudyStreak>> => {
   const studyStreakResult = await fetchStudyStreak();
   if (studyStreakResult.success === false) {
     return studyStreakResult;
@@ -16,5 +16,13 @@ export const increaseStudyStreak = async (): Promise<Result<unknown>> => {
     Intl.DateTimeFormat().resolvedOptions().timeZone
   );
 
-  return putStudyStreak(toBeSaved);
+  const putResult = await putStudyStreak(toBeSaved);
+  if (putResult.success === false) {
+    return putResult;
+  }
+
+  return {
+    success: true,
+    value: toBeSaved,
+  };
 };

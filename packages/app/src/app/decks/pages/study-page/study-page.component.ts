@@ -17,6 +17,12 @@ import { DeckStoreService } from '../../deck-store.service';
 import { DeckService } from '../../deck.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertComponent } from '../../../components/alert/alert.component';
+import { increaseStudyStreak } from '../../../../increaseStudyStreak';
+import {
+  getLastStudyStreak,
+  saveLastStudyStreak,
+} from '../../../localStudyStreak';
+import { dateToString } from '@vocably/sulna';
 
 @Component({
   selector: 'app-study-page',
@@ -97,10 +103,26 @@ export class StudyPageComponent implements OnInit, OnDestroy {
     this.deckService
       .update(gradeResult.cardItem.id, item)
       .pipe(
-        tap((saveResult) => {
+        tap(async (saveResult) => {
           if (saveResult.success === false) {
             this.showSaveError();
+            return;
           }
+
+          const today = dateToString(new Date());
+          const lastStudyStreak = getLastStudyStreak();
+
+          if (lastStudyStreak.lastStudyDay === today) {
+            return;
+          }
+
+          const increaseResult = await increaseStudyStreak();
+          if (increaseResult.success === false) {
+            this.showSaveError();
+            return;
+          }
+
+          saveLastStudyStreak(increaseResult.value);
         })
       )
       .pipe(takeUntil(this.destroy$))
