@@ -23,6 +23,7 @@ import {
   saveLastStudyStreak,
 } from '../../../localStudyStreak';
 import { dateToString } from '@vocably/sulna';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-study-page',
@@ -53,7 +54,8 @@ export class StudyPageComponent implements OnInit, OnDestroy {
 
       const studySteps = filterStudyFlow(
         userMetadataResult.value.studyFlow ?? defaultStudyFlow,
-        userStaticMetadataResult.value.premium
+        (await this.authService.isPaidGroup()) ||
+          userStaticMetadataResult.value.premium
       );
 
       return {
@@ -69,7 +71,8 @@ export class StudyPageComponent implements OnInit, OnDestroy {
   constructor(
     private deckStore: DeckStoreService,
     private deckService: DeckService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
