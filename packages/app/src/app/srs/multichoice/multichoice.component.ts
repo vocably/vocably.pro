@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CardItem } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { sanitizeTranscript } from '@vocably/sulna';
@@ -24,6 +31,22 @@ export class CardMultichoiceComponent implements OnInit {
   @Output() grade = new EventEmitter<SrsScore>();
 
   @Input() reverse: boolean = false;
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(event: KeyboardEvent) {
+    if (
+      !this.options
+        .map((_, index) => (index + 1).toString())
+        .includes(event.key)
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    const index = parseInt(event.key) - 1;
+
+    this.onOptionClick(this.options[index]);
+  }
 
   correct: boolean = false;
 
