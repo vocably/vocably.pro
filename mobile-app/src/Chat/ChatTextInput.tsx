@@ -117,7 +117,7 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
           onChangeText={onChange}
           placeholder={placeholder}
           placeholderTextColor={theme.colors.tertiary}
-          returnKeyType={multiline ? 'default' : 'search'}
+          returnKeyType={'search'}
           onSubmitEditing={() => onSubmit(value)}
           autoFocus={autoFocus}
         />
