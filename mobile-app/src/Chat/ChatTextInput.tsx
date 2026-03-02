@@ -122,7 +122,8 @@ export const ChatTextInput = forwardRef<ChatTextInputRef, Props>(
           autoFocus={autoFocus}
         />
         <IconButton
-          icon={'arrow-up-circle'}
+          icon={'send-circle'}
+          size={32}
           mode="contained"
           iconColor={theme.colors.inputIconColor}
           style={{

@@ -265,10 +265,10 @@ export const LookUpScreen: FC<Props> = ({
                   }}
                 >
                   <Text style={{ textAlign: 'center' }}>
-                    Want to generate a list of cards on a specific topic?
+                    Looking for card collections?
                   </Text>
                   <Button
-                    icon={'plus-circle-multiple-outline'}
+                    icon={'robot-outline'}
                     textColor={theme.colors.onBackground}
                     style={{
                       borderColor: theme.colors.onBackground,
@@ -282,7 +282,7 @@ export const LookUpScreen: FC<Props> = ({
                       navigation.navigate('GenerateCards');
                     }}
                   >
-                    Try the new AI card generator
+                    Try the AI card generator
                   </Button>
                   <Text style={{ textAlign: 'center', marginTop: 24 }}>
                     Questions or suggestions?

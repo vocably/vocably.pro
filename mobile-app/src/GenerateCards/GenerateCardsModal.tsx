@@ -80,7 +80,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
       },
       headerRight: () => (
         <Appbar.Action
-          icon={'refresh'}
+          icon={'trash-can-outline'}
           onPress={() => {
             setMessages([]);
             posthog.capture('generator-refresh');
