@@ -34,7 +34,7 @@ export const SlideReverseTranslate: FC<Props> = ({
         <Text style={{ fontWeight: 'bold' }}>
           {trimLanguage(languageList[sourceLanguage])}
         </Text>{' '}
-        but don't know the word? Translate it from{' '}
+        but don't know the word? Look it up in{' '}
         <Text style={{ fontWeight: 'bold' }}>
           {trimLanguage(languageList[targetLanguage])}
         </Text>
@@ -58,8 +58,7 @@ export const SlideReverseTranslate: FC<Props> = ({
                     onboardingData.reverseTranslationExample.sourceLanguage,
                   translationLanguage:
                     onboardingData.reverseTranslationExample.targetLanguage,
-                  isReverse:
-                    onboardingData.reverseTranslationExample.isReversed,
+                  isReverse: false,
                 }}
                 onChange={() => {}}
                 languagePairs={{}}

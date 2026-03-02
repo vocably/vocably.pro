@@ -87,7 +87,7 @@ export const TranslationPresetForm: FC<Props> = ({
         useNativeDriver: true,
       }),
     ]).start();
-  }, [preset.isReverse]);
+  }, [preset.isReverse, displacement]);
 
   useEffect(() => {
     if (preset.isReverse) {

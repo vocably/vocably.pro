@@ -25,7 +25,7 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
       welcomeIsRequiredResult.status === 'loaded' &&
       welcomeIsRequiredResult.value
     ) {
-      timer = setTimeout(() => navigation.navigate('Welcome'), 50);
+      timer = setTimeout(() => navigation.navigate('Welcome'), 400);
     }
 
     return () => {
