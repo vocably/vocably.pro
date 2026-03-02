@@ -309,11 +309,13 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
               </View>
             )}
             {lastMessageError && (
-              <Message
-                direction="fromAi"
-                message={lastMessageError}
-                error={true}
-              />
+              <View style={messageWrapperStyle}>
+                <Message
+                  direction="fromAi"
+                  message={lastMessageError}
+                  error={true}
+                />
+              </View>
             )}
           </ScrollView>
         }
