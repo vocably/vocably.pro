@@ -1,3 +1,4 @@
+import { ANALYTICS_DISABLED } from '@env';
 import {
   PostHogOptions,
   PostHogProvider as OriginalPostHogProvider,
@@ -21,6 +22,7 @@ export const PostHogProvider: FC<PropsWithChildren<Props>> = ({
         host: 'https://us.i.posthog.com',
         customStorage: postHogCustomStorage,
         enableSessionReplay: false,
+        disabled: ANALYTICS_DISABLED === 'true',
       }}
       autocapture={false}
     >
