@@ -1,6 +1,20 @@
-.green-zone {
-  height: calc(
-    var(--app-height) - var(--header-height) - 4rem - var(--container-padding) *
-      2
-  );
+.mobile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  & > * {
+    flex: 1 1 300px;
+  }
+
+  & > *:nth-child(1) {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  @media (max-width: 650px) {
+    & > *:nth-child(1) {
+      justify-content: flex-start;
+    }
+  }
 }

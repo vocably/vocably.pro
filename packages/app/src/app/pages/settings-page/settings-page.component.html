@@ -1,18 +1,22 @@
 <div class="container-xl top"><app-header title="Settings"></app-header></div>
 <div class="container bottom">
   <div class="flex-direction-column align-items-center">
-    <div class="text-center">
-      <p>
-        Not sure where to start? Just
-        <a [routerLink]="['/welcome']">click this link</a>.
-      </p>
-      <p>Do you still need help?</p>
-      <p>Let me know if anything bothered you.</p>
-      <p>
-        <a class="button block" [routerLink]="['/feedback']">I need help</a>
-      </p>
+    <mat-divider style="margin: 4rem 0"></mat-divider>
+    <div class="text-center mb-2">
+      Not sure where to start? Just
+      <a [routerLink]="['/welcome']">click this link</a>.
     </div>
-    <mat-divider style="margin: 2rem 0"></mat-divider>
+    <mat-divider style="margin: 4rem 0"></mat-divider>
+    <div>
+      <p class="text-center">Need help?</p>
+      <p>
+        <a class="button block outline" [routerLink]="['/feedback']"
+          >Contact the author of Vocably</a
+        >
+      </p>
+      <div class="text-center small">I respond to everyone.</div>
+    </div>
+    <mat-divider style="margin: 4rem 0"></mat-divider>
     <div>
       <h2>Study settings</h2>
 
@@ -77,18 +81,9 @@
       </div>
     </div>
 
-    <mat-divider style="margin: 2rem 0"></mat-divider>
+    <mat-divider style="margin: 4rem 0"></mat-divider>
 
-    <div
-      style="
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 1rem;
-        text-align: left;
-      "
-    >
+    <div class="mobile">
       <div>
         <video
           autoplay
@@ -116,8 +111,8 @@
       </div>
     </div>
   </div>
-  <mat-divider style="margin: 2rem 0"></mat-divider>
-  <div>
+  <mat-divider style="margin: 4rem 0"></mat-divider>
+  <div class="text-center">
     <button class="link unstyled" (click)="deleteAccount()">
       <mat-icon class="middle">delete-outline</mat-icon>Delete my account
     </button>
