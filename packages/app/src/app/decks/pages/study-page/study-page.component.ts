@@ -24,6 +24,8 @@ import {
 } from '../../../localStudyStreak';
 import { dateToString } from '@vocably/sulna';
 import { AuthService } from '../../../auth/auth.service';
+import { getStudySettings } from '../../../../study-settings';
+import { shuffle } from 'lodash-es';
 
 @Component({
   selector: 'app-study-page',
@@ -80,8 +82,22 @@ export class StudyPageComponent implements OnInit, OnDestroy {
   }
 
   reloadCards() {
+    const studySettings = getStudySettings();
     this.allCards = this.deckStore.deck$.value.cards;
-    this.cards = slice(new Date(), 10, this.deckStore.deck$.value.cards);
+
+    if (studySettings.random) {
+      this.cards = shuffle(this.allCards).slice(
+        0,
+        studySettings.cardsPerSession
+      );
+    } else {
+      this.cards = slice(
+        new Date(),
+        studySettings.cardsPerSession,
+        this.allCards
+      );
+    }
+
     this.total = this.cards.length;
   }
 

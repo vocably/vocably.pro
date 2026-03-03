@@ -12,6 +12,72 @@
         <a class="button block" [routerLink]="['/feedback']">I need help</a>
       </p>
     </div>
+    <mat-divider
+      style="margin-top: 1.5rem; margin-bottom: 1.5rem; width: 100%"
+    ></mat-divider>
+    <div style="text-align: left; margin-bottom: 1.5rem">
+      <h2>Study settings</h2>
+
+      <div style="margin-bottom: 1.5rem">
+        <p style="margin-top: 0; margin-bottom: 8px">
+          Maximum cards per study session
+        </p>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <mat-slider min="5" max="40" step="1" style="flex: 1" color="accent">
+            <input
+              matSliderThumb
+              [(ngModel)]="studySettings.cardsPerSession"
+              (ngModelChange)="onStudySettingsChange()"
+            />
+          </mat-slider>
+          <strong style="font-size: 1rem; width: 24px">{{
+            studySettings.cardsPerSession
+          }}</strong>
+        </div>
+      </div>
+
+      <div>
+        <mat-checkbox
+          [(ngModel)]="studySettings.random"
+          (ngModelChange)="onStudySettingsChange()"
+          color="accent"
+        >
+          Randomly select cards to study
+        </mat-checkbox>
+        <div style="padding-left: 0.75rem; padding-top: 8px">
+          <p class="small">
+            <mat-icon
+              style="
+                font-size: 1.1rem;
+                width: 1.1rem;
+                height: 1.1rem;
+                vertical-align: text-bottom;
+                margin-right: 0.25rem;
+              "
+              >error_outline</mat-icon
+            >
+            Enabling this option is generally a
+            <strong>bad idea</strong>. This option disables the smart study
+            algorithm. People who disable the smart study algorithm eventually
+            get frustrated with their study progress.
+            <a href="https://vocably.pro/srs.html" target="_blank">
+              Read how Vocably uses the smart study algorithm to help you learn
+              more words in a shorter time.</a
+            >
+            <mat-icon
+              style="
+                font-size: 1.1rem;
+                width: 1.1rem;
+                height: 1.1rem;
+                vertical-align: text-bottom;
+                margin-left: 0.25rem;
+              "
+              >open_in_new</mat-icon
+            >
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
   <mat-divider style="margin-bottom: 1rem"></mat-divider>
   <button class="link unstyled" (click)="deleteAccount()">

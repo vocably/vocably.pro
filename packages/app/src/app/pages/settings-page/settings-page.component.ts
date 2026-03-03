@@ -1,24 +1,52 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
 import { RouterLink } from '@angular/router';
 import { Auth } from '@aws-amplify/auth';
 import { IonicModule } from '@ionic/angular';
 import { LoaderService } from '../../components/loader.service';
 import { HeaderComponent } from '../../header/header.component';
 import { DeleteAccountConfirmationComponent } from './delete-account-confirmation/delete-account-confirmation.component';
+import {
+  getStudySettings,
+  setStudySettings,
+  StudySettings,
+} from '../../../study-settings';
 
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss'],
-  imports: [HeaderComponent, IonicModule, RouterLink, MatDivider, MatIcon],
+  imports: [
+    HeaderComponent,
+    IonicModule,
+    RouterLink,
+    MatDivider,
+    MatIcon,
+    MatSliderModule,
+    MatCheckboxModule,
+    FormsModule,
+  ],
 })
 export class SettingsPageComponent implements OnInit {
-  constructor(public dialog: MatDialog, public loader: LoaderService) {}
+  studySettings: StudySettings = { cardsPerSession: 10, random: false };
 
-  ngOnInit(): void {}
+  constructor(
+    public dialog: MatDialog,
+    public loader: LoaderService
+  ) {}
+
+  ngOnInit(): void {
+    this.studySettings = getStudySettings();
+  }
+
+  onStudySettingsChange() {
+    setStudySettings(this.studySettings);
+  }
 
   deleteAccount() {
     const dialogRef = this.dialog.open(DeleteAccountConfirmationComponent);
