@@ -29,13 +29,25 @@
           >
         </button>
         <mat-menu #menu="matMenu">
-          <a mat-menu-item [routerLink]="['/welcome']">Setup (Welcome)</a>
-          <a mat-menu-item [routerLink]="['/membership']">Premium</a>
-          <a mat-menu-item [routerLink]="['/settings']">Settings</a>
-          <a mat-menu-item [routerLink]="['/import']">Import</a>
-          <a mat-menu-item [routerLink]="['/feedback']">Feedback</a>
+          <a mat-menu-item [routerLink]="['/welcome']"
+            ><mat-icon>person_raised_hand</mat-icon>Setup (Welcome)</a
+          >
+          <a mat-menu-item [routerLink]="['/membership']"
+            ><mat-icon>crown</mat-icon>Premium</a
+          >
+          <a mat-menu-item [routerLink]="['/settings']"
+            ><mat-icon>settings</mat-icon>Settings</a
+          >
+          <a mat-menu-item [routerLink]="['/import']"
+            ><mat-icon>csv</mat-icon>Import</a
+          >
+          <a mat-menu-item [routerLink]="['/feedback']"
+            ><mat-icon>chat</mat-icon>Feedback</a
+          >
           <mat-divider></mat-divider>
-          <button mat-menu-item (click)="signOut()">Sign Out</button>
+          <button mat-menu-item (click)="signOut()">
+            <mat-icon>logout</mat-icon>Sign Out
+          </button>
         </mat-menu>
       </div>
     </ng-container>
