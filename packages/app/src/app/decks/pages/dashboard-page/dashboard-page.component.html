@@ -1,12 +1,12 @@
 <div class="gradient">
   <div *ngIf="isDesktop" class="mb-1">
-    <button
+    <a
       class="button block track-click"
       id="practice-button"
-      (click)="goToPractice()"
+      [routerLink]="['study']"
     >
-      Study on mobile
-    </button>
+      Study
+    </a>
   </div>
   <ul class="unstyled separated mb-1" data-test="dashboard-cards">
     <li *ngFor="let item of cardItems.slice(0, 7)">

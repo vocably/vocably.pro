@@ -16,6 +16,7 @@ import {
   setStudySettings,
   StudySettings,
 } from '../../../study-settings';
+import { AppQrCodeComponent } from '../../components/app-qr-code/app-qr-code.component';
 
 @Component({
   selector: 'app-settings-page',
@@ -30,6 +31,7 @@ import {
     MatSliderModule,
     MatCheckboxModule,
     FormsModule,
+    AppQrCodeComponent,
   ],
 })
 export class SettingsPageComponent implements OnInit {

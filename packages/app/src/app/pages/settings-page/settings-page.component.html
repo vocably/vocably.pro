@@ -1,7 +1,7 @@
 <div class="container-xl top"><app-header title="Settings"></app-header></div>
-<div class="container bottom text-center">
-  <div class="green-zone display-flex flex-direction-column align-items-center">
-    <div>
+<div class="container bottom">
+  <div class="flex-direction-column align-items-center">
+    <div class="text-center">
       <p>
         Not sure where to start? Just
         <a [routerLink]="['/welcome']">click this link</a>.
@@ -12,13 +12,11 @@
         <a class="button block" [routerLink]="['/feedback']">I need help</a>
       </p>
     </div>
-    <mat-divider
-      style="margin-top: 1.5rem; margin-bottom: 1.5rem; width: 100%"
-    ></mat-divider>
-    <div style="text-align: left; margin-bottom: 1.5rem">
+    <mat-divider style="margin: 2rem 0"></mat-divider>
+    <div>
       <h2>Study settings</h2>
 
-      <div style="margin-bottom: 1.5rem">
+      <div>
         <p style="margin-top: 0; margin-bottom: 8px">
           Maximum cards per study session
         </p>
@@ -78,9 +76,50 @@
         </div>
       </div>
     </div>
+
+    <mat-divider style="margin: 2rem 0"></mat-divider>
+
+    <div
+      style="
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+        text-align: left;
+      "
+    >
+      <div>
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          style="width: 184px; height: 400px"
+        >
+          <source src="assets/study/mobile.mov" type="video/quicktime" />
+          <source src="assets/study/mobile.webm" type="video/webm" />
+          The video is not supported by your browser.
+        </video>
+      </div>
+      <div>
+        <h3>Sync your cards across desktop and mobile.</h3>
+        <p>The mobile app also includes exclusive features like:</p>
+        <ul class="mb-1">
+          <li>Group with Tags</li>
+          <li>Custom Study Steps</li>
+          <li>AI Dictionary</li>
+          <li>Promt-Based Collections Generation</li>
+        </ul>
+        <p>Scan the QR code to install:</p>
+        <app-app-qr-code style="width: 160px"></app-app-qr-code>
+      </div>
+    </div>
   </div>
-  <mat-divider style="margin-bottom: 1rem"></mat-divider>
-  <button class="link unstyled" (click)="deleteAccount()">
-    <mat-icon class="middle">delete-outline</mat-icon>Delete my account
-  </button>
+  <mat-divider style="margin: 2rem 0"></mat-divider>
+  <div>
+    <button class="link unstyled" (click)="deleteAccount()">
+      <mat-icon class="middle">delete-outline</mat-icon>Delete my account
+    </button>
+  </div>
 </div>

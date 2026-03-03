@@ -14,7 +14,6 @@ import { CardComponent } from './card/card.component';
 import { DecksRoutingModule } from './decks-routing.module';
 import { DecksComponent } from './decks.component';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
-import { MobileAppEncouragerComponent } from './pages/dashboard-page/mobile-app-encourager/mobile-app-encourager.component';
 import { CardFormComponent } from './pages/edit-page/card-form/card-form.component';
 import { DeleteConfirmationDialogComponent } from './pages/edit-page/delete-confirmation-dialog/delete-confirmation-dialog.component';
 import { EditCardComponent } from './pages/edit-page/edit-card/edit-card.component';
@@ -49,7 +48,6 @@ import { SelectedDeckComponent } from './selected-deck/selected-deck.component';
     CardFormComponent,
     DeleteConfirmationDialogComponent,
     CardComponent,
-    MobileAppEncouragerComponent,
     LexicalaExplanationDialogComponent,
   ],
   exports: [],
