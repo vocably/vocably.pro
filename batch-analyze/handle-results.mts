@@ -7,8 +7,9 @@ import {
 import { parseJson } from '@vocably/api';
 import { config } from 'dotenv-flow';
 import { readFileSync, unlinkSync, writeFileSync } from 'fs';
-import { renameSync } from 'node:fs';
+import { mkdirSync, renameSync } from 'node:fs';
 import { listFiles } from './utils.js';
+import { dirname } from 'path';
 
 config();
 
@@ -64,10 +65,12 @@ for (let file of files) {
     }
 
     const fileName = getAnalyseCacheFileName(payload);
-    writeFileSync(
-      `./../../vocably-languages/${fileName}`,
-      JSON.stringify(aiAnalysisResult.value)
-    );
+
+    const filePath = `./../../vocably-languages/${fileName}`;
+
+    // Create the folder structure if it doesn't exist
+    mkdirSync(dirname(filePath), { recursive: true });
+    writeFileSync(filePath, JSON.stringify(aiAnalysisResult.value));
   }
 
   const theNameOfFile = file.split('/').pop();

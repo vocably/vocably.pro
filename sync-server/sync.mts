@@ -26,7 +26,9 @@ if (process.env.UNITS_OF_SPEECH_BUCKET !== 'vocably-prod-units-of-speech') {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const repoPath = normalize(`${__dirname}/../../vocably-languages/${language}`);
+const repoPath = normalize(
+  `${__dirname}/../../vocably-languages/${language.toLowerCase()}`
+);
 
 if (!existsSync(repoPath)) {
   throw new Error(`Repo path ${repoPath} does not exist`);
