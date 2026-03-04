@@ -155,7 +155,12 @@ export const getGeminiTranslationBatchItem = (payload: Payload) => {
   delete params?.config?.safetySettings;
 
   return {
-    key: JSON.stringify(payload),
+    key: JSON.stringify({
+      sourceLanguage: payload.sourceLanguage,
+      targetLanguage: payload.targetLanguage,
+      partOfSpeech: payload.partOfSpeech,
+      source: payload.source,
+    }),
     request: {
       model: `models/${params.model}`,
       contents: params.contents,
