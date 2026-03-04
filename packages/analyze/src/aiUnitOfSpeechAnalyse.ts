@@ -367,7 +367,7 @@ const getGeminiGenerateContentParameters = ({
   });
 
   return {
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-2.5-flash',
     contents: createUserContent([source]),
     config: {
       safetySettings: [
@@ -510,6 +510,7 @@ export const geminiAnalyse = async (
     timeout(genAI.models.generateContent(params), abortController, 4000),
     {
       reason: 'Unable to perform Gemini analyse.',
+      extra: { payload },
     }
   );
 

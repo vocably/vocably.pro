@@ -31,7 +31,11 @@ export const isError = (object: any): object is Error => {
 
 export const resultify = async <T>(
   p: Promise<T>,
-  failureReason: { errorCode?: VocablyErrorCode | string; reason: string }
+  failureReason: {
+    errorCode?: VocablyErrorCode | string;
+    reason: string;
+    extra?: any;
+  }
 ): Promise<Result<T>> => {
   try {
     const value = await p;
@@ -40,7 +44,10 @@ export const resultify = async <T>(
     return {
       success: false,
       ...failureReason,
-      extra: e,
+      extra: {
+        ...failureReason.extra,
+        error: e,
+      },
     };
   }
 };

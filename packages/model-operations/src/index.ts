@@ -1,3 +1,4 @@
+export * from './analysisItemToCardItem';
 export * from './buildTagMap';
 export * from './compareCards';
 export * from './deckSerializer';
