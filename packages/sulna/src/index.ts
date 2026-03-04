@@ -13,3 +13,4 @@ export * from './tokenize';
 export * from './trimArticle';
 export * from './trimLanguage';
 export * from './getStreakDays';
+export * from './timeout';

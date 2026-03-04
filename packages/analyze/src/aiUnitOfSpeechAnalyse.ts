@@ -37,7 +37,7 @@ import {
 import { removeAuxiliaryWords } from './removeAuxiliaryWords';
 import { sanitizePartOfSpeech } from './sanitizePartOfSpeech';
 import { secureSource } from './secureSource';
-import { timeout } from './timeout';
+import { timeout } from '@vocably/sulna';
 import { transformSource } from './transformSource';
 import { validateSource } from './validateSource';
 

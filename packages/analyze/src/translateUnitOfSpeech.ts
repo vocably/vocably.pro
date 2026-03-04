@@ -20,7 +20,7 @@ import { trimArticle } from '@vocably/sulna';
 import { first, isArray, isObject, uniq } from 'lodash-es';
 import { config } from './config';
 import { fallback, FallbackResult } from './fallback';
-import { timeout } from './timeout';
+import { timeout } from '@vocably/sulna';
 import { validateSource } from './validateSource';
 
 type Payload = {

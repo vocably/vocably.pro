@@ -1,8 +1,12 @@
 import { Component, OnDestroy, OnInit, resource } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { IonicModule } from '@ionic/angular';
-import { getUserMetadata, getUserStaticMetadata } from '@vocably/api';
-import { CardItem } from '@vocably/model';
+import {
+  getUserMetadata,
+  getUserStaticMetadata,
+  publicPredefinedOptions,
+} from '@vocably/api';
+import { CardItem, GoogleLanguage, isGoogleLanguage } from '@vocably/model';
 import {
   craftTheStrategy,
   defaultStudyFlow,
@@ -22,10 +26,11 @@ import {
   getLastStudyStreak,
   saveLastStudyStreak,
 } from '../../../localStudyStreak';
-import { dateToString } from '@vocably/sulna';
+import { dateToString, timeout } from '@vocably/sulna';
 import { AuthService } from '../../../auth/auth.service';
 import { getStudySettings } from '../../../../study-settings';
 import { shuffle } from 'lodash-es';
+import { analysisItemToCardItem } from '@vocably/model-operations';
 
 @Component({
   selector: 'app-study-page',
@@ -54,6 +59,33 @@ export class StudyPageComponent implements OnInit, OnDestroy {
         throw `Unable to fetch necessary data.`;
       }
 
+      let predefinedCards: CardItem[] = [];
+
+      if (
+        isGoogleLanguage(userMetadataResult.value.defaultTranslationLanguage) &&
+        isGoogleLanguage(this.deckStore.deck$.value.language)
+      ) {
+        const abortController = new AbortController();
+        const predefinedCardsResult = await timeout(
+          publicPredefinedOptions(
+            this.deckStore.deck$.value.language,
+            userMetadataResult.value.defaultTranslationLanguage,
+            abortController
+          ),
+          abortController,
+          3000
+        );
+
+        if (predefinedCardsResult.success) {
+          predefinedCards = predefinedCardsResult.value.map((analysisItem) =>
+            analysisItemToCardItem(
+              this.deckStore.deck$.value.language as GoogleLanguage,
+              analysisItem
+            )
+          );
+        }
+      }
+
       const studySteps = filterStudyFlow(
         userMetadataResult.value.studyFlow ?? defaultStudyFlow,
         (await this.authService.isPaidGroup()) ||
@@ -64,6 +96,7 @@ export class StudyPageComponent implements OnInit, OnDestroy {
         userMetadata: userMetadataResult.value,
         userStaticMetadata: userStaticMetadataResult.value,
         studySteps,
+        predefinedCards,
       };
     },
   });
@@ -110,7 +143,7 @@ export class StudyPageComponent implements OnInit, OnDestroy {
       studySteps: this.necessaryData.value().studySteps,
       card: gradeResult.cardItem,
       allCards: this.cards,
-      prerenderedCards: [],
+      prerenderedCards: this.necessaryData.value().predefinedCards,
     });
 
     const item = grade(

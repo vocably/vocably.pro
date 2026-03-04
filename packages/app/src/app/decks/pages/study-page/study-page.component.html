@@ -22,7 +22,7 @@
       [allCards]="allCards"
       [cards]="cards"
       [total]="total"
-      [prerenderedCards]="[]"
+      [prerenderedCards]="necessaryData.value().predefinedCards"
       (grade)="onGrade($event)"
       (oneMoreRound)="reloadCards()"
     ></app-srs-list>
