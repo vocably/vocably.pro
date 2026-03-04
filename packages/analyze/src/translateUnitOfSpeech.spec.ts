@@ -1,7 +1,7 @@
 import '@vocably/jest';
 import { configureTestAnalyzer } from './test/configureTestAnalyzer';
 import {
-  getFileName,
+  getUnitOfSpeechTranslationFileName,
   translateUnitOfSpeechChatGpt,
   translateUnitOfSpeechGemini,
   translateUnitOfSpeechNoCache,
@@ -224,7 +224,7 @@ describe('translateUnitOfSpeech', () => {
   describe('get file name', () => {
     it('replaces slashes', () => {
       expect(
-        getFileName({
+        getUnitOfSpeechTranslationFileName({
           source: 'some/wrong/file/name',
           sourceLanguage: 'en',
           partOfSpeech: 'noun/and/something/else',
@@ -237,7 +237,7 @@ describe('translateUnitOfSpeech', () => {
 
     it('works fine', () => {
       expect(
-        getFileName({
+        getUnitOfSpeechTranslationFileName({
           source: 'խնձոր',
           sourceLanguage: 'hy',
           partOfSpeech: 'noun',

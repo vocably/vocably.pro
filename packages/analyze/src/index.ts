@@ -16,5 +16,6 @@ export {
   getExpectedNumberOfTranslations,
   getGeminiTranslationBatchItem,
   handleGeminiTranslationResponse,
+  getUnitOfSpeechTranslationFileName,
 } from './translateUnitOfSpeech';
 export { validateSource } from './validateSource';

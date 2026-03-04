@@ -337,7 +337,9 @@ export const translateUnitOfSpeechNoCache = async (
   );
 };
 
-export const getFileName = (payload: Payload): string => {
+export const getUnitOfSpeechTranslationFileName = (
+  payload: Payload
+): string => {
   return `${payload.sourceLanguage.toLowerCase()}/translations/${payload.source
     .toLowerCase()
     .replace(/\//g, '-')}/${payload.partOfSpeech
@@ -352,7 +354,7 @@ export const translateUnitOfSpeech = async (
     source: payload.source,
     partOfSpeech: payload.partOfSpeech,
   });
-  const fileName = getFileName(payload);
+  const fileName = getUnitOfSpeechTranslationFileName(payload);
   const s3FetchResult = await nodeFetchS3File(
     config.unitsOfSpeechBucket,
     fileName
