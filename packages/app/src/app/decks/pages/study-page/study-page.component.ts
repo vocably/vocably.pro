@@ -30,7 +30,7 @@ import { dateToString, timeout } from '@vocably/sulna';
 import { AuthService } from '../../../auth/auth.service';
 import { getStudySettings } from '../../../../study-settings';
 import { shuffle } from 'lodash-es';
-import { analysisItemToCardItem } from '@vocably/model-operations';
+import { analysisItemToCardItem } from '../../../../analysisItemToCardItem';
 
 @Component({
   selector: 'app-study-page',
