@@ -1,7 +1,8 @@
 import { AnalysisItem, GoogleLanguage, Result } from '@vocably/model';
-import { isArray } from 'lodash-es';
+import { isArray, isString } from 'lodash-es';
 import { publicRequest } from './publicRestClient';
 import { publicStaticFile } from './publicStaticFile';
+import { parseJson } from './parseJson';
 
 const publicPredefinedOptionsApiRequest = async (
   sourceLanguage: GoogleLanguage,
@@ -41,8 +42,19 @@ export const publicPredefinedOptions = async (
     abortController
   );
 
-  if (staticFileResult.success && isArray(staticFileResult.value)) {
-    return staticFileResult;
+  if (staticFileResult.success) {
+    if (isArray(staticFileResult.value)) {
+      return staticFileResult;
+    }
+
+    if (isString(staticFileResult.value)) {
+      const parseResult = parseJson(staticFileResult.value);
+      if (parseResult.success && isArray(parseResult.value))
+        return {
+          success: true,
+          value: parseResult.value,
+        };
+    }
   }
 
   return publicPredefinedOptionsApiRequest(

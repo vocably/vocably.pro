@@ -27,7 +27,8 @@ resource "aws_apigatewayv2_api" "public_api" {
     allow_origins = [
       "https://${var.root_domain}",
       "https://${local.app_domain}",
-      "http://localhost:8050"
+      "http://localhost:8050",
+      "http://localhost:8030"
     ]
   }
 }
