@@ -16,6 +16,7 @@ import { LanguagePipe } from '../../../language/language.pipe';
 import { HowToMultilangComponent } from '../../how-to-multilang/how-to-multilang.component';
 import { LanguageButtonComponent } from '../../language-button/language-button.component';
 import { detectTargetLanguage } from './detectTargetLanguage';
+import { saveUserMetadata } from '@vocably/api';
 
 @Component({
   selector: 'app-index-page',
@@ -62,6 +63,13 @@ export class IndexPageComponent implements OnInit {
 
   onClick(value: GoogleLanguage) {
     this.selected = value;
+
+    if (this.targetLanguage) {
+      saveUserMetadata({
+        defaultTranslationLanguage: this.targetLanguage,
+      });
+    }
+
     this.router
       .navigate([`./${value}/${this.targetLanguage}`], {
         relativeTo: this.activatedRoute,
