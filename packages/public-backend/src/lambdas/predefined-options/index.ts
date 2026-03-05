@@ -61,7 +61,10 @@ export const predefinedOptions = async (
           await nodePutS3File(
             publicStaticFilesBucket,
             key,
-            JSON.stringify(result.items)
+            JSON.stringify(result.items),
+            {
+              ContentType: 'application/json',
+            }
           );
         }
 

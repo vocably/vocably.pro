@@ -3,6 +3,7 @@ import {
   GetObjectCommand,
   GetObjectCommandOutput,
   PutObjectCommand,
+  PutObjectCommandInput,
   S3Client,
 } from '@aws-sdk/client-s3';
 import { Result } from '@vocably/model';
@@ -61,7 +62,8 @@ export const nodeFetchS3File = async (
 export const nodePutS3File = async (
   bucket: string,
   file: string,
-  body: string
+  body: string,
+  input?: Partial<PutObjectCommandInput>
 ): Promise<Result<null>> => {
   if (file.includes('//') || file.includes('/.')) {
     return {
@@ -87,6 +89,7 @@ export const nodePutS3File = async (
 
   try {
     const command = new PutObjectCommand({
+      ...input,
       Bucket: bucket,
       Key: file,
       Body: body,
