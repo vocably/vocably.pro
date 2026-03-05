@@ -50,7 +50,7 @@ cd packages/backend && npm test -- src/analyze.test.ts
 ```bash
 # Terraform deployment (requires environment setup)
 cd platform
-terraform init -backend-config=./env-dev.remote
+terraform init
 terraform workspace select dev
 terraform plan -var-file="env-dev.tfvars"
 terraform apply -var-file="env-dev.tfvars" -auto-approve
@@ -59,9 +59,6 @@ terraform apply -var-file="env-dev.tfvars" -auto-approve
 npm run deploy-ios-dev --prefix=./mobile-app    # iOS to TestFlight
 npm run deploy-ios-prod --prefix=./mobile-app   # iOS production
 npm run deploy-android --prefix=./mobile-app    # Android to Play Store
-
-# Build browser extension
-npx zx ./scripts/build-extension.mjs
 ```
 
 ## Monorepo Architecture
@@ -108,8 +105,8 @@ Packages must be built in this order (handled by `build-packages.mjs`):
 #### Web Applications
 
 - **`packages/www`** - Marketing website (webpack, S3/CloudFront)
-- **`packages/app`** - Angular 14 dashboard application
-- **`packages/extension-popup`** - Angular 14 extension popup UI
+- **`packages/app`** - Angular 19 dashboard application
+- **`packages/extension-popup`** - Angular 19 extension popup UI
 
 #### Backend Services (AWS Lambda)
 
@@ -133,11 +130,6 @@ Packages must be built in this order (handled by `build-packages.mjs`):
 - **`@vocably/jest`** - Shared Jest configuration
 - **`@vocably/lambda-shared`** - Shared Lambda utilities
 
-### External Dependencies (Published Packages)
-
-- **`@vocably/pontis`** (1.0.1) - Extension storage wrapper
-- **`@vocably/hermes`** (1.0.1) - Messaging library
-
 ## Infrastructure (AWS Terraform)
 
 ### Key Resources (managed in `/platform`)
@@ -158,10 +150,9 @@ Packages must be built in this order (handled by `build-packages.mjs`):
 ### Environments
 
 - **dev** - Development environment
-- **stage** - Staging environment
 - **prod** - Production environment
 
-Managed via Terraform workspaces with separate `.tfvars` files (`env-dev.tfvars`, `env-stage.tfvars`, `env-prod.tfvars`).
+Managed via Terraform workspaces with separate `.tfvars` files (`env-dev.tfvars`, `env-prod.tfvars`).
 
 ### Deployment Flow
 
@@ -330,8 +321,7 @@ Lambda functions:
 ### Build Issues
 
 ```bash
-# Clean and rebuild all packages
-npm run test -ws -- --clearCache
+# Rebuild all packages
 npx zx ./scripts/build-packages.mjs
 
 # Reset mobile app build
@@ -357,5 +347,6 @@ cd packages/model && rm -rf dist node_modules && npm install && npm run build
 # Re-initialize terraform
 cd platform
 rm -rf .terraform .terraform.lock.hcl
-terraform init -backend-config=./env-dev.remote
+terraform init
+terraform workspace select dev
 ```

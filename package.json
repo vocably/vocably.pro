@@ -14,7 +14,8 @@
   "scripts": {
     "deploy-android": "npm run deploy-android --prefix=./mobile-app",
     "deploy-ios-dev": "npm run deploy-ios-dev --prefix=./mobile-app",
-    "deploy-ios-prod": "npm run deploy-ios-prod --prefix=./mobile-app"
+    "deploy-ios-prod": "npm run deploy-ios-prod --prefix=./mobile-app",
+    "claude": "claude --dangerously-skip-permissions"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.0",
