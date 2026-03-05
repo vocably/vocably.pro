@@ -1,0 +1,62 @@
+.study-container {
+  --nav-height: 48px;
+
+  height: var(--app-height);
+  position: relative;
+}
+
+.content {
+  display: flex;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--nav-height);
+  bottom: 0;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: var(--container-padding);
+  height: var(--nav-height);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 1rem;
+  text-decoration: none;
+
+  mat-icon {
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+h2 {
+  margin: 0;
+}
+
+.error {
+  color: var(--warn, #f44336);
+}
+
+.completed {
+  text-align: center;
+
+  p {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+}
+
+.card-container {
+  height: 100%;
+}

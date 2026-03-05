@@ -23,6 +23,7 @@ import { SignOutPageComponent } from './auth/pages/sign-out-page/sign-out-page.c
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
 import { ImportPageComponent } from './pages/import-page/import-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
+import { PreviewStudyStepPageComponent } from './pages/preview-study-step-page/preview-study-step-page.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 export const autoSignInPath = 'hands-free';
@@ -103,6 +104,12 @@ const routes: Routes = [
   {
     path: 'sign-out',
     component: SignOutPageComponent,
+  },
+  {
+    path: 'settings/preview-study-step',
+    title: 'Preview Study Step',
+    component: PreviewStudyStepPageComponent,
+    canActivate: [CognitoAuthGuard],
   },
   {
     path: 'settings',

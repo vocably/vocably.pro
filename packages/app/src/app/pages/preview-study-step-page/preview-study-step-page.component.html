@@ -1,0 +1,60 @@
+<div class="study-container">
+  <div class="content">
+    @if (loading) {
+      <div>
+        <ion-spinner name="dots" class="mr-1"></ion-spinner>Study session...
+      </div>
+    } @else if (error) {
+      <p class="error">{{ error }}</p>
+    } @else if (completed) {
+      <div class="completed">
+        <p>Step completed.</p>
+        <button class="button outline" (click)="retry()">Try Again</button>
+      </div>
+    } @else if (card) {
+      <div class="card-container">
+        @switch (step) {
+          @case ('sf') {
+            <app-srs-card-sf
+              [card]="card"
+              (grade)="onGrade($event)"
+            ></app-srs-card-sf>
+          }
+          @case ('sb') {
+            <app-srs-card-sb
+              [card]="card"
+              (grade)="onGrade($event)"
+            ></app-srs-card-sb>
+          }
+          @case ('mf') {
+            <app-srs-card-mf
+              [card]="card"
+              [wrongOptions]="wrongOptions"
+              (grade)="onGrade($event)"
+            ></app-srs-card-mf>
+          }
+          @case ('mb') {
+            <app-srs-card-mb
+              [card]="card"
+              [wrongOptions]="wrongOptions"
+              (grade)="onGrade($event)"
+            ></app-srs-card-mb>
+          }
+          @case ('ab') {
+            <app-srs-card-ab
+              [card]="card"
+              (grade)="onGrade($event)"
+            ></app-srs-card-ab>
+          }
+        }
+      </div>
+    }
+  </div>
+  <div class="nav">
+    <a [routerLink]="['/settings']" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      Back to Settings
+    </a>
+    <h2>{{ stepLabel }}</h2>
+  </div>
+</div>

@@ -17,6 +17,7 @@ import {
   StudySettings,
 } from '../../../study-settings';
 import { AppQrCodeComponent } from '../../components/app-qr-code/app-qr-code.component';
+import { StudyStepsComponent } from './study-steps/study-steps.component';
 
 @Component({
   selector: 'app-settings-page',
@@ -32,6 +33,7 @@ import { AppQrCodeComponent } from '../../components/app-qr-code/app-qr-code.com
     MatCheckboxModule,
     FormsModule,
     AppQrCodeComponent,
+    StudyStepsComponent,
   ],
 })
 export class SettingsPageComponent implements OnInit {

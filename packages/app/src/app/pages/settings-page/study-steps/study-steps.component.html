@@ -1,0 +1,29 @@
+@if (loaded) {
+  <h3>Study Steps</h3>
+  <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="step-list">
+    @for (step of steps; track step.id; let i = $index) {
+      <div class="step-item" cdkDrag>
+        <mat-icon class="drag-handle" cdkDragHandle>drag_indicator</mat-icon>
+        <mat-slide-toggle
+          [checked]="step.enabled"
+          (change)="onToggle(i)"
+          [disabled]="step.id === 'ab' && !isPaid"
+          color="accent"
+        ></mat-slide-toggle>
+        <div class="step-label">
+          <span>{{ getLabel(step.id) }}</span>
+          @if (step.id === 'ab' && !isPaid) {
+            <span class="small"
+              >Available only for premium users.
+              <a href="/membership">Become a premium member.</a></span
+            >
+          }
+        </div>
+        <a class="preview-link" [href]="getPreviewUrl(step)" target="_blank">
+          Preview
+        </a>
+      </div>
+    }
+  </div>
+  <p class="description">Drag to reorder, toggle to enable or disable.</p>
+}
