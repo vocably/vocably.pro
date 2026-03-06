@@ -17,8 +17,7 @@
   gap: 0.5rem;
   padding: 1rem;
   border-radius: 1rem;
-  background: var(--surface, #fff);
-  border: 1px solid var(--border, #e0e0e0);
+  background: var(--form-background-color);
   cursor: grab;
 
   &:active {
@@ -49,8 +48,7 @@
   gap: 0.5rem;
   padding: 1rem;
   border-radius: 1rem;
-  background: var(--surface, #fff);
-  border: 1px solid var(--border, #e0e0e0);
+  background: var(--form-background-drag-color);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
