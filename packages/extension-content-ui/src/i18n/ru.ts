@@ -63,7 +63,7 @@ export const ru = {
   'rate.never': 'Больше не показывать это сообщение.',
   // language
   'language.i_study': 'Я изучаю',
-  'language.i_speak': 'Я говорю',
+  'language.i_speak': 'Я знаю',
   'language.save': 'Сохранить',
   'language.saving': 'Сохранение...',
   // first-translation-congratulation
@@ -71,4 +71,23 @@ export const ru = {
   'congrats.scan_qr': 'Отсканируйте QR-код, чтобы учить.',
   // mobile-button
   'mobile_button.look_up': 'Найти',
+  // tag-form
+  'tag_form.new_name_for': 'Новое название для {title}:',
+  'tag_form.new_tag_name': 'Новое название тега:',
+  'tag_form.placeholder': 'Новый тег',
+  'tag_form.save_error':
+    'Произошла ошибка при попытке сохранить тег.\nПожалуйста, попробуйте позже.',
+  'tag_form.delete_error':
+    'Произошла ошибка при попытке удалить тег.\nПожалуйста, попробуйте позже.',
+  'tag_form.delete_confirm': 'Удалить этот тег?\nКарточки удалены не будут.',
+  'tag_form.delete': 'Удалить',
+  'tag_form.cancel': 'Отмена',
+  'tag_form.save': 'Сохранить',
+  // tags-menu
+  'tags_menu.info_line1': 'Теги — это как группы или папки, только лучше.',
+  'tags_menu.info_line2': 'Нажмите «Добавить тег», чтобы начать.',
+  'tags_menu.add': 'Добавить тег',
+  'tags_menu.edit': 'Редактировать тег',
+  'tags_menu.error':
+    'Не удалось выполнить операцию с тегом. Пожалуйста, попробуйте снова.',
 };

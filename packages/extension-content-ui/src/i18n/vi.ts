@@ -72,4 +72,24 @@ export const vi = {
   'congrats.scan_qr': 'Quét mã QR để học.',
   // mobile-button
   'mobile_button.look_up': 'Tra cứu',
+  // tag-form
+  'tag_form.new_name_for': 'Tên mới cho {title}:',
+  'tag_form.new_tag_name': 'Tên thẻ tag mới:',
+  'tag_form.placeholder': 'Thẻ tag mới',
+  'tag_form.save_error':
+    'Đã xảy ra lỗi khi cố gắng lưu thẻ tag.\nVui lòng thử lại sau.',
+  'tag_form.delete_error':
+    'Đã xảy ra lỗi khi cố gắng xóa thẻ tag.\nVui lòng thử lại sau.',
+  'tag_form.delete_confirm':
+    'Xóa thẻ tag này?\nKhông có thẻ ghi nhớ nào bị xóa.',
+  'tag_form.delete': 'Xóa',
+  'tag_form.cancel': 'Hủy',
+  'tag_form.save': 'Lưu',
+  // tags-menu
+  'tags_menu.info_line1': 'Thẻ tag giống như nhóm hoặc thư mục, nhưng tốt hơn.',
+  'tags_menu.info_line2': 'Nhấn "Thêm thẻ tag mới" để bắt đầu.',
+  'tags_menu.add': 'Thêm thẻ tag mới',
+  'tags_menu.edit': 'Chỉnh sửa thẻ tag',
+  'tags_menu.error':
+    'Không thể hoàn thành thao tác với thẻ tag. Vui lòng thử lại.',
 };

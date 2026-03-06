@@ -74,4 +74,24 @@ export const tr = {
   'congrats.scan_qr': 'Öğrenmek için QR kodunu tarayın.',
   // mobile-button
   'mobile_button.look_up': 'Ara',
+  // tag-form
+  'tag_form.new_name_for': '{title} için yeni ad:',
+  'tag_form.new_tag_name': 'Yeni etiket adı:',
+  'tag_form.placeholder': 'Yeni etiket',
+  'tag_form.save_error':
+    'Etiketi kaydetme girişimi sırasında bir hata oluştu.\nLütfen daha sonra tekrar deneyin.',
+  'tag_form.delete_error':
+    'Etiketi silme girişimi sırasında bir hata oluştu.\nLütfen daha sonra tekrar deneyin.',
+  'tag_form.delete_confirm':
+    'Bu etiket silinsin mi?\nHiçbir kart silinmeyecek.',
+  'tag_form.delete': 'Sil',
+  'tag_form.cancel': 'İptal',
+  'tag_form.save': 'Kaydet',
+  // tags-menu
+  'tags_menu.info_line1':
+    'Etiketler gruplar veya klasörler gibidir, ama daha iyisi.',
+  'tags_menu.info_line2': 'Başlamak için "Yeni etiket ekle"ye basın.',
+  'tags_menu.add': 'Yeni etiket ekle',
+  'tags_menu.edit': 'Etiketi düzenle',
+  'tags_menu.error': 'Etiket işlemi tamamlanamadı. Lütfen tekrar deneyin.',
 };

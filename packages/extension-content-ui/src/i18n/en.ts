@@ -72,4 +72,22 @@ export const en = {
   'congrats.scan_qr': 'Scan the QR code to learn it.',
   // mobile-button
   'mobile_button.look_up': 'Look up',
+  // tag-form
+  'tag_form.new_name_for': 'New name for {title}:',
+  'tag_form.new_tag_name': 'New tag name:',
+  'tag_form.placeholder': 'New tag',
+  'tag_form.save_error':
+    'An error occurred during the attempt to save the tag.\nPlease try again later.',
+  'tag_form.delete_error':
+    'An error occurred during the attempt to delete the tag.\nPlease try again later.',
+  'tag_form.delete_confirm': 'Delete this tag?\nNo cards will be deleted.',
+  'tag_form.delete': 'Delete',
+  'tag_form.cancel': 'Cancel',
+  'tag_form.save': 'Save',
+  // tags-menu
+  'tags_menu.info_line1': 'Tags are like groups, or folders, but better.',
+  'tags_menu.info_line2': 'Press "Add new tag" to begin.',
+  'tags_menu.add': 'Add new tag',
+  'tags_menu.edit': 'Edit Tag',
+  'tags_menu.error': 'Unable to complete the tag operation. Please try again.',
 };
