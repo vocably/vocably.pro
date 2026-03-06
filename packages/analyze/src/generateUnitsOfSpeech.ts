@@ -49,7 +49,7 @@ export const generateUnitsOfSpeech = async ({
           `User asks you to generate the collection of ${languageList[sourceLanguage]} words or phrases`,
           `Interpret user request as the starting point for generation of collections of units of speech unless instructed otherwise`,
           `Avoid direct translations unless asked otherwise`,
-          `Provide the amount reasonable for learning unless asked otherwise`,
+          `Provide 1-30 items unless asked otherwise`,
         ],
         thinkingConfig: {
           thinkingBudget: 0, // Disables thinking
