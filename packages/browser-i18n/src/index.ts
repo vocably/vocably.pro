@@ -1,6 +1,17 @@
+import { GoogleLanguage } from '@vocably/model';
+import { ru } from './ru';
+import { en } from './en';
+import { uk } from './uk';
+import { vi } from './vi';
+import { tr } from './tr';
+
 export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr';
 
 export type Translations = Record<Locale, Record<string, string>>;
+
+export type LanguageTranslationOption =
+  | `nominative_${GoogleLanguage}`
+  | `objective_${GoogleLanguage}`;
 
 const SUPPORTED_LOCALES: Locale[] = ['en', 'ru', 'uk', 'vi', 'tr'];
 
@@ -78,3 +89,11 @@ export const buildT =
       str
     );
   };
+
+export const languageTranslations: Translations = {
+  en,
+  ru,
+  uk,
+  vi,
+  tr,
+};

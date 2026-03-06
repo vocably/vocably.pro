@@ -51,9 +51,9 @@ export class VocablyLanguage {
                 (this.sourceLanguageSelect = el as HTMLSelectElement)
               }
             >
-              {Object.entries(languageList).map(([code, name]) => (
+              {Object.keys(languageList).map((code) => (
                 <option selected={this.sourceLanguage === code} value={code}>
-                  {name}
+                  {t(`nominative_${code}`)}
                 </option>
               ))}
             </select>
@@ -66,9 +66,9 @@ export class VocablyLanguage {
                 (this.targetLanguageSelect = el as HTMLSelectElement)
               }
             >
-              {Object.entries(languageList).map(([code, name]) => (
+              {Object.keys(languageList).map((code) => (
                 <option selected={this.targetLanguage === code} value={code}>
-                  {name}
+                  {t(`nominative_${code}`)}
                 </option>
               ))}
             </select>

@@ -387,9 +387,11 @@ export class VocablyTranslation {
         optionGroups={[
           [
             '',
-            Object.entries(languageList).sort(
-              sortLanguages(this.existingSourceLanguages)
-            ),
+            Object.keys(languageList)
+              .map((code) => {
+                return [code, t(`nominative_${code}`)] as any;
+              })
+              .sort(sortLanguages(this.existingSourceLanguages)),
           ],
         ]}
       ></vocably-hint-selector>
@@ -405,9 +407,11 @@ export class VocablyTranslation {
         optionGroups={[
           [
             '',
-            Object.entries(languageList).sort(
-              sortLanguages(this.existingTargetLanguages)
-            ),
+            Object.keys(languageList)
+              .map((code) => {
+                return [code, t(`nominative_${code}`)] as any;
+              })
+              .sort(sortLanguages(this.existingTargetLanguages)),
           ],
         ]}
       ></vocably-hint-selector>

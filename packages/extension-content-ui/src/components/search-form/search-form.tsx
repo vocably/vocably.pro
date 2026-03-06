@@ -76,7 +76,7 @@ export class VocablySearchForm {
 
   languageName(languageCode: string): string {
     // @ts-ignore
-    return languageList[languageCode] ?? '';
+    return t(`nominative_${languageCode}`) ?? '';
   }
 
   getPlaceholderText(): string {
