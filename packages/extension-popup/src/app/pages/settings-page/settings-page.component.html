@@ -1,8 +1,26 @@
 <div class="header">
-  <a [routerLink]="['/']"><mat-icon>arrow_back</mat-icon> Back</a>
-  <h1>Extension Settings</h1>
+  <a [routerLink]="['/']"
+    ><mat-icon>arrow_back</mat-icon> {{ 'settings.back' | translate }}</a
+  >
+  <h1>{{ 'settings.title' | translate }}</h1>
 </div>
 <ng-container *ngIf="settings$ | async as settings">
+  <div class="mb-1">
+    <label>
+      {{ 'settings.language' | translate }}
+      <select
+        [value]="settings.locale || 'en'"
+        (change)="setLocale($any($event.target).value)"
+      >
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+        <option value="uk">Українська</option>
+        <option value="vi">Tiếng Việt</option>
+        <option value="tr">Türkçe</option>
+      </select>
+    </label>
+  </div>
+
   <p class="mb-0_5">
     <label>
       <input
@@ -10,17 +28,15 @@
         [checked]="settings.autodetectLanguage"
         (change)="
           setSettings({
-            autodetectLanguage: !settings.autodetectLanguage
+            autodetectLanguage: !settings.autodetectLanguage,
           })
         "
       />
-      Automatically detect website language.
+      {{ 'settings.autodetect' | translate }}
     </label>
   </p>
   <p class="mb-1 small" style="max-width: 500px">
-    Automatic language detection isn’t 100% accurate and might confuse
-    inexperienced users. However, it can be a handy feature for people actively
-    studying multiple languages.
+    {{ 'settings.autodetect_help' | translate }}
   </p>
   <p class="mb-1">
     <label>
@@ -29,11 +45,11 @@
         [checked]="settings.showOnDoubleClick"
         (change)="
           setSettings({
-            showOnDoubleClick: !settings.showOnDoubleClick
+            showOnDoubleClick: !settings.showOnDoubleClick,
           })
         "
       />
-      Display the popup on double-click.
+      {{ 'settings.double_click' | translate }}
     </label>
   </p>
 
@@ -44,11 +60,11 @@
         [checked]="settings.showOnHotKey"
         (change)="
           setSettings({
-            showOnHotKey: !settings.showOnHotKey
+            showOnHotKey: !settings.showOnHotKey,
           })
         "
       />
-      Display the popup on double-press of the Shift key.
+      {{ 'settings.hot_key' | translate }}
     </label>
   </p>
 
@@ -59,41 +75,49 @@
         [checked]="settings.hideSelectionButton"
         (change)="
           setSettings({
-            hideSelectionButton: !settings.hideSelectionButton
+            hideSelectionButton: !settings.hideSelectionButton,
           })
         "
       />
-      Don't show the Vocably button when text is selected.
+      {{ 'settings.hide_button' | translate }}
     </label>
   </p>
   <div class="mb-1 small" style="max-width: 500px">
-    <p class="mb-0_5">Alternatively you can display the popup by:</p>
+    <p class="mb-0_5">{{ 'settings.alternatively' | translate }}</p>
     <ul>
       <li class="mb-0_5">
-        Opening context menu and selecting "Translate with Vocably".
+        {{ 'settings.context_menu' | translate }}
       </li>
       <li class="mb-0_5">
-        Double-clicking the word. [<button
+        {{ 'settings.double_click_word' | translate }} [<button
           class="link"
           (click)="
             setSettings({
-              showOnDoubleClick: !settings.showOnDoubleClick
+              showOnDoubleClick: !settings.showOnDoubleClick,
             })
           "
         >
-          {{ settings.showOnDoubleClick ? 'Disable' : 'Enable' }}</button
+          {{
+            (settings.showOnDoubleClick
+              ? 'settings.disable'
+              : 'settings.enable'
+            ) | translate
+          }}</button
         >]
       </li>
       <li>
-        Double-pressing the Shift button. [<button
+        {{ 'settings.double_shift' | translate }} [<button
           class="link"
           (click)="
             setSettings({
-              showOnHotKey: !settings.showOnHotKey
+              showOnHotKey: !settings.showOnHotKey,
             })
           "
         >
-          {{ settings.showOnHotKey ? 'Disable' : 'Enable' }}</button
+          {{
+            (settings.showOnHotKey ? 'settings.disable' : 'settings.enable')
+              | translate
+          }}</button
         >]
       </li>
     </ul>
@@ -106,30 +130,33 @@
         [checked]="settings.autoPlay"
         (change)="
           setSettings({
-            autoPlay: !settings.autoPlay
+            autoPlay: !settings.autoPlay,
           })
         "
       />
-      Automatically play audio pronunciation.
+      {{ 'settings.auto_play' | translate }}
     </label>
   </p>
 
   <div>
-    <button class="link" (click)="showQRCode = true">Use the mobile app</button>
-    to study your cards.
+    <button class="link" (click)="showQRCode = true">
+      {{ 'settings.mobile_app' | translate }}
+    </button>
+    {{ 'settings.to_study' | translate }}
   </div>
   <div class="qr-code" [class.visible]="showQRCode">
-    <p class="mt-1 mb-1">Scan the below QR code with your phone:</p>
+    <p class="mt-1 mb-1">{{ 'settings.scan_qr' | translate }}</p>
     <vocably-qr-code style="width: 200px"></vocably-qr-code>
     <div>
-      Or open this link on your mobile:<br />
+      {{ 'settings.or_open' | translate }}<br />
       <strong>https://vocably.pro/app.html</strong>
     </div>
   </div>
   <div class="mt-1">
-    Want to <span style="color: var(--emphasize-color)">import</span> or
-    <span style="color: var(--emphasize-color)">export</span> your cards? You
-    can
-    <a href="https://app.vocably.pro" target="_blank">do it in the web app</a>.
+    {{ 'settings.import_prompt' | translate }}
+    <a href="https://app.vocably.pro" target="_blank">{{
+      'settings.web_app_link' | translate
+    }}</a
+    >.
   </div>
 </ng-container>

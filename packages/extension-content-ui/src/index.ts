@@ -1,1 +1,1 @@
-// Use ../public/index.ts instead
+export { setLocale, getLocale, type Locale } from './i18n';

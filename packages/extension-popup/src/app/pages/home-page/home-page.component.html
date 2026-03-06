@@ -5,15 +5,16 @@
     class="text-center"
     style="position: relative; top: -1px; margin-left: 0.22rem"
   >
-    is almost ready!
+    {{ 'home.almost_ready' | translate }}
   </div>
   <a class="settings" [routerLink]="['settings']"
-    ><mat-icon>page_info</mat-icon> Settings</a
+    ><mat-icon>page_info</mat-icon> {{ 'home.settings' | translate }}</a
   >
 </div>
 
 <div *ngIf="!languagePairsLoaded" class="mt-2">
-  <ion-spinner name="dots"></ion-spinner> Loading search presets
+  <ion-spinner name="dots"></ion-spinner>
+  {{ 'home.loading_presets' | translate }}
 </div>
 
 <ng-container *ngIf="languagePairsLoaded">
@@ -24,7 +25,7 @@
         target="_blank"
         class="button block"
         style="white-space: nowrap"
-        >Setup</a
+        >{{ 'home.setup' | translate }}</a
       >
     </div>
   </div>
@@ -49,7 +50,8 @@
       class="text-center floating-loading"
       style="margin-top: 1rem; font-size: 0.9rem"
     >
-      <ion-spinner name="dots"></ion-spinner> Requesting ChatGPT
+      <ion-spinner name="dots"></ion-spinner>
+      {{ 'home.requesting_chatgpt' | translate }}
     </div>
 
     <vocably-translation

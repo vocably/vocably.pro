@@ -1,7 +1,9 @@
 import {
   Component,
+  Element,
   Event,
   EventEmitter,
+  forceUpdate,
   h,
   Host,
   Prop,
@@ -14,6 +16,7 @@ import {
   LanguagePairs,
 } from '@vocably/model';
 import { uniq } from 'lodash-es';
+import { subscribeToLocale, t } from '../../i18n';
 import { SearchValues } from './types';
 
 const article = (phrase: string) => {
@@ -32,6 +35,7 @@ const article = (phrase: string) => {
   shadow: true,
 })
 export class VocablySearchForm {
+  @Element() el: HTMLElement;
   @Prop() loading: boolean = false;
   @Prop() disabled: boolean = false;
   @Prop() existingSourceLanguages: GoogleLanguage[] = [];
@@ -52,6 +56,7 @@ export class VocablySearchForm {
   @State() textInputFocused: boolean = false;
 
   private textInput: HTMLInputElement | undefined = undefined;
+  private unsubLocale: (() => void) | undefined;
 
   componentDidLoad() {
     if (this.autoFocus) {
@@ -59,6 +64,14 @@ export class VocablySearchForm {
         this.textInput?.focus();
       }, 300);
     }
+  }
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
   }
 
   languageName(languageCode: string): string {
@@ -75,12 +88,14 @@ export class VocablySearchForm {
     const targetLanguageName = this.languageName(this.values.targetLanguage);
 
     if (this.values.isReversed) {
-      return `Enter ${article(
-        targetLanguageName
-      )} ${targetLanguageName} word or phrase here. ${sourceLanguageName} cards will be created.`;
+      return t('search.placeholder_reversed', {
+        article: article(targetLanguageName),
+        language: targetLanguageName,
+        source: sourceLanguageName,
+      });
     }
 
-    return `Enter any word or phrase here.`;
+    return t('search.placeholder_default');
   }
 
   getSourceLanguageGroups(): any {
@@ -108,7 +123,7 @@ export class VocablySearchForm {
     );
 
     const availableGroup = [
-      'Available Languages',
+      t('search.available_languages'),
       available.map((lng) => [lng, this.languageName(lng)] as const),
     ] as const;
 
@@ -118,7 +133,7 @@ export class VocablySearchForm {
 
     return [
       [
-        'Preferred Languages',
+        t('search.preferred_languages'),
         preferred.map((lng) => [lng, this.languageName(lng)] as const),
       ],
       availableGroup,
@@ -156,7 +171,7 @@ export class VocablySearchForm {
     );
 
     const availableGroup = [
-      'Available Languages',
+      t('search.available_languages'),
       available.map((lng) => [lng, this.languageName(lng)] as const),
     ] as const;
 
@@ -166,7 +181,7 @@ export class VocablySearchForm {
 
     return [
       [
-        'Preferred Languages',
+        t('search.preferred_languages'),
         preferred.map((lng) => [lng, this.languageName(lng)] as const),
       ],
       availableGroup,
@@ -201,7 +216,7 @@ export class VocablySearchForm {
           <div class="preset">
             <vocably-hint-selector
               class="language"
-              hint={'I study'}
+              hint={t('search.i_study')}
               shrinkSmall={true}
               disabled={this.loading || this.disabled}
               onChoose={(event) =>
@@ -230,7 +245,7 @@ export class VocablySearchForm {
             </div>
             <vocably-hint-selector
               class={'language'}
-              hint={'I speak'}
+              hint={t('search.i_speak')}
               shrinkSmall={true}
               disabled={this.loading || this.disabled}
               onChoose={(event) =>
@@ -282,8 +297,9 @@ export class VocablySearchForm {
           </div>
           {!this.hideHint && (
             <div class="hint">
-              Type any word or phrase in any language. Vocably will create{' '}
-              {this.languageName(this.values.sourceLanguage)} cards for you.
+              {t('search.hint', {
+                language: this.languageName(this.values.sourceLanguage),
+              })}
             </div>
           )}
         </form>

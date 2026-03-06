@@ -3,6 +3,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '../../translate.pipe';
 import { detectExtensionPlatform } from '@vocably/browser';
 import { SearchValues } from '@vocably/extension-content-ui/src/components/search-form/types';
 import {
@@ -30,7 +31,7 @@ const lastUsedSearchValuesKey = 'lastUsedSearchValues_01';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [NgIf, IonicModule, RouterLink, MatIcon],
+  imports: [NgIf, IonicModule, RouterLink, MatIcon, TranslatePipe],
 })
 export class HomePageComponent implements OnInit {
   welcomeUrl = `${environment.appBaseUrl}/welcome`;

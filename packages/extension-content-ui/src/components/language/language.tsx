@@ -1,5 +1,15 @@
-import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  forceUpdate,
+  h,
+  Host,
+  Prop,
+} from '@stencil/core';
 import { languageList } from '@vocably/model';
+import { subscribeToLocale, t } from '../../i18n';
 
 @Component({
   tag: 'vocably-language',
@@ -7,6 +17,7 @@ import { languageList } from '@vocably/model';
   shadow: true,
 })
 export class VocablyLanguage {
+  @Element() el: HTMLElement;
   @Prop() sourceLanguage: string;
   @Prop() targetLanguage: string;
   @Prop() waiting: boolean;
@@ -18,11 +29,21 @@ export class VocablyLanguage {
   private sourceLanguageSelect: HTMLSelectElement;
   private targetLanguageSelect: HTMLSelectElement;
 
+  private unsubLocale: (() => void) | undefined;
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
+  }
+
   render() {
     return (
       <Host data-test="language">
         <div class="container">
-          <div class="h1 p">I study</div>
+          <div class="h1 p">{t('language.i_study')}</div>
           <div class="p">
             <select
               data-test="source-language-selector"
@@ -37,7 +58,7 @@ export class VocablyLanguage {
               ))}
             </select>
           </div>
-          <div class="h1 p">I speak</div>
+          <div class="h1 p">{t('language.i_speak')}</div>
           <div class="p">
             <select
               data-test="target-language-selector"
@@ -64,7 +85,7 @@ export class VocablyLanguage {
               data-test="subscribe-button"
               disabled={this.waiting}
             >
-              {this.waiting ? 'Saving...' : 'Save'}
+              {this.waiting ? t('language.saving') : t('language.save')}
             </button>
           </div>
         </div>

@@ -1,4 +1,14 @@
-import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  forceUpdate,
+  h,
+  Host,
+  Prop,
+} from '@stencil/core';
+import { subscribeToLocale, t } from '../../i18n';
 
 @Component({
   tag: 'vocably-card-counter-explanation',
@@ -6,6 +16,7 @@ import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
   shadow: true,
 })
 export class VocablyCardCounterExplanation {
+  @Element() el: HTMLElement;
   @Prop() maxCards: number = 30;
   @Prop() paymentLink: string = '';
 
@@ -13,9 +24,15 @@ export class VocablyCardCounterExplanation {
   @Event() paymentClicked: EventEmitter<void>;
 
   private becameVisible: number = 0;
+  private unsubLocale: (() => void) | undefined;
 
   connectedCallback() {
     this.becameVisible = new Date().getTime();
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
   }
 
   onClose = () => {
@@ -34,18 +51,17 @@ export class VocablyCardCounterExplanation {
             onClick={() => this.onClose()}
             class="close-button"
             style={{ right: '8px', top: '8px' }}
-            title="Close"
+            title={t('counter.close')}
           >
             <vocably-icon-close></vocably-icon-close>
           </button>
           <div style={{ marginRight: '8px' }}>
-            The <strong>Free Plan</strong> allows to save up to{' '}
-            <strong>{this.maxCards}</strong> cards.
+            {t('counter.limit_message', {
+              plan: t('counter.free_plan'),
+              count: this.maxCards,
+            })}
           </div>
-          <div>
-            After you reached the limit, you will be allowed to save{' '}
-            <strong>one card per day</strong>.
-          </div>
+          <div>{t('counter.one_per_day')}</div>
           <div>
             <a
               href={this.paymentLink}
@@ -53,7 +69,7 @@ export class VocablyCardCounterExplanation {
               class="upgrade-button"
               onClick={() => this.paymentClicked.emit()}
             >
-              Upgrade to Premium Plan
+              {t('counter.upgrade')}
             </a>
           </div>
         </div>

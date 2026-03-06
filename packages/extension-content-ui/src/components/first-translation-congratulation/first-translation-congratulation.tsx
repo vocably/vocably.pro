@@ -1,7 +1,8 @@
 import '@sneas/telephone';
-import { Component, h, Host, Prop } from '@stencil/core';
+import { Component, Element, forceUpdate, h, Host, Prop } from '@stencil/core';
 import { TranslationCard } from '@vocably/model';
 import { explode } from '@vocably/sulna';
+import { subscribeToLocale, t } from '../../i18n';
 
 @Component({
   tag: 'vocably-first-translation-congratulation',
@@ -9,7 +10,19 @@ import { explode } from '@vocably/sulna';
   shadow: true,
 })
 export class VocablyFirstTranslationCongratulation {
+  @Element() el: HTMLElement;
   @Prop() card: TranslationCard;
+
+  private unsubLocale: (() => void) | undefined;
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
+  }
+
   render() {
     const examples = explode(this.card.data.example ?? '');
     const definitions = explode(this.card.data.definition ?? '');
@@ -85,10 +98,10 @@ export class VocablyFirstTranslationCongratulation {
           </div>
           <div class="col">
             <p>
-              <span class="emphasize">{this.card.data.source}</span> is already
-              on your phone.
+              <span class="emphasize">{this.card.data.source}</span>{' '}
+              {t('congrats.on_phone')}
             </p>
-            <p>Scan the QR code to learn it.</p>
+            <p>{t('congrats.scan_qr')}</p>
             <vocably-qr-code style={{ width: '200px' }}></vocably-qr-code>
           </div>
         </div>

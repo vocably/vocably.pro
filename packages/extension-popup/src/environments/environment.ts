@@ -28,6 +28,7 @@ let settings: ExtensionSettings = {
   hideSelectionButton: true,
   autodetectLanguage: false,
   showOnHotKey: false,
+  locale: 'en',
 };
 
 const timeout = async (ms: number) => {

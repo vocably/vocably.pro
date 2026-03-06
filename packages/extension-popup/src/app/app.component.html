@@ -1,22 +1,23 @@
 <div class="container">
   <ng-container *ngIf="isLoggedIn === 'undefined'"
-    ><ion-spinner name="dots"></ion-spinner> Checking auth status
+    ><ion-spinner name="dots"></ion-spinner>
+    {{ 'app.checking_auth' | translate }}
   </ng-container>
   <ng-container *ngIf="isLoggedIn === 'yes'">
     <router-outlet></router-outlet>
   </ng-container>
   <div *ngIf="isLoggedIn === 'no'">
     <p class="mb-1">
-      This extension translates the selected text and creates flashcards.
+      {{ 'app.translates_text' | translate }}
     </p>
-    <p class="mb-1">The flashcards will be available on your mobile device.</p>
-    <p class="mb-1">You need to be signed in to use Vocably.</p>
+    <p class="mb-1">{{ 'app.flashcards_mobile' | translate }}</p>
+    <p class="mb-1">{{ 'app.need_signed_in' | translate }}</p>
     <a
       [href]="loginUrl"
       target="_blank"
       class="button block"
       style="white-space: nowrap"
-      >Sign in or create account</a
+      >{{ 'app.sign_in' | translate }}</a
     >
   </div>
 </div>

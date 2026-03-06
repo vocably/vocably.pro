@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { TranslatePipe } from './translate.pipe';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
     }),
     HomePageComponent,
     SettingsPageComponent,
+    TranslatePipe,
   ],
   providers: [],
   bootstrap: [AppComponent],

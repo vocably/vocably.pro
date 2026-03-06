@@ -32,12 +32,15 @@ export const [isLoggedIn, onIsLoggedInRequest] = createScopedMessage<
   boolean
 >('isLoggedIn');
 
+export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr';
+
 export type ExtensionSettings = {
   showOnDoubleClick: boolean;
   autoPlay: boolean;
   hideSelectionButton: boolean;
   autodetectLanguage: boolean;
   showOnHotKey: boolean;
+  locale: Locale;
 };
 
 export const [getSettings, onGetSettingsRequest] = createScopedMessage<
