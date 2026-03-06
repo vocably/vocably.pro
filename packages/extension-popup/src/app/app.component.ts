@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { environment } from '../environments/environment';
 import { isUserLoggedIn$ } from '../isUserLoggedIn';
-import { setStencilLocale } from './setStencilLocale';
 import { TranslationService } from './translation.service';
+import { detectLocale, setLocale } from '@vocably/browser-i18n';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +26,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     environment.getSettings().then((settings) => {
-      const locale = settings.locale ?? 'en';
+      const locale = settings.locale ?? detectLocale();
       this.ts.setLocale(locale);
-      setStencilLocale(locale);
+      setLocale(locale);
     });
 
     isUserLoggedIn$.subscribe((isUserLoggedIn) => {

@@ -12,7 +12,7 @@ export const vi = {
   'subscribe.trial_button': 'Yêu cầu dùng thử miễn phí 7 ngày',
   'subscribe.button': 'Đăng ký',
   // translation
-  'translation.generating': '...Đang tạo',
+  'translation.generating': 'Nghĩ...',
   'translation.error': 'Yêu cầu Gemini hoặc ChatGPT đã xảy ra lỗi.',
   'translation.retry': 'Thử lại',
   'translation.requesting_ai': 'Đang yêu cầu thông tin thêm từ AI',

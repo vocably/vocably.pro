@@ -12,7 +12,7 @@ export const uk = {
   'home.settings': 'Налаштування',
   'home.loading_presets': 'Завантаження налаштувань',
   'home.setup': 'Налаштувати',
-  'home.requesting_chatgpt': 'Запит до ChatGPT',
+  'home.requesting_chatgpt': 'Запит до ШI',
   // settings
   'settings.title': 'Налаштування розширення',
   'settings.back': 'Назад',

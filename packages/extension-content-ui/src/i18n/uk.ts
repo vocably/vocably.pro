@@ -13,7 +13,7 @@ export const uk = {
   'subscribe.trial_button': 'Запитати 7-денний безкоштовний пробний період',
   'subscribe.button': 'Підписатися',
   // translation
-  'translation.generating': '...Генерація',
+  'translation.generating': 'Думаю...',
   'translation.error': 'Запит до Gemini або ChatGPT завершився помилкою.',
   'translation.retry': 'Повторити',
   'translation.requesting_ai': 'Запитуємо додаткову інформацію у ШІ',
@@ -25,7 +25,7 @@ export const uk = {
   'translation.edit_tags': 'Редагувати теги',
   'translation.remove_tag': 'Видалити цей тег з картки',
   'translation.i_study': 'Я вивчаю',
-  'translation.i_speak': 'Я говорю',
+  'translation.i_speak': 'Я знаю',
   'translation.free_plan': 'Безкоштовний план',
   'translation.free_plan_limit':
     '{plan} дозволяє безкоштовно зберігати до {count} карток.',
@@ -34,7 +34,7 @@ export const uk = {
   'translation.upgrade': 'Перейти на Premium',
   // search-form
   'search.i_study': 'Я вивчаю',
-  'search.i_speak': 'Я говорю',
+  'search.i_speak': 'Я знаю',
   'search.preferred_languages': 'Бажані мови',
   'search.available_languages': 'Доступні мови',
   'search.placeholder_default': 'Введіть будь-яке слово або фразу.',

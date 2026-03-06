@@ -19,6 +19,7 @@ import {
   UpdateCardPayload,
   UpdateTagPayload,
 } from '@vocably/model';
+import { Locale } from '@vocably/browser-i18n';
 
 const createScope =
   (scope: string): typeof createMessage =>
@@ -31,8 +32,6 @@ export const [isLoggedIn, onIsLoggedInRequest] = createScopedMessage<
   void,
   boolean
 >('isLoggedIn');
-
-export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr';
 
 export type ExtensionSettings = {
   showOnDoubleClick: boolean;

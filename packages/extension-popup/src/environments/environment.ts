@@ -21,6 +21,7 @@ import {
 } from '@vocably/extension-messages';
 import { isEqual, merge } from 'lodash-es';
 import { environmentLocal } from './environmentLocal';
+import { detectLocale } from '@vocably/browser-i18n';
 
 let settings: ExtensionSettings = {
   showOnDoubleClick: true,
@@ -28,7 +29,7 @@ let settings: ExtensionSettings = {
   hideSelectionButton: true,
   autodetectLanguage: false,
   showOnHotKey: false,
-  locale: 'en',
+  locale: detectLocale(),
 };
 
 const timeout = async (ms: number) => {

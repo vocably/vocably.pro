@@ -1,5 +1,6 @@
 import { ExtensionSettings } from '@vocably/extension-messages';
 import { browserEnv } from './browserEnv';
+import { detectLocale } from '@vocably/browser-i18n';
 
 const defaultSettings: ExtensionSettings = {
   showOnDoubleClick: false,
@@ -7,7 +8,7 @@ const defaultSettings: ExtensionSettings = {
   hideSelectionButton: false,
   autodetectLanguage: false,
   showOnHotKey: false,
-  locale: 'en',
+  locale: detectLocale(),
 };
 
 export const getSettings = async (): Promise<ExtensionSettings> => {

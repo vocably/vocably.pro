@@ -3,12 +3,12 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { ExtensionSettings, Locale } from '@vocably/extension-messages';
-import { setStencilLocale } from '../../setStencilLocale';
+import { ExtensionSettings } from '@vocably/extension-messages';
 import { ReplaySubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { TranslatePipe } from '../../translate.pipe';
 import { TranslationService } from '../../translation.service';
+import { Locale, setLocale } from '@vocably/browser-i18n';
 
 @Component({
   selector: 'app-settings-page',
@@ -37,7 +37,7 @@ export class SettingsPageComponent implements OnInit {
 
   setLocale(locale: string) {
     const localeValue = locale as Locale;
-    setStencilLocale(localeValue);
+    setLocale(localeValue);
     console.log('setLocale', localeValue);
     this.ts.setLocale(localeValue);
     environment

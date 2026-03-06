@@ -12,7 +12,7 @@ export const en = {
   'home.settings': 'Settings',
   'home.loading_presets': 'Loading search presets',
   'home.setup': 'Setup',
-  'home.requesting_chatgpt': 'Requesting ChatGPT',
+  'home.requesting_chatgpt': 'Requesting AI',
   // settings
   'settings.title': 'Extension Settings',
   'settings.back': 'Back',

@@ -13,7 +13,7 @@ export const tr = {
   'subscribe.trial_button': '7 günlük ücretsiz deneme talep et',
   'subscribe.button': 'Abone ol',
   // translation
-  'translation.generating': '...Oluşturuluyor',
+  'translation.generating': 'Düşünmek...',
   'translation.error': 'Gemini veya ChatGPT isteği bir hatayla sonuçlandı.',
   'translation.retry': 'Tekrar dene',
   'translation.requesting_ai': 'Yapay zekadan ek bilgi isteniyor',

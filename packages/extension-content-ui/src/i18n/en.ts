@@ -12,7 +12,7 @@ export const en = {
   'subscribe.trial_button': 'Request a 7 day free trial',
   'subscribe.button': 'Subscribe',
   // translation
-  'translation.generating': '...Generating',
+  'translation.generating': 'Thinking...',
   'translation.error':
     'A (likely) Gemini or ChatGPT request has resulted in an error.',
   'translation.retry': 'Retry',

@@ -13,7 +13,7 @@ export const ru = {
   'home.settings': 'Настройки',
   'home.loading_presets': 'Загрузка предустановок',
   'home.setup': 'Настройка',
-  'home.requesting_chatgpt': 'Запрос к ChatGPT',
+  'home.requesting_chatgpt': 'Запрос к ИИ',
   // settings
   'settings.title': 'Настройки расширения',
   'settings.back': 'Назад',

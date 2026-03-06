@@ -11,6 +11,7 @@ import {
   Position,
   setupTransform,
 } from './styling';
+import { detectLocale } from '@vocably/browser-i18n';
 
 type PopupStackItem = {
   overlay: HTMLVocablyOverlayElement;
@@ -93,7 +94,7 @@ export const createPopup = async (options: PopupOptions) => {
   popup.dataset.text = options.text;
 
   const { autoPlay, locale } = await api.getSettings();
-  setLocale(locale ?? 'en');
+  setLocale(locale ?? detectLocale());
 
   const tearDownContents = await setContents({
     popup,
