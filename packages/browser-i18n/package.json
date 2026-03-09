@@ -11,7 +11,7 @@
     "watch-esm": "tsc --watch",
     "watch-commonjs": "tsc --watch --project tsconfig.commonjs.json",
     "start": "run-p watch*",
-    "test": "jest",
+    "test": "echo '@vocably/browser-i18n has no tests.'",
     "browser-i18n": "npm run start"
   },
   "repository": {
