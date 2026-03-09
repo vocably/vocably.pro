@@ -124,7 +124,11 @@ export class VocablySearchForm {
 
     const availableGroup = [
       t('search.available_languages'),
-      available.map((lng) => [lng, this.languageName(lng)] as const),
+      available
+        .map((lng) => [lng, this.languageName(lng)] as const)
+        .sort(([_, lngA], [__, lngB]) => {
+          return lngA.localeCompare(lngB);
+        }),
     ] as const;
 
     if (preferred.length === 0) {
@@ -172,7 +176,11 @@ export class VocablySearchForm {
 
     const availableGroup = [
       t('search.available_languages'),
-      available.map((lng) => [lng, this.languageName(lng)] as const),
+      available
+        .map((lng) => [lng, this.languageName(lng)] as const)
+        .sort(([_, lngA], [__, lngB]) => {
+          return lngA.localeCompare(lngB);
+        }),
     ] as const;
 
     if (preferred.length === 0) {

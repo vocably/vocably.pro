@@ -51,11 +51,14 @@ export class VocablyLanguage {
                 (this.sourceLanguageSelect = el as HTMLSelectElement)
               }
             >
-              {Object.keys(languageList).map((code) => (
-                <option selected={this.sourceLanguage === code} value={code}>
-                  {t(`nominative_${code}`)}
-                </option>
-              ))}
+              {Object.keys(languageList)
+                .map((code) => [code, t(`nominative_${code}`)])
+                .sort((a, b) => a[1].localeCompare(b[1]))
+                .map(([code, label]) => (
+                  <option selected={this.sourceLanguage === code} value={code}>
+                    {label}
+                  </option>
+                ))}
             </select>
           </div>
           <div class="h1 p">{t('language.i_speak')}</div>
@@ -66,11 +69,14 @@ export class VocablyLanguage {
                 (this.targetLanguageSelect = el as HTMLSelectElement)
               }
             >
-              {Object.keys(languageList).map((code) => (
-                <option selected={this.targetLanguage === code} value={code}>
-                  {t(`nominative_${code}`)}
-                </option>
-              ))}
+              {Object.keys(languageList)
+                .map((code) => [code, t(`nominative_${code}`)])
+                .sort((a, b) => a[1].localeCompare(b[1]))
+                .map(([code, label]) => (
+                  <option selected={this.targetLanguage === code} value={code}>
+                    {label}
+                  </option>
+                ))}
             </select>
           </div>
           <div class="button-container">
