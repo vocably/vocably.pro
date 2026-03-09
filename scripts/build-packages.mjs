@@ -9,6 +9,7 @@ const packages = [
   'node-sulna',
   'model',
   'model-operations',
+  'browser-i18n',
   'srs',
   'webpack',
   'crud',

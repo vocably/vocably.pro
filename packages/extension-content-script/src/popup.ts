@@ -1,3 +1,4 @@
+import { setLocale } from '@vocably/extension-content-ui/src/i18n';
 import { GoogleLanguage } from '@vocably/model';
 import { api } from './api';
 import { setContents, TearDown } from './popup/contents';
@@ -10,6 +11,7 @@ import {
   Position,
   setupTransform,
 } from './styling';
+import { detectLocale } from '@vocably/browser-i18n';
 
 type PopupStackItem = {
   overlay: HTMLVocablyOverlayElement;
@@ -91,7 +93,8 @@ export const createPopup = async (options: PopupOptions) => {
   const popup = document.createElement('vocably-popup');
   popup.dataset.text = options.text;
 
-  const { autoPlay } = await api.getSettings();
+  const { autoPlay, locale } = await api.getSettings();
+  setLocale(locale ?? detectLocale());
 
   const tearDownContents = await setContents({
     popup,

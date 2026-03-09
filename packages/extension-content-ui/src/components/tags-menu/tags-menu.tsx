@@ -1,5 +1,14 @@
-import { Component, h, Host, Prop, State } from '@stencil/core';
+import {
+  Component,
+  Element,
+  forceUpdate,
+  h,
+  Host,
+  Prop,
+  State,
+} from '@stencil/core';
 import { Result, TagCandidate, TagItem } from '@vocably/model';
+import { subscribeToLocale, t } from '../../i18n';
 
 @Component({
   tag: 'vocably-tags-menu',
@@ -7,6 +16,7 @@ import { Result, TagCandidate, TagItem } from '@vocably/model';
   shadow: true,
 })
 export class VocablyTagsMenu {
+  @Element() el: HTMLElement;
   @Prop() disabled = false;
   @Prop() selectedItems: string[] = [];
   @Prop() existingItems: TagItem[] = [];
@@ -19,6 +29,15 @@ export class VocablyTagsMenu {
 
   private overlayElement: HTMLVocablyOverlayElement | null = null;
   private tagForm: HTMLVocablyTagFormElement | null = null;
+  private unsubLocale: (() => void) | undefined;
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
+  }
 
   hideTagForm() {
     const overlay = this.overlayElement;
@@ -41,7 +60,7 @@ export class VocablyTagsMenu {
     this.savingTag = null;
 
     if (result.success === false) {
-      alert('Unable to complete the tag operation. Please try again.');
+      alert(t('tags_menu.error'));
       return;
     }
   };
@@ -82,9 +101,9 @@ export class VocablyTagsMenu {
         <menu>
           {this.existingItems.length === 0 && (
             <li class="info">
-              Tags are like groups, or folders, but better.
+              {t('tags_menu.info_line1')}
               <br />
-              Press "Add new tag" to begin.
+              {t('tags_menu.info_line2')}
             </li>
           )}
           <li class="clickable">
@@ -97,7 +116,7 @@ export class VocablyTagsMenu {
                 this.displayTagForm();
               }}
             >
-              Add new tag
+              {t('tags_menu.add')}
             </button>
           </li>
           {this.existingItems
@@ -120,7 +139,7 @@ export class VocablyTagsMenu {
                   </span>
                 </button>
                 <button
-                  title={'Edit Tag'}
+                  title={t('tags_menu.edit')}
                   class="edit"
                   style={{ flex: '0', textAlign: 'center' }}
                   onClick={() => {

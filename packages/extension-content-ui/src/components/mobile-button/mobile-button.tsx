@@ -1,4 +1,5 @@
-import { Component, h, Host } from '@stencil/core';
+import { Component, Element, forceUpdate, h, Host } from '@stencil/core';
+import { subscribeToLocale, t } from '../../i18n';
 
 @Component({
   tag: 'vocably-mobile-button',
@@ -6,6 +7,18 @@ import { Component, h, Host } from '@stencil/core';
   shadow: true,
 })
 export class VocablyMobileButton {
+  @Element() el: HTMLElement;
+
+  private unsubLocale: (() => void) | undefined;
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
+  }
+
   render() {
     return (
       <Host>
@@ -20,7 +33,7 @@ export class VocablyMobileButton {
               fill="#0050FF"
             />
           </svg>
-          <span class="caption">Look up</span>
+          <span class="caption">{t('mobile_button.look_up')}</span>
         </button>
       </Host>
     );

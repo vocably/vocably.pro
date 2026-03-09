@@ -6,19 +6,22 @@ import { IonicModule } from '@ionic/angular';
 import { ExtensionSettings } from '@vocably/extension-messages';
 import { ReplaySubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { TranslatePipe } from '../../translate.pipe';
+import { TranslationService } from '../../translation.service';
+import { Locale, setLocale } from '@vocably/browser-i18n';
 
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.scss'],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [IonicModule, RouterLink, MatIcon, NgIf, AsyncPipe],
+  imports: [IonicModule, RouterLink, MatIcon, NgIf, AsyncPipe, TranslatePipe],
 })
 export class SettingsPageComponent implements OnInit {
   showQRCode = false;
   settings$ = new ReplaySubject<ExtensionSettings>();
 
-  constructor() {}
+  constructor(private ts: TranslationService) {}
 
   ngOnInit(): void {
     environment.getSettings().then((settings) => {
@@ -29,6 +32,16 @@ export class SettingsPageComponent implements OnInit {
   setSettings(partialSettings: Partial<ExtensionSettings>) {
     environment
       .setSettings(partialSettings)
+      .then((settings) => this.settings$.next(settings));
+  }
+
+  setLocale(locale: string) {
+    const localeValue = locale as Locale;
+    setLocale(localeValue);
+    console.log('setLocale', localeValue);
+    this.ts.setLocale(localeValue);
+    environment
+      .setSettings({ locale: localeValue })
       .then((settings) => this.settings$.next(settings));
   }
 }

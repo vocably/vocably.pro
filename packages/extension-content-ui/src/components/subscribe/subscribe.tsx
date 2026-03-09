@@ -1,4 +1,14 @@
-import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  forceUpdate,
+  h,
+  Host,
+  Prop,
+} from '@stencil/core';
+import { subscribeToLocale, t } from '../../i18n';
 
 @Component({
   tag: 'vocably-subscribe',
@@ -6,17 +16,26 @@ import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
   shadow: true,
 })
 export class VocablySubscribe {
+  @Element() el: HTMLElement;
   @Prop() trial: boolean = false;
   @Event() confirm: EventEmitter;
+
+  private unsubLocale: (() => void) | undefined;
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
+  }
 
   render() {
     return (
       <Host data-test="subscribe">
         <div class="container">
           <div class="message">
-            {this.trial
-              ? 'Request a 7 day free trial to proceed.'
-              : 'Please subscribe to proceed.'}
+            {this.trial ? t('subscribe.trial_message') : t('subscribe.message')}
           </div>
           <div class="button-container">
             <button
@@ -24,7 +43,7 @@ export class VocablySubscribe {
               onClick={() => this.confirm.emit()}
               data-test="subscribe-button"
             >
-              {this.trial ? 'Request a 7 day free trial' : 'Subscribe'}
+              {this.trial ? t('subscribe.trial_button') : t('subscribe.button')}
             </button>
           </div>
         </div>

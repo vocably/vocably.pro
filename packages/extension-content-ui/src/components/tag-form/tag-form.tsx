@@ -1,5 +1,15 @@
-import { Component, Event, EventEmitter, h, Prop, State } from '@stencil/core';
+import {
+  Component,
+  Element,
+  Event,
+  EventEmitter,
+  forceUpdate,
+  h,
+  Prop,
+  State,
+} from '@stencil/core';
 import { Result, TagCandidate, TagItem } from '@vocably/model';
+import { subscribeToLocale, t } from '../../i18n';
 
 @Component({
   tag: 'vocably-tag-form',
@@ -7,6 +17,7 @@ import { Result, TagCandidate, TagItem } from '@vocably/model';
   shadow: true,
 })
 export class VocablyTagsMenu {
+  @Element() el: HTMLElement;
   @Event() hide: EventEmitter<void>;
 
   @Prop() tagItem: TagItem | null = null;
@@ -17,6 +28,16 @@ export class VocablyTagsMenu {
   @State() saving = false;
 
   textInput!: HTMLInputElement;
+
+  private unsubLocale: (() => void) | undefined;
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
+  }
 
   componentDidLoad() {
     const initialTitle = this.tagItem ? this.tagItem.data.title : '';
@@ -52,12 +73,7 @@ export class VocablyTagsMenu {
     });
 
     if (result.success === false) {
-      alert(
-        [
-          'An error occurred during the attempt to save the tag.',
-          'Please try again later.',
-        ].join('\n')
-      );
+      alert(t('tag_form.save_error'));
 
       this.saving = false;
       return;
@@ -81,12 +97,7 @@ export class VocablyTagsMenu {
     const result = await this.deleteTag(this.tagItem);
 
     if (result.success === false) {
-      alert(
-        [
-          'An error occurred during the attempt to delete the tag.',
-          'Please try again later.',
-        ].join('\n')
-      );
+      alert(t('tag_form.delete_error'));
 
       this.saving = false;
       return;
@@ -112,12 +123,12 @@ export class VocablyTagsMenu {
           <label>
             <h1>
               {this.tagItem
-                ? `New name for ${this.tagItem.data.title}:`
-                : `New tag name:`}
+                ? t('tag_form.new_name_for', { title: this.tagItem.data.title })
+                : t('tag_form.new_tag_name')}
             </h1>
             <input
               type="text"
-              placeholder="New tag"
+              placeholder={t('tag_form.placeholder')}
               onKeyUp={this.onInputChange.bind(this)}
               onChange={this.onInputChange.bind(this)}
               ref={(el) => (this.textInput = el as HTMLInputElement)}
@@ -131,7 +142,7 @@ export class VocablyTagsMenu {
                 type="button"
                 onClick={() => {
                   const yesPlease = window.confirm(
-                    ['Delete this tag?', 'No cards will be deleted.'].join('\n')
+                    t('tag_form.delete_confirm')
                   );
 
                   if (yesPlease) {
@@ -139,7 +150,7 @@ export class VocablyTagsMenu {
                   }
                 }}
               >
-                Delete
+                {t('tag_form.delete')}
               </button>
             )}
             <button
@@ -147,10 +158,10 @@ export class VocablyTagsMenu {
               class="cancel"
               onClick={() => this.hide.emit()}
             >
-              Cancel
+              {t('tag_form.cancel')}
             </button>
             <button type="submit" class="submit" disabled={this.isDisabled()}>
-              Save
+              {t('tag_form.save')}
             </button>
           </div>
           {this.saving && (

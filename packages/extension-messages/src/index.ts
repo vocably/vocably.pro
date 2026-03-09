@@ -19,6 +19,7 @@ import {
   UpdateCardPayload,
   UpdateTagPayload,
 } from '@vocably/model';
+import { Locale } from '@vocably/browser-i18n';
 
 const createScope =
   (scope: string): typeof createMessage =>
@@ -38,6 +39,7 @@ export type ExtensionSettings = {
   hideSelectionButton: boolean;
   autodetectLanguage: boolean;
   showOnHotKey: boolean;
+  locale: Locale;
 };
 
 export const [getSettings, onGetSettingsRequest] = createScopedMessage<

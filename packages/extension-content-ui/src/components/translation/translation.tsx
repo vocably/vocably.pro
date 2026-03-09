@@ -3,6 +3,7 @@ import {
   Element,
   Event,
   EventEmitter,
+  forceUpdate,
   Fragment,
   h,
   Host,
@@ -36,6 +37,7 @@ import {
 } from '@vocably/model';
 import { isToday } from '@vocably/sulna';
 import showdown from 'showdown';
+import { subscribeToLocale, t } from '../../i18n';
 import { getSelectedTagIds } from './getSelectedTagIds';
 import { sortLanguages } from './sortLanguages';
 
@@ -126,6 +128,16 @@ export class VocablyTranslation {
   } | null = null;
 
   @Element() el: HTMLElement;
+
+  private unsubLocale: (() => void) | undefined;
+
+  connectedCallback() {
+    this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
+  }
+
+  disconnectedCallback() {
+    this.unsubLocale?.();
+  }
 
   @Method()
   async play() {
@@ -367,7 +379,7 @@ export class VocablyTranslation {
   render() {
     const sourceLanguageSelector = this.result && this.result.success && (
       <vocably-hint-selector
-        hint={'I study'}
+        hint={t('translation.i_study')}
         shrinkSmall={true}
         disabled={this.loading || this.disabled}
         onChoose={(event) => this.changeSourceLanguage.emit(event.detail)}
@@ -375,9 +387,11 @@ export class VocablyTranslation {
         optionGroups={[
           [
             '',
-            Object.entries(languageList).sort(
-              sortLanguages(this.existingSourceLanguages)
-            ),
+            Object.keys(languageList)
+              .map((code) => {
+                return [code, t(`nominative_${code}`)] as any;
+              })
+              .sort(sortLanguages(this.existingSourceLanguages)),
           ],
         ]}
       ></vocably-hint-selector>
@@ -385,7 +399,7 @@ export class VocablyTranslation {
 
     const targetLanguageSelector = this.result && this.result.success && (
       <vocably-hint-selector
-        hint={'I speak'}
+        hint={t('translation.i_speak')}
         shrinkSmall={true}
         disabled={this.loading || this.disabled}
         onChoose={(event) => this.changeTargetLanguage.emit(event.detail)}
@@ -393,9 +407,11 @@ export class VocablyTranslation {
         optionGroups={[
           [
             '',
-            Object.entries(languageList).sort(
-              sortLanguages(this.existingTargetLanguages)
-            ),
+            Object.keys(languageList)
+              .map((code) => {
+                return [code, t(`nominative_${code}`)] as any;
+              })
+              .sort(sortLanguages(this.existingTargetLanguages)),
           ],
         ]}
       ></vocably-hint-selector>
@@ -433,7 +449,9 @@ export class VocablyTranslation {
               }}
             >
               <vocably-spinner></vocably-spinner>
-              <div style={{ fontSize: '13px' }}>...Generating</div>
+              <div style={{ fontSize: '13px' }}>
+                {t('translation.generating')}
+              </div>
             </div>
           )}
           {this.result && this.result.success === false && (
@@ -445,9 +463,7 @@ export class VocablyTranslation {
                 gap: '12px',
               }}
             >
-              <div>
-                A (likely) Gemini or ChatGPT request has resulted in an error.
-              </div>
+              <div>{t('translation.error')}</div>
               <div>
                 <button
                   class="vocably-link-button vocably-nondecorated"
@@ -459,7 +475,7 @@ export class VocablyTranslation {
                   }}
                   disabled={this.isRetrying}
                 >
-                  Retry
+                  {t('translation.retry')}
                   {this.isRetrying && (
                     <vocably-inline-loader></vocably-inline-loader>
                   )}
@@ -488,7 +504,7 @@ export class VocablyTranslation {
               {showChatGpt && (
                 <div class="padding-left-12 vocably-bottom-12-border">
                   <div class="vocably-small vocably-muted vocably-mb-4">
-                    AI thinks that{' '}
+                    {t('translation.ai_thinks')}{' '}
                   </div>
                   <span class="vocably-emphasized">
                     {isGoogleTTSLanguage(this.result.value.sourceLanguage) && (
@@ -500,7 +516,8 @@ export class VocablyTranslation {
                     )}
                     {this.phrase}
                   </span>{' '}
-                  means <i>{this.result.value.aiThinksItIs}</i>
+                  {t('translation.means')}{' '}
+                  <i>{this.result.value.aiThinksItIs}</i>
                 </div>
               )}
               {this.result.value.cards.map((card, itemIndex, cardsArray) => (
@@ -515,20 +532,12 @@ export class VocablyTranslation {
                       <div class="max-limit-2">
                         <div class="panel max-limit-3">
                           <div>
-                            The{' '}
-                            <strong class="vocably-emphasized">
-                              Free Plan
-                            </strong>{' '}
-                            allows to freely save up to{' '}
-                            <strong>{this.maxCards}</strong> cards.
+                            {t('translation.free_plan_limit', {
+                              plan: t('translation.free_plan'),
+                              count: this.maxCards,
+                            })}
                           </div>
-                          <div>
-                            After you reached the limit, you can save{' '}
-                            <strong class="vocably-emphasized">
-                              one card per day
-                            </strong>
-                            .
-                          </div>
+                          <div>{t('translation.one_per_day')}</div>
                           <a
                             href={this.paymentLink}
                             target="_blank"
@@ -537,7 +546,7 @@ export class VocablyTranslation {
                               this.watchMePaying.emit();
                             }}
                           >
-                            Upgrade to Premium
+                            {t('translation.upgrade')}
                           </a>
                         </div>
                       </div>
@@ -591,7 +600,7 @@ export class VocablyTranslation {
                             >
                               <button
                                 class="vocably-card-action-button"
-                                title="Remove card"
+                                title={t('translation.remove_card')}
                                 disabled={this.isUpdating !== null}
                                 onClick={() => {
                                   if (this.disabled) {
@@ -624,7 +633,7 @@ export class VocablyTranslation {
 
                             <button
                               class="vocably-card-action-button"
-                              title="Edit tags"
+                              title={t('translation.edit_tags')}
                               disabled={this.isUpdating !== null}
                               onClick={(e) => {
                                 if (this.disabled) {
@@ -692,7 +701,7 @@ export class VocablyTranslation {
                                 fontSize: '16px',
                               }}
                             >
-                              Learn
+                              {t('translation.learn')}
                             </span>
                           </button>
                         )}
@@ -715,7 +724,7 @@ export class VocablyTranslation {
                         {card.data.example && (
                           <div>
                             <div class="vocably-small vocably-mb-6">
-                              Example:
+                              {t('translation.example')}
                             </div>
                             <vocably-card-examples
                               example={card.data.example}
@@ -738,8 +747,8 @@ export class VocablyTranslation {
                                 <button
                                   type="button"
                                   class="vocably-tag-remove-button"
-                                  aria-label="Remove this tag from the card"
-                                  title="Remove this tag from the card"
+                                  aria-label={t('translation.remove_tag')}
+                                  title={t('translation.remove_tag')}
                                   onClick={this.detachTagClick(card, tagItem)}
                                 >
                                   {this.removing &&
@@ -778,7 +787,7 @@ export class VocablyTranslation {
                               fontSize: '13px',
                             }}
                           >
-                            Requesting extra info from AI
+                            {t('translation.requesting_ai')}
                           </span>
                           <vocably-inline-loader
                             style={{ marginLeft: '8px' }}
