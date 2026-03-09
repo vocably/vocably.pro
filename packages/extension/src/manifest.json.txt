@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "{{ process.env.NAME }}: Translate and Learn with Flashcards",
-  "description": "AI translator and dictionary. Translate on any website or YouTube. Learn your translations on mobile. Expand your vocabulary.",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDescription__",
+  "default_locale": "en",
   "version": "{{ process.env.VERSION }}",
 
   "icons": {
