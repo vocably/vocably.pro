@@ -24,8 +24,8 @@ export const uk = {
   'translation.remove_card': 'Видалити картку',
   'translation.edit_tags': 'Редагувати теги',
   'translation.remove_tag': 'Видалити цей тег з картки',
-  'translation.i_study': 'Я вивчаю',
-  'translation.i_speak': 'Я знаю',
+  'translation.i_study': 'Я вивчаю:',
+  'translation.i_speak': 'Переклад:',
   'translation.free_plan': 'Безкоштовний план',
   'translation.free_plan_limit':
     '{plan} дозволяє безкоштовно зберігати до {count} карток.',
@@ -33,15 +33,15 @@ export const uk = {
     'Після досягнення ліміту можна зберігати по одній картці на день.',
   'translation.upgrade': 'Перейти на Premium',
   // search-form
-  'search.i_study': 'Я вивчаю',
-  'search.i_speak': 'Я знаю',
+  'search.i_study': 'Я вивчаю:',
+  'search.i_speak': 'Переклад:',
   'search.preferred_languages': 'Бажані мови',
   'search.available_languages': 'Доступні мови',
   'search.placeholder_default': 'Введіть будь-яке слово або фразу.',
   'search.placeholder_reversed':
-    'Введіть слово або фразу на {language}. Картки {source} будуть створені.',
+    'Введіть слово або фразу. Vocably створить {source} картки.',
   'search.hint':
-    'Введіть будь-яке слово або фразу. Vocably створить картки {language} для вас.',
+    'Введіть будь-яке слово або фразу. Vocably створить {language} картки для вас.',
   // card-counter-explanation
   'counter.free_plan': 'Безкоштовний план',
   'counter.limit_message': '{plan} дозволяє зберігати до {count} карток.',
@@ -62,8 +62,8 @@ export const uk = {
   'rate.show_again': 'Ви побачите це повідомлення знову після 10 перекладів.',
   'rate.never': 'Більше не показувати це повідомлення.',
   // language
-  'language.i_study': 'Я вивчаю',
-  'language.i_speak': 'Я знаю',
+  'language.i_study': 'Я вивчаю:',
+  'language.i_speak': 'Переклад:',
   'language.save': 'Зберегти',
   'language.saving': 'Збереження...',
   // first-translation-congratulation

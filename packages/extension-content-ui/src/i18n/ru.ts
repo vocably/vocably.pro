@@ -39,9 +39,9 @@ export const ru = {
   'search.available_languages': 'Доступные языки',
   'search.placeholder_default': 'Введите любое слово или фразу.',
   'search.placeholder_reversed':
-    'Введите слово или фразу на {language}. Карточки {source} будут созданы.',
+    'Введите слово или фразу. Vocably создаст {source} карточки.',
   'search.hint':
-    'Введите любое слово или фразу. Vocably создаст карточки {language} для вас.',
+    'Введите любое слово или фразу. Vocably создаст {language} карточки для вас.',
   // card-counter-explanation
   'counter.free_plan': 'Бесплатный план',
   'counter.limit_message': '{plan} позволяет сохранять до {count} карточек.',

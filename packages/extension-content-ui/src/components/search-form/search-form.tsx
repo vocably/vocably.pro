@@ -84,14 +84,13 @@ export class VocablySearchForm {
       return '';
     }
 
-    const sourceLanguageName = this.languageName(this.values.sourceLanguage);
     const targetLanguageName = this.languageName(this.values.targetLanguage);
 
     if (this.values.isReversed) {
       return t('search.placeholder_reversed', {
         article: article(targetLanguageName),
         language: targetLanguageName,
-        source: sourceLanguageName,
+        source: t(`objective_${this.values.sourceLanguage}`),
       });
     }
 
@@ -306,7 +305,7 @@ export class VocablySearchForm {
           {!this.hideHint && (
             <div class="hint">
               {t('search.hint', {
-                language: this.languageName(this.values.sourceLanguage),
+                language: t(`objective_${this.values.sourceLanguage}`),
               })}
             </div>
           )}

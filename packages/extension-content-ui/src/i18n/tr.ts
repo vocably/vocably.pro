@@ -24,8 +24,8 @@ export const tr = {
   'translation.remove_card': 'Kartı kaldır',
   'translation.edit_tags': 'Etiketleri düzenle',
   'translation.remove_tag': 'Bu etiketi karttan kaldır',
-  'translation.i_study': 'Öğreniyorum',
-  'translation.i_speak': 'Konuşuyorum',
+  'translation.i_study': 'Çalışılan Dil:',
+  'translation.i_speak': 'Çeviri Dili:',
   'translation.free_plan': 'Ücretsiz Plan',
   'translation.free_plan_limit':
     '{plan}, {count} kartı ücretsiz olarak kaydetmenize izin verir.',
@@ -33,8 +33,8 @@ export const tr = {
     'Limite ulaştıktan sonra günde bir kart kaydedebilirsiniz.',
   'translation.upgrade': "Premium'a yükselt",
   // search-form
-  'search.i_study': 'Öğreniyorum',
-  'search.i_speak': 'Konuşuyorum',
+  'search.i_study': 'Çalışılan Dil:',
+  'search.i_speak': 'Çeviri Dili:',
   'search.preferred_languages': 'Tercih Edilen Diller',
   'search.available_languages': 'Mevcut Diller',
   'search.placeholder_default': 'Herhangi bir kelime veya cümle girin.',
@@ -65,8 +65,8 @@ export const tr = {
   'rate.show_again': 'Bu mesajı 10 çeviriden sonra tekrar göreceksiniz.',
   'rate.never': 'Bu mesajı bir daha gösterme.',
   // language
-  'language.i_study': 'Öğreniyorum',
-  'language.i_speak': 'Konuşuyorum',
+  'language.i_study': 'Çalışılan Dil:',
+  'language.i_speak': 'Çeviri Dili:',
   'language.save': 'Kaydet',
   'language.saving': 'Kaydediliyor...',
   // first-translation-congratulation
