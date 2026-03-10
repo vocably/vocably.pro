@@ -10,6 +10,7 @@ import { AppQrCodeComponent } from '../components/app-qr-code/app-qr-code.compon
 import { ExpansionComponent } from '../components/expansion/expansion.component';
 import { HeaderComponent } from '../header/header.component';
 import { isExtensionInstalled$ } from '../isExtensionInstalled';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-welcome',
@@ -21,6 +22,7 @@ import { isExtensionInstalled$ } from '../isExtensionInstalled';
     ExpansionComponent,
     AppQrCodeComponent,
     RouterOutlet,
+    TranslocoModule,
   ],
 })
 export class WelcomeComponent implements OnInit, OnDestroy {

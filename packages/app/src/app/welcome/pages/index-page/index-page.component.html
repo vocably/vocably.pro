@@ -1,9 +1,11 @@
 <p class="mat-headline-4 mb-2 text-emphasize">
-  Welcome to Vocably. Let's set you up.
+  {{ 'welcome.index.headline' | transloco }}
 </p>
 
 <div class="display-flex align-items-center mb-2" *ngIf="targetLanguage">
-  <div class="mat-h2 m-0 mr-1">My mother tongue is</div>
+  <div class="mat-h2 m-0 mr-1">
+    {{ 'welcome.index.mother_tongue' | transloco }}
+  </div>
   <div class="flex-1">
     <app-language-input
       [value]="targetLanguage"
@@ -13,7 +15,7 @@
 </div>
 
 <div class="text-left">
-  <div class="mat-h2 mt-1 mb-2">I study</div>
+  <div class="mat-h2 mt-1 mb-2">{{ 'welcome.index.i_study' | transloco }}</div>
 </div>
 <div class="grid-container mb-2">
   <div
@@ -36,7 +38,8 @@
 <div class="display-flex">
   <div class="text-left">
     <button class="unstyled link" type="button" (click)="expanded = !expanded">
-      Show more languages<mat-icon
+      {{ 'welcome.index.show_more' | transloco
+      }}<mat-icon
         aria-hidden="true"
         class="middle expand-icon"
         [class]="{ down: expanded }"
@@ -47,7 +50,7 @@
   <div class="flex-1">
     <div class="text-right">
       <button class="unstyled link" (click)="showHowToMultilang()">
-        I'd like to learn multiple languages.
+        {{ 'welcome.index.multilang' | transloco }}
       </button>
     </div>
   </div>

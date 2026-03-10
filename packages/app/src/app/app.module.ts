@@ -11,8 +11,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import * as Sentry from '@sentry/angular';
+import { provideTransloco, TranslocoService } from '@jsverse/transloco';
+import { firstValueFrom } from 'rxjs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InlineTranslocoLoader } from './i18n/transloco-loader';
+import { resolveLocale } from './i18n/resolve-locale';
 
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
 import { ImportFailureDialogComponent } from './pages/import-page/import-failure-dialog/import-failure-dialog.component';
@@ -48,6 +52,26 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
     ImportFailureDialogComponent,
   ],
   providers: [
+    provideTransloco({
+      config: {
+        availableLangs: ['en', 'ru', 'uk', 'vi', 'tr'],
+        defaultLang: 'en',
+        fallbackLang: 'en',
+        reRenderOnLangChange: true,
+        prodMode: true,
+      },
+      loader: InlineTranslocoLoader,
+    }),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (ts: TranslocoService) => async () => {
+        const locale = await resolveLocale();
+        ts.setActiveLang(locale);
+        await firstValueFrom(ts.load(locale));
+      },
+      deps: [TranslocoService],
+      multi: true,
+    },
     {
       provide: ErrorHandler,
       useValue: Sentry.createErrorHandler({

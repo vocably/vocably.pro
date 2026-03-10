@@ -2,16 +2,11 @@
   class="mat-typography"
   style="font-size: 140%; max-width: 600px"
 >
-  <p>Vocably makes it super convenient to study multiple languages.</p>
+  <p>{{ 'welcome.multilang.p1' | transloco }}</p>
 
-  <p>
-    The extension automatically detects the language of the website you're on
-    and uses the correct translation language.
-  </p>
+  <p>{{ 'welcome.multilang.p2' | transloco }}</p>
 
-  <p>
-    To update your study and translation language, just change the dropdown.
-  </p>
+  <p>{{ 'welcome.multilang.p3' | transloco }}</p>
 
   <p>
     <img
@@ -20,8 +15,10 @@
     />
   </p>
 
-  <p>For now, let's focus on the language you'd like to study the most.</p>
+  <p>{{ 'welcome.multilang.p4' | transloco }}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button class="button" [mat-dialog-close]="true">Close</button>
+  <button class="button" [mat-dialog-close]="true">
+    {{ 'welcome.multilang.close' | transloco }}
+  </button>
 </mat-dialog-actions>

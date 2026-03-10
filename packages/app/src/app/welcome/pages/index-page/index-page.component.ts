@@ -17,6 +17,7 @@ import { HowToMultilangComponent } from '../../how-to-multilang/how-to-multilang
 import { LanguageButtonComponent } from '../../language-button/language-button.component';
 import { detectTargetLanguage } from './detectTargetLanguage';
 import { publicPredefinedOptions, saveUserMetadata } from '@vocably/api';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-index-page',
@@ -30,6 +31,7 @@ import { publicPredefinedOptions, saveUserMetadata } from '@vocably/api';
     LanguageIconComponent,
     MatIcon,
     LanguagePipe,
+    TranslocoModule,
   ],
 })
 export class IndexPageComponent implements OnInit {

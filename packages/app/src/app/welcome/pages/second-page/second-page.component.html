@@ -1,5 +1,6 @@
 <div *ngIf="isLoading">
-  <ion-spinner name="dots" class="mr-1"></ion-spinner>Loading example text...
+  <ion-spinner name="dots" class="mr-1"></ion-spinner
+  >{{ 'welcome.second.loading' | transloco }}
 </div>
 <div class="mb-2" *ngIf="targetLanguage">
   <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
@@ -8,19 +9,19 @@
   *ngIf="sourceLanguage && targetLanguage"
   class="contrast-panel rounded mb-2"
 >
-  You study <strong>{{ sourceLanguage | language }}</strong> and your mother
-  tongue is <strong>{{ targetLanguage | language }}</strong
+  <span [innerHTML]="studySentenceHtml"></span>
+  <a href="/welcome" style="margin-left: 8px">{{
+    'welcome.second.change' | transloco
+  }}</a
   >.
-
-  <a href="/welcome">Change</a>.
 </div>
 <ng-container *ngIf="!isLoading && exampleHtml">
   <div class="mat-headline-1 mb-2">
-    <span highlight>Select</span> any word or phrase on any website to see its
-    meaning.
+    <span highlight>{{ 'welcome.second.select_highlight' | transloco }}</span>
+    {{ 'welcome.second.select_rest' | transloco }}
   </div>
   <div class="mb-2">
-    Try selecting any word or phrase in this text
+    {{ 'welcome.second.try_select' | transloco }}
     <mat-icon style="vertical-align: middle">arrow_downward</mat-icon>
   </div>
   <div class="mb-2">

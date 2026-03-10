@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@ionic/angular": "^8.0.0",
+    "@jsverse/transloco": "^8.2.1",
     "pulltorefreshjs": "^0.1.22"
   },
   "devDependencies": {

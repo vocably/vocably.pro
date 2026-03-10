@@ -8,7 +8,8 @@ import {
   setProxyLanguage,
   setSourceLanguage,
 } from '@vocably/extension-messages';
-import { GoogleLanguage, isGoogleLanguage } from '@vocably/model';
+import { GoogleLanguage, isGoogleLanguage, Locale } from '@vocably/model';
+import { languageTranslations } from '@vocably/browser-i18n';
 import posthog from 'posthog-js';
 import {
   catchError,
@@ -28,6 +29,7 @@ import { LanguagePipe } from '../../../language/language.pipe';
 import { GenericInstructionComponent } from '../../generic-instruction/generic-instruction.component';
 import { HighlightComponent } from '../../highlight/highlight.component';
 import { HowToVideoComponent } from '../../how-to-video/how-to-video.component';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 
 const getOnboardedTargetLanguages = (): string[] => {
   return JSON.parse(localStorage.getItem('onboardedLanguages') ?? '[]');
@@ -75,6 +77,7 @@ const onboardTargetLanguage = async (targetLanguage: string) => {
     MatIcon,
     GenericInstructionComponent,
     LanguagePipe,
+    TranslocoModule,
   ],
 })
 export class SecondPageComponent implements OnInit, OnDestroy {
@@ -87,7 +90,23 @@ export class SecondPageComponent implements OnInit, OnDestroy {
   public sourceLanguage: GoogleLanguage | undefined = undefined;
   public targetLanguage: GoogleLanguage | undefined = undefined;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private transloco: TranslocoService
+  ) {}
+
+  get studySentenceHtml(): string {
+    if (!this.sourceLanguage || !this.targetLanguage) return '';
+    const locale = this.transloco.getActiveLang() as Locale;
+    const dict = languageTranslations[locale] ?? languageTranslations['en'];
+    return this.transloco.translate('welcome.second.study_sentence', {
+      sourceLanguage:
+        dict[`nominative_${this.sourceLanguage}`] ?? this.sourceLanguage,
+      targetLanguage:
+        dict[`nominative_${this.targetLanguage}`] ?? this.targetLanguage,
+    });
+  }
 
   ngOnInit(): void {
     this.activatedRoute.params

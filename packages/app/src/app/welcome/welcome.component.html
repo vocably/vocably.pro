@@ -5,22 +5,22 @@
   <div class="hero">
     <div *ngIf="extensionCanBeInstalled && extensionIsInstalled === false">
       <p>
-        It looks like you don't have the browser extension installed or enabled.
+        {{ 'welcome.no_extension' | transloco }}
       </p>
       <p>
-        <a class="button mr-1" [href]="extensionInstallUrl" target="_blank"
-          >Install or enable the extension</a
-        >
+        <a class="button mr-1" [href]="extensionInstallUrl" target="_blank">{{
+          'welcome.install_extension' | transloco
+        }}</a>
         <app-expansion
-          label="I don't want to install the extension"
+          [label]="'welcome.no_install' | transloco"
           panelStyle="padding-top: 1rem;"
         >
-          <p>You can use the mobile app.</p>
-          <p>Scan the QR code below:</p>
+          <p>{{ 'welcome.use_mobile' | transloco }}</p>
+          <p>{{ 'welcome.scan_qr' | transloco }}</p>
           <p>
             <app-app-qr-code style="width: 300px"></app-app-qr-code>
           </p>
-          <p>Or open this link on your mobile device:</p>
+          <p>{{ 'welcome.open_mobile_link' | transloco }}</p>
           <div>
             <a
               style="font-size: 160%"
