@@ -13,7 +13,7 @@ export const tr = {
   'welcome.index.multilang': 'Birden fazla dil öğrenmek istiyorum.',
   'welcome.second.loading': 'Örnek metin yükleniyor...',
   'welcome.second.study_sentence':
-    '<strong>{{sourceLanguage}}</strong> öğreniyorsunuz ve anadiliz <strong>{{targetLanguage}}</strong>.',
+    '<strong>{{sourceLanguage}}</strong> öğreniyorsunuz ve anadiliniz <strong>{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Değiştir',
   'welcome.second.select_highlight': 'İşaretleyin',
   'welcome.second.select_rest':

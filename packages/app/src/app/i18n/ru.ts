@@ -15,7 +15,7 @@ export const ru = {
   'welcome.index.multilang': 'Я хочу учить несколько языков.',
   'welcome.second.loading': 'Загрузка примера текста...',
   'welcome.second.study_sentence':
-    'Язык, который вы изучаете — <strong>{{sourceLanguage}}</strong>, а ваш родной язык — <strong>{{targetLanguage}}</strong>.',
+    'Вы изучаете — <strong>{{sourceLanguage}}</strong>, а ваш родной язык — <strong>{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Изменить',
   'welcome.second.select_highlight': 'Выделите',
   'welcome.second.select_rest':

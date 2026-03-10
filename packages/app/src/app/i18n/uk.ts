@@ -10,12 +10,12 @@ export const uk = {
   'welcome.index.headline':
     'Ласкаво просимо до Vocably. Давайте налаштуємо додаток.',
   'welcome.index.mother_tongue': 'Моя рідна мова',
-  'welcome.index.i_study': 'Я вивчаю',
+  'welcome.index.i_study': 'Мова, яку я вивчаю',
   'welcome.index.show_more': 'Показати більше мов',
   'welcome.index.multilang': 'Я хочу вивчати кілька мов.',
   'welcome.second.loading': 'Завантаження прикладу тексту...',
   'welcome.second.study_sentence':
-    'Ви вивчаєте <strong>{{sourceLanguage}}</strong>, а ваша рідна мова — <strong>{{targetLanguage}}</strong>.',
+    'Мова, яку ви вивчаєте — <strong>{{sourceLanguage}}</strong>, а ваша рідна мова — <strong>{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Змінити',
   'welcome.second.select_highlight': 'Виділіть',
   'welcome.second.select_rest':

@@ -17,7 +17,9 @@ import {
 } from '@angular/material/autocomplete';
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { GoogleLanguage, languageList } from '@vocably/model';
+import { TranslocoService } from '@jsverse/transloco';
+import { languageTranslations } from '@vocably/browser-i18n';
+import { GoogleLanguage, Locale, languageList } from '@vocably/model';
 import { map, Observable, startWith, Subject } from 'rxjs';
 
 @Component({
@@ -38,6 +40,8 @@ import { map, Observable, startWith, Subject } from 'rxjs';
 export class LanguageInputComponent implements OnInit, OnDestroy, OnChanges {
   private destroy$ = new Subject();
 
+  constructor(private transloco: TranslocoService) {}
+
   @Input() value: GoogleLanguage | '' = 'en';
   @Output() onChange = new EventEmitter<GoogleLanguage>();
 
@@ -50,11 +54,21 @@ export class LanguageInputComponent implements OnInit, OnDestroy, OnChanges {
     this.languageInput.valueChanges.pipe(
       startWith(''),
       map((value) =>
-        this._filterLanguages(this.languageInput.pristine ? '' : value ?? '')
+        this._filterLanguages(this.languageInput.pristine ? '' : (value ?? ''))
       )
     );
 
-  ngOnInit(): void {}
+  public sortedLanguages: GoogleLanguage[] = [];
+
+  ngOnInit(): void {
+    this.sortedLanguages = (Object.keys(languageList) as GoogleLanguage[]).sort(
+      (codeA, codeB) => {
+        return this.displayLanguage(codeA).localeCompare(
+          this.displayLanguage(codeB)
+        );
+      }
+    );
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next(null);
@@ -71,20 +85,32 @@ export class LanguageInputComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  private _filterLanguages(value: string): GoogleLanguage[] {
-    const loweredValue = value.toLowerCase();
-    return Object.entries(languageList)
-      .filter(
-        ([languageCode, languageName]) =>
-          languageCode.toLowerCase().includes(loweredValue) ||
-          languageName.toLowerCase().includes(loweredValue)
-      )
-      .map(([code]) => code as GoogleLanguage);
+  private _getTranslatedName(languageCode: string): string {
+    const locale = this.transloco.getActiveLang() as Locale;
+    const dict = languageTranslations[locale] ?? languageTranslations['en'];
+    return (
+      dict[`nominative_${languageCode}`] ??
+      languageList[languageCode as GoogleLanguage] ??
+      languageCode
+    );
   }
 
-  displayLanguage(languageCode: GoogleLanguage): string {
-    return languageCode ? languageList[languageCode] : '';
+  private _filterLanguages(value: string): GoogleLanguage[] {
+    const loweredValue = value.toLowerCase();
+    return this.sortedLanguages
+      .filter(
+        (languageCode) =>
+          languageCode.toLowerCase().includes(loweredValue) ||
+          this._getTranslatedName(languageCode)
+            .toLowerCase()
+            .includes(loweredValue)
+      )
+      .map((code) => code as GoogleLanguage);
   }
+
+  displayLanguage = (languageCode: GoogleLanguage): string => {
+    return languageCode ? this._getTranslatedName(languageCode) : '';
+  };
 
   onLanguageInputFocus(event: any) {
     if (this.languageInput.pristine) {
