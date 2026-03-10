@@ -1,0 +1,37 @@
+Language: English
+
+Translate unfamiliar words while reading websites and watching YouTube videos. Vocably automatically turns your translations into detailed vocabulary entries and lets you learn them in the mobile or web app.
+
+You'll stop forgetting the words you've looked up — and expand your vocabulary all the way to fluency.
+
+Vocably is the intelligent language assistant designed for real-world browsing. Instantly translate text on any website or YouTube video and save it to your personal collection for long-term retention.
+
+Using a scientifically-proven Spaced Repetition System (SRS), Vocably tracks your progress and reminds you to review words exactly when you're about to forget them. Transform your daily internet usage into an enjoyable learning habit.
+
+🌐 Translation & Discovery Without Effort
+
+Instant Translation: Select any word or phrase on any webpage to get a translation and detailed information about the new word.
+
+YouTube Integration: Hold Alt (or Option ⌥) to highlight and save unfamiliar words directly from YouTube subtitles.
+
+Detailed Information: Vocably provides clear, accurate definitions, phonetic transcriptions, examples, and other useful information.
+
+Multi-Language Support: Learn multiple languages and conveniently switch between them in the extension and app interfaces.
+
+🧠 Learn Saved Words with Spaced Repetition
+
+Spaced Repetition (SRS): Efficiently move words from short-term to long-term memory with automated review schedules.
+
+Mobile Sync: Your saved words are always with you. Review them at any convenient time with our iOS and Android apps. Expand your vocabulary and reach fluency.
+
+Personalized Flashcards: Every word you translate automatically becomes a study card — no manual entry required.
+
+🚀 How to Get Started
+
+Select & Translate: Highlight any word or phrase on a website and click the Vocably popup button.
+
+Save: Add the word and its definition to your collection with a single click.
+
+Learn: Open the Vocably mobile app or website to study your saved words whenever it suits you.
+
+Turn every article, blog post, and YouTube video into a personal language lesson. Add Vocably to Chrome and start progressing in your language learning like never before.
