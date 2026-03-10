@@ -24,29 +24,33 @@
           [matMenuTriggerFor]="menu"
           data-test="main-menu"
         >
-          <mat-icon aria-hidden="false" aria-label="Menu" class="middle"
+          <mat-icon
+            aria-hidden="false"
+            [attr.aria-label]="'header.menu' | transloco"
+            class="middle"
             >menu</mat-icon
           >
         </button>
         <mat-menu #menu="matMenu">
           <a mat-menu-item [routerLink]="['/welcome']"
-            ><mat-icon>person_raised_hand</mat-icon>Setup (Welcome)</a
+            ><mat-icon>person_raised_hand</mat-icon
+            >{{ 'header.setup' | transloco }}</a
           >
           <a mat-menu-item [routerLink]="['/membership']"
-            ><mat-icon>crown</mat-icon>Premium</a
+            ><mat-icon>crown</mat-icon>{{ 'header.premium' | transloco }}</a
           >
           <a mat-menu-item [routerLink]="['/settings']"
-            ><mat-icon>settings</mat-icon>Settings</a
+            ><mat-icon>settings</mat-icon>{{ 'header.settings' | transloco }}</a
           >
           <a mat-menu-item [routerLink]="['/import']"
-            ><mat-icon>csv</mat-icon>Import</a
+            ><mat-icon>csv</mat-icon>{{ 'header.import' | transloco }}</a
           >
           <a mat-menu-item [routerLink]="['/feedback']"
-            ><mat-icon>chat</mat-icon>Feedback</a
+            ><mat-icon>chat</mat-icon>{{ 'header.feedback' | transloco }}</a
           >
           <mat-divider></mat-divider>
           <button mat-menu-item (click)="signOut()">
-            <mat-icon>logout</mat-icon>Sign Out
+            <mat-icon>logout</mat-icon>{{ 'header.sign_out' | transloco }}
           </button>
         </mat-menu>
       </div>

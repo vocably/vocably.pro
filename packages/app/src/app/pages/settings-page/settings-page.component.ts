@@ -7,6 +7,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { RouterLink } from '@angular/router';
 import { Auth } from '@aws-amplify/auth';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { LoaderService } from '../../components/loader.service';
 import { HeaderComponent } from '../../header/header.component';
@@ -34,6 +35,7 @@ import { StudyStepsComponent } from './study-steps/study-steps.component';
     FormsModule,
     AppQrCodeComponent,
     StudyStepsComponent,
+    TranslocoModule,
   ],
 })
 export class SettingsPageComponent implements OnInit {

@@ -9,8 +9,8 @@
   <div *ngIf="productResult.status === 'product'">
     <div>
       <div class="mat-h1">{{ productResult.product.title }}</div>
-      <div class="mat-h2">is successfully purchased.</div>
+      <div class="mat-h2">{{ 'subscription.purchased' | transloco }}</div>
     </div>
-    <a [href]="'/membership'">Go back to the membership page.</a>
+    <a [href]="'/membership'">{{ 'subscription.go_back' | transloco }}</a>
   </div>
 </div>

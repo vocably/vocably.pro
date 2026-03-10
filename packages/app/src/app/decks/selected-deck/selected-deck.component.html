@@ -12,7 +12,8 @@
 <div [class.container]="!cleanScreen" [class.bottom]="!cleanScreen">
   <div class="hero" [class.max]="cleanScreen" *ngIf="isLoading">
     <div class="hero-body text-center">
-      <ion-spinner name="dots" class="mr-1"></ion-spinner>Loading cards...
+      <ion-spinner name="dots" class="mr-1"></ion-spinner
+      >{{ 'decks.loading_cards' | transloco }}
     </div>
   </div>
   <router-outlet *ngIf="!isLoading"></router-outlet>

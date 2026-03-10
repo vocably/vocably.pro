@@ -1,20 +1,22 @@
-<h1 mat-dialog-title>I don't know</h1>
+<h1 mat-dialog-title>{{ 'membership.why_paid.title' | transloco }}</h1>
 <mat-dialog-content>
-  <p>Possible reasons are:</p>
+  <p>{{ 'membership.why_paid.possible_reasons' | transloco }}</p>
 
   <ul class="mb-1">
-    <li>You are one of the first active users of Vocably</li>
-    <li>I like you</li>
+    <li>{{ 'membership.why_paid.first_users' | transloco }}</li>
+    <li>{{ 'membership.why_paid.like_you' | transloco }}</li>
   </ul>
 
-  <p>Anyway, enjoy your Premium.</p>
+  <p>{{ 'membership.why_paid.enjoy' | transloco }}</p>
 
   <p *ngIf="this.platform">
-    Want to help this project? Rate it on
+    {{ 'membership.why_paid.rate' | transloco }}
     <a [href]="this.platform.url" target="_blank">{{ this.platform.name }}</a
     >.
   </p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button class="button" [mat-dialog-close]="true">Close</button>
+  <button class="button" [mat-dialog-close]="true">
+    {{ 'membership.why_paid.close' | transloco }}
+  </button>
 </mat-dialog-actions>

@@ -7,6 +7,7 @@ import {
   MatDialogTitle,
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { GoogleLanguage } from '@vocably/model';
 
 export type ImportSuccessDialogData = {
@@ -17,7 +18,7 @@ export type ImportSuccessDialogData = {
   selector: 'app-import-success-dialog',
   templateUrl: './import-success-dialog.component.html',
   styleUrls: ['./import-success-dialog.component.scss'],
-  imports: [MatDialogTitle, MatDialogActions, MatButton],
+  imports: [MatDialogTitle, MatDialogActions, MatButton, TranslocoModule],
 })
 export class ImportSuccessDialogComponent implements OnInit {
   constructor(

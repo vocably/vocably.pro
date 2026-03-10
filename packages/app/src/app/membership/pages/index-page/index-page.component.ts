@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { EntitlementInfo, Purchases } from '@revenuecat/purchases-js';
 import { getUserStaticMetadata } from '@vocably/api';
@@ -35,7 +36,13 @@ type MembershipStatus =
   selector: 'app-index-page',
   templateUrl: './index-page.component.html',
   styleUrls: ['./index-page.component.scss'],
-  imports: [HeaderComponent, NgIf, IonicModule, MembershipSelectorComponent],
+  imports: [
+    HeaderComponent,
+    NgIf,
+    IonicModule,
+    MembershipSelectorComponent,
+    TranslocoModule,
+  ],
 })
 export class IndexPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
@@ -46,7 +53,10 @@ export class IndexPageComponent implements OnInit, OnDestroy {
 
   public reload$ = new Subject<'with_loader' | 'without_loader'>();
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {}
+  constructor(
+    private authService: AuthService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.reload$

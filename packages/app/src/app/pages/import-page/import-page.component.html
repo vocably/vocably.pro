@@ -1,5 +1,5 @@
 <div class="container-xl top">
-  <app-header title="Import Cards from CSV"></app-header>
+  <app-header [title]="'import.title' | transloco"></app-header>
 </div>
 <style>
   .hero-sticky-container {
@@ -38,13 +38,14 @@
   <div class="hero hero-sticky-container">
     <div>
       <div *ngIf="loadingDecks" class="text-center">
-        <ion-spinner name="dots" class="mr-1"></ion-spinner>Loading decks...
+        <ion-spinner name="dots" class="mr-1"></ion-spinner
+        >{{ 'import.loading_decks' | transloco }}
       </div>
       <ng-container *ngIf="!loadingDecks">
         <ng-container *ngIf="selectedDeck$ | async as selectedDeck">
           <ng-container *ngIf="selectedDeck === 'none'">
             <div class="lead-2 text-center text-emphasize mb-2">
-              What language would you like to import?
+              {{ 'import.what_language' | transloco }}
             </div>
             <app-language-input
               value=""
@@ -53,7 +54,7 @@
           </ng-container>
           <div style="margin-bottom: 4rem" *ngIf="selectedDeck !== 'none'">
             <div class="mb-1">
-              Import cards for
+              {{ 'import.import_cards_for' | transloco }}
 
               <app-deck-selector
                 style="
@@ -68,7 +69,7 @@
               ></app-deck-selector>
             </div>
             <div class="mb-1">
-              The CSV file must include two columns, separated by tabs
+              {{ 'import.csv_two_columns' | transloco }}
               <mat-icon class="middle ml-0_5">keyboard_tab</mat-icon>.
             </div>
             <div class="mb-1">
@@ -79,7 +80,7 @@
                 (change)="onFileChange($event.target)"
                 accept=".csv,.txt"
               />
-              Copy and paste from the Google Sheets, CSV file, or
+              {{ 'import.copy_paste' | transloco }}
               <button
                 mat-button
                 color="accent"
@@ -90,7 +91,9 @@
               >
                 <mat-icon class="middle mr-0_5" style="margin-left: 0"
                   >upload</mat-icon
-                ><span class="middle">Upload CSV file</span>
+                ><span class="middle">{{
+                  'import.upload_csv' | transloco
+                }}</span>
               </button>
             </div>
 
@@ -103,27 +106,28 @@
                 [readOnly]="isImporting"
                 class="csv-textarea"
                 wrap="off"
-                placeholder="Paste your Google Sheets CSV data here."
+                [placeholder]="'import.placeholder' | transloco"
               ></textarea>
             </p>
 
             <p>
-              Don't know where to start?
-              <a target="_blank" href="assets/example.csv"
-                >Download an example of CSV file</a
+              {{ 'import.dont_know' | transloco }}
+              <a target="_blank" href="assets/example.csv">{{
+                'import.download_example' | transloco
+              }}</a
               >.
             </p>
 
             <ng-container *ngIf="csvData$ | async as csvData">
               <ng-container *ngIf="csvData.length === 0">
                 <p class="text-danger">
-                  Each line of CSV data must contain two values: a word/phrase
-                  and its translation. Values should be separated by tab
+                  {{ 'import.csv_error' | transloco }}
                   <mat-icon class="middle ml-0_5">keyboard_tab</mat-icon>
                 </p>
                 <p class="text-danger">
-                  Having trouble with the import?
-                  <a href="/feedback">Let me know</a> — I'll do my best to help.
+                  {{ 'import.trouble' | transloco }}
+                  <a href="/feedback">{{ 'import.let_me_know' | transloco }}</a>
+                  {{ 'import.help_best' | transloco }}
                 </p>
               </ng-container>
               <ng-container *ngIf="csvData.length > 0">
@@ -178,7 +182,7 @@
                       <mat-icon class="middle mr-0_5" style="margin-left: 0"
                         >sell</mat-icon
                       >
-                      Add tags
+                      {{ 'import.add_tags' | transloco }}
                     </button></app-tags-selector
                   >
                   <mat-chip-set>
@@ -199,17 +203,18 @@
                 </div>
                 <div class="mt-1 text-center">
                   <span *ngIf="isAnalyzing"
-                    >Analysing <ion-spinner name="dots"></ion-spinner
+                    >{{ 'import.analysing' | transloco }}
+                    <ion-spinner name="dots"></ion-spinner
                   ></span>
                   <button
                     *ngIf="!isAnalyzing"
                     class="button block"
                     (click)="import(selectedDeck, csvData)"
                   >
-                    Import Cards
+                    {{ 'import.import_cards' | transloco }}
                     <ion-spinner
                       [style]="{
-                        visibility: isImporting ? 'visible' : 'hidden'
+                        visibility: isImporting ? 'visible' : 'hidden',
                       }"
                       name="dots"
                       style="margin-right: -28px"

@@ -5,26 +5,28 @@
   <div class="hero">
     <div class="text-center">
       <ng-container *ngIf="membershipStatus.type === 'loading'">
-        <ion-spinner name="dots" class="mr-1"></ion-spinner>Checking membership
-        status...
+        <ion-spinner name="dots" class="mr-1"></ion-spinner
+        >{{ 'membership.loading' | transloco }}
       </ng-container>
       <ng-container *ngIf="membershipStatus.type === 'paid_group'">
-        <h1>You are a Premium user</h1>
+        <h1>{{ 'membership.premium_user' | transloco }}</h1>
         <div>
-          <button class="unstyled link" (click)="showWhyPaid()">Why?</button>
+          <button class="unstyled link" (click)="showWhyPaid()">
+            {{ 'membership.why' | transloco }}
+          </button>
         </div>
       </ng-container>
       <ng-container *ngIf="membershipStatus.type === 'free'">
         <app-membership-selector></app-membership-selector>
       </ng-container>
       <ng-container *ngIf="membershipStatus.type === 'revenue_cat'">
-        <h1>You are a Premium user</h1>
+        <h1>{{ 'membership.premium_user' | transloco }}</h1>
         <p *ngIf="membershipStatus.endDate">
-          Your subscription ends at:
+          {{ 'membership.ends_at' | transloco }}
           {{ membershipStatus.endDate.toLocaleDateString() }}
         </p>
         <p *ngIf="membershipStatus.nextPaymentDate">
-          Next payment:
+          {{ 'membership.next_payment' | transloco }}
           {{ membershipStatus.nextPaymentDate.toLocaleDateString() }}
         </p>
         <div
@@ -33,13 +35,13 @@
             membershipStatus.managementUrl
           "
         >
-          <a [href]="membershipStatus.managementUrl"
-            >Manage your subscription</a
-          >
+          <a [href]="membershipStatus.managementUrl">{{
+            'membership.manage' | transloco
+          }}</a>
         </div>
       </ng-container>
       <ng-container *ngIf="membershipStatus.type === 'error'">
-        <div>Unable to load your membership status</div>
+        <div>{{ 'membership.error' | transloco }}</div>
       </ng-container>
     </div>
   </div>

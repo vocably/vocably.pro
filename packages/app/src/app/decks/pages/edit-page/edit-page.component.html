@@ -1,6 +1,8 @@
 <nav class="text-center mb-2 deck-menu">
   <app-back-button></app-back-button>
-  <button class="unstyled link" [routerLink]="['./export']">Export Deck</button>
+  <button class="unstyled link" [routerLink]="['./export']">
+    {{ 'decks.edit.export_deck' | transloco }}
+  </button>
 </nav>
 <ul class="separated unstyled mb-2">
   <li *ngFor="let card of cards">
@@ -20,5 +22,5 @@
   (click)="deleteDeck()"
   data-test="delete-button"
 >
-  Delete Deck
+  {{ 'decks.edit.delete_deck' | transloco }}
 </button>

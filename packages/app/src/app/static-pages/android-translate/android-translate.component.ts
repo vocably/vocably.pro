@@ -4,6 +4,7 @@ import { GoogleLanguage, isGoogleLanguage } from '@vocably/model';
 
 import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import {
   catchError,
@@ -23,7 +24,7 @@ import { LogoComponent } from '../../header/logo/logo.component';
   selector: 'app-android-translate',
   templateUrl: './android-translate.component.html',
   styleUrls: ['./android-translate.component.scss'],
-  imports: [LogoComponent, NgIf, IonicModule, MatIcon],
+  imports: [LogoComponent, NgIf, IonicModule, MatIcon, TranslocoModule],
 })
 export class AndroidTranslateComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

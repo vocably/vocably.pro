@@ -9,6 +9,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
 
 export type DeleteConfirmationDialogData = {
   fullLanguage: string;
@@ -25,6 +26,7 @@ export type DeleteConfirmationDialogData = {
     MatDialogActions,
     MatButton,
     MatDialogClose,
+    TranslocoModule,
   ],
 })
 export class DeleteConfirmationDialogComponent implements OnInit {

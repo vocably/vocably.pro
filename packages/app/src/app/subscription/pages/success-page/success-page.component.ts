@@ -2,6 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import {
   getSubscriptionProducts,
   SubscriptionProduct,
@@ -24,7 +25,7 @@ type ProductResult =
   selector: 'app-success-page',
   templateUrl: './success-page.component.html',
   styleUrls: ['./success-page.component.scss'],
-  imports: [MatIcon, NgIf],
+  imports: [MatIcon, NgIf, TranslocoModule],
 })
 export class SuccessPageComponent implements OnInit {
   public productResult: ProductResult = { status: 'loading' };

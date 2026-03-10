@@ -1,17 +1,18 @@
 <div class="text-center">
   <div class="mb-1">
     <button class="button" (click)="auth.signIn()">
-      Sign in or Create an account
+      {{ 'auth.sign_in.button' | transloco }}
     </button>
   </div>
   <div class="small">
-    By signing in, you agree to our
-    <a [href]="wwwBaseUrl + '/terms-and-conditions.html'" target="_blank"
-      >Terms and Conditions</a
-    >
-    and
-    <a [href]="wwwBaseUrl + '/privacy-policy.html'" target="_blank"
-      >Privacy Policy</a
+    {{ 'auth.sign_in.agree' | transloco }}
+    <a [href]="wwwBaseUrl + '/terms-and-conditions.html'" target="_blank">{{
+      'auth.sign_in.terms' | transloco
+    }}</a>
+    {{ 'auth.sign_in.and' | transloco }}
+    <a [href]="wwwBaseUrl + '/privacy-policy.html'" target="_blank">{{
+      'auth.sign_in.privacy' | transloco
+    }}</a
     >.
   </div>
 </div>

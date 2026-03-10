@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { byDate, CardItem } from '@vocably/model';
 import { Subject, takeUntil } from 'rxjs';
@@ -12,7 +13,14 @@ import { DeckStoreService } from '../../deck-store.service';
   selector: 'app-dashboard-page',
   templateUrl: './dashboard-page.component.html',
   styleUrls: ['./dashboard-page.component.scss'],
-  imports: [NgIf, NgFor, CardComponent, IonicModule, RouterLink],
+  imports: [
+    NgIf,
+    NgFor,
+    CardComponent,
+    IonicModule,
+    RouterLink,
+    TranslocoModule,
+  ],
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

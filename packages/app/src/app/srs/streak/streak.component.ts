@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TranslocoModule } from '@jsverse/transloco';
 import { getStreakDays, StreakDay } from '@vocably/sulna';
 import {
   trigger,
@@ -13,7 +14,7 @@ import { get } from 'lodash-es';
 @Component({
   selector: 'app-srs-streak',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslocoModule],
   templateUrl: './streak.component.html',
   styleUrl: './streak.component.scss',
   animations: [

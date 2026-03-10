@@ -6,6 +6,7 @@ import { MatButton } from '@angular/material/button';
 import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import * as Sentry from '@sentry/browser';
 import {
@@ -99,6 +100,7 @@ const detectImportDeck = async (): Promise<GoogleLanguage | ''> => {
     MatChip,
     MatChipRemove,
     AsyncPipe,
+    TranslocoModule,
   ],
 })
 export class ImportPageComponent implements OnInit, OnDestroy {

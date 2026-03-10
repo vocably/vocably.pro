@@ -1,21 +1,23 @@
 <div class="container-l text-center">
-  <h1 class="text-center" style="margin-bottom: 0">Vocably Premium</h1>
-  <div class="mb-2">Created for active language users</div>
+  <h1 class="text-center" style="margin-bottom: 0">
+    {{ 'membership_selector.title' | transloco }}
+  </h1>
+  <div class="mb-2">{{ 'membership_selector.subtitle' | transloco }}</div>
   <div class="features mb-2">
     <div class="feature">
       <div class="feature-icon">
         <mat-icon>computer</mat-icon>
       </div>
       <div class="feature-explanation">
-        <div class="feature-title">See a new word in a desktop browser?</div>
+        <div class="feature-title">
+          {{ 'membership_selector.feature1.title' | transloco }}
+        </div>
         <div class="feature-description">
           <div class="mb-0_5">
-            Use Chrome or Safari extensions to quickly select, translate, and
-            generate flashcards with a single click.
+            {{ 'membership_selector.feature1.desc1' | transloco }}
           </div>
           <div>
-            iOS users can also take advantage of the iOS Safari extension for
-            iPhone and iPad.
+            {{ 'membership_selector.feature1.desc2' | transloco }}
           </div>
         </div>
       </div>
@@ -25,11 +27,12 @@
         <mat-icon>mobile_text_2</mat-icon>
       </div>
       <div class="feature-explanation">
-        <div class="feature-title">See a new word in any mobile app?</div>
+        <div class="feature-title">
+          {{ 'membership_selector.feature2.title' | transloco }}
+        </div>
         <div class="feature-description">
           <div class="mb-0_5">
-            Select it and share with Vocably Mobile App to translate and
-            generate flashcards.
+            {{ 'membership_selector.feature2.desc1' | transloco }}
           </div>
           <div>
             Android users can use <mat-icon class="middle">more_vert</mat-icon>
@@ -46,11 +49,12 @@
         <mat-icon>visibility</mat-icon>
       </div>
       <div class="feature-explanation">
-        <div class="feature-title">See a new word in real life?</div>
+        <div class="feature-title">
+          {{ 'membership_selector.feature3.title' | transloco }}
+        </div>
         <div class="feature-description">
           <div class="mb-0_5">
-            Use Vocably Mobile App instead of Google Translate to translate and
-            automatically generate a flashcard.
+            {{ 'membership_selector.feature3.desc' | transloco }}
           </div>
         </div>
       </div>
@@ -61,12 +65,11 @@
       </div>
       <div class="feature-explanation">
         <div class="feature-title">
-          Want to say something but don't know a word?
+          {{ 'membership_selector.feature4.title' | transloco }}
         </div>
         <div class="feature-description">
           <div class="mb-0_5">
-            Find the right word in your native language using the Vocably Mobile
-            App. Save it as a flashcard to review later.
+            {{ 'membership_selector.feature4.desc' | transloco }}
           </div>
         </div>
       </div>
@@ -77,12 +80,11 @@
       </div>
       <div class="feature-explanation">
         <div class="feature-title">
-          Seamlessly works with most e-book readers for Android
+          {{ 'membership_selector.feature5.title' | transloco }}
         </div>
         <div class="feature-description">
           <div class="mb-0_5">
-            Long-tap any word in an e-book to see its translations and save it
-            as a high-quality flashcard.
+            {{ 'membership_selector.feature5.desc' | transloco }}
           </div>
         </div>
       </div>
@@ -93,19 +95,20 @@
       </div>
       <div class="feature-explanation">
         <div class="feature-title">
-          All of your cards are saved in the cloud
+          {{ 'membership_selector.feature6.title' | transloco }}
         </div>
         <div class="feature-description">
           <div class="mb-0_5">
-            You can study them using an integrated SRS system on any of your
-            mobile devices.
+            {{ 'membership_selector.feature6.desc' | transloco }}
           </div>
         </div>
       </div>
     </div>
   </div>
-  <h2 style="margin-bottom: 0.5rem">Difference between the Free and Premium</h2>
-  <p>All the Premium features are available in the Free version.</p>
+  <h2 style="margin-bottom: 0.5rem">
+    {{ 'membership_selector.comparison_title' | transloco }}
+  </h2>
+  <p>{{ 'membership_selector.all_premium_available' | transloco }}</p>
   <div class="comparison mb-2">
     <table>
       <tr>
@@ -114,36 +117,50 @@
         <th class="text-center">Premium</th>
       </tr>
       <tr>
-        <td class="text-left">Unlimited translations</td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-      </tr>
-      <tr>
-        <td class="text-left">Unlimited card collections</td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-      </tr>
-      <tr>
-        <td class="text-left">Unlimited study sessions</td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-      </tr>
-      <tr>
-        <td class="text-left">Unlimited language decks</td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
-      </tr>
-      <tr>
         <td class="text-left">
-          Cards are stored in the cloud and available on all the platforms
+          {{ 'membership_selector.unlimited_translations' | transloco }}
         </td>
         <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
         <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
       </tr>
       <tr>
-        <td class="text-left">Card saving over 300 cards</td>
-        <td class="text-center">1 card per day</td>
-        <td class="text-center">Unlimited</td>
+        <td class="text-left">
+          {{ 'membership_selector.unlimited_collections' | transloco }}
+        </td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+      </tr>
+      <tr>
+        <td class="text-left">
+          {{ 'membership_selector.unlimited_sessions' | transloco }}
+        </td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+      </tr>
+      <tr>
+        <td class="text-left">
+          {{ 'membership_selector.unlimited_decks' | transloco }}
+        </td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+      </tr>
+      <tr>
+        <td class="text-left">
+          {{ 'membership_selector.cloud_storage' | transloco }}
+        </td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+        <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
+      </tr>
+      <tr>
+        <td class="text-left">
+          {{ 'membership_selector.card_saving' | transloco }}
+        </td>
+        <td class="text-center">
+          {{ 'membership_selector.one_card_per_day' | transloco }}
+        </td>
+        <td class="text-center">
+          {{ 'membership_selector.unlimited' | transloco }}
+        </td>
       </tr>
     </table>
   </div>
@@ -172,9 +189,7 @@
       </div>
     </div>
     <div>
-      Vocably is the only tool that fully focuses on the needs of active
-      language users.<br />It's new, but hundreds of people already use it for
-      real-world language practice.
+      {{ 'membership_selector.social_proof' | transloco }}
     </div>
   </div>
   <div class="cards mb-2" *ngIf="subscriptionProducts">
@@ -194,7 +209,9 @@
         class="display-flex justify-content-center align-items-center border-bottom mb-1 pb-1"
       >
         <ng-container *ngIf="product.perMonth">
-          <div class="text-emphasize flex-1 nowrap">Per month</div>
+          <div class="text-emphasize flex-1 nowrap">
+            {{ 'membership_selector.per_month' | transloco }}
+          </div>
           <div class="text-primary text-x150 flex-1 text-right">
             {{ product.perMonth }}
           </div>
@@ -203,12 +220,14 @@
           <div
             class="text-emphasize flex-1 nowrap text-x150-line-height text-center"
           >
-            Pay once, use forever
+            {{ 'membership_selector.pay_once' | transloco }}
           </div>
         </ng-container>
       </div>
       <div class="display-flex justify-content-center align-items-center mb-2">
-        <div class="text-emphasize flex-0">Total</div>
+        <div class="text-emphasize flex-0">
+          {{ 'membership_selector.total' | transloco }}
+        </div>
         <del
           *ngIf="product.maxTotal"
           class="flex-1 ml-1 text-x150 text-center"
@@ -219,19 +238,21 @@
         </div>
       </div>
       <div class="text-center">
-        <div class="select-button">Select</div>
+        <div class="select-button">
+          {{ 'membership_selector.select' | transloco }}
+        </div>
       </div>
       <div class="text-center small">
-        <ng-container *ngIf="product.trialDays > 0"
-          >Try for {{ product.trialDays }} days. Cancel any time.</ng-container
-        >
+        <ng-container *ngIf="product.trialDays > 0">{{
+          'membership_selector.trial'
+            | transloco: { trialDays: product.trialDays }
+        }}</ng-container>
         <ng-container *ngIf="product.trialDays === 0">&nbsp;</ng-container>
       </div>
     </button>
   </div>
 
   <div class="text-center">
-    All your saved cards will stay in your collection if you decide to cancel
-    your subscription.
+    {{ 'membership_selector.cards_stay' | transloco }}
   </div>
 </div>

@@ -10,10 +10,10 @@
         </div>
         <div class="text">
           <div class="mb-1">
-            Instant context-aware translations on any website.
+            {{ 'auth.carousel.slide1_text1' | transloco }}
           </div>
           <div class="save-your-cards">
-            Save your translations as flashcards.
+            {{ 'auth.carousel.slide1_text2' | transloco }}
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="text">
-          Master your word-cards with interactive quizzes and questions.
+          {{ 'auth.carousel.slide2' | transloco }}
         </div>
       </div>
     </swiper-slide>
@@ -37,13 +37,13 @@
         <div class="image">
           <img src="assets/sign-up/youtube.webp" alt="YouTube" />
         </div>
-        <div class="text">Translate directly from YouTube subtitles.</div>
+        <div class="text">{{ 'auth.carousel.slide3' | transloco }}</div>
       </div>
     </swiper-slide>
     <swiper-slide *ngIf="!isIOS" class="hero-slide youtube-slide">
       <div class="hero-slide-body">
         <div class="text">
-          Translate and save words during your online classes.
+          {{ 'auth.carousel.slide4' | transloco }}
         </div>
         <div class="image">
           <img src="assets/sign-up/google-meet.webp" alt="Google Meet Popup" />
@@ -60,12 +60,12 @@
           </div>
         </div>
         <div class="text">
-          Don't know the right word? Search for it in your native language.
+          {{ 'auth.carousel.slide5' | transloco }}
         </div>
       </div>
     </swiper-slide>
   </swiper-container>
 </div>
 <div class="text-center mb-1 lead-1">
-  You'll need an account to use Vocably.
+  {{ 'auth.carousel.need_account' | transloco }}
 </div>

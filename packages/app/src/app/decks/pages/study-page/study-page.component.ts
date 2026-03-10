@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, resource } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import {
   getUserMetadata,
@@ -36,7 +37,13 @@ import { analysisItemToCardItem } from '../../../../analysisItemToCardItem';
   selector: 'app-study-page',
   templateUrl: './study-page.component.html',
   styleUrls: ['./study-page.component.scss'],
-  imports: [ListComponent, BackButtonComponent, IonicModule, MatIconModule],
+  imports: [
+    ListComponent,
+    BackButtonComponent,
+    IonicModule,
+    MatIconModule,
+    TranslocoModule,
+  ],
 })
 export class StudyPageComponent implements OnInit, OnDestroy {
   public cards: CardItem[] = [];

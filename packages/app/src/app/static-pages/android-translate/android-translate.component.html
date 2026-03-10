@@ -3,22 +3,24 @@
 </div>
 <div class="container bottom">
   <div *ngIf="isLoading" class="text-center">
-    <ion-spinner name="dots" class="mr-1"></ion-spinner>Loading example text...
+    <ion-spinner name="dots" class="mr-1"></ion-spinner
+    >{{ 'android_translate.loading' | transloco }}
   </div>
   <div *ngIf="!isLoading">
-    <div class="mb-1">To translate any word on any website or app:</div>
+    <div class="mb-1">{{ 'android_translate.how_to' | transloco }}</div>
 
     <ol class="mb-1">
-      <li>Select the word</li>
+      <li>{{ 'android_translate.step1' | transloco }}</li>
       <li>
-        Click
+        {{ 'android_translate.step2' | transloco }}
         <span class="more-button"><mat-icon>more_vert</mat-icon></span>
       </li>
-      <li>Click "Translate with Vocably"</li>
+      <li>{{ 'android_translate.step3' | transloco }}</li>
     </ol>
     <ng-container *ngIf="exampleHtml">
       <div class="mb-1">
-        Try it on this text <mat-icon class="middle">arrow_downward</mat-icon>
+        {{ 'android_translate.try_it' | transloco }}
+        <mat-icon class="middle">arrow_downward</mat-icon>
       </div>
       <div
         class="text-example"

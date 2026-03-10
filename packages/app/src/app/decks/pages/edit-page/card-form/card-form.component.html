@@ -1,5 +1,7 @@
 <form (submit)="save.emit(this.model)">
-  <label [htmlFor]="'source_' + item.id">Source</label>
+  <label [htmlFor]="'source_' + item.id">{{
+    'decks.card_form.source' | transloco
+  }}</label>
   <input
     type="text"
     class="form-control mb-1"
@@ -8,7 +10,9 @@
     [(ngModel)]="model.source"
   />
 
-  <label [htmlFor]="'partOfSpeech_' + item.id">Part of Speech</label>
+  <label [htmlFor]="'partOfSpeech_' + item.id">{{
+    'decks.card_form.part_of_speech' | transloco
+  }}</label>
   <input
     type="text"
     class="form-control mb-1"
@@ -17,7 +21,9 @@
     [(ngModel)]="model.partOfSpeech"
   />
 
-  <label [htmlFor]="'example_' + item.id">Examples</label>
+  <label [htmlFor]="'example_' + item.id">{{
+    'decks.card_form.examples' | transloco
+  }}</label>
   <textarea
     type="text"
     class="form-control mb-1"
@@ -27,7 +33,9 @@
     style="height: 6rem"
   ></textarea>
 
-  <label [htmlFor]="'translation_' + item.id">Translation</label>
+  <label [htmlFor]="'translation_' + item.id">{{
+    'decks.card_form.translation' | transloco
+  }}</label>
   <input
     type="text"
     class="form-control mb-1"
@@ -36,7 +44,9 @@
     [(ngModel)]="model.translation"
   />
 
-  <label [htmlFor]="'definition_' + item.id">Definition</label>
+  <label [htmlFor]="'definition_' + item.id">{{
+    'decks.card_form.definition' | transloco
+  }}</label>
   <textarea
     type="text"
     class="form-control mb-1"
@@ -46,14 +56,16 @@
     style="height: 6rem"
   ></textarea>
   <div>
-    <button data-test="submit" type="submit" class="button mr-0_5">Save</button>
+    <button data-test="submit" type="submit" class="button mr-0_5">
+      {{ 'decks.card_form.save' | transloco }}
+    </button>
     <button
       data-test="cancel"
       type="button"
       class="unstyled link"
       (click)="cancel.emit()"
     >
-      Cancel
+      {{ 'decks.card_form.cancel' | transloco }}
     </button>
   </div>
 </form>

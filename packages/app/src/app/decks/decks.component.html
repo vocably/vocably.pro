@@ -1,6 +1,7 @@
 <div class="hero max" *ngIf="isLoading">
   <div class="hero-body text-center">
-    <ion-spinner name="dots" class="mr-1"></ion-spinner>Loading decks...
+    <ion-spinner name="dots" class="mr-1"></ion-spinner
+    >{{ 'decks.loading' | transloco }}
   </div>
 </div>
 <router-outlet *ngIf="!isLoading"></router-outlet>

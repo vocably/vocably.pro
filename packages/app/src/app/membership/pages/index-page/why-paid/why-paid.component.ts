@@ -7,6 +7,7 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
 import { isChrome, isMacSafari } from '../../../../../browser';
 
 type Platform = {
@@ -43,6 +44,7 @@ const getPlatform = (): Platform | null => {
     NgIf,
     MatDialogActions,
     MatDialogClose,
+    TranslocoModule,
   ],
 })
 export class WhyPaidComponent implements OnInit {

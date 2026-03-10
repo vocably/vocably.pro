@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { from, Subject, takeUntil } from 'rxjs';
 import { HeaderComponent } from '../../../header/header.component';
@@ -14,7 +15,7 @@ import {
   selector: 'app-mnual-sign-in-success-page',
   templateUrl: './manual-sign-in-success-page.component.html',
   styleUrls: ['./manual-sign-in-success-page.component.scss'],
-  imports: [HeaderComponent, NgIf, IonicModule],
+  imports: [HeaderComponent, NgIf, IonicModule, TranslocoModule],
 })
 export class ManualSignInSuccessPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
@@ -22,7 +23,10 @@ export class ManualSignInSuccessPageComponent implements OnInit, OnDestroy {
   public isLoading = true;
   public isRedirecting = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     from(this.auth.isLoggedIn$)

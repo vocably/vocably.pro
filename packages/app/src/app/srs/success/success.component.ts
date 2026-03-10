@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { TranslocoModule } from '@jsverse/transloco';
 import { getLastStudyStreak } from '../../localStudyStreak';
 import { dateToString } from '@vocably/sulna';
 import { StreakComponent } from '../streak/streak.component';
@@ -8,7 +9,7 @@ import { StreakComponent } from '../streak/streak.component';
   selector: 'app-srs-success',
   templateUrl: './success.component.html',
   styleUrls: ['./success.component.scss'],
-  imports: [MatIcon, StreakComponent],
+  imports: [MatIcon, StreakComponent, TranslocoModule],
 })
 export class SuccessComponent implements OnInit {
   @Output() oneMoreRound = new EventEmitter();

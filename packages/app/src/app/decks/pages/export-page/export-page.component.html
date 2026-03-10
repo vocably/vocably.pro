@@ -3,7 +3,9 @@
   style="justify-content: flex-start; flex-wrap: wrap; gap: 1rem"
 >
   <div style="margin-right: 5rem">
-    <div class="mb-2 strong">Between card columns</div>
+    <div class="mb-2 strong">
+      {{ 'decks.export.between_columns' | transloco }}
+    </div>
 
     <mat-radio-group
       aria-label="Select column delimiter"
@@ -11,15 +13,15 @@
       [(ngModel)]="colDelimiter"
     >
       <mat-radio-button value="tab" class="mb-1">
-        <span class="mr-0_5">Tab</span>
+        <span class="mr-0_5">{{ 'decks.export.tab' | transloco }}</span>
         <mat-icon aria-hidden="false" class="middle">keyboard_tab</mat-icon>
       </mat-radio-button>
-      <mat-radio-button value="comma" class="mb-1"
-        >Comma [ , ]</mat-radio-button
-      >
+      <mat-radio-button value="comma" class="mb-1">{{
+        'decks.export.comma' | transloco
+      }}</mat-radio-button>
       <mat-radio-button value="custom" class="mb-1">
         <mat-form-field>
-          <mat-label> Custom </mat-label>
+          <mat-label>{{ 'decks.export.custom' | transloco }}</mat-label>
           <input
             matInput
             value="-"
@@ -31,7 +33,9 @@
     </mat-radio-group>
   </div>
   <div>
-    <div class="mb-2 strong">Between cards</div>
+    <div class="mb-2 strong">
+      {{ 'decks.export.between_cards' | transloco }}
+    </div>
 
     <mat-radio-group
       aria-label="Select column delimiter"
@@ -39,15 +43,15 @@
       [(ngModel)]="rowDelimiter"
     >
       <mat-radio-button value="new_line" class="mb-1">
-        <span class="mr-0_5">New line</span>
+        <span class="mr-0_5">{{ 'decks.export.new_line' | transloco }}</span>
         <mat-icon aria-hidden="false" class="middle">keyboard_return</mat-icon>
       </mat-radio-button>
-      <mat-radio-button value="semicolon" class="mb-1"
-        >Semicolon [ ; ]</mat-radio-button
-      >
+      <mat-radio-button value="semicolon" class="mb-1">{{
+        'decks.export.semicolon' | transloco
+      }}</mat-radio-button>
       <mat-radio-button value="custom" class="mb-1">
         <mat-form-field>
-          <mat-label> Custom </mat-label>
+          <mat-label>{{ 'decks.export.custom' | transloco }}</mat-label>
           <input
             matInput
             value="\n\n"
@@ -61,9 +65,9 @@
 </div>
 
 <div class="mb-1">
-  Cards created before October 27, 2025 can’t be exported.
+  {{ 'decks.export.old_cards_warning' | transloco }}
   <button mat-button color="accent" (click)="whyCantExportLexicala()">
-    Why?
+    {{ 'decks.export.why' | transloco }}
   </button>
 </div>
 
@@ -73,10 +77,10 @@
       class="display-flex"
       style="margin-bottom: 0.5rem; align-items: center"
     >
-      <div class="flex-1">Copy the generated CSV.</div>
+      <div class="flex-1">{{ 'decks.export.copy_csv' | transloco }}</div>
       <div>
         <button mat-button color="accent" (click)="copyToClipboard(contents)">
-          Copy all
+          {{ 'decks.export.copy_all' | transloco }}
         </button>
       </div>
     </div>
@@ -87,7 +91,7 @@
   <div>
     <a [href]="getContentsLink(textContents)" [download]="fileName"
       ><mat-icon aria-hidden="false" class="middle mr-0_5">download</mat-icon
-      >Download {{ fileName }}</a
+      >{{ 'decks.export.download' | transloco: { fileName: fileName } }}</a
     >
   </div>
 </ng-container>

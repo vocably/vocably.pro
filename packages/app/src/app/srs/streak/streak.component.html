@@ -10,7 +10,11 @@
   </div>
 
   <div class="subtitle">
-    consecutive day{{ currentValue === 1 ? '' : 's' }}.
+    {{
+      currentValue === 1
+        ? ('srs.streak.consecutive_day' | transloco)
+        : ('srs.streak.consecutive_days' | transloco)
+    }}
   </div>
 
   <div class="days-list">

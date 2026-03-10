@@ -8,6 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { DomSanitizer } from '@angular/platform-browser';
+import { TranslocoModule } from '@jsverse/transloco';
 import { byDate, CardItem, languageList } from '@vocably/model';
 import { languageToLexicalaLanguage } from '@vocably/model-operations';
 import { get } from 'lodash-es';
@@ -34,6 +35,7 @@ import { prepareColumn } from './prepareColumn';
     MatInput,
     MatButton,
     NgIf,
+    TranslocoModule,
   ],
 })
 export class ExportPageComponent implements OnInit, OnDestroy {
@@ -107,15 +109,15 @@ export class ExportPageComponent implements OnInit, OnDestroy {
       this.colDelimiter === 'tab'
         ? `\t`
         : this.colDelimiter === 'comma'
-        ? ','
-        : this.customColDelimiter;
+          ? ','
+          : this.customColDelimiter;
 
     const rowDelimiter =
       this.rowDelimiter === 'new_line'
         ? `\n`
         : this.rowDelimiter === 'semicolon'
-        ? ';'
-        : this.customRowDelimiter.replace(/\\n/g, `\n`);
+          ? ';'
+          : this.customRowDelimiter.replace(/\\n/g, `\n`);
 
     const columns = getColumns(this.cards);
 
