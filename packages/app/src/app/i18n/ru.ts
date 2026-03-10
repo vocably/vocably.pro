@@ -336,4 +336,7 @@ export const ru = {
 
   // Alert
   'alert.error': 'Ошибка',
+
+  // Back Button
+  'back_button.back': 'Назад',
 };

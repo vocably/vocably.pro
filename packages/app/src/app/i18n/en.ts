@@ -327,4 +327,7 @@ export const en = {
 
   // Alert
   'alert.error': 'Error',
+
+  // Back Button
+  'back_button.back': 'Back',
 };

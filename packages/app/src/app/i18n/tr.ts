@@ -336,4 +336,7 @@ export const tr = {
 
   // Alert
   'alert.error': 'Hata',
+
+  // Back Button
+  'back_button.back': 'Geri',
 };

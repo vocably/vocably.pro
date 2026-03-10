@@ -334,4 +334,7 @@ export const uk = {
 
   // Alert
   'alert.error': 'Помилка',
+
+  // Back Button
+  'back_button.back': 'Назад',
 };

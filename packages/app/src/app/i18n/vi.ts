@@ -325,4 +325,7 @@ export const vi = {
 
   // Alert
   'alert.error': 'Lỗi',
+
+  // Back Button
+  'back_button.back': 'Quay lại',
 };
