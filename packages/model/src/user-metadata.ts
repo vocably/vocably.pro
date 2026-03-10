@@ -18,12 +18,15 @@ export type OnboardingFlow = {
   language: string | null;
 };
 
+export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr';
+
 export type UserMetadata = {
   onboardingFlow: OnboardingFlow;
   rate: Record<Platform, RateResponse | undefined>;
   studyFlow?: StudyFlowType[];
   defaultTranslationLanguage?: string;
   lastUpdated: number;
+  interfaceLanguage?: Locale;
 };
 
 export type PartialUserMetadata = {
@@ -32,6 +35,7 @@ export type PartialUserMetadata = {
   studyFlow?: UserMetadata['studyFlow'];
   lastUpdated?: UserMetadata['lastUpdated'];
   defaultTranslationLanguage?: UserMetadata['defaultTranslationLanguage'];
+  interfaceLanguage?: UserMetadata['interfaceLanguage'];
 };
 
 export const defaultUserMetadata: UserMetadata = {

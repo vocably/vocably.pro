@@ -1,6 +1,7 @@
 import { ExtensionSettings } from '@vocably/extension-messages';
 import { browserEnv } from './browserEnv';
 import { detectLocale } from '@vocably/browser-i18n';
+import { saveUserMetadata } from '@vocably/api';
 
 const defaultSettings: ExtensionSettings = {
   showOnDoubleClick: false,
@@ -23,6 +24,10 @@ export const setSettings = async (
     ...(await getSettings()),
     ...partialSettings,
   };
+
+  if (partialSettings.locale) {
+    await saveUserMetadata({ interfaceLanguage: partialSettings.locale });
+  }
 
   await browserEnv.storage.sync.set({
     settings: settings,

@@ -8,7 +8,8 @@ import { ReplaySubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { TranslatePipe } from '../../translate.pipe';
 import { TranslationService } from '../../translation.service';
-import { Locale, setLocale } from '@vocably/browser-i18n';
+import { setLocale } from '@vocably/browser-i18n';
+import { Locale } from '@vocably/model';
 
 @Component({
   selector: 'app-settings-page',

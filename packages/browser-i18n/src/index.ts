@@ -1,11 +1,9 @@
-import { GoogleLanguage } from '@vocably/model';
+import { GoogleLanguage, Locale } from '@vocably/model';
 import { ru } from './ru';
 import { en } from './en';
 import { uk } from './uk';
 import { vi } from './vi';
 import { tr } from './tr';
-
-export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr';
 
 export type Translations = Record<Locale, Record<string, string>>;
 

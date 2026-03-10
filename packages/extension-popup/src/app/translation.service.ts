@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { translations } from './i18n/translations';
-import { Locale } from '@vocably/browser-i18n';
+import { Locale } from '@vocably/model';
 
 @Injectable({ providedIn: 'root' })
 export class TranslationService {

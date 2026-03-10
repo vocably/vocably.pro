@@ -18,8 +18,8 @@ import {
   TranslationCards,
   UpdateCardPayload,
   UpdateTagPayload,
+  Locale,
 } from '@vocably/model';
-import { Locale } from '@vocably/browser-i18n';
 
 const createScope =
   (scope: string): typeof createMessage =>
