@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "__MSG_appName__",
+  "name": "{{ process.env.NAME_PREFIX }}__MSG_appName__",
   "description": "__MSG_appDescription__",
   "default_locale": "en",
   "version": "{{ process.env.VERSION }}",

@@ -32,7 +32,7 @@ variable "apple_sign_in_key" {
   sensitive = true
 }
 
-variable "extension_name" {
+variable "extension_name_prefix" {
   type = string
 }
 

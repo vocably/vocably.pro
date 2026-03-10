@@ -51,7 +51,7 @@ locals {
 
 locals {
   extension_env_content = <<EOT
-NAME="${var.extension_name}"
+NAME_PREFIX="${var.extension_name_prefix}"
 KEY=${local.extension_key_json_param}
 AUTH_REGION="${data.aws_region.current.name}"
 AUTH_USER_POOL_ID="${aws_cognito_user_pool.users.id}"
