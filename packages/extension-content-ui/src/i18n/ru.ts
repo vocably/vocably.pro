@@ -53,9 +53,9 @@ export const ru = {
   'rate.tagline': 'Это займёт меньше минуты, но много значит для Vocably.',
   'rate.question': 'Нравится ли вам Vocably? Ваш отзыв на {platform}',
   'rate.question2': 'поможет этому проекту.',
-  'rate.ok': 'Хорошо, оценить Vocably',
+  'rate.ok': 'Оценить Vocably',
   'rate.later': 'Спросить позже.',
-  'rate.dislike': 'Вам ничего не нравится в Vocably? Тогда, пожалуйста,',
+  'rate.dislike': 'Вас что-то не устраивает в Vocably? Тогда, пожалуйста,',
   'rate.contact': 'свяжитесь с автором',
   'rate.feedback_note':
     '. Я серьёзно отношусь к каждому отзыву. Мы можем улучшить этот проект вместе.',

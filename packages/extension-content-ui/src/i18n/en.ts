@@ -54,9 +54,10 @@ export const en = {
     'It will take less than a minute, but will mean a lot for Vocably.',
   'rate.question': 'Do you find Vocably useful? Your rating on the {platform}',
   'rate.question2': 'will make a big difference for this project.',
-  'rate.ok': 'OK, rate Vocably',
+  'rate.ok': 'Rate Vocably',
   'rate.later': 'Ask me later.',
-  'rate.dislike': "Don't you like anything about Vocably? Then please",
+  'rate.dislike':
+    "Is there something you don't like about Vocably? Then please",
   'rate.contact': 'contact the author',
   'rate.feedback_note':
     '. I take every feedback seriously. We can improve this project together.',

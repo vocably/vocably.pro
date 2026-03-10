@@ -56,9 +56,9 @@ export const tr = {
   'rate.question':
     "Vocably'yi yararlı buluyor musunuz? {platform} üzerindeki değerlendirmeniz",
   'rate.question2': 'bu proje için büyük fark yaratacak.',
-  'rate.ok': "Tamam, Vocably'yi değerlendir",
+  'rate.ok': "Vocably'yi değerlendir",
   'rate.later': 'Daha sonra sor.',
-  'rate.dislike': "Vocably'de hiçbir şey beğenmediğiniz mi? O zaman lütfen",
+  'rate.dislike': "Vocably'de beğenmediğiniz bir şey mi var? O zaman lütfen",
   'rate.contact': 'yazar ile iletişime geçin',
   'rate.feedback_note':
     '. Her geri bildirimi ciddiye alıyorum. Bu projeyi birlikte geliştirebiliriz.',

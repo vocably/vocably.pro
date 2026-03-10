@@ -54,9 +54,9 @@ export const vi = {
   'rate.question':
     'Bạn có thấy Vocably hữu ích không? Đánh giá của bạn trên {platform}',
   'rate.question2': 'sẽ tạo ra sự khác biệt lớn cho dự án này.',
-  'rate.ok': 'OK, đánh giá Vocably',
+  'rate.ok': 'Đánh giá Vocably',
   'rate.later': 'Hỏi tôi sau.',
-  'rate.dislike': 'Bạn không thích điều gì về Vocably? Vui lòng',
+  'rate.dislike': 'Bạn có điều gì không hài lòng về Vocably? Vui lòng',
   'rate.contact': 'liên hệ với tác giả',
   'rate.feedback_note':
     '. Tôi coi trọng từng phản hồi. Chúng ta có thể cải thiện dự án này cùng nhau.',
