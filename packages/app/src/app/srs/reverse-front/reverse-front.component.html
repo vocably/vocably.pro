@@ -1,11 +1,11 @@
 <div class="text-left">
   <span style="font-size: 80%"
-    >{{ expectedAction }} the
+    >{{ expectedAction | transloco }}
     @if (card.data.partOfSpeech) {
       <span class="text-emphasize">{{ card.data.partOfSpeech }}</span
       >:
     } @else {
-      meaning:
+      {{ 'srs.reverse_front.meaning' | transloco }}
     }
   </span>
   <ul

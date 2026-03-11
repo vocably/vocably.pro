@@ -311,6 +311,9 @@ export const en = {
   'srs.success.one_more': 'Take one more round',
   'srs.streak.consecutive_day': 'consecutive day.',
   'srs.streak.consecutive_days': 'consecutive days.',
+  'srs.reverse_front.guess_the': 'Guess the',
+  'srs.reverse_front.type_in_the': 'Type in the',
+  'srs.reverse_front.meaning': 'meaning:',
 
   // Header
   'header.menu': 'Menu',

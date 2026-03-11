@@ -321,6 +321,9 @@ export const ru = {
   'srs.success.one_more': 'Ещё один раунд',
   'srs.streak.consecutive_day': 'день подряд.',
   'srs.streak.consecutive_days': 'дней подряд.',
+  'srs.reverse_front.guess_the': 'Угадай',
+  'srs.reverse_front.type_in_the': 'Введи',
+  'srs.reverse_front.meaning': 'значение:',
 
   // Header
   'header.menu': 'Меню',

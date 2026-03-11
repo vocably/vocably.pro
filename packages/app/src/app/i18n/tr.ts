@@ -321,6 +321,9 @@ export const tr = {
   'srs.success.one_more': 'Bir tur daha',
   'srs.streak.consecutive_day': 'gün üst üste.',
   'srs.streak.consecutive_days': 'gün üst üste.',
+  'srs.reverse_front.guess_the': 'Tahmin et',
+  'srs.reverse_front.type_in_the': 'Yaz',
+  'srs.reverse_front.meaning': 'anlamı:',
 
   // Header
   'header.menu': 'Menü',

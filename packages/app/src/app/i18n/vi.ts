@@ -310,6 +310,9 @@ export const vi = {
   'srs.success.one_more': 'Một vòng nữa',
   'srs.streak.consecutive_day': 'ngày liên tiếp.',
   'srs.streak.consecutive_days': 'ngày liên tiếp.',
+  'srs.reverse_front.guess_the': 'Đoán',
+  'srs.reverse_front.type_in_the': 'Nhập',
+  'srs.reverse_front.meaning': 'nghĩa:',
 
   // Header
   'header.menu': 'Menu',

@@ -320,6 +320,9 @@ export const uk = {
   'srs.success.one_more': 'Ще один раунд',
   'srs.streak.consecutive_day': 'день поспіль.',
   'srs.streak.consecutive_days': 'днів поспіль.',
+  'srs.reverse_front.guess_the': 'Вгадай',
+  'srs.reverse_front.type_in_the': 'Введи',
+  'srs.reverse_front.meaning': 'значення:',
 
   // Header
   'header.menu': 'Меню',
