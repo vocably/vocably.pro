@@ -218,6 +218,7 @@ export const uk = {
   'settings.feature_ai_dict': 'ШІ-словник',
   'settings.feature_prompts': 'Генерація колекцій за запитом',
   'settings.scan_qr': 'Відскануйте QR-код для встановлення:',
+  'settings.interface_language': 'Мова інтерфейсу',
   'settings.delete_account': 'Видалити мій акаунт',
   'settings.delete_dialog.title': 'Видалити акаунт',
   'settings.delete_dialog.confirm':

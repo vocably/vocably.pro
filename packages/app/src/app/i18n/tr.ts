@@ -220,6 +220,7 @@ export const tr = {
   'settings.feature_ai_dict': 'Yapay Zeka Sözlüğü',
   'settings.feature_prompts': 'İstem Tabanlı Koleksiyon Oluşturma',
   'settings.scan_qr': 'Yüklemek için QR kodu tarayın:',
+  'settings.interface_language': 'Arayüz dili',
   'settings.delete_account': 'Hesabımı sil',
   'settings.delete_dialog.title': 'Hesabımı Sil',
   'settings.delete_dialog.confirm':

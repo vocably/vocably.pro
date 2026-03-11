@@ -220,6 +220,7 @@ export const ru = {
   'settings.feature_ai_dict': 'ИИ-словарь',
   'settings.feature_prompts': 'Генерация коллекций по запросу',
   'settings.scan_qr': 'Отсканируйте QR-код для установки:',
+  'settings.interface_language': 'Язык интерфейса',
   'settings.delete_account': 'Удалить мой аккаунт',
   'settings.delete_dialog.title': 'Удалить аккаунт',
   'settings.delete_dialog.confirm':

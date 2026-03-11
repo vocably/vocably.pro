@@ -213,6 +213,7 @@ export const en = {
   'settings.feature_ai_dict': 'AI Dictionary',
   'settings.feature_prompts': 'Prompt-Based Collections Generation',
   'settings.scan_qr': 'Scan the QR code to install:',
+  'settings.interface_language': 'Interface language',
   'settings.delete_account': 'Delete my account',
   'settings.delete_dialog.title': 'Delete My Account',
   'settings.delete_dialog.confirm':

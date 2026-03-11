@@ -212,6 +212,7 @@ export const vi = {
   'settings.feature_ai_dict': 'Từ điển AI',
   'settings.feature_prompts': 'Tạo bộ sưu tập theo yêu cầu',
   'settings.scan_qr': 'Quét mã QR để cài đặt:',
+  'settings.interface_language': 'Ngôn ngữ giao diện',
   'settings.delete_account': 'Xóa tài khoản của tôi',
   'settings.delete_dialog.title': 'Xóa tài khoản',
   'settings.delete_dialog.confirm':

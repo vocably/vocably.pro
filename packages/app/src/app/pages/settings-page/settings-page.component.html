@@ -4,6 +4,28 @@
 <div class="container bottom">
   <div class="flex-direction-column align-items-center">
     <mat-divider style="margin: 4rem 0"></mat-divider>
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      "
+    >
+      <div style="margin: 0">
+        {{ 'settings.interface_language' | transloco }}:
+      </div>
+      <select
+        [(ngModel)]="interfaceLanguage"
+        (ngModelChange)="onInterfaceLanguageChange($event)"
+      >
+        @for (lang of languages; track lang.value) {
+          <option [value]="lang.value">{{ lang.label }}</option>
+        }
+      </select>
+    </div>
+
+    <mat-divider style="margin: 4rem 0"></mat-divider>
     <div class="text-center mb-2">
       {{ 'settings.not_sure' | transloco }}
       <a [routerLink]="['/welcome']">{{ 'settings.click_link' | transloco }}</a
