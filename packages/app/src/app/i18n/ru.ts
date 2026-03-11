@@ -188,7 +188,7 @@ export const ru = {
   'membership_selector.social_proof':
     'Vocably — единственный инструмент, полностью ориентированный на нужды людей, активно изучающих языки. Это новый продукт, но уже сотни людей используют его для практики языка в реальных условиях.',
   'membership_selector.per_month': 'В месяц',
-  'membership_selector.pay_once': 'Оплатите один раз, пользуйтесь навсегда',
+  'membership_selector.pay_once': 'Раз и навсегда',
   'membership_selector.total': 'Итого',
   'membership_selector.select': 'Выбрать',
   'membership_selector.trial':
