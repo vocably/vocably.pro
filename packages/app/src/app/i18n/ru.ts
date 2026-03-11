@@ -352,4 +352,13 @@ export const ru = {
   'page.study': 'Обучение',
   'page.edit_deck': 'Редактировать коллекцию',
   'page.export_deck': 'Экспорт коллекции',
+  'page.welcome': 'Добро пожаловать',
+  'page.user_info': 'Информация о пользователе',
+  'page.uninstall': 'Удаление',
+  'page.ios_extension': 'Safari Extension для iOS',
+  'page.android_translate': 'Перевод через Android',
+  'page.subscribe': 'Подписка',
+  'page.subscription_success': 'Успешно',
+  'page.try_out': 'Попробуй Vocably',
+  'page.membership': 'Членство',
 };

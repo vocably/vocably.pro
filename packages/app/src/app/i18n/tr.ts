@@ -352,4 +352,13 @@ export const tr = {
   'page.study': 'Çalış',
   'page.edit_deck': 'Desteyi Düzenle',
   'page.export_deck': 'Desteyi Dışa Aktar',
+  'page.welcome': 'Hoş Geldiniz',
+  'page.user_info': 'Kullanıcı Bilgisi',
+  'page.uninstall': 'Kaldır',
+  'page.ios_extension': 'iOS Safari Uzantısı',
+  'page.android_translate': 'Android ile Çevir',
+  'page.subscribe': 'Abone Ol',
+  'page.subscription_success': 'Başarılı',
+  'page.try_out': "Vocably'yi Dene",
+  'page.membership': 'Üyelik',
 };

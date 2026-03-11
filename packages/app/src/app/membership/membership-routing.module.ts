@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Membership',
+        title: 'page.membership',
         component: IndexPageComponent,
       },
     ],

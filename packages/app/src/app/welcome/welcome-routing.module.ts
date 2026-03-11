@@ -11,12 +11,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Welcome',
+        title: 'page.welcome',
         component: IndexPageComponent,
       },
       {
         path: ':sourceLanguage/:targetLanguage',
-        title: 'Try out Vocably',
+        title: 'page.try_out',
         component: SecondPageComponent,
       },
     ],

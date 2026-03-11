@@ -341,4 +341,13 @@ export const vi = {
   'page.study': 'Đào tạo',
   'page.edit_deck': 'Chỉnh sửa bộ thẻ',
   'page.export_deck': 'Xuất bộ thẻ',
+  'page.welcome': 'Chào mừng',
+  'page.user_info': 'Thông tin người dùng',
+  'page.uninstall': 'Gỡ cài đặt',
+  'page.ios_extension': 'Tiện ích mở rộng Safari iOS',
+  'page.android_translate': 'Dịch bằng Android',
+  'page.subscribe': 'Đăng ký',
+  'page.subscription_success': 'Thành công',
+  'page.try_out': 'Thử Vocably',
+  'page.membership': 'Thành viên',
 };

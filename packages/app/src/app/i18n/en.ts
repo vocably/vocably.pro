@@ -342,4 +342,13 @@ export const en = {
   'page.study': 'Study',
   'page.edit_deck': 'Edit Deck',
   'page.export_deck': 'Export Deck',
+  'page.welcome': 'Welcome',
+  'page.user_info': 'User Info',
+  'page.uninstall': 'Uninstall',
+  'page.ios_extension': 'iOS Safari Extension',
+  'page.android_translate': 'Translate with Android',
+  'page.subscribe': 'Subscribe',
+  'page.subscription_success': 'Success',
+  'page.try_out': 'Try out Vocably',
+  'page.membership': 'Membership',
 };

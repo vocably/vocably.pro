@@ -351,4 +351,13 @@ export const uk = {
   'page.study': 'Навчання',
   'page.edit_deck': 'Редагувати колекцію',
   'page.export_deck': 'Експорт колекції',
+  'page.welcome': 'Ласкаво просимо',
+  'page.user_info': 'Інформація про користувача',
+  'page.uninstall': 'Видалення',
+  'page.ios_extension': 'Safari Extension для iOS',
+  'page.android_translate': 'Переклад через Android',
+  'page.subscribe': 'Підписка',
+  'page.subscription_success': 'Успішно',
+  'page.try_out': 'Спробуй Vocably',
+  'page.membership': 'Членство',
 };
