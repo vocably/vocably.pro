@@ -186,7 +186,9 @@ export const en = {
   'membership_selector.pay_once': 'Pay once, use forever',
   'membership_selector.total': 'Total',
   'membership_selector.select': 'Select',
-  'membership_selector.trial': 'Try for {{trialDays}} days. Cancel any time.',
+  'membership_selector.trial_3_days': 'Try 3 days for free.',
+  'membership_selector.trial_7_days': 'Try 7 days for free.',
+  'membership_selector.cancel': 'Cancel any time.',
   'membership_selector.cards_stay':
     'All your saved cards will stay in your collection if you decide to cancel your subscription.',
 

@@ -185,8 +185,9 @@ export const vi = {
   'membership_selector.pay_once': 'Trả một lần, dùng mãi mãi',
   'membership_selector.total': 'Tổng',
   'membership_selector.select': 'Chọn',
-  'membership_selector.trial':
-    'Dùng thử {{trialDays}} ngày. Hủy bất cứ lúc nào.',
+  'membership_selector.trial_3_days': 'Dùng thử miễn phí 3 ngày.',
+  'membership_selector.trial_7_days': 'Dùng thử miễn phí 7 ngày.',
+  'membership_selector.cancel': 'Hủy bất cứ lúc nào.',
   'membership_selector.cards_stay':
     'Tất cả thẻ đã lưu sẽ ở lại trong bộ sưu tập nếu bạn hủy gói đăng ký.',
 

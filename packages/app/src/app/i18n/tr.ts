@@ -192,8 +192,9 @@ export const tr = {
   'membership_selector.pay_once': 'Bir kere öde, sonsuza kadar kullan',
   'membership_selector.total': 'Toplam',
   'membership_selector.select': 'Seç',
-  'membership_selector.trial':
-    '{{trialDays}} gün deneyin. İstediğiniz zaman iptal edin.',
+  'membership_selector.trial_3_days': '3 gün ücretsiz deneyin.',
+  'membership_selector.trial_7_days': '7 gün ücretsiz deneyin.',
+  'membership_selector.cancel': 'İstediğiniz zaman iptal edin.',
   'membership_selector.cards_stay':
     'Aboneliğinizi iptal etmeye karar verirseniz, tüm kaydettiğiniz kartlar koleksiyonunuzda kalacak.',
 

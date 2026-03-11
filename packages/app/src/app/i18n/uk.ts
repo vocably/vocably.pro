@@ -191,8 +191,9 @@ export const uk = {
   'membership_selector.pay_once': 'Раз і назавжди',
   'membership_selector.total': 'Разом',
   'membership_selector.select': 'Вибрати',
-  'membership_selector.trial':
-    'Спробуйте {{trialDays}} днів безкоштовно. Скасування будь-коли.',
+  'membership_selector.trial_3_days': 'Спробуйте 3 дні безкоштовно.',
+  'membership_selector.trial_7_days': 'Спробуйте 7 днів безкоштовно.',
+  'membership_selector.cancel': 'Скасування будь-коли.',
   'membership_selector.cards_stay':
     'Усі збережені картки залишаться у вашій колекції, якщо ви вирішите скасувати підписку.',
 

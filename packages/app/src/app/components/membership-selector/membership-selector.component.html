@@ -243,11 +243,16 @@
         </div>
       </div>
       <div class="text-center small">
-        <ng-container *ngIf="product.trialDays > 0">{{
-          'membership_selector.trial'
-            | transloco: { trialDays: product.trialDays }
-        }}</ng-container>
-        <ng-container *ngIf="product.trialDays === 0">&nbsp;</ng-container>
+        <ng-container *ngIf="product.trialDays > 0"
+          ><div>
+            {{
+              `membership_selector.trial_${product.trialDays}_days` | transloco
+            }}
+          </div>
+          <div>
+            {{ `membership_selector.cancel` | transloco }}
+          </div>
+        </ng-container>
       </div>
     </button>
   </div>

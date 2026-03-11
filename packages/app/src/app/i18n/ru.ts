@@ -192,8 +192,9 @@ export const ru = {
   'membership_selector.pay_once': 'Раз и навсегда',
   'membership_selector.total': 'Итого',
   'membership_selector.select': 'Выбрать',
-  'membership_selector.trial':
-    'Попробуйте {{trialDays}} дней бесплатно. Отмена в любое время.',
+  'membership_selector.trial_3_days': 'Попробуйте 3 дня бесплатно.',
+  'membership_selector.trial_7_days': 'Попробуйте 7 дней бесплатно.',
+  'membership_selector.cancel': 'Отмена в любое время.',
   'membership_selector.cards_stay':
     'Все сохранённые карточки останутся в вашей коллекции, если вы решите отменить подписку.',
 
