@@ -337,4 +337,9 @@ export const en = {
   'page.settings': 'Settings',
   'page.feedback': 'Feedback',
   'page.import_cards': 'Import Cards',
+  'page.set_up': 'Set Up',
+  'page.dashboard': 'Dashboard',
+  'page.study': 'Study',
+  'page.edit_deck': 'Edit Deck',
+  'page.export_deck': 'Export Deck',
 };

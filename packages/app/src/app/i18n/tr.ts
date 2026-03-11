@@ -347,4 +347,9 @@ export const tr = {
   'page.settings': 'Ayarlar',
   'page.feedback': 'Geri Bildirim',
   'page.import_cards': 'Kart İçe Aktar',
+  'page.set_up': 'Kurulum',
+  'page.dashboard': 'Ana Sayfa',
+  'page.study': 'Çalış',
+  'page.edit_deck': 'Desteyi Düzenle',
+  'page.export_deck': 'Desteyi Dışa Aktar',
 };

@@ -346,4 +346,9 @@ export const uk = {
   'page.settings': 'Налаштування',
   'page.feedback': "Зворотний зв'язок",
   'page.import_cards': 'Імпорт карток',
+  'page.set_up': 'Налаштування',
+  'page.dashboard': 'Головна',
+  'page.study': 'Навчання',
+  'page.edit_deck': 'Редагувати колекцію',
+  'page.export_deck': 'Експорт колекції',
 };

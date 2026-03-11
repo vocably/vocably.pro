@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Set Up',
+        title: 'page.set_up',
         component: NoDecksPageComponent,
       },
       {
@@ -24,34 +24,34 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            title: 'Dashboard',
+            title: 'page.dashboard',
             component: DashboardPageComponent,
           },
           {
             path: 'study',
-            title: 'Study',
+            title: 'page.study',
             component: StudyPageComponent,
             data: {
-              title: 'Study',
+              title: 'page.study',
               cleanScreen: true,
             },
             children: [],
           },
           {
             path: 'edit',
-            title: 'Edit',
+            title: 'page.edit_deck',
             component: EditPageComponent,
             data: {
-              title: 'Edit Deck',
+              title: 'page.edit_deck',
             },
             children: [],
           },
           {
             path: 'edit/export',
-            title: 'Export Deck',
+            title: 'page.export_deck',
             component: ExportPageComponent,
             data: {
-              title: 'Export Deck',
+              title: 'page.export_deck',
             },
           },
         ],

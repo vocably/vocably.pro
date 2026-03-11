@@ -347,4 +347,9 @@ export const ru = {
   'page.settings': 'Настройки',
   'page.feedback': 'Обратная связь',
   'page.import_cards': 'Импорт карточек',
+  'page.set_up': 'Настройка',
+  'page.dashboard': 'Главная',
+  'page.study': 'Обучение',
+  'page.edit_deck': 'Редактировать коллекцию',
+  'page.export_deck': 'Экспорт коллекции',
 };

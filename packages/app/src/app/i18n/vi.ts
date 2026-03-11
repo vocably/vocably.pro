@@ -336,4 +336,9 @@ export const vi = {
   'page.settings': 'Cài đặt',
   'page.feedback': 'Phản hồi',
   'page.import_cards': 'Nhập thẻ',
+  'page.set_up': 'Thiết lập',
+  'page.dashboard': 'Trang chính',
+  'page.study': 'Đào tạo',
+  'page.edit_deck': 'Chỉnh sửa bộ thẻ',
+  'page.export_deck': 'Xuất bộ thẻ',
 };
