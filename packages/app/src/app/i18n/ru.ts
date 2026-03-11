@@ -40,22 +40,22 @@ export const ru = {
     'Мгновенные контекстные переводы на любом сайте.',
   'auth.carousel.slide1_text2': 'Сохраняйте переводы как карточки.',
   'auth.carousel.slide2':
-    'Осваивайте слова с помощью интерактивных тестов и вопросов.',
+    'Учите сохранённые слова с помощью интерактивных тестов и вопросов.',
   'auth.carousel.slide3': 'Переводите прямо из субтитров YouTube.',
   'auth.carousel.slide4':
-    'Переводите и сохраняйте слова во время онлайн-занятий.',
+    'Переводите и сохраняйте слова прямо во время видеозвонков.',
   'auth.carousel.slide5':
     'Не знаете нужное слово? Найдите его на родном языке.',
   'auth.carousel.need_account': 'Для использования Vocably нужен аккаунт.',
   'auth.sign_in.button': 'Войти или создать аккаунт',
   'auth.sign_in.agree': 'Входя, вы соглашаетесь с нашими',
-  'auth.sign_in.terms': 'Условиями использования',
+  'auth.sign_in.terms': 'условиями использования',
   'auth.sign_in.and': 'и',
-  'auth.sign_in.privacy': 'Политикой конфиденциальности',
+  'auth.sign_in.privacy': 'политикой конфиденциальности',
   'auth.hands_free.not_installed':
     'Похоже, расширение браузера не установлено или не включено.',
   'auth.hands_free.please_install':
-    'Установите или включите расширение браузера и попробуйте снова.',
+    'Установите или включите расширение для браузера и попробуйте снова.',
   'auth.hands_free.but_installed': 'Но у меня оно установлено',
   'auth.hands_free.safari_bug':
     'Вероятно, вы столкнулись с ошибкой Safari, которая мешает обнаружить расширение.',
@@ -67,7 +67,7 @@ export const ru = {
   'auth.hands_free.ios_step4':
     'Снова откройте Настройки iOS и поставьте отметку «Разрешить расширение» для Vocably for Safari',
   'auth.hands_free.sorry':
-    'Приносим извинения за неудобства — мы работаем над исправлением.',
+    'Я прошу извинения за неудобства — я работаю над исправлением.',
   'auth.hands_free.restart_safari': 'Попробуйте перезапустить Safari.',
   'auth.hands_free.signing_in': 'Вход...',
   'auth.sign_in_success.loading': 'Загрузка данных профиля...',
@@ -80,13 +80,13 @@ export const ru = {
   'auth.sign_out.go_to_sign_in': 'Перейти на страницу входа',
 
   // Decks
-  'decks.loading': 'Загрузка колод...',
+  'decks.loading': 'Загрузка коллекций...',
   'decks.loading_cards': 'Загрузка карточек...',
-  'decks.dashboard.study': 'Учить',
-  'decks.dashboard.edit_deck': 'Редактировать колоду',
-  'decks.edit.export_deck': 'Экспорт колоды',
-  'decks.edit.delete_deck': 'Удалить колоду',
-  'decks.card_form.source': 'Источник',
+  'decks.dashboard.study': 'Приступить к обучению',
+  'decks.dashboard.edit_deck': 'Редактировать коллекцию',
+  'decks.edit.export_deck': 'Экспорт коллекции',
+  'decks.edit.delete_deck': 'Удалить коллекцию',
+  'decks.card_form.source': 'Слово/фраза',
   'decks.card_form.part_of_speech': 'Часть речи',
   'decks.card_form.examples': 'Примеры',
   'decks.card_form.translation': 'Перевод',
@@ -123,7 +123,7 @@ export const ru = {
   'decks.lexicala_dialog.p5':
     'Карточки, созданные до 27 октября 2025 года, нельзя экспортировать по юридическим причинам.',
   'decks.lexicala_dialog.close': 'Закрыть',
-  'decks.no_decks.no_cards': 'В этой колоде пока нет карточек.',
+  'decks.no_decks.no_cards': 'В этой коллекции пока нет карточек.',
   'decks.study.loading': 'Учебная сессия...',
   'decks.study.reload':
     'Пожалуйста, перезагрузите страницу и попробуйте снова.',
@@ -149,21 +149,20 @@ export const ru = {
   'membership_selector.title': 'Vocably Premium',
   'membership_selector.subtitle': 'Создан для активных изучающих языки',
   'membership_selector.feature1.title':
-    'Встретили новое слово в браузере на компьютере?',
+    'Увидели новое слово в браузере на компьютере?',
   'membership_selector.feature1.desc1':
     'Используйте расширения Chrome или Safari, чтобы быстро выделить, перевести и создать карточку одним кликом.',
   'membership_selector.feature1.desc2':
     'Пользователи iOS также могут использовать расширение Safari для iPhone и iPad.',
   'membership_selector.feature2.title':
-    'Встретили новое слово в мобильном приложении?',
+    'Увидели новое слово в мобильном приложении?',
   'membership_selector.feature2.desc1':
     'Выделите его и поделитесь с мобильным приложением Vocably для перевода и создания карточки.',
   'membership_selector.feature2.desc2':
-    'Пользователи Android могут использовать {{icon}} «Перевести с Vocably».',
-  'membership_selector.feature3.title':
-    'Встретили новое слово в реальной жизни?',
+    'Пользователи Android могут использовать',
+  'membership_selector.feature3.title': 'Увидели новое слово в реальной жизни?',
   'membership_selector.feature3.desc':
-    'Используйте мобильное приложение Vocably вместо Google Translate для перевода и автоматического создания карточки.',
+    'Используйте мобильное приложение Vocably вместо Google Translate для перевода и автоматического создания карточек.',
   'membership_selector.feature4.title':
     'Хотите что-то сказать, но не знаете слово?',
   'membership_selector.feature4.desc':
@@ -171,26 +170,24 @@ export const ru = {
   'membership_selector.feature5.title':
     'Отлично работает с большинством читалок для Android',
   'membership_selector.feature5.desc':
-    'Удерживайте любое слово в электронной книге, чтобы увидеть перевод и сохранить его как карточку.',
+    'Нажмите на любое слово в электронной книге, чтобы увидеть перевод и сохранить его как карточку.',
   'membership_selector.feature6.title': 'Все ваши карточки хранятся в облаке',
   'membership_selector.feature6.desc':
     'Вы можете изучать их с помощью встроенной системы интервального повторения на любом мобильном устройстве.',
   'membership_selector.comparison_title':
     'Разница между бесплатной и Premium версиями',
-  'membership_selector.all_premium_available':
-    'Все функции Premium доступны в бесплатной версии.',
   'membership_selector.unlimited_translations': 'Неограниченные переводы',
   'membership_selector.unlimited_collections':
     'Неограниченные коллекции карточек',
   'membership_selector.unlimited_sessions': 'Неограниченные учебные сессии',
-  'membership_selector.unlimited_decks': 'Неограниченные языковые колоды',
+  'membership_selector.unlimited_decks': 'Неограниченные языковые коллекции',
   'membership_selector.cloud_storage':
     'Карточки хранятся в облаке и доступны на всех платформах',
   'membership_selector.card_saving': 'Сохранение более 300 карточек',
   'membership_selector.one_card_per_day': '1 карточка в день',
   'membership_selector.unlimited': 'Неограниченно',
   'membership_selector.social_proof':
-    'Vocably — единственный инструмент, полностью ориентированный на нужды активных изучающих языки. Он новый, но уже сотни людей используют его для практики языка в реальных условиях.',
+    'Vocably — единственный инструмент, полностью ориентированный на нужды людей, активно изучающих языки. Это новый продукт, но уже сотни людей используют его для практики языка в реальных условиях.',
   'membership_selector.per_month': 'В месяц',
   'membership_selector.pay_once': 'Оплатите один раз, пользуйтесь навсегда',
   'membership_selector.total': 'Итого',
@@ -244,9 +241,9 @@ export const ru = {
   // Feedback
   'feedback.title': 'Обратная связь',
   'feedback.p1':
-    'Не хватает важных функций? Есть вопросы или вы хотите поделиться мнением о Vocably? Буду рад услышать вас!',
+    'Не хватает каких-то функций? Есть вопросы или вы хотите поделиться мнением о Vocably? Буду рад получить от вас сообщение!',
   'feedback.p2':
-    'Я отвечаю каждому пользователю, обычно в течение нескольких дней.',
+    'Я отвечаю каждому пользователю. Обычно, в течение нескольких дней.',
   'feedback.p3': 'Я отвечу вам на ваш email-адрес',
   'feedback.apple_email':
     'Похоже, это секретный email Apple, который вы предоставили при регистрации, но не беспокойтесь — он работает.',
@@ -258,9 +255,9 @@ export const ru = {
 
   // Import
   'import.title': 'Импорт карточек из CSV',
-  'import.loading_decks': 'Загрузка колод...',
+  'import.loading_decks': 'Загрузка коллекций...',
   'import.what_language': 'Какой язык вы хотите импортировать?',
-  'import.import_cards_for': 'Импорт карточек для',
+  'import.import_cards_for': 'Язык карточек для импорта:',
   'import.csv_two_columns':
     'CSV-файл должен содержать два столбца, разделённых табуляцией',
   'import.copy_paste': 'Скопируйте и вставьте из Google Sheets, CSV-файла или',
@@ -327,9 +324,9 @@ export const ru = {
 
   // Header
   'header.menu': 'Меню',
-  'header.setup': 'Настройка (Добро пожаловать)',
+  'header.setup': 'Настроить экстеншн',
   'header.premium': 'Premium',
-  'header.settings': 'Настройки',
+  'header.settings': 'Настройки системы',
   'header.import': 'Импорт',
   'header.feedback': 'Обратная связь',
   'header.sign_out': 'Выйти',

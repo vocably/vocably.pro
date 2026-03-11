@@ -39,10 +39,10 @@ export const uk = {
     'Миттєві контекстні переклади на будь-якому сайті.',
   'auth.carousel.slide1_text2': 'Зберігайте переклади як картки.',
   'auth.carousel.slide2':
-    'Опановуйте слова за допомогою інтерактивних тестів і завдань.',
+    'Опановуйте збережені слова за допомогою інтерактивних тестів і завдань.',
   'auth.carousel.slide3': 'Перекладайте прямо із субтитрів YouTube.',
   'auth.carousel.slide4':
-    'Перекладайте і зберігайте слова під час онлайн-занять.',
+    'Перекладайте і зберігайте слова під час відеозвонків.',
   'auth.carousel.slide5':
     'Не знаєте потрібне слово? Знайдіть його рідною мовою.',
   'auth.carousel.need_account': 'Для використання Vocably потрібен акаунт.',
@@ -54,7 +54,7 @@ export const uk = {
   'auth.hands_free.not_installed':
     'Схоже, розширення браузера не встановлено або не увімкнено.',
   'auth.hands_free.please_install':
-    'Встановіть або увімкніть розширення браузера та спробуйте знову.',
+    'Встановіть або увімкніть розширення та спробуйте знову.',
   'auth.hands_free.but_installed': 'Але у мене воно встановлено',
   'auth.hands_free.safari_bug':
     'Схоже, ви зіткнулися з помилкою Safari, яка заважає виявити розширення.',
@@ -66,7 +66,7 @@ export const uk = {
   'auth.hands_free.ios_step4':
     'Знову відкрийте Налаштування iOS і поставте позначку «Дозволити розширення» для Vocably for Safari',
   'auth.hands_free.sorry':
-    'Вибачте за незручності — ми працюємо над виправленням.',
+    'Вибачте за незручності — я працюю над виправленням.',
   'auth.hands_free.restart_safari': 'Спробуйте перезапустити Safari.',
   'auth.hands_free.signing_in': 'Вхід...',
   'auth.sign_in_success.loading': 'Завантаження даних профілю...',
@@ -79,13 +79,13 @@ export const uk = {
   'auth.sign_out.go_to_sign_in': 'Перейти на сторінку входу',
 
   // Decks
-  'decks.loading': 'Завантаження колод...',
+  'decks.loading': 'Завантаження колекцій...',
   'decks.loading_cards': 'Завантаження карток...',
-  'decks.dashboard.study': 'Вчити',
-  'decks.dashboard.edit_deck': 'Редагувати колоду',
-  'decks.edit.export_deck': 'Експорт колоди',
-  'decks.edit.delete_deck': 'Видалити колоду',
-  'decks.card_form.source': 'Джерело',
+  'decks.dashboard.study': 'Розпочати навчання',
+  'decks.dashboard.edit_deck': 'Редагувати колекцію',
+  'decks.edit.export_deck': 'Експорт колекції',
+  'decks.edit.delete_deck': 'Видалити колекцію',
+  'decks.card_form.source': 'Слово або фраза',
   'decks.card_form.part_of_speech': 'Частина мови',
   'decks.card_form.examples': 'Приклади',
   'decks.card_form.translation': 'Переклад',
@@ -122,7 +122,7 @@ export const uk = {
   'decks.lexicala_dialog.p5':
     'Картки, створені до 27 жовтня 2025 року, не можна експортувати з юридичних причин.',
   'decks.lexicala_dialog.close': 'Закрити',
-  'decks.no_decks.no_cards': 'У цій колоді поки що немає карток.',
+  'decks.no_decks.no_cards': 'У цій колекції поки що немає карток.',
   'decks.study.loading': 'Навчальна сесія...',
   'decks.study.reload':
     'Будь ласка, перезавантажте сторінку та спробуйте знову.',
@@ -148,19 +148,19 @@ export const uk = {
   'membership_selector.title': 'Vocably Premium',
   'membership_selector.subtitle': 'Створено для активних вивчаючих мови',
   'membership_selector.feature1.title':
-    "Зустріли нове слово в браузері на комп'ютері?",
+    "Побачили нове слово в браузері на комп'ютері?",
   'membership_selector.feature1.desc1':
     'Використовуйте розширення Chrome або Safari, щоб швидко виділити, перекласти та створити картку одним кліком.',
   'membership_selector.feature1.desc2':
     'Користувачі iOS також можуть скористатися розширенням Safari для iPhone та iPad.',
   'membership_selector.feature2.title':
-    'Зустріли нове слово в мобільному додатку?',
+    'Побачили нове слово в мобільному додатку?',
   'membership_selector.feature2.desc1':
     'Виділіть його і поділіться з мобільним додатком Vocably для перекладу та створення картки.',
   'membership_selector.feature2.desc2':
-    'Користувачі Android можуть використовувати {{icon}} «Перекласти з Vocably».',
+    'Користувачі Android можуть використовувати',
   'membership_selector.feature3.title':
-    'Зустріли нове слово в реальному житті?',
+    'Побачили нове слово в реальному житті?',
   'membership_selector.feature3.desc':
     'Використовуйте мобільний додаток Vocably замість Google Translate для перекладу та автоматичного створення картки.',
   'membership_selector.feature4.title':
@@ -170,25 +170,23 @@ export const uk = {
   'membership_selector.feature5.title':
     'Бездоганно працює з більшістю читалок для Android',
   'membership_selector.feature5.desc':
-    'Утримуйте будь-яке слово в електронній книзі, щоб побачити переклад і зберегти його як картку.',
+    'Натисніть на будь-яке слово в електронній книзі, щоб побачити переклад і зберегти його як картку.',
   'membership_selector.feature6.title': 'Усі ваші картки зберігаються в хмарі',
   'membership_selector.feature6.desc':
     'Ви можете вивчати їх за допомогою вбудованої системи інтервального повторення на будь-якому мобільному пристрої.',
   'membership_selector.comparison_title':
     'Різниця між безкоштовною та Premium версіями',
-  'membership_selector.all_premium_available':
-    'Усі функції Premium доступні в безкоштовній версії.',
   'membership_selector.unlimited_translations': 'Необмежені переклади',
   'membership_selector.unlimited_collections': 'Необмежені колекції карток',
   'membership_selector.unlimited_sessions': 'Необмежені навчальні сесії',
-  'membership_selector.unlimited_decks': 'Необмежені мовні колоди',
+  'membership_selector.unlimited_decks': 'Необмежені мовні колекції',
   'membership_selector.cloud_storage':
     'Картки зберігаються в хмарі та доступні на всіх платформах',
   'membership_selector.card_saving': 'Збереження понад 300 карток',
   'membership_selector.one_card_per_day': '1 картка на день',
   'membership_selector.unlimited': 'Необмежено',
   'membership_selector.social_proof':
-    'Vocably — єдиний інструмент, повністю орієнтований на потреби активних вивчаючих мови. Він новий, але вже сотні людей використовують його для практики мови в реальних умовах.',
+    'Vocably — єдиний інструмент, повністю орієнтований на потреби людей, активно вивчаючих мови. Це новий продукт, але вже сотні людей використовують його для практики мови в реальних умовах.',
   'membership_selector.per_month': 'На місяць',
   'membership_selector.pay_once': 'Оплатіть один раз, користуйтесь назавжди',
   'membership_selector.total': 'Разом',
@@ -241,9 +239,9 @@ export const uk = {
   // Feedback
   'feedback.title': "Зворотний зв'язок",
   'feedback.p1':
-    'Бракує важливих функцій? Є питання або ви хочете поділитися думкою про Vocably? Буду радий почути вас!',
+    'Бракує функцій? Є питання або ви хочете поділитися думкою про Vocably? Буду радий отримати вашу думку!',
   'feedback.p2':
-    'Я відповідаю кожному користувачу, зазвичай протягом кількох днів.',
+    'Я відповідаю кожному користувачу. Зазвичай, протягом кількох днів.',
   'feedback.p3': 'Я відповім вам на вашу електронну адресу',
   'feedback.apple_email':
     'Схоже, це секретна email-адреса Apple, яку ви надали під час реєстрації, але не хвилюйтеся — вона працює.',
@@ -256,9 +254,9 @@ export const uk = {
 
   // Import
   'import.title': 'Імпорт карток з CSV',
-  'import.loading_decks': 'Завантаження колод...',
+  'import.loading_decks': 'Завантаження колекцій...',
   'import.what_language': 'Яку мову ви хочете імпортувати?',
-  'import.import_cards_for': 'Імпорт карток для',
+  'import.import_cards_for': 'Мова карток для імпорту:',
   'import.csv_two_columns':
     'CSV-файл повинен містити два стовпці, розділені табуляцією',
   'import.copy_paste': 'Скопіюйте та вставте з Google Sheets, CSV-файлу або',
@@ -325,9 +323,9 @@ export const uk = {
 
   // Header
   'header.menu': 'Меню',
-  'header.setup': 'Налаштування (Ласкаво просимо)',
+  'header.setup': 'Налаштувати розширення',
   'header.premium': 'Premium',
-  'header.settings': 'Налаштування',
+  'header.settings': 'Системні налаштування',
   'header.import': 'Імпорт',
   'header.feedback': "Зворотний зв'язок",
   'header.sign_out': 'Вийти',

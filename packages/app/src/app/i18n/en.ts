@@ -38,10 +38,9 @@ export const en = {
     'Instant context-aware translations on any website.',
   'auth.carousel.slide1_text2': 'Save your translations as flashcards.',
   'auth.carousel.slide2':
-    'Master your word-cards with interactive quizzes and questions.',
+    'Master your saved words with interactive quizzes and questions.',
   'auth.carousel.slide3': 'Translate directly from YouTube subtitles.',
-  'auth.carousel.slide4':
-    'Translate and save words during your online classes.',
+  'auth.carousel.slide4': 'Translate and save words during your video calls.',
   'auth.carousel.slide5':
     "Don't know the right word? Search for it in your native language.",
   'auth.carousel.need_account': "You'll need an account to use Vocably.",
@@ -53,7 +52,7 @@ export const en = {
   'auth.hands_free.not_installed':
     "It seems like the browser extension isn't installed or enabled.",
   'auth.hands_free.please_install':
-    'Please install or enable the browser extension and try again.',
+    'Please install or enable the extension and try again.',
   'auth.hands_free.but_installed': 'But I have it installed',
   'auth.hands_free.safari_bug':
     "You're likely encountering a Safari bug that's preventing the extension from being detected.",
@@ -65,7 +64,7 @@ export const en = {
   'auth.hands_free.ios_step4':
     'Go to the iOS Settings again and check the "Allow Extension" for Vocably for Safari',
   'auth.hands_free.sorry':
-    "I'm sorry for the inconvenience — I'm working on a fix.",
+    "I apologize for the inconvenience — I'm working on a fix.",
   'auth.hands_free.restart_safari': 'Please try restarting Safari.',
   'auth.hands_free.signing_in': 'Signing in...',
   'auth.sign_in_success.loading': 'Loading profile data...',
@@ -78,13 +77,13 @@ export const en = {
   'auth.sign_out.go_to_sign_in': 'Go to sign in page',
 
   // Decks
-  'decks.loading': 'Loading decks...',
+  'decks.loading': 'Loading collections...',
   'decks.loading_cards': 'Loading cards...',
   'decks.dashboard.study': 'Study',
-  'decks.dashboard.edit_deck': 'Edit deck',
-  'decks.edit.export_deck': 'Export Deck',
-  'decks.edit.delete_deck': 'Delete Deck',
-  'decks.card_form.source': 'Source',
+  'decks.dashboard.edit_deck': 'Edit collection',
+  'decks.edit.export_deck': 'Export Collection',
+  'decks.edit.delete_deck': 'Delete Collection',
+  'decks.card_form.source': 'Word or phrase',
   'decks.card_form.part_of_speech': 'Part of Speech',
   'decks.card_form.examples': 'Examples',
   'decks.card_form.translation': 'Translation',
@@ -121,7 +120,7 @@ export const en = {
   'decks.lexicala_dialog.p5':
     "Cards created before October 27, 2025 can't be exported due to legal restrictions.",
   'decks.lexicala_dialog.close': 'Close',
-  'decks.no_decks.no_cards': 'There are no cards in this deck, yet.',
+  'decks.no_decks.no_cards': 'There are no cards in this collection yet.',
   'decks.study.loading': 'Study session...',
   'decks.study.reload': 'Please reload the page to try again.',
 
@@ -153,8 +152,7 @@ export const en = {
   'membership_selector.feature2.title': 'See a new word in any mobile app?',
   'membership_selector.feature2.desc1':
     'Select it and share with Vocably Mobile App to translate and generate flashcards.',
-  'membership_selector.feature2.desc2':
-    'Android users can use {{icon}} Translate with Vocably.',
+  'membership_selector.feature2.desc2': 'Android users can use',
   'membership_selector.feature3.title': 'See a new word in real life?',
   'membership_selector.feature3.desc':
     'Use Vocably Mobile App instead of Google Translate to translate and automatically generate a flashcard.',
@@ -165,26 +163,24 @@ export const en = {
   'membership_selector.feature5.title':
     'Seamlessly works with most e-book readers for Android',
   'membership_selector.feature5.desc':
-    'Long-tap any word in an e-book to see its translations and save it as a high-quality flashcard.',
+    'Tap any word in an e-book to see its translations and save it as a high-quality flashcard.',
   'membership_selector.feature6.title':
     'All of your cards are saved in the cloud',
   'membership_selector.feature6.desc':
     'You can study them using an integrated SRS system on any of your mobile devices.',
   'membership_selector.comparison_title':
     'Difference between the Free and Premium',
-  'membership_selector.all_premium_available':
-    'All the Premium features are available in the Free version.',
   'membership_selector.unlimited_translations': 'Unlimited translations',
   'membership_selector.unlimited_collections': 'Unlimited card collections',
   'membership_selector.unlimited_sessions': 'Unlimited study sessions',
-  'membership_selector.unlimited_decks': 'Unlimited language decks',
+  'membership_selector.unlimited_decks': 'Unlimited language collections',
   'membership_selector.cloud_storage':
     'Cards are stored in the cloud and available on all the platforms',
   'membership_selector.card_saving': 'Card saving over 300 cards',
   'membership_selector.one_card_per_day': '1 card per day',
   'membership_selector.unlimited': 'Unlimited',
   'membership_selector.social_proof':
-    "Vocably is the only tool that fully focuses on the needs of active language users. It's new, but hundreds of people already use it for real-world language practice.",
+    "Vocably is the only tool that fully focuses on the needs of people who are actively learning languages. It's a new product, but hundreds of people already use it for real-world language practice.",
   'membership_selector.per_month': 'Per month',
   'membership_selector.pay_once': 'Pay once, use forever',
   'membership_selector.total': 'Total',
@@ -235,9 +231,9 @@ export const en = {
   // Feedback
   'feedback.title': 'Feedback',
   'feedback.p1':
-    "Are you missing any important features? Do you have questions, or would you like to share your thoughts about Vocably? I'd love to hear from you!",
+    "Missing any features? Do you have questions, or would you like to share your thoughts about Vocably? I'd love to hear from you!",
   'feedback.p2':
-    'I respond to every user, and it usually takes me a couple of days to reply.',
+    'I respond to every user. Typically it takes me a couple of days.',
   'feedback.p3': 'I will respond to you at your email address',
   'feedback.apple_email':
     'This seems like a secret Apple email you shared with me during registration, but no worries; it should work just fine.',
@@ -250,9 +246,9 @@ export const en = {
 
   // Import
   'import.title': 'Import Cards from CSV',
-  'import.loading_decks': 'Loading decks...',
+  'import.loading_decks': 'Loading collections...',
   'import.what_language': 'What language would you like to import?',
-  'import.import_cards_for': 'Import cards for',
+  'import.import_cards_for': 'Language for cards to import:',
   'import.csv_two_columns':
     'The CSV file must include two columns, separated by tabs',
   'import.copy_paste': 'Copy and paste from the Google Sheets, CSV file, or',
@@ -318,9 +314,9 @@ export const en = {
 
   // Header
   'header.menu': 'Menu',
-  'header.setup': 'Setup (Welcome)',
+  'header.setup': 'Setup Extension',
   'header.premium': 'Premium',
-  'header.settings': 'Settings',
+  'header.settings': 'System Settings',
   'header.import': 'Import',
   'header.feedback': 'Feedback',
   'header.sign_out': 'Sign Out',

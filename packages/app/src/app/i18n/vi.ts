@@ -38,9 +38,9 @@ export const vi = {
     'Bản dịch theo ngữ cảnh tức thì trên mọi trang web.',
   'auth.carousel.slide1_text2': 'Lưu bản dịch làm thẻ học.',
   'auth.carousel.slide2':
-    'Ghi nhớ từ vựng với các bài kiểm tra và câu hỏi tương tác.',
+    'Ghi nhớ các từ đã lưu với các bài kiểm tra và câu hỏi tương tác.',
   'auth.carousel.slide3': 'Dịch trực tiếp từ phụ đề YouTube.',
-  'auth.carousel.slide4': 'Dịch và lưu từ trong các buổi học trực tuyến.',
+  'auth.carousel.slide4': 'Dịch và lưu từ trong các cuộc gọi video.',
   'auth.carousel.slide5': 'Không biết từ cần dùng? Tìm kiếm bằng tiếng mẹ đẻ.',
   'auth.carousel.need_account': 'Bạn cần tài khoản để sử dụng Vocably.',
   'auth.sign_in.button': 'Đăng nhập hoặc Tạo tài khoản',
@@ -51,7 +51,7 @@ export const vi = {
   'auth.hands_free.not_installed':
     'Có vẻ như tiện ích mở rộng trình duyệt chưa được cài đặt hoặc bật.',
   'auth.hands_free.please_install':
-    'Vui lòng cài đặt hoặc bật tiện ích mở rộng trình duyệt và thử lại.',
+    'Vui lòng cài đặt hoặc bật tiện ích mở rộng và thử lại.',
   'auth.hands_free.but_installed': 'Nhưng tôi đã cài đặt rồi',
   'auth.hands_free.safari_bug':
     'Bạn có thể đang gặp lỗi Safari khiến tiện ích mở rộng không được phát hiện.',
@@ -62,7 +62,7 @@ export const vi = {
   'auth.hands_free.ios_step3': 'Thoát Safari',
   'auth.hands_free.ios_step4':
     'Vào lại Cài đặt iOS và chọn "Cho phép tiện ích mở rộng" cho Vocably for Safari',
-  'auth.hands_free.sorry': 'Xin lỗi vì sự bất tiện — chúng tôi đang khắc phục.',
+  'auth.hands_free.sorry': 'Xin lỗi vì sự bất tiện — tôi đang khắc phục.',
   'auth.hands_free.restart_safari': 'Vui lòng thử khởi động lại Safari.',
   'auth.hands_free.signing_in': 'Đang đăng nhập...',
   'auth.sign_in_success.loading': 'Đang tải dữ liệu hồ sơ...',
@@ -75,13 +75,13 @@ export const vi = {
   'auth.sign_out.go_to_sign_in': 'Đến trang đăng nhập',
 
   // Decks
-  'decks.loading': 'Đang tải bộ thẻ...',
+  'decks.loading': 'Đang tải bộ sưu tập...',
   'decks.loading_cards': 'Đang tải thẻ...',
   'decks.dashboard.study': 'Học',
-  'decks.dashboard.edit_deck': 'Chỉnh sửa bộ thẻ',
-  'decks.edit.export_deck': 'Xuất bộ thẻ',
-  'decks.edit.delete_deck': 'Xóa bộ thẻ',
-  'decks.card_form.source': 'Nguồn',
+  'decks.dashboard.edit_deck': 'Chỉnh sửa bộ sưu tập',
+  'decks.edit.export_deck': 'Xuất bộ sưu tập',
+  'decks.edit.delete_deck': 'Xóa bộ sưu tập',
+  'decks.card_form.source': 'Từ hoặc cụm từ',
   'decks.card_form.part_of_speech': 'Từ loại',
   'decks.card_form.examples': 'Ví dụ',
   'decks.card_form.translation': 'Bản dịch',
@@ -118,7 +118,7 @@ export const vi = {
   'decks.lexicala_dialog.p5':
     'Thẻ được tạo trước ngày 27 tháng 10 năm 2025 không thể xuất do hạn chế pháp lý.',
   'decks.lexicala_dialog.close': 'Đóng',
-  'decks.no_decks.no_cards': 'Chưa có thẻ nào trong bộ thẻ này.',
+  'decks.no_decks.no_cards': 'Chưa có thẻ nào trong bộ sưu tập này.',
   'decks.study.loading': 'Phiên học...',
   'decks.study.reload': 'Vui lòng tải lại trang để thử lại.',
 
@@ -151,8 +151,7 @@ export const vi = {
   'membership_selector.feature2.title': 'Gặp từ mới trong ứng dụng di động?',
   'membership_selector.feature2.desc1':
     'Chọn và chia sẻ với ứng dụng di động Vocably để dịch và tạo thẻ học.',
-  'membership_selector.feature2.desc2':
-    'Người dùng Android có thể dùng {{icon}} Dịch với Vocably.',
+  'membership_selector.feature2.desc2': 'Người dùng Android có thể dùng',
   'membership_selector.feature3.title': 'Gặp từ mới trong cuộc sống thực?',
   'membership_selector.feature3.desc':
     'Dùng ứng dụng di động Vocably thay vì Google Translate để dịch và tự động tạo thẻ học.',
@@ -162,26 +161,24 @@ export const vi = {
   'membership_selector.feature5.title':
     'Hoạt động liền mạch với hầu hết máy đọc sách cho Android',
   'membership_selector.feature5.desc':
-    'Nhấn giữ bất kỳ từ nào trong sách điện tử để xem bản dịch và lưu làm thẻ học chất lượng cao.',
+    'Nhấp bất kỳ từ nào trong sách điện tử để xem bản dịch và lưu làm thẻ học chất lượng cao.',
   'membership_selector.feature6.title':
     'Tất cả thẻ của bạn được lưu trên đám mây',
   'membership_selector.feature6.desc':
     'Bạn có thể học chúng bằng hệ thống lặp lại ngắt quãng tích hợp trên bất kỳ thiết bị di động nào.',
   'membership_selector.comparison_title':
     'Sự khác biệt giữa phiên bản Miễn phí và Premium',
-  'membership_selector.all_premium_available':
-    'Tất cả tính năng Premium đều có trong phiên bản Miễn phí.',
   'membership_selector.unlimited_translations': 'Dịch không giới hạn',
   'membership_selector.unlimited_collections': 'Bộ sưu tập thẻ không giới hạn',
   'membership_selector.unlimited_sessions': 'Phiên học không giới hạn',
-  'membership_selector.unlimited_decks': 'Bộ thẻ ngôn ngữ không giới hạn',
+  'membership_selector.unlimited_decks': 'Bộ sưu tập ngôn ngữ không giới hạn',
   'membership_selector.cloud_storage':
     'Thẻ được lưu trên đám mây và có thể truy cập trên mọi nền tảng',
   'membership_selector.card_saving': 'Lưu hơn 300 thẻ',
   'membership_selector.one_card_per_day': '1 thẻ mỗi ngày',
   'membership_selector.unlimited': 'Không giới hạn',
   'membership_selector.social_proof':
-    'Vocably là công cụ duy nhất tập trung hoàn toàn vào nhu cầu của người học ngôn ngữ tích cực. Nó mới, nhưng hàng trăm người đã sử dụng để luyện tập ngôn ngữ thực tế.',
+    'Vocably là công cụ duy nhất tập trung hoàn toàn vào nhu cầu của những người đang tích cực học ngôn ngữ. Nó là một sản phẩm mới, nhưng hàng trăm người đã sử dụng để luyện tập ngôn ngữ thực tế.',
   'membership_selector.per_month': 'Mỗi tháng',
   'membership_selector.pay_once': 'Trả một lần, dùng mãi mãi',
   'membership_selector.total': 'Tổng',
@@ -233,9 +230,9 @@ export const vi = {
   // Feedback
   'feedback.title': 'Phản hồi',
   'feedback.p1':
-    'Bạn thiếu tính năng quan trọng? Có câu hỏi hay muốn chia sẻ suy nghĩ về Vocably? Tôi rất muốn nghe từ bạn!',
+    'Thiếu tính năng? Có câu hỏi hay muốn chia sẻ suy nghĩ về Vocably? Tôi rất muốn nghe từ bạn!',
   'feedback.p2':
-    'Tôi trả lời từng người dùng, thường mất vài ngày để phản hồi.',
+    'Tôi trả lời từng người dùng. Thường mất vài ngày để phản hồi.',
   'feedback.p3': 'Tôi sẽ trả lời bạn qua địa chỉ email',
   'feedback.apple_email':
     'Có vẻ đây là email bí mật Apple bạn đã cung cấp khi đăng ký, nhưng đừng lo — nó vẫn hoạt động tốt.',
@@ -248,9 +245,9 @@ export const vi = {
 
   // Import
   'import.title': 'Nhập thẻ từ CSV',
-  'import.loading_decks': 'Đang tải bộ thẻ...',
+  'import.loading_decks': 'Đang tải bộ sưu tập...',
   'import.what_language': 'Bạn muốn nhập ngôn ngữ nào?',
-  'import.import_cards_for': 'Nhập thẻ cho',
+  'import.import_cards_for': 'Ngôn ngữ cho thẻ nhập:',
   'import.csv_two_columns': 'File CSV phải có hai cột, phân cách bằng tab',
   'import.copy_paste': 'Sao chép và dán từ Google Sheets, file CSV hoặc',
   'import.upload_csv': 'Tải lên file CSV',
@@ -316,9 +313,9 @@ export const vi = {
 
   // Header
   'header.menu': 'Menu',
-  'header.setup': 'Thiết lập (Chào mừng)',
+  'header.setup': 'Thiết lập tiện ích',
   'header.premium': 'Premium',
-  'header.settings': 'Cài đặt',
+  'header.settings': 'Cài đặt hệ thống',
   'header.import': 'Nhập',
   'header.feedback': 'Phản hồi',
   'header.sign_out': 'Đăng xuất',

@@ -38,10 +38,10 @@ export const tr = {
     'Her web sitesinde anlık bağlama duyarlı çeviriler.',
   'auth.carousel.slide1_text2': 'Çevirilerinizi flash kart olarak kaydedin.',
   'auth.carousel.slide2':
-    'Kelimelerinizi interaktif testler ve sorularla öğrenin.',
+    'Kaydedilen kelimeleri interaktif testler ve sorularla öğrenin.',
   'auth.carousel.slide3': 'Doğrudan YouTube altyazılarından çevirin.',
   'auth.carousel.slide4':
-    'Online dersler sırasında kelimeleri çevirin ve kaydedin.',
+    'Video görüşmeleri sırasında kelimeleri çevirin ve kaydedin.',
   'auth.carousel.slide5':
     'Doğru kelimeyi bilmiyor musunuz? Ana dilinizde arayın.',
   'auth.carousel.need_account':
@@ -54,7 +54,7 @@ export const tr = {
   'auth.hands_free.not_installed':
     'Tarayıcı uzantısının yüklü veya etkin olmadığı görünüyor.',
   'auth.hands_free.please_install':
-    'Lütfen tarayıcı uzantısını yükleyin veya etkinleştirin ve tekrar deneyin.',
+    'Lütfen uzantıyı yükleyin veya etkinleştirin ve tekrar deneyin.',
   'auth.hands_free.but_installed': 'Ama bende yüklü',
   'auth.hands_free.safari_bug':
     'Uzantının algılanmasını engelleyen bir Safari hatasıyla karşılaşıyor olabilirsiniz.',
@@ -67,7 +67,7 @@ export const tr = {
   'auth.hands_free.ios_step4':
     'iOS Ayarlar\'a tekrar gidip Vocably for Safari için "Uzantıya İzin Ver" seçeneğini işaretleyin',
   'auth.hands_free.sorry':
-    'Yaşanan rahatsızlık için özür dileriz — üzerinde çalışıyoruz.',
+    'Yaşanan rahatsızlık için özür diliyorum — üzerinde çalışıyorum.',
   'auth.hands_free.restart_safari':
     "Lütfen Safari'yi yeniden başlatmayı deneyin.",
   'auth.hands_free.signing_in': 'Giriş yapılıyor...',
@@ -81,13 +81,13 @@ export const tr = {
   'auth.sign_out.go_to_sign_in': 'Giriş sayfasına git',
 
   // Decks
-  'decks.loading': 'Desteler yükleniyor...',
+  'decks.loading': 'Koleksiyonlar yükleniyor...',
   'decks.loading_cards': 'Kartlar yükleniyor...',
   'decks.dashboard.study': 'Çalış',
-  'decks.dashboard.edit_deck': 'Desteyi düzenle',
-  'decks.edit.export_deck': 'Desteyi dışa aktar',
-  'decks.edit.delete_deck': 'Desteyi sil',
-  'decks.card_form.source': 'Kaynak',
+  'decks.dashboard.edit_deck': 'Koleksiyonu düzenle',
+  'decks.edit.export_deck': 'Koleksiyonu dışa aktar',
+  'decks.edit.delete_deck': 'Koleksiyonu sil',
+  'decks.card_form.source': 'Kelime veya ifade',
   'decks.card_form.part_of_speech': 'Sözcük türü',
   'decks.card_form.examples': 'Örnekler',
   'decks.card_form.translation': 'Çeviri',
@@ -124,7 +124,7 @@ export const tr = {
   'decks.lexicala_dialog.p5':
     '27 Ekim 2025 öncesinde oluşturulan kartlar yasal kısıtlamalar nedeniyle dışa aktarılamaz.',
   'decks.lexicala_dialog.close': 'Kapat',
-  'decks.no_decks.no_cards': 'Bu destede henüz kart yok.',
+  'decks.no_decks.no_cards': 'Bu koleksiyonda henüz kart yok.',
   'decks.study.loading': 'Çalışma oturumu...',
   'decks.study.reload': 'Lütfen tekrar denemek için sayfayı yenileyin.',
 
@@ -159,8 +159,7 @@ export const tr = {
     'Herhangi bir mobil uygulamada yeni bir kelime mi gördünüz?',
   'membership_selector.feature2.desc1':
     'Seçin ve çevirmek ve flash kart oluşturmak için Vocably Mobil Uygulaması ile paylaşın.',
-  'membership_selector.feature2.desc2':
-    'Android kullanıcıları {{icon}} Vocably ile Çevir seçeneğini kullanabilir.',
+  'membership_selector.feature2.desc2': 'Android kullanıcıları',
   'membership_selector.feature3.title':
     'Gerçek hayatta yeni bir kelime mi gördünüz?',
   'membership_selector.feature3.desc':
@@ -172,24 +171,22 @@ export const tr = {
   'membership_selector.feature5.title':
     'Android için e-kitap okuyucularının çoğuyla sorunsuz çalışır',
   'membership_selector.feature5.desc':
-    'E-kitapta herhangi bir kelimeye uzun basın, çevirisini görün ve yüksek kaliteli flash kart olarak kaydedin.',
+    'E-kitapta herhangi bir kelimeyi tıklayın, çevirisini görün ve yüksek kaliteli flash kart olarak kaydedin.',
   'membership_selector.feature6.title': 'Tüm kartlarınız bulutta kaydedilir',
   'membership_selector.feature6.desc':
     'Bunları herhangi bir mobil cihazınızda entegre SRS sistemi ile çalışabilirsiniz.',
   'membership_selector.comparison_title': 'Ücretsiz ve Premium arasındaki fark',
-  'membership_selector.all_premium_available':
-    'Tüm Premium özellikler Ücretsiz sürümde de mevcuttur.',
   'membership_selector.unlimited_translations': 'Sınırsız çeviri',
   'membership_selector.unlimited_collections': 'Sınırsız kart koleksiyonu',
   'membership_selector.unlimited_sessions': 'Sınırsız çalışma oturumu',
-  'membership_selector.unlimited_decks': 'Sınırsız dil destesi',
+  'membership_selector.unlimited_decks': 'Sınırsız dil koleksiyonları',
   'membership_selector.cloud_storage':
     'Kartlar bulutta saklanır ve tüm platformlarda erişilebilir',
   'membership_selector.card_saving': '300 kartın üzerinde kart kaydetme',
   'membership_selector.one_card_per_day': 'Günde 1 kart',
   'membership_selector.unlimited': 'Sınırsız',
   'membership_selector.social_proof':
-    'Vocably, aktif dil öğrenicilerinin ihtiyaçlarına tamamen odaklanan tek araçtır. Yeni olmakla birlikte, yüzlerce kişi onu gerçek dünya dil pratiği için kullanıyor.',
+    'Vocably, dil öğrenimini aktif olarak sürdüren insanların ihtiyaçlarına tamamen odaklanan tek araçtır. Yeni bir ürün olmakla birlikte, yüzlerce kişi onu gerçek dünya dil pratiği için kullanıyor.',
   'membership_selector.per_month': 'Aylık',
   'membership_selector.pay_once': 'Bir kere öde, sonsuza kadar kullan',
   'membership_selector.total': 'Toplam',
@@ -243,9 +240,9 @@ export const tr = {
   // Feedback
   'feedback.title': 'Geri Bildirim',
   'feedback.p1':
-    'Önemli özellikler mi eksik? Sorularınız var mı yoksa Vocably hakkındaki düşüncelerinizi paylaşmak ister misiniz? Sizi duymaktan memnuniyet duyarım!',
+    'Özellikler eksik mi? Sorularınız var mı yoksa Vocably hakkındaki düşüncelerinizi paylaşmak ister misiniz? Sizi duymaktan memnuniyet duyarım!',
   'feedback.p2':
-    'Her kullanıcıya yanıt veriyorum, genellikle birkaç gün içinde yanıt veriyorum.',
+    'Her kullanıcıya yanıt veriyorum, genellikle birkaç gün içinde.',
   'feedback.p3': 'E-posta adresinize yanıt vereceğim',
   'feedback.apple_email':
     'Bu, kayıt sırasında bana verdiğiniz gizli bir Apple e-postası gibi görünüyor, ancak merak etmeyin; sorunsuz çalışmalıdır.',
@@ -257,9 +254,9 @@ export const tr = {
 
   // Import
   'import.title': "CSV'den Kart İçe Aktar",
-  'import.loading_decks': 'Desteler yükleniyor...',
+  'import.loading_decks': 'Koleksiyonlar yükleniyor...',
   'import.what_language': 'Hangi dili içe aktarmak istiyorsunuz?',
-  'import.import_cards_for': 'Kart içe aktarma için',
+  'import.import_cards_for': 'İçe aktarılacak kartlar için dil:',
   'import.csv_two_columns':
     'CSV dosyası sekmeyle ayrılmış iki sütun içermelidir',
   'import.copy_paste':
@@ -327,9 +324,9 @@ export const tr = {
 
   // Header
   'header.menu': 'Menü',
-  'header.setup': 'Kurulum (Hoş Geldiniz)',
+  'header.setup': 'Uzantıyı Kur',
   'header.premium': 'Premium',
-  'header.settings': 'Ayarlar',
+  'header.settings': 'Sistem Ayarları',
   'header.import': 'İçe Aktar',
   'header.feedback': 'Geri Bildirim',
   'header.sign_out': 'Çıkış Yap',
