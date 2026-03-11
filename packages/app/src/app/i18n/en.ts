@@ -149,17 +149,17 @@ export const en = {
     'Use Chrome or Safari extensions to quickly select, translate, and generate flashcards with a single click.',
   'membership_selector.feature1.desc2':
     'iOS users can also take advantage of the iOS Safari extension for iPhone and iPad.',
-  'membership_selector.feature2.title': 'See a new word in any mobile app?',
+  'membership_selector.feature2.title': 'See a new word in any Android app?',
   'membership_selector.feature2.desc1':
-    'Select it and share with Vocably Mobile App to translate and generate flashcards.',
-  'membership_selector.feature2.desc2': 'Android users can use',
+    'Select it and share with Vocably to translate and generate flashcards.',
+  'membership_selector.feature2.desc2': 'Select and tap',
   'membership_selector.feature3.title': 'See a new word in real life?',
   'membership_selector.feature3.desc':
-    'Use Vocably Mobile App instead of Google Translate to translate and automatically generate a flashcard.',
+    'Use Vocably Mobile App for iOS and Android instead of Google Translate to translate and automatically generate a flashcard.',
   'membership_selector.feature4.title':
     "Want to say something but don't know a word?",
   'membership_selector.feature4.desc':
-    'Find the right word in your native language using the Vocably Mobile App. Save it as a flashcard to review later.',
+    'Find the right word in your native language using the Vocably Mobile App for iOS and Android. Save it as a flashcard to review later.',
   'membership_selector.feature5.title':
     'Seamlessly works with most e-book readers for Android',
   'membership_selector.feature5.desc':
@@ -167,7 +167,7 @@ export const en = {
   'membership_selector.feature6.title':
     'All of your cards are saved in the cloud',
   'membership_selector.feature6.desc':
-    'You can study them using an integrated SRS system on any of your mobile devices.',
+    'You can study them using an integrated SRS system on any of your mobile devices (iOS or Android).',
   'membership_selector.comparison_title':
     'Difference between the Free and Premium',
   'membership_selector.unlimited_translations': 'Unlimited translations',

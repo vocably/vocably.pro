@@ -154,26 +154,25 @@ export const uk = {
   'membership_selector.feature1.desc2':
     'Користувачі iOS також можуть скористатися розширенням Safari для iPhone та iPad.',
   'membership_selector.feature2.title':
-    'Побачили нове слово в мобільному додатку?',
+    'Побачили нове слово в будь-якому Android додатку?',
   'membership_selector.feature2.desc1':
-    'Виділіть його і поділіться з мобільним додатком Vocably для перекладу та створення картки.',
-  'membership_selector.feature2.desc2':
-    'Користувачі Android можуть використовувати',
+    'Виділіть його і поділіться з Vocably для перекладу та створення картки.',
+  'membership_selector.feature2.desc2': 'Виділіть і натисніть',
   'membership_selector.feature3.title':
     'Побачили нове слово в реальному житті?',
   'membership_selector.feature3.desc':
-    'Використовуйте мобільний додаток Vocably замість Google Translate для перекладу та автоматичного створення картки.',
+    'Використовуйте мобільний додаток Vocably для iOS та Android замість Google Translate для перекладу та автоматичного створення картки.',
   'membership_selector.feature4.title':
     'Хочете щось сказати, але не знаєте слово?',
   'membership_selector.feature4.desc':
-    'Знайдіть потрібне слово рідною мовою в мобільному додатку Vocably. Збережіть його як картку для повторення.',
+    'Знайдіть потрібне слово рідною мовою в мобільному додатку Vocably для iOS та Android. Збережіть його як картку для повторення.',
   'membership_selector.feature5.title':
     'Бездоганно працює з більшістю читалок для Android',
   'membership_selector.feature5.desc':
     'Натисніть на будь-яке слово в електронній книзі, щоб побачити переклад і зберегти його як картку.',
   'membership_selector.feature6.title': 'Усі ваші картки зберігаються в хмарі',
   'membership_selector.feature6.desc':
-    'Ви можете вивчати їх за допомогою вбудованої системи інтервального повторення на будь-якому мобільному пристрої.',
+    'Ви можете вивчати їх за допомогою вбудованої системи інтервального повторення на будь-якому мобільному пристрої (iOS або Android).',
   'membership_selector.comparison_title':
     'Різниця між безкоштовною та Premium версіями',
   'membership_selector.unlimited_translations': 'Необмежені переклади',

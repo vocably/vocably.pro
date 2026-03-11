@@ -156,25 +156,25 @@ export const tr = {
   'membership_selector.feature1.desc2':
     'iOS kullanıcıları iPhone ve iPad için iOS Safari uzantısından da yararlanabilir.',
   'membership_selector.feature2.title':
-    'Herhangi bir mobil uygulamada yeni bir kelime mi gördünüz?',
+    'Herhangi bir Android uygulamasında yeni bir kelime mi gördünüz?',
   'membership_selector.feature2.desc1':
-    'Seçin ve çevirmek ve flash kart oluşturmak için Vocably Mobil Uygulaması ile paylaşın.',
-  'membership_selector.feature2.desc2': 'Android kullanıcıları',
+    'Seçin ve çevirmek ve flash kart oluşturmak için Vocably ile paylaşın.',
+  'membership_selector.feature2.desc2': 'Seçin ve dokunun',
   'membership_selector.feature3.title':
     'Gerçek hayatta yeni bir kelime mi gördünüz?',
   'membership_selector.feature3.desc':
-    'Çevirmek ve otomatik flash kart oluşturmak için Google Translate yerine Vocably Mobil Uygulamasını kullanın.',
+    'Çevirmek ve otomatik flash kart oluşturmak için Google Translate yerine iOS ve Android için Vocably Mobil Uygulamasını kullanın.',
   'membership_selector.feature4.title':
     'Bir şey söylemek istiyor ama kelimeyi bilmiyor musunuz?',
   'membership_selector.feature4.desc':
-    'Vocably Mobil Uygulamasında ana dilinizde doğru kelimeyi bulun. Daha sonra tekrar etmek için flash kart olarak kaydedin.',
+    'iOS ve Android için Vocably Mobil Uygulamasında ana dilinizde doğru kelimeyi bulun. Daha sonra tekrar etmek için flash kart olarak kaydedin.',
   'membership_selector.feature5.title':
     'Android için e-kitap okuyucularının çoğuyla sorunsuz çalışır',
   'membership_selector.feature5.desc':
     'E-kitapta herhangi bir kelimeyi tıklayın, çevirisini görün ve yüksek kaliteli flash kart olarak kaydedin.',
   'membership_selector.feature6.title': 'Tüm kartlarınız bulutta kaydedilir',
   'membership_selector.feature6.desc':
-    'Bunları herhangi bir mobil cihazınızda entegre SRS sistemi ile çalışabilirsiniz.',
+    'Bunları herhangi bir mobil cihazınızda (iOS veya Android) entegre SRS sistemi ile çalışabilirsiniz.',
   'membership_selector.comparison_title': 'Ücretsiz ve Premium arasındaki fark',
   'membership_selector.unlimited_translations': 'Sınırsız çeviri',
   'membership_selector.unlimited_collections': 'Sınırsız kart koleksiyonu',

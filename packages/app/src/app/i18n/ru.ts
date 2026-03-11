@@ -155,25 +155,24 @@ export const ru = {
   'membership_selector.feature1.desc2':
     'Пользователи iOS также могут использовать расширение Safari для iPhone и iPad.',
   'membership_selector.feature2.title':
-    'Увидели новое слово в мобильном приложении?',
+    'Увидели новое слово в любом Android приложении?',
   'membership_selector.feature2.desc1':
-    'Выделите его и поделитесь с мобильным приложением Vocably для перевода и создания карточки.',
-  'membership_selector.feature2.desc2':
-    'Пользователи Android могут использовать',
+    'Выделите его и поделитесь с Vocably для перевода и создания карточки.',
+  'membership_selector.feature2.desc2': 'Выдлите и нажмите',
   'membership_selector.feature3.title': 'Увидели новое слово в реальной жизни?',
   'membership_selector.feature3.desc':
-    'Используйте мобильное приложение Vocably вместо Google Translate для перевода и автоматического создания карточек.',
+    'Используйте мобильное приложение Vocably для iOS и Android вместо Google Translate для перевода и автоматического создания карточек.',
   'membership_selector.feature4.title':
     'Хотите что-то сказать, но не знаете слово?',
   'membership_selector.feature4.desc':
-    'Найдите нужное слово на родном языке в мобильном приложении Vocably. Сохраните его как карточку для повторения.',
+    'Найдите нужное слово на родном языке в мобильном приложении Vocably для iOS и Android. Сохраните его как карточку для повторения.',
   'membership_selector.feature5.title':
     'Отлично работает с большинством читалок для Android',
   'membership_selector.feature5.desc':
     'Нажмите на любое слово в электронной книге, чтобы увидеть перевод и сохранить его как карточку.',
   'membership_selector.feature6.title': 'Все ваши карточки хранятся в облаке',
   'membership_selector.feature6.desc':
-    'Вы можете изучать их с помощью встроенной системы интервального повторения на любом мобильном устройстве.',
+    'Вы можете изучать их с помощью встроенной системы интервального повторения на любом мобильном устройстве (iOS или Android).',
   'membership_selector.comparison_title':
     'Разница между бесплатной и Premium версиями',
   'membership_selector.unlimited_translations': 'Неограниченные переводы',

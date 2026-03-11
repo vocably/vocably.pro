@@ -148,16 +148,17 @@ export const vi = {
     'Sử dụng tiện ích Chrome hoặc Safari để chọn, dịch và tạo thẻ học chỉ bằng một cú nhấp chuột.',
   'membership_selector.feature1.desc2':
     'Người dùng iOS cũng có thể sử dụng tiện ích Safari cho iPhone và iPad.',
-  'membership_selector.feature2.title': 'Gặp từ mới trong ứng dụng di động?',
+  'membership_selector.feature2.title':
+    'Gặp từ mới trong bất kỳ ứng dụng Android nào?',
   'membership_selector.feature2.desc1':
-    'Chọn và chia sẻ với ứng dụng di động Vocably để dịch và tạo thẻ học.',
-  'membership_selector.feature2.desc2': 'Người dùng Android có thể dùng',
+    'Chọn và chia sẻ với Vocably để dịch và tạo thẻ học.',
+  'membership_selector.feature2.desc2': 'Chọn và nhấn',
   'membership_selector.feature3.title': 'Gặp từ mới trong cuộc sống thực?',
   'membership_selector.feature3.desc':
-    'Dùng ứng dụng di động Vocably thay vì Google Translate để dịch và tự động tạo thẻ học.',
+    'Dùng ứng dụng di động Vocably cho iOS và Android thay vì Google Translate để dịch và tự động tạo thẻ học.',
   'membership_selector.feature4.title': 'Muốn nói gì đó nhưng không biết từ?',
   'membership_selector.feature4.desc':
-    'Tìm từ cần dùng bằng tiếng mẹ đẻ trong ứng dụng di động Vocably. Lưu làm thẻ học để ôn tập sau.',
+    'Tìm từ cần dùng bằng tiếng mẹ đẻ trong ứng dụng di động Vocably cho iOS và Android. Lưu làm thẻ học để ôn tập sau.',
   'membership_selector.feature5.title':
     'Hoạt động liền mạch với hầu hết máy đọc sách cho Android',
   'membership_selector.feature5.desc':
@@ -165,7 +166,7 @@ export const vi = {
   'membership_selector.feature6.title':
     'Tất cả thẻ của bạn được lưu trên đám mây',
   'membership_selector.feature6.desc':
-    'Bạn có thể học chúng bằng hệ thống lặp lại ngắt quãng tích hợp trên bất kỳ thiết bị di động nào.',
+    'Bạn có thể học chúng bằng hệ thống lặp lại ngắt quãng tích hợp trên bất kỳ thiết bị di động nào (iOS hoặc Android).',
   'membership_selector.comparison_title':
     'Sự khác biệt giữa phiên bản Miễn phí và Premium',
   'membership_selector.unlimited_translations': 'Dịch không giới hạn',
