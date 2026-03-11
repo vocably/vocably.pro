@@ -25,7 +25,6 @@ import {
 } from 'rxjs';
 import { extensionId } from '../../../../extension';
 import { getFacility } from '../../../getFacility';
-import { LanguagePipe } from '../../../language/language.pipe';
 import { GenericInstructionComponent } from '../../generic-instruction/generic-instruction.component';
 import { HighlightComponent } from '../../highlight/highlight.component';
 import { HowToVideoComponent } from '../../how-to-video/how-to-video.component';
@@ -76,7 +75,6 @@ const onboardTargetLanguage = async (targetLanguage: string) => {
     HighlightComponent,
     MatIcon,
     GenericInstructionComponent,
-    LanguagePipe,
     TranslocoModule,
   ],
 })

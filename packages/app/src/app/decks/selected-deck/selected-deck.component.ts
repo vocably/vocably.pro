@@ -1,5 +1,6 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TranslocoModule } from '@jsverse/transloco';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -38,6 +39,7 @@ import { DeckStoreService } from '../deck-store.service';
     IonicModule,
     RouterOutlet,
     AsyncPipe,
+    TranslocoModule,
   ],
 })
 export class SelectedDeckComponent implements OnInit, OnDestroy {

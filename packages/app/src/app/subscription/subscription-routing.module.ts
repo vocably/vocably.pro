@@ -11,12 +11,12 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        title: 'Subscribe',
+        title: 'page.subscribe',
         component: IndexPageComponent,
       },
       {
         path: 'success/:priceId',
-        title: 'Success',
+        title: 'page.subscription_success',
         component: SuccessPageComponent,
       },
     ],

@@ -316,6 +316,16 @@ Lambda functions:
 - Husky for git hooks (`.husky/`)
 - EditorConfig for editor consistency (`.editorconfig`)
 
+## User interface language
+
+The system interface expected to be translated into following languages:
+
+- English (en) - default
+- Russian (ru)
+- Ukrainian (uk)
+- Turkish (tr)
+- Vietnamese (vi)
+
 ## Troubleshooting
 
 ### Build Issues

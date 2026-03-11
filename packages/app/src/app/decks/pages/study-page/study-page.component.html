@@ -2,7 +2,8 @@
   @if (necessaryData.isLoading()) {
     <div class="hero max">
       <div class="hero-body text-center">
-        <ion-spinner name="dots" class="mr-1"></ion-spinner>Study session...
+        <ion-spinner name="dots" class="mr-1"></ion-spinner
+        >{{ 'decks.study.loading' | transloco }}
       </div>
     </div>
   } @else if (necessaryData.error()) {
@@ -12,7 +13,7 @@
           <mat-icon class="error-icon" inline>error</mat-icon>
         </div>
         <p>{{ necessaryData.error() }}</p>
-        <p>Please reload the page to try again.</p>
+        <p>{{ 'decks.study.reload' | transloco }}</p>
       </div>
     </div>
   } @else {

@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { listLanguages } from '@vocably/api';
 import { GoogleLanguage } from '@vocably/model';
@@ -19,7 +20,7 @@ import { DeckListStoreService } from './deck-list-store.service';
 @Component({
   selector: 'app-decks',
   templateUrl: './decks.component.html',
-  imports: [NgIf, IonicModule, RouterOutlet],
+  imports: [NgIf, IonicModule, RouterOutlet, TranslocoModule],
 })
 export class DecksComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();

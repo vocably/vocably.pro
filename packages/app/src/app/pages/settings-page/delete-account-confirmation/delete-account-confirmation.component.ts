@@ -8,6 +8,7 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-delete-account-confirmation',
@@ -20,6 +21,7 @@ import {
     MatDialogActions,
     MatButton,
     MatDialogClose,
+    TranslocoModule,
   ],
 })
 export class DeleteAccountConfirmationComponent implements OnInit {

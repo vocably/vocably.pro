@@ -10,47 +10,47 @@ import { WelcomeComponent } from './welcome/welcome.component';
 const routes: Routes = [
   {
     path: 'welcome',
-    title: 'Welcome',
+    title: 'page.welcome',
     component: WelcomeComponent,
   },
   {
     path: 'user-info',
-    title: 'User Info',
+    title: 'page.user_info',
     component: UserInfoPageComponent,
   },
   {
     path: 'uninstall',
-    title: 'Uninstall',
+    title: 'page.uninstall',
     component: UninstallComponent,
   },
   {
     path: 'ios-extension/:sourceLanguage/:targetLanguage',
-    title: 'iOS Safari Extension',
+    title: 'page.ios_extension',
     component: IosExtensionComponent,
   },
   {
     path: 'ios-extension/:sourceLanguage',
-    title: 'iOS Safari Extension',
+    title: 'page.ios_extension',
     component: IosExtensionComponent,
   },
   {
     path: 'ios-extension',
-    title: 'iOS Safari Extension',
+    title: 'page.ios_extension',
     component: IosExtensionComponent,
   },
   {
     path: 'android-translate/:sourceLanguage/:targetLanguage',
-    title: 'Translate with Android',
+    title: 'page.android_translate',
     component: AndroidTranslateComponent,
   },
   {
     path: 'android-translate/:sourceLanguage',
-    title: 'Translate with Android',
+    title: 'page.android_translate',
     component: AndroidTranslateComponent,
   },
   {
     path: 'android-translate',
-    title: 'Translate with Android',
+    title: 'page.android_translate',
     component: AndroidTranslateComponent,
   },
   {

@@ -2,14 +2,17 @@
   <div class="content">
     @if (loading) {
       <div>
-        <ion-spinner name="dots" class="mr-1"></ion-spinner>Study session...
+        <ion-spinner name="dots" class="mr-1"></ion-spinner
+        >{{ 'preview_step.loading' | transloco }}
       </div>
     } @else if (error) {
       <p class="error">{{ error }}</p>
     } @else if (completed) {
       <div class="completed">
-        <p>Step completed.</p>
-        <button class="button outline" (click)="retry()">Try Again</button>
+        <p>{{ 'preview_step.completed' | transloco }}</p>
+        <button class="button outline" (click)="retry()">
+          {{ 'preview_step.try_again' | transloco }}
+        </button>
       </div>
     } @else if (card) {
       <div class="card-container">
@@ -53,7 +56,7 @@
   <div class="nav">
     <a [routerLink]="['/settings']" class="back-link">
       <mat-icon>arrow_back</mat-icon>
-      Back to Settings
+      {{ 'preview_step.back_to_settings' | transloco }}
     </a>
     <h2>{{ stepLabel }}</h2>
   </div>

@@ -1,6 +1,7 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { sendUserFeedback } from '@vocably/api';
 import { AuthService } from '../../auth/auth.service';
@@ -17,6 +18,7 @@ import { HeaderComponent } from '../../header/header.component';
     FormsModule,
     IonicModule,
     AsyncPipe,
+    TranslocoModule,
   ],
 })
 export class FeedbackPageComponent implements OnInit {

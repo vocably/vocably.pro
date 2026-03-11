@@ -4,6 +4,7 @@ import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
@@ -23,6 +24,7 @@ import { LogoComponent } from './logo/logo.component';
     MatMenu,
     MatMenuItem,
     MatDivider,
+    TranslocoModule,
   ],
 })
 export class HeaderComponent implements OnInit, OnDestroy {

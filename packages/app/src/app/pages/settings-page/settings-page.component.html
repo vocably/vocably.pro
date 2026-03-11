@@ -1,28 +1,55 @@
-<div class="container-xl top"><app-header title="Settings"></app-header></div>
+<div class="container-xl top">
+  <app-header [title]="'settings.title' | transloco"></app-header>
+</div>
 <div class="container bottom">
   <div class="flex-direction-column align-items-center">
     <mat-divider style="margin: 4rem 0"></mat-divider>
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      "
+    >
+      <div style="margin: 0">
+        {{ 'settings.interface_language' | transloco }}:
+      </div>
+      <select
+        [(ngModel)]="interfaceLanguage"
+        (ngModelChange)="onInterfaceLanguageChange($event)"
+      >
+        @for (lang of languages; track lang.value) {
+          <option [value]="lang.value">{{ lang.label }}</option>
+        }
+      </select>
+    </div>
+
+    <mat-divider style="margin: 4rem 0"></mat-divider>
     <div class="text-center mb-2">
-      Not sure where to start? Just
-      <a [routerLink]="['/welcome']">click this link</a>.
+      {{ 'settings.not_sure' | transloco }}
+      <a [routerLink]="['/welcome']">{{ 'settings.click_link' | transloco }}</a
+      >.
     </div>
     <mat-divider style="margin: 4rem 0"></mat-divider>
     <div>
-      <p class="text-center">Need help?</p>
+      <p class="text-center">{{ 'settings.need_help' | transloco }}</p>
       <p>
-        <a class="button block outline" [routerLink]="['/feedback']"
-          >Contact the author of Vocably</a
-        >
+        <a class="button block outline" [routerLink]="['/feedback']">{{
+          'settings.contact' | transloco
+        }}</a>
       </p>
-      <div class="text-center small">I respond to everyone.</div>
+      <div class="text-center small">
+        {{ 'settings.respond_everyone' | transloco }}
+      </div>
     </div>
     <mat-divider style="margin: 4rem 0"></mat-divider>
     <div>
-      <h2>Study settings</h2>
+      <h2>{{ 'settings.study_settings' | transloco }}</h2>
 
       <div>
         <p style="margin-top: 0; margin-bottom: 8px">
-          Maximum cards per study session
+          {{ 'settings.max_cards' | transloco }}
         </p>
         <div style="display: flex; align-items: center; gap: 12px">
           <mat-slider min="5" max="40" step="1" style="flex: 1" color="accent">
@@ -44,7 +71,7 @@
           (ngModelChange)="onStudySettingsChange()"
           color="accent"
         >
-          Randomly select cards to study
+          {{ 'settings.random_select' | transloco }}
         </mat-checkbox>
         <div style="padding-left: 0.75rem; padding-top: 8px">
           <p class="small">
@@ -58,13 +85,9 @@
               "
               >error_outline</mat-icon
             >
-            Enabling this option is generally a
-            <strong>bad idea</strong>. This option disables the smart study
-            algorithm. People who disable the smart study algorithm eventually
-            get frustrated with their study progress.
+            <span [innerHTML]="'settings.random_warning' | transloco"></span>
             <a href="https://vocably.pro/srs.html" target="_blank">
-              Read how Vocably uses the smart study algorithm to help you learn
-              more words in a shorter time.</a
+              {{ 'settings.read_how' | transloco }}</a
             >
             <mat-icon
               style="
@@ -100,14 +123,14 @@
         </video>
       </div>
       <div>
-        <h3>Sync your cards across desktop and mobile.</h3>
-        <p>The mobile app also includes exclusive features like:</p>
+        <h3>{{ 'settings.sync_cards' | transloco }}</h3>
+        <p>{{ 'settings.mobile_features' | transloco }}</p>
         <ul class="mb-1">
-          <li>Group with Tags</li>
-          <li>AI Dictionary</li>
-          <li>Prompt-Based Collections Generation</li>
+          <li>{{ 'settings.feature_tags' | transloco }}</li>
+          <li>{{ 'settings.feature_ai_dict' | transloco }}</li>
+          <li>{{ 'settings.feature_prompts' | transloco }}</li>
         </ul>
-        <p>Scan the QR code to install:</p>
+        <p>{{ 'settings.scan_qr' | transloco }}</p>
         <app-app-qr-code style="width: 160px"></app-app-qr-code>
       </div>
     </div>
@@ -115,7 +138,8 @@
   <mat-divider style="margin: 4rem 0"></mat-divider>
   <div class="text-center">
     <button class="link unstyled" (click)="deleteAccount()">
-      <mat-icon class="middle">delete-outline</mat-icon>Delete my account
+      <mat-icon class="middle">delete-outline</mat-icon
+      >{{ 'settings.delete_account' | transloco }}
     </button>
   </div>
 </div>

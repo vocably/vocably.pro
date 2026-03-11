@@ -5,7 +5,7 @@
       id="practice-button"
       [routerLink]="['study']"
     >
-      Study
+      {{ 'decks.dashboard.study' | transloco }}
     </a>
   </div>
   <ul class="unstyled separated mb-1" data-test="dashboard-cards">
@@ -21,7 +21,8 @@
     data-test="edit-button"
     id="edit-deck"
     class="lead-0_5 track-click inline-block"
-    >Edit deck<span class="text-decoration-none ml-0_5 inline-block"
+    >{{ 'decks.dashboard.edit_deck' | transloco
+    }}<span class="text-decoration-none ml-0_5 inline-block"
       >({{ cardItems.length }})</span
     ></a
   >

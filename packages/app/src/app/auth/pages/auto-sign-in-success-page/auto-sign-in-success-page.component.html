@@ -7,13 +7,15 @@
     >
       <div class="text-center">
         <ng-container *ngIf="isLoading">
-          <ion-spinner name="dots" class="mr-1"></ion-spinner>Loading profile
-          data...
+          <ion-spinner name="dots" class="mr-1"></ion-spinner
+          >{{ 'auth.sign_in_success.loading' | transloco }}
         </ng-container>
         <ng-container *ngIf="!isLoading">
-          <div class="mb-1">You have been successfully signed in.</div>
+          <div class="mb-1">
+            {{ 'auth.sign_in_success.signed_in' | transloco }}
+          </div>
           <div class="mb-1" *ngIf="!canBeAutomaticallyClosed">
-            This tab can be closed now.
+            {{ 'auth.sign_in_success.tab_can_close' | transloco }}
           </div>
           <div
             class="mb-1"
@@ -21,13 +23,13 @@
             *ngIf="canBeAutomaticallyClosed"
           >
             <button class="button block" (click)="closeTheTab()">
-              Close this tab
+              {{ 'auth.sign_in_success.close_tab' | transloco }}
             </button>
           </div>
           <div>
-            <a href="/welcome" class="button outline block"
-              >Show me how Vocably works</a
-            >
+            <a href="/welcome" class="button outline block">{{
+              'auth.sign_in_success.show_how' | transloco
+            }}</a>
           </div>
         </ng-container>
       </div>

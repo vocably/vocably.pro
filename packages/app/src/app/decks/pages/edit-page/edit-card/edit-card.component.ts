@@ -8,6 +8,7 @@ import {
 import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
+import { TranslocoModule } from '@jsverse/transloco';
 import { CardItem } from '@vocably/model';
 import { CardComponent } from '../../../card/card.component';
 import {
@@ -59,7 +60,7 @@ const animationSpeed = '0.2s';
       ]),
     ]),
   ],
-  imports: [NgIf, CardFormComponent, MatIcon, CardComponent],
+  imports: [NgIf, CardFormComponent, MatIcon, CardComponent, TranslocoModule],
 })
 export class EditCardComponent implements OnInit {
   @Input() item!: CardItem;

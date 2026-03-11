@@ -3,19 +3,28 @@
   <div class="hero">
     <div class="hero-body text-center">
       <ng-container *ngIf="isLoading">
-        <ion-spinner name="dots" class="mr-1"></ion-spinner>Loading profile
-        data...
+        <ion-spinner name="dots" class="mr-1"></ion-spinner
+        >{{ 'auth.sign_in_success.loading' | transloco }}
       </ng-container>
       <ng-container *ngIf="!isLoading && !isRedirecting">
-        <div class="mb-1">You have been successfully signed in.</div>
-        <div class="mb-1">This tab can be closed now.</div>
+        <div class="mb-1">
+          {{ 'auth.sign_in_success.signed_in' | transloco }}
+        </div>
+        <div class="mb-1">
+          {{ 'auth.sign_in_success.tab_can_close' | transloco }}
+        </div>
         <div>
-          <a href="/welcome" class="button">Show me how Vocably works</a>
+          <a href="/welcome" class="button">{{
+            'auth.sign_in_success.show_how' | transloco
+          }}</a>
         </div>
       </ng-container>
       <ng-container *ngIf="!isLoading && isRedirecting">
-        <div class="mb-1">You have been successfully signed in.</div>
-        <ion-spinner name="dots" class="mr-1"></ion-spinner>Redirecting...
+        <div class="mb-1">
+          {{ 'auth.sign_in_success.signed_in' | transloco }}
+        </div>
+        <ion-spinner name="dots" class="mr-1"></ion-spinner
+        >{{ 'auth.sign_in_success.redirecting' | transloco }}
       </ng-container>
     </div>
   </div>

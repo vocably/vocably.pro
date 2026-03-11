@@ -6,46 +6,42 @@
     <div class="hero-body text-center">
       <ng-container *ngIf="isInstalled === false">
         <div>
-          <p>It seems like the browser extension isn't installed or enabled.</p>
-          Please install or enable the browser extension and try again.
+          <p>{{ 'auth.hands_free.not_installed' | transloco }}</p>
+          {{ 'auth.hands_free.please_install' | transloco }}
         </div>
         <div *ngIf="browserType !== 'normal'" style="margin-top: 1rem">
-          <app-expansion label="But I have it installed">
+          <app-expansion [label]="'auth.hands_free.but_installed' | transloco">
             <ng-container *ngIf="browserType === 'ios-safari'">
               <div class="text-left">
                 <p>
-                  You're likely encountering a Safari bug that's preventing the
-                  extension from being detected.
+                  {{ 'auth.hands_free.safari_bug' | transloco }}
                 </p>
-                <p>Here's what you need to do:</p>
+                <p>{{ 'auth.hands_free.ios_steps_title' | transloco }}</p>
 
                 <ol class="mb-1">
                   <li>
-                    Go to the iOS Settings -> Safari -> Extensions -> Vocably
-                    for Safari
+                    {{ 'auth.hands_free.ios_step1' | transloco }}
                   </li>
-                  <li>Uncheck the "Allow Extension"</li>
-                  <li>Quit Safari</li>
+                  <li>{{ 'auth.hands_free.ios_step2' | transloco }}</li>
+                  <li>{{ 'auth.hands_free.ios_step3' | transloco }}</li>
                   <li>
-                    Go to the iOS Settings again and check the "Allow Extension"
-                    for Vocably for Safari
+                    {{ 'auth.hands_free.ios_step4' | transloco }}
                   </li>
                 </ol>
 
                 <div>
-                  I'm sorry for the inconvenience — I'm working on a fix.
+                  {{ 'auth.hands_free.sorry' | transloco }}
                 </div>
               </div>
             </ng-container>
             <ng-container *ngIf="browserType === 'desktop-safari'">
               <div class="text-left">
                 <p>
-                  You're likely encountering a Safari bug that's preventing the
-                  extension from being detected.
+                  {{ 'auth.hands_free.safari_bug' | transloco }}
                 </p>
-                <p>Please try restarting Safari.</p>
+                <p>{{ 'auth.hands_free.restart_safari' | transloco }}</p>
                 <div>
-                  I'm sorry for the inconvenience — I'm working on a fix.
+                  {{ 'auth.hands_free.sorry' | transloco }}
                 </div>
               </div>
             </ng-container>
@@ -53,7 +49,8 @@
         </div>
       </ng-container>
       <ng-container *ngIf="isInstalled">
-        <ion-spinner name="dots" class="mr-1"></ion-spinner>Signing in...
+        <ion-spinner name="dots" class="mr-1"></ion-spinner
+        >{{ 'auth.hands_free.signing_in' | transloco }}
       </ng-container>
     </div>
   </div>

@@ -1,19 +1,12 @@
 <mat-dialog-content style="max-width: 400px">
-  <p>Vocably was built before the AI era.</p>
-  <p>
-    Back then, the only way to offer quality flashcards was through a paid
-    dictionary provider.
-  </p>
-  <p>
-    In October 2025, that provider informed me that I violated their Terms of
-    Service by letting users export cards.
-  </p>
-  <p>On October 27, 2025, Vocably switched to fully AI-generated flashcards.</p>
-  <p>
-    Cards created before October 27, 2025 can’t be exported due to legal
-    restrictions.
-  </p>
+  <p>{{ 'decks.lexicala_dialog.p1' | transloco }}</p>
+  <p>{{ 'decks.lexicala_dialog.p2' | transloco }}</p>
+  <p>{{ 'decks.lexicala_dialog.p3' | transloco }}</p>
+  <p>{{ 'decks.lexicala_dialog.p4' | transloco }}</p>
+  <p>{{ 'decks.lexicala_dialog.p5' | transloco }}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button class="button" [mat-dialog-close]="false">Close</button>
+  <button class="button" [mat-dialog-close]="false">
+    {{ 'decks.lexicala_dialog.close' | transloco }}
+  </button>
 </mat-dialog-actions>

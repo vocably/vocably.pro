@@ -1,5 +1,5 @@
 @if (loaded) {
-  <h3>Study Steps</h3>
+  <h3>{{ 'settings.study_steps.title' | transloco }}</h3>
   <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="step-list">
     @for (step of steps; track step.id; let i = $index) {
       <div class="step-item" cdkDrag>
@@ -14,16 +14,20 @@
           <span>{{ getLabel(step.id) }}</span>
           @if (step.id === 'ab' && !isPaid) {
             <span class="small"
-              >Available only for premium users.
-              <a href="/membership">Become a premium member.</a></span
+              >{{ 'settings.study_steps.premium_only' | transloco }}
+              <a href="/membership">{{
+                'settings.study_steps.become_premium' | transloco
+              }}</a></span
             >
           }
         </div>
         <a class="preview-link" [href]="getPreviewUrl(step)" target="_blank">
-          Preview
+          {{ 'settings.study_steps.preview' | transloco }}
         </a>
       </div>
     }
   </div>
-  <p class="description">Drag to reorder, toggle to enable or disable.</p>
+  <p class="description">
+    {{ 'settings.study_steps.drag_to_reorder' | transloco }}
+  </p>
 }

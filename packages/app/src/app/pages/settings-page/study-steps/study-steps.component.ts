@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CdkDragDrop, CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatIcon } from '@angular/material/icon';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { StudyFlowType } from '@vocably/model';
 import { defaultStudyFlow } from '@vocably/srs';
 import {
@@ -12,19 +13,19 @@ import {
 } from '@vocably/api';
 import { AuthService } from '../../../auth/auth.service';
 
-const stepLabels: Record<string, string> = {
-  mf: 'Choose the correct translation',
-  sf: 'Recall the correct translation',
-  mb: 'Choose the correct word or phrase',
-  ab: 'Arrange the correct word or phrase by letters',
-  sb: 'Recall the correct word or phrase',
+const stepLabelKeys: Record<string, string> = {
+  mf: 'settings.study_steps.mf',
+  sf: 'settings.study_steps.sf',
+  mb: 'settings.study_steps.mb',
+  ab: 'settings.study_steps.ab',
+  sb: 'settings.study_steps.sb',
 };
 
 @Component({
   selector: 'app-study-steps',
   templateUrl: './study-steps.component.html',
   styleUrls: ['./study-steps.component.scss'],
-  imports: [CdkDropList, CdkDrag, MatSlideToggle, MatIcon],
+  imports: [CdkDropList, CdkDrag, MatSlideToggle, MatIcon, TranslocoModule],
 })
 export class StudyStepsComponent implements OnInit {
   steps: StudyFlowType[] = [];
@@ -32,6 +33,7 @@ export class StudyStepsComponent implements OnInit {
   sourceLanguage: string | null = null;
   translationLanguage: string | null = null;
   authService = inject(AuthService);
+  transloco = inject(TranslocoService);
 
   isPaid = false;
 
@@ -81,7 +83,8 @@ export class StudyStepsComponent implements OnInit {
   }
 
   getLabel(id: string): string {
-    return stepLabels[id] ?? 'Unknown step';
+    const key = stepLabelKeys[id];
+    return key ? this.transloco.translate(key) : id;
   }
 
   getPreviewUrl(step: StudyFlowType): string {

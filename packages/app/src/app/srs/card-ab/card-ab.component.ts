@@ -9,6 +9,7 @@ import {
 import { CardItem } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { ReverseFrontComponent } from '../reverse-front/reverse-front.component';
+import { TranslocoModule } from '@jsverse/transloco';
 import { shuffle } from 'lodash-es';
 import {
   animate,
@@ -21,7 +22,7 @@ import { hideAnimation } from '../hide-animation';
 
 @Component({
   selector: 'app-srs-card-ab',
-  imports: [ReverseFrontComponent],
+  imports: [ReverseFrontComponent, TranslocoModule],
   templateUrl: './card-ab.component.html',
   styleUrl: './card-ab.component.scss',
   animations: [

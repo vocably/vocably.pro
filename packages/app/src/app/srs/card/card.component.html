@@ -21,39 +21,52 @@
   <div class="control-elements">
     <button
       class="show-answer-button"
-      matTooltip="Space on the keyboard"
+      [matTooltip]="'srs.card.space_hint' | transloco"
       matTooltipPosition="above"
       (click)="onFlip()"
     >
-      {{ isFlipped ? 'Show the question' : 'Show the answer' }}
+      {{
+        isFlipped
+          ? ('srs.card.show_question' | transloco)
+          : ('srs.card.show_answer' | transloco)
+      }}
     </button>
     <div class="rate">
       <button
         class="button outline"
         (click)="userAnswer = 1"
-        matTooltip="Left arrow on the keyboard"
+        [matTooltip]="'srs.card.left_arrow' | transloco"
       >
-        <mat-icon aria-hidden="false" aria-label="Weak" inline="true"
+        <mat-icon
+          aria-hidden="false"
+          [attr.aria-label]="'srs.card.weak' | transloco"
+          inline="true"
           >close</mat-icon
-        ><span>Not yet</span>
+        ><span>{{ 'srs.card.not_yet' | transloco }}</span>
       </button>
       <button
         class="button outline"
         (click)="userAnswer = 3"
-        matTooltip="Bottom arrow on the keyboard"
+        [matTooltip]="'srs.card.down_arrow' | transloco"
       >
-        <mat-icon aria-hidden="false" aria-label="Somewhat" inline="true"
+        <mat-icon
+          aria-hidden="false"
+          [attr.aria-label]="'srs.card.somewhat' | transloco"
+          inline="true"
           >done</mat-icon
-        ><span>Almost</span>
+        ><span>{{ 'srs.card.almost' | transloco }}</span>
       </button>
       <button
         class="button outline"
         (click)="userAnswer = 5"
-        matTooltip="Right arrow on the keyboard"
+        [matTooltip]="'srs.card.right_arrow' | transloco"
       >
-        <mat-icon aria-hidden="false" aria-label="Strong" inline="true"
+        <mat-icon
+          aria-hidden="false"
+          [attr.aria-label]="'srs.card.strong' | transloco"
+          inline="true"
           >done_all</mat-icon
-        ><span>Got it</span>
+        ><span>{{ 'srs.card.got_it' | transloco }}</span>
       </button>
     </div>
   </div>
@@ -67,21 +80,21 @@
   >
     <mat-icon
       aria-hidden="false"
-      aria-label="Strong"
+      [attr.aria-label]="'srs.card.strong' | transloco"
       inline="true"
       class="operation-icon strong-icon"
       >done_all</mat-icon
     >
     <mat-icon
       aria-hidden="false"
-      aria-label="Somewhat"
+      [attr.aria-label]="'srs.card.somewhat' | transloco"
       inline="true"
       class="operation-icon somewhat-icon"
       >done</mat-icon
     >
     <mat-icon
       aria-hidden="false"
-      aria-label="Weak"
+      [attr.aria-label]="'srs.card.weak' | transloco"
       inline="true"
       class="operation-icon weak-icon"
       >close</mat-icon

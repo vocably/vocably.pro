@@ -1,12 +1,14 @@
-<h1 mat-dialog-title>Delete My Account</h1>
+<h1 mat-dialog-title>{{ 'settings.delete_dialog.title' | transloco }}</h1>
 <div mat-dialog-content>
   <p>
-    Are you sure you want to delete your account? This action cannot be undone.
+    {{ 'settings.delete_dialog.confirm' | transloco }}
   </p>
 </div>
 <mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="true" data-test="yes-please">
-    Yes
+    {{ 'settings.delete_dialog.yes' | transloco }}
   </button>
-  <button mat-button (click)="onNoClick()">No, thanks</button>
+  <button mat-button (click)="onNoClick()">
+    {{ 'settings.delete_dialog.no' | transloco }}
+  </button>
 </mat-dialog-actions>

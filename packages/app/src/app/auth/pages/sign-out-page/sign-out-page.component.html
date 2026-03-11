@@ -1,5 +1,7 @@
 <div class="container-xl top"><app-header></app-header></div>
 <div class="container bottom">
-  <p class="lead-3">You have been successfully signed out.</p>
-  <div><a href="/sign-in">Go to sign in page</a></div>
+  <p class="lead-3">{{ 'auth.sign_out.signed_out' | transloco }}</p>
+  <div>
+    <a href="/sign-in">{{ 'auth.sign_out.go_to_sign_in' | transloco }}</a>
+  </div>
 </div>

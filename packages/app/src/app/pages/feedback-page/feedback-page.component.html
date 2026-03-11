@@ -1,28 +1,27 @@
-<div class="container-xl top"><app-header title="Feedback"></app-header></div>
+<div class="container-xl top">
+  <app-header [title]="'feedback.title' | transloco"></app-header>
+</div>
 <div class="container bottom">
   <form (ngSubmit)="submitFeedback()" *ngIf="userData$ | async as useData">
     <p>
-      Are you missing any important features? Do you have questions, or would
-      you like to share your thoughts about Vocably? I'd love to hear from you!
+      {{ 'feedback.p1' | transloco }}
     </p>
     <p>
-      I respond to every user, and it usually takes me a couple of days to
-      reply.
+      {{ 'feedback.p2' | transloco }}
     </p>
     <p>
-      I will respond to you at your email address
+      {{ 'feedback.p3' | transloco }}
       <strong>{{ useData.email }}</strong
       >.
       <ng-container *ngIf="useData.email.includes('privaterelay')">
-        This seems like a secret Apple email you shared with me during
-        registration, but no worries; it should work just fine.
+        {{ 'feedback.apple_email' | transloco }}
       </ng-container>
     </p>
     <textarea
       class="form-control mb-1"
       name="feedback"
       style="height: 6rem"
-      placeholder="Please type your message here..."
+      [placeholder]="'feedback.placeholder' | transloco"
       [(ngModel)]="feedback"
     ></textarea>
     <div class="mb-1">
@@ -32,21 +31,20 @@
         class="button"
         [disabled]="feedback.trim() === '' || isSubmitting"
       >
-        Submit
+        {{ 'feedback.submit' | transloco }}
       </button>
       <ion-spinner *ngIf="isSubmitting" name="dots"></ion-spinner>
     </div>
     <div class="success" [class.expanded]="success">
       <div class="success-content">
-        Your message has been successfully sent. Here is what you sent:
+        {{ 'feedback.success' | transloco }}
         <pre style="margin: 1rem 0 0 0; white-space: pre-wrap">{{
           lastFeedback
         }}</pre>
       </div>
     </div>
     <div *ngIf="error" class="text-danger">
-      Unfortunately, we encountered an error while submitting your feedback.
-      Could you please try again later?
+      {{ 'feedback.error' | transloco }}
     </div>
   </form>
 </div>

@@ -1,9 +1,9 @@
 <h1 mat-dialog-title style="font-size: 100%">
-  Your cards have been imported successfully.
+  {{ 'import.success.title' | transloco }}
 </h1>
 <div mat-dialog-actions style="justify-content: flex-end">
   <button mat-button (click)="dialogRef.close('import-more')" type="button">
-    Import more cards
+    {{ 'import.success.import_more' | transloco }}
   </button>
   <button
     color="accent"
@@ -11,6 +11,6 @@
     (click)="dialogRef.close(); goToDeck()"
     cdkFocusInitial
   >
-    Go to your imported cards
+    {{ 'import.success.go_to_cards' | transloco }}
   </button>
 </div>

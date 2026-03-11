@@ -7,6 +7,7 @@ import {
   MatDialogContent,
   MatDialogTitle,
 } from '@angular/material/dialog';
+import { TranslocoModule } from '@jsverse/transloco';
 
 export interface AlertData {
   message: string;
@@ -23,6 +24,7 @@ export interface AlertData {
     MatDialogActions,
     MatButton,
     MatDialogClose,
+    TranslocoModule,
   ],
 })
 export class AlertComponent {

@@ -18,6 +18,7 @@ import {
 } from '@angular/core';
 
 import { MatIcon } from '@angular/material/icon';
+import { TranslocoModule } from '@jsverse/transloco';
 import { CardItem } from '@vocably/model';
 import { TextLengthDirective } from '../text-length.directive';
 import { SrsScore } from '@vocably/srs';
@@ -90,7 +91,7 @@ import { MatTooltip } from '@angular/material/tooltip';
       ]),
     ]),
   ],
-  imports: [TextLengthDirective, MatIcon, MatTooltip],
+  imports: [TextLengthDirective, MatIcon, MatTooltip, TranslocoModule],
 })
 export class CardComponent {
   @Input() card!: CardItem;

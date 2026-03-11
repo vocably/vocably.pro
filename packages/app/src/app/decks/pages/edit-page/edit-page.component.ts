@@ -2,6 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { deleteLanguageDeck } from '@vocably/api';
 import { byDate, CardItem, getFullLanguageName } from '@vocably/model';
@@ -25,6 +26,7 @@ import { EditCardComponent } from './edit-card/edit-card.component';
     RouterLink,
     NgFor,
     EditCardComponent,
+    TranslocoModule,
   ],
 })
 export class EditPageComponent implements OnInit, OnDestroy {

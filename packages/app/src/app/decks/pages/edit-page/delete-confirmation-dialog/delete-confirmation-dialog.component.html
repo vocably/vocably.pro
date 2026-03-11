@@ -1,10 +1,14 @@
-<h1 mat-dialog-title>Delete {{ data.fullLanguage }}?</h1>
+<h1 mat-dialog-title>
+  {{ 'decks.delete_dialog.title' | transloco: { language: data.fullLanguage } }}
+</h1>
 <div mat-dialog-content>
-  <p>This action cannot be undone.</p>
+  <p>{{ 'decks.delete_dialog.cannot_undo' | transloco }}</p>
 </div>
 <div mat-dialog-actions>
   <button mat-button [mat-dialog-close]="true" data-test="yes-please">
-    Yes
+    {{ 'decks.delete_dialog.yes' | transloco }}
   </button>
-  <button mat-button (click)="onNoClick()">No, thanks</button>
+  <button mat-button (click)="onNoClick()">
+    {{ 'decks.delete_dialog.no' | transloco }}
+  </button>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslocoModule } from '@jsverse/transloco';
 import { HeaderComponent } from '../../../header/header.component';
 import { DeckListStoreService } from '../../deck-list-store.service';
 
@@ -7,7 +8,7 @@ import { DeckListStoreService } from '../../deck-list-store.service';
   selector: 'app-no-decks-page',
   templateUrl: './no-decks-page.component.html',
   styleUrls: ['./no-decks-page.component.scss'],
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, TranslocoModule],
 })
 export class NoDecksPageComponent implements OnInit {
   constructor(

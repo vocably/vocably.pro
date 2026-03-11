@@ -2,7 +2,7 @@
   <app-srs-reverse-front
     class="srs-card-font"
     [card]="card"
-    expectedAction="Type in"
+    expectedAction="srs.reverse_front.type_in_the"
   ></app-srs-reverse-front>
   <div class="answer" [@shake]="wrong">
     @for (letterIndex of answer; track $index) {
@@ -36,7 +36,7 @@
       (click)="answerDisplayed = true"
       [disabled]="answerDisplayed"
     >
-      Show the answer
+      {{ 'srs.card.show_answer' | transloco }}
     </button>
   </div>
 </div>

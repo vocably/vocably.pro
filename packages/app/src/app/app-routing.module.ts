@@ -8,6 +8,7 @@ import {
   Routes,
   TitleStrategy,
 } from '@angular/router';
+import { TranslocoService } from '@jsverse/transloco';
 import posthog from 'posthog-js';
 import {
   autoSignInConfirmationPath,
@@ -30,14 +31,18 @@ export const autoSignInPath = 'hands-free';
 
 @Injectable()
 export class TemplatePageTitleStrategy extends TitleStrategy {
-  constructor(private readonly title: Title) {
+  constructor(
+    private readonly title: Title,
+    private readonly transloco: TranslocoService
+  ) {
     super();
   }
 
   override updateTitle(routerState: RouterStateSnapshot) {
-    const title = this.buildTitle(routerState);
-    if (title !== undefined) {
-      this.title.setTitle(`Vocably | ${title}`);
+    const titleKey = this.buildTitle(routerState);
+    if (titleKey !== undefined) {
+      const translatedTitle = this.transloco.translate(titleKey);
+      this.title.setTitle(`Vocably | ${translatedTitle}`);
     } else {
       this.title.setTitle('Vocably');
     }
@@ -85,12 +90,12 @@ const routes: Routes = [
   },
   {
     path: 'sign-in',
-    title: 'Sign In',
+    title: 'page.sign_in',
     component: SignInPageComponent,
   },
   {
     path: autoSignInPath,
-    title: 'Auto Sign In',
+    title: 'page.auto_sign_in',
     component: HandsFreePageComponent,
   },
   {
@@ -107,25 +112,25 @@ const routes: Routes = [
   },
   {
     path: 'settings/preview-study-step',
-    title: 'Preview Study Step',
+    title: 'page.preview_study_step',
     component: PreviewStudyStepPageComponent,
     canActivate: [CognitoAuthGuard],
   },
   {
     path: 'settings',
-    title: 'Settings',
+    title: 'page.settings',
     component: SettingsPageComponent,
     canActivate: [CognitoAuthGuard],
   },
   {
     path: 'feedback',
-    title: 'Feedback',
+    title: 'page.feedback',
     component: FeedbackPageComponent,
     canActivate: [CognitoAuthGuard],
   },
   {
     path: 'import',
-    title: 'Import Cards',
+    title: 'page.import_cards',
     component: ImportPageComponent,
     canActivate: [CognitoAuthGuard],
   },

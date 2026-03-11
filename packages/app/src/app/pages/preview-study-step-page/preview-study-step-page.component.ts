@@ -8,6 +8,7 @@ import {
   SrsScore,
 } from '@vocably/srs';
 import { MatIcon } from '@angular/material/icon';
+import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { CardSfComponent } from '../../srs/card-sf/card-sf.component';
 import { CardSbComponent } from '../../srs/card-sb/card-sb.component';
 import { CardMfComponent } from '../../srs/card-mf/card-mf.component';
@@ -18,12 +19,12 @@ import { IonicModule } from '@ionic/angular';
 
 type StepId = 'sf' | 'sb' | 'mf' | 'mb' | 'ab';
 
-const stepLabels: Record<StepId, string> = {
-  sf: 'Recall the correct translation',
-  sb: 'Recall the correct word or phrase',
-  mf: 'Choose the correct translation',
-  mb: 'Choose the correct word or phrase',
-  ab: 'Arrange the correct word or phrase by letters',
+const stepLabelKeys: Record<StepId, string> = {
+  sf: 'settings.study_steps.sf',
+  sb: 'settings.study_steps.sb',
+  mf: 'settings.study_steps.mf',
+  mb: 'settings.study_steps.mb',
+  ab: 'settings.study_steps.ab',
 };
 
 @Component({
@@ -39,6 +40,7 @@ const stepLabels: Record<StepId, string> = {
     CardMbComponent,
     CardAbComponent,
     IonicModule,
+    TranslocoModule,
   ],
 })
 export class PreviewStudyStepPageComponent implements OnInit {
@@ -52,7 +54,10 @@ export class PreviewStudyStepPageComponent implements OnInit {
 
   private allCards: CardItem[] = [];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private transloco: TranslocoService
+  ) {}
 
   async ngOnInit() {
     const params = this.route.snapshot.queryParams;
@@ -76,7 +81,8 @@ export class PreviewStudyStepPageComponent implements OnInit {
     }
 
     this.step = step;
-    this.stepLabel = stepLabels[step] ?? step;
+    const labelKey = stepLabelKeys[step];
+    this.stepLabel = labelKey ? this.transloco.translate(labelKey) : step;
 
     const result = await publicPredefinedOptions(
       sourceLanguage,
