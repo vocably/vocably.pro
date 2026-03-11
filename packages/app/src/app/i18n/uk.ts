@@ -338,4 +338,12 @@ export const uk = {
 
   // Back Button
   'back_button.back': 'Назад',
+
+  // Page Titles
+  'page.sign_in': 'Увійти',
+  'page.auto_sign_in': 'Автоматичний вхід',
+  'page.preview_study_step': 'Попередній перегляд кроку навчання',
+  'page.settings': 'Налаштування',
+  'page.feedback': "Зворотний зв'язок",
+  'page.import_cards': 'Імпорт карток',
 };

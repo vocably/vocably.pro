@@ -339,4 +339,12 @@ export const ru = {
 
   // Back Button
   'back_button.back': 'Назад',
+
+  // Page Titles
+  'page.sign_in': 'Войти',
+  'page.auto_sign_in': 'Автоматический вход',
+  'page.preview_study_step': 'Предпросмотр шага обучения',
+  'page.settings': 'Настройки',
+  'page.feedback': 'Обратная связь',
+  'page.import_cards': 'Импорт карточек',
 };

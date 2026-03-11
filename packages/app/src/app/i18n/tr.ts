@@ -339,4 +339,12 @@ export const tr = {
 
   // Back Button
   'back_button.back': 'Geri',
+
+  // Page Titles
+  'page.sign_in': 'Giriş Yap',
+  'page.auto_sign_in': 'Otomatik Giriş',
+  'page.preview_study_step': 'Çalışma Adımını Önizle',
+  'page.settings': 'Ayarlar',
+  'page.feedback': 'Geri Bildirim',
+  'page.import_cards': 'Kart İçe Aktar',
 };

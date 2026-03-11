@@ -329,4 +329,12 @@ export const en = {
 
   // Back Button
   'back_button.back': 'Back',
+
+  // Page Titles
+  'page.sign_in': 'Sign In',
+  'page.auto_sign_in': 'Auto Sign In',
+  'page.preview_study_step': 'Preview Study Step',
+  'page.settings': 'Settings',
+  'page.feedback': 'Feedback',
+  'page.import_cards': 'Import Cards',
 };

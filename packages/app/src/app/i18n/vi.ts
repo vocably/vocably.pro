@@ -328,4 +328,12 @@ export const vi = {
 
   // Back Button
   'back_button.back': 'Quay lại',
+
+  // Page Titles
+  'page.sign_in': 'Đăng nhập',
+  'page.auto_sign_in': 'Đăng nhập tự động',
+  'page.preview_study_step': 'Xem trước bước học',
+  'page.settings': 'Cài đặt',
+  'page.feedback': 'Phản hồi',
+  'page.import_cards': 'Nhập thẻ',
 };
