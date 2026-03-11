@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
@@ -34,6 +35,7 @@ import { StudyStepsComponent } from './study-steps/study-steps.component';
     MatIcon,
     MatSliderModule,
     MatCheckboxModule,
+    MatSelectModule,
     FormsModule,
     AppQrCodeComponent,
     StudyStepsComponent,

@@ -15,14 +15,16 @@
       <div style="margin: 0">
         {{ 'settings.interface_language' | transloco }}:
       </div>
-      <select
-        [(ngModel)]="interfaceLanguage"
-        (ngModelChange)="onInterfaceLanguageChange($event)"
-      >
-        @for (lang of languages; track lang.value) {
-          <option [value]="lang.value">{{ lang.label }}</option>
-        }
-      </select>
+      <mat-form-field appearance="outline" nolabel>
+        <mat-select
+          [(ngModel)]="interfaceLanguage"
+          (ngModelChange)="onInterfaceLanguageChange($event)"
+        >
+          @for (lang of languages; track lang.value) {
+            <mat-option [value]="lang.value">{{ lang.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <mat-divider style="margin: 4rem 0"></mat-divider>
