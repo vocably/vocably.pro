@@ -143,7 +143,8 @@ export const en = {
 
   // Membership Selector
   'membership_selector.title': 'Vocably Premium',
-  'membership_selector.subtitle': 'Created for active language users',
+  'membership_selector.subtitle':
+    'Created for people who learn languages through active use',
   'membership_selector.feature1.title': 'See a new word in a desktop browser?',
   'membership_selector.feature1.desc1':
     'Use Chrome or Safari extensions to quickly select, translate, and generate flashcards with a single click.',
@@ -167,7 +168,7 @@ export const en = {
   'membership_selector.feature6.title':
     'All of your cards are saved in the cloud',
   'membership_selector.feature6.desc':
-    'You can study them using an integrated SRS system on any of your mobile devices (iOS or Android).',
+    'You can study them using an integrated SRS system on any of your mobile devices (iOS or Android), as well as directly in a web browser.',
   'membership_selector.comparison_title':
     'Difference between the Free and Premium',
   'membership_selector.unlimited_translations': 'Unlimited translations',

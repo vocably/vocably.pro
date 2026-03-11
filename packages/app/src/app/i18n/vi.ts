@@ -141,7 +141,8 @@ export const vi = {
 
   // Membership Selector
   'membership_selector.title': 'Vocably Premium',
-  'membership_selector.subtitle': 'Tạo ra cho người học ngôn ngữ tích cực',
+  'membership_selector.subtitle':
+    'Tạo ra cho những người học ngôn ngữ qua việc sử dụng tích cực',
   'membership_selector.feature1.title':
     'Gặp từ mới khi duyệt web trên máy tính?',
   'membership_selector.feature1.desc1':
@@ -166,7 +167,7 @@ export const vi = {
   'membership_selector.feature6.title':
     'Tất cả thẻ của bạn được lưu trên đám mây',
   'membership_selector.feature6.desc':
-    'Bạn có thể học chúng bằng hệ thống lặp lại ngắt quãng tích hợp trên bất kỳ thiết bị di động nào (iOS hoặc Android).',
+    'Bạn có thể học chúng bằng hệ thống lặp lại ngắt quãng tích hợp trên bất kỳ thiết bị di động nào (iOS hoặc Android), cũng như trực tiếp trên trình duyệt web.',
   'membership_selector.comparison_title':
     'Sự khác biệt giữa phiên bản Miễn phí và Premium',
   'membership_selector.unlimited_translations': 'Dịch không giới hạn',

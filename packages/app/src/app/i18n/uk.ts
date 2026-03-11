@@ -146,7 +146,8 @@ export const uk = {
 
   // Membership Selector
   'membership_selector.title': 'Vocably Premium',
-  'membership_selector.subtitle': 'Створено для активних вивчаючих мови',
+  'membership_selector.subtitle':
+    'Створено для людей, які вивчають мову через активне використання',
   'membership_selector.feature1.title':
     "Побачили нове слово в браузері на комп'ютері?",
   'membership_selector.feature1.desc1':
@@ -172,7 +173,7 @@ export const uk = {
     'Натисніть на будь-яке слово в електронній книзі, щоб побачити переклад і зберегти його як картку.',
   'membership_selector.feature6.title': 'Усі ваші картки зберігаються в хмарі',
   'membership_selector.feature6.desc':
-    'Ви можете вивчати їх за допомогою вбудованої системи інтервального повторення на будь-якому мобільному пристрої (iOS або Android).',
+    'Ви можете вивчати їх за допомогою вбудованої системи інтервального повторення на будь-якому мобільному пристрої (iOS або Android), а також безпосередньо у веб-браузері.',
   'membership_selector.comparison_title':
     'Різниця між безкоштовною та Premium версіями',
   'membership_selector.unlimited_translations': 'Необмежені переклади',

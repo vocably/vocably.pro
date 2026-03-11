@@ -148,7 +148,8 @@ export const tr = {
 
   // Membership Selector
   'membership_selector.title': 'Vocably Premium',
-  'membership_selector.subtitle': 'Aktif dil öğrenicileri için oluşturuldu',
+  'membership_selector.subtitle':
+    'Aktif kullanım yoluyla dil öğrenen kişiler için oluşturuldu',
   'membership_selector.feature1.title':
     'Masaüstü tarayıcıda yeni bir kelime mi gördünüz?',
   'membership_selector.feature1.desc1':
@@ -174,7 +175,7 @@ export const tr = {
     'E-kitapta herhangi bir kelimeyi tıklayın, çevirisini görün ve yüksek kaliteli flash kart olarak kaydedin.',
   'membership_selector.feature6.title': 'Tüm kartlarınız bulutta kaydedilir',
   'membership_selector.feature6.desc':
-    'Bunları herhangi bir mobil cihazınızda (iOS veya Android) entegre SRS sistemi ile çalışabilirsiniz.',
+    'Bunları herhangi bir mobil cihazınızda (iOS veya Android) entegre SRS sistemi ile çalışabilir, ayrıca doğrudan bir web tarayıcısında da inceleyebilirsiniz.',
   'membership_selector.comparison_title': 'Ücretsiz ve Premium arasındaki fark',
   'membership_selector.unlimited_translations': 'Sınırsız çeviri',
   'membership_selector.unlimited_collections': 'Sınırsız kart koleksiyonu',

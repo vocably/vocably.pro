@@ -147,7 +147,8 @@ export const ru = {
 
   // Membership Selector
   'membership_selector.title': 'Vocably Premium',
-  'membership_selector.subtitle': 'Создан для активных изучающих языки',
+  'membership_selector.subtitle':
+    'Создан для людей, изучающих язык через активное использование',
   'membership_selector.feature1.title':
     'Увидели новое слово в браузере на компьютере?',
   'membership_selector.feature1.desc1':
@@ -172,7 +173,7 @@ export const ru = {
     'Нажмите на любое слово в электронной книге, чтобы увидеть перевод и сохранить его как карточку.',
   'membership_selector.feature6.title': 'Все ваши карточки хранятся в облаке',
   'membership_selector.feature6.desc':
-    'Вы можете изучать их с помощью встроенной системы интервального повторения на любом мобильном устройстве (iOS или Android).',
+    'Вы можете изучать их с помощью встроенной системы интервального повторения на любом мобильном устройстве (iOS или Android), а так же прямо в веб браузере.',
   'membership_selector.comparison_title':
     'Разница между бесплатной и Premium версиями',
   'membership_selector.unlimited_translations': 'Неограниченные переводы',
