@@ -1,12 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import { usePostHog } from 'posthog-react-native';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { OfferingId, presentPaywall } from './presentPaywall';
+import { UserMetadataContext } from './UserMetadataContainer';
 
 export const usePresentPaywall = () => {
   const navigation = useNavigation();
   const paywallIsPresentRef = useRef(false);
   const posthog = usePostHog();
+
+  const { userStaticMetadata } = useContext(UserMetadataContext);
 
   return async (offeringId: OfferingId = 'mobile-premium') => {
     if (paywallIsPresentRef.current) {
@@ -16,7 +19,10 @@ export const usePresentPaywall = () => {
     paywallIsPresentRef.current = true;
 
     posthog.capture('paywall-showed', { offeringId });
-    const isPaid = await presentPaywall(offeringId);
+    const isPaid = await presentPaywall(offeringId, {
+      maxCardsInCollection: userStaticMetadata.max_cards,
+      maxCardsPerDay: userStaticMetadata.cards_per_day,
+    });
     posthog.capture('paywall-closed', { offeringId, isPaid });
     paywallIsPresentRef.current = false;
 
