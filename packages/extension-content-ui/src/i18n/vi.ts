@@ -27,9 +27,9 @@ export const vi = {
   'translation.i_speak': 'Tôi nói',
   'translation.free_plan': 'Gói miễn phí',
   'translation.free_plan_limit':
-    '{plan} cho phép lưu miễn phí tối đa {count} thẻ.',
+    '{plan} cho phép có tối đa {count} thẻ trong bộ sưu tập của bạn.',
   'translation.per_day':
-    'Sau khi đạt giới hạn, bạn có thể lưu {count} thẻ mỗi ngày.',
+    'Sau khi đạt giới hạn, bạn có thể lưu tối đa {count} thẻ mỗi ngày.',
   'translation.upgrade': 'Nâng cấp lên Premium',
   // search-form
   'search.i_study': 'Tôi học',

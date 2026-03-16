@@ -28,9 +28,9 @@ export const tr = {
   'translation.i_speak': 'Çeviri Dili:',
   'translation.free_plan': 'Ücretsiz Plan',
   'translation.free_plan_limit':
-    '{plan}, {count} kartı ücretsiz olarak kaydetmenize izin verir.',
+    '{plan}, koleksiyonunuzda {count} kartınız olmasına izin verir.',
   'translation.per_day':
-    'Limite ulaştıktan sonra günde {count} kart kaydedebilirsiniz.',
+    'Limite ulaştıktan sonra günde en fazla {count} kart kaydedebilirsiniz.',
   'translation.upgrade': "Premium'a yükselt",
   // search-form
   'search.i_study': 'Çalışılan Dil:',

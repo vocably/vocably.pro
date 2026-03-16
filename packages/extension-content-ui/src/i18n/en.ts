@@ -28,9 +28,9 @@ export const en = {
   'translation.i_speak': 'I speak',
   'translation.free_plan': 'Free Plan',
   'translation.free_plan_limit':
-    'The {plan} allows to freely save up to {count} cards.',
+    'The {plan} allows to have up to {count} cards in your collection.',
   'translation.per_day':
-    'After you reached the limit, you can save {count} cards per day.',
+    'After you reached the limit, you can save no more than {count} cards per day.',
   'translation.upgrade': 'Upgrade to Premium',
   // search-form
   'search.i_study': 'I study',

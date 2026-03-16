@@ -28,9 +28,9 @@ export const uk = {
   'translation.i_speak': 'Переклад:',
   'translation.free_plan': 'Безкоштовний план',
   'translation.free_plan_limit':
-    '{plan} дозволяє безкоштовно зберігати до {count} карток.',
+    '{plan} дозволяє мати до {count} карток у своїй колекції.',
   'translation.per_day':
-    'Після досягнення ліміту можна зберігати {count} карток на день.',
+    'Після досягнення ліміту можна зберігати не більше {count} карток на день.',
   'translation.upgrade': 'Перейти на Premium',
   // search-form
   'search.i_study': 'Я вивчаю:',
