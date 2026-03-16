@@ -18,6 +18,7 @@ import {
   AudioPronunciationPayload,
   Card,
   CardItem,
+  CardsLimit,
   DeleteTagPayload,
   DetachTagPayload,
   GoogleLanguage,
@@ -35,7 +36,6 @@ import {
   UpdateCardPayload,
   UpdateTagPayload,
 } from '@vocably/model';
-import { isToday } from '@vocably/sulna';
 import showdown from 'showdown';
 import { subscribeToLocale, t } from '../../i18n';
 import { getSelectedTagIds } from './getSelectedTagIds';
@@ -102,7 +102,7 @@ export class VocablyTranslation {
   @Prop({ mutable: true }) disabled = false;
   @Prop() showLanguages: boolean = true;
   @Prop() hideChatGpt: boolean = false;
-  @Prop() maxCards: number | 'unlimited' = 'unlimited';
+  @Prop() cardsLimit: CardsLimit = 'unlimited';
   @Prop() paymentLink: string = '';
   @Prop() explanation: ComponentExplanationState = { state: 'none' };
   @Prop() explanationAnimationDelay = 0;
@@ -424,14 +424,14 @@ export class VocablyTranslation {
       this.result.value.aiThinksItIs;
 
     const canAdd =
-      this.maxCards === 'unlimited' ||
+      this.cardsLimit === 'unlimited' ||
       !this.paymentLink ||
       (this.result &&
         this.result.success &&
-        this.result.value.collectionLength < this.maxCards) ||
+        this.result.value.collectionLength < this.cardsLimit.maxCards) ||
       (this.result &&
         this.result.success &&
-        !isToday(this.result.value.lastAdded));
+        this.cardsLimit.cardsPerDay > this.result.value.addedToday);
 
     const isOkayToAskForRating = this.askForRating && canAdd;
 
@@ -522,7 +522,7 @@ export class VocablyTranslation {
               )}
               {this.result.value.cards.map((card, itemIndex, cardsArray) => (
                 <Fragment>
-                  {!canAdd && (
+                  {!canAdd && this.cardsLimit !== 'unlimited' && (
                     <div
                       class={{
                         'max-limit-1': true,
@@ -534,10 +534,14 @@ export class VocablyTranslation {
                           <div>
                             {t('translation.free_plan_limit', {
                               plan: t('translation.free_plan'),
-                              count: this.maxCards,
+                              count: this.cardsLimit.maxCards,
                             })}
                           </div>
-                          <div>{t('translation.one_per_day')}</div>
+                          <div>
+                            {t('translation.per_day', {
+                              count: this.cardsLimit.cardsPerDay,
+                            })}
+                          </div>
                           <a
                             href={this.paymentLink}
                             target="_blank"

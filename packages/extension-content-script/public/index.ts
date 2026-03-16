@@ -64,28 +64,31 @@ registerContentScript({
     analyze: (payload) => {
       console.info('Analyze request', payload);
       return new Promise((resolve) => {
-        setTimeout(() => {
-          const result = JSON.parse(
-            (document.getElementById('response') as HTMLTextAreaElement).value
-          );
+        setTimeout(
+          () => {
+            const result = JSON.parse(
+              (document.getElementById('response') as HTMLTextAreaElement).value
+            );
 
-          if (result.success === false) {
+            if (result.success === false) {
+              resolve(result);
+              return;
+            }
+
+            if (payload.sourceLanguage) {
+              result.value.translation.sourceLanguage = payload.sourceLanguage;
+            }
+
+            // @ts-ignore
+            result.value.translation.source = payload.source;
+
+            result.value.tags = tags;
+            result.value.addedToday = 3;
+
             resolve(result);
-            return;
-          }
-
-          if (payload.sourceLanguage) {
-            result.value.translation.sourceLanguage = payload.sourceLanguage;
-          }
-
-          // @ts-ignore
-          result.value.translation.source = payload.source;
-
-          result.value.tags = tags;
-          result.value.lastAdded = new Date().getTime();
-
-          resolve(result);
-        }, parseInt((document.getElementById('delay') as HTMLInputElement).value));
+          },
+          parseInt((document.getElementById('delay') as HTMLInputElement).value)
+        );
       });
     },
     explain: (payload) => {
@@ -241,6 +244,7 @@ registerContentScript({
           ).checked,
 
           autodetectLanguage: false,
+          locale: 'en',
         });
       }),
 
@@ -377,12 +381,15 @@ registerContentScript({
           });
         }, 1000)
       ),
-    getMaxCards: () => {
+    getCardsLimit: () => {
       return new Promise((resolve) =>
         setTimeout(() => {
           resolve(
             (document.getElementById('limitCards') as HTMLInputElement).checked
-              ? 50
+              ? {
+                  maxCards: 50,
+                  cardsPerDay: 1,
+                }
               : 'unlimited'
           );
         }, 200)

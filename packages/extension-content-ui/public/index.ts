@@ -62,7 +62,7 @@ const simpletonTranslationResult: Result<TranslationCards> = {
     ],
     tags: [],
     collectionLength: 50,
-    lastAdded: new Date().getTime(),
+    addedToday: 6,
   },
 };
 
@@ -94,7 +94,7 @@ const successfulTranslationResult: Result<TranslationCards> = {
   success: true,
   value: {
     collectionLength: 50,
-    lastAdded: 0,
+    addedToday: 0,
     explanation: '',
     source: 'gemaakt',
     sourceLanguage: 'nl',
@@ -150,7 +150,7 @@ const englishTranslationResult: Result<TranslationCards> = {
   success: true,
   value: {
     collectionLength: 50,
-    lastAdded: 0,
+    addedToday: 0,
     explanation: '',
     cards: [
       {
@@ -281,7 +281,10 @@ paywallTranslation.extensionPlatform = {
   paymentLink: 'web',
 };
 paywallTranslation.paymentLink = 'https://app.vocably.pro/subscribe';
-paywallTranslation.maxCards = 50;
+paywallTranslation.cardsLimit = {
+  maxCards: 50,
+  cardsPerDay: 1,
+};
 
 // ---
 

@@ -29,8 +29,8 @@ export const tr = {
   'translation.free_plan': 'Ücretsiz Plan',
   'translation.free_plan_limit':
     '{plan}, {count} kartı ücretsiz olarak kaydetmenize izin verir.',
-  'translation.one_per_day':
-    'Limite ulaştıktan sonra günde bir kart kaydedebilirsiniz.',
+  'translation.per_day':
+    'Limite ulaştıktan sonra günde {count} kart kaydedebilirsiniz.',
   'translation.upgrade': "Premium'a yükselt",
   // search-form
   'search.i_study': 'Çalışılan Dil:',
@@ -42,14 +42,6 @@ export const tr = {
     '{language} dilinde kelime veya cümle girin. {source} kartları oluşturulacak.',
   'search.hint':
     'Herhangi bir dilde kelime veya cümle girin. Vocably sizin için {language} kartları oluşturacak.',
-  // card-counter-explanation
-  'counter.free_plan': 'Ücretsiz Plan',
-  'counter.limit_message':
-    '{plan}, {count} karta kadar kaydetmenize izin verir.',
-  'counter.one_per_day':
-    'Limite ulaştıktan sonra günde bir kart kaydedebilirsiniz.',
-  'counter.upgrade': 'Premium Plana yükselt',
-  'counter.close': 'Kapat',
   // rate
   'rate.tagline':
     'Bir dakikadan az sürer, ancak Vocably için çok şey ifade eder.',

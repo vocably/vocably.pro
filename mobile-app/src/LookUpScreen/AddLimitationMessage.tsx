@@ -1,15 +1,16 @@
-import { CardItem } from '@vocably/model';
+import { CardItem, CardsLimit } from '@vocably/model';
 import { FC, useState } from 'react';
 import { Linking, View } from 'react-native';
 import { Button, Dialog, Portal, Text, useTheme } from 'react-native-paper';
 import { mainPadding } from '../styles';
 import { usePresentPaywall } from '../usePresentPaywall';
+import { plural } from '../plural';
 
 type Props = {
   leftInset: number;
   rightInset: number;
   cards: CardItem[];
-  maxCards: number | 'unlimited';
+  maxCards: CardsLimit;
   isSharedLookup: boolean;
 };
 
@@ -71,15 +72,15 @@ export const AddLimitationMessage: FC<Props> = ({
       >
         <Text>
           Your collection has
-          {cards.length > maxCards ? ' more  than' : ''}{' '}
+          {cards.length > maxCards.maxCards ? ' more  than' : ''}{' '}
           <Text style={{ fontWeight: 'bold', color: theme.colors.secondary }}>
-            {maxCards}
+            {maxCards.maxCards}
           </Text>{' '}
           cards. Now you can save{' '}
           <Text style={{ fontWeight: 'bold', color: theme.colors.secondary }}>
-            one card per day
-          </Text>
-          .
+            {plural(maxCards.cardsPerDay, 'card', true)} per day.
+          </Text>{' '}
+          Premium users don't have this limit.
         </Text>
         <Button mode="contained" onPress={upgradeClick}>
           Upgrade to Premium

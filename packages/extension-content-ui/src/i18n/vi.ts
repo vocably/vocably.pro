@@ -28,8 +28,8 @@ export const vi = {
   'translation.free_plan': 'Gói miễn phí',
   'translation.free_plan_limit':
     '{plan} cho phép lưu miễn phí tối đa {count} thẻ.',
-  'translation.one_per_day':
-    'Sau khi đạt giới hạn, bạn có thể lưu một thẻ mỗi ngày.',
+  'translation.per_day':
+    'Sau khi đạt giới hạn, bạn có thể lưu {count} thẻ mỗi ngày.',
   'translation.upgrade': 'Nâng cấp lên Premium',
   // search-form
   'search.i_study': 'Tôi học',
@@ -41,13 +41,6 @@ export const vi = {
     'Nhập từ hoặc cụm từ {language} tại đây. Thẻ {source} sẽ được tạo.',
   'search.hint':
     'Nhập bất kỳ từ hoặc cụm từ nào. Vocably sẽ tạo thẻ {language} cho bạn.',
-  // card-counter-explanation
-  'counter.free_plan': 'Gói miễn phí',
-  'counter.limit_message': '{plan} cho phép lưu tối đa {count} thẻ.',
-  'counter.one_per_day':
-    'Sau khi đạt giới hạn, bạn có thể lưu một thẻ mỗi ngày.',
-  'counter.upgrade': 'Nâng cấp lên Premium',
-  'counter.close': 'Đóng',
   // rate
   'rate.tagline':
     'Chỉ mất chưa đến một phút, nhưng sẽ có ý nghĩa rất lớn với Vocably.',

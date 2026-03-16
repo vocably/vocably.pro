@@ -133,7 +133,7 @@ const createTranslationCards = (
       })),
       explanation: '',
       collectionLength: 0,
-      lastAdded: 0,
+      addedToday: 0,
     },
   };
 };

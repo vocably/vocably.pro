@@ -47,6 +47,13 @@ const userStaticMetadata = JSON.parse(metadataJson);
 
 set(userStaticMetadata, 'max_cards', maxCards);
 
+if (process.argv[4]) {
+  const cardsPerDay = Number(process.argv[4]);
+  if (cardsPerDay) {
+    set(userStaticMetadata, 'cards_per_day', cardsPerDay);
+  }
+}
+
 console.log(
   'User static metadata',
   inspect(userStaticMetadata, { depth: null })

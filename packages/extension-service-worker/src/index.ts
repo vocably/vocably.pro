@@ -25,7 +25,7 @@ import {
   onGetInternalSourceLanguage,
   onGetLanguagePairs,
   onGetLocationLanguageRequest,
-  onGetMaxCardsRequest,
+  onGetCardsLimitRequest,
   onGetProxyLanguage,
   onGetSettingsRequest,
   onGetSourceLanguage,
@@ -67,7 +67,7 @@ import {
   TranslationCard,
   TranslationCards,
 } from '@vocably/model';
-import { buildTagMap, getLastAdded } from '@vocably/model-operations';
+import { buildTagMap, getAddedToday } from '@vocably/model-operations';
 import { createSrsItem } from '@vocably/srs';
 import { get, isEqual, uniq } from 'lodash-es';
 import posthog from 'posthog-js/dist/module.no-external';
@@ -80,7 +80,7 @@ import {
 import { browserEnv, hasOffscreen } from './browserEnv';
 import { createTranslationCards } from './createTranslationCards';
 import './fixAuth';
-import { getMaxCards } from './getMaxCards';
+import { getCardsLimit } from './getCardsLimit';
 import { getUserAttributes } from './getUserAttributes';
 import { addLanguage, getUserLanguages, removeLanguage } from './languageList';
 import { getLastUsedTagsIds, saveLastUsedTagsIds } from './lastUsedTagsIds';
@@ -147,8 +147,8 @@ export const registerServiceWorker = (
       registerServiceWorkerOptions.facility === 'ios-safari'
         ? 'ios-safari-extension'
         : browserEnv.runtime.getURL('/').startsWith('chrome-extension:')
-        ? 'chrome-extension'
-        : 'safari-extension';
+          ? 'chrome-extension'
+          : 'safari-extension';
 
     postOnboardingAction({
       name: 'userLoggedIn',
@@ -207,11 +207,11 @@ export const registerServiceWorker = (
     return sendResponse(isEligibleForTrial(userData));
   });
 
-  onGetMaxCardsRequest(async (sendResponse) => {
+  onGetCardsLimitRequest(async (sendResponse) => {
     if (registerServiceWorkerOptions.unlimitedMaxCards) {
       return sendResponse('unlimited');
     }
-    return sendResponse(await getMaxCards());
+    return sendResponse(await getCardsLimit());
   });
 
   onGetUserEmail(async (sendResponse) => {
@@ -316,7 +316,10 @@ export const registerServiceWorker = (
         aiThinksItIs: analysisResult.value.aiThinksItIs,
         tags: loadLanguageDeckResult.value.tags,
         collectionLength: loadLanguageDeckResult.value.cards.length,
-        lastAdded: getLastAdded(loadLanguageDeckResult.value.cards),
+        addedToday: getAddedToday(
+          loadLanguageDeckResult.value.cards,
+          new Date()
+        ).length,
       };
 
       addLanguage(value.sourceLanguage);
@@ -368,7 +371,8 @@ export const registerServiceWorker = (
             : item
         ),
         collectionLength: getLanguageDeckResult.value.cards.length,
-        lastAdded: getLastAdded(getLanguageDeckResult.value.cards),
+        addedToday: getAddedToday(getLanguageDeckResult.value.cards, new Date())
+          .length,
       },
     });
   });
@@ -417,7 +421,8 @@ export const registerServiceWorker = (
           isEqual(item, payload.card) ? addedCard : item
         ),
         collectionLength: getLanguageDeckResult.value.cards.length,
-        lastAdded: getLastAdded(getLanguageDeckResult.value.cards),
+        addedToday: getAddedToday(getLanguageDeckResult.value.cards, new Date())
+          .length,
       },
     });
   });

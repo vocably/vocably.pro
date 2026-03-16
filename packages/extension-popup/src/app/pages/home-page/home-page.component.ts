@@ -19,6 +19,7 @@ import {
   TranslationCards,
   UpdateCardPayload,
   UpdateTagPayload,
+  CardsLimit,
 } from '@vocably/model';
 import { first, isString } from 'lodash-es';
 import { environment } from '../../../environments/environment';
@@ -38,7 +39,10 @@ export class HomePageComponent implements OnInit {
   isSearching: boolean = false;
   isTranslationLoading: boolean = false;
   searchResult: Result<TranslationCards> | null = null;
-  maxCards: number | 'unlimited' = 50;
+  cardsLimit: CardsLimit = {
+    maxCards: 50,
+    cardsPerDay: 1,
+  };
   paymentLink: string = '';
   extensionPlatform = detectExtensionPlatform();
   askForRating: boolean = false;
@@ -126,7 +130,7 @@ export class HomePageComponent implements OnInit {
 
     this.isSearching = true;
 
-    const [analyzeResult, maxCards] = await Promise.all([
+    const [analyzeResult, cardsLimit] = await Promise.all([
       environment.analyze(
         values.isReversed
           ? {
@@ -142,11 +146,11 @@ export class HomePageComponent implements OnInit {
               initiator: 'popup',
             }
       ),
-      environment.getMaxCards(),
+      environment.getCardsLimit(),
     ]);
 
     this.searchResult = analyzeResult;
-    this.maxCards = maxCards;
+    this.cardsLimit = cardsLimit;
 
     if (analyzeResult.success === true) {
       environment

@@ -1,9 +1,17 @@
+export type CardsLimit =
+  | {
+      maxCards: number;
+      cardsPerDay: number;
+    }
+  | 'unlimited';
+
 export type UserStaticMetadata = {
   premium: boolean;
   premium_status: string;
   premium_last_event_ms: number;
   premium_expiration_at_ms: number | null;
   max_cards: number;
+  cards_per_day: number;
   thanks_trial: 'none' | 'one-year';
   management_url: string | null;
 };
@@ -14,6 +22,7 @@ export const defaultUserStaticMetadata: UserStaticMetadata = {
   premium_expiration_at_ms: null,
   premium_last_event_ms: 0,
   max_cards: 300,
+  cards_per_day: 1,
   thanks_trial: 'none',
   management_url: null,
 };

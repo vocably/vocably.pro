@@ -10,7 +10,7 @@ import {
   getAudioPronunciation,
   getInternalSourceLanguage,
   getLanguagePairs,
-  getMaxCards,
+  getCardsLimit,
   getSettings,
   isLoggedIn,
   removeCard,
@@ -112,7 +112,7 @@ const mockAnalyze: typeof analyze = async () => {
       tags: [],
       explanation: 'Explanation example',
       collectionLength: 49,
-      lastAdded: new Date().getTime(),
+      addedToday: 4,
     },
   };
 };
@@ -298,9 +298,12 @@ const saveAskForRatingResponseMock: typeof saveAskForRatingResponse = async (
   await timeout(500);
 };
 
-const getMaxCardsMock: typeof getMaxCards = async () => {
+const getCardsLimitMock: typeof getCardsLimit = async () => {
   await timeout(500);
-  return 50;
+  return {
+    maxCards: 50,
+    cardsPerDay: 1,
+  };
 };
 
 export const environment = merge(environmentLocal, {
@@ -322,5 +325,5 @@ export const environment = merge(environmentLocal, {
   updateCard: mockUpdateCard,
   askForRating: askForRatingMock,
   saveAskForRatingResponse: saveAskForRatingResponseMock,
-  getMaxCards: getMaxCardsMock,
+  getCardsLimit: getCardsLimitMock,
 });

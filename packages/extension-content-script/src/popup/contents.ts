@@ -71,7 +71,7 @@ export const setContents = async ({
     }: AnalyzePayload = {}) => {
       translation.loading = true;
 
-      const [translationResult, maxCards] = await Promise.all([
+      const [translationResult, cardsLimit] = await Promise.all([
         api.analyze({
           source,
           // @ts-ignore
@@ -80,10 +80,10 @@ export const setContents = async ({
           context,
           initiator: initiator ?? 'content-script',
         }),
-        api.getMaxCards(),
+        api.getCardsLimit(),
       ]);
 
-      translation.maxCards = maxCards;
+      translation.cardsLimit = cardsLimit;
       translation.loading = false;
 
       if (translationResult.success === false) {
@@ -185,9 +185,9 @@ export const setContents = async ({
 
     translation.addEventListener('watchMePaying', () => {
       waitForPaymentIntervalId = setInterval(async () => {
-        const maxCards = await api.getMaxCards();
-        translation.maxCards = maxCards;
-        if (maxCards === 'unlimited') {
+        const cardsLimit = await api.getCardsLimit();
+        translation.cardsLimit = cardsLimit;
+        if (cardsLimit === 'unlimited') {
           clearInterval(waitForPaymentIntervalId);
           waitForPaymentIntervalId = undefined;
         }

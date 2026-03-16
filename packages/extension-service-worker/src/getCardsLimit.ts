@@ -1,8 +1,9 @@
 import { Auth } from '@aws-amplify/auth';
 import { getUserStaticMetadata } from '@vocably/api';
 import { get } from 'lodash-es';
+import { CardsLimit } from '@vocably/model';
 
-export const getMaxCards = async (): Promise<number | 'unlimited'> => {
+export const getCardsLimit = async (): Promise<CardsLimit> => {
   const user = await Auth.currentAuthenticatedUser().catch(() => false);
 
   if (!user) {
@@ -29,5 +30,8 @@ export const getMaxCards = async (): Promise<number | 'unlimited'> => {
     return 'unlimited';
   }
 
-  return staticMetadataResult.value.max_cards;
+  return {
+    maxCards: staticMetadataResult.value.max_cards,
+    cardsPerDay: staticMetadataResult.value.cards_per_day,
+  };
 };

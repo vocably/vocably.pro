@@ -12,7 +12,7 @@
     "watch-commonjs": "tsc --watch --project tsconfig.commonjs.json",
     "start": "run-p watch*",
     "test": "echo '@vocably/extension-messages has no tests.'",
-    "extension-messags": "npm start"
+    "extension-messages": "npm start"
   },
   "repository": {
     "type": "git",

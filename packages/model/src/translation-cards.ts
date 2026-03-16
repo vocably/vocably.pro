@@ -22,7 +22,7 @@ export type TranslationCards = {
   cards: TranslationCard[];
   tags: TagItem[];
   collectionLength: number;
-  lastAdded: number;
+  addedToday: number;
 };
 
 export type RemoveCardPayload = {

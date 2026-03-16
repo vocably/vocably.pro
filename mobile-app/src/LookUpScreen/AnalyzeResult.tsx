@@ -1,4 +1,10 @@
-import { Analysis, CardItem, Result, TagItem } from '@vocably/model';
+import {
+  Analysis,
+  CardItem,
+  CardsLimit,
+  Result,
+  TagItem,
+} from '@vocably/model';
 import { FC } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import { Separator } from '../CardListItem';
@@ -18,7 +24,7 @@ type Props = {
   deck: Deck;
   leftInset?: number;
   rightInset?: number;
-  cardsLimit: number | 'unlimited';
+  cardsLimit: CardsLimit;
   isSharedLookup: boolean;
 };
 

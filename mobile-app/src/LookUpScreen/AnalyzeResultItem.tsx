@@ -1,6 +1,5 @@
-import { CardItem, Result, TagItem } from '@vocably/model';
-import { getLastAdded } from '@vocably/model-operations';
-import { isToday } from '@vocably/sulna';
+import { CardItem, CardsLimit, Result, TagItem } from '@vocably/model';
+import { getAddedToday } from '@vocably/model-operations';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useState } from 'react';
 import { PixelRatio, Platform, StyleProp, View, ViewStyle } from 'react-native';
@@ -21,7 +20,7 @@ type AnalyzeResultItem = FC<{
   hideOperations?: boolean;
   leftInset?: number;
   rightInset?: number;
-  cardsLimit?: number | 'unlimited';
+  cardsLimit?: CardsLimit;
   style?: StyleProp<ViewStyle>;
   isSharedLookup?: boolean;
 }>;
@@ -44,8 +43,8 @@ export const AnalyzeResultItem: AnalyzeResultItem = ({
 
   const canAdd =
     cardsLimit === 'unlimited' ||
-    cardsLimit > deck.deck.cards.length ||
-    !isToday(getLastAdded(deck.deck.cards));
+    cardsLimit.maxCards > deck.deck.cards.length ||
+    getAddedToday(deck.deck.cards, new Date()).length < cardsLimit.cardsPerDay;
 
   const [isBannerVisible, setIsBannerVisible] = useState(false);
 

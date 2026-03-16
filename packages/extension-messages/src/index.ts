@@ -19,6 +19,7 @@ import {
   UpdateCardPayload,
   UpdateTagPayload,
   Locale,
+  CardsLimit,
 } from '@vocably/model';
 
 const createScope =
@@ -59,10 +60,10 @@ export const [isActive, onIsActiveRequest] = createScopedMessage<void, boolean>(
 export const [isEligibleForTrial, onIsEligibleForTrialRequest] =
   createScopedMessage<void, boolean>('isEligibleForTrial');
 
-export const [getMaxCards, onGetMaxCardsRequest] = createScopedMessage<
+export const [getCardsLimit, onGetCardsLimitRequest] = createScopedMessage<
   void,
-  number | 'unlimited'
->('getMaxCards');
+  CardsLimit
+>('getCardsLimit');
 
 export const [getUserEmail, onGetUserEmail] = createScopedMessage<
   void,

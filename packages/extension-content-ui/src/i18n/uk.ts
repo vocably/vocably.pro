@@ -29,8 +29,8 @@ export const uk = {
   'translation.free_plan': 'Безкоштовний план',
   'translation.free_plan_limit':
     '{plan} дозволяє безкоштовно зберігати до {count} карток.',
-  'translation.one_per_day':
-    'Після досягнення ліміту можна зберігати по одній картці на день.',
+  'translation.per_day':
+    'Після досягнення ліміту можна зберігати {count} карток на день.',
   'translation.upgrade': 'Перейти на Premium',
   // search-form
   'search.i_study': 'Я вивчаю:',
@@ -42,13 +42,6 @@ export const uk = {
     'Введіть слово або фразу. Vocably створить {source} картки.',
   'search.hint':
     'Введіть будь-яке слово або фразу. Vocably створить {language} картки для вас.',
-  // card-counter-explanation
-  'counter.free_plan': 'Безкоштовний план',
-  'counter.limit_message': '{plan} дозволяє зберігати до {count} карток.',
-  'counter.one_per_day':
-    'Після досягнення ліміту ви зможете зберігати по одній картці на день.',
-  'counter.upgrade': 'Перейти на Premium',
-  'counter.close': 'Закрити',
   // rate
   'rate.tagline': 'Це займе менше хвилини, але багато значить для Vocably.',
   'rate.question': 'Чи вважаєте ви Vocably корисним? Ваш відгук на {platform}',

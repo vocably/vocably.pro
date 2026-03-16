@@ -29,8 +29,8 @@ export const en = {
   'translation.free_plan': 'Free Plan',
   'translation.free_plan_limit':
     'The {plan} allows to freely save up to {count} cards.',
-  'translation.one_per_day':
-    'After you reached the limit, you can save one card per day.',
+  'translation.per_day':
+    'After you reached the limit, you can save {count} cards per day.',
   'translation.upgrade': 'Upgrade to Premium',
   // search-form
   'search.i_study': 'I study',
@@ -42,13 +42,6 @@ export const en = {
     'Enter {article} {language} word or phrase here. {source} cards will be created.',
   'search.hint':
     'Type any word or phrase in any language. Vocably will create {language} cards for you.',
-  // card-counter-explanation
-  'counter.free_plan': 'Free Plan',
-  'counter.limit_message': 'The {plan} allows to save up to {count} cards.',
-  'counter.one_per_day':
-    'After you reached the limit, you will be allowed to save one card per day.',
-  'counter.upgrade': 'Upgrade to Premium Plan',
-  'counter.close': 'Close',
   // rate
   'rate.tagline':
     'It will take less than a minute, but will mean a lot for Vocably.',

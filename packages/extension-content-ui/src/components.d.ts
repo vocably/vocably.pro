@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, DeleteTagPayload, DetachTagPayload, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
+import { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, CardsLimit, DeleteTagPayload, DetachTagPayload, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
 import { SearchValues } from "./components/search-form/types";
 import { ComponentExplanationState } from "./components/translation/translation";
 export namespace Components {
@@ -13,15 +13,6 @@ export namespace Components {
         "delay": number;
     }
     interface VocablyButton {
-    }
-    interface VocablyCardCounter {
-        "collectionLength": number;
-        "maxCards": number;
-        "paymentLink": string;
-    }
-    interface VocablyCardCounterExplanation {
-        "maxCards": number;
-        "paymentLink": string;
     }
     interface VocablyCardDefinitions {
         "card": TranslationCard;
@@ -173,6 +164,7 @@ export namespace Components {
     data: AttachTagPayload
   ) => Promise<Result<TranslationCards>>;
         "canCongratulate": boolean;
+        "cardsLimit": CardsLimit;
         "deleteTag": (
     data: DeleteTagPayload
   ) => Promise<Result<TranslationCards>>;
@@ -195,7 +187,6 @@ export namespace Components {
         "isRetrying": boolean;
         "isUpdating": TranslationCard | null;
         "loading": boolean;
-        "maxCards": number | 'unlimited';
         "paymentLink": string;
         "phrase": string;
         "play": () => Promise<void>;
@@ -217,10 +208,6 @@ export namespace Components {
 export interface VocablyAnimatedContentWrapperCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVocablyAnimatedContentWrapperElement;
-}
-export interface VocablyCardCounterExplanationCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLVocablyCardCounterExplanationElement;
 }
 export interface VocablyCloseButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -274,18 +261,6 @@ declare global {
     var HTMLVocablyButtonElement: {
         prototype: HTMLVocablyButtonElement;
         new (): HTMLVocablyButtonElement;
-    };
-    interface HTMLVocablyCardCounterElement extends Components.VocablyCardCounter, HTMLStencilElement {
-    }
-    var HTMLVocablyCardCounterElement: {
-        prototype: HTMLVocablyCardCounterElement;
-        new (): HTMLVocablyCardCounterElement;
-    };
-    interface HTMLVocablyCardCounterExplanationElement extends Components.VocablyCardCounterExplanation, HTMLStencilElement {
-    }
-    var HTMLVocablyCardCounterExplanationElement: {
-        prototype: HTMLVocablyCardCounterExplanationElement;
-        new (): HTMLVocablyCardCounterExplanationElement;
     };
     interface HTMLVocablyCardDefinitionsElement extends Components.VocablyCardDefinitions, HTMLStencilElement {
     }
@@ -542,8 +517,6 @@ declare global {
     interface HTMLElementTagNameMap {
         "vocably-animated-content-wrapper": HTMLVocablyAnimatedContentWrapperElement;
         "vocably-button": HTMLVocablyButtonElement;
-        "vocably-card-counter": HTMLVocablyCardCounterElement;
-        "vocably-card-counter-explanation": HTMLVocablyCardCounterExplanationElement;
         "vocably-card-definitions": HTMLVocablyCardDefinitionsElement;
         "vocably-card-examples": HTMLVocablyCardExamplesElement;
         "vocably-card-source": HTMLVocablyCardSourceElement;
@@ -594,17 +567,6 @@ declare namespace LocalJSX {
         "onClose"?: (event: VocablyAnimatedContentWrapperCustomEvent<void>) => void;
     }
     interface VocablyButton {
-    }
-    interface VocablyCardCounter {
-        "collectionLength"?: number;
-        "maxCards"?: number;
-        "paymentLink"?: string;
-    }
-    interface VocablyCardCounterExplanation {
-        "maxCards"?: number;
-        "onCloseExplanation"?: (event: VocablyCardCounterExplanationCustomEvent<void>) => void;
-        "onPaymentClicked"?: (event: VocablyCardCounterExplanationCustomEvent<void>) => void;
-        "paymentLink"?: string;
     }
     interface VocablyCardDefinitions {
         "card"?: TranslationCard;
@@ -767,6 +729,7 @@ declare namespace LocalJSX {
     data: AttachTagPayload
   ) => Promise<Result<TranslationCards>>;
         "canCongratulate"?: boolean;
+        "cardsLimit"?: CardsLimit;
         "deleteTag"?: (
     data: DeleteTagPayload
   ) => Promise<Result<TranslationCards>>;
@@ -789,7 +752,6 @@ declare namespace LocalJSX {
         "isRetrying"?: boolean;
         "isUpdating"?: TranslationCard | null;
         "loading"?: boolean;
-        "maxCards"?: number | 'unlimited';
         "onAddCard"?: (event: VocablyTranslationCustomEvent<AddCardPayload>) => void;
         "onChangeSourceLanguage"?: (event: VocablyTranslationCustomEvent<string>) => void;
         "onChangeTargetLanguage"?: (event: VocablyTranslationCustomEvent<string>) => void;
@@ -816,8 +778,6 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "vocably-animated-content-wrapper": VocablyAnimatedContentWrapper;
         "vocably-button": VocablyButton;
-        "vocably-card-counter": VocablyCardCounter;
-        "vocably-card-counter-explanation": VocablyCardCounterExplanation;
         "vocably-card-definitions": VocablyCardDefinitions;
         "vocably-card-examples": VocablyCardExamples;
         "vocably-card-source": VocablyCardSource;
@@ -868,8 +828,6 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "vocably-animated-content-wrapper": LocalJSX.VocablyAnimatedContentWrapper & JSXBase.HTMLAttributes<HTMLVocablyAnimatedContentWrapperElement>;
             "vocably-button": LocalJSX.VocablyButton & JSXBase.HTMLAttributes<HTMLVocablyButtonElement>;
-            "vocably-card-counter": LocalJSX.VocablyCardCounter & JSXBase.HTMLAttributes<HTMLVocablyCardCounterElement>;
-            "vocably-card-counter-explanation": LocalJSX.VocablyCardCounterExplanation & JSXBase.HTMLAttributes<HTMLVocablyCardCounterExplanationElement>;
             "vocably-card-definitions": LocalJSX.VocablyCardDefinitions & JSXBase.HTMLAttributes<HTMLVocablyCardDefinitionsElement>;
             "vocably-card-examples": LocalJSX.VocablyCardExamples & JSXBase.HTMLAttributes<HTMLVocablyCardExamplesElement>;
             "vocably-card-source": LocalJSX.VocablyCardSource & JSXBase.HTMLAttributes<HTMLVocablyCardSourceElement>;
