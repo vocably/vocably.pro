@@ -22,6 +22,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Sentry } from './BetterSentry';
 import { iconButtonOpacity, pressedIconButtonOpacity } from './stupidConstants';
 
+let activeInstance: { stop: () => void } | null = null;
+
 export type PlaySoundRef = {
   play: () => Promise<Result<unknown>>;
   stop: () => void;
@@ -43,6 +45,7 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
     const [isPlaying, setIsPlaying] = useState(false);
     const loadedAudioRef = useRef<Sound>();
     const loadedAudioResolverRef = useRef<(value: Result<unknown>) => void>();
+    const stopRef = useRef<{ stop: () => void }>({ stop: () => {} });
 
     const loadAudio = (): Promise<Result<Sound>> => {
       if (loadedAudioRef.current) {
@@ -85,6 +88,10 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
     };
 
     const play = async (): Promise<Result<unknown>> => {
+      if (activeInstance && activeInstance !== stopRef.current) {
+        activeInstance.stop();
+      }
+      activeInstance = stopRef.current;
       setIsPlaying(true);
 
       const loadedAudioResult = await loadAudio();
@@ -140,7 +147,13 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
       }
 
       setIsPlaying(false);
+
+      if (activeInstance === stopRef.current) {
+        activeInstance = null;
+      }
     };
+
+    stopRef.current = { stop };
 
     useImperativeHandle(ref, () => ({
       play,

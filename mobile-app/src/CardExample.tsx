@@ -44,7 +44,7 @@ export const CardExample: FC<Props> = ({
           style={[
             textStyle,
             {
-              marginBottom: 6,
+              marginTop: 6,
             },
           ]}
         >
@@ -52,7 +52,7 @@ export const CardExample: FC<Props> = ({
             <PlaySound
               text={text}
               language={language}
-              size={18}
+              size={20}
               style={{
                 transform: [{ translateY: 4 }, { translateX: -2 }],
               }}
