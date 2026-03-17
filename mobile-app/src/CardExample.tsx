@@ -1,6 +1,6 @@
 import { explode } from '@vocably/sulna';
 import React, { FC } from 'react';
-import { PixelRatio, StyleProp } from 'react-native';
+import { PixelRatio, Platform, StyleProp } from 'react-native';
 import { Text } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
 import { PlaySound } from './PlaySound';
@@ -59,7 +59,9 @@ export const CardExample: FC<Props> = ({
                 transform: [
                   {
                     translateY:
-                      (28 - get(textStyle, 'fontSize', 14)) * fontScale * 0.35,
+                      (28 - get(textStyle, 'fontSize', 14)) *
+                      fontScale *
+                      (Platform.OS === 'ios' ? 0.35 : 0.4),
                   },
                   { translateX: -2 },
                 ],
