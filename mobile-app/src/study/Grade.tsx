@@ -61,7 +61,14 @@ export const Grade: FC<Props> = ({
           />
         );
       case 'ab':
-        return <ArrangeByLetters key={card.id} card={card} onGrade={onGrade} />;
+        return (
+          <ArrangeByLetters
+            autoPlay={autoPlay}
+            key={card.id}
+            card={card}
+            onGrade={onGrade}
+          />
+        );
       default:
         return (
           <SwipeGrade onGrade={onGrade} key={card.id}>

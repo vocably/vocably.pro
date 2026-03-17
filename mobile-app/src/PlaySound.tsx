@@ -2,6 +2,7 @@ import { GoogleTTSLanguage, Result } from '@vocably/model';
 import { languageToGoogleTranslateLanguage } from '@vocably/model-operations';
 import React, {
   forwardRef,
+  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -32,10 +33,11 @@ type Props = {
   size?: number;
   style?: StyleProp<ViewStyle>;
   color?: ColorValue;
+  autoPlay?: boolean;
 };
 
 export const PlaySound = forwardRef<PlaySoundRef, Props>(
-  ({ text, language, size = 16, style = {}, color }, ref) => {
+  ({ text, language, size = 16, style = {}, color, autoPlay = false }, ref) => {
     const theme = useTheme();
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -146,6 +148,12 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
     }));
 
     const fontScale = PixelRatio.getFontScale();
+
+    useEffect(() => {
+      if (autoPlay) {
+        play();
+      }
+    }, []);
 
     return (
       <Pressable

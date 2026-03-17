@@ -1,4 +1,4 @@
-import { CardItem } from '@vocably/model';
+import { CardItem, isGoogleTTSLanguage } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { shuffle } from 'lodash-es';
 import { FC, useEffect, useRef, useState } from 'react';
@@ -21,13 +21,19 @@ import {
 } from 'react-native-paper';
 import { ReverseCardFront } from './Card/ReverseCardFront';
 import { Displayer, DisplayerRef } from './Displayer';
+import { PlaySound } from '../PlaySound';
 
 type Props = {
   card: CardItem;
   onGrade: (score: SrsScore) => void;
+  autoPlay?: boolean;
 };
 
-export const ArrangeByLetters: FC<Props> = ({ card, onGrade }) => {
+export const ArrangeByLetters: FC<Props> = ({
+  card,
+  onGrade,
+  autoPlay = false,
+}) => {
   const displayerRef = useRef<DisplayerRef>(null);
   const theme = useTheme();
   const scrollViewRef = useRef<ScrollView>(null);
@@ -186,7 +192,7 @@ export const ArrangeByLetters: FC<Props> = ({ card, onGrade }) => {
         }}
       >
         <ReverseCardFront
-          hasChecked={false}
+          hasChecked={isAnswerVisible}
           card={card}
           requiredAction="Type in"
         />
@@ -303,7 +309,28 @@ export const ArrangeByLetters: FC<Props> = ({ card, onGrade }) => {
               Show me the answer
             </Button>
           )}
-          {isAnswerVisible && <Text>{correctString}</Text>}
+          {isAnswerVisible && (
+            <Text>
+              {isGoogleTTSLanguage(card.data.language) && (
+                <>
+                  <PlaySound
+                    text={card.data.source}
+                    language={card.data.language}
+                    autoPlay={autoPlay}
+                    size={24}
+                    style={{
+                      transform: [
+                        {
+                          translateY: 7 * fontScale,
+                        },
+                      ],
+                    }}
+                  />{' '}
+                </>
+              )}
+              <Text>{correctString}</Text>
+            </Text>
+          )}
         </View>
       </Displayer>
     </ScrollView>
