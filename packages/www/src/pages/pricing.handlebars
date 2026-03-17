@@ -7,7 +7,7 @@
     <h1 class="mb-5 text-center">Pricing</h1>
     <p>Translations with Vocably are always free and unlimited. I am <a href="/about.html" class="link-secondary">working hard</a> to keep it this way.</p>
 
-    <p>The <strong>Free Plan</strong> lets you save <strong>300 words</strong> in your study collection. When you have 300 words, you can only save one new word per day. All translations remain free and unlimited.</p>
+    <p>The <strong>Free Plan</strong> lets you save <strong>{{ htmlWebpackPlugin.options.environment.usageLimit.maxCollectionLength }} words</strong> in your study collection. When your collection reaches {{ htmlWebpackPlugin.options.environment.usageLimit.maxCollectionLength }} words, you can save <strong>{{ htmlWebpackPlugin.options.environment.usageLimit.cardsPerDay }} new words per day</strong>. All translations remain free and unlimited.</p>
 
     <p>With <strong>Premium</strong>, you can <strong>save unlimited words</strong> and get <strong>one more type of practice question</strong>:</p>
     <div style="text-align: center;"><video
@@ -84,10 +84,10 @@
         <tr>
           <td>Save translations as flashcards</td>
           <td class="smaller-on-tiny-screens">
-            <div><strong>First 300 cards</strong></div>
+            <div><strong>First {{ htmlWebpackPlugin.options.environment.usageLimit.maxCollectionLength }} cards</strong></div>
             <div>Unlimited</div>
-            <div class="mt-3"><strong>Over 300 cards</strong></div>
-            <div>1 card per day</div>
+            <div class="mt-3"><strong>Over {{ htmlWebpackPlugin.options.environment.usageLimit.maxCollectionLength }} cards</strong></div>
+            <div>{{ htmlWebpackPlugin.options.environment.usageLimit.cardsPerDay }} cards per day</div>
           </td>
           <td class="smaller-on-tiny-screens">Unlimited</td>
         </tr>

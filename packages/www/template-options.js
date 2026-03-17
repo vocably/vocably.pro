@@ -1,5 +1,11 @@
+const { defaultUserStaticMetadata } = require('@vocably/model');
+
 module.exports = {
   templateOptions: {
+    usageLimit: {
+      maxCollectionLength: defaultUserStaticMetadata.max_cards,
+      cardsPerDay: defaultUserStaticMetadata.cards_per_day,
+    },
     languages: [
       { code: 'af', label: 'Afrikaans' },
       { code: 'sq', label: 'Albanian' },
