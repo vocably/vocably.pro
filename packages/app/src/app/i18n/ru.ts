@@ -304,7 +304,7 @@ export const ru = {
   'android_translate.try_it': 'Попробуйте на этом тексте',
 
   // Subscription
-  'subscription.purchased': 'успешно куплено.',
+  'subscription.purchased': 'успешно куплен.',
   'subscription.go_back': 'Вернуться на страницу подписки.',
 
   // SRS
