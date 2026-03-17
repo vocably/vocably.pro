@@ -64,6 +64,8 @@ export const en = {
   // first-translation-congratulation
   'congrats.on_phone': 'is already on your phone.',
   'congrats.scan_qr': 'Scan the QR code to learn it.',
+  'congrats.or_go_to': 'Or go to',
+  'congrats.to_study_browser': 'to study in your browser.',
   // mobile-button
   'mobile_button.look_up': 'Look up',
   // tag-form

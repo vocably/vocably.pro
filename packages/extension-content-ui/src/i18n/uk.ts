@@ -62,6 +62,8 @@ export const uk = {
   // first-translation-congratulation
   'congrats.on_phone': 'вже на вашому телефоні.',
   'congrats.scan_qr': 'Відскануйте QR-код, щоб вчити.',
+  'congrats.or_go_to': 'Або перейдіть на',
+  'congrats.to_study_browser': 'щоб навчатися у браузері.',
   // mobile-button
   'mobile_button.look_up': 'Знайти',
   // tag-form

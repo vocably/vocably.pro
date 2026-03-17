@@ -64,6 +64,8 @@ export const tr = {
   // first-translation-congratulation
   'congrats.on_phone': 'zaten telefonunuzda.',
   'congrats.scan_qr': 'Öğrenmek için QR kodunu tarayın.',
+  'congrats.or_go_to': 'Veya şuraya gidin:',
+  'congrats.to_study_browser': 'tarayıcınızda çalışmak için.',
   // mobile-button
   'mobile_button.look_up': 'Ara',
   // tag-form

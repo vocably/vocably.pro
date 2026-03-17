@@ -3,6 +3,8 @@
 
 :host {
   @include base-font();
+  line-height: 1 !important;
+
   display: block;
 
   .phone {

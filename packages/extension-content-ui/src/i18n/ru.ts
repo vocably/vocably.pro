@@ -62,6 +62,8 @@ export const ru = {
   // first-translation-congratulation
   'congrats.on_phone': 'уже на вашем телефоне.',
   'congrats.scan_qr': 'Отсканируйте QR-код, чтобы учить.',
+  'congrats.or_go_to': 'Или перейдите на',
+  'congrats.to_study_browser': 'чтобы учиться в браузере.',
   // mobile-button
   'mobile_button.look_up': 'Найти',
   // tag-form

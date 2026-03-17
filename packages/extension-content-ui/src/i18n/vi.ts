@@ -63,6 +63,8 @@ export const vi = {
   // first-translation-congratulation
   'congrats.on_phone': 'đã có trên điện thoại của bạn.',
   'congrats.scan_qr': 'Quét mã QR để học.',
+  'congrats.or_go_to': 'Hoặc truy cập',
+  'congrats.to_study_browser': 'để học trong trình duyệt của bạn.',
   // mobile-button
   'mobile_button.look_up': 'Tra cứu',
   // tag-form

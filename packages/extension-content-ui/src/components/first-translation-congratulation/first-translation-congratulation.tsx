@@ -102,7 +102,19 @@ export class VocablyFirstTranslationCongratulation {
               {t('congrats.on_phone')}
             </p>
             <p>{t('congrats.scan_qr')}</p>
-            <vocably-qr-code style={{ width: '200px' }}></vocably-qr-code>
+            <vocably-qr-code
+              style={{ width: '180px', marginBottom: '8px' }}
+            ></vocably-qr-code>
+            <p>
+              {t('congrats.or_go_to')}{' '}
+              <a
+                href={`https://app.vocably.pro/deck/${this.card.data.language}`}
+                target="_blank"
+              >
+                app.vocably.pro
+              </a>
+            </p>
+            <div>{t('congrats.to_study_browser')}</div>
           </div>
         </div>
       </Host>
