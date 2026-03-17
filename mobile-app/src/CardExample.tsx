@@ -1,10 +1,11 @@
 import { explode } from '@vocably/sulna';
 import React, { FC } from 'react';
-import { StyleProp } from 'react-native';
-import { Text, useTheme } from 'react-native-paper';
+import { PixelRatio, StyleProp } from 'react-native';
+import { Text } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
 import { PlaySound } from './PlaySound';
 import { isGoogleTTSLanguage } from '@vocably/model';
+import { get } from 'lodash-es';
 
 export type Mask = {
   text: string;
@@ -24,7 +25,6 @@ export const CardExample: FC<Props> = ({
   mask,
   language,
 }) => {
-  const theme = useTheme();
   let examples = explode(example);
 
   if (mask) {
@@ -35,6 +35,8 @@ export const CardExample: FC<Props> = ({
   }
 
   const bul = examples.length === 1 ? '' : '\u2022 ';
+
+  const fontScale = PixelRatio.getFontScale();
 
   return (
     <>
@@ -54,7 +56,14 @@ export const CardExample: FC<Props> = ({
               language={language}
               size={20}
               style={{
-                transform: [{ translateY: 4 }, { translateX: -2 }],
+                transform: [
+                  {
+                    translateY:
+                      (28 - get(textStyle, 'fontSize', 14)) * fontScale * 0.35,
+                  },
+                  { translateX: -2 },
+                ],
+                opacity: 0.2,
               }}
             />
           ) : (
