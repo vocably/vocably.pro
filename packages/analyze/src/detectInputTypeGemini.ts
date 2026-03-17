@@ -7,6 +7,7 @@ import {
   InputAnalysis,
   isInputAnalysis,
 } from './detectInputTypeAi';
+import { timeout } from '@vocably/sulna';
 
 export const detectInputTypeGemini = async ({
   source,
@@ -16,34 +17,42 @@ export const detectInputTypeGemini = async ({
     apiKey: config.geminiApiKey,
   });
 
+  const abortController = new AbortController();
+  const abortSignal = abortController.signal;
+
   const result = await resultify(
-    genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: createUserContent([source]),
-      config: {
-        systemInstruction: [`Detect unit of speech type`],
-        thinkingConfig: {
-          thinkingBudget: 0, // Disables thinking
-        },
-        temperature: 0,
-        responseMimeType: 'application/json',
-        responseJsonSchema: {
-          type: 'object',
-          properties: {
-            type: {
-              type: 'string',
-              enum: inputTypes,
-              description: 'Type of input',
-            },
-            isDirect: {
-              type: 'boolean',
-              description: `true if the input is ${languageList[language]}`,
-            },
+    timeout(
+      genAI.models.generateContent({
+        model: 'gemini-2.5-flash',
+        contents: createUserContent([source]),
+        config: {
+          abortSignal,
+          systemInstruction: [`Detect unit of speech type`],
+          thinkingConfig: {
+            thinkingBudget: 0, // Disables thinking
           },
-          required: ['type', 'isDirect'],
+          temperature: 0,
+          responseMimeType: 'application/json',
+          responseJsonSchema: {
+            type: 'object',
+            properties: {
+              type: {
+                type: 'string',
+                enum: inputTypes,
+                description: 'Type of input',
+              },
+              isDirect: {
+                type: 'boolean',
+                description: `true if the input is ${languageList[language]}`,
+              },
+            },
+            required: ['type', 'isDirect'],
+          },
         },
-      },
-    }),
+      }),
+      abortController,
+      3000
+    ),
     {
       reason: 'Unable to perform Gemini translation.',
     }
