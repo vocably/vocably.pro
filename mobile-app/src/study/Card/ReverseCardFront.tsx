@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import { View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { CardDefinition } from '../../CardDefinition';
-import { CardExample } from '../../CardExample';
+import { CardExample, Mask } from '../../CardExample';
 import { maskTheWord } from '../../maskTheWord';
 
 type Props = { card: CardItem; hasChecked: boolean; requiredAction?: string };
@@ -18,11 +18,12 @@ export const ReverseCardFront: FC<Props> = ({
 
   let examples = card.data.example ? explode(card.data.example) : [];
 
+  let mask: Mask = undefined;
   if (!hasChecked) {
-    examples = examples
-      .map(maskTheWord(card.data.source, card.data.language))
-      .filter((replacementResult) => replacementResult.masked)
-      .map((replacementResult) => replacementResult.value);
+    mask = {
+      text: card.data.source,
+      language: card.data.language,
+    };
   }
 
   return (
@@ -54,7 +55,12 @@ export const ReverseCardFront: FC<Props> = ({
           >
             Example{examples.length > 1 ? 's' : ''}:
           </Text>
-          <CardExample example={join(examples)} textStyle={{ fontSize: 18 }} />
+          <CardExample
+            mask={mask}
+            example={join(examples)}
+            language={card.data.language}
+            textStyle={{ fontSize: 18 }}
+          />
         </>
       )}
     </View>

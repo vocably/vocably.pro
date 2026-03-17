@@ -218,7 +218,7 @@ export const CardListItem: FC<Props> = ({
       {showExamples && card.example && (
         <View style={{ marginStart: 10, marginTop: 8 }}>
           <Text style={{ fontWeight: 'bold' }}>Examples</Text>
-          <CardExample example={card.example} />
+          <CardExample example={card.example} language={card.language} />
         </View>
       )}
       {(card.tags.length > 0 || savingTagsInProgress) && (

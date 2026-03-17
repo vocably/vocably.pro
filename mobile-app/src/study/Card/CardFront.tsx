@@ -120,6 +120,7 @@ export const CardFront: FC<Props> = ({
           <CardExample
             example={card.data.example}
             textStyle={{ fontSize: 18 }}
+            language={card.data.language}
           />
         </View>
       )}
