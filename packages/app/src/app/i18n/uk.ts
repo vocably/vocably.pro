@@ -182,9 +182,11 @@ export const uk = {
   'membership_selector.unlimited_decks': 'Необмежені мовні колекції',
   'membership_selector.cloud_storage':
     'Картки зберігаються в хмарі та доступні на всіх платформах',
-  'membership_selector.card_saving': 'Збереження понад 300 карток',
-  'membership_selector.one_card_per_day': '1 картка на день',
-  'membership_selector.unlimited': 'Необмежено',
+  'membership_selector.card_saving':
+    'Якщо колекція досягла {{count}} карток, то',
+  'membership_selector.cards_per_day':
+    'можна додавати не більше {{count}} карток на день',
+  'membership_selector.unlimited': 'можна додавати скільки завгодно карток',
   'membership_selector.social_proof':
     'Vocably — єдиний інструмент, повністю орієнтований на потреби людей, активно вивчаючих мови. Це новий продукт, але вже сотні людей використовують його для практики мови в реальних умовах.',
   'membership_selector.per_month': 'На місяць',

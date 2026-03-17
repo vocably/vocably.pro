@@ -151,17 +151,25 @@
         <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
         <td class="text-center text-primary"><mat-icon>check</mat-icon></td>
       </tr>
-      <tr>
-        <td class="text-left">
-          {{ 'membership_selector.card_saving' | transloco }}
-        </td>
-        <td class="text-center">
-          {{ 'membership_selector.one_card_per_day' | transloco }}
-        </td>
-        <td class="text-center">
-          {{ 'membership_selector.unlimited' | transloco }}
-        </td>
-      </tr>
+      @if (staticMetadata) {
+        <tr>
+          <td class="text-left">
+            {{
+              'membership_selector.card_saving'
+                | transloco: { count: staticMetadata.max_cards }
+            }}
+          </td>
+          <td class="text-center">
+            {{
+              'membership_selector.cards_per_day'
+                | transloco: { count: staticMetadata.cards_per_day }
+            }}
+          </td>
+          <td class="text-center">
+            {{ 'membership_selector.unlimited' | transloco }}
+          </td>
+        </tr>
+      }
     </table>
   </div>
   <div class="social-proof mb-2">

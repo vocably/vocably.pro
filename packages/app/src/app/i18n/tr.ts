@@ -183,9 +183,10 @@ export const tr = {
   'membership_selector.unlimited_decks': 'Sınırsız dil koleksiyonları',
   'membership_selector.cloud_storage':
     'Kartlar bulutta saklanır ve tüm platformlarda erişilebilir',
-  'membership_selector.card_saving': '300 kartın üzerinde kart kaydetme',
-  'membership_selector.one_card_per_day': 'Günde 1 kart',
-  'membership_selector.unlimited': 'Sınırsız',
+  'membership_selector.card_saving': 'Koleksiyon {{count}} karta ulaştığında,',
+  'membership_selector.cards_per_day':
+    'günde en fazla {{count}} kart ekleyebilirsiniz',
+  'membership_selector.unlimited': 'istediğiniz kadar kart ekleyebilirsiniz',
   'membership_selector.social_proof':
     'Vocably, dil öğrenimini aktif olarak sürdüren insanların ihtiyaçlarına tamamen odaklanan tek araçtır. Yeni bir ürün olmakla birlikte, yüzlerce kişi onu gerçek dünya dil pratiği için kullanıyor.',
   'membership_selector.per_month': 'Aylık',

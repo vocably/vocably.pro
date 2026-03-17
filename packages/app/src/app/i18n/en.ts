@@ -177,9 +177,11 @@ export const en = {
   'membership_selector.unlimited_decks': 'Unlimited language collections',
   'membership_selector.cloud_storage':
     'Cards are stored in the cloud and available on all the platforms',
-  'membership_selector.card_saving': 'Card saving over 300 cards',
-  'membership_selector.one_card_per_day': '1 card per day',
-  'membership_selector.unlimited': 'Unlimited',
+  'membership_selector.card_saving':
+    'When the collection reaches {{count}} cards,',
+  'membership_selector.cards_per_day':
+    'you can add no more than {{count}} cards per day',
+  'membership_selector.unlimited': 'you can add as many cards as you want',
   'membership_selector.social_proof':
     "Vocably is the only tool that fully focuses on the needs of people who are actively learning languages. It's a new product, but hundreds of people already use it for real-world language practice.",
   'membership_selector.per_month': 'Per month',

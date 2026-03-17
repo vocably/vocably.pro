@@ -9,6 +9,8 @@ import {
   getSubscriptionProducts,
   SubscriptionProduct,
 } from '../../subscription-products';
+import { UserStaticMetadata } from '@vocably/model';
+import { getUserStaticMetadata } from '@vocably/api';
 
 @Component({
   selector: 'app-membership-selector',
@@ -20,12 +22,19 @@ export class MembershipSelectorComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   subscriptionProducts: SubscriptionProduct[] | null = null;
+  staticMetadata: UserStaticMetadata | null = null;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     getSubscriptionProducts().then((products) => {
       this.subscriptionProducts = products;
+    });
+
+    getUserStaticMetadata().then((result) => {
+      if (result.success) {
+        this.staticMetadata = result.value;
+      }
     });
   }
 

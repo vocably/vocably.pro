@@ -176,9 +176,10 @@ export const vi = {
   'membership_selector.unlimited_decks': 'Bộ sưu tập ngôn ngữ không giới hạn',
   'membership_selector.cloud_storage':
     'Thẻ được lưu trên đám mây và có thể truy cập trên mọi nền tảng',
-  'membership_selector.card_saving': 'Lưu hơn 300 thẻ',
-  'membership_selector.one_card_per_day': '1 thẻ mỗi ngày',
-  'membership_selector.unlimited': 'Không giới hạn',
+  'membership_selector.card_saving': 'Khi bộ sưu tập đạt {{count}} thẻ,',
+  'membership_selector.cards_per_day':
+    'bạn chỉ có thể thêm tối đa {{count}} thẻ mỗi ngày',
+  'membership_selector.unlimited': 'bạn có thể thêm bao nhiêu thẻ tùy thích',
   'membership_selector.social_proof':
     'Vocably là công cụ duy nhất tập trung hoàn toàn vào nhu cầu của những người đang tích cực học ngôn ngữ. Nó là một sản phẩm mới, nhưng hàng trăm người đã sử dụng để luyện tập ngôn ngữ thực tế.',
   'membership_selector.per_month': 'Mỗi tháng',
