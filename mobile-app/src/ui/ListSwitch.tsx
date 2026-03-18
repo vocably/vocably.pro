@@ -32,7 +32,7 @@ export const ListSwitch: FC<Props> = ({
         style,
       ]}
     >
-      <View style={{ flexGrow: 1, paddingRight: 12 }}>
+      <View style={{ flexGrow: 1, flexShrink: 1, paddingRight: 12 }}>
         <Text
           style={{
             fontSize: 16,

@@ -141,10 +141,10 @@ export const StudySettingsScreen: FC<Props> = () => {
             }}
           >
             <Text>
-              his option makes the app play a random example sentence when
+              This option makes the app play a random example sentence when
               appropriate during the study session. The{' '}
-              <Icon name="volume-high" size={16} /> option should be turned on.
-              This option is in the top-right corner of the Study screen.
+              <Icon name="volume-high" size={16} /> option should be turned on —
+              this option is in the top-right corner of the Study screen.
             </Text>
           </View>
         </>

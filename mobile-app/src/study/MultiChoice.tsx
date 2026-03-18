@@ -39,6 +39,7 @@ export const MultiChoice: FC<Props> = ({
   onGrade,
   alternatives,
   autoPlay,
+  playRandomExample,
   direction,
 }) => {
   const theme = useTheme();
@@ -139,6 +140,7 @@ export const MultiChoice: FC<Props> = ({
               <CardFront
                 card={card}
                 autoPlay={autoPlay}
+                playRandomExample={playRandomExample}
                 showInflections={true}
               />
             </>
