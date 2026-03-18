@@ -3,8 +3,8 @@ import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { PixelRatio, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
-import { CardExample } from '../../CardExample';
-import { PlaySound } from '../../PlaySound';
+import { CardExample, CardExampleRef } from '../../CardExample';
+import { PlaySound, PlaySoundRef } from '../../PlaySound';
 
 type Props = {
   card: CardItem;
@@ -20,7 +20,8 @@ export const CardFront: FC<Props> = ({
   const theme = useTheme();
 
   const [isAutoPlayed, setIsAutoPlayed] = useState(false);
-  const playRef = useRef();
+  const playRef = useRef<PlaySoundRef>(null);
+  const cardExampleRef = useRef<CardExampleRef>(null);
 
   useEffect(() => {
     if (!autoPlay) {
@@ -35,8 +36,11 @@ export const CardFront: FC<Props> = ({
       return;
     }
 
-    // @ts-ignore
-    playRef.current.play();
+    playRef.current.play().then(() => {
+      if (cardExampleRef.current) {
+        cardExampleRef.current.play();
+      }
+    });
     setIsAutoPlayed(true);
   }, [isAutoPlayed, autoPlay]);
 
@@ -65,7 +69,6 @@ export const CardFront: FC<Props> = ({
                 text={card.data.source}
                 language={card.data.language}
                 size={24}
-                // @ts-ignore
                 ref={playRef}
                 style={{
                   transform: [
@@ -118,6 +121,7 @@ export const CardFront: FC<Props> = ({
       {card.data.example && (
         <View style={{ marginTop: 12, marginLeft: 8 }}>
           <CardExample
+            ref={cardExampleRef}
             example={card.data.example}
             textStyle={{ fontSize: 18 }}
             language={card.data.language}

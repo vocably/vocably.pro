@@ -37,7 +37,6 @@ type Props = {
   hitSlop?: number;
   style?: StyleProp<ViewStyle>;
   color?: ColorValue;
-  autoPlay?: boolean;
 };
 
 export const PlaySound = forwardRef<PlaySoundRef, Props>(
@@ -48,7 +47,6 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
       size = 16,
       style = {},
       color,
-      autoPlay = false,
       hitSlop = 20,
       disabled = false,
     },
@@ -175,12 +173,6 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
     }));
 
     const fontScale = PixelRatio.getFontScale();
-
-    useEffect(() => {
-      if (autoPlay) {
-        play();
-      }
-    }, []);
 
     return (
       <Pressable

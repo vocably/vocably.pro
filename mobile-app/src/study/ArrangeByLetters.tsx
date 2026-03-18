@@ -19,9 +19,9 @@ import {
   TouchableRipple,
   useTheme,
 } from 'react-native-paper';
-import { ReverseCardFront } from './Card/ReverseCardFront';
+import { ReverseCardFront, ReverseCardFrontRef } from './Card/ReverseCardFront';
 import { Displayer, DisplayerRef } from './Displayer';
-import { PlaySound } from '../PlaySound';
+import { PlaySound, PlaySoundRef } from '../PlaySound';
 
 type Props = {
   card: CardItem;
@@ -49,6 +49,28 @@ export const ArrangeByLetters: FC<Props> = ({
   const [isAnswerVisible, setIsAnswerVisible] = useState(false);
 
   const fontScale = Math.max(1, PixelRatio.getFontScale());
+
+  const playSoundRef = useRef<PlaySoundRef>(null);
+  const reverseCardFrontRef = useRef<ReverseCardFrontRef>(null);
+
+  useEffect(() => {
+    if (!autoPlay) {
+      return;
+    }
+
+    if (!isAnswerVisible) {
+      return;
+    }
+
+    const timeOutId = setTimeout(async () => {
+      await playSoundRef.current?.play();
+      await reverseCardFrontRef.current?.playExample();
+    }, 500);
+
+    return () => {
+      clearTimeout(timeOutId);
+    };
+  }, [autoPlay, isAnswerVisible]);
 
   useEffect(() => {
     const timeOutId = setTimeout(() => {
@@ -192,6 +214,7 @@ export const ArrangeByLetters: FC<Props> = ({
         }}
       >
         <ReverseCardFront
+          ref={reverseCardFrontRef}
           hasChecked={isAnswerVisible}
           card={card}
           requiredAction="Type in"
@@ -314,9 +337,9 @@ export const ArrangeByLetters: FC<Props> = ({
               {isGoogleTTSLanguage(card.data.language) && (
                 <>
                   <PlaySound
+                    ref={playSoundRef}
                     text={card.data.source}
                     language={card.data.language}
-                    autoPlay={autoPlay}
                     size={24}
                     style={{
                       transform: [
