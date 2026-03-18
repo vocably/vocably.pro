@@ -14,6 +14,7 @@ import { StudySteps } from './StudySteps';
 
 const RANDOMIZER_ENABLED_KEY = 'isRandomizerEnabled';
 const MAXIMUM_CARDS_PER_SESSION_KEY = 'maximumCardsPerSession';
+const PLAY_RANDOM_EXAMPLE_KEY = 'playRandomExample';
 
 export const getRandomizerEnabled = () =>
   getItem(RANDOMIZER_ENABLED_KEY).then((res) => res === 'true');
@@ -26,6 +27,12 @@ export const getMaximumCardsPerSession = () =>
 
 export const setMaximumCardsPerSession = (cardsPerSession: number) =>
   setItem(MAXIMUM_CARDS_PER_SESSION_KEY, cardsPerSession.toString());
+
+export const getPlayRandomExample = () =>
+  getItem(PLAY_RANDOM_EXAMPLE_KEY).then((res) => res !== 'false');
+
+const setPlayRandomExample = (isEnabled: boolean) =>
+  setItem(PLAY_RANDOM_EXAMPLE_KEY, isEnabled ? 'true' : 'false');
 
 type Props = {};
 
@@ -43,12 +50,25 @@ export const StudySettingsScreen: FC<Props> = () => {
     setMaximumCardsPerSession
   );
 
+  const [playRandomExample, mutatePlayRandomExample] = useAsync(
+    getPlayRandomExample,
+    setPlayRandomExample
+  );
+
   const onRandomizerEnabledChange = async () => {
     if (isRandomizerEnabled.status !== 'loaded') {
       return;
     }
 
     await mutateIsRandomizerEnabled(!isRandomizerEnabled.value);
+  };
+
+  const onPlayRandomExampleChange = async () => {
+    if (playRandomExample.status !== 'loaded') {
+      return;
+    }
+
+    await mutatePlayRandomExample(!playRandomExample.value);
   };
 
   const insets = useSafeAreaInsets();
@@ -104,6 +124,31 @@ export const StudySettingsScreen: FC<Props> = () => {
           </View>
         )}
       </CustomSurface>
+
+      {playRandomExample.status === 'loaded' && (
+        <>
+          <CustomSurface style={{ marginBottom: 8 }}>
+            <ListSwitch
+              title="Pronounce an example sentence"
+              value={playRandomExample.value}
+              onChange={onPlayRandomExampleChange}
+            />
+          </CustomSurface>
+          <View
+            style={{
+              paddingHorizontal: 8,
+              marginBottom: 32,
+            }}
+          >
+            <Text>
+              his option makes the app play a random example sentence when
+              appropriate during the study session. The{' '}
+              <Icon name="volume-high" size={16} /> option should be turned on.
+              This option is in the top-right corner of the Study screen.
+            </Text>
+          </View>
+        </>
+      )}
 
       {isRandomizerEnabled.status === 'loaded' && (
         <CustomSurface style={{ marginBottom: 8 }}>

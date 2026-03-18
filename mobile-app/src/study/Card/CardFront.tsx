@@ -9,12 +9,14 @@ import { PlaySound, PlaySoundRef } from '../../PlaySound';
 type Props = {
   card: CardItem;
   autoPlay: boolean;
+  playRandomExample: boolean;
   showInflections?: boolean;
 };
 
 export const CardFront: FC<Props> = ({
   card,
   autoPlay,
+  playRandomExample,
   showInflections = false,
 }) => {
   const theme = useTheme();
@@ -37,7 +39,7 @@ export const CardFront: FC<Props> = ({
     }
 
     playRef.current.play().then(() => {
-      if (cardExampleRef.current) {
+      if (cardExampleRef.current && playRandomExample) {
         cardExampleRef.current.play();
       }
     });

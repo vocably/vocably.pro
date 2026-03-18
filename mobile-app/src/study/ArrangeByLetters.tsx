@@ -27,12 +27,14 @@ type Props = {
   card: CardItem;
   onGrade: (score: SrsScore) => void;
   autoPlay?: boolean;
+  playRandomExample?: boolean;
 };
 
 export const ArrangeByLetters: FC<Props> = ({
   card,
   onGrade,
   autoPlay = false,
+  playRandomExample = true,
 }) => {
   const displayerRef = useRef<DisplayerRef>(null);
   const theme = useTheme();
@@ -64,7 +66,9 @@ export const ArrangeByLetters: FC<Props> = ({
 
     const timeOutId = setTimeout(async () => {
       await playSoundRef.current?.play();
-      await reverseCardFrontRef.current?.playExample();
+      if (playRandomExample) {
+        await reverseCardFrontRef.current?.playExample();
+      }
     }, 500);
 
     return () => {

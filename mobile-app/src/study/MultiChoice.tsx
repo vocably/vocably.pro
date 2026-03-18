@@ -14,6 +14,7 @@ import { PADDING_VERTICAL } from './StudyScreen';
 
 type Props = {
   autoPlay: boolean;
+  playRandomExample: boolean;
   card: CardItem;
   onGrade: (score: SrsScore) => void;
   alternatives: CardItem[];
@@ -187,8 +188,8 @@ export const MultiChoice: FC<Props> = ({
                     backgroundColor: wrong.includes(answerCard.id)
                       ? theme.colors.error
                       : correct === answerCard.id
-                      ? theme.colors.primary
-                      : theme.colors.background,
+                        ? theme.colors.primary
+                        : theme.colors.background,
                   }}
                 >
                   <View
@@ -205,8 +206,8 @@ export const MultiChoice: FC<Props> = ({
                         color: wrong.includes(answerCard.id)
                           ? theme.colors.onError
                           : correct === answerCard.id
-                          ? theme.colors.onPrimary
-                          : theme.colors.primary,
+                            ? theme.colors.onPrimary
+                            : theme.colors.primary,
                       }}
                     >
                       {direction === 'back'
@@ -226,8 +227,8 @@ export const MultiChoice: FC<Props> = ({
                               color: wrong.includes(answerCard.id)
                                 ? theme.colors.onError
                                 : correct === answerCard.id
-                                ? theme.colors.onPrimary
-                                : theme.colors.primary,
+                                  ? theme.colors.onPrimary
+                                  : theme.colors.primary,
                             }}
                           >
                             {' '}

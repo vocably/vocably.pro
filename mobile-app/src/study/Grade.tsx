@@ -8,6 +8,7 @@ import { SwipeGrade } from './SwipeGrade';
 
 type Props = {
   autoPlay: boolean;
+  playRandomExample: boolean;
   studySteps: StudyFlowType[];
   card: CardItem;
   onGrade: (score: SrsScore) => void;
@@ -20,6 +21,7 @@ export const Grade: FC<Props> = ({
   studySteps,
   existingCards,
   autoPlay,
+  playRandomExample,
   onGrade,
   prerenderedCards,
 }) => {
@@ -35,7 +37,12 @@ export const Grade: FC<Props> = ({
       case 'sb':
         return (
           <SwipeGrade onGrade={onGrade} key={card.id}>
-            <Card autoPlay={autoPlay} card={card} direction="back" />
+            <Card
+              autoPlay={autoPlay}
+              playRandomExample={playRandomExample}
+              card={card}
+              direction="back"
+            />
           </SwipeGrade>
         );
       case 'mf':
@@ -43,6 +50,7 @@ export const Grade: FC<Props> = ({
           <MultiChoice
             key={card.id}
             autoPlay={autoPlay}
+            playRandomExample={playRandomExample}
             card={card}
             alternatives={immediateStep.multiChoice}
             onGrade={onGrade}
@@ -54,6 +62,7 @@ export const Grade: FC<Props> = ({
           <MultiChoice
             key={card.id}
             autoPlay={autoPlay}
+            playRandomExample={playRandomExample}
             card={card}
             alternatives={immediateStep.multiChoice}
             onGrade={onGrade}
@@ -64,6 +73,7 @@ export const Grade: FC<Props> = ({
         return (
           <ArrangeByLetters
             autoPlay={autoPlay}
+            playRandomExample={playRandomExample}
             key={card.id}
             card={card}
             onGrade={onGrade}
@@ -72,7 +82,12 @@ export const Grade: FC<Props> = ({
       default:
         return (
           <SwipeGrade onGrade={onGrade} key={card.id}>
-            <Card autoPlay={autoPlay} card={card} direction="front" />
+            <Card
+              autoPlay={autoPlay}
+              playRandomExample={playRandomExample}
+              card={card}
+              direction="front"
+            />
           </SwipeGrade>
         );
     }

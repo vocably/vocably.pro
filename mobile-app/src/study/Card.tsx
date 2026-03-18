@@ -51,11 +51,17 @@ const setTapHelperIsNeeded = async (isNeeded: boolean) => {
 
 type Props = {
   autoPlay: boolean;
+  playRandomExample: boolean;
   card: CardItem;
   direction: 'front' | 'back';
 };
 
-export const Card: FC<Props> = ({ card, autoPlay, direction }) => {
+export const Card: FC<Props> = ({
+  card,
+  autoPlay,
+  playRandomExample,
+  direction,
+}) => {
   const flipAnimation = useRef(new Animated.Value(0)).current;
   const flipToFrontStyle = {
     transform: [
@@ -135,7 +141,11 @@ export const Card: FC<Props> = ({ card, autoPlay, direction }) => {
             pointerEvents={!isFlipped ? 'none' : 'auto'}
           >
             {isReverse ? (
-              <ReverseCardBack autoPlay={autoPlay && isFlipped} card={card} />
+              <ReverseCardBack
+                autoPlay={autoPlay && isFlipped}
+                playRandomExample={playRandomExample}
+                card={card}
+              />
             ) : (
               <CardBack card={card} />
             )}
@@ -147,7 +157,11 @@ export const Card: FC<Props> = ({ card, autoPlay, direction }) => {
             {isReverse ? (
               <ReverseCardFront card={card} hasChecked={hasChecked} />
             ) : (
-              <CardFront autoPlay={autoPlay && !isFlipped} card={card} />
+              <CardFront
+                autoPlay={autoPlay && !isFlipped}
+                playRandomExample={playRandomExample}
+                card={card}
+              />
             )}
           </Animated.View>
         </View>

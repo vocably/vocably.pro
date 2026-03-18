@@ -23,6 +23,7 @@ import { Loader } from '../loaders/Loader';
 import { useNumberOfStudySessions } from '../RequestFeedback/useNumberOfStudySessions';
 import {
   getMaximumCardsPerSession,
+  getPlayRandomExample,
   getRandomizerEnabled,
 } from '../Settings/StudySettingsScreen';
 import { ScreenLayout } from '../ui/ScreenLayout';
@@ -50,6 +51,8 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     getAutoPlayFromStorage,
     saveAutoPlayToStorage
   );
+
+  const [playRandomExampleResult] = useAsync(getPlayRandomExample);
 
   const studySteps = useStudySteps();
 
@@ -228,7 +231,8 @@ export const StudyScreen: Props = ({ route, navigation }) => {
       isRandomizerEnabledResult.status !== 'loaded' ||
       autoPlayResult.status !== 'loaded' ||
       maximumCardsPerSessionResult.status !== 'loaded' ||
-      streakHasShownToday.status !== 'loaded'
+      streakHasShownToday.status !== 'loaded' ||
+      playRandomExampleResult.status !== 'loaded'
     ) {
       return;
     }
@@ -303,7 +307,8 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     isRandomizerEnabledResult.status !== 'loaded' ||
     autoPlayResult.status !== 'loaded' ||
     maximumCardsPerSessionResult.status !== 'loaded' ||
-    streakHasShownToday.status !== 'loaded'
+    streakHasShownToday.status !== 'loaded' ||
+    playRandomExampleResult.status !== 'loaded'
   ) {
     return <Loader>Loading...</Loader>;
   }
@@ -327,6 +332,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
                   card={card}
                   onGrade={onGrade}
                   autoPlay={autoPlayResult.value}
+                  playRandomExample={playRandomExampleResult.value}
                   existingCards={allCards}
                   studySteps={studySteps}
                   prerenderedCards={
