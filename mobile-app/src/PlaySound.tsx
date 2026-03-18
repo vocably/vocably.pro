@@ -33,13 +33,25 @@ type Props = {
   text: string;
   language: GoogleTTSLanguage;
   size?: number;
+  hitSlop?: number;
   style?: StyleProp<ViewStyle>;
   color?: ColorValue;
   autoPlay?: boolean;
 };
 
 export const PlaySound = forwardRef<PlaySoundRef, Props>(
-  ({ text, language, size = 16, style = {}, color, autoPlay = false }, ref) => {
+  (
+    {
+      text,
+      language,
+      size = 16,
+      style = {},
+      color,
+      autoPlay = false,
+      hitSlop = 20,
+    },
+    ref
+  ) => {
     const theme = useTheme();
 
     const [isPlaying, setIsPlaying] = useState(false);
@@ -170,7 +182,7 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
 
     return (
       <Pressable
-        hitSlop={20}
+        hitSlop={hitSlop}
         style={({ pressed }) => [
           {
             opacity: pressed ? pressedIconButtonOpacity : iconButtonOpacity,

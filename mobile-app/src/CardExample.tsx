@@ -55,6 +55,7 @@ export const CardExample: FC<Props> = ({
               text={text}
               language={language}
               size={20}
+              hitSlop={4}
               style={{
                 transform: [
                   {
