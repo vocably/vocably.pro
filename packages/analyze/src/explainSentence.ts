@@ -2,13 +2,16 @@ import { createUserContent, GoogleGenAI } from '@google/genai';
 import { chatGptRequest, GPT_4O } from '@vocably/lambda-shared';
 import {
   ExplainPayload,
-  Explanation,
   languageList,
   Result,
   resultify,
 } from '@vocably/model';
 import { config } from './config';
 import { fallback } from './fallback';
+
+type Explanation = {
+  explanation: string;
+};
 
 export const explainGemini = async ({
   targetLanguage,
@@ -49,8 +52,6 @@ export const explainGemini = async ({
   return {
     success: true,
     value: {
-      sourceLanguage,
-      targetLanguage,
       explanation: result.value.text ?? '',
     },
   };
@@ -93,8 +94,6 @@ export const explainGpt = async ({
   return {
     success: true,
     value: {
-      sourceLanguage,
-      targetLanguage,
       explanation: responseResult.value,
     },
   };

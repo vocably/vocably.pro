@@ -1,4 +1,8 @@
-import { configureAnalyzer, explainSentence } from '@vocably/analyze';
+import {
+  configureAnalyzer,
+  explainSentence,
+  mineUnitsOfSpeech,
+} from '@vocably/analyze';
 import { trimArticle } from '@vocably/sulna';
 import {
   type APIGatewayProxyEvent,
@@ -10,6 +14,7 @@ import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
 import { extractPayload } from './extractPayload';
 import { sanitizePayload } from './sanitizePayload';
+import { Explanation } from '@vocably/model';
 
 configureAnalyzer({
   googleProjectId: process.env.GOOGLE_PROJECT_ID as string,
@@ -26,7 +31,7 @@ export const explain = async (
     of(event).pipe(
       map(extractPayload),
       map(sanitizePayload),
-      mergeMap((payload) => {
+      mergeMap(async (payload) => {
         const source = trimArticle(
           payload.sourceLanguage,
           payload.source.trim()
@@ -43,15 +48,29 @@ export const explain = async (
           });
         }
 
-        return explainSentence(payload);
-      }),
-      map((result) => {
-        if (result.success === false) {
-          throw result;
+        const [explainResult, mineUnitsOfSpeechResult] = await Promise.all([
+          explainSentence(payload),
+          mineUnitsOfSpeech(payload),
+        ]);
+
+        if (explainResult.success === false) {
+          throw explainResult;
         }
 
+        const explanation: Explanation = {
+          sourceLanguage: payload.sourceLanguage,
+          targetLanguage: payload.targetLanguage,
+          explanation: explainResult.value.explanation,
+          unitsOfSpeech: mineUnitsOfSpeechResult.success
+            ? mineUnitsOfSpeechResult.value
+            : [],
+        };
+
+        return explanation;
+      }),
+      map((explanation) => {
         return buildResponse({
-          body: JSON.stringify(result.value),
+          body: JSON.stringify(explanation),
         });
       }),
       catchError(buildErrorResponse)

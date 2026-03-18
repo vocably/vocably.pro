@@ -10,6 +10,7 @@ export { buildBulkAnalysisResult } from './buildBulkAnalysisResult';
 export { buildResult } from './buildResult';
 export { configureAnalyzer } from './config';
 export { explainSentence } from './explainSentence';
+export { mineUnitsOfSpeech } from './mineUnitsOfSpeech';
 export * from './generateUnitsOfSpeech';
 export { isVerb } from './isVerb';
 export {
