@@ -38,6 +38,8 @@ export const CardExample: FC<Props> = ({
 
   const fontScale = PixelRatio.getFontScale();
 
+  const playDisabled = mask !== undefined;
+
   return (
     <>
       {examples.map((text, index) => (
@@ -50,12 +52,13 @@ export const CardExample: FC<Props> = ({
             },
           ]}
         >
-          {isGoogleTTSLanguage(language) && mask === undefined ? (
+          {isGoogleTTSLanguage(language) ? (
             <PlaySound
               text={text}
               language={language}
               size={20}
               hitSlop={4}
+              disabled={playDisabled}
               style={{
                 transform: [
                   {
@@ -66,7 +69,7 @@ export const CardExample: FC<Props> = ({
                   },
                   { translateX: -2 },
                 ],
-                opacity: 0.2,
+                opacity: playDisabled ? 0.8 : 0.2,
               }}
             />
           ) : (
