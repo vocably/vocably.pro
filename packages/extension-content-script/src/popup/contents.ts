@@ -112,22 +112,20 @@ export const setContents = async ({
             translation.play();
           }, 50);
         }
+      }
 
-        const source =
-          translationResult.value.cards.length === 1
-            ? translationResult.value.cards[0].data.source
-            : translationResult.value.source;
-
+      if (
+        translationResult.success === true &&
+        translationResult.value.isDirect &&
+        (translationResult.value.detectedInputType === 'sentence' ||
+          translationResult.value.detectedInputType === 'phrase')
+      ) {
         translation.explanation = { state: 'loading' };
-        if (translationResult.value.source.trim().split(' ').length === 1) {
-          translation.explanationAnimationDelay = 2000;
-        }
-
         api
           .explain({
             sourceLanguage: translationResult.value.sourceLanguage,
             targetLanguage: translationResult.value.targetLanguage,
-            source: source,
+            source: translationResult.value.source,
           })
           .then((result) => {
             if (result.success === true && result.value.explanation) {

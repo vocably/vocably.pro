@@ -101,6 +101,7 @@ registerContentScript({
                 sourceLanguage: payload.sourceLanguage,
                 targetLanguage: payload.targetLanguage,
                 explanation: '',
+                unitsOfSpeech: [],
               },
             });
           }
@@ -125,6 +126,7 @@ registerContentScript({
                 '   - "of sitting" - указывает причину усталости, то есть усталость вызвана длительным сидением.\n' +
                 '\n' +
                 'Понимание этих аспектов поможет правильно интерпретировать предложение.',
+              unitsOfSpeech: [],
             },
           });
         }, 4000);

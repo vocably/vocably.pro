@@ -312,6 +312,7 @@ export const registerServiceWorker = (
         source: analysisResult.value.source,
         sourceLanguage: analysisResult.value.sourceLanguage,
         targetLanguage: analysisResult.value.targetLanguage,
+        isDirect: analysisResult.value.isDirect,
         detectedInputType: analysisResult.value.detectedInputType,
         aiThinksItIs: analysisResult.value.aiThinksItIs,
         tags: loadLanguageDeckResult.value.tags,

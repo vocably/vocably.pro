@@ -17,6 +17,7 @@ export type TranslationCards = {
   explanation: string;
   sourceLanguage: GoogleLanguage;
   targetLanguage: GoogleLanguage;
+  isDirect?: boolean;
   detectedInputType?: DetectedInputType;
   aiThinksItIs?: string;
   cards: TranslationCard[];
