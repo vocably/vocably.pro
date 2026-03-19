@@ -105,10 +105,6 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  stringify(value: any) {
-    return JSON.stringify(value, null, 2);
-  }
-
   onSearchValuesChanged(values: any) {
     localStorage.setItem(lastUsedSearchValuesKey, JSON.stringify(values));
     this.searchValues = values;

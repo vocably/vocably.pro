@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, CardsLimit, DeleteTagPayload, DetachTagPayload, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
+import { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, CardItem, CardsLimit, DeleteTagPayload, DetachTagPayload, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
 import { SearchValues } from "./components/search-form/types";
 import { ComponentExplanationState } from "./components/translation/translation";
 export namespace Components {
@@ -203,6 +203,34 @@ export namespace Components {
         "updateTag": (
     data: UpdateTagPayload
   ) => Promise<Result<TranslationCards>>;
+    }
+    interface VocablyTranslationCard {
+        "addClick": () => void;
+        "canAdd": boolean;
+        "canCongratulate": boolean;
+        "card": TranslationCard;
+        "cardsLimit": CardsLimit;
+        "detachTagHandler": (
+    card: CardItem,
+    tag: TagItem
+  ) => () => Promise<any>;
+        "disabled": boolean;
+        "isLast": boolean;
+        "isLightweight": boolean;
+        "isUpdating": TranslationCard | null;
+        "paymentLink": string;
+        "playAudioPronunciation": (
+    payload: AudioPronunciationPayload
+  ) => Promise<Result<true>>;
+        "removeClick": () => void;
+        "removing": { card: CardItem; tag: TagItem } | null;
+        "showAddAttempt": boolean;
+        "showCongratulation": boolean;
+        "tagMenuClick": (target: HTMLElement) => void;
+        "updateCard": (
+    data: Partial<Card>
+  ) => Promise<Result<TranslationCards>>;
+        "watchMePayingClick": () => void;
     }
 }
 export interface VocablyAnimatedContentWrapperCustomEvent<T> extends CustomEvent<T> {
@@ -514,6 +542,12 @@ declare global {
         prototype: HTMLVocablyTranslationElement;
         new (): HTMLVocablyTranslationElement;
     };
+    interface HTMLVocablyTranslationCardElement extends Components.VocablyTranslationCard, HTMLStencilElement {
+    }
+    var HTMLVocablyTranslationCardElement: {
+        prototype: HTMLVocablyTranslationCardElement;
+        new (): HTMLVocablyTranslationCardElement;
+    };
     interface HTMLElementTagNameMap {
         "vocably-animated-content-wrapper": HTMLVocablyAnimatedContentWrapperElement;
         "vocably-button": HTMLVocablyButtonElement;
@@ -559,6 +593,7 @@ declare global {
         "vocably-tag-form": HTMLVocablyTagFormElement;
         "vocably-tags-menu": HTMLVocablyTagsMenuElement;
         "vocably-translation": HTMLVocablyTranslationElement;
+        "vocably-translation-card": HTMLVocablyTranslationCardElement;
     }
 }
 declare namespace LocalJSX {
@@ -775,6 +810,34 @@ declare namespace LocalJSX {
     data: UpdateTagPayload
   ) => Promise<Result<TranslationCards>>;
     }
+    interface VocablyTranslationCard {
+        "addClick"?: () => void;
+        "canAdd"?: boolean;
+        "canCongratulate"?: boolean;
+        "card"?: TranslationCard;
+        "cardsLimit"?: CardsLimit;
+        "detachTagHandler"?: (
+    card: CardItem,
+    tag: TagItem
+  ) => () => Promise<any>;
+        "disabled"?: boolean;
+        "isLast"?: boolean;
+        "isLightweight"?: boolean;
+        "isUpdating"?: TranslationCard | null;
+        "paymentLink"?: string;
+        "playAudioPronunciation"?: (
+    payload: AudioPronunciationPayload
+  ) => Promise<Result<true>>;
+        "removeClick"?: () => void;
+        "removing"?: { card: CardItem; tag: TagItem } | null;
+        "showAddAttempt"?: boolean;
+        "showCongratulation"?: boolean;
+        "tagMenuClick"?: (target: HTMLElement) => void;
+        "updateCard"?: (
+    data: Partial<Card>
+  ) => Promise<Result<TranslationCards>>;
+        "watchMePayingClick"?: () => void;
+    }
     interface IntrinsicElements {
         "vocably-animated-content-wrapper": VocablyAnimatedContentWrapper;
         "vocably-button": VocablyButton;
@@ -820,6 +883,7 @@ declare namespace LocalJSX {
         "vocably-tag-form": VocablyTagForm;
         "vocably-tags-menu": VocablyTagsMenu;
         "vocably-translation": VocablyTranslation;
+        "vocably-translation-card": VocablyTranslationCard;
     }
 }
 export { LocalJSX as JSX };
@@ -870,6 +934,7 @@ declare module "@stencil/core" {
             "vocably-tag-form": LocalJSX.VocablyTagForm & JSXBase.HTMLAttributes<HTMLVocablyTagFormElement>;
             "vocably-tags-menu": LocalJSX.VocablyTagsMenu & JSXBase.HTMLAttributes<HTMLVocablyTagsMenuElement>;
             "vocably-translation": LocalJSX.VocablyTranslation & JSXBase.HTMLAttributes<HTMLVocablyTranslationElement>;
+            "vocably-translation-card": LocalJSX.VocablyTranslationCard & JSXBase.HTMLAttributes<HTMLVocablyTranslationCardElement>;
         }
     }
 }
