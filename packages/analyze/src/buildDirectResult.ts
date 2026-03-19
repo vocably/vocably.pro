@@ -52,11 +52,16 @@ export const buildDirectResult = async (
   }
 
   if (unitOfSpeechTypes.includes(detectedTypeResult.value.type)) {
-    return unitOfSpeechAnalysis(payload);
+    return unitOfSpeechAnalysis({
+      ...payload,
+      isDirect: detectedTypeResult.value.isDirect,
+      inputType: detectedTypeResult.value.type,
+    });
   }
 
   return sentenceAnalysis({
     ...payload,
     inputType: detectedTypeResult.value.type,
+    isDirect: detectedTypeResult.value.isDirect,
   });
 };

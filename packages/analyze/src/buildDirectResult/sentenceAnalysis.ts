@@ -13,6 +13,7 @@ type Payload = {
   source: string;
   sourceLanguage: GoogleLanguage;
   targetLanguage: GoogleLanguage;
+  isDirect: boolean;
   inputType: DetectedInputType;
   translation?: Translation;
 };
@@ -21,6 +22,7 @@ export const sentenceAnalysis = async ({
   source,
   sourceLanguage,
   targetLanguage,
+  isDirect,
   inputType,
   translation: preTranslatedTranslation,
 }: Payload): Promise<Result<DirectAnalysis>> => {
@@ -64,6 +66,8 @@ export const sentenceAnalysis = async ({
           partOfSpeech: inputType,
         },
       ],
+      isDirect,
+      detectedInputType: inputType,
     },
   };
 };

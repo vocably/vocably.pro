@@ -54,6 +54,8 @@
       {{ 'home.requesting_chatgpt' | translate }}
     </div>
 
+    {{ stringify(searchResult) }}
+
     <vocably-translation
       *ngIf="searchResult"
       style="margin-top: 12px"

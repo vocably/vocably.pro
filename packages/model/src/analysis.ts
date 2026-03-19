@@ -77,7 +77,7 @@ export const inputTypes = [
   'idiom',
 ] as const;
 
-export type DetectedInputType = typeof inputTypes[number];
+export type DetectedInputType = (typeof inputTypes)[number];
 
 export const unitOfSpeechTypes: DetectedInputType[] = [
   'word',
@@ -95,8 +95,8 @@ export type DirectAnalysis = {
   // ToDo: Remove
   translation: Translation;
   items: ValidAnalysisItems;
-  isDirect?: boolean;
-  detectedInputType?: DetectedInputType;
+  isDirect: boolean;
+  detectedInputType: DetectedInputType;
   aiThinksItIs?: string;
 };
 

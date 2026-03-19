@@ -30,6 +30,7 @@ export const directContextAnalysis = async ({
   sourceLanguage,
   targetLanguage,
   context,
+  isDirect,
   inputType,
 }: Payload): Promise<Result<DirectAnalysis>> => {
   const source = ['word', 'compound word'].includes(inputType)
@@ -103,6 +104,8 @@ export const directContextAnalysis = async ({
         sourceLanguage: sourceLanguage,
         translation: translation,
         items: resultItems,
+        isDirect: isDirect,
+        detectedInputType: inputType,
       },
     };
   }

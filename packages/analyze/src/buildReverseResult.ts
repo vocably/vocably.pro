@@ -47,6 +47,8 @@ export const buildReverseResultYes = async (
           sourceLanguage: payload.sourceLanguage,
           targetLanguage: payload.targetLanguage,
           predefinedPartsOfSpeech,
+          isDirect: inputAnalysis.isDirect,
+          inputType: inputAnalysis.type,
         });
       }
 
@@ -54,6 +56,7 @@ export const buildReverseResultYes = async (
         source: reverseTranslation.target,
         sourceLanguage: payload.sourceLanguage,
         targetLanguage: payload.targetLanguage,
+        isDirect: inputAnalysis.isDirect,
         inputType: inputAnalysis.type,
         translation: {
           source: reverseTranslation.target,

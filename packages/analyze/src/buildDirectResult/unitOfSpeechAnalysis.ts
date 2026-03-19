@@ -1,4 +1,5 @@
 import {
+  DetectedInputType,
   DirectAnalysis,
   GoogleLanguage,
   isSuccess,
@@ -19,6 +20,8 @@ type Payload = {
   sourceLanguage: GoogleLanguage;
   targetLanguage: GoogleLanguage;
   predefinedPartsOfSpeech?: PartOfSpeech[];
+  isDirect: boolean;
+  inputType: DetectedInputType;
 };
 
 export const unitOfSpeechAnalysis = async ({
@@ -26,6 +29,8 @@ export const unitOfSpeechAnalysis = async ({
   sourceLanguage,
   targetLanguage,
   predefinedPartsOfSpeech = [],
+  isDirect,
+  inputType,
 }: Payload): Promise<Result<DirectAnalysis>> => {
   const trimmedSource = trimSenselessArticle(sourceLanguage, source);
 
@@ -79,6 +84,8 @@ export const unitOfSpeechAnalysis = async ({
         sourceLanguage: sourceLanguage,
         translation: translation,
         items: resultItems,
+        isDirect,
+        detectedInputType: inputType,
       },
     };
   }
@@ -97,6 +104,8 @@ export const unitOfSpeechAnalysis = async ({
       sourceLanguage: sourceLanguage,
       translation: translation,
       items: resultItems,
+      isDirect,
+      detectedInputType: inputType,
     },
   };
 };

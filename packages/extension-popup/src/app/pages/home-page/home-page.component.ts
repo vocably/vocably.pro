@@ -105,6 +105,10 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  stringify(value: any) {
+    return JSON.stringify(value, null, 2);
+  }
+
   onSearchValuesChanged(values: any) {
     localStorage.setItem(lastUsedSearchValuesKey, JSON.stringify(values));
     this.searchValues = values;
@@ -152,36 +156,39 @@ export class HomePageComponent implements OnInit {
     this.searchResult = analyzeResult;
     this.cardsLimit = cardsLimit;
 
-    if (analyzeResult.success === true) {
-      environment
-        .askForRating({
-          translationResult: analyzeResult,
-          extensionPlatform: this.extensionPlatform.platform,
-        })
-        .then((result) => {
-          this.askForRating = result;
-        });
+    this.isSearching = false;
 
+    this.explanationState = {
+      state: 'none',
+    };
+
+    if (analyzeResult.success === false) {
+      return;
+    }
+
+    environment
+      .askForRating({
+        translationResult: analyzeResult,
+        extensionPlatform: this.extensionPlatform.platform,
+      })
+      .then((result) => {
+        this.askForRating = result;
+      });
+
+    if (
+      analyzeResult.value.isDirect &&
+      (analyzeResult.value.detectedInputType === 'sentence' ||
+        analyzeResult.value.detectedInputType === 'phrase')
+    ) {
       this.explanationState = {
         state: 'loading',
       };
-
-      if (analyzeResult.value.source.trim().split(' ').length === 1) {
-        this.explanationAnimationDelay = 2000;
-      } else {
-        this.explanationAnimationDelay = 0;
-      }
-
-      const source =
-        analyzeResult.value.cards.length === 1
-          ? analyzeResult.value.cards[0].data.source
-          : analyzeResult.value.source;
 
       environment
         .explain({
           sourceLanguage: analyzeResult.value.sourceLanguage,
           targetLanguage: analyzeResult.value.targetLanguage,
-          source: source,
+          source: analyzeResult.value.source,
         })
         .then((explanationResult) => {
           if (explanationResult.success === false) {
@@ -205,8 +212,6 @@ export class HomePageComponent implements OnInit {
           };
         });
     }
-
-    this.isSearching = false;
   }
 
   async addCard(event: any) {

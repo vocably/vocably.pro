@@ -124,6 +124,7 @@ const mockExplain: typeof explain = async (payload) => {
     value: {
       sourceLanguage: payload.sourceLanguage,
       targetLanguage: payload.targetLanguage,
+      unitsOfSpeech: [],
       explanation:
         'Для правильного понимания этого предложения обратите внимание на следующие моменты:\n' +
         '\n' +
