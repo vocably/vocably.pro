@@ -27,6 +27,17 @@ export const buildDirectResult = async (
   }
 
   if (
+    detectedTypeResult.value.isDirect &&
+    detectedTypeResult.value.type === 'sentence'
+  ) {
+    return sentenceAnalysis({
+      ...payload,
+      inputType: detectedTypeResult.value.type,
+      isDirect: detectedTypeResult.value.isDirect,
+    });
+  }
+
+  if (
     isString(payload.context) &&
     payload.context.length > payload.source.length
   ) {
