@@ -1,4 +1,3 @@
-@use 'sass:math';
 @import '../../styles/component';
 
 $input-padding-x: 14px;
@@ -144,82 +143,6 @@ $section-margin: 8px;
   }
 }
 
-.vocably-card {
-  .vocably-card-container {
-    position: relative;
-  }
-
-  .vocably-safe-action-area {
-    padding-right: 34px;
-  }
-
-  &:first-child {
-    border-top: none;
-  }
-
-  .vocably-card-source {
-    padding-right: 50px;
-  }
-
-  .vocably-card-action {
-    $size: 24px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: $size;
-    height: $size;
-    line-height: $size;
-    text-align: center;
-  }
-
-  .vocably-card-action-button {
-    padding: 0;
-    margin: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    min-width: auto;
-    box-shadow: none;
-    color: $v-light-color-primary;
-
-    &:hover {
-      filter: brightness(80%);
-    }
-
-    &:active {
-      filter: brightness(60%);
-    }
-
-    & > * {
-      vertical-align: middle;
-    }
-
-    &.vocably-card-add-button {
-      --button-color: #{$v-light-color-primary};
-      --color: var(--button-color);
-
-      border: 1.5px solid var(--button-color);
-      color: var(--button-color);
-      border-radius: 16px;
-      padding-right: 8px !important;
-      padding-left: 2px !important;
-      height: 32px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      vocably-icon-spin {
-        --color: var(--button-color);
-      }
-
-      vocably-icon-plus {
-        --color: var(--button-color);
-      }
-    }
-  }
-}
-
 vocably-play-sound {
   opacity: 0.8;
 
@@ -246,16 +169,6 @@ vocably-play-sound {
 .vocably-direct-translation {
   display: flex;
   flex-direction: row;
-}
-
-.vocably-added-congratulation {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
-
-  &.vocably-added-congratulation-visible {
-    max-height: 750px;
-  }
 }
 
 .vocably-list {
@@ -321,69 +234,6 @@ vocably-play-sound {
   color: $v-light-color-emphasize !important;
 }
 
-.vocably-tag {
-  border: none;
-  border-radius: math.div($v-border-radius, 2);
-  background-color: $v-light-color-elevation-2;
-  padding: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-
-.vocably-tag-remove-button {
-  $height: 24px;
-
-  @include unstyled();
-
-  vertical-align: middle;
-  height: $height;
-  opacity: 0.3;
-  transition: opacity 300ms;
-  transform: scale(80%);
-
-  .vocably-tag-remove-button-icon {
-    --color: #{$v-light-color-muted};
-    --size: #{$height};
-  }
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
 .padding-left-12 {
   padding-left: 12px;
-}
-
-.max-limit-1 {
-  overflow: hidden;
-  color: $v-light-color-emphasize;
-  max-height: 0;
-  transition: max-height 0.5s ease-in-out;
-
-  &.max-limit-visible {
-    max-height: 200px;
-  }
-
-  .max-limit-2 {
-    padding-bottom: 12px;
-  }
-
-  .max-limit-3 {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-
-  .upgrade-button {
-    flex: 1;
-    @include button();
-    min-width: 200px;
-    padding-left: 16px;
-    padding-right: 16px;
-  }
 }
