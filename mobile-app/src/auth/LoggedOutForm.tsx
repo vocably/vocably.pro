@@ -6,9 +6,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { mainPadding } from '../styles';
 import { signIn, signInWithAnIdioticCognitoFlow } from './logInFunctions';
 
-type Props = {};
+type Props = {
+  onSignOut?: () => void;
+};
 
-export const LoggedOutForm: FC<Props> = () => {
+export const LoggedOutForm: FC<Props> = ({ onSignOut = () => {} }) => {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
 
@@ -45,7 +47,10 @@ export const LoggedOutForm: FC<Props> = () => {
       <Button
         mode="outlined"
         style={{ alignSelf: 'stretch' }}
-        onPress={() => signOut()}
+        onPress={async () => {
+          await signOut();
+          onSignOut();
+        }}
       >
         Sign out
       </Button>

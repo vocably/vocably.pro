@@ -56,6 +56,7 @@ type AuthErrorCode =
 
 export type ExtendedAuthStatus = {
   createAnonymousUser: () => Promise<void>;
+  reset: () => Promise<void>;
   error: AuthErrorCode | null;
 } & {
   login: LoginStatus;
@@ -68,6 +69,7 @@ export const AuthContext = createContext<ExtendedAuthStatus>({
   },
   error: null,
   createAnonymousUser: async () => {},
+  reset: async () => {},
 });
 
 const getAttributes = async (): Promise<
@@ -179,6 +181,15 @@ export const AuthContainer: FC<{
     await setAuthStatus({
       status: 'anonymous-logged-in',
       id: id,
+    });
+  };
+
+  const reset = async () => {
+    await setAuthStatus({
+      status: 'undefined',
+    });
+    await setLoginStatus({
+      reason: 'undefined',
     });
   };
 
@@ -388,6 +399,7 @@ export const AuthContainer: FC<{
     <AuthContext.Provider
       value={{
         createAnonymousUser,
+        reset,
         ...authStatusResult.value,
         login: loginStatusResult.value,
         error,

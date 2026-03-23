@@ -21,7 +21,7 @@ export const AuthFlow: FC<{
   }
 
   if (authStatus.login.reason === 'logged-out') {
-    return <LoggedOutForm />;
+    return <LoggedOutForm onSignOut={() => authStatus.reset()} />;
   }
 
   return <AuthNavigation />;
