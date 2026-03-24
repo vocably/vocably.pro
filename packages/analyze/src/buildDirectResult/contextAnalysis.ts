@@ -116,6 +116,8 @@ export const directContextAnalysis = async ({
     resultItems.push(result.value);
   });
 
+  const needsAiThinks = sourceLanguage !== targetLanguage;
+
   return {
     success: true,
     value: {
@@ -126,7 +128,9 @@ export const directContextAnalysis = async ({
       items: resultItems,
       isDirect: true,
       detectedInputType: inputType,
-      aiThinksItIs: contextAnalysisResult.value.target,
+      aiThinksItIs: needsAiThinks
+        ? contextAnalysisResult.value.target
+        : undefined,
     },
   };
 };
@@ -208,6 +212,8 @@ export const reverseContextAnalysis = async ({
     resultItems.push(result.value);
   });
 
+  const needsAiThinks = sourceLanguage !== targetLanguage;
+
   return {
     success: true,
     value: {
@@ -218,7 +224,9 @@ export const reverseContextAnalysis = async ({
       items: resultItems,
       isDirect: false,
       detectedInputType: inputType,
-      aiThinksItIs: contextAnalysisResult.value.source,
+      aiThinksItIs: needsAiThinks
+        ? contextAnalysisResult.value.source
+        : undefined,
     },
   };
 };

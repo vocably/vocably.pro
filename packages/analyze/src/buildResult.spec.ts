@@ -982,4 +982,20 @@ describe('integration check for translate lambda', () => {
       'Geerda, can you give us the bed of Grover this time?'
     );
   });
+
+  it('skips the thinking part for equal source and target languages', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'en',
+      targetLanguage: 'en',
+      context:
+        'On Tuesday, Mozilla announced a number of upcoming updates to Firefox',
+      source: 'announced',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    expect(result.value.aiThinksItIs).toBeUndefined();
+  });
 });
