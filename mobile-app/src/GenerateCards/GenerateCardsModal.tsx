@@ -290,9 +290,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                         deck={deck}
                         onRemove={onRemove}
                         onAdd={(card) => {
-                          posthog.capture('generator-add', {
-                            card: card.card,
-                          });
+                          posthog.capture('generator-add', card.card);
                           return onAdd(card);
                         }}
                         onTagsChange={onTagsChange}

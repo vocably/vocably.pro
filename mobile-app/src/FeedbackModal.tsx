@@ -1,12 +1,14 @@
 import { NavigationProp, Route } from '@react-navigation/native';
 import { sendPublicUserFeedback } from '@vocably/api';
-import { FC, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { Alert, Platform, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { useUserEmail } from './auth/useUserEmail';
 import { useTranslationPreset } from './TranslationPreset/useTranslationPreset';
 import { CustomScrollView } from './ui/CustomScrollView';
 import { FormText } from './ui/FormText';
+import { AuthContext } from './auth/AuthContainer';
+import { isFunction, pickBy } from 'lodash-es';
 
 type Props = {
   route: Route<string, any>;
@@ -22,6 +24,8 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
   const [isSending, setIsSending] = useState(false);
   const userEmail = useUserEmail();
 
+  const authContext = useContext(AuthContext);
+
   const translationPreset = useTranslationPreset();
 
   const reallySend = async () => {
@@ -34,6 +38,7 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
         translationPreset,
         extraRouteParams: route.params,
         email: userEmail,
+        authContext: pickBy(authContext, (v) => !isFunction(v)),
       },
     });
 
