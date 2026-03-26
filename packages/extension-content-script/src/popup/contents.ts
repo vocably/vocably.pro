@@ -170,9 +170,6 @@ export const setContents = async ({
     translation.addEventListener(
       'changeSourceLanguage',
       ({ detail: sourceLanguage }: CustomEvent) => {
-        if (translation.result && translation.result.success) {
-          api.cleanUp(translation.result.value);
-        }
         api.saveLocationLanguage([window.location.toString(), sourceLanguage]);
         translation.sourceLanguage = sourceLanguage;
         analyze({
@@ -202,9 +199,6 @@ export const setContents = async ({
     translation.addEventListener(
       'changeTargetLanguage',
       ({ detail: targetLanguage }: CustomEvent) => {
-        if (translation.result && translation.result.success) {
-          api.cleanUp(translation.result.value);
-        }
         translation.targetLanguage = targetLanguage;
         analyze({
           targetLanguage,

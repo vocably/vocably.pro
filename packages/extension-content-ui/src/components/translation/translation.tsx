@@ -9,6 +9,8 @@ import {
   Host,
   Method,
   Prop,
+  State,
+  Watch,
 } from '@stencil/core';
 import {
   AddCardPayload,
@@ -31,6 +33,10 @@ import {
 import showdown from 'showdown';
 import { subscribeToLocale, t } from '../../i18n';
 import { sortLanguages } from './sortLanguages';
+import {
+  createTranslationCards,
+  getAddedToday,
+} from '@vocably/model-operations';
 
 const mdConverter = new showdown.Converter();
 
@@ -111,9 +117,30 @@ export class VocablyTranslation {
 
   @Element() el: HTMLElement;
 
+  @State() addedToday = 0;
+  @State() translationCards: TranslationCard[] = [];
+
+  @Watch('result')
+  resultChanged(result: Result<TranslationCards> | null) {
+    console.log('result changed', result);
+    if (result === null || result.success === false) {
+      this.addedToday = 0;
+      this.translationCards = [];
+      return;
+    }
+
+    this.addedToday = getAddedToday(result.value.deck.cards, new Date()).length;
+    this.translationCards = createTranslationCards({
+      collection: result.value.deck.cards,
+      analysisItems: result.value.items,
+      language: result.value.sourceLanguage,
+    });
+  }
+
   private unsubLocale: (() => void) | undefined;
 
   connectedCallback() {
+    this.resultChanged(this.result);
     this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
   }
 
@@ -188,10 +215,10 @@ export class VocablyTranslation {
       !this.paymentLink ||
       (this.result &&
         this.result.success &&
-        this.result.value.collectionLength < this.cardsLimit.maxCards) ||
+        this.result.value.deck.cards.length < this.cardsLimit.maxCards) ||
       (this.result &&
         this.result.success &&
-        this.cardsLimit.cardsPerDay > this.result.value.addedToday);
+        this.cardsLimit.cardsPerDay > this.addedToday);
 
     const isOkayToAskForRating = this.askForRating && canAdd;
 
@@ -281,7 +308,7 @@ export class VocablyTranslation {
                 </div>
               )}
               <vocably-translation-cards
-                cards={this.result.value.cards}
+                cards={this.translationCards}
                 translationCards={this.result.value}
                 canAdd={!!canAdd}
                 cardsLimit={this.cardsLimit}

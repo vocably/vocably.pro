@@ -42,32 +42,55 @@ const simpletonTranslationResult: Result<TranslationCards> = {
     targetLanguage: 'en',
     detectedInputType: 'word',
     aiThinksItIs: 'created',
-    cards: [
-      {
-        data: {
-          language: 'nl',
-          source: 'gemaakt',
-          ipa: "xə'mak",
-          translation: 'created, done',
-          definition:
-            '* (iets dat nog niet bestond) laten ontstaan\n* (iets dat kapot is) zorgen dat het weer heel is',
-          example: 'Bij een gemaakte glimlach lachen onze ogen niet mee.',
-          partOfSpeech: 'verb',
-          g: 'n',
-          tense: 'present',
-          pastTenses: 'makte, gemaakt',
-          tags: [],
+    deck: {
+      language: 'nl',
+      cards: [
+        {
+          id: 'simpleton1',
+          created: 1639827779683,
+          data: {
+            language: 'nl',
+            source: 'gemaakt',
+            ipa: "xə'mak",
+            translation: 'created, done',
+            definition:
+              '(iets dat nog niet bestond) laten ontstaan\n(iets dat kapot is) zorgen dat het weer heel is',
+            example: 'Bij een gemaakte glimlach lachen onze ogen niet mee.',
+            partOfSpeech: 'verb',
+            g: 'n',
+            tense: 'present',
+            pastTenses: 'makte, gemaakt',
+            tags: [],
+            interval: 0,
+            repetition: 0,
+            eFactor: 2.5,
+            dueDate: 0,
+          },
         },
+      ],
+      tags: [],
+    },
+    items: [
+      {
+        source: 'gemaakt',
+        ipa: "xə'mak",
+        translation: 'created, done',
+        definitions: [
+          '(iets dat nog niet bestond) laten ontstaan',
+          '(iets dat kapot is) zorgen dat het weer heel is',
+        ],
+        examples: ['Bij een gemaakte glimlach lachen onze ogen niet mee.'],
+        partOfSpeech: 'verb',
+        g: 'n',
+        tense: 'present',
+        pastTenses: 'makte, gemaakt',
       },
     ],
-    tags: [],
-    collectionLength: 50,
-    addedToday: 6,
   },
 };
 
 const longCard = JSON.parse(
-  JSON.stringify(simpletonTranslationResult.value.cards[0])
+  JSON.stringify(simpletonTranslationResult.value.deck.cards[0])
 );
 
 longCard.data.source =
@@ -88,60 +111,82 @@ document.getElementById('congrats').card = longCard;
 
 // @ts-ignore
 document.getElementById('congrats-short').card =
-  simpletonTranslationResult.value.cards[0];
+  simpletonTranslationResult.value.deck.cards[0];
 
 const successfulTranslationResult: Result<TranslationCards> = {
   success: true,
   value: {
-    collectionLength: 50,
-    addedToday: 0,
     explanation: '',
     source: 'gemaakt',
     sourceLanguage: 'nl',
     targetLanguage: 'en',
     detectedInputType: 'word',
     aiThinksItIs: 'created',
-    cards: [
-      {
-        id: 'NYS4L',
-        created: 1639827779683,
-        data: {
-          language: 'nl',
-          source: 'maken',
-          ipa: "'makə(n)",
-          example: '* winst maken [make a profit]\n* De klok is weer gemaakt.',
-          definition:
-            '* (iets dat nog niet bestond) laten ontstaan\n* (iets dat kapot is) zorgen dat het weer heel is',
-          translation: 'to make',
-          partOfSpeech: 'verb',
-          tense: 'present',
-          pastTenses: 'maakte, heeft gemaakt',
-          tags: [
-            { id: '1', data: { title: 'Lesson 1' }, created: 123 },
-            { id: '2', data: { title: 'Lesson 2' }, created: 234 },
-          ],
+    deck: {
+      language: 'nl',
+      cards: [
+        {
+          id: 'NYS4L',
+          created: 1639827779683,
+          data: {
+            language: 'nl',
+            source: 'maken',
+            ipa: "'makə(n)",
+            example:
+              '* winst maken [make a profit]\n* De klok is weer gemaakt.',
+            definition:
+              '(iets dat nog niet bestond) laten ontstaan\n(iets dat kapot is) zorgen dat het weer heel is',
+            translation: 'to make',
+            partOfSpeech: 'verb',
+            tense: 'present',
+            pastTenses: 'maakte, heeft gemaakt',
+            tags: [
+              { id: '1', data: { title: 'Lesson 1' }, created: 123 },
+              { id: '2', data: { title: 'Lesson 2' }, created: 234 },
+            ],
+            interval: 0,
+            repetition: 0,
+            eFactor: 2.5,
+            dueDate: 0,
+          },
         },
+      ],
+      tags: [
+        { id: '1', data: { title: 'Lesson 1' }, created: 123 },
+        { id: '2', data: { title: 'Lesson 2' }, created: 234 },
+        { id: '3', data: { title: 'Lesson 3' }, created: 345 },
+      ],
+    },
+    items: [
+      {
+        source: 'maken',
+        ipa: "'makə(n)",
+        translation: 'to make',
+        definitions: [
+          '(iets dat nog niet bestond) laten ontstaan',
+          '(iets dat kapot is) zorgen dat het weer heel is',
+        ],
+        examples: [
+          '* winst maken [make a profit]',
+          '* De klok is weer gemaakt.',
+        ],
+        partOfSpeech: 'verb',
+        tense: 'present',
+        pastTenses: 'maakte, heeft gemaakt',
       },
       {
-        data: {
-          language: 'nl',
-          source: 'gemaakt',
-          ipa: "xə'mak",
-          example:
-            "Bij een gemaakte glimlach lachen onze ogen niet mee. [When we fake a smile, our eyes don't smile along with us.]",
-          definition:
-            'als iets niet natuurlijk is of gebeurt [if something is not natural or does not happen]',
-          translation: 'created, done',
-          partOfSpeech: 'adjective',
-          tags: [],
-          tense: 'present',
-        },
+        source: 'gemaakt',
+        ipa: "xə'mak",
+        translation: 'created, done',
+        definitions: [
+          'als iets niet natuurlijk is of gebeurt [if something is not natural or does not happen]',
+        ],
+        examples: [
+          "Bij een gemaakte glimlach lachen onze ogen niet mee. [When we fake a smile, our eyes don't smile along with us.]",
+        ],
+        partOfSpeech: 'adjective',
+        tense: 'present',
       },
-    ],
-    tags: [
-      { id: '1', data: { title: 'Lesson 1' }, created: 123 },
-      { id: '2', data: { title: 'Lesson 2' }, created: 234 },
-      { id: '3', data: { title: 'Lesson 3' }, created: 345 },
     ],
   },
 };
@@ -149,38 +194,58 @@ const successfulTranslationResult: Result<TranslationCards> = {
 const englishTranslationResult: Result<TranslationCards> = {
   success: true,
   value: {
-    collectionLength: 50,
-    addedToday: 0,
     explanation: '',
-    cards: [
-      {
-        data: {
-          language: 'en',
-          source: 'bring',
-          example:
-            '* Bring your swimsuit.\\n* March usually brings rain.\\n* We added another ten, bringing the number to 104.',
-          definition:
-            '* to have something or somebody with you when you come\n* to make sth come to a place\n* to result in a new total of',
-          translation: '',
-          partOfSpeech: 'verb',
-          tense: 'present',
-          pastTenses: 'brought',
-          interval: 0,
-          repetition: 0,
-          eFactor: 2.5,
-          dueDate: 1651622400000,
-          tags: [],
-        },
-        id: 'ifu0J',
-        created: 1651656677053,
-      },
-    ],
     source: 'bringing',
     sourceLanguage: 'en',
     targetLanguage: 'en',
     detectedInputType: 'word',
     aiThinksItIs: 'bringing',
-    tags: [],
+    deck: {
+      language: 'en',
+      cards: [
+        {
+          id: 'ifu0J',
+          created: 1651656677053,
+          data: {
+            language: 'en',
+            source: 'bring',
+            example:
+              '* Bring your swimsuit.\n* March usually brings rain.\n* We added another ten, bringing the number to 104.',
+            definition:
+              'to have something or somebody with you when you come\nto make sth come to a place\nto result in a new total of',
+            translation: '',
+            partOfSpeech: 'verb',
+            tense: 'present',
+            pastTenses: 'brought',
+            interval: 0,
+            repetition: 0,
+            eFactor: 2.5,
+            dueDate: 1651622400000,
+            tags: [],
+          },
+        },
+      ],
+      tags: [],
+    },
+    items: [
+      {
+        source: 'bring',
+        translation: '',
+        definitions: [
+          'to have something or somebody with you when you come',
+          'to make sth come to a place',
+          'to result in a new total of',
+        ],
+        examples: [
+          '* Bring your swimsuit.',
+          '* March usually brings rain.',
+          '* We added another ten, bringing the number to 104.',
+        ],
+        partOfSpeech: 'verb',
+        tense: 'present',
+        pastTenses: 'brought',
+      },
+    ],
   },
 };
 

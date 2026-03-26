@@ -1,6 +1,6 @@
-import { DetectedInputType } from './analysis';
+import { AnalysisItem, DetectedInputType } from './analysis';
 import { GoogleLanguage } from './language';
-import { Card, CardItem, TagItem } from './language-deck';
+import { Card, CardItem, LanguageDeck, TagItem } from './language-deck';
 
 export type DetachedCard = Omit<
   CardItem['data'],
@@ -20,10 +20,8 @@ export type TranslationCards = {
   isDirect?: boolean;
   detectedInputType?: DetectedInputType;
   aiThinksItIs?: string;
-  cards: TranslationCard[];
-  tags: TagItem[];
-  collectionLength: number;
-  addedToday: number;
+  deck: LanguageDeck;
+  items: AnalysisItem[];
 };
 
 export type RemoveCardPayload = {

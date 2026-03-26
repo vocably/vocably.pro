@@ -7,3 +7,6 @@ export * from './languageToLexicalaLanguage';
 export * from './restClient';
 export * from './retry';
 export * from './setStreak';
+export * from './analysisItemToCard';
+export * from './createTranslationCards';
+export * from './updateDetachedCard';

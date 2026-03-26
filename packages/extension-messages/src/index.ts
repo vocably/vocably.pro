@@ -117,11 +117,6 @@ export const [getLanguagePairs, onGetLanguagePairs] = createScopedMessage<
   LanguagePairs
 >('getLanguagePairs');
 
-export const [cleanUp, onCleanUpRequest] = createScopedMessage<
-  TranslationCards,
-  Result<null>
->('cleanUp');
-
 export const [ping, onPing] = createScopedMessage<void, string>('ping');
 
 export const [getInternalProxyLanguage, onGetInternalProxyLanuage] =
