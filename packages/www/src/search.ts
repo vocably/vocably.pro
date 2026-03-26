@@ -113,27 +113,13 @@ const createTranslationCards = (
       targetLanguage: analyzeResult.value.targetLanguage,
       detectedInputType: analyzeResult.value.detectedInputType,
       aiThinksItIs: analyzeResult.value.aiThinksItIs,
-      tags: [],
-      cards: analyzeResult.value.items.map<TranslationCard>((item) => ({
-        data: {
-          source: item.source,
-          translation: item.translation,
-          partOfSpeech: item.partOfSpeech,
-          definition: join(item.definitions),
-          example: join(item.examples ?? []),
-          ipa: item.ipa,
-          g: item.g,
-          tags: [],
-          language: analyzeResult.value.sourceLanguage,
-          tense: item.tense,
-          pastTenses: item.pastTenses,
-          number: item.number,
-          pluralForm: item.pluralForm,
-        },
-      })),
+      items: analyzeResult.value.items,
+      deck: {
+        language: analyzeResult.value.sourceLanguage,
+        cards: [],
+        tags: [],
+      },
       explanation: '',
-      collectionLength: 0,
-      addedToday: 0,
     },
   };
 };

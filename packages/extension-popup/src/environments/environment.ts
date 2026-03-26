@@ -19,9 +19,11 @@ import {
   updateCard,
   updateTag,
 } from '@vocably/extension-messages';
-import { isEqual, merge } from 'lodash-es';
+import { merge } from 'lodash-es';
 import { environmentLocal } from './environmentLocal';
 import { detectLocale } from '@vocably/browser-i18n';
+import { isCardItem, isDetachedCardItem } from '@vocably/model';
+import { updateDetachedCard } from '@vocably/model-operations';
 
 let settings: ExtensionSettings = {
   showOnDoubleClick: true,
@@ -65,54 +67,61 @@ const mockAnalyze: typeof analyze = async () => {
   return {
     success: true,
     value: {
-      cards: [
-        {
-          data: {
-            language: 'nl',
-            source: 'gemaakt',
-            g: 'f',
-            ipa: 'ɣəˈmaːkt',
-            example: 'Bij een gemaakte glimlach lachen onze ogen niet mee.',
-            definition: 'als iets niet natuurlijk is of gebeurt',
-            translation: 'made',
-            partOfSpeech: 'adjective',
-            interval: 0,
-            repetition: 0,
-            eFactor: 2.5,
-            dueDate: 1646179200000,
-            tags: [],
-          },
-        },
-        {
-          id: 'Oqewl',
-          created: 1646242718636,
-          data: {
-            language: 'nl',
-            source: 'maken',
-            g: 'f',
-            ipa: 'ˈmaːkə(n)',
-            example: '* winst maken\n* De klok is weer gemaakt.',
-            definition:
-              '* (iets dat nog niet bestond) laten ontstaan\n* (iets dat kapot is) zorgen dat het weer heel is',
-            translation: 'to make',
-            partOfSpeech: 'verb',
-            interval: 0,
-            repetition: 0,
-            eFactor: 2.5,
-            dueDate: 1646179200000,
-            tags: [],
-          },
-        },
-      ],
       source: 'gemaakt',
       sourceLanguage: 'nl',
       targetLanguage: 'en',
       aiThinksItIs: 'made',
       detectedInputType: 'word',
-      tags: [],
       explanation: 'Explanation example',
-      collectionLength: 49,
-      addedToday: 4,
+      deck: {
+        language: 'nl',
+        cards: [
+          {
+            id: 'Oqewl',
+            created: 1646242718636,
+            data: {
+              language: 'nl',
+              source: 'maken',
+              g: 'f',
+              ipa: 'ˈmaːkə(n)',
+              example: '* winst maken\n* De klok is weer gemaakt.',
+              definition:
+                '* (iets dat nog niet bestond) laten ontstaan\n* (iets dat kapot is) zorgen dat het weer heel is',
+              translation: 'to make',
+              partOfSpeech: 'verb',
+              interval: 0,
+              repetition: 0,
+              eFactor: 2.5,
+              dueDate: 1646179200000,
+              tags: [],
+            },
+          },
+        ],
+        tags: [],
+      },
+      items: [
+        {
+          source: 'gemaakt',
+          g: 'f',
+          ipa: 'ɣəˈmaːkt',
+          examples: ['Bij een gemaakte glimlach lachen onze ogen niet mee.'],
+          definitions: ['als iets niet natuurlijk is of gebeurt'],
+          translation: 'made',
+          partOfSpeech: 'adjective',
+        },
+        {
+          source: 'maken',
+          g: 'f',
+          ipa: 'ˈmaːkə(n)',
+          examples: ['winst maken', 'De klok is weer gemaakt.'],
+          definitions: [
+            '(iets dat nog niet bestond) laten ontstaan',
+            '(iets dat kapot is) zorgen dat het weer heel is',
+          ],
+          translation: 'to make',
+          partOfSpeech: 'verb',
+        },
+      ],
     },
   };
 };
@@ -151,19 +160,24 @@ const mockAddCard: typeof addCard = async (payload) => {
     success: true,
     value: {
       ...payload.translationCards,
-      cards: payload.translationCards.cards.map((translationCard) => {
-        if (translationCard.data.source !== payload.card.data.source) {
-          return translationCard;
-        }
-
-        return {
-          id: 'piu',
-          created: 123,
-          updated: 123,
-          data: translationCard.data,
-        };
-      }),
-      collectionLength: payload.translationCards.collectionLength + 1,
+      deck: {
+        ...payload.translationCards.deck,
+        cards: [
+          ...payload.translationCards.deck.cards,
+          {
+            id: 'piu',
+            created: 123,
+            updated: 123,
+            data: {
+              ...payload.card.data,
+              interval: 0,
+              repetition: 0,
+              eFactor: 2.5,
+              dueDate: 0,
+            },
+          },
+        ],
+      },
     },
   };
 };
@@ -175,16 +189,12 @@ const mockRemoveCard: typeof removeCard = async (payload) => {
     success: true,
     value: {
       ...payload.translationCards,
-      cards: payload.translationCards.cards.map((translationCard) => {
-        if (translationCard.data.source !== payload.card.data.source) {
-          return translationCard;
-        }
-
-        return {
-          data: translationCard.data,
-        };
-      }),
-      collectionLength: payload.translationCards.collectionLength - 1,
+      deck: {
+        ...payload.translationCards.deck,
+        cards: payload.translationCards.deck.cards.filter(
+          (card) => card.id !== payload.card.id
+        ),
+      },
     },
   };
 };
@@ -266,23 +276,29 @@ const mockGetLanguagePairs: typeof getLanguagePairs = async () => {
 const mockUpdateCard: typeof updateCard = async (payload) => {
   await timeout(500);
 
+  if (isDetachedCardItem(payload.card)) {
+    return updateDetachedCard(payload);
+  }
   return {
     success: true,
     value: {
       ...payload.translationCards,
-      cards: payload.translationCards.cards.map((existingCard) => {
-        if (isEqual(existingCard, payload.card)) {
-          return {
-            ...existingCard,
-            data: {
-              ...existingCard.data,
-              ...payload.data,
-            },
-          };
-        }
+      deck: {
+        ...payload.translationCards.deck,
+        cards: payload.translationCards.deck.cards.map((existingCard) => {
+          if (isCardItem(payload.card) && existingCard.id === payload.card.id) {
+            return {
+              ...existingCard,
+              data: {
+                ...existingCard.data,
+                ...payload.data,
+              },
+            };
+          }
 
-        return existingCard;
-      }),
+          return existingCard;
+        }),
+      },
     },
   };
 };

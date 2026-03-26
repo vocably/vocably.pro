@@ -133,6 +133,8 @@ export class VocablyTranslationCards {
     tagsMenu.saveTag = async (tag: TagCandidate): Promise<Result<any>> => {
       this.disabled = true;
 
+      console.log('selected itesm before', tagsMenu.selectedItems);
+
       const result = await (isItem(tag)
         ? this.updateTag({
             tag,
@@ -149,7 +151,12 @@ export class VocablyTranslationCards {
       if (result.success) {
         this.resultUpdated.emit(result);
         tagsMenu.existingItems = result.value.deck.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(this.cards, cardId);
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
+
+        console.log('selected itesm', tagsMenu.selectedItems);
       }
 
       return result;
@@ -168,7 +175,10 @@ export class VocablyTranslationCards {
       if (result.success) {
         this.resultUpdated.emit(result);
         tagsMenu.existingItems = result.value.deck.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(this.cards, cardId);
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
       }
 
       return result;
@@ -188,7 +198,10 @@ export class VocablyTranslationCards {
       if (result.success) {
         this.resultUpdated.emit(result);
         tagsMenu.existingItems = result.value.deck.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(this.cards, cardId);
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
       }
 
       return result;
@@ -208,7 +221,10 @@ export class VocablyTranslationCards {
       if (result.success) {
         this.resultUpdated.emit(result);
         tagsMenu.existingItems = result.value.deck.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(this.cards, cardId);
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
       }
 
       return result;
