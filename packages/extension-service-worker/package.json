@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc --watch",
-    "test": "jest",
+    "test": "echo '@vocably/extension-service-worker has no tests'",
     "extension-service-worker": "npm start"
   },
   "repository": {
