@@ -212,6 +212,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
                   flexDirection: 'column',
                   flex: 1,
                   flexShrink: 1,
+                  paddingRight: 16,
                 }}
               >
                 <View>
