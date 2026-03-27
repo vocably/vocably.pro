@@ -122,7 +122,6 @@ export class VocablyTranslation {
 
   @Watch('result')
   resultChanged(result: Result<TranslationCards> | null) {
-    console.log('result changed', result);
     if (result === null || result.success === false) {
       this.addedToday = 0;
       this.translationCards = [];

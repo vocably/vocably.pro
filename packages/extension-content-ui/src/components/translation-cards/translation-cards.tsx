@@ -133,8 +133,6 @@ export class VocablyTranslationCards {
     tagsMenu.saveTag = async (tag: TagCandidate): Promise<Result<any>> => {
       this.disabled = true;
 
-      console.log('selected itesm before', tagsMenu.selectedItems);
-
       const result = await (isItem(tag)
         ? this.updateTag({
             tag,
@@ -277,8 +275,6 @@ export class VocablyTranslationCards {
   };
 
   render() {
-    console.log('Congratulations', this.congratulateItemIndex);
-
     return (
       <Host>
         {this.cards.map((card, itemIndex, cardsArray) => (
