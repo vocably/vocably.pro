@@ -37,6 +37,12 @@ target 'VocablyPro' do
     ]
 
     installer.pods_project.targets.each do |target|
+      # ToDo: Remove this once react-native is apgraded
+      if ['Yoga', 'fmt'].include?(target.name)
+        target.build_configurations.each do |config|
+          config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++17'
+        end
+      end
       target.build_configurations.each do |config|
         if rn_pods.include?(target.name)
           config.build_settings['APPLICATION_EXTENSION_API_ONLY'] = 'YES'
