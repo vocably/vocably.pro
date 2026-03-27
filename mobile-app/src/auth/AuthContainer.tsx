@@ -311,11 +311,19 @@ export const AuthContainer: FC<{
             status: 'undefined',
           });
         }
-        //@ts-ignore
-        posthog.capture('tokenRefreshFailure', { ...event.payload });
+
         //@ts-ignore
         Sentry.captureMessage('tokenRefreshFailure', { ...event.payload });
         setError('UNABLE_TO_REFRESH_TOKEN');
+
+        const allValues = await getAll();
+
+        //@ts-ignore
+        posthog.capture('tokenRefreshFailure', {
+          ...event.payload,
+          ...allValues,
+        });
+
         return;
       }
 
