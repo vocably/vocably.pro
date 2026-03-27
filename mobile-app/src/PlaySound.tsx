@@ -2,13 +2,11 @@ import { GoogleTTSLanguage, Result } from '@vocably/model';
 import { languageToGoogleTranslateLanguage } from '@vocably/model-operations';
 import React, {
   forwardRef,
-  useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
 import {
-  Alert,
   ColorValue,
   PixelRatio,
   Platform,
@@ -55,6 +53,7 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
     const theme = useTheme();
 
     const [isPlaying, setIsPlaying] = useState(false);
+    const [isError, setIsError] = useState(false);
     const loadedAudioRef = useRef<Sound>();
     const loadedAudioResolverRef = useRef<(value: Result<unknown>) => void>();
     const stopRef = useRef<{ stop: () => void }>({ stop: () => {} });
@@ -105,15 +104,13 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
       }
       activeInstance = stopRef.current;
       setIsPlaying(true);
+      setIsError(false);
 
       const loadedAudioResult = await loadAudio();
 
       if (!loadedAudioResult.success) {
         setIsPlaying(false);
-        Alert.alert(
-          'Error: The pronunciation could not be played',
-          `Something went wrong during the pronunciation playback.\n\nCould you please try again?`
-        );
+        setIsError(true);
         return loadedAudioResult;
       }
 
@@ -196,10 +193,14 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
               ? 'volume-medium'
               : disabled
                 ? 'circle-small'
-                : 'play-circle'
+                : isError
+                  ? 'alert-circle-outline'
+                  : 'play-circle'
           }
           style={{
-            color: color ?? theme.colors.onBackground,
+            color: isError
+              ? theme.colors.error
+              : (color ?? theme.colors.onBackground),
           }}
           size={size * fontScale}
         />
