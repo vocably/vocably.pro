@@ -122,8 +122,8 @@ export class VocablyTranslationCards {
     }
 
     const tagsMenu = document.createElement('vocably-tags-menu');
-    tagsMenu.existingItems = this.translationCards.tags;
-    tagsMenu.selectedItems = getSelectedTagIds(this.translationCards, cardId);
+    tagsMenu.existingItems = this.translationCards.deck.tags;
+    tagsMenu.selectedItems = getSelectedTagIds(this.cards, cardId);
 
     const callerPosition = caller.getBoundingClientRect();
     tagsMenu.style.position = 'absolute';
@@ -148,8 +148,13 @@ export class VocablyTranslationCards {
 
       if (result.success) {
         this.resultUpdated.emit(result);
-        tagsMenu.existingItems = result.value.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(result.value, cardId);
+        tagsMenu.existingItems = result.value.deck.tags;
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
+
+        console.log('selected itesm', tagsMenu.selectedItems);
       }
 
       return result;
@@ -167,8 +172,11 @@ export class VocablyTranslationCards {
 
       if (result.success) {
         this.resultUpdated.emit(result);
-        tagsMenu.existingItems = result.value.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(result.value, cardId);
+        tagsMenu.existingItems = result.value.deck.tags;
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
       }
 
       return result;
@@ -187,8 +195,11 @@ export class VocablyTranslationCards {
 
       if (result.success) {
         this.resultUpdated.emit(result);
-        tagsMenu.existingItems = result.value.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(result.value, cardId);
+        tagsMenu.existingItems = result.value.deck.tags;
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
       }
 
       return result;
@@ -207,8 +218,11 @@ export class VocablyTranslationCards {
 
       if (result.success) {
         this.resultUpdated.emit(result);
-        tagsMenu.existingItems = result.value.tags;
-        tagsMenu.selectedItems = getSelectedTagIds(result.value, cardId);
+        tagsMenu.existingItems = result.value.deck.tags;
+        tagsMenu.selectedItems = getSelectedTagIds(
+          result.value.deck.cards,
+          cardId
+        );
       }
 
       return result;
@@ -261,8 +275,6 @@ export class VocablyTranslationCards {
   };
 
   render() {
-    console.log('Congratulations', this.congratulateItemIndex);
-
     return (
       <Host>
         {this.cards.map((card, itemIndex, cardsArray) => (

@@ -2,7 +2,6 @@ import { Auth } from '@aws-amplify/auth';
 import {
   analyze,
   configureApi,
-  deleteLanguageDeck,
   explain,
   loadLanguageDeck,
   playSound,
@@ -16,7 +15,6 @@ import {
   onAskForRating,
   onAttachTag,
   onCanPlayOffScreen,
-  onCleanUpRequest,
   onDeleteTag,
   onDetachTag,
   onExplainRequest,
@@ -56,6 +54,7 @@ import {
   Analysis,
   AnalyzePayload,
   Card,
+  DetachedCardItem,
   Facility,
   GoogleLanguage,
   isCardItem,
@@ -67,7 +66,12 @@ import {
   TranslationCard,
   TranslationCards,
 } from '@vocably/model';
-import { buildTagMap, getAddedToday } from '@vocably/model-operations';
+import {
+  analysisItemToCard,
+  buildTagMap,
+  equalCards,
+  updateDetachedCard,
+} from '@vocably/model-operations';
 import { createSrsItem } from '@vocably/srs';
 import { get, isEqual, uniq } from 'lodash-es';
 import posthog from 'posthog-js/dist/module.no-external';
@@ -78,7 +82,6 @@ import {
   storeAskForRatingCounter,
 } from './askForRatingCounter';
 import { browserEnv, hasOffscreen } from './browserEnv';
-import { createTranslationCards } from './createTranslationCards';
 import './fixAuth';
 import { getCardsLimit } from './getCardsLimit';
 import { getUserAttributes } from './getUserAttributes';
@@ -300,14 +303,9 @@ export const registerServiceWorker = (
       }
 
       const languageDeck = loadLanguageDeckResult.value;
-      const cards = createTranslationCards(
-        languageDeck.cards,
-        analyzePayload,
-        analysisResult.value
-      );
 
-      const value = {
-        cards,
+      const value: TranslationCards = {
+        deck: languageDeck,
         explanation: analysisResult.value.explanation ?? '',
         source: analysisResult.value.source,
         sourceLanguage: analysisResult.value.sourceLanguage,
@@ -315,12 +313,7 @@ export const registerServiceWorker = (
         isDirect: analysisResult.value.isDirect,
         detectedInputType: analysisResult.value.detectedInputType,
         aiThinksItIs: analysisResult.value.aiThinksItIs,
-        tags: loadLanguageDeckResult.value.tags,
-        collectionLength: loadLanguageDeckResult.value.cards.length,
-        addedToday: getAddedToday(
-          loadLanguageDeckResult.value.cards,
-          new Date()
-        ).length,
+        items: analysisResult.value.items,
       };
 
       addLanguage(value.sourceLanguage);
@@ -364,16 +357,7 @@ export const registerServiceWorker = (
       success: true,
       value: {
         ...payload.translationCards,
-        cards: payload.translationCards.cards.map((item) =>
-          isEqual(item, payload.card)
-            ? {
-                data: item.data,
-              }
-            : item
-        ),
-        collectionLength: getLanguageDeckResult.value.cards.length,
-        addedToday: getAddedToday(getLanguageDeckResult.value.cards, new Date())
-          .length,
+        deck: getLanguageDeckResult.value,
       },
     });
   });
@@ -400,7 +384,7 @@ export const registerServiceWorker = (
 
     await saveLastUsedTagsIds(tags.map((t) => t.id));
 
-    const addedCard = makeCreate(getLanguageDeckResult.value.cards)({
+    makeCreate(getLanguageDeckResult.value.cards)({
       ...createSrsItem(),
       ...payload.card.data,
       tags,
@@ -418,55 +402,9 @@ export const registerServiceWorker = (
       success: true,
       value: {
         ...payload.translationCards,
-        cards: payload.translationCards.cards.map((item) =>
-          isEqual(item, payload.card) ? addedCard : item
-        ),
-        collectionLength: getLanguageDeckResult.value.cards.length,
-        addedToday: getAddedToday(getLanguageDeckResult.value.cards, new Date())
-          .length,
+        deck: getLanguageDeckResult.value,
       },
     });
-  });
-
-  onCleanUpRequest(async (sendResponse, payload) => {
-    console.info(`Clean up has been requested.`, payload);
-    try {
-      const loadLanguageDeckResult = await loadLanguageDeck(
-        payload.sourceLanguage
-      );
-
-      if (loadLanguageDeckResult.success === false) {
-        return sendResponse(loadLanguageDeckResult);
-      }
-
-      const deck = loadLanguageDeckResult.value;
-
-      const deleteCard = makeDelete(deck.cards);
-      payload.cards.forEach((item) => {
-        if (isCardItem(item)) {
-          deleteCard(item.id);
-        }
-      });
-
-      if (deck.cards.length === 0) {
-        console.info(`The entire deck will be deleted.`, payload);
-        removeLanguage(deck.language as GoogleLanguage);
-        return sendResponse(await deleteLanguageDeck(deck.language));
-      }
-
-      console.info(
-        `${payload.cards.length} cards will be deleted from the deck.`,
-        payload
-      );
-      return sendResponse(await saveLanguageDeck(deck));
-    } catch (e) {
-      return sendResponse({
-        success: false,
-        errorCode: 'EXTENSION_SERVICE_WORKER_ERROR_CLEANING_UP',
-        reason: `An unexpected error has occurred during the cards clean up in service worker.`,
-        extra: e,
-      });
-    }
   });
 
   onListLanguagesRequest(async (sendResponse) =>
@@ -670,37 +608,6 @@ export const registerServiceWorker = (
     return sendResponse(await playAudioPronunciationOffscreen(payload));
   });
 
-  type UpdateDetachedCardPayload = {
-    translationCards: TranslationCards;
-    card: TranslationCard;
-    data: Partial<Card>;
-  };
-  const updateDetachedCard = ({
-    translationCards,
-    card,
-    data,
-  }: UpdateDetachedCardPayload): Result<TranslationCards> => {
-    return {
-      success: true,
-      value: {
-        ...translationCards,
-        cards: translationCards.cards.map((translationCard) => {
-          if (!isEqual(translationCard, card)) {
-            return translationCard;
-          }
-
-          return {
-            ...translationCard,
-            data: {
-              ...translationCard.data,
-              ...data,
-            },
-          };
-        }),
-      },
-    };
-  };
-
   onUpdateCard(async (sendResponse, payload) => {
     if (payload.data.translation) {
       posthog.capture('cardTranslationUpdated', {
@@ -748,17 +655,7 @@ export const registerServiceWorker = (
       success: true,
       value: {
         ...payload.translationCards,
-        cards: payload.translationCards.cards.map((c) => {
-          if (!isItem(c)) {
-            return c;
-          }
-
-          if (c.id !== updateResult.value.id) {
-            return c;
-          }
-
-          return updateResult.value;
-        }),
+        deck: languageDeckResult.value,
       },
     });
   });
@@ -819,25 +716,7 @@ export const registerServiceWorker = (
       success: true,
       value: {
         ...payload.translationCards,
-        tags: languageDeckResult.value.tags,
-        cards: payload.translationCards.cards.map((c) => {
-          if (!isItem(c)) {
-            return c;
-          }
-
-          if (c.id !== payload.cardId) {
-            return c;
-          }
-
-          return {
-            ...c,
-            ...card,
-            data: {
-              ...c.data,
-              ...card.data,
-            },
-          };
-        }),
+        deck: languageDeckResult.value,
       },
     });
   });
@@ -880,25 +759,7 @@ export const registerServiceWorker = (
       success: true,
       value: {
         ...payload.translationCards,
-        tags: languageDeckResult.value.tags,
-        cards: payload.translationCards.cards.map((c) => {
-          if (!isItem(c)) {
-            return c;
-          }
-
-          if (c.id !== payload.cardId) {
-            return c;
-          }
-
-          return {
-            ...c,
-            ...card,
-            data: {
-              ...c.data,
-              ...card.data,
-            },
-          };
-        }),
+        deck: languageDeckResult.value,
       },
     });
   });
@@ -931,18 +792,7 @@ export const registerServiceWorker = (
       success: true,
       value: {
         ...payload.translationCards,
-        tags: languageDeckResult.value.tags,
-        cards: payload.translationCards.cards.map((c) => {
-          return {
-            ...c,
-            data: {
-              ...c.data,
-              tags: c.data.tags.map((t) =>
-                t.id === updateResult.value.id ? updateResult.value : t
-              ),
-            },
-          };
-        }),
+        deck: languageDeckResult.value,
       },
     });
   });
@@ -978,16 +828,7 @@ export const registerServiceWorker = (
       success: true,
       value: {
         ...payload.translationCards,
-        tags: languageDeckResult.value.tags,
-        cards: payload.translationCards.cards.map((c) => {
-          return {
-            ...c,
-            data: {
-              ...c.data,
-              tags: c.data.tags.filter((t) => t.id !== payload.tag.id),
-            },
-          };
-        }),
+        deck: languageDeckResult.value,
       },
     });
   });

@@ -1,13 +1,11 @@
 import { isItem } from '@vocably/crud';
-import { TranslationCards } from '@vocably/model';
+import { TranslationCard } from '@vocably/model';
 
 export const getSelectedTagIds = (
-  translationCards: TranslationCards,
+  cards: TranslationCard[],
   cardId: string
 ): string[] => {
-  const card = translationCards.cards.find(
-    (card) => isItem(card) && card.id === cardId
-  );
+  const card = cards.find((card) => isItem(card) && card.id === cardId);
 
   if (!card) {
     return [];

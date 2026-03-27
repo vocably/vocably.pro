@@ -1,8 +1,18 @@
 import { isItem } from '@vocably/crud';
-import { TagItem } from '@vocably/model';
+import {
+  CardItem,
+  GoogleLanguage,
+  isCardItem,
+  isDetachedCardItem,
+  Result,
+  TagItem,
+  TranslationCards,
+} from '@vocably/model';
 import { cloneDeep, isEqual } from 'lodash-es';
 import { registerContentScript } from '../src';
 import { configureContentScript } from '../src/configuration';
+import { nanoid } from 'nanoid';
+import { updateDetachedCard } from '@vocably/model-operations';
 
 let isUserKnowsHowToAdd = false;
 
@@ -74,17 +84,7 @@ registerContentScript({
               resolve(result);
               return;
             }
-
-            if (payload.sourceLanguage) {
-              result.value.translation.sourceLanguage = payload.sourceLanguage;
-            }
-
-            // @ts-ignore
-            result.value.translation.source = payload.source;
-
-            result.value.tags = tags;
-            result.value.addedToday = 3;
-
+            result.value.deck.tags = tags;
             resolve(result);
           },
           parseInt((document.getElementById('delay') as HTMLInputElement).value)
@@ -139,16 +139,23 @@ registerContentScript({
             success: true,
             value: {
               ...payload.translationCards,
-              cards: payload.translationCards.cards.map((card) => {
-                return isEqual(card, payload.card)
-                  ? {
-                      id: 'new-id',
-                      created: new Date().getTime(),
-                      ...payload.card,
-                    }
-                  : card;
-              }),
-              collectionLength: payload.translationCards.collectionLength + 1,
+              deck: {
+                ...payload.translationCards.deck,
+                cards: [
+                  ...payload.translationCards.deck.cards,
+                  {
+                    id: nanoid(5),
+                    created: new Date().getTime(),
+                    data: {
+                      ...payload.card.data,
+                      interval: 0,
+                      repetition: 0,
+                      eFactor: 2.5,
+                      dueDate: 0,
+                    },
+                  },
+                ],
+              },
             },
           });
         }, 500);
@@ -169,22 +176,22 @@ registerContentScript({
             success: true,
             value: {
               ...payload.translationCards,
-              cards: payload.translationCards.cards.map((card) => {
-                return isEqual(card, payload.card)
-                  ? {
-                      data: payload.card.data,
-                    }
-                  : card;
-              }),
-              collectionLength: payload.translationCards.collectionLength - 1,
+              deck: {
+                ...payload.translationCards.deck,
+                cards: payload.translationCards.deck.cards.filter(
+                  (card) => card.id !== payload.card.id
+                ),
+              },
             },
           });
         }, 500);
       }),
-    cleanUp: () => Promise.resolve({ success: true, value: null }),
     ping: () => Promise.resolve('pong'),
     listLanguages: () =>
-      Promise.resolve({ success: true, value: ['en', 'nl'] }),
+      Promise.resolve({
+        success: true,
+        value: ['en', 'nl'],
+      }),
     listTargetLanguages: () => Promise.resolve(['en', 'ru']),
     isUserKnowsHowToAdd: () => Promise.resolve(isUserKnowsHowToAdd),
     setUserKnowsHowToAdd: async (value) => {
@@ -254,19 +261,35 @@ registerContentScript({
       return new Promise((resolve) => {
         const translationCards = cloneDeep(payload.translationCards);
 
-        translationCards.cards = translationCards.cards.map((existingCard) => {
-          if (!isEqual(existingCard, payload.card)) {
-            return existingCard;
-          }
+        if (isDetachedCardItem(payload.card)) {
+          resolve(
+            updateDetachedCard({
+              card: payload.card,
+              data: payload.data,
+              translationCards: payload.translationCards,
+            })
+          );
+          return;
+        }
 
-          return {
-            ...payload.card,
-            data: {
-              ...payload.card.data,
-              ...payload.data,
-            },
-          };
-        });
+        translationCards.deck.cards = translationCards.deck.cards.map(
+          (existingCard) => {
+            if (
+              !isCardItem(payload.card) ||
+              existingCard.id !== payload.card.id
+            ) {
+              return existingCard;
+            }
+
+            return {
+              ...payload.card,
+              data: {
+                ...payload.card.data,
+                ...payload.data,
+              },
+            } as CardItem;
+          }
+        );
 
         setTimeout(() => {
           resolve({
@@ -292,10 +315,10 @@ registerContentScript({
             };
 
             tags = [...tags, tag];
-            translationCards.tags = tags;
+            translationCards.deck.tags = tags;
           }
 
-          translationCards.cards = translationCards.cards.map(
+          translationCards.deck.cards = translationCards.deck.cards.map(
             (translationCard) => {
               return {
                 ...translationCard,
@@ -309,7 +332,7 @@ registerContentScript({
             }
           );
 
-          const card = translationCards.cards.find(
+          const card = translationCards.deck.cards.find(
             (candidate) => isItem(candidate) && candidate.id == payload.cardId
           );
 
@@ -327,7 +350,7 @@ registerContentScript({
       new Promise((resolve) => {
         const translationCards = cloneDeep(payload.translationCards);
         setTimeout(() => {
-          const card = translationCards.cards.find(
+          const card = translationCards.deck.cards.find(
             (translationCard) =>
               isItem(translationCard) && translationCard.id === payload.cardId
           );
@@ -351,8 +374,8 @@ registerContentScript({
           tags = tags.map((tag) =>
             tag.id !== payload.tag.id ? tag : payload.tag
           );
-          translationCards.tags = tags;
-          translationCards.cards.forEach((card) => {
+          translationCards.deck.tags = tags;
+          translationCards.deck.cards.forEach((card) => {
             card.data.tags = card.data.tags.map((cardTag) =>
               cardTag.id !== payload.tag.id ? cardTag : payload.tag
             );
@@ -369,9 +392,9 @@ registerContentScript({
         setTimeout(() => {
           const translationCards = cloneDeep(payload.translationCards);
           tags = tags.filter((t) => t.id !== payload.tag.id);
-          translationCards.tags = tags;
+          translationCards.deck.tags = tags;
 
-          translationCards.cards.forEach((card) => {
+          translationCards.deck.cards.forEach((card) => {
             card.data.tags = card.data.tags.filter(
               (cardTag) => cardTag.id !== payload.tag.id
             );
@@ -428,3 +451,95 @@ document
     captionSegment.innerHTML = `These orbits, these arcs\n...something`;
   }
 };
+
+const successfulResponse: Result<TranslationCards> = {
+  success: true,
+  value: {
+    explanation: 'Test explanation',
+    source: 'gemaakt',
+    sourceLanguage: 'nl',
+    targetLanguage: 'en',
+    deck: {
+      language: 'nl',
+      cards: [
+        {
+          id: 'Oqewl',
+          created: 1646242718636,
+          data: {
+            language: 'nl',
+            source: 'maken',
+            g: 'f',
+            ipa: 'ˈmaːkə(n)',
+            example: '* winst maken\n* De klok is weer gemaakt.',
+            definition:
+              '(iets dat nog niet bestond) laten ontstaan\n(iets dat kapot is) zorgen dat het weer heel is',
+            translation: 'to make',
+            partOfSpeech: 'verb',
+            interval: 0,
+            repetition: 0,
+            eFactor: 2.5,
+            dueDate: 1646179200000,
+            tags: [],
+          },
+        },
+      ],
+      tags: [],
+    },
+    items: [
+      {
+        source: 'gemaakt',
+        g: 'f',
+        ipa: 'ɣəˈmaːkt',
+        examples: ['Bij een gemaakte glimlach lachen onze ogen niet mee.'],
+        definitions: ['als iets niet natuurlijk is of gebeurt'],
+        translation: 'made',
+        partOfSpeech: 'adjective',
+      },
+      {
+        source: 'maken',
+        g: 'f',
+        ipa: 'ˈmaːkə(n)',
+        examples: ['winst maken', 'De klok is weer gemaakt.'],
+        definitions: [
+          '(iets dat nog niet bestond) laten ontstaan',
+          '(iets dat kapot is) zorgen dat het weer heel is',
+        ],
+        translation: 'to make',
+        partOfSpeech: 'verb',
+      },
+    ],
+  },
+};
+
+const errorResponse: Result<TranslationCards> = {
+  success: false,
+  errorCode: 'CARDS_SAVE_HTTP_FETCH_ERROR',
+  reason: 'Unable to fetch cards',
+  extra: { a: 'b' },
+};
+
+window.addEventListener('load', () => {
+  const responseTextarea = document.getElementById(
+    'response'
+  ) as HTMLTextAreaElement;
+
+  const setSuccessfulResponse = document.getElementById(
+    'setSuccessfulResponse'
+  );
+
+  const setErrorResponse = document.getElementById('setErrorResponse');
+
+  if (!responseTextarea || !setSuccessfulResponse || !setErrorResponse) {
+    return;
+  }
+
+  responseTextarea.value = JSON.stringify(successfulResponse, null, 2);
+
+  setSuccessfulResponse.addEventListener('click', () => {
+    responseTextarea.value = JSON.stringify(successfulResponse, null, 2);
+  });
+
+  setErrorResponse.addEventListener('click', () => {
+    responseTextarea.value = JSON.stringify(errorResponse, null, 2);
+  });
+});
