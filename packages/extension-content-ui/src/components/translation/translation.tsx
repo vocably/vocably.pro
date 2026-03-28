@@ -406,7 +406,17 @@ export class VocablyTranslation {
                   </div>
                 )}
                 {this.isLoadingExtraWords && (
-                  <div class="vocably-pt-12" style={{ paddingLeft: '12px' }}>
+                  <div
+                    class="vocably-pt-12"
+                    style={{
+                      paddingLeft: '12px',
+                      fontSize: '13px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <span>{t('translation.requests_extra_items')}</span>
                     <vocably-inline-loader></vocably-inline-loader>
                   </div>
                 )}

@@ -17,6 +17,7 @@ export const uk = {
   'translation.error': 'Запит до Gemini або ChatGPT завершився помилкою.',
   'translation.retry': 'Повторити',
   'translation.requesting_ai': 'Запитуємо додаткову інформацію у ШІ',
+  'translation.requests_extra_items': 'Розбираємо на складові частини',
   'translation.ai_thinks': 'ШІ вважає, що',
   'translation.means': 'означає',
   'translation.example': 'Приклад:',

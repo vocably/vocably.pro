@@ -17,6 +17,7 @@ export const tr = {
   'translation.error': 'Gemini veya ChatGPT isteği bir hatayla sonuçlandı.',
   'translation.retry': 'Tekrar dene',
   'translation.requesting_ai': 'Yapay zekadan ek bilgi isteniyor',
+  'translation.requests_extra_items': 'Parçalarına ayırıyoruz',
   'translation.ai_thinks': 'Yapay zeka şunu düşünüyor:',
   'translation.means': 'anlamına gelir',
   'translation.example': 'Örnek:',
