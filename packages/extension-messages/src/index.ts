@@ -20,6 +20,9 @@ import {
   UpdateTagPayload,
   Locale,
   CardsLimit,
+  BatchUnitOfSpeechAnalyzePayload,
+  AnalysisItem,
+  BatchUnitOfSpeechAnalysis,
 } from '@vocably/model';
 
 const createScope =
@@ -234,3 +237,9 @@ export const [deleteTag, onDeleteTag] = createScopedMessage<
   DeleteTagPayload,
   Result<TranslationCards>
 >('deleteTag');
+
+export const [analyzeUnitsOfSpeech, onAnalyzeUnitsOfSpeech] =
+  createScopedMessage<
+    BatchUnitOfSpeechAnalyzePayload,
+    Result<BatchUnitOfSpeechAnalysis>
+  >('analyzeUnitsOfSpeech');

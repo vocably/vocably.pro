@@ -270,6 +270,100 @@ translationWithTagMenu.result = successfulTranslationResult;
 
 // ----
 
+const extra: Result<TranslationCards> = {
+  success: true,
+  value: {
+    explanation: '',
+    source: 'gemaakt',
+    sourceLanguage: 'nl',
+    targetLanguage: 'en',
+    detectedInputType: 'word',
+    aiThinksItIs: 'created',
+    deck: {
+      language: 'nl',
+      cards: [
+        {
+          id: 'NYS4L',
+          created: 1639827779683,
+          data: {
+            language: 'nl',
+            source: 'maken',
+            ipa: "'makə(n)",
+            example:
+              '* winst maken [make a profit]\n* De klok is weer gemaakt.',
+            definition:
+              '(iets dat nog niet bestond) laten ontstaan\n(iets dat kapot is) zorgen dat het weer heel is',
+            translation: 'to make',
+            partOfSpeech: 'verb',
+            tense: 'present',
+            pastTenses: 'maakte, heeft gemaakt',
+            tags: [
+              { id: '1', data: { title: 'Lesson 1' }, created: 123 },
+              { id: '2', data: { title: 'Lesson 2' }, created: 234 },
+            ],
+            interval: 0,
+            repetition: 0,
+            eFactor: 2.5,
+            dueDate: 0,
+          },
+        },
+      ],
+      tags: [
+        { id: '1', data: { title: 'Lesson 1' }, created: 123 },
+        { id: '2', data: { title: 'Lesson 2' }, created: 234 },
+        { id: '3', data: { title: 'Lesson 3' }, created: 345 },
+      ],
+    },
+    items: [
+      {
+        source: 'maken',
+        ipa: "'makə(n)",
+        translation: 'to make',
+        definitions: [
+          '(iets dat nog niet bestond) laten ontstaan',
+          '(iets dat kapot is) zorgen dat het weer heel is',
+        ],
+        examples: [
+          '* winst maken [make a profit]',
+          '* De klok is weer gemaakt.',
+        ],
+        partOfSpeech: 'verb',
+        tense: 'present',
+        pastTenses: 'maakte, heeft gemaakt',
+      },
+    ],
+    extraItems: [
+      {
+        source: 'gemaakt',
+        ipa: "xə'mak",
+        translation: 'created, done',
+        definitions: [
+          'als iets niet natuurlijk is of gebeurt [if something is not natural or does not happen]',
+        ],
+        examples: [
+          "Bij een gemaakte glimlach lachen onze ogen niet mee. [When we fake a smile, our eyes don't smile along with us.]",
+        ],
+        partOfSpeech: 'adjective',
+        tense: 'present',
+      },
+    ],
+  },
+};
+
+const translationWithExtraLoading = document.getElementById(
+  'extra-loading'
+) as HTMLVocablyTranslationElement;
+translationWithExtraLoading.result = extra;
+translationWithExtraLoading.isLoadingExtraWords = true;
+translationWithExtraLoading.explanation = {
+  state: 'loaded',
+  value: 'Explanation goes here',
+};
+
+console.log(translationWithExtraLoading);
+
+// ----
+
 const menu = document.getElementById('menu') as HTMLVocablyTagsMenuElement;
 menu.existingItems = [
   { id: '1', data: { title: 'Luke Skywalker' }, created: 123 },

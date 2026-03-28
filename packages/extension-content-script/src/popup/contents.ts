@@ -1,6 +1,7 @@
 import { detectExtensionPlatform } from '@vocably/browser';
 import {
   AddCardPayload,
+  BatchUnitOfSpeechAnalyzePayload,
   GoogleLanguage,
   RateInteractionPayload,
   RemoveCardPayload,
@@ -114,6 +115,31 @@ export const setContents = async ({
         }
       }
 
+      const fetchExplanationItems = async (
+        payload: BatchUnitOfSpeechAnalyzePayload
+      ) => {
+        translation.isLoadingExtraWords = true;
+        const result = await api.analyzeUnitsOfSpeech(payload);
+        translation.isLoadingExtraWords = false;
+        if (
+          result.success &&
+          result.value.items.length > 0 &&
+          translation.result &&
+          translation.result.success
+        ) {
+          translation.result = {
+            success: true,
+            value: {
+              ...translation.result.value,
+              extraItems: [
+                ...(translation.result.value.extraItems ?? []),
+                ...result.value.items,
+              ],
+            },
+          };
+        }
+      };
+
       if (
         translationResult.success === true &&
         translationResult.value.isDirect &&
@@ -133,6 +159,12 @@ export const setContents = async ({
                 state: 'loaded',
                 value: result.value.explanation,
               };
+
+              fetchExplanationItems({
+                sourceLanguage: translationResult.value.sourceLanguage,
+                targetLanguage: translationResult.value.targetLanguage,
+                unitsOfSpeech: result.value.unitsOfSpeech,
+              });
             } else if (result.success === true && !result.value.explanation) {
               translation.explanation = { state: 'none' };
             } else {

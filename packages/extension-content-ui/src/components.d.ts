@@ -184,6 +184,7 @@ export namespace Components {
   };
         "hideChatGpt": boolean;
         "isLightweight": boolean;
+        "isLoadingExtraWords": boolean;
         "isRetrying": boolean;
         "isUpdating": TranslationCard | null;
         "loading": boolean;
@@ -789,6 +790,7 @@ declare namespace LocalJSX {
   };
         "hideChatGpt"?: boolean;
         "isLightweight"?: boolean;
+        "isLoadingExtraWords"?: boolean;
         "isRetrying"?: boolean;
         "isUpdating"?: TranslationCard | null;
         "loading"?: boolean;
