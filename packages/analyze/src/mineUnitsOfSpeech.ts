@@ -30,6 +30,12 @@ export const mineUnitsOfSpeech = async ({
           `Normalize each unit: nouns must be in singular form, verbs must be in infinitive form.`,
           `Include idioms and phrasal verbs that appear in or can be derived from the sentence.`,
           `The partOfSpeech field must be in English.`,
+          `Ignore`,
+          `- names`,
+          `- personal pronouns`,
+          `- articles`,
+          `- prepositions`,
+          `- determiners`,
         ],
         thinkingConfig: {
           thinkingBudget: 0,

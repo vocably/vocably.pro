@@ -85,4 +85,27 @@ describe('mineUnitsOfSpeech', () => {
     expect(headwords).toContain('laufen');
     expect(headwords).toContain('straße');
   });
+
+  it('skips personal names and easy words', async () => {
+    const result = await mineUnitsOfSpeech({
+      sourceLanguage: 'en',
+      targetLanguage: 'ru',
+      source:
+        'Alice was beginning to get very tired of sitting by her sister on the bank',
+    });
+
+    console.log(result);
+
+    expect(result.success).toEqual(true);
+    if (!result.success) return;
+
+    expect(result.value.length).toBeGreaterThan(0);
+
+    const headwords = result.value.map((u) => u.headword.toLowerCase());
+
+    expect(headwords).not.toContain('alice');
+    expect(headwords).not.toContain('be');
+    expect(headwords).not.toContain('the');
+    expect(headwords).not.toContain('on');
+  });
 });
