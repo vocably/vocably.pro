@@ -1,6 +1,7 @@
 import {
   addCard,
   analyze,
+  analyzeUnitsOfSpeech,
   askForRating,
   attachTag,
   deleteTag,
@@ -323,6 +324,26 @@ const getCardsLimitMock: typeof getCardsLimit = async () => {
   };
 };
 
+const mockAnalyzeUnitsOfSpeech: typeof analyzeUnitsOfSpeech = async (
+  payload
+) => {
+  await timeout(1000);
+  return {
+    success: true,
+    value: {
+      items: payload.unitsOfSpeech.map((unit) => ({
+        source: unit.headword,
+        translation: `translation of ${unit.headword}`,
+        partOfSpeech: unit.partOfSpeech,
+        ipa: '',
+        definitions: [],
+        examples: [],
+      })),
+      failed: [],
+    },
+  };
+};
+
 export const environment = merge(environmentLocal, {
   production: false,
   analyze: mockAnalyze,
@@ -343,4 +364,5 @@ export const environment = merge(environmentLocal, {
   askForRating: askForRatingMock,
   saveAskForRatingResponse: saveAskForRatingResponseMock,
   getCardsLimit: getCardsLimitMock,
+  analyzeUnitsOfSpeech: mockAnalyzeUnitsOfSpeech,
 });
