@@ -1,6 +1,7 @@
 import {
   addCard,
   analyze,
+  analyzeUnitsOfSpeech,
   askForRating,
   attachTag,
   deleteTag,
@@ -41,4 +42,5 @@ export const environment = merge(environmentLocal, {
   askForRating: askForRating,
   saveAskForRatingResponse: saveAskForRatingResponse,
   getCardsLimit: getCardsLimit,
+  analyzeUnitsOfSpeech: analyzeUnitsOfSpeech,
 });

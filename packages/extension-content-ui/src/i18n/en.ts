@@ -17,6 +17,7 @@ export const en = {
     'A (likely) Gemini or ChatGPT request has resulted in an error.',
   'translation.retry': 'Retry',
   'translation.requesting_ai': 'Requesting extra info from AI',
+  'translation.requests_extra_items': 'Breaking it down',
   'translation.ai_thinks': 'AI thinks that',
   'translation.means': 'means',
   'translation.example': 'Example:',

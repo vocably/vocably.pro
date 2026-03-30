@@ -33,6 +33,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/extension-content-ui/.stencil" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/cache-batch-analyse" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/user-state" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/extension-angular-components/projects/library/src/lib/stencil-generated" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

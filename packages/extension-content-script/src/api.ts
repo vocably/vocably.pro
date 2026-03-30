@@ -30,6 +30,7 @@ import {
   setUserKnowsHowToAdd,
   updateCard,
   updateTag,
+  analyzeUnitsOfSpeech,
 } from '@vocably/extension-messages';
 
 export const api = {
@@ -65,6 +66,7 @@ export const api = {
   updateTag,
   deleteTag,
   explain,
+  analyzeUnitsOfSpeech,
 };
 
 export type ApiConfigOptions = Partial<typeof api>;

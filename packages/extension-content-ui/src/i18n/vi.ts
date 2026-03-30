@@ -16,6 +16,7 @@ export const vi = {
   'translation.error': 'Yêu cầu Gemini hoặc ChatGPT đã xảy ra lỗi.',
   'translation.retry': 'Thử lại',
   'translation.requesting_ai': 'Đang yêu cầu thông tin thêm từ AI',
+  'translation.requests_extra_items': 'Chia nhỏ thành các phần',
   'translation.ai_thinks': 'AI cho rằng',
   'translation.means': 'có nghĩa là',
   'translation.example': 'Ví dụ:',

@@ -10,6 +10,7 @@ import {
   AddCardPayload,
   AttachTagPayload,
   AudioPronunciationPayload,
+  BatchUnitOfSpeechAnalyzePayload,
   DeleteTagPayload,
   DetachTagPayload,
   isGoogleLanguage,
@@ -21,7 +22,7 @@ import {
   UpdateTagPayload,
   CardsLimit,
 } from '@vocably/model';
-import { first, isString } from 'lodash-es';
+import { chunk, first, isString } from 'lodash-es';
 import { environment } from '../../../environments/environment';
 import { playDataUrl } from './playDataUrl';
 
@@ -58,6 +59,7 @@ export class HomePageComponent implements OnInit {
     state: 'none',
   };
   explanationAnimationDelay = 0;
+  isLoadingExtraWords = false;
 
   constructor() {}
 
@@ -206,8 +208,46 @@ export class HomePageComponent implements OnInit {
             state: 'loaded',
             value: explanationResult.value.explanation,
           };
+
+          this.fetchExplanationItems({
+            sourceLanguage: analyzeResult.value.sourceLanguage,
+            targetLanguage: analyzeResult.value.targetLanguage,
+            unitsOfSpeech: explanationResult.value.unitsOfSpeech,
+          });
         });
     }
+  }
+
+  async fetchExplanationItems(payload: BatchUnitOfSpeechAnalyzePayload) {
+    const batchSize = 5;
+    const { unitsOfSpeech, ...rest } = payload;
+
+    this.isLoadingExtraWords = true;
+    for (const batch of chunk(unitsOfSpeech, batchSize)) {
+      const result = await environment.analyzeUnitsOfSpeech({
+        ...rest,
+        unitsOfSpeech: batch,
+      });
+
+      if (
+        result.success &&
+        result.value.items.length > 0 &&
+        this.searchResult &&
+        this.searchResult.success
+      ) {
+        this.searchResult = {
+          success: true,
+          value: {
+            ...this.searchResult.value,
+            extraItems: [
+              ...(this.searchResult.value.extraItems ?? []),
+              ...result.value.items,
+            ],
+          },
+        };
+      }
+    }
+    this.isLoadingExtraWords = false;
   }
 
   async addCard(event: any) {

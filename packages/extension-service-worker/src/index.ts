@@ -6,6 +6,7 @@ import {
   loadLanguageDeck,
   playSound,
   postOnboardingAction,
+  publicAnalyzeUnitsOfSpeech,
   saveLanguageDeck,
 } from '@vocably/api';
 import { isItem, makeCreate, makeDelete, makeUpdate } from '@vocably/crud';
@@ -49,6 +50,7 @@ import {
   onUpdateCard,
   onUpdateTag,
   playAudioPronunciationOffscreen,
+  onAnalyzeUnitsOfSpeech,
 } from '@vocably/extension-messages';
 import {
   Analysis,
@@ -589,12 +591,12 @@ export const registerServiceWorker = (
 
   onPlayAudioPronunciation(async (sendResponse, payload) => {
     if (!hasOffscreen(browserEnv)) {
-      return {
+      return sendResponse({
         success: false,
         errorCode: 'EXTENSION_OFFSCREEN_DOES_NOT_EXIST',
         reason:
           'The extension is trying to use browser.offscreen to play the audio pronunciation',
-      };
+      });
     }
 
     if (!(await browserEnv.offscreen.hasDocument())) {
@@ -835,5 +837,9 @@ export const registerServiceWorker = (
 
   onGetLanguagePairs(async (sendResponse) => {
     return sendResponse(languagePairs);
+  });
+
+  onAnalyzeUnitsOfSpeech(async (sendResponse, payload) => {
+    return sendResponse(await publicAnalyzeUnitsOfSpeech(payload));
   });
 };

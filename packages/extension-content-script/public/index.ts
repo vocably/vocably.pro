@@ -44,7 +44,7 @@ registerContentScript({
       Promise.resolve(
         (document.getElementById('hasProxyLanguage') as HTMLInputElement)
           .checked
-          ? 'en'
+          ? ('en' as const)
           : null
       ),
     setInternalProxyLanguage: async () => {
@@ -55,7 +55,7 @@ registerContentScript({
       Promise.resolve(
         (document.getElementById('hasProxyLanguage') as HTMLInputElement)
           .checked
-          ? 'nl'
+          ? ('nl' as const)
           : null
       ),
     setInternalSourceLanguage: async () => {
@@ -94,18 +94,6 @@ registerContentScript({
     explain: (payload) => {
       return new Promise((resolve) => {
         setTimeout(() => {
-          if (payload.source.split(' ').length === 1) {
-            resolve({
-              success: true,
-              value: {
-                sourceLanguage: payload.sourceLanguage,
-                targetLanguage: payload.targetLanguage,
-                explanation: '',
-                unitsOfSpeech: [],
-              },
-            });
-          }
-
           resolve({
             success: true,
             value: {
@@ -126,7 +114,12 @@ registerContentScript({
                 '   - "of sitting" - указывает причину усталости, то есть усталость вызвана длительным сидением.\n' +
                 '\n' +
                 'Понимание этих аспектов поможет правильно интерпретировать предложение.',
-              unitsOfSpeech: [],
+              unitsOfSpeech: [
+                {
+                  headword: 'something',
+                  partOfSpeech: 'noun',
+                },
+              ],
             },
           });
         }, 4000);
@@ -190,7 +183,7 @@ registerContentScript({
     listLanguages: () =>
       Promise.resolve({
         success: true,
-        value: ['en', 'nl'],
+        value: ['en', 'nl'] as const,
       }),
     listTargetLanguages: () => Promise.resolve(['en', 'ru']),
     isUserKnowsHowToAdd: () => Promise.resolve(isUserKnowsHowToAdd),
@@ -420,6 +413,52 @@ registerContentScript({
         }, 200)
       );
     },
+    analyzeUnitsOfSpeech: () => {
+      return new Promise((resolve) =>
+        setTimeout(() => {
+          resolve({
+            success: true,
+            value: {
+              items: [
+                {
+                  source: 'blijven',
+                  translation: 'stay, remain, last',
+                  definitions: [
+                    'Niet weggaan, op dezelfde plaats of in dezelfde toestand blijven.',
+                    'Voortduren, aanhouden.',
+                    'Overblijven, resteren.',
+                  ],
+                  examples: [
+                    'Ik blijf thuis.',
+                    'Het weer blijft slecht.',
+                    'Er blijft weinig tijd over.',
+                  ],
+                  partOfSpeech: 'verb',
+                  ipa: 'ˈblɛivə(n)',
+                  number: 'plural',
+                  pastTenses: 'bleef, is gebleven',
+                  tense: 'present',
+                },
+                {
+                  source: 'uiteindelijk',
+                  translation: 'eventually, ultimately, in the end',
+                  definitions: ['ten slotte', 'na alles', 'op het einde'],
+                  examples: [
+                    'Uiteindelijk besloot hij te blijven.',
+                    'Het project was uiteindelijk een succes.',
+                    'Ze kwamen uiteindelijk tot een akkoord.',
+                  ],
+                  partOfSpeech: 'adverb',
+                  ipa: 'œy̯tˈɛin̯dələk',
+                  number: 'singular',
+                },
+              ],
+              failed: [],
+            },
+          });
+        }, 200)
+      );
+    },
   },
   youTube: {
     ytHosts: ['localhost:8020'],
@@ -456,6 +495,8 @@ const successfulResponse: Result<TranslationCards> = {
   success: true,
   value: {
     explanation: 'Test explanation',
+    detectedInputType: 'sentence',
+    isDirect: true,
     source: 'gemaakt',
     sourceLanguage: 'nl',
     targetLanguage: 'en',

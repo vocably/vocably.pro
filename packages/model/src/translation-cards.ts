@@ -22,6 +22,7 @@ export type TranslationCards = {
   aiThinksItIs?: string;
   deck: LanguageDeck;
   items: AnalysisItem[];
+  extraItems?: AnalysisItem[];
 };
 
 export type RemoveCardPayload = {

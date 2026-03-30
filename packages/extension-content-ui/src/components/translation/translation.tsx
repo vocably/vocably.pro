@@ -105,6 +105,7 @@ export class VocablyTranslation {
   @Prop() explanationAnimationDelay = 0;
   @Prop() isRetrying = false;
   @Prop() isLightweight = false;
+  @Prop() isLoadingExtraWords = false;
 
   @Event() ratingInteraction: EventEmitter<RateInteractionPayload>;
 
@@ -119,12 +120,14 @@ export class VocablyTranslation {
 
   @State() addedToday = 0;
   @State() translationCards: TranslationCard[] = [];
+  @State() extraCards: TranslationCard[] = [];
 
   @Watch('result')
   resultChanged(result: Result<TranslationCards> | null) {
     if (result === null || result.success === false) {
       this.addedToday = 0;
       this.translationCards = [];
+      this.extraCards = [];
       return;
     }
 
@@ -134,6 +137,16 @@ export class VocablyTranslation {
       analysisItems: result.value.items,
       language: result.value.sourceLanguage,
     });
+
+    if (result.value.extraItems) {
+      this.extraCards = createTranslationCards({
+        collection: result.value.deck.cards,
+        analysisItems: result.value.extraItems,
+        language: result.value.sourceLanguage,
+      });
+    } else {
+      this.extraCards = [];
+    }
   }
 
   private unsubLocale: (() => void) | undefined;
@@ -363,6 +376,48 @@ export class VocablyTranslation {
                         ></div>
                       )}
                     </div>
+                  </div>
+                )}
+                {this.extraCards.length > 0 && (
+                  <div class="vocably-pt-12">
+                    <vocably-translation-cards
+                      cards={this.extraCards}
+                      translationCards={this.result.value}
+                      canAdd={!!canAdd}
+                      cardsLimit={this.cardsLimit}
+                      paymentLink={this.paymentLink}
+                      canCongratulate={this.canCongratulate}
+                      isUpdating={this.isUpdating}
+                      disabled={this.disabled}
+                      isLightweight={this.isLightweight}
+                      playAudioPronunciation={this.playAudioPronunciation}
+                      updateCard={this.updateCard}
+                      attachTag={this.attachTag}
+                      detachTag={this.detachTag}
+                      updateTag={this.updateTag}
+                      deleteTag={this.deleteTag}
+                      onRemoveCard={(e) => this.removeCard.emit(e.detail)}
+                      onAddCard={(e) => this.addCard.emit(e.detail)}
+                      onWatchMePaying={() => this.watchMePaying.emit()}
+                      onResultUpdated={(e) => {
+                        this.result = e.detail;
+                      }}
+                    ></vocably-translation-cards>
+                  </div>
+                )}
+                {this.isLoadingExtraWords && (
+                  <div
+                    class="vocably-pt-12"
+                    style={{
+                      paddingLeft: '12px',
+                      fontSize: '13px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <span>{t('translation.requests_extra_items')}</span>
+                    <vocably-inline-loader></vocably-inline-loader>
                   </div>
                 )}
               </vocably-animated-content-wrapper>

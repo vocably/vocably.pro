@@ -1,11 +1,12 @@
 import { detectExtensionPlatform } from '@vocably/browser';
 import {
   AddCardPayload,
+  BatchUnitOfSpeechAnalyzePayload,
   GoogleLanguage,
   RateInteractionPayload,
   RemoveCardPayload,
 } from '@vocably/model';
-import { isString } from 'lodash-es';
+import { chunk, isString } from 'lodash-es';
 import { api } from '../api';
 import { contentScriptConfiguration } from '../configuration';
 import { playAudioPronunciation } from '../playAudioPronunciation';
@@ -41,8 +42,10 @@ export const setContents = async ({
   let waitForPaymentIntervalId: ReturnType<typeof setInterval> | undefined =
     undefined;
   let explicitlySetLanguage: GoogleLanguage | null = null;
+  let tornDown = false;
 
   const tearDown = () => {
+    tornDown = true;
     clearInterval(intervalId);
     intervalId = undefined;
     clearInterval(waitForPaymentIntervalId);
@@ -114,6 +117,44 @@ export const setContents = async ({
         }
       }
 
+      const fetchExplanationItems = async (
+        payload: BatchUnitOfSpeechAnalyzePayload
+      ) => {
+        const batchSize = 5;
+        const { unitsOfSpeech, ...rest } = payload;
+
+        translation.isLoadingExtraWords = true;
+        for (let batch of chunk(unitsOfSpeech, batchSize)) {
+          if (tornDown) break;
+
+          const result = await api.analyzeUnitsOfSpeech({
+            ...rest,
+            unitsOfSpeech: batch,
+          });
+
+          if (tornDown) break;
+
+          if (
+            result.success &&
+            result.value.items.length > 0 &&
+            translation.result &&
+            translation.result.success
+          ) {
+            translation.result = {
+              success: true,
+              value: {
+                ...translation.result.value,
+                extraItems: [
+                  ...(translation.result.value.extraItems ?? []),
+                  ...result.value.items,
+                ],
+              },
+            };
+          }
+        }
+        translation.isLoadingExtraWords = false;
+      };
+
       if (
         translationResult.success === true &&
         translationResult.value.isDirect &&
@@ -133,6 +174,12 @@ export const setContents = async ({
                 state: 'loaded',
                 value: result.value.explanation,
               };
+
+              fetchExplanationItems({
+                sourceLanguage: translationResult.value.sourceLanguage,
+                targetLanguage: translationResult.value.targetLanguage,
+                unitsOfSpeech: result.value.unitsOfSpeech,
+              });
             } else if (result.success === true && !result.value.explanation) {
               translation.explanation = { state: 'none' };
             } else {
