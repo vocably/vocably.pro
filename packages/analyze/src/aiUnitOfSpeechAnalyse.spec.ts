@@ -233,6 +233,24 @@ describe('unit of speech analyze', () => {
       }
       expect(result.value.source).toEqual('laufen');
     }, 10_000_000);
+
+    it('provides the present tense for german', async () => {
+      const result = await gptAnalyse({
+        source: 'laufen',
+        partOfSpeech: 'verb',
+        sourceLanguage: 'de',
+      });
+      expect(result.success).toBeTruthy();
+
+      if (!result.success) {
+        return;
+      }
+
+      expect(result.value.isIrregular).toEqual(true);
+      expect(result.value.presentTenses).toEqual(
+        'ich laufe, du läufst, er/sie/es läuft'
+      );
+    }, 10_000_000);
   });
 
   describe('gemini', () => {
@@ -266,6 +284,24 @@ describe('unit of speech analyze', () => {
 
       expect(result.value.isIrregular).toEqual(true);
       expect(result.value.pastTenses).toEqual('brought, brought');
+    }, 10_000_000);
+
+    it('provides the present tense for german', async () => {
+      const result = await geminiAnalyse({
+        source: 'laufen',
+        partOfSpeech: 'verb',
+        sourceLanguage: 'de',
+      });
+      expect(result.success).toBeTruthy();
+
+      if (!result.success) {
+        return;
+      }
+
+      expect(result.value.isIrregular).toEqual(true);
+      expect(result.value.presentTenses).toEqual(
+        'ich laufe, du läufst, er/sie/es läuft'
+      );
     }, 10_000_000);
 
     it('skips identical tense of regular verb', async () => {

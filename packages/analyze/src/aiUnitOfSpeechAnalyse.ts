@@ -54,6 +54,7 @@ export type AiAnalysis = {
   tense?: Tense;
   exists?: boolean;
   pastTenses?: string;
+  presentTenses?: string;
   isIrregular?: boolean;
   pluralForm?: string;
 };
@@ -113,9 +114,14 @@ type AiAnalysePayload = {
   sourceLanguage: GoogleLanguage;
 };
 
-type InflectionKey = 'pastTenses' | 'tense' | 'pluralForm' | 'isIrregular';
+type InflectionKey =
+  | 'pastTenses'
+  | 'tense'
+  | 'pluralForm'
+  | 'isIrregular'
+  | 'presentTenses';
 
-const tensesPrompts: Partial<Record<GoogleLanguage, string>> = {
+const pastTensePrompts: Partial<Record<GoogleLanguage, string>> = {
   'pt-PT': 'past simple and past perfect tense with necessary auxiliary verbs',
   pt: 'past simple and past perfect tense with necessary auxiliary verbs',
   af: 'past simple and present perfect tense with necessary auxiliary verbs',
@@ -125,10 +131,14 @@ const tensesPrompts: Partial<Record<GoogleLanguage, string>> = {
   it: 'past simple and present perfect tense with necessary auxiliary verbs',
   fr: 'past simple and present perfect tense with necessary auxiliary verbs',
   es: 'past simple and present perfect tense with necessary auxiliary verbs',
-  de: 'past simple and present perfect tense with necessary auxiliary verbs',
+  de: 'past simple and present perfect tense with necessary auxiliary verbs no pronouns',
   sv: 'past simple and present perfect tense with necessary auxiliary verbs',
   en: 'past simple and perfect tenses',
   'en-GB': 'past simple and perfect tenses',
+};
+
+const presentTensePrompts: Partial<Record<GoogleLanguage, string>> = {
+  de: 'present simple tense for ich, du, er/sie/es',
 };
 
 export const sanitizeEnglishPastTenses = (
@@ -166,12 +176,22 @@ export const getInflectionsPrompt = ({
   sourceLanguage,
 }: AiAnalysePayload): Partial<Record<InflectionKey, string>> => {
   const infections: Partial<Record<InflectionKey, string>> = {};
-  if (isVerb(partOfSpeech) && tensesPrompts[sourceLanguage]) {
-    infections.pastTenses = `comma separated list of ${tensesPrompts[sourceLanguage]} of the provided ${partOfSpeech}`;
+  if (isVerb(partOfSpeech)) {
     infections.tense = 'present, past, or future. English only';
+
+    if (pastTensePrompts[sourceLanguage]) {
+      infections.pastTenses = pastTensePrompts[sourceLanguage];
+    }
+
+    if (presentTensePrompts[sourceLanguage]) {
+      infections.presentTenses = presentTensePrompts[sourceLanguage];
+    }
   }
 
-  if (isVerb(partOfSpeech) && ['en', 'en-GB', 'nl'].includes(sourceLanguage)) {
+  if (
+    isVerb(partOfSpeech) &&
+    ['en', 'en-GB', 'nl', 'de'].includes(sourceLanguage)
+  ) {
     infections.isIrregular = 'true or false';
   }
 
@@ -217,11 +237,20 @@ export const sanitizeAiAnalyseResult = (
     output.tense = result.tense;
   }
 
-  if (isString(result.pastTenses) && ['en', 'en-GB'].includes(language)) {
-    output.pastTenses = sanitizeEnglishPastTenses(
-      result.pastTenses,
-      !!result.isIrregular
-    );
+  if (isArray(result.pastTenses)) {
+    output.pastTenses = result.pastTenses.join(', ');
+  }
+
+  if (isArray(result.presentTenses)) {
+    output.presentTenses = result.presentTenses.join(', ');
+  }
+
+  if (isSafeObject(result.pastTenses)) {
+    output.pastTenses = Object.values(result.pastTenses).join(', ');
+  }
+
+  if (isSafeObject(result.presentTenses)) {
+    output.presentTenses = Object.values(result.presentTenses).join(', ');
   }
 
   if (output.pluralForm === 'null') {
@@ -230,6 +259,17 @@ export const sanitizeAiAnalyseResult = (
 
   if (output.pastTenses === 'null') {
     delete output.pastTenses;
+  }
+
+  if (output.presentTenses === 'null') {
+    delete output.presentTenses;
+  }
+
+  if (isString(output.pastTenses) && ['en', 'en-GB'].includes(language)) {
+    output.pastTenses = sanitizeEnglishPastTenses(
+      output.pastTenses,
+      !!result.isIrregular
+    );
   }
 
   return output;
