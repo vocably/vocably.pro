@@ -55,6 +55,21 @@ export const CardDefinition: FC<Props> = ({
           <Text style={item.style}>{`\u2022 ${item.text}`}</Text>
         </Text>
       ))}
+      {showInflections && card.presentTenses && (
+        <Text
+          style={[
+            textStyle,
+            {
+              marginTop: 16,
+            },
+          ]}
+        >
+          Present:{' '}
+          <Text style={{ color: theme.colors.secondary }}>
+            {card.presentTenses}
+          </Text>
+        </Text>
+      )}
       {showInflections && card.tense === 'present' && card.pastTenses && (
         <Text
           style={[

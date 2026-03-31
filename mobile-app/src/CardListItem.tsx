@@ -57,6 +57,16 @@ export const CardListItem: FC<Props> = ({
 
   const fontScale = PixelRatio.getFontScale();
 
+  const present = card.presentTenses
+    ? `(present: ${card.presentTenses})`
+    : false;
+  const past =
+    card.tense === 'present' && card.pastTenses
+      ? `(past: ${card.pastTenses})`
+      : false;
+
+  const presentAndPast = [present, past].filter(Boolean).join(`\n`);
+
   return (
     <View style={style}>
       <View
@@ -179,11 +189,11 @@ export const CardListItem: FC<Props> = ({
               </>
             )}
 
-            {card.tense === 'present' && card.pastTenses && (
+            {presentAndPast && (
               <>
                 {' '}
                 <View style={{ transform: textTransform }}>
-                  <Text style={{ lineHeight }}>(past: {card.pastTenses})</Text>
+                  <Text style={{ lineHeight }}>{presentAndPast}</Text>
                 </View>
               </>
             )}

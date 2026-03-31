@@ -14,8 +14,8 @@ export const makeCards = (analysis: Analysis): Card[] => {
     ...pick(item, [
       'g',
       'tense',
-      'pastTenses',
       'presentTenses',
+      'pastTenses',
       'number',
       'pluralForm',
     ]),

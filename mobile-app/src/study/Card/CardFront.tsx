@@ -48,6 +48,16 @@ export const CardFront: FC<Props> = ({
 
   const fontScale = PixelRatio.getFontScale();
 
+  const present = card.data.presentTenses
+    ? `(present: ${card.data.presentTenses})`
+    : false;
+  const past =
+    card.data.tense === 'present' && card.data.pastTenses
+      ? `(past: ${card.data.pastTenses})`
+      : false;
+
+  const presentAndPast = [present, past].filter(Boolean).join(`\n`);
+
   return (
     <View>
       <View
@@ -95,9 +105,7 @@ export const CardFront: FC<Props> = ({
       {(card.data.ipa ||
         card.data.partOfSpeech ||
         card.data.g ||
-        (showInflections &&
-          card.data.tense === 'present' &&
-          card.data.pastTenses)) && (
+        (showInflections && presentAndPast)) && (
         <View
           style={{
             flexDirection: 'row',
@@ -110,9 +118,7 @@ export const CardFront: FC<Props> = ({
           {card.data.ipa && <Text>/{sanitizeTranscript(card.data.ipa)}/</Text>}
           {card.data.g && <Text>({card.data.g})</Text>}
           {card.data.partOfSpeech && <Text>{card.data.partOfSpeech}</Text>}
-          {showInflections &&
-            card.data.tense === 'present' &&
-            card.data.pastTenses && <Text>(past: {card.data.pastTenses})</Text>}
+          {showInflections && presentAndPast && <Text>{presentAndPast}</Text>}
           {showInflections &&
             card.data.number === 'singular' &&
             isGoodPlural(card.data.pluralForm) && (
