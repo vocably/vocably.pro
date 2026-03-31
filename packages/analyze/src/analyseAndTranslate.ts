@@ -88,6 +88,10 @@ export const analyseAndTranslate = async (
     analysisItem.pastTenses = aiAnalyseResult.value.pastTenses;
   }
 
+  if (aiAnalyseResult.value.presentTenses) {
+    analysisItem.presentTenses = aiAnalyseResult.value.presentTenses;
+  }
+
   if (isTense(aiAnalyseResult.value.tense)) {
     analysisItem.tense = aiAnalyseResult.value.tense;
   }

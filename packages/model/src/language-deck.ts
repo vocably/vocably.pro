@@ -62,6 +62,7 @@ export type Card = {
   number?: AnalysisNumber;
   tense?: Tense;
   pastTenses?: string;
+  presentTenses?: string;
   pluralForm?: string;
   example?: string;
   definition: string;

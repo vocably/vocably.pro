@@ -22,6 +22,7 @@ export const analysisItemToCard = ({
     partOfSpeech: analysisItem.partOfSpeech ?? '',
     number: analysisItem.number,
     pastTenses: analysisItem.pastTenses,
+    presentTenses: analysisItem.presentTenses,
     tense: analysisItem.tense,
     pluralForm: analysisItem.pluralForm,
     tags: [],

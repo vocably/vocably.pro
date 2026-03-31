@@ -63,6 +63,7 @@ export type AnalysisItem = {
   number?: AnalysisNumber;
   tense?: Tense;
   pastTenses?: string;
+  presentTenses?: string;
   pluralForm?: string;
 };
 
