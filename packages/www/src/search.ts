@@ -6,10 +6,8 @@ import {
   GoogleLanguage,
   isGoogleLanguage,
   Result,
-  TranslationCard,
   TranslationCards,
 } from '@vocably/model';
-import { join } from '@vocably/sulna';
 import { isObject } from 'lodash-es';
 import { track } from './analytics';
 import { analyze } from './search/analyze';

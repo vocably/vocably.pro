@@ -19,6 +19,7 @@ export class VocablyCardSource {
   ) => Promise<Result<true>>;
 
   render() {
+    const past = this.card.data.tense !== 'past' && this.card.data.pastTenses;
     return (
       <Host>
         {isGoogleTTSLanguage(this.card.data.language) && (
@@ -53,10 +54,21 @@ export class VocablyCardSource {
             </span>
           </Fragment>
         )}
-        {this.card.data.tense !== 'past' && this.card.data.pastTenses && (
-          <span class="vocably-muted vocably-small vocably-translation-margin-left">
-            (past: {this.card.data.pastTenses})
-          </span>
+        {this.card.data.presentTenses && (
+          <Fragment>
+            {past && <br />}
+            <span class="vocably-muted vocably-small vocably-translation-margin-left">
+              (present: {this.card.data.presentTenses})
+            </span>
+          </Fragment>
+        )}
+        {past && (
+          <Fragment>
+            {this.card.data.presentTenses && <br />}
+            <span class="vocably-muted vocably-small vocably-translation-margin-left">
+              (past: {past})
+            </span>
+          </Fragment>
         )}
 
         {this.card.data.number === 'singular' &&
