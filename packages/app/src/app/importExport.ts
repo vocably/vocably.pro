@@ -11,6 +11,7 @@ export const columnLabels: Record<Column, string> = {
   definition: 'Definition',
   example: 'Example',
   tense: 'Tense',
+  presentTenses: 'Present Tenses',
   pastTenses: 'Past Tenses',
   number: 'Number',
   pluralForm: 'Plural Form',
