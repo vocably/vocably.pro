@@ -226,7 +226,7 @@ export const CardListItem: FC<Props> = ({
         <CardDefinition card={card} />
       </View>
       {showExamples && card.example && (
-        <View style={{ marginStart: 10, marginTop: 8 }}>
+        <View style={{ marginTop: 8 }}>
           <Text style={{ fontWeight: 'bold' }}>Examples</Text>
           <CardExample example={card.example} language={card.language} />
         </View>

@@ -665,6 +665,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
               >
                 <CardListItem
                   savingTagsInProgress={savingTagsForId === item.id}
+                  showExamples={true}
                   card={item.data}
                   style={{ flex: 1 }}
                   onTagsChange={onTagsChange(item)}
@@ -673,6 +674,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                   todayTs < item.data.dueDate && (
                     <View
                       style={{
+                        marginStart: 4,
                         marginTop: 8,
                         flexDirection: 'row',
                         alignItems: 'center',
