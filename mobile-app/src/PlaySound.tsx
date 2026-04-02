@@ -71,7 +71,23 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
           text
         )}&tl=${languageToGoogleTranslateLanguage(language)}&client=tw-ob`;
         Sound.setCategory('Playback');
+
+        let settled = false;
+        const timeout = setTimeout(() => {
+          if (!settled) {
+            settled = true;
+            resolve({
+              success: false,
+              reason: 'Sound loading timed out',
+            });
+          }
+        }, 4000);
+
         const audio = new Sound(soundUrl, '', (error) => {
+          if (settled) return;
+          settled = true;
+          clearTimeout(timeout);
+
           if (error === null) {
             loadedAudioRef.current = audio;
 
@@ -117,6 +133,11 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
       return new Promise((resolve) => {
         loadedAudioResolverRef.current = resolve;
         loadedAudioResult.value.play((success) => {
+          if (Platform.OS === 'android') {
+            loadedAudioRef.current?.release();
+            loadedAudioRef.current = undefined;
+          }
+          loadedAudioRef.current = undefined;
           setIsPlaying(false);
 
           if (success) {
