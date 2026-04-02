@@ -674,7 +674,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                   todayTs < item.data.dueDate && (
                     <View
                       style={{
-                        marginStart: 4,
+                        marginStart: 2,
                         marginTop: 8,
                         flexDirection: 'row',
                         alignItems: 'center',
