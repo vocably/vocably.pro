@@ -51,7 +51,7 @@ export const es = {
   'rate.question2': 'marcará una gran diferencia para este proyecto.',
   'rate.ok': 'Calificar Vocably',
   'rate.later': 'Pregúntame más tarde.',
-  'rate.dislike': '¿Hay algo que no te gusta de Vocably? Entonces por favor',
+  'rate.dislike': '¿Hay algo que no te guste de Vocably? Entonces por favor',
   'rate.contact': 'contacta al autor',
   'rate.feedback_note':
     '. Tomo cada comentario en serio. Podemos mejorar este proyecto juntos.',
