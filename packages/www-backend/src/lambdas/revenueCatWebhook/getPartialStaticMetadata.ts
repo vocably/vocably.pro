@@ -21,7 +21,10 @@ export const getPartialStaticMetadata = (
     metadata.premium = true;
   }
 
-  if (action.event.type === 'EXPIRATION') {
+  if (
+    action.event.type === 'EXPIRATION' ||
+    action.event.type === 'CANCELLATION'
+  ) {
     metadata.premium = false;
   }
 
