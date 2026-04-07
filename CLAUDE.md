@@ -321,6 +321,8 @@ Lambda functions:
 The system interface expected to be translated into following languages:
 
 - English (en) - default
+- Spanish (es)
+- Portuguese (pt)
 - Russian (ru)
 - Ukrainian (uk)
 - Turkish (tr)

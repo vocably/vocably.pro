@@ -54,7 +54,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
   providers: [
     provideTransloco({
       config: {
-        availableLangs: ['en', 'ru', 'uk', 'vi', 'tr'],
+        availableLangs: ['en', 'es', 'pt', 'ru', 'uk', 'vi', 'tr'],
         defaultLang: 'en',
         fallbackLang: 'en',
         reRenderOnLangChange: true,

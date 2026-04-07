@@ -48,6 +48,8 @@ export class SettingsPageComponent implements OnInit {
 
   readonly languages: { value: Locale; label: string }[] = [
     { value: 'en', label: 'English' },
+    { value: 'es', label: 'Español' },
+    { value: 'pt', label: 'Português' },
     { value: 'ru', label: 'Русский' },
     { value: 'uk', label: 'Українська' },
     { value: 'tr', label: 'Türkçe' },
