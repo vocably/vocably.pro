@@ -18,7 +18,7 @@ export type OnboardingFlow = {
   language: string | null;
 };
 
-export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr';
+export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr' | 'es' | 'pt';
 
 export type UserMetadata = {
   onboardingFlow: OnboardingFlow;

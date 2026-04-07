@@ -3,6 +3,8 @@ import { ru } from './ru';
 import { tr } from './tr';
 import { uk } from './uk';
 import { vi } from './vi';
+import { es } from './es';
+import { pt } from './pt';
 import { languageTranslations, Translations } from '@vocably/browser-i18n';
 
 export const translations: Translations = {
@@ -25,5 +27,13 @@ export const translations: Translations = {
   tr: {
     ...tr,
     ...languageTranslations['tr'],
+  },
+  es: {
+    ...es,
+    ...languageTranslations['es'],
+  },
+  pt: {
+    ...pt,
+    ...languageTranslations['pt'],
   },
 };

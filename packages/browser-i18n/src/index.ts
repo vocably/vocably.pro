@@ -4,6 +4,8 @@ import { en } from './en';
 import { uk } from './uk';
 import { vi } from './vi';
 import { tr } from './tr';
+import { es } from './es';
+import { pt } from './pt';
 
 export type Translations = Record<Locale, Record<string, string>>;
 
@@ -11,7 +13,7 @@ export type LanguageTranslationOption =
   | `nominative_${GoogleLanguage}`
   | `objective_${GoogleLanguage}`;
 
-const SUPPORTED_LOCALES: Locale[] = ['en', 'ru', 'uk', 'vi', 'tr'];
+const SUPPORTED_LOCALES: Locale[] = ['en', 'ru', 'uk', 'vi', 'tr', 'es', 'pt'];
 
 export const detectLocale = (): Locale => {
   console.log('detectLocale');
@@ -94,4 +96,6 @@ export const languageTranslations: Translations = {
   uk,
   vi,
   tr,
+  es,
+  pt,
 };
