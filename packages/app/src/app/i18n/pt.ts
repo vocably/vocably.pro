@@ -94,7 +94,7 @@ export const pt = {
   'decks.card_form.cancel': 'Cancelar',
   'decks.edit_card.edit': 'Editar',
   'decks.edit_card.delete': 'Excluir',
-  'decks.edit_card.restore': 'restaurar',
+  'decks.edit_card.restore': 'Restaurar',
   'decks.delete_dialog.title': 'Excluir {{language}}?',
   'decks.delete_dialog.cannot_undo': 'Esta ação não pode ser desfeita.',
   'decks.delete_dialog.yes': 'Sim',
@@ -146,7 +146,7 @@ export const pt = {
   // Membership Selector
   'membership_selector.title': 'Vocably Premium',
   'membership_selector.subtitle':
-    'Criado para pessoas que aprendem idiomas por meio do uso ativo',
+    'Criado para quem aprende idiomas de forma ativa',
   'membership_selector.feature1.title':
     'Viu uma nova palavra em um navegador de desktop?',
   'membership_selector.feature1.desc1':
@@ -174,7 +174,7 @@ export const pt = {
   'membership_selector.feature6.desc':
     'Você pode estudá-los usando o sistema SRS integrado em qualquer dispositivo móvel (iOS ou Android), bem como diretamente no navegador.',
   'membership_selector.comparison_title':
-    'Diferença entre a versão Gratuita e Premium',
+    'Diferença entre a versão gratuita e Premium',
   'membership_selector.unlimited_translations': 'Traduções ilimitadas',
   'membership_selector.unlimited_collections': 'Coleções de cartões ilimitadas',
   'membership_selector.unlimited_sessions': 'Sessões de estudo ilimitadas',
@@ -246,7 +246,7 @@ export const pt = {
   'feedback.p2': 'Respondo a cada usuário. Normalmente leva alguns dias.',
   'feedback.p3': 'Responderei no seu endereço de e-mail',
   'feedback.apple_email':
-    'Parece um e-mail secreto da Apple que você compartilhou durante o registro, mas não se preocupe; deve funcionar perfeitamente.',
+    'Parece um e-mail oculto da Apple que você compartilhou durante o registro, mas não se preocupe; deve funcionar perfeitamente.',
   'feedback.placeholder': 'Por favor, digite sua mensagem aqui...',
   'feedback.submit': 'Enviar',
   'feedback.success':
@@ -313,7 +313,7 @@ export const pt = {
   'srs.card.left_arrow': 'Seta esquerda no teclado',
   'srs.card.weak': 'Fraco',
   'srs.card.not_yet': 'Ainda não',
-  'srs.card.down_arrow': 'Seta abaixo no teclado',
+  'srs.card.down_arrow': 'Seta para baixo no teclado',
   'srs.card.somewhat': 'Mais ou menos',
   'srs.card.almost': 'Quase',
   'srs.card.right_arrow': 'Seta direita no teclado',

@@ -94,7 +94,7 @@ export const es = {
   'decks.card_form.cancel': 'Cancelar',
   'decks.edit_card.edit': 'Editar',
   'decks.edit_card.delete': 'Eliminar',
-  'decks.edit_card.restore': 'restaurar',
+  'decks.edit_card.restore': 'Restaurar',
   'decks.delete_dialog.title': '¿Eliminar {{language}}?',
   'decks.delete_dialog.cannot_undo': 'Esta acción no se puede deshacer.',
   'decks.delete_dialog.yes': 'Sí',
@@ -146,7 +146,7 @@ export const es = {
   // Membership Selector
   'membership_selector.title': 'Vocably Premium',
   'membership_selector.subtitle':
-    'Creado para personas que aprenden idiomas mediante el uso activo',
+    'Creado para quienes aprenden idiomas de forma activa',
   'membership_selector.feature1.title':
     '¿Ves una nueva palabra en un navegador de escritorio?',
   'membership_selector.feature1.desc1':
@@ -175,7 +175,7 @@ export const es = {
   'membership_selector.feature6.desc':
     'Puedes estudiarlas usando el sistema SRS integrado en cualquiera de tus dispositivos móviles (iOS o Android), así como directamente en un navegador web.',
   'membership_selector.comparison_title':
-    'Diferencia entre la versión Gratuita y Premium',
+    'Diferencia entre la versión gratuita y Premium',
   'membership_selector.unlimited_translations': 'Traducciones ilimitadas',
   'membership_selector.unlimited_collections':
     'Colecciones de tarjetas ilimitadas',
@@ -190,7 +190,7 @@ export const es = {
   'membership_selector.unlimited':
     'puedes agregar todas las tarjetas que quieras',
   'membership_selector.social_proof':
-    'Vocably es la única herramienta que se enfoca completamente en las necesidades de las personas que aprenden idiomas activamente. Es un producto nuevo, pero ya cientos de personas lo usan para la práctica del idioma en el mundo real.',
+    'Vocably es la única herramienta que se enfoca completamente en las necesidades de las personas que aprenden idiomas activamente. Es un producto nuevo, pero ya cientos de personas lo usan para practicar idiomas en el mundo real.',
   'membership_selector.per_month': 'Por mes',
   'membership_selector.pay_once': 'Paga una vez, úsalo para siempre',
   'membership_selector.total': 'Total',
@@ -212,7 +212,7 @@ export const es = {
   'settings.max_cards': 'Máximo de tarjetas por sesión de estudio',
   'settings.random_select': 'Seleccionar tarjetas aleatoriamente para estudiar',
   'settings.random_warning':
-    'Activar esta opción generalmente es una <strong>mala idea</strong>. Esta opción desactiva el algoritmo de estudio inteligente. Las personas que desactivan el algoritmo de estudio inteligente eventualmente se frustran con su progreso.',
+    'Activar esta opción generalmente es una <strong>mala idea</strong>. Esta opción desactiva el algoritmo de estudio inteligente. Las personas que desactivan el algoritmo de estudio inteligente terminan frustrándose con su progreso.',
   'settings.read_how':
     'Lee cómo Vocably usa el algoritmo de estudio inteligente para ayudarte a aprender más palabras en menos tiempo.',
   'settings.sync_cards': 'Sincroniza tus tarjetas entre escritorio y móvil.',
@@ -248,7 +248,7 @@ export const es = {
   'feedback.p2': 'Respondo a cada usuario. Normalmente me toma un par de días.',
   'feedback.p3': 'Te responderé a tu dirección de correo electrónico',
   'feedback.apple_email':
-    'Parece un correo secreto de Apple que compartiste durante el registro, pero no te preocupes; debería funcionar perfectamente.',
+    'Parece un correo oculto de Apple que compartiste durante el registro, pero no te preocupes; debería funcionar perfectamente.',
   'feedback.placeholder': 'Por favor, escribe tu mensaje aquí...',
   'feedback.submit': 'Enviar',
   'feedback.success':
