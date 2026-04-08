@@ -1,8 +1,8 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { CardItem, GoogleLanguage } from '@vocably/model';
+import { CardItem, GoogleLanguage, SrsItem } from '@vocably/model';
 import { craftTheStrategy, grade, slice, SrsScore } from '@vocably/srs';
 import { setBadgeCount } from 'aws-amplify/push-notifications';
-import { shuffle } from 'lodash-es';
+import { cloneDeep, omit, shuffle } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, {
   FC,
@@ -37,6 +37,17 @@ import { useCardsAnsweredToday } from './useCardsAnsweredToday';
 import { useStreakHasBeenShown } from './useStreakHasBeenShown';
 import { useTranslationLanguage } from './useTranslationLanguage';
 
+const srsFieldsObject: Record<keyof SrsItem, true> = {
+  state: true,
+  dueDate: true,
+  eFactor: true,
+  interval: true,
+  lastStudied: true,
+  repetition: true,
+};
+
+const srsFields = Object.keys(srsFieldsObject) as (keyof SrsItem)[];
+
 export const PADDING_VERTICAL = 40;
 
 type Props = FC<{
@@ -69,7 +80,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
   const [maximumCardsPerSessionResult] = useAsync(getMaximumCardsPerSession);
 
   const [cards, setCards] = useState<CardItem[]>();
-  const [cardsInTheCurrentSession, setCardsInTheCurrentSession] = useState(0);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   // Set cards studied to -1 as the initial state
   // this will be changed to 0 when filtered cards are loaded
   const [cardsStudied, setCardsStudied] = useState(-1);
@@ -119,9 +130,9 @@ export const StudyScreen: Props = ({ route, navigation }) => {
         );
       }
 
-      setCardsInTheCurrentSession(sessionCards.length);
-      setCards(sessionCards);
+      setCards(cloneDeep(sessionCards));
       setCardsStudied(0);
+      setCurrentCardIndex(0);
     }
   }, [
     filteredCards,
@@ -142,9 +153,27 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
       return cards
         .filter((card) => filteredCardsMap[card.id])
-        .map((card) => filteredCardsMap[card.id]);
+        .map((card) => {
+          return {
+            ...card,
+            data: {
+              ...card.data,
+              ...omit(filteredCardsMap[card.id].data, srsFields),
+            },
+          };
+        });
     });
   }, [filteredCards]);
+
+  useEffect(() => {
+    if (!cards) {
+      return;
+    }
+
+    if (cards.length < cardsStudied) {
+      setCardsStudied(cards.length);
+    }
+  }, [cards, cardsStudied, setCardsStudied]);
 
   const onGrade = (score: SrsScore) => {
     if (cards === undefined) {
@@ -157,7 +186,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
     const { strategy } = craftTheStrategy({
       studySteps: studySteps,
-      card: cards[0],
+      card: cards[currentCardIndex],
       allCards,
       prerenderedCards: translationLanguage
         ? getPredefinedMultiChoiceOptions(
@@ -167,39 +196,43 @@ export const StudyScreen: Props = ({ route, navigation }) => {
         : [],
     });
 
-    update(cards[0].id, grade(cards[0].data, score, strategy)).then(
-      async (result) => {
-        if (result.success === false) {
-          Alert.alert(
-            `Error: Card update failed`,
-            result.errorCode === 'NETWORK_REQUEST_ERROR'
-              ? `Your answer wasn't saved due to a lost connection. The session will stop and resume from the failed answer.`
-              : `Oops! Unable to continue study session due to a technical issue. Please try again later.`,
-            [
-              {
-                text: 'Exit study session',
-                onPress: () => navigation.goBack(),
-              },
-            ]
-          );
+    update(
+      cards[currentCardIndex].id,
+      grade(cards[currentCardIndex].data, score, strategy)
+    ).then(async (result) => {
+      if (result.success === false) {
+        Alert.alert(
+          `Error: Card update failed`,
+          result.errorCode === 'NETWORK_REQUEST_ERROR'
+            ? `Your answer wasn't saved due to a lost connection. The session will stop and resume from the failed answer.`
+            : `Oops! Unable to continue study session due to a technical issue. Please try again later.`,
+          [
+            {
+              text: 'Exit study session',
+              onPress: () => navigation.goBack(),
+            },
+          ]
+        );
 
-          return;
-        }
-
-        if (cardsStudied > 0) {
-          return;
-        }
-
-        await increaseStudyStreak();
+        return;
       }
-    );
+
+      if (cardsStudied > 0) {
+        return;
+      }
+
+      await increaseStudyStreak();
+    });
 
     increaseCardsAnsweredToday();
-    const followingCards = cards.slice(1);
-    setCards(followingCards);
-    setCardsStudied((cardsStudied) => cardsStudied + 1);
+    const followingIndex = currentCardIndex + 1;
+    setCurrentCardIndex(followingIndex);
 
-    if (followingCards.length === 0) {
+    if (currentCardIndex === cardsStudied) {
+      setCardsStudied(followingIndex);
+    }
+
+    if (followingIndex === cards.length) {
       setBadgeCount(0);
       increaseNumberOfStudySessions();
     }
@@ -237,18 +270,22 @@ export const StudyScreen: Props = ({ route, navigation }) => {
       return;
     }
 
+    const originalCard = filteredCards.find(
+      (f) => f.id === cards[currentCardIndex]?.id
+    );
+
     navigation.setOptions({
       headerTitle: '',
       headerRight: () => (
         <>
-          {cards.length > 0 && (
+          {cards.length > 0 && originalCard && (
             <>
               <IconButton
                 icon={'creation'}
                 size={24}
                 onPress={() =>
                   navigation.navigate('ChatWithCardModal', {
-                    card: cards[0].data,
+                    card: originalCard.data,
                   })
                 }
                 style={{
@@ -260,7 +297,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
                 size={24}
                 onPress={() =>
                   navigation.navigate('EditCardModal', {
-                    card: cards[0],
+                    card: originalCard,
                   })
                 }
                 style={{
@@ -299,6 +336,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     isRandomizerEnabledResult,
     maximumCardsPerSessionResult,
     streakHasShownToday,
+    filteredCards,
   ]);
 
   if (
@@ -313,6 +351,9 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     return <Loader>Loading...</Loader>;
   }
 
+  const previousIsPossible = currentCardIndex > 0;
+  const nextIsPossible = currentCardIndex < cardsStudied;
+
   return (
     <ScreenLayout
       content={
@@ -323,29 +364,26 @@ export const StudyScreen: Props = ({ route, navigation }) => {
             alignItems: 'center',
           }}
         >
-          {cards.length > 0 &&
-            cards
-              .slice(0, 1)
-              .map((card) => (
-                <Grade
-                  key={card.id}
-                  card={card}
-                  onGrade={onGrade}
-                  autoPlay={autoPlayResult.value}
-                  playRandomExample={playRandomExampleResult.value}
-                  existingCards={allCards}
-                  studySteps={studySteps}
-                  prerenderedCards={
-                    translationLanguage
-                      ? getPredefinedMultiChoiceOptions(
-                          language as GoogleLanguage,
-                          translationLanguage
-                        )
-                      : []
-                  }
-                />
-              ))}
-          {cards.length === 0 && (
+          {cards.length > currentCardIndex && (
+            <Grade
+              key={cards[currentCardIndex].id}
+              card={cards[currentCardIndex]}
+              onGrade={onGrade}
+              autoPlay={autoPlayResult.value}
+              playRandomExample={playRandomExampleResult.value}
+              existingCards={allCards}
+              studySteps={studySteps}
+              prerenderedCards={
+                translationLanguage
+                  ? getPredefinedMultiChoiceOptions(
+                      language as GoogleLanguage,
+                      translationLanguage
+                    )
+                  : []
+              }
+            />
+          )}
+          {cards.length === currentCardIndex && (
             <Completed
               cards={allCards}
               onDone={() => navigation.goBack()}
@@ -365,32 +403,60 @@ export const StudyScreen: Props = ({ route, navigation }) => {
       }
       footer={
         <>
-          {cards.length > 0 && (
+          <View
+            style={{
+              paddingBottom: insets.bottom + 16,
+              paddingHorizontal: 16,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <View
               style={{
-                paddingBottom: insets.bottom + 16,
-                paddingHorizontal: 16,
-                alignItems: 'center',
+                padding: 8,
+                backgroundColor: theme.colors.background,
+                borderRadius: 16,
+                flexDirection: 'row',
                 justifyContent: 'center',
+                alignItems: 'center',
+                gap: 12,
               }}
             >
-              <View
+              <IconButton
+                icon={'menu-left'}
+                disabled={!previousIsPossible}
                 style={{
-                  padding: 8,
-                  backgroundColor: theme.colors.background,
-                  borderRadius: 16,
+                  opacity: previousIsPossible ? 1 : 0.3,
                 }}
-              >
-                <Text>
-                  <Text style={{ color: theme.colors.secondary }}>
-                    {cardsStudied + 1}
-                  </Text>
-                  {' / '}
-                  {cardsInTheCurrentSession}
+                onPress={() => {
+                  if (!previousIsPossible) {
+                    return;
+                  }
+                  setCurrentCardIndex(currentCardIndex - 1);
+                }}
+              />
+              <Text>
+                <Text style={{ color: theme.colors.secondary }}>
+                  {Math.min(currentCardIndex + 1, cards.length)}
                 </Text>
-              </View>
+                {' / '}
+                {cards.length}
+              </Text>
+              <IconButton
+                icon={'menu-right'}
+                disabled={!nextIsPossible}
+                style={{
+                  opacity: nextIsPossible ? 1 : 0.3,
+                }}
+                onPress={() => {
+                  if (!nextIsPossible) {
+                    return;
+                  }
+                  setCurrentCardIndex(currentCardIndex + 1);
+                }}
+              />
             </View>
-          )}
+          </View>
         </>
       }
     />
