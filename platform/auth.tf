@@ -480,21 +480,6 @@ resource "aws_cognito_identity_pool_roles_attachment" "user" {
   }
 }
 
-resource "null_resource" "test_user" {
-
-  triggers = {
-    user_pool_id = aws_cognito_user_pool.users.id
-  }
-
-  provisioner "local-exec" {
-    command = "aws cognito-idp admin-create-user --user-pool-id ${aws_cognito_user_pool.users.id} --username ${var.test_user_username} --user-attributes Name=email,Value=${var.test_user_email} --region ${data.aws_region.current.name}"
-  }
-
-  provisioner "local-exec" {
-    command = "aws cognito-idp admin-set-user-password --user-pool-id ${aws_cognito_user_pool.users.id} --username ${var.test_user_username} --password ${var.test_user_password} --permanent --region ${data.aws_region.current.name}"
-  }
-}
-
 resource "aws_cognito_user_pool_ui_customization" "auth" {
   image_file = filebase64("www-logo.png")
 
