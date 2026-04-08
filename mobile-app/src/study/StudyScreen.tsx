@@ -36,6 +36,9 @@ import { Grade } from './Grade';
 import { useCardsAnsweredToday } from './useCardsAnsweredToday';
 import { useStreakHasBeenShown } from './useStreakHasBeenShown';
 import { useTranslationLanguage } from './useTranslationLanguage';
+import { usePremium } from '../usePremium';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { usePresentPaywall } from '../usePresentPaywall';
 
 const srsFieldsObject: Record<keyof SrsItem, true> = {
   state: true,
@@ -57,6 +60,7 @@ type Props = FC<{
 
 export const StudyScreen: Props = ({ route, navigation }) => {
   const theme = useTheme();
+  const isPremium = usePremium();
 
   const [autoPlayResult, setAutoPlay] = useAsync(
     getAutoPlayFromStorage,
@@ -95,6 +99,8 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
   const [streakHasShownToday, setStreakHasShown] = useStreakHasBeenShown();
   const { studyStreak, increaseStudyStreak } = useContext(UserMetadataContext);
+  const [usedPrevious, setUsedPrevious] = useState(false);
+  const presentPaywall = usePresentPaywall();
 
   useEffect(() => {
     if (
@@ -133,6 +139,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
       setCards(cloneDeep(sessionCards));
       setCardsStudied(0);
       setCurrentCardIndex(0);
+      setUsedPrevious(false);
     }
   }, [
     filteredCards,
@@ -352,6 +359,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
   }
 
   const previousIsPossible = currentCardIndex > 0;
+  const previousIsAllowed = isPremium || !usedPrevious;
   const nextIsPossible = currentCardIndex < cardsStudied;
 
   return (
@@ -422,19 +430,45 @@ export const StudyScreen: Props = ({ route, navigation }) => {
                 gap: 12,
               }}
             >
-              <IconButton
-                icon={'menu-left'}
-                disabled={!previousIsPossible}
+              <View
                 style={{
-                  opacity: previousIsPossible ? 1 : 0.3,
+                  position: 'relative',
                 }}
-                onPress={() => {
-                  if (!previousIsPossible) {
-                    return;
-                  }
-                  setCurrentCardIndex(currentCardIndex - 1);
-                }}
-              />
+              >
+                <IconButton
+                  icon={'menu-left'}
+                  disabled={!previousIsPossible}
+                  style={{
+                    opacity: previousIsPossible ? 1 : 0.3,
+                  }}
+                  onPress={() => {
+                    if (!previousIsPossible) {
+                      return;
+                    }
+
+                    if (!previousIsAllowed) {
+                      presentPaywall();
+                      return;
+                    }
+
+                    setUsedPrevious(true);
+                    setCurrentCardIndex(currentCardIndex - 1);
+                  }}
+                />
+                {previousIsPossible && !previousIsAllowed && (
+                  <Icon
+                    name="lock-outline"
+                    size={12}
+                    color={theme.colors.onBackground}
+                    style={{
+                      position: 'absolute',
+                      right: 10,
+                      bottom: 20,
+                      pointerEvents: 'none',
+                    }}
+                  />
+                )}
+              </View>
               <Text>
                 <Text style={{ color: theme.colors.secondary }}>
                   {Math.min(currentCardIndex + 1, cards.length)}
