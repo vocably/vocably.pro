@@ -101,6 +101,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
   const { studyStreak, increaseStudyStreak } = useContext(UserMetadataContext);
   const [usedPrevious, setUsedPrevious] = useState(false);
   const presentPaywall = usePresentPaywall();
+  const [isPrevPaying, setIsPrevPaying] = useState(false);
 
   useEffect(() => {
     if (
@@ -362,6 +363,9 @@ export const StudyScreen: Props = ({ route, navigation }) => {
   const previousIsAllowed = isPremium || !usedPrevious;
   const nextIsPossible = currentCardIndex < cardsStudied;
 
+  const nextPreviousActiveOpacity = 0.6;
+  const nextPreviousInactiveOpacity = 0.3;
+
   return (
     <ScreenLayout
       content={
@@ -437,9 +441,13 @@ export const StudyScreen: Props = ({ route, navigation }) => {
               >
                 <IconButton
                   icon={'menu-left'}
+                  loading={isPrevPaying}
                   disabled={!previousIsPossible}
+                  iconColor={theme.colors.onBackground}
                   style={{
-                    opacity: previousIsPossible ? 1 : 0.3,
+                    opacity: previousIsPossible
+                      ? nextPreviousActiveOpacity
+                      : nextPreviousInactiveOpacity,
                   }}
                   onPress={() => {
                     if (!previousIsPossible) {
@@ -447,7 +455,10 @@ export const StudyScreen: Props = ({ route, navigation }) => {
                     }
 
                     if (!previousIsAllowed) {
-                      presentPaywall();
+                      setIsPrevPaying(true);
+                      presentPaywall().then(() => {
+                        setIsPrevPaying(false);
+                      });
                       return;
                     }
 
@@ -455,18 +466,28 @@ export const StudyScreen: Props = ({ route, navigation }) => {
                     setCurrentCardIndex(currentCardIndex - 1);
                   }}
                 />
-                {previousIsPossible && !previousIsAllowed && (
-                  <Icon
-                    name="lock-outline"
-                    size={12}
-                    color={theme.colors.onBackground}
+                {previousIsPossible && !previousIsAllowed && !isPrevPaying && (
+                  <View
                     style={{
                       position: 'absolute',
                       right: 10,
-                      bottom: 20,
+                      width: 12,
+                      top: 0,
+                      bottom: 1,
                       pointerEvents: 'none',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                     }}
-                  />
+                  >
+                    <Icon
+                      name="crown-outline"
+                      size={12}
+                      color={theme.colors.onBackground}
+                      style={{
+                        opacity: nextPreviousActiveOpacity,
+                      }}
+                    />
+                  </View>
                 )}
               </View>
               <Text>
@@ -479,8 +500,11 @@ export const StudyScreen: Props = ({ route, navigation }) => {
               <IconButton
                 icon={'menu-right'}
                 disabled={!nextIsPossible}
+                iconColor={theme.colors.onBackground}
                 style={{
-                  opacity: nextIsPossible ? 1 : 0.3,
+                  opacity: nextIsPossible
+                    ? nextPreviousActiveOpacity
+                    : nextPreviousInactiveOpacity,
                 }}
                 onPress={() => {
                   if (!nextIsPossible) {
