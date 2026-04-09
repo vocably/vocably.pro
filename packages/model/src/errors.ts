@@ -27,6 +27,7 @@ export const Errors = [
   'API_REQUEST_NOT_OK',
   'API_REQUEST_UNHANDLED_ERROR',
   'API_REQUEST_ABORTED',
+  'API_REQUEST_UNAUTHORIZED',
   'AUTH_INVALID_USER_CREDENTIALS',
   'AUTH_UNABLE_TO_GET_USER_SESSION',
   'AUTH_UNABLE_TO_GET_USER_ATTRIBUTES',
@@ -65,4 +66,4 @@ export const Errors = [
   'FUCKING_ERROR',
 ] as const;
 
-export type VocablyErrorCode = typeof Errors[number];
+export type VocablyErrorCode = (typeof Errors)[number];

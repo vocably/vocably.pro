@@ -20,6 +20,7 @@ import { RootModalStack } from './RootModalStack';
 import { ThemeProvider } from './ThemeProvider';
 import { TranslationPresetContainer } from './TranslationPreset/TranslationPresetContainer';
 import { UserMetadataContainer } from './UserMetadataContainer';
+import { apiEventBus } from './apiEventBus';
 
 configureApi({
   publicBaseUrl: PUBLIC_API_BASE_URL,
@@ -30,6 +31,9 @@ configureApi({
     fetchAuthSession().then(
       (session) => session.tokens?.idToken?.toString() ?? ''
     ),
+  onError: (error) => {
+    apiEventBus.emit('error', error);
+  },
 });
 
 const App = () => {

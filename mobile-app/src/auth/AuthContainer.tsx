@@ -1,5 +1,5 @@
 import { postOnboardingAction } from '@vocably/api';
-import { Result, resultify } from '@vocably/model';
+import { Result, ResultError, resultify } from '@vocably/model';
 import { fetchAuthSession, getCurrentUser } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import { get } from 'lodash-es';
@@ -21,6 +21,7 @@ import { Loader } from '../loaders/Loader';
 import { notificationsIdentifyUser } from '../notificationsIdentifyUser';
 import { useAsync } from '../useAsync';
 import { getFlatAttributes } from './getFlatAttributes';
+import { apiEventBus } from '../apiEventBus';
 
 type LoginStatus =
   | {
@@ -297,6 +298,27 @@ export const AuthContainer: FC<{
     ) {
       defineAuthStatus();
     }
+  }, [authStatusResult]);
+
+  useEffect(() => {
+    const onApiError = async (error: ResultError) => {
+      if (
+        error.errorCode === 'API_REQUEST_UNAUTHORIZED' &&
+        authStatusResult.status === 'loaded' &&
+        authStatusResult.value.status === 'logged-in'
+      ) {
+        await forcefulSignOut();
+        await setLoginStatus({ reason: 'logged-out' });
+        await setAuthStatus({
+          status: 'undefined',
+        });
+      }
+    };
+    apiEventBus.addListener('error', onApiError);
+
+    return () => {
+      apiEventBus.removeListener('error', onApiError);
+    };
   }, [authStatusResult]);
 
   useEffect(() => {

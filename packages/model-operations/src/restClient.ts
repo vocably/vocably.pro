@@ -22,7 +22,10 @@ export const request = async (
       console.error('API error', await response.text());
       return {
         success: false,
-        errorCode: 'API_REQUEST_NOT_OK',
+        errorCode:
+          response.status === 401
+            ? 'API_REQUEST_UNAUTHORIZED'
+            : 'API_REQUEST_NOT_OK',
         reason: 'The API has returned failed status.',
         extra: response,
       };

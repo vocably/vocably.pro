@@ -10,10 +10,16 @@ export const request = async (
   const headers = {
     Authorization: `Bearer ${await apiOptions.getJwtToken()}`,
   };
-  return httpRequest(
+  const result = await httpRequest(
     apiOptions.baseUrl + url,
     merge(init, {
       headers,
     })
   );
+
+  if (!result.success && apiOptions.onError) {
+    apiOptions.onError(result);
+  }
+
+  return result;
 };
