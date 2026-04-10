@@ -16,7 +16,14 @@
       {{/each}}
     </select>
   </div>
-  <input type='text' class='text-input' name='text' />
+  <input
+    type='text'
+    class='text-input'
+    name='text'
+    autocomplete='off'
+    autocorrect='off'
+    autocapitalize='none'
+  />
   <input type='hidden' name='isReversed' value='false' />
   <button type='submit' class='submit-button'><i
       class='bi bi-search'
