@@ -270,9 +270,10 @@ export class VocablySearchForm {
               ref={(el) => {
                 this.textInput = el;
               }}
-              autocomplete="off"
               aria-haspopup="false"
-              autocapitalize="off"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="none"
               class="input"
               type="text"
               name="searchText"
