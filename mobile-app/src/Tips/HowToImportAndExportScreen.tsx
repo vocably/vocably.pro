@@ -34,12 +34,10 @@ export const HowToImportAndExportScreen: FC<Props> = () => {
         />
       </CustomSurface>
       <View style={{ paddingHorizontal: 16, marginBottom: 32, gap: 4 }}>
-        <Text>
-          <Icon name="alert-circle-outline" size={12} /> Import is available
-          only for registered users.
+        <Text style={{ fontSize: 16 }}>
+          <Icon name="alert-circle-outline" size={14} /> Import is available
+          only for registered users. You will be redirected to the website.
         </Text>
-        <Text>You will be redirected to the website.</Text>
-        <Text>Login with your account to proceed.</Text>
       </View>
 
       <CustomSurface style={{ marginBottom: 16 }}>
