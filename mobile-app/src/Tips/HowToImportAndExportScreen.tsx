@@ -26,37 +26,43 @@ export const HowToImportAndExportScreen: FC<Props> = () => {
 
   return (
     <CustomScrollView>
-      <View style={{ gap: 8, marginBottom: 32, paddingHorizontal: 16 }}>
-        <Text style={{ fontSize: 18 }}>
-          <Icon name="alert-circle-outline" size={18} /> Available only for
-          registered users.
-        </Text>
-        <Text style={{ fontSize: 18 }}>
-          You will be redirected to the website.
-        </Text>
-        <Text style={{ fontSize: 18 }}>
-          Login with your account to proceed.
-        </Text>
-      </View>
-
-      <CustomSurface style={{ marginBottom: 16 }}>
+      <CustomSurface style={{ marginBottom: 8 }}>
         <ListItem
-          order="first"
           leftIcon="open-in-new"
           title="Import cards"
           onPress={() => Linking.openURL('https://app.vocably.pro/import')}
         />
+      </CustomSurface>
+      <View style={{ paddingHorizontal: 16, marginBottom: 32, gap: 4 }}>
+        <Text>
+          <Icon name="alert-circle-outline" size={12} /> Import is available
+          only for registered users.
+        </Text>
+        <Text>You will be redirected to the website.</Text>
+        <Text>Login with your account to proceed.</Text>
+      </View>
+
+      <CustomSurface style={{ marginBottom: 16 }}>
         {exportLanguages.map((language, index) => (
           <View key={language} style={{ alignSelf: 'stretch' }}>
-            <Divider />
+            {index > 0 && <Divider />}
             <ListItem
-              leftIcon="open-in-new"
+              leftIcon="file-delimited-outline"
               title={`Export your ${get(languageList, language)} cards`}
-              order={index < exportLanguages.length - 1 ? 'middle' : 'last'}
+              order={
+                exportLanguages.length > 1 && index === 0
+                  ? 'first'
+                  : exportLanguages.length > 1 &&
+                      index === exportLanguages.length - 1
+                    ? 'last'
+                    : exportLanguages.length > 1
+                      ? 'middle'
+                      : 'single'
+              }
               onPress={() =>
-                Linking.openURL(
-                  `https://app.vocably.pro/deck/${language}/edit/export`
-                )
+                navigation.navigate('ExportDeckModal', {
+                  language: language,
+                })
               }
             />
           </View>

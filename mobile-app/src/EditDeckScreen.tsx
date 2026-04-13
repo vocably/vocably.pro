@@ -57,6 +57,18 @@ export const EditDeckScreen: FC<Props> = ({ navigation }) => {
         ></ListItem>
         <Divider />
         <ListItem
+          title="Export deck"
+          onPress={() => {
+            navigation.navigate('ExportDeckModal', {
+              language: deck.deck.language,
+            });
+          }}
+          leftIcon="file-delimited-outline"
+          rightIcon="menu-right"
+          order="first"
+        ></ListItem>
+        <Divider />
+        <ListItem
           title="Study reminders"
           onPress={() => navigation.navigate('Notifications')}
           leftIcon="bell-outline"

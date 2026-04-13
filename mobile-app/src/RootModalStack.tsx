@@ -5,6 +5,7 @@ import { Appbar, useTheme } from 'react-native-paper';
 import { LoginModal } from './auth/LoginModal';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
 import { EditCardScreen } from './EditCardScreen';
+import { ExportDeckModal } from './ExportDeckModal';
 import { FeedbackModal } from './FeedbackModal';
 import { GenerateCardsModal } from './GenerateCards/GenerateCardsModal';
 import { LanguageSelectorModal } from './LanguageSelectorModal';
@@ -131,6 +132,14 @@ export const RootModalStack = () => {
           options={{
             headerShown: true,
             title: 'Study settings',
+          }}
+        />
+        <Stack.Screen
+          name="ExportDeckModal"
+          component={ExportDeckModal}
+          options={{
+            headerShown: true,
+            title: 'Export deck',
           }}
         />
       </Stack.Group>
