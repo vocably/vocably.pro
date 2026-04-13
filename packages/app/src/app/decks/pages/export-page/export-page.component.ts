@@ -9,16 +9,13 @@ import { MatInput } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslocoModule } from '@jsverse/transloco';
-import { byDate, CardItem, languageList } from '@vocably/model';
-import { languageToLexicalaLanguage } from '@vocably/model-operations';
+import { CardItem, languageList } from '@vocably/model';
+import { cardsToCsv } from '@vocably/model-operations';
 import { get } from 'lodash-es';
 import { Subject, takeUntil } from 'rxjs';
 import { LoaderService } from '../../../components/loader.service';
-import { columnLabels } from '../../../importExport';
 import { DeckStoreService } from '../../deck-store.service';
-import { getColumns, getValue } from './getColumns';
 import { LexicalaExplanationDialogComponent } from './lexicala-explanation-dialog/lexicala-explanation-dialog.component';
-import { prepareColumn } from './prepareColumn';
 
 @Component({
   selector: 'app-export-page',
@@ -48,7 +45,6 @@ export class ExportPageComponent implements OnInit, OnDestroy {
 
   public fileName = '';
 
-  public isLexicalaLanguage = true;
   public languageName: string = '';
   public hasLexicalaItems = false;
 
@@ -61,19 +57,14 @@ export class ExportPageComponent implements OnInit, OnDestroy {
     private dialog: MatDialog
   ) {
     this.deckStore.deck$.pipe(takeUntil(this.destroy$)).subscribe((deck) => {
-      this.cards = deck.cards.sort(byDate).filter((card) => {
-        if (this.isLexicalaLanguage) {
-          // Lexicala was disabled on 27/10/2025 at 09:33:44 UTC
-          return card.created > 1761557624697;
-        }
+      this.cards = deck.cards;
 
-        return true;
+      const csvData = cardsToCsv({
+        cards: this.cards,
+        language: deck.language,
       });
 
-      this.hasLexicalaItems = this.cards.length < deck.cards.length;
-
-      this.isLexicalaLanguage =
-        languageToLexicalaLanguage(deck.language) !== null;
+      this.hasLexicalaItems = csvData.lexicalaSkipped;
       this.languageName = get(languageList, deck.language, 'this language');
 
       this.fileName = `${deck.language}`;
@@ -119,22 +110,14 @@ export class ExportPageComponent implements OnInit, OnDestroy {
           ? ';'
           : this.customRowDelimiter.replace(/\\n/g, `\n`);
 
-    const columns = getColumns(this.cards);
+    const result = cardsToCsv({
+      cards: this.cards,
+      language: this.deckStore.deck$.value.language,
+      colDelimiter,
+      rowDelimiter,
+    });
 
-    return [
-      columns.map((column) => columnLabels[column]).join(colDelimiter),
-      ...this.cards.map((card) => {
-        return columns
-          .map((column) => {
-            return prepareColumn(
-              getValue(card, column),
-              colDelimiter,
-              rowDelimiter
-            );
-          })
-          .join(colDelimiter);
-      }),
-    ].join(rowDelimiter);
+    return result.csv;
   }
 
   getContentsLink = (textContents: string): any => {

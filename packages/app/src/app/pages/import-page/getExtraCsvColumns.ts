@@ -1,4 +1,4 @@
-import { Column, columnLabels } from '../../importExport';
+import { Column, columnLabels } from '@vocably/model-operations';
 import { CsvData } from './getCsvData';
 
 const columnsToExclude = [
@@ -8,7 +8,7 @@ const columnsToExclude = [
   'tags',
 ] as const;
 
-export type SafeColumn = Exclude<Column, typeof columnsToExclude[number]>;
+export type SafeColumn = Exclude<Column, (typeof columnsToExclude)[number]>;
 
 export const getExtraCsvColumns = (csvData: CsvData): SafeColumn[] => {
   return Object.keys(columnLabels)

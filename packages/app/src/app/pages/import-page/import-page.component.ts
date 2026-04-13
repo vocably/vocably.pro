@@ -41,7 +41,7 @@ import { extensionId } from '../../../extension';
 import { DeckSelectorComponent } from '../../components/deck-selector/deck-selector.component';
 import { LanguageInputComponent } from '../../components/language-input/language-input.component';
 import { HeaderComponent } from '../../header/header.component';
-import { columnLabels } from '../../importExport';
+import { columnLabels } from '@vocably/model-operations';
 import { isExtensionInstalled$ } from '../../isExtensionInstalled';
 import { TagsSelectorComponent } from '../../tags/tags-selector/tags-selector.component';
 import { bulkAnalyzeSources } from './bulkAnalyzeSources';

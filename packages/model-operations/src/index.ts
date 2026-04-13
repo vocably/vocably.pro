@@ -10,3 +10,4 @@ export * from './setStreak';
 export * from './analysisItemToCard';
 export * from './createTranslationCards';
 export * from './updateDetachedCard';
+export * from './cardsToCsv';

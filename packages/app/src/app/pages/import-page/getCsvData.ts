@@ -1,5 +1,5 @@
 import { Card } from '@vocably/model';
-import { Column, columnLabels } from '../../importExport';
+import { Column, columnLabels } from '@vocably/model-operations';
 
 type CsvDataItem = Pick<Card, 'source' | 'translation'> &
   Partial<Pick<Card, Exclude<Column, 'source' | 'translation' | 'tags'>>>;
@@ -14,7 +14,7 @@ const isHeader = (items: string[]): boolean => {
 const excludedColumns = ['tags'] as const;
 
 type ColumnMap = Partial<
-  Record<Exclude<Column, typeof excludedColumns[number]>, number>
+  Record<Exclude<Column, (typeof excludedColumns)[number]>, number>
 >;
 
 const getColumnMap = (header: string[]): Partial<Record<Column, number>> => {
