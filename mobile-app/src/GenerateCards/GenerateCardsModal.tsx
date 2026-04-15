@@ -298,6 +298,8 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                         }}
                         onTagsChange={onTagsChange}
                         wrapperStyle={messageWrapperStyle}
+                        leftInset={insets.left}
+                        rightInset={insets.right}
                       />
                     )}
                   </>
