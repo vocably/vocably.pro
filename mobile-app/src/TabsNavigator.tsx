@@ -8,6 +8,8 @@ import { LookUpScreen } from './LookUpScreen';
 import { SettingsStack } from './Settings/SettingsStack';
 import { TipsStack } from './Tips/TipsStack';
 import { useWelcomeRequired } from './useWelcomeRequired';
+import { usePostHog } from 'posthog-react-native';
+import { getAll } from './asyncAppStorage';
 
 const Tabs = createBottomTabNavigator();
 
@@ -18,6 +20,7 @@ type Props = {
 export const TabsNavigator: FC<Props> = ({ navigation }) => {
   const welcomeIsRequiredResult = useWelcomeRequired();
   const theme = useTheme();
+  const posthog = usePostHog();
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -25,7 +28,17 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
       welcomeIsRequiredResult.status === 'loaded' &&
       welcomeIsRequiredResult.value
     ) {
-      timer = setTimeout(() => navigation.navigate('Welcome'), 400);
+      timer = setTimeout(async () => {
+        navigation.navigate('Welcome');
+        posthog.capture(
+          'showingWelcomeScreen',
+          Object.fromEntries(
+            Object.entries(await getAll()).filter(
+              ([key]) => !key.endsWith('.languageDecks')
+            )
+          )
+        );
+      }, 400);
     }
 
     return () => {
