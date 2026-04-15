@@ -22,11 +22,9 @@ import { useTranslationPreset } from './TranslationPreset/useTranslationPreset';
 import { ScreenLayout } from './ui/ScreenLayout';
 import { useAnalyzeOperations } from './useAnalyzeOperations';
 import { useCardsLimit } from './useCardsLimit';
-import { explain } from '@vocably/api';
+import { publicExplain } from '@vocably/api';
 import { createExplainPayload } from '@vocably/model-operations';
 import UnitsOfSpeechAnalyze from './GenerateCards/UnitsOfSpeechAnalyze';
-import { Separator } from './CardListItem';
-import { InlineLoader } from './loaders/InlineLoader';
 import { Thinking } from './Chat/Thinking';
 
 const padding = 16;
@@ -180,7 +178,7 @@ export const LookUpScreen: FC<Props> = ({
       status: 'loading',
     });
 
-    const explainResult = await explain(
+    const explainResult = await publicExplain(
       explainPayload,
       abortControllerRef.current
     );

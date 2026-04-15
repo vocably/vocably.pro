@@ -29,3 +29,4 @@ export * from './studyStats';
 export { sendUserFeedback } from './userFeedback';
 export { getUserMetadata, saveUserMetadata } from './userMetadata';
 export { getUserStaticMetadata } from './userStaticMetadata';
+export * from './publicExplain';
