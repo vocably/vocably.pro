@@ -65,7 +65,7 @@ export const EditDeckScreen: FC<Props> = ({ navigation }) => {
           }}
           leftIcon="file-delimited-outline"
           rightIcon="menu-right"
-          order="first"
+          order="middle"
         ></ListItem>
         <Divider />
         <ListItem

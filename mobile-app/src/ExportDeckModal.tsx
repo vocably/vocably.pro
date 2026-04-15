@@ -4,8 +4,8 @@ import { languageList } from '@vocably/model';
 import { cardsToCsv } from '@vocably/model-operations';
 import { trimLanguage } from '@vocably/sulna';
 import { get } from 'lodash-es';
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
-import { Linking, TextInput, View } from 'react-native';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { Linking, ScrollView, View } from 'react-native';
 import { Button, Portal, Snackbar, Text, useTheme } from 'react-native-paper';
 import { useSelectedDeck } from './languageDeck/useSelectedDeck';
 import { CustomScrollView } from './ui/CustomScrollView';
@@ -29,7 +29,6 @@ export const ExportDeckModal: FC<Props> = ({ route, navigation }) => {
   const cards = deck.cards;
   const theme = useTheme();
   const [copied, setCopied] = useState(false);
-  const inputRef = useRef<TextInput>(null);
 
   const languageName = trimLanguage(get(languageList, language, ''));
 
@@ -92,28 +91,27 @@ export const ExportDeckModal: FC<Props> = ({ route, navigation }) => {
         <Button icon={'content-copy'} onPress={handleCopy} mode="outlined">
           Copy to Clipboard
         </Button>
-        <View
+        <ScrollView
           style={{
             borderRadius: 16,
             backgroundColor: theme.colors.elevation.level2,
-            padding: 16,
+            minHeight: 120,
+            maxHeight: 400,
           }}
+          contentContainerStyle={{ padding: 16 }}
+          nestedScrollEnabled={true}
         >
-          <TextInput
-            ref={inputRef}
-            value={csv}
-            multiline={true}
-            editable={false}
+          <Text
+            selectable={true}
             style={{
               color: theme.colors.onSurface,
               fontSize: 13,
               fontFamily: 'monospace',
-              textAlignVertical: 'top',
-              minHeight: 120,
-              maxHeight: 400,
             }}
-          />
-        </View>
+          >
+            {csv}
+          </Text>
+        </ScrollView>
       </CustomScrollView>
       <Portal>
         <Snackbar
