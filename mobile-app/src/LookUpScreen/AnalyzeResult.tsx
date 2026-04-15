@@ -26,6 +26,7 @@ type Props = {
   rightInset?: number;
   cardsLimit: CardsLimit;
   isSharedLookup: boolean;
+  alwaysShowSeparator?: boolean;
 };
 
 export const AnalyzeResult: FC<Props> = ({
@@ -39,6 +40,7 @@ export const AnalyzeResult: FC<Props> = ({
   leftInset = 0,
   rightInset = 0,
   isSharedLookup = false,
+  alwaysShowSeparator = false,
 }) => {
   const associatedCards = associateCards(makeCards(analysis), cards);
 
@@ -46,7 +48,7 @@ export const AnalyzeResult: FC<Props> = ({
     <Displayer scaleAnimationEnabled={false}>
       {associatedCards.map((item, index) => (
         <View key={`${item.card.source}${item.card.partOfSpeech}`}>
-          {index > 0 && <Separator />}
+          {(index > 0 || alwaysShowSeparator) && <Separator />}
           <AnalyzeResultItem
             leftInset={leftInset}
             rightInset={rightInset}

@@ -11,3 +11,4 @@ export * from './analysisItemToCard';
 export * from './createTranslationCards';
 export * from './updateDetachedCard';
 export * from './cardsToCsv';
+export * from './createExplainPayload';

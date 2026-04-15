@@ -26,6 +26,10 @@ type Props = {
   onRemove: (card: AssociatedCard) => Promise<Result<unknown>>;
   onTagsChange: (id: string, tags: TagItem[]) => Promise<Result<unknown>>;
   deck: Deck;
+  abortController?: AbortController;
+  alwaysShowSeparator?: boolean;
+  leftInset?: number;
+  rightInset?: number;
 };
 
 const UnitsOfSpeechAnalyze: FC<Props> = ({
@@ -38,6 +42,10 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
   onRemove,
   onTagsChange,
   deck,
+  abortController,
+  alwaysShowSeparator,
+  leftInset,
+  rightInset,
 }) => {
   const [analysisItems, setAnalysisItems] = useState<AnalysisItem[]>([]);
   const [unitsToProcess, setUnitsToProcess] = useState(unitsOfSpeech);
@@ -46,11 +54,14 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
     const processUnitsOfSpeech = async (
       unitsOfSpeech: UnitOfSpeech[]
     ): Promise<boolean> => {
-      const result = await analyzeUnitsOfSpeech({
-        unitsOfSpeech: unitsOfSpeech,
-        sourceLanguage,
-        targetLanguage,
-      });
+      const result = await analyzeUnitsOfSpeech(
+        {
+          unitsOfSpeech: unitsOfSpeech,
+          sourceLanguage,
+          targetLanguage,
+        },
+        abortController
+      );
 
       if (result.success === false) {
         return false;
@@ -105,6 +116,9 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
           // @ts-ignore
           items: analysisItems,
         }}
+        alwaysShowSeparator={alwaysShowSeparator}
+        leftInset={leftInset}
+        rightInset={rightInset}
       />
       {unitsToProcess.length > 0 && (
         <View style={[wrapperStyle, { gap: 16 }]}>

@@ -1,5 +1,5 @@
 import { NavigationProp } from '@react-navigation/native';
-import { AnalyzePayload, GoogleLanguage } from '@vocably/model';
+import { AnalyzePayload, GoogleLanguage, UnitOfSpeech } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, Linking, ScrollView, View } from 'react-native';
@@ -22,8 +22,28 @@ import { useTranslationPreset } from './TranslationPreset/useTranslationPreset';
 import { ScreenLayout } from './ui/ScreenLayout';
 import { useAnalyzeOperations } from './useAnalyzeOperations';
 import { useCardsLimit } from './useCardsLimit';
+import { explain } from '@vocably/api';
+import { createExplainPayload } from '@vocably/model-operations';
+import UnitsOfSpeechAnalyze from './GenerateCards/UnitsOfSpeechAnalyze';
+import { Separator } from './CardListItem';
+import { InlineLoader } from './loaders/InlineLoader';
+import { Thinking } from './Chat/Thinking';
 
 const padding = 16;
+
+type ExplainStatus =
+  | {
+      status: 'loading';
+    }
+  | {
+      status: 'loaded';
+      value: {
+        unitsOfSpeech: UnitOfSpeech[];
+      };
+    }
+  | {
+      status: 'empty';
+    };
 
 type Props = {
   navigation: NavigationProp<any>;
@@ -51,6 +71,10 @@ export const LookUpScreen: FC<Props> = ({
         ? translationPresetState.preset.sourceLanguage
         : '',
     autoReload: true,
+  });
+
+  const [explainStatus, setExplainStatus] = useState<ExplainStatus>({
+    status: 'empty',
   });
 
   const insets = useSafeAreaInsets();
@@ -139,6 +163,42 @@ export const LookUpScreen: FC<Props> = ({
     setIsAnalyzingPreset(false);
 
     posthog.capture('lookup', payload);
+
+    // Explain
+
+    if (!lookupResult.success) {
+      return;
+    }
+
+    const explainPayload = createExplainPayload(lookupResult.value);
+
+    if (!explainPayload) {
+      return;
+    }
+
+    setExplainStatus({
+      status: 'loading',
+    });
+
+    const explainResult = await explain(
+      explainPayload,
+      abortControllerRef.current
+    );
+
+    setExplainStatus({ status: 'empty' });
+
+    if (!explainResult.success) {
+      return;
+    }
+
+    if (explainResult.value.unitsOfSpeech.length > 0) {
+      setExplainStatus({
+        status: 'loaded',
+        value: {
+          unitsOfSpeech: explainResult.value.unitsOfSpeech,
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -336,7 +396,8 @@ export const LookUpScreen: FC<Props> = ({
                 entering={FadeIn}
                 exiting={FadeOut.duration(50)}
                 style={{
-                  padding: padding + 8,
+                  paddingLeft: insets.left + padding + 8,
+                  paddingRight: insets.right + padding + 8,
                   paddingTop: mainPadding + 4,
                 }}
               >
@@ -344,26 +405,62 @@ export const LookUpScreen: FC<Props> = ({
               </Animated.View>
             )}
             {!isAnalyzingPreset && lookUpResult && lookUpResult.success && (
-              <AnalyzeResult
-                cardsLimit={cardsLimit}
-                leftInset={insets.left}
-                rightInset={insets.right}
-                style={{
-                  flex: 1,
-                  width: '100%',
-                  marginRight: 8,
-                }}
-                analysis={lookUpResult.value}
-                cards={deck.deck.cards}
-                onAdd={(card) => {
-                  posthog.capture('mobileCardAdded', card.card);
-                  return onAdd(card);
-                }}
-                onRemove={onRemove}
-                onTagsChange={onTagsChange}
-                deck={deck}
-                isSharedLookup={isSharedLookUp}
-              />
+              <>
+                <AnalyzeResult
+                  cardsLimit={cardsLimit}
+                  leftInset={insets.left}
+                  rightInset={insets.right}
+                  style={{
+                    flex: 1,
+                    width: '100%',
+                    marginRight: 8,
+                  }}
+                  analysis={lookUpResult.value}
+                  cards={deck.deck.cards}
+                  onAdd={(card) => {
+                    posthog.capture('mobileCardAdded', card.card);
+                    return onAdd(card);
+                  }}
+                  onRemove={onRemove}
+                  onTagsChange={onTagsChange}
+                  deck={deck}
+                  isSharedLookup={isSharedLookUp}
+                />
+                {explainStatus.status === 'loading' && (
+                  <View
+                    style={{
+                      paddingLeft: insets.left + padding + 8,
+                      paddingRight: insets.right + padding + 8,
+                    }}
+                  >
+                    <Thinking message="Conducting further analysis..." />
+                  </View>
+                )}
+                {explainStatus.status === 'loaded' && (
+                  <>
+                    <UnitsOfSpeechAnalyze
+                      sourceLanguage={lookUpResult.value.sourceLanguage}
+                      targetLanguage={lookUpResult.value.targetLanguage}
+                      unitsOfSpeech={explainStatus.value.unitsOfSpeech}
+                      cards={deck.deck.cards}
+                      deck={deck}
+                      onRemove={onRemove}
+                      onAdd={(card) => {
+                        posthog.capture('generator-add', card.card);
+                        return onAdd(card);
+                      }}
+                      onTagsChange={onTagsChange}
+                      wrapperStyle={{
+                        paddingLeft: insets.left + padding + 8,
+                        paddingRight: insets.right + padding + 8,
+                      }}
+                      alwaysShowSeparator={true}
+                      leftInset={insets.left}
+                      rightInset={insets.right}
+                    />
+                  </>
+                )}
+              </>
             )}
           </ScrollView>
         }
