@@ -25,6 +25,7 @@ import { ScreenLayout } from '../ui/ScreenLayout';
 import { useAnalyzeOperations } from '../useAnalyzeOperations';
 import { GenerateTranslationPresetForm } from './GenerateTranslationPresetForm';
 import UnitsOfSpeechAnalyze from './UnitsOfSpeechAnalyze';
+import { useCardsLimit } from '../useCardsLimit';
 
 type Props = {
   route: Route<string, any>;
@@ -56,6 +57,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   const [inputText, setInputText] = useState('');
   const scrollViewRef = useRef<ScrollView>(null);
   const posthog = usePostHog();
+  const cardsLimit = useCardsLimit();
 
   const deck = useLanguageDeck({
     language:
@@ -185,6 +187,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   const messageWrapperStyle = {
     paddingLeft: insets.left + padding,
     paddingRight: insets.left + padding,
+    marginBottom: 8,
   };
 
   const infoTextStyle = {
@@ -204,7 +207,6 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
             keyboardShouldPersistTaps={'handled'}
             contentContainerStyle={{
               flexGrow: 1,
-              gap: 8,
               paddingTop: 16,
             }}
             ref={scrollViewRef}
@@ -262,7 +264,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
               </View>
             </View>
             {messages.map((message, index) => (
-              <View key={index} style={{ gap: 8 }}>
+              <View key={index}>
                 {message.role === 'user' && (
                   <View style={messageWrapperStyle}>
                     <Message direction="toAi" message={message.text} />
@@ -277,6 +279,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                     )}
                     {message.unitsOfSpeech.length > 0 && (
                       <UnitsOfSpeechAnalyze
+                        cardsLimit={cardsLimit}
                         sourceLanguage={
                           translationPresetState.preset
                             .sourceLanguage as GoogleLanguage

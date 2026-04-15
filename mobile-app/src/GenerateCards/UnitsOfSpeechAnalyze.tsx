@@ -1,6 +1,7 @@
 import {
   AnalysisItem,
   CardItem,
+  CardsLimit,
   GoogleLanguage,
   Result,
   TagItem,
@@ -26,6 +27,7 @@ type Props = {
   onRemove: (card: AssociatedCard) => Promise<Result<unknown>>;
   onTagsChange: (id: string, tags: TagItem[]) => Promise<Result<unknown>>;
   deck: Deck;
+  cardsLimit: CardsLimit;
   abortController?: AbortController;
   alwaysShowSeparator?: boolean;
   leftInset?: number;
@@ -46,6 +48,7 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
   alwaysShowSeparator,
   leftInset,
   rightInset,
+  cardsLimit,
 }) => {
   const [analysisItems, setAnalysisItems] = useState<AnalysisItem[]>([]);
   const [unitsToProcess, setUnitsToProcess] = useState(unitsOfSpeech);
@@ -119,6 +122,7 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
         alwaysShowSeparator={alwaysShowSeparator}
         leftInset={leftInset}
         rightInset={rightInset}
+        cardsLimit={cardsLimit}
       />
       {unitsToProcess.length > 0 && (
         <View style={[wrapperStyle, { gap: 16 }]}>

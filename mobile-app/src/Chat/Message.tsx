@@ -17,8 +17,8 @@ export const Message: FC<Props> = ({ message, direction, error = false }) => {
       color: error
         ? theme.colors.error
         : direction === 'fromAi'
-        ? theme.colors.onBackground
-        : theme.colors.onPrimary,
+          ? theme.colors.onBackground
+          : theme.colors.onPrimary,
       fontSize: 16,
     },
     hr: {
@@ -40,6 +40,7 @@ export const Message: FC<Props> = ({ message, direction, error = false }) => {
         borderRadius: 16,
         paddingHorizontal: 16,
         paddingVertical: 8,
+        marginBottom: 8,
       }}
     >
       <Markdown style={markdownStyles}>{fixMarkdown(message)}</Markdown>

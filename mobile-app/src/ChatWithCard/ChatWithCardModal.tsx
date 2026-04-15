@@ -122,7 +122,6 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               marginLeft: insets.left + 16,
               marginRight: insets.right + 16,
               flexGrow: 1,
-              gap: 8,
             }}
             ref={scrollViewRef}
           >

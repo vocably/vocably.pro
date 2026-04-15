@@ -88,6 +88,7 @@ export const LookUpScreen: FC<Props> = ({
     }
 
     setIsAnalyzingPreset(false);
+    setExplainStatus({ status: 'empty' });
   };
 
   const searchInputRef = useRef<SearchInputRef>(null);
@@ -106,6 +107,7 @@ export const LookUpScreen: FC<Props> = ({
     if (lookUpText === '') {
       cancelThePreviousLookUp();
       setLookupResult(undefined);
+      setExplainStatus({ status: 'empty' });
     }
   }, [lookUpText]);
 
@@ -124,6 +126,7 @@ export const LookUpScreen: FC<Props> = ({
 
     Keyboard.dismiss();
 
+    setExplainStatus({ status: 'empty' });
     setIsAnalyzingPreset({
       ...translationPresetState.preset,
     });
@@ -455,6 +458,7 @@ export const LookUpScreen: FC<Props> = ({
                       alwaysShowSeparator={true}
                       leftInset={insets.left}
                       rightInset={insets.right}
+                      cardsLimit={cardsLimit}
                     />
                   </>
                 )}
