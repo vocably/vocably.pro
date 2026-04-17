@@ -30,3 +30,4 @@ export * from './units-of-speech-generation';
 export * from './user';
 export * from './user-metadata';
 export * from './user-static-metadata';
+export * from './grammar';
