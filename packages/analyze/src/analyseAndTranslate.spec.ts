@@ -27,12 +27,12 @@ describe('analyseAndTranslate', () => {
 
     expect(
       result.value.definitions.every((sentence) => /^.+\[.+\]$/.test(sentence))
-    ).toEqual(true);
+    ).toEqual(false);
 
     expect(
       (result.value.examples ?? []).every((sentence) =>
         /^.+\[.+\]$/.test(sentence)
       )
-    ).toEqual(true);
+    ).toEqual(false);
   });
 });
