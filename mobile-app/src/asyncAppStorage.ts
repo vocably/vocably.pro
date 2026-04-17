@@ -90,18 +90,14 @@ export const removeItem = async (key: string): Promise<void> => {
 
 export const clear = async (keys: string[]): Promise<void> => {
   await migrateToMMKV;
-  for (const key of keys) {
+  for (const key of keys.filter((key) => key !== 'mmkvMigrated')) {
     mmkvStorage.remove(key);
   }
 };
 
 export const clearAll = async (): Promise<void> => {
   await migrateToMMKV;
-
-  const allKeys = mmkvStorage
-    .getAllKeys()
-    .filter((key) => key !== 'auth' && !key.includes('posthog'));
-
+  const allKeys = mmkvStorage.getAllKeys();
   await clear(allKeys);
 };
 

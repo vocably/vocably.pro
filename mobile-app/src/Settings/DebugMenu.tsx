@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { Button, IconButton, Text, useTheme } from 'react-native-paper';
-import { clearAll } from '../asyncAppStorage';
+import { clear, getAll } from '../asyncAppStorage';
 import { loadTransformationsFromStorage } from '../languages/useLanguageTransformations';
 import { CustomSurface } from '../ui/CustomSurface';
 import { loadStudyStreakFromStorage } from '../UserMetadataContainer';
@@ -22,6 +22,13 @@ export const DebugMenu: FC<Props> = () => {
   }, []);
 
   const theme = useTheme();
+
+  const clearNonEssential = async () => {
+    const keys = Object.keys(getAll()).filter(
+      (key) => key !== 'auth' && !key.includes('posthog')
+    );
+    await clear(keys);
+  };
 
   return (
     <CustomSurface
@@ -56,7 +63,7 @@ export const DebugMenu: FC<Props> = () => {
         mode="outlined"
         textColor={theme.colors.error}
         style={{ borderColor: theme.colors.error }}
-        onPress={() => clearAll()}
+        onPress={() => clearNonEssential()}
       >
         Clear storage data
       </Button>
