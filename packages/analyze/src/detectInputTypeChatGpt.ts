@@ -14,7 +14,7 @@ export const detectInputTypeChatGpt = async ({
     `User provides an input`,
     `Respond with a JSON object`,
     `- type - ${inputTypes.join(', ')}`,
-    `- isDirect - true if the input is ${languageList[language]}`,
+    `- isDirect - true if the input can be ${languageList[language]}`,
   ]
     .filter((s) => !!s)
     .join('\n');

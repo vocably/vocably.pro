@@ -168,4 +168,36 @@ describe('detectInputTypeGemini', () => {
     expect(responseResult.value.type).toEqual('word');
     expect(responseResult.value.isDirect).toEqual(true);
   });
+
+  it('detects a rare german word a german', async () => {
+    const responseResult = await detectInputTypeGemini({
+      language: 'de',
+      source: 'wider',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.isDirect).toEqual(true);
+  });
+
+  it('dutch false friend', async () => {
+    const responseResult = await detectInputTypeGemini({
+      language: 'nl',
+      source: 'gift',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.isDirect).toEqual(true);
+  });
 });

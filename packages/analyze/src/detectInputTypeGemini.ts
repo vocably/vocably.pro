@@ -43,7 +43,7 @@ export const detectInputTypeGemini = async ({
               },
               isDirect: {
                 type: 'boolean',
-                description: `true if the input is ${languageList[language]}`,
+                description: `true if the input can be ${languageList[language]}`,
               },
             },
             required: ['type', 'isDirect'],

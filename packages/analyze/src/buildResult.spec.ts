@@ -998,4 +998,20 @@ describe('integration check for translate lambda', () => {
 
     expect(result.value.aiThinksItIs).toBeUndefined();
   });
+
+  it('prioritizes language words', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'de',
+      targetLanguage: 'en',
+      source: 'wider',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    console.log(result.value.items);
+
+    expect(result.value.items.some((i) => i.source === 'wider')).toBeTruthy();
+  });
 });
