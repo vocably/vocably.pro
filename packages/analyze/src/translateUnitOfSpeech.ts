@@ -123,6 +123,9 @@ const getGeminiGenerationContentParams = ({
           ? `Consider tense of the provided ${partOfSpeech}`
           : '',
         number === 'plural' && partOfSpeech === 'noun' ? 'This is plural.' : '',
+        partOfSpeech.includes('preposition')
+          ? `Shortly explain in ${safeTargetLanguage} in brackets if necessary`
+          : '',
         `Omit explanations`,
         `Sort results by commonality`,
       ],
@@ -280,6 +283,9 @@ export const translateUnitOfSpeechChatGpt = async ({
           `Only respond in text format with each translation on a separate line`,
           partOfSpeech.includes('verb')
             ? `Consider tense of the provided ${partOfSpeech}`
+            : '',
+          partOfSpeech.includes('preposition')
+            ? `Shortly explain in ${safeTargetLanguage} in brackets if necessary`
             : '',
           number === 'plural' && partOfSpeech === 'noun'
             ? 'This is plural'
