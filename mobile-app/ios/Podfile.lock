@@ -75,12 +75,12 @@ PODS:
   - hermes-engine (0.77.3):
     - hermes-engine/Pre-built (= 0.77.3)
   - hermes-engine/Pre-built (0.77.3)
-  - MMKVCore (2.4.0)
-  - NitroMmkv (4.3.1):
+  - MMKVCore (2.2.4)
+  - NitroMmkv (4.1.2):
     - DoubleConversion
     - glog
     - hermes-engine
-    - MMKVCore (= 2.4.0)
+    - MMKVCore (= 2.2.4)
     - NitroModules
     - RCT-Folly (= 2024.11.18.00)
     - RCTRequired
@@ -101,7 +101,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - NitroModules (0.35.4):
+  - NitroModules (0.34.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2389,9 +2389,9 @@ SPEC CHECKSUMS:
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: eb93e2f488219332457c3c4eafd2738ddc7e80b8
   hermes-engine: b2187dbe13edb0db8fcb2a93a69c1987a30d98a4
-  MMKVCore: 3d16ce9f7d411e135020915fde98a056859a1efa
-  NitroMmkv: 37f6329eac2347f39357804591fcdab3c36302c8
-  NitroModules: d72a1cdacf75cdc99b2cca5959c16c1ffa5f4dc0
+  MMKVCore: f2dd4c9befea04277a55e84e7812f930537993df
+  NitroMmkv: 0a764837b300af64d87dfa2ed2b628ec5175e0c5
+  NitroModules: 50ad8ab6a8bab6429924ac4b7d179115a65b1f72
   PurchasesHybridCommon: afaf46e9650f9399984196a6966c6d697d6122a2
   PurchasesHybridCommonUI: 19f4782374f25aa19c87d035a02fa845b4805157
   RCT-Folly: 36fe2295e44b10d831836cc0d1daec5f8abcf809
