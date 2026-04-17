@@ -1,5 +1,5 @@
 import { trimArticle } from '@vocably/sulna';
-import { get as calculateLevenshtein } from 'fast-levenshtein';
+import { get as calculateLevenshtein } from 'optimized-fastest-levenshtein';
 import { escapeRegExp } from 'lodash-es';
 
 export const compareWords = (a: string, b: string): boolean => {

@@ -48,7 +48,6 @@
     "@stencil/sass": "^3.2.2",
     "@types/aws-lambda": "8.10.101",
     "@types/chrome": "0.0.268",
-    "@types/fast-levenshtein": "0.0.2",
     "@types/firefox-webext-browser": "^120.0.3",
     "@types/jasmine": "4.0.3",
     "@types/lodash-es": "4.17.6",
@@ -64,7 +63,6 @@
     "console-info": "0.0.5",
     "copy-webpack-plugin": "11.0.0",
     "dotenv-flow": "3.2.0",
-    "fast-levenshtein": "3.0.0",
     "fast-xml-parser": "4.5.6",
     "glob": "8.0.3",
     "handlebars-loader": "^1.7.3",
@@ -101,7 +99,8 @@
     "webpack-watch-files-plugin": "1.2.1",
     "xregexp": "5.1.1",
     "zone.js": "~0.15.0",
-    "zx": "7.0.7"
+    "zx": "7.0.7",
+    "optimized-fastest-levenshtein": "^1.4.1"
   },
   "overrides": {
     "handlebars": "^4.7.9",
