@@ -16,6 +16,7 @@ module.exports = (env) => {
     entry: {
       main: './src/index.ts',
       search: './src/search.ts',
+      grammar: './src/grammar.ts',
     },
     module: {
       rules: [

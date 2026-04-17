@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, CardsLimit, DeleteTagPayload, DetachTagPayload, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
+import { AddCardPayload, AttachTagPayload, AudioPronunciationPayload, Card, CardsLimit, DeleteTagPayload, DetachTagPayload, FixGrammarPayload, FixGrammarResponse, GoogleLanguage, GoogleTTSLanguage, LanguagePairs, RateInteractionPayload, RemoveCardPayload, Result, TagCandidate, TagItem, TranslationCard, TranslationCards, UpdateCardPayload, UpdateTagPayload } from "@vocably/model";
 import { SearchValues } from "./components/search-form/types";
 import { ComponentExplanationState } from "./components/translation/translation";
 export namespace Components {
@@ -41,6 +41,12 @@ export namespace Components {
     }
     interface VocablyFirstTranslationCongratulation {
         "card": TranslationCard;
+    }
+    interface VocablyFixGrammar {
+        "fixGrammar": (
+    payload: FixGrammarPayload,
+    abortController?: AbortController
+  ) => Promise<Result<FixGrammarResponse>>;
     }
     interface VocablyHintSelector {
         "disabled": boolean;
@@ -332,6 +338,12 @@ declare global {
         prototype: HTMLVocablyFirstTranslationCongratulationElement;
         new (): HTMLVocablyFirstTranslationCongratulationElement;
     };
+    interface HTMLVocablyFixGrammarElement extends Components.VocablyFixGrammar, HTMLStencilElement {
+    }
+    var HTMLVocablyFixGrammarElement: {
+        prototype: HTMLVocablyFixGrammarElement;
+        new (): HTMLVocablyFixGrammarElement;
+    };
     interface HTMLVocablyHintSelectorElement extends Components.VocablyHintSelector, HTMLStencilElement {
     }
     var HTMLVocablyHintSelectorElement: {
@@ -563,6 +575,7 @@ declare global {
         "vocably-card-translation": HTMLVocablyCardTranslationElement;
         "vocably-close-button": HTMLVocablyCloseButtonElement;
         "vocably-first-translation-congratulation": HTMLVocablyFirstTranslationCongratulationElement;
+        "vocably-fix-grammar": HTMLVocablyFixGrammarElement;
         "vocably-hint-selector": HTMLVocablyHintSelectorElement;
         "vocably-icon-add": HTMLVocablyIconAddElement;
         "vocably-icon-ai": HTMLVocablyIconAiElement;
@@ -637,6 +650,12 @@ declare namespace LocalJSX {
     }
     interface VocablyFirstTranslationCongratulation {
         "card"?: TranslationCard;
+    }
+    interface VocablyFixGrammar {
+        "fixGrammar"?: (
+    payload: FixGrammarPayload,
+    abortController?: AbortController
+  ) => Promise<Result<FixGrammarResponse>>;
     }
     interface VocablyHintSelector {
         "disabled"?: boolean;
@@ -859,6 +878,7 @@ declare namespace LocalJSX {
         "vocably-card-translation": VocablyCardTranslation;
         "vocably-close-button": VocablyCloseButton;
         "vocably-first-translation-congratulation": VocablyFirstTranslationCongratulation;
+        "vocably-fix-grammar": VocablyFixGrammar;
         "vocably-hint-selector": VocablyHintSelector;
         "vocably-icon-add": VocablyIconAdd;
         "vocably-icon-ai": VocablyIconAi;
@@ -910,6 +930,7 @@ declare module "@stencil/core" {
             "vocably-card-translation": LocalJSX.VocablyCardTranslation & JSXBase.HTMLAttributes<HTMLVocablyCardTranslationElement>;
             "vocably-close-button": LocalJSX.VocablyCloseButton & JSXBase.HTMLAttributes<HTMLVocablyCloseButtonElement>;
             "vocably-first-translation-congratulation": LocalJSX.VocablyFirstTranslationCongratulation & JSXBase.HTMLAttributes<HTMLVocablyFirstTranslationCongratulationElement>;
+            "vocably-fix-grammar": LocalJSX.VocablyFixGrammar & JSXBase.HTMLAttributes<HTMLVocablyFixGrammarElement>;
             "vocably-hint-selector": LocalJSX.VocablyHintSelector & JSXBase.HTMLAttributes<HTMLVocablyHintSelectorElement>;
             "vocably-icon-add": LocalJSX.VocablyIconAdd & JSXBase.HTMLAttributes<HTMLVocablyIconAddElement>;
             "vocably-icon-ai": LocalJSX.VocablyIconAi & JSXBase.HTMLAttributes<HTMLVocablyIconAiElement>;
