@@ -51,6 +51,8 @@
     "react-native-linear-gradient": "2.8.3",
     "react-native-localize": "^3.4.1",
     "react-native-markdown-display": "^7.0.2",
+    "react-native-mmkv": "4.1.2",
+    "react-native-nitro-modules": "0.34.1",
     "react-native-paper": "^5.14.5",
     "react-native-purchases": "^9.11.2",
     "react-native-purchases-ui": "^9.11.2",

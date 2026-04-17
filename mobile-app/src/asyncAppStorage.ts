@@ -1,56 +1,15 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import * as iosGroupStorage from './asyncAppStorage/iosGroupStorage';
+import { mmkvStorage } from './mmkvStorage';
 
-export const getItem = async (key: string): Promise<string | undefined> => {
-  if (Platform.OS === 'ios') {
-    return iosGroupStorage.getItem(key);
-  }
-
-  return AsyncStorage.getItem(key).then((value) => value ?? undefined);
-};
-
-export const setItem = async (key: string, value: string): Promise<void> => {
-  if (Platform.OS === 'ios') {
-    return iosGroupStorage.setItem(key, value);
-  }
-
-  return AsyncStorage.setItem(key, value);
-};
-
-export const removeItem = async (key: string): Promise<void> => {
-  if (Platform.OS === 'ios') {
-    return iosGroupStorage.removeItem(key);
-  }
-
-  return AsyncStorage.removeItem(key);
-};
-
-export const clear = async (keys: string[]): Promise<void> => {
-  if (Platform.OS === 'ios') {
-    return iosGroupStorage.clear(keys);
-  }
-
-  return AsyncStorage.multiRemove(keys);
-};
-
-export const clearAll = async (): Promise<void> => {
-  if (Platform.OS === 'ios') {
-    await iosGroupStorage.clearAll();
-  }
-
-  const allKeys = (await AsyncStorage.getAllKeys()).filter(
-    (key) => key !== 'auth' && !key.includes('posthog')
-  );
-  await AsyncStorage.multiRemove(allKeys);
-};
-
-export const getAll = async (): Promise<Record<string, string>> => {
-  if (Platform.OS === 'ios') {
-    return iosGroupStorage.getAllValues();
-  }
-
+const getAllAsyncValues = async () => {
   const allKeys = await AsyncStorage.getAllKeys();
+
+  if (allKeys.length === 0) {
+    return undefined;
+  }
+
   let allValues: Record<string, string> = {};
 
   for (const key of allKeys) {
@@ -61,5 +20,101 @@ export const getAll = async (): Promise<Record<string, string>> => {
     allValues[key] = item;
   }
 
+  return allValues;
+};
+
+// ToDo: do I even need this?
+const clearAllAsyncValues = async () => {
+  const whiteListedKeys = [
+    '.posthog-rn.json',
+    'auth',
+    'vocablyAuthStatus',
+    'userStaticMetadata',
+    'userMetadata',
+    'studyStreak',
+    'languageDecks',
+    'languagesContainerSelectedLanguage',
+    'last-recalibration',
+    'translationPresetSelectedLanguage',
+    'languagePairs',
+    'languageTransformations',
+  ];
+
+  const allKeys = (await AsyncStorage.getAllKeys()).filter((k) =>
+    whiteListedKeys.some((wk) => k.endsWith(wk))
+  );
+};
+
+const populateMMKV = (values: Record<string, string>) => {
+  for (let [key, value] of Object.entries(values)) {
+    mmkvStorage.set(key, value);
+  }
+};
+
+const migrateToMMKV = new Promise<void>(async (resolve) => {
+  if (mmkvStorage.getBoolean('mmkvMigrated')) {
+    resolve();
+    return;
+  }
+
+  if (Platform.OS === 'ios') {
+    const values = await iosGroupStorage.getAllValues();
+    if (values) {
+      populateMMKV(values);
+    }
+  } else {
+    const values = await getAllAsyncValues();
+    if (values) {
+      populateMMKV(values);
+    }
+  }
+
+  mmkvStorage.set('mmkvMigrated', true);
+  resolve();
+});
+
+export const getItem = async (key: string): Promise<string | undefined> => {
+  await migrateToMMKV;
+  return mmkvStorage.getString(key);
+};
+
+export const setItem = async (key: string, value: string): Promise<void> => {
+  await migrateToMMKV;
+  mmkvStorage.set(key, value);
+};
+
+export const removeItem = async (key: string): Promise<void> => {
+  await migrateToMMKV;
+  mmkvStorage.remove(key);
+};
+
+export const clear = async (keys: string[]): Promise<void> => {
+  await migrateToMMKV;
+  for (const key of keys) {
+    mmkvStorage.remove(key);
+  }
+};
+
+export const clearAll = async (): Promise<void> => {
+  await migrateToMMKV;
+
+  const allKeys = mmkvStorage
+    .getAllKeys()
+    .filter((key) => key !== 'auth' && !key.includes('posthog'));
+
+  await clear(allKeys);
+};
+
+export const getAll = async (): Promise<Record<string, string>> => {
+  await migrateToMMKV;
+
+  const allKeys = mmkvStorage.getAllKeys();
+  let allValues: Record<string, string> = {};
+  for (const key of allKeys) {
+    const value = mmkvStorage.getString(key);
+    if (value !== undefined) {
+      allValues[key] = value;
+    }
+  }
   return allValues;
 };
