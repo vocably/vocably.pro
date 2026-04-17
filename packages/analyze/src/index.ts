@@ -20,3 +20,4 @@ export {
   getUnitOfSpeechTranslationFileName,
 } from './translateUnitOfSpeech';
 export { validateSource } from './validateSource';
+export { fixGrammar } from './grammar/fixGrammar';
