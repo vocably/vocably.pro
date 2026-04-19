@@ -20,6 +20,7 @@
     "setup-safari-extension-dev": "npm run build-dev --prefix ../packages/ios-extension && npm run copy-ios-extension",
     "setup-safari-extension-prod": "npm run build-prod --prefix ../packages/ios-extension && npm run copy-ios-extension",
     "postinstall": "patch-package",
+    "premobile-app": "sed -i '' 's/^ANALYTICS_DISABLED.*/ANALYTICS_DISABLED=\"true\"/' .env",
     "mobile-app": "npm start"
   },
   "dependencies": {
