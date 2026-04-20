@@ -40,7 +40,7 @@ const saveValues = (values: FixGrammarPayload) => {
   params.set('text', values.text);
   params.set('language', values.language);
   params.set('context', values.context);
-  params.set('explanationLanguages', values.explanationLanguage ?? '');
+  params.set('explanationLanguage', values.explanationLanguage ?? '');
   window.history.replaceState(
     {},
     '',
