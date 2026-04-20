@@ -1,0 +1,117 @@
+@import '../../styles/variables';
+@import '../../styles/component';
+
+:host {
+  --font-size: 16px;
+  display: block;
+  visibility: visible !important;
+}
+
+$gap: 1rem;
+$input-padding-x: 1rem;
+$input-padding-y: 0.5rem;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+.fields-row {
+  display: flex;
+  flex-direction: row;
+  gap: $gap;
+
+  .field {
+    flex: 1;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.label {
+  font-size: calc(var(--font-size) * 0.875);
+  color: $v-light-color-muted;
+}
+
+.optional {
+  font-size: calc(var(--font-size) * 0.8);
+  opacity: 0.7;
+}
+
+.input {
+  @include input-text($input-padding-x, $input-padding-y);
+}
+
+.select {
+  @include select($input-padding-x, $input-padding-y);
+}
+
+.actions {
+  display: flex;
+  justify-content: stretch;
+}
+
+.submit {
+  @include button();
+}
+
+.result {
+  margin-top: 16px;
+
+  &--error {
+    color: $v-light-color-body;
+    background-color: $v-light-color-elevation-2;
+    border-radius: $v-border-radius;
+    padding: 12px;
+    font-size: calc(var(--font-size) * 0.9);
+  }
+}
+
+.correct-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: calc(var(--font-size) * 0.9);
+  color: $v-light-color-muted;
+  margin-bottom: 12px;
+
+  .correct-icon {
+    flex-shrink: 0;
+  }
+}
+
+.corrected-text {
+  background-color: $v-light-color-elevation-2;
+  border-radius: $v-border-radius;
+  padding: 12px;
+  margin-bottom: 12px;
+
+  &__label {
+    font-size: calc(var(--font-size) * 0.8);
+    color: $v-light-color-muted;
+    margin-bottom: 4px;
+  }
+
+  &__value {
+    font-size: var(--font-size);
+    font-weight: 500;
+  }
+}
+
+.explanation {
+  font-size: calc(var(--font-size) * 0.9);
+  line-height: 1.6;
+
+  :first-child {
+    margin-top: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
