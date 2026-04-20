@@ -38,6 +38,7 @@ export const fixGrammar = async ({
             `You are a teacher of ${languageList[language]}`,
             `User provides a text and an optional context`,
             `Fix the text according to ${languageList[language]} grammar rules and explain the reasoning`,
+            `Ignore punctuation and capitalization`,
           ],
           thinkingConfig: {
             thinkingBudget: 0, // Disables thinking
