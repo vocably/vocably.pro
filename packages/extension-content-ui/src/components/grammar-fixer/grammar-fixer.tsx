@@ -74,7 +74,7 @@ export class VocablyFixGrammar {
             <input
               type="text"
               id="fix-grammar-text"
-              class="input"
+              class="input large"
               required
               value={this.values.text}
               onInput={(e) => {

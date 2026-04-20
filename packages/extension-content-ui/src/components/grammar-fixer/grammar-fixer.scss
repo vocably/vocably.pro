@@ -10,6 +10,7 @@
 $gap: 1rem;
 $input-padding-x: 1rem;
 $input-padding-y: 0.5rem;
+$large-font-size: 2rem;
 
 .form {
   display: flex;
@@ -45,6 +46,10 @@ $input-padding-y: 0.5rem;
 
 .input {
   @include input-text($input-padding-x, $input-padding-y);
+}
+
+.input.large {
+  font-size: $large-font-size !important;
 }
 
 .select {
@@ -102,7 +107,7 @@ $input-padding-y: 0.5rem;
 .corrected-text {
   background-color: $v-light-color-elevation-2;
   border-radius: $v-border-radius;
-  padding: 12px;
+  padding: $input-padding-y $input-padding-x;
   margin-bottom: 12px;
 
   &__label {
@@ -112,8 +117,8 @@ $input-padding-y: 0.5rem;
   }
 
   &__value {
-    font-size: 120%;
-    font-weight: 500;
+    font-size: $large-font-size;
+    font-weight: 400;
   }
 }
 
