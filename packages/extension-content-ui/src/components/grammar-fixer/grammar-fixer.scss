@@ -1,4 +1,5 @@
 @import '../../styles/variables';
+@import '../../styles/component';
 
 :host {
   --font-size: 16px;
@@ -6,16 +7,20 @@
   visibility: visible !important;
 }
 
+$gap: 1rem;
+$input-padding-x: 1rem;
+$input-padding-y: 0.5rem;
+
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: $gap;
 }
 
 .fields-row {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: $gap;
 
   .field {
     flex: 1;
@@ -25,7 +30,7 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.3rem;
 }
 
 .label {
@@ -38,72 +43,21 @@
   opacity: 0.7;
 }
 
-.input,
-.textarea,
-.select {
-  padding: 8px 12px;
-  color: $v-light-color-body;
-  border: none;
-  border-radius: $v-border-radius;
-  background-color: $v-light-color-elevation-2;
-  outline: none;
-  box-shadow: none;
-  box-sizing: border-box;
-  width: 100%;
-  font-size: var(--font-size);
-  transition: background-color 0.25s ease-in-out;
-
-  &:focus {
-    background-color: $v-light-color-elevation-3;
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-}
-
-.textarea {
-  resize: vertical;
-  min-height: 80px;
-  font-family: inherit;
-  line-height: 1.5;
+.input {
+  @include input-text($input-padding-x, $input-padding-y);
 }
 
 .select {
-  appearance: auto;
-  cursor: pointer;
-
-  &:disabled {
-    cursor: not-allowed;
-  }
+  @include select($input-padding-x, $input-padding-y);
 }
 
 .actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: stretch;
 }
 
 .submit {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 16px;
-  border: none;
-  border-radius: $v-border-radius;
-  background-color: $v-light-color-contrast;
-  color: $v-light-color-body;
-  font-size: var(--font-size);
-  cursor: pointer;
-  transition: background-color 0.25s ease-in-out;
-
-  &:hover:not(:disabled) {
-    background-color: $v-light-color-contrast-2;
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
+  @include button();
 }
 
 .result {

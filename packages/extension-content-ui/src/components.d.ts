@@ -42,7 +42,7 @@ export namespace Components {
     interface VocablyFirstTranslationCongratulation {
         "card": TranslationCard;
     }
-    interface VocablyFixGrammar {
+    interface VocablyGrammarFixer {
         "fixGrammar": (
     payload: FixGrammarPayload,
     abortController?: AbortController
@@ -338,11 +338,11 @@ declare global {
         prototype: HTMLVocablyFirstTranslationCongratulationElement;
         new (): HTMLVocablyFirstTranslationCongratulationElement;
     };
-    interface HTMLVocablyFixGrammarElement extends Components.VocablyFixGrammar, HTMLStencilElement {
+    interface HTMLVocablyGrammarFixerElement extends Components.VocablyGrammarFixer, HTMLStencilElement {
     }
-    var HTMLVocablyFixGrammarElement: {
-        prototype: HTMLVocablyFixGrammarElement;
-        new (): HTMLVocablyFixGrammarElement;
+    var HTMLVocablyGrammarFixerElement: {
+        prototype: HTMLVocablyGrammarFixerElement;
+        new (): HTMLVocablyGrammarFixerElement;
     };
     interface HTMLVocablyHintSelectorElement extends Components.VocablyHintSelector, HTMLStencilElement {
     }
@@ -575,7 +575,7 @@ declare global {
         "vocably-card-translation": HTMLVocablyCardTranslationElement;
         "vocably-close-button": HTMLVocablyCloseButtonElement;
         "vocably-first-translation-congratulation": HTMLVocablyFirstTranslationCongratulationElement;
-        "vocably-fix-grammar": HTMLVocablyFixGrammarElement;
+        "vocably-grammar-fixer": HTMLVocablyGrammarFixerElement;
         "vocably-hint-selector": HTMLVocablyHintSelectorElement;
         "vocably-icon-add": HTMLVocablyIconAddElement;
         "vocably-icon-ai": HTMLVocablyIconAiElement;
@@ -651,7 +651,7 @@ declare namespace LocalJSX {
     interface VocablyFirstTranslationCongratulation {
         "card"?: TranslationCard;
     }
-    interface VocablyFixGrammar {
+    interface VocablyGrammarFixer {
         "fixGrammar"?: (
     payload: FixGrammarPayload,
     abortController?: AbortController
@@ -878,7 +878,7 @@ declare namespace LocalJSX {
         "vocably-card-translation": VocablyCardTranslation;
         "vocably-close-button": VocablyCloseButton;
         "vocably-first-translation-congratulation": VocablyFirstTranslationCongratulation;
-        "vocably-fix-grammar": VocablyFixGrammar;
+        "vocably-grammar-fixer": VocablyGrammarFixer;
         "vocably-hint-selector": VocablyHintSelector;
         "vocably-icon-add": VocablyIconAdd;
         "vocably-icon-ai": VocablyIconAi;
@@ -930,7 +930,7 @@ declare module "@stencil/core" {
             "vocably-card-translation": LocalJSX.VocablyCardTranslation & JSXBase.HTMLAttributes<HTMLVocablyCardTranslationElement>;
             "vocably-close-button": LocalJSX.VocablyCloseButton & JSXBase.HTMLAttributes<HTMLVocablyCloseButtonElement>;
             "vocably-first-translation-congratulation": LocalJSX.VocablyFirstTranslationCongratulation & JSXBase.HTMLAttributes<HTMLVocablyFirstTranslationCongratulationElement>;
-            "vocably-fix-grammar": LocalJSX.VocablyFixGrammar & JSXBase.HTMLAttributes<HTMLVocablyFixGrammarElement>;
+            "vocably-grammar-fixer": LocalJSX.VocablyGrammarFixer & JSXBase.HTMLAttributes<HTMLVocablyGrammarFixerElement>;
             "vocably-hint-selector": LocalJSX.VocablyHintSelector & JSXBase.HTMLAttributes<HTMLVocablyHintSelectorElement>;
             "vocably-icon-add": LocalJSX.VocablyIconAdd & JSXBase.HTMLAttributes<HTMLVocablyIconAddElement>;
             "vocably-icon-ai": LocalJSX.VocablyIconAi & JSXBase.HTMLAttributes<HTMLVocablyIconAiElement>;

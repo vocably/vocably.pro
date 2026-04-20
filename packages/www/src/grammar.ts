@@ -4,10 +4,10 @@ import { fixGrammar } from './grammar/fixGrammar';
 document.body.classList.add('vocably-extension-disabled');
 defineCustomElements();
 
-const grammarChecker = document.createElement(
-  'vocably-fix-grammar'
-) as HTMLVocablyFixGrammarElement;
+const grammarFixer = document.createElement(
+  'vocably-grammar-fixer'
+) as HTMLVocablyGrammarFixerElement;
 
-grammarChecker.fixGrammar = fixGrammar;
+grammarFixer.fixGrammar = fixGrammar;
 
-document.getElementById('grammar-checker').appendChild(grammarChecker);
+document.getElementById('grammar-checker').appendChild(grammarFixer);

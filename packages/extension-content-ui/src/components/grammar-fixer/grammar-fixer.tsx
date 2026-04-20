@@ -28,8 +28,8 @@ type FixGrammarState =
   | { status: 'error'; message: string };
 
 @Component({
-  tag: 'vocably-fix-grammar',
-  styleUrl: 'fix-grammar.scss',
+  tag: 'vocably-grammar-fixer',
+  styleUrl: 'grammar-fixer.scss',
   shadow: true,
 })
 export class VocablyFixGrammar {
@@ -113,16 +113,16 @@ export class VocablyFixGrammar {
             <label class="label" htmlFor="fix-grammar-text">
               Text
             </label>
-            <textarea
+            <input
+              type="text"
               id="fix-grammar-text"
-              class="textarea"
+              class="input"
               required
               disabled={isLoading}
               value={this.text}
               onInput={(e) => {
-                this.text = (e.target as HTMLTextAreaElement).value;
+                this.text = (e.target as HTMLInputElement).value;
               }}
-              rows={4}
             />
           </div>
 
