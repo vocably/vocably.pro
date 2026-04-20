@@ -16,10 +16,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <title>Vocably{{#if title}} - {{title}}{{/if}}</title>
-    <meta name="description" content="Combination of contextual dictionary and flashcards. Select → Translate → Save → Learn. Supports Chrome, Safari, iOS, Android." />
+    <meta name="description" content="{{#if metaDescription}}{{metaDescription}}{{else}}Combination of contextual dictionary and flashcards. Select → Translate → Save → Learn. Supports Chrome, Safari, iOS, Android.{{/if}}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Vocably{{#if title}} - {{title}}{{/if}}" />
-    <meta property="og:description" content="Combination of contextual dictionary and flashcards. Select → Translate → Save → Learn." />
+    <meta property="og:description" content="{{#if ogDescription}}{{ogDescription}}{{else}}Combination of contextual dictionary and flashcards. Select → Translate → Save → Learn.{{/if}}" />
     <meta property="og:url" content="{{htmlWebpackPlugin.options.environment.baseUrl}}{{url}}" />
     <meta property="og:image" content="{{htmlWebpackPlugin.options.environment.baseUrl}}/assets/og-image.png" />
     <link rel="canonical" href="{{htmlWebpackPlugin.options.canonicalHref}}" />
@@ -153,6 +153,7 @@
             <ul class="list-unstyled mb-0">
               <li class="mb-2"><a href="/about.html">About</a></li>
               <li class="mb-2"><a href="/search.html">Online Dictionary</a></li>
+              <li class="mb-2"><a href="/grammar.html">Online Grammar Corrector</a></li>
               <li class="mb-2"><a href="/privacy-policy.html">Privacy Policy</a></li>
               <li class="mb-2"><a href="/terms-and-conditions.html">Terms and Conditions</a></li>
             </ul>
