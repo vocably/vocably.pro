@@ -1,7 +1,6 @@
 import {
   Component,
   Element,
-  Fragment,
   forceUpdate,
   h,
   Host,
@@ -103,7 +102,8 @@ export class VocablyFixGrammar {
 
   render() {
     const isLoading = this.state.status === 'loading';
-    const canSubmit = this.text.trim() !== '' && !isLoading;
+    console.log('isLoading', isLoading);
+    const canSubmit = this.text.trim() !== '';
     const languages = this.languageOptions();
 
     return (
@@ -111,14 +111,13 @@ export class VocablyFixGrammar {
         <form class="form" onSubmit={(e) => this.handleSubmit(e)}>
           <div class="field">
             <label class="label" htmlFor="fix-grammar-text">
-              Text
+              Sentence to check
             </label>
             <input
               type="text"
               id="fix-grammar-text"
               class="input"
               required
-              disabled={isLoading}
               value={this.text}
               onInput={(e) => {
                 this.text = (e.target as HTMLInputElement).value;
@@ -134,7 +133,6 @@ export class VocablyFixGrammar {
               id="fix-grammar-context"
               class="input"
               type="text"
-              disabled={isLoading}
               value={this.context}
               onInput={(e) => {
                 this.context = (e.target as HTMLInputElement).value;
@@ -150,7 +148,6 @@ export class VocablyFixGrammar {
               <select
                 id="fix-grammar-language"
                 class="select"
-                disabled={isLoading}
                 onChange={(e) => {
                   const val = (e.target as HTMLSelectElement).value;
                   if (isGoogleLanguage(val)) {
@@ -173,7 +170,6 @@ export class VocablyFixGrammar {
               <select
                 id="fix-grammar-explanation-language"
                 class="select"
-                disabled={isLoading}
                 onChange={(e) => {
                   const val = (e.target as HTMLSelectElement).value;
                   if (isGoogleLanguage(val)) {
@@ -193,17 +189,15 @@ export class VocablyFixGrammar {
             </div>
           </div>
 
-          <div class="actions">
+          <div class="submit-container">
             <button class="submit" type="submit" disabled={!canSubmit}>
-              {isLoading ? (
-                <Fragment>
-                  Checking
-                  <vocably-inline-loader style={{ marginLeft: '6px' }} />
-                </Fragment>
-              ) : (
-                'Check grammar'
-              )}
+              Check grammar
             </button>
+            {isLoading && (
+              <div class="loader">
+                <vocably-inline-loader></vocably-inline-loader>
+              </div>
+            )}
           </div>
         </form>
 

@@ -51,13 +51,27 @@ $input-padding-y: 0.5rem;
   @include select($input-padding-x, $input-padding-y);
 }
 
-.actions {
+.submit-container {
   display: flex;
   justify-content: stretch;
-}
+  position: relative;
 
-.submit {
-  @include button();
+  .submit {
+    @include button();
+  }
+
+  .loader {
+    --color: #{$v-light-btn-color};
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .result {
