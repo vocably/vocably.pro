@@ -26,6 +26,11 @@ describe('translateUnitOfSpeech', () => {
         'A long, raised mass or mound of earth, especially bordering or paralleling a river or shore.',
         'A set or series of similar or related things, particularly in a row or tier.',
       ],
+      examples: [
+        'I deposited money in the bank.',
+        'The river overflowed its banks.',
+        'A bank of computers.',
+      ],
     });
 
     if (translationResult.success === false) {
@@ -49,6 +54,11 @@ describe('translateUnitOfSpeech', () => {
         'A financial institution where money and other valuables are stored and managed.',
         'A long, raised mass or mound of earth, especially bordering or paralleling a river or shore.',
         'A set or series of similar or related things, particularly in a row or tier.',
+      ],
+      examples: [
+        'I deposited money in the bank.',
+        'The river overflowed its banks.',
+        'A bank of computers.',
       ],
     });
     expect(translationResult.success).toEqual(true);
@@ -88,6 +98,7 @@ describe('translateUnitOfSpeech', () => {
         'Een traject of koers die men volgt.',
         'Een amfibie uit de familie Bufonidae.',
       ],
+      examples: ['een smal pad door het bos', 'het juiste pad kiezen'],
     });
     expect(translationResult.success).toEqual(true);
     if (translationResult.success === false) {
@@ -193,6 +204,11 @@ describe('translateUnitOfSpeech', () => {
         'verricht een handeling',
         'functioneert op een specifieke manier',
       ],
+      examples: [
+        'Hij doet zijn werk goed.',
+        'Dat doet pijn.',
+        'Zij doet de deur dicht.',
+      ],
     });
     expect(translationResult.success).toEqual(true);
     if (!translationResult.success) {
@@ -259,6 +275,12 @@ describe('translateUnitOfSpeech', () => {
         'To quickly go somewhere, especially to avoid being seen.',
         'To avoid a duty, an unpleasant task, etc.',
       ],
+      examples: [
+        'She had to duck to avoid the ball.',
+        'He ducked his brother in the pool.',
+        'I ducked into the nearest doorway to escape the rain.',
+        "He's always trying to duck his responsibilities.",
+      ],
     });
 
     expect(translationResult.success).toEqual(true);
@@ -267,7 +289,9 @@ describe('translateUnitOfSpeech', () => {
     }
 
     expect(
-      translationResult.value.some((v) => v.includes('пригибаться'))
+      translationResult.value.some(
+        (v) => v.includes('пригибаться') || v.includes('пригнуться')
+      )
     ).toEqual(true);
 
     expect(translationResult.value.some((v) => v.includes('утка'))).toEqual(
@@ -344,6 +368,7 @@ describe('translateUnitOfSpeech', () => {
         'to lower the head or body quickly to avoid being hit or seen',
         'to evade or avoid a task, responsibility, or difficult situation',
       ],
+      examples: ['The duck swam in the pond.', 'He made a quick duck.'],
     });
 
     expect(translationResult.success).toEqual(true);

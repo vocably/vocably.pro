@@ -48,6 +48,7 @@ export const analyseAndTranslate = async (
       targetLanguage: payload.targetLanguage,
       partOfSpeech: payload.partOfSpeech,
       definitions: aiAnalyseResult.value.definitions,
+      examples: aiAnalyseResult.value.examples,
       number: aiAnalyseResult.value.number,
     });
 

@@ -29,6 +29,7 @@ type Payload = {
   partOfSpeech: string;
   source: string;
   definitions?: string[];
+  examples?: string[];
   number?: string;
 };
 
@@ -94,6 +95,7 @@ const getGeminiGenerationContentParams = ({
   source,
   partOfSpeech,
   definitions = [],
+  examples = [],
   number,
 }: Payload): GenerateContentParameters => {
   const safeSourceLanguage = languageList[sourceLanguage];
@@ -102,18 +104,19 @@ const getGeminiGenerationContentParams = ({
   const expectedNumberOfTranslations =
     getExpectedNumberOfTranslations(definitions);
 
+  const definitionsMd =
+    definitions?.length > 0 ? [`#Definitions`, ...definitions] : [];
+
+  const examplesMd = examples?.length > 0 ? [`#Examples`, ...examples] : [];
+
   return {
     model: 'gemini-2.5-flash',
-    contents: createUserContent([source, ...definitions]),
+    contents: createUserContent([source, ...definitionsMd, ...examplesMd]),
     config: {
       systemInstruction: [
         `You are ${safeSourceLanguage}-${safeTargetLanguage} dictionary`,
-        `User provides ${safeSourceLanguage} ${partOfSpeech}${
-          definitions?.length > 0 ? ' and its definitions' : ''
-        }.`,
-        `Give up to ${expectedNumberOfTranslations} relevant translations into ${safeTargetLanguage}${
-          definitions?.length > 0 ? ' in the context of definitions' : ''
-        }.${
+        `User provides ${safeSourceLanguage} ${partOfSpeech}.`,
+        `Give up to ${expectedNumberOfTranslations} relevant translations into ${safeTargetLanguage}.${
           expectedNumberOfTranslations === 2
             ? ' Only include a second if it is a common, high-frequency usage.'
             : ''
@@ -261,10 +264,15 @@ export const translateUnitOfSpeechChatGpt = async ({
   source,
   partOfSpeech,
   definitions = [],
+  examples = [],
   number,
 }: Payload): Promise<Result<string[]>> => {
   const safeSourceLanguage = languageList[sourceLanguage];
   const safeTargetLanguage = languageList[targetLanguage];
+
+  const definitionsMd =
+    definitions?.length > 0 ? [`#Definitions`, ...definitions] : [];
+  const examplesMd = examples?.length > 0 ? [`#Examples`, ...examples] : [];
 
   const result = await chatGptRequest({
     messages: [
@@ -295,7 +303,7 @@ export const translateUnitOfSpeechChatGpt = async ({
         ].join('\n'),
       },
       { role: 'user', content: source },
-      { role: 'user', content: definitions.join('\n') },
+      { role: 'user', content: [definitionsMd, examplesMd].join('\n') },
     ],
     model: GPT_4O,
     responseFormat: {
