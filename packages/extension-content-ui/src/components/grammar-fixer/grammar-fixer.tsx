@@ -1,16 +1,17 @@
 import {
   Component,
   Element,
+  EventEmitter,
   forceUpdate,
   h,
   Host,
   Prop,
-  State,
+  Event,
+  Fragment,
 } from '@stencil/core';
 import {
   FixGrammarPayload,
   FixGrammarResponse,
-  GoogleLanguage,
   isGoogleLanguage,
   languageList,
   Result,
@@ -20,12 +21,6 @@ import { subscribeToLocale } from '../../i18n';
 
 const mdConverter = new showdown.Converter();
 
-type FixGrammarState =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success'; data: FixGrammarResponse }
-  | { status: 'error'; message: string };
-
 @Component({
   tag: 'vocably-grammar-fixer',
   styleUrl: 'grammar-fixer.scss',
@@ -34,18 +29,16 @@ type FixGrammarState =
 export class VocablyFixGrammar {
   @Element() el: HTMLElement;
 
-  @Prop() fixGrammar: (
-    payload: FixGrammarPayload,
-    abortController?: AbortController
-  ) => Promise<Result<FixGrammarResponse>>;
+  @Prop() values: FixGrammarPayload = {
+    text: '',
+    language: 'en',
+  };
+  @Prop() isLoading: boolean = false;
+  @Prop() result: Result<FixGrammarResponse> | null = null;
 
-  @State() text: string = '';
-  @State() context: string = '';
-  @State() language: GoogleLanguage = 'en';
-  @State() explanationLanguage: GoogleLanguage = 'en';
-  @State() state: FixGrammarState = { status: 'idle' };
+  @Event() valuesChange: EventEmitter<FixGrammarPayload>;
+  @Event() formSubmit: EventEmitter<FixGrammarPayload>;
 
-  private abortController: AbortController | null = null;
   private unsubLocale: (() => void) | undefined;
 
   connectedCallback() {
@@ -54,44 +47,11 @@ export class VocablyFixGrammar {
 
   disconnectedCallback() {
     this.unsubLocale?.();
-    this.abortController?.abort();
   }
 
   private async handleSubmit(e: Event) {
     e.preventDefault();
-
-    this.abortController?.abort();
-    this.abortController = new AbortController();
-
-    this.state = { status: 'loading' };
-
-    const payload: FixGrammarPayload = {
-      text: this.text,
-      language: this.language,
-    };
-
-    if (this.context.trim()) {
-      payload.context = this.context.trim();
-    }
-
-    if (this.explanationLanguage) {
-      payload.explanationLanguage = this.explanationLanguage;
-    }
-
-    const result = await this.fixGrammar(payload, this.abortController);
-
-    if (this.abortController.signal.aborted) {
-      return;
-    }
-
-    if (result.success) {
-      this.state = { status: 'success', data: result.value };
-    } else {
-      this.state = {
-        status: 'error',
-        message: result.reason ?? 'An error occurred.',
-      };
-    }
+    this.formSubmit.emit(this.values);
   }
 
   private languageOptions() {
@@ -101,9 +61,7 @@ export class VocablyFixGrammar {
   }
 
   render() {
-    const isLoading = this.state.status === 'loading';
-    console.log('isLoading', isLoading);
-    const canSubmit = this.text.trim() !== '';
+    const canSubmit = this.values.text.trim() !== '';
     const languages = this.languageOptions();
 
     return (
@@ -118,9 +76,12 @@ export class VocablyFixGrammar {
               id="fix-grammar-text"
               class="input"
               required
-              value={this.text}
+              value={this.values.text}
               onInput={(e) => {
-                this.text = (e.target as HTMLInputElement).value;
+                this.valuesChange.emit({
+                  ...this.values,
+                  text: (e.target as HTMLInputElement).value,
+                });
               }}
             />
           </div>
@@ -133,9 +94,12 @@ export class VocablyFixGrammar {
               id="fix-grammar-context"
               class="input"
               type="text"
-              value={this.context}
+              value={this.values.context}
               onInput={(e) => {
-                this.context = (e.target as HTMLInputElement).value;
+                this.valuesChange.emit({
+                  ...this.values,
+                  context: (e.target as HTMLInputElement).value,
+                });
               }}
             />
           </div>
@@ -150,13 +114,17 @@ export class VocablyFixGrammar {
                 class="select"
                 onChange={(e) => {
                   const val = (e.target as HTMLSelectElement).value;
-                  if (isGoogleLanguage(val)) {
-                    this.language = val;
+                  if (!isGoogleLanguage(val)) {
+                    return;
                   }
+                  this.valuesChange.emit({
+                    ...this.values,
+                    language: val,
+                  });
                 }}
               >
                 {languages.map(({ code, name }) => (
-                  <option value={code} selected={this.language === code}>
+                  <option value={code} selected={this.values.language === code}>
                     {name}
                   </option>
                 ))}
@@ -172,15 +140,20 @@ export class VocablyFixGrammar {
                 class="select"
                 onChange={(e) => {
                   const val = (e.target as HTMLSelectElement).value;
-                  if (isGoogleLanguage(val)) {
-                    this.explanationLanguage = val;
+                  if (!isGoogleLanguage(val)) {
+                    return;
                   }
+
+                  this.valuesChange.emit({
+                    ...this.values,
+                    explanationLanguage: val,
+                  });
                 }}
               >
                 {languages.map(({ code, name }) => (
                   <option
                     value={code}
-                    selected={this.explanationLanguage === code}
+                    selected={this.values.explanationLanguage === code}
                   >
                     {name}
                   </option>
@@ -193,7 +166,7 @@ export class VocablyFixGrammar {
             <button class="submit" type="submit" disabled={!canSubmit}>
               Check grammar
             </button>
-            {isLoading && (
+            {this.isLoading && (
               <div class="loader">
                 <vocably-inline-loader></vocably-inline-loader>
               </div>
@@ -201,28 +174,36 @@ export class VocablyFixGrammar {
           </div>
         </form>
 
-        {this.state.status === 'error' && (
-          <div class="result result--error">{this.state.message}</div>
-        )}
+        {this.result && (
+          <Fragment>
+            {this.result.success === false && (
+              <div class="result result--error">{this.result.reason}</div>
+            )}
 
-        {this.state.status === 'success' && (
-          <div class="result">
-            {this.state.data.isCorrect ? (
-              <div class="correct-badge">
-                <vocably-icon-check class="correct-icon" />
-                No grammar issues found
-              </div>
-            ) : (
-              <div class="corrected-text">
-                <div class="corrected-text__label">Corrected text</div>
-                <div class="corrected-text__value">{this.state.data.text}</div>
+            {this.result.success === true && (
+              <div class="result">
+                {this.result.value.isCorrect ? (
+                  <div class="correct-badge">
+                    <vocably-icon-check class="correct-icon" />
+                    No grammar issues found
+                  </div>
+                ) : (
+                  <div class="corrected-text">
+                    <div class="corrected-text__label">Corrected text</div>
+                    <div class="corrected-text__value">
+                      {this.result.value.text}
+                    </div>
+                  </div>
+                )}
+                <div
+                  class="explanation"
+                  innerHTML={mdConverter.makeHtml(
+                    this.result.value.explanation
+                  )}
+                />
               </div>
             )}
-            <div
-              class="explanation"
-              innerHTML={mdConverter.makeHtml(this.state.data.explanation)}
-            />
-          </div>
+          </Fragment>
         )}
       </Host>
     );

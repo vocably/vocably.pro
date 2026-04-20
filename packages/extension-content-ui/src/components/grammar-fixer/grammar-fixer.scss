@@ -75,7 +75,7 @@ $input-padding-y: 0.5rem;
 }
 
 .result {
-  margin-top: 16px;
+  margin-top: 3rem;
 
   &--error {
     color: $v-light-color-body;
@@ -112,13 +112,13 @@ $input-padding-y: 0.5rem;
   }
 
   &__value {
-    font-size: var(--font-size);
+    font-size: 120%;
     font-weight: 500;
   }
 }
 
 .explanation {
-  font-size: calc(var(--font-size) * 0.9);
+  font-size: 110%;
   line-height: 1.6;
 
   :first-child {

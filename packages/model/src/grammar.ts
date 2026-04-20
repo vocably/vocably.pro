@@ -1,4 +1,4 @@
-import { GoogleLanguage } from './language';
+import { GoogleLanguage, isGoogleLanguage } from './language';
 
 export type FixGrammarPayload = {
   text: string;
@@ -11,6 +11,16 @@ export type FixGrammarResponse = {
   text: string;
   explanation: string;
   isCorrect: boolean;
+};
+
+export const isFixGrammarPayload = (data: any): data is FixGrammarPayload => {
+  return (
+    typeof data['text'] === 'string' &&
+    isGoogleLanguage(data['language']) &&
+    (data['context'] === undefined || typeof data['context'] === 'string') &&
+    (data['explanationLanguage'] === undefined ||
+      isGoogleLanguage(data['explanationLanguage']))
+  );
 };
 
 export const isFixGrammarResponse = (data: any): data is FixGrammarResponse => {
