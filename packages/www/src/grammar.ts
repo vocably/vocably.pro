@@ -16,9 +16,14 @@ const grammarFixer = document.createElement(
 
 const getInitialValues = (): FixGrammarPayload => {
   const params = new URLSearchParams(window.location.search);
+  const grammarFixerStorageValues = JSON.parse(
+    localStorage.getItem('grammarFixerValues') ?? '{}'
+  ) as Partial<FixGrammarPayload>;
 
-  const language = params.get('language');
-  const explanationsLanguage = params.get('explanationLanguage');
+  const language = params.get('language') ?? grammarFixerStorageValues.language;
+  const explanationsLanguage =
+    params.get('explanationLanguage') ??
+    grammarFixerStorageValues.explanationLanguage;
 
   return {
     text: params.get('text') || '',
@@ -69,6 +74,7 @@ grammarFixer.addEventListener(
       return;
     }
     grammarFixer.values = e.detail;
+    localStorage.setItem('grammarFixerValues', JSON.stringify(e.detail));
   }
 );
 
