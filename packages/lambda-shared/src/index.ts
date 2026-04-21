@@ -5,3 +5,4 @@ export * from './nodeUserMetadata';
 export * from './nodeUserStaticMetadata';
 export * from './openAiClient';
 export * from './sanitizePayload';
+export * from './nodeS3Scan';

@@ -80,6 +80,12 @@ export const inputTypes = [
 
 export type DetectedInputType = (typeof inputTypes)[number];
 
+export const isDetectedInputType = (
+  inputType: any
+): inputType is DetectedInputType => {
+  return inputTypes.includes(inputType);
+};
+
 export const unitOfSpeechTypes: DetectedInputType[] = [
   'word',
   'compound word',
