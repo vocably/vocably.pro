@@ -1,0 +1,12 @@
+{
+  "name": "@vocably/scripts",
+  "version": "0.0.0-auto",
+  "private": true,
+  "type": "module",
+  "repository": "gi t@github.com:vocably/getvocably.git",
+  "author": "Dmytro Snisarenko <dmytro@sneas.io>",
+  "scripts": {},
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
