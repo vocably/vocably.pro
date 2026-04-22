@@ -144,6 +144,13 @@ $large-font-size: 2rem;
   border-radius: $v-border-radius;
   padding: $input-padding-y $input-padding-x;
   margin-bottom: 12px;
+  position: relative;
+
+  &__copy {
+    position: absolute;
+    bottom: $input-padding-y;
+    right: $input-padding-y;
+  }
 
   &__label {
     font-size: calc(var(--font-size) * 0.8);

@@ -229,6 +229,17 @@ export class VocablyFixGrammar {
                 ) : (
                   <div class="corrected-text">
                     <div class="corrected-text__label">Corrected text</div>
+                    <div class="corrected-text__copy">
+                      <vocably-button-copy
+                        onCopy={() => {
+                          if (this.result?.success === true) {
+                            navigator.clipboard.writeText(
+                              this.result.value.text
+                            );
+                          }
+                        }}
+                      ></vocably-button-copy>
+                    </div>
                     <div class="corrected-text__value">
                       {this.result.value.text}
                     </div>

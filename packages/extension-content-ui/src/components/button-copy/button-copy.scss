@@ -1,0 +1,22 @@
+:host {
+  display: inline-block;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:active {
+    transform: scale(0.8);
+  }
+
+  * {
+    --size: 24px;
+  }
+}
