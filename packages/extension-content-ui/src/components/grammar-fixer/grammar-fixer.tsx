@@ -39,6 +39,8 @@ export class VocablyFixGrammar {
   @Event() valuesChange: EventEmitter<FixGrammarPayload>;
   @Event() formSubmit: EventEmitter<FixGrammarPayload>;
 
+  private textElement: HTMLTextAreaElement;
+  private contextElement: HTMLInputElement;
   private unsubLocale: (() => void) | undefined;
 
   connectedCallback() {
@@ -76,6 +78,7 @@ export class VocablyFixGrammar {
                 id="fix-grammar-text"
                 class="input textarea"
                 required
+                ref={(el) => (this.textElement = el as HTMLTextAreaElement)}
                 value={this.values.text}
                 onInput={(e) => {
                   this.valuesChange.emit({
@@ -96,9 +99,10 @@ export class VocablyFixGrammar {
                 <button
                   class="clear"
                   type="button"
-                  onClick={() =>
-                    this.valuesChange.emit({ ...this.values, text: '' })
-                  }
+                  onClick={() => {
+                    this.valuesChange.emit({ ...this.values, text: '' });
+                    this.textElement?.focus();
+                  }}
                 >
                   <vocably-icon-remove></vocably-icon-remove>
                 </button>
@@ -115,6 +119,7 @@ export class VocablyFixGrammar {
                 id="fix-grammar-context"
                 class="input"
                 type="text"
+                ref={(el) => (this.contextElement = el as HTMLInputElement)}
                 value={this.values.context}
                 onInput={(e) => {
                   this.valuesChange.emit({
@@ -127,9 +132,10 @@ export class VocablyFixGrammar {
                 <button
                   class="clear"
                   type="button"
-                  onClick={() =>
-                    this.valuesChange.emit({ ...this.values, context: '' })
-                  }
+                  onClick={() => {
+                    this.valuesChange.emit({ ...this.values, context: '' });
+                    this.contextElement?.focus();
+                  }}
                 >
                   <vocably-icon-remove></vocably-icon-remove>
                 </button>
