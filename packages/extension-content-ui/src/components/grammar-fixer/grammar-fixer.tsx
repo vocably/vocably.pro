@@ -71,17 +71,24 @@ export class VocablyFixGrammar {
             <label class="label" htmlFor="fix-grammar-text">
               Sentence to check
             </label>
-            <input
-              type="text"
+            <textarea
               id="fix-grammar-text"
-              class="input large"
+              class="input textarea"
               required
               value={this.values.text}
               onInput={(e) => {
                 this.valuesChange.emit({
                   ...this.values,
-                  text: (e.target as HTMLInputElement).value,
+                  text: (e.target as HTMLTextAreaElement).value,
                 });
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  if (this.values.text.trim() !== '') {
+                    this.formSubmit.emit(this.values);
+                  }
+                }
               }}
             />
           </div>

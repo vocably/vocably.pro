@@ -48,8 +48,11 @@ $large-font-size: 2rem;
   @include input-text($input-padding-x, $input-padding-y);
 }
 
-.input.large {
+.input.textarea {
+  font-family: $font-family !important;
   font-size: $large-font-size !important;
+  field-sizing: content;
+  resize: none;
 }
 
 .select {
