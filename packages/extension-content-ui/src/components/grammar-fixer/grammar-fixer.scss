@@ -44,15 +44,47 @@ $large-font-size: 2rem;
   opacity: 0.7;
 }
 
-.input {
+.clean-input {
+  position: relative;
+  display: flex;
   @include input-text($input-padding-x, $input-padding-y);
-}
 
-.input.textarea {
-  font-family: $font-family !important;
-  font-size: $large-font-size !important;
-  field-sizing: content;
-  resize: none;
+  &:focus-within {
+    background-color: $v-light-color-contrast-2;
+  }
+
+  .input {
+    color: $v-light-color-body;
+    font-size: var(--font-size);
+    line-height: inherit;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    width: 100%;
+  }
+
+  .input.textarea {
+    font-family: $font-family !important;
+    font-size: $large-font-size !important;
+    field-sizing: content;
+    resize: none;
+  }
+
+  .clear {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    align-self: center;
+    line-height: 0;
+    border-radius: 50%;
+
+    vocably-icon-remove {
+      --color: #{$v-light-color-muted};
+    }
+  }
 }
 
 .select {

@@ -71,44 +71,70 @@ export class VocablyFixGrammar {
             <label class="label" htmlFor="fix-grammar-text">
               Sentence to check
             </label>
-            <textarea
-              id="fix-grammar-text"
-              class="input textarea"
-              required
-              value={this.values.text}
-              onInput={(e) => {
-                this.valuesChange.emit({
-                  ...this.values,
-                  text: (e.target as HTMLTextAreaElement).value,
-                });
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                  e.preventDefault();
-                  if (this.values.text.trim() !== '') {
-                    this.formSubmit.emit(this.values);
+            <div class="clean-input">
+              <textarea
+                id="fix-grammar-text"
+                class="input textarea"
+                required
+                value={this.values.text}
+                onInput={(e) => {
+                  this.valuesChange.emit({
+                    ...this.values,
+                    text: (e.target as HTMLTextAreaElement).value,
+                  });
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    if (this.values.text.trim() !== '') {
+                      this.formSubmit.emit(this.values);
+                    }
                   }
-                }
-              }}
-            />
+                }}
+              />
+              {this.values.text.length > 0 && (
+                <button
+                  class="clear"
+                  type="button"
+                  onClick={() =>
+                    this.valuesChange.emit({ ...this.values, text: '' })
+                  }
+                >
+                  <vocably-icon-remove></vocably-icon-remove>
+                </button>
+              )}
+            </div>
           </div>
 
           <div class="field">
             <label class="label" htmlFor="fix-grammar-context">
               Context <span class="optional">(optional)</span>
             </label>
-            <input
-              id="fix-grammar-context"
-              class="input"
-              type="text"
-              value={this.values.context}
-              onInput={(e) => {
-                this.valuesChange.emit({
-                  ...this.values,
-                  context: (e.target as HTMLInputElement).value,
-                });
-              }}
-            />
+            <div class="clean-input">
+              <input
+                id="fix-grammar-context"
+                class="input"
+                type="text"
+                value={this.values.context}
+                onInput={(e) => {
+                  this.valuesChange.emit({
+                    ...this.values,
+                    context: (e.target as HTMLInputElement).value,
+                  });
+                }}
+              />
+              {this.values.context && this.values.context.length > 0 && (
+                <button
+                  class="clear"
+                  type="button"
+                  onClick={() =>
+                    this.valuesChange.emit({ ...this.values, context: '' })
+                  }
+                >
+                  <vocably-icon-remove></vocably-icon-remove>
+                </button>
+              )}
+            </div>
           </div>
 
           <div class="fields-row">
