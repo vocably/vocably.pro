@@ -124,6 +124,17 @@ $large-font-size: 2rem;
     padding: 12px;
     font-size: calc(var(--font-size) * 0.9);
   }
+
+  .skeleton-loader-title {
+    height: 32px;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .skeleton-loader-text {
+    height: 24px;
+    margin-bottom: 8px;
+  }
 }
 
 .correct-badge {
