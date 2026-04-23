@@ -2,39 +2,87 @@
 
 import { listFiles } from './utils.js';
 import { readFileSync } from 'fs';
-import { writeFileSync } from 'node:fs';
+import { existsSync, writeFileSync } from 'node:fs';
+import { AnalysisItem, UnitOfSpeech } from '@vocably/model';
+import {
+  getAnalyseCacheFileName,
+  sanitizeAiAnalyseResult,
+  aiAnalysisToItem,
+  isAiAnalysis,
+} from '@vocably/analyze';
+
+const areAnalysisItemsEqual =
+  (a: AnalysisItem) =>
+  (b: AnalysisItem): boolean => {
+    return (
+      a.source.toLowerCase() === b.source.toLowerCase() &&
+      a.partOfSpeech === b.partOfSpeech
+    );
+  };
 
 const files = await listFiles(
   '../../vocably-languages/de/translations/**/en.txt'
 );
 
-const words: Record<string, string[]> = {};
+const words: Record<string, AnalysisItem[]> = {};
+
+console.log('Found', files.length, 'files');
 
 for (const englishFile of files) {
-  const translations = readFileSync(englishFile).toString().split('\n');
+  const translations = readFileSync(englishFile)
+    .toString()
+    .split('\n')
+    .filter(Boolean);
   const word = englishFile.split('/').at(-3) as string;
-  for (const translation of translations) {
+  const partOfSpeech = englishFile.split('/').at(-2) as string;
+
+  const unitOfSpeechFilename = `../../vocably-languages/${getAnalyseCacheFileName(
+    {
+      source: word,
+      partOfSpeech,
+      sourceLanguage: 'de',
+    }
+  )}`;
+
+  if (!existsSync(unitOfSpeechFilename)) {
+    console.log(`Unit of speech file ${unitOfSpeechFilename} does not exist`);
+    continue;
+  }
+
+  const rawAnalysis = JSON.parse(readFileSync(unitOfSpeechFilename, 'utf-8'));
+
+  if (!isAiAnalysis(rawAnalysis)) {
+    console.log(
+      `Unit of speech file ${unitOfSpeechFilename} is not an AI analysis`
+    );
+    continue;
+  }
+
+  const aiAnalysis = sanitizeAiAnalyseResult('de', partOfSpeech, rawAnalysis);
+
+  if (aiAnalysis.exists === false) {
+    console.log(
+      `AI says this unit of speech does not exist ${word} ${partOfSpeech}`
+    );
+    continue;
+  }
+
+  const analysisItem = aiAnalysisToItem({
+    aiAnalysis,
+    sourceLanguage: 'de',
+    translations,
+    partOfSpeech,
+  });
+
+  for (let translation of translations) {
     if (!words[translation]) {
       words[translation] = [];
     }
 
-    if (!words[translation].includes(word)) {
-      words[translation].push(word);
+    if (!words[translation].some(areAnalysisItemsEqual(analysisItem))) {
+      words[translation].push(analysisItem);
     }
   }
 }
 
-const searchHandlebars = readFileSync(
-  '../packages/www/src/pages/search.handlebars',
-  'utf-8'
-);
-
-for (const translation of Object.keys(words)) {
-  writeFileSync(
-    '../packages/www/src/pages/search/' +
-      translation.replace(/[ \\\/]/g, '-') +
-      '.handlebars',
-    searchHandlebars,
-    'utf-8'
-  );
-}
+console.log('Items', Object.keys(words).length);
