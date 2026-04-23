@@ -2,6 +2,7 @@ dist/
 www/
 www-dist/
 loader/
+hydrate/
 src/**/readme.md
 
 *~
