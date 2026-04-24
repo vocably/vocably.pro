@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, normalize } from 'path';
 import 'zx/globals';
 import { execute } from './utils.js';
+import { chunk } from 'lodash-es';
 
 const language = process.argv.at(-1) ?? '';
 
@@ -57,18 +58,24 @@ if (deleteFiles.length > 0) {
   console.log(`Deleting ${deleteFiles.length} files`);
 }
 
-for (const file of deleteFiles) {
-  await execute(`aws s3 rm ${quotePath(s3Path + file)}`);
+for (const batch of chunk(deleteFiles, 10)) {
+  await Promise.allSettled(
+    batch.map((file) => execute(`aws s3 rm ${quotePath(s3Path + file)}`))
+  );
 }
 
 if (modifiedFiles.length > 0) {
   console.log(`Uploading ${modifiedFiles.length} files`);
 }
 
-for (const file of modifiedFiles) {
-  await execute(`aws s3 cp ${quotePath(file)} ${quotePath(s3Path + file)}`, {
-    cwd: repoPath,
-  });
+for (const batch of chunk(modifiedFiles, 10)) {
+  await Promise.allSettled(
+    batch.map((file) =>
+      execute(`aws s3 cp ${quotePath(file)} ${quotePath(s3Path + file)}`, {
+        cwd: repoPath,
+      })
+    )
+  );
 }
 
 console.log('Downloading data from S3');
