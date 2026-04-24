@@ -184,7 +184,7 @@ $disabled-opacity: 0.4;
   gap: 6px;
   font-size: calc(var(--font-size) * 0.9);
   color: $v-light-color-muted;
-  margin-bottom: 12px;
+  padding: 0 $input-padding-x;
 
   .correct-icon {
     flex-shrink: 0;
