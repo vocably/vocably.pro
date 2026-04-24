@@ -12,6 +12,8 @@ $input-padding-x: 1rem;
 $input-padding-y: 0.5rem;
 $large-font-size: 2rem;
 
+$disabled-opacity: 0.4;
+
 .form {
   display: flex;
   flex-direction: column;
@@ -39,10 +41,68 @@ $large-font-size: 2rem;
   color: $v-light-color-muted;
 }
 
-.label-with-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.block {
+  background-color: $v-light-color-elevation-2;
+  border-radius: $v-border-radius;
+  padding: $input-padding-y $input-padding-x;
+
+  &.input-block:focus-within {
+    background-color: $v-light-color-contrast-2;
+  }
+
+  .label-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .body-wrapper {
+    display: flex;
+    gap: 0.5rem;
+
+    --font-size: 2rem;
+
+    @media (width <= 600px) {
+      --font-size: 1.5rem;
+    }
+
+    .body {
+      flex: 1;
+      display: flex;
+      color: $v-light-color-body;
+      font-size: var(--font-size);
+    }
+
+    .body-actions {
+      display: inline-flex;
+      align-self: flex-end;
+      margin-bottom: calc(var(--font-size) * 0.25);
+    }
+  }
+}
+
+.submit-button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  line-height: 0;
+  border-radius: 50%;
+  transition: transform 0.2s;
+
+  &:active {
+    transform: scale(0.8);
+  }
+
+  & > * {
+    --color: #{$v-light-color-muted};
+    --size: var(--font-size);
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: $disabled-opacity;
+  }
 }
 
 .clear-button {
@@ -55,7 +115,11 @@ $large-font-size: 2rem;
   padding: 0;
   margin: 0;
   border: none;
-  margin-right: 0.5rem;
+  transition: transform 0.2s;
+
+  &:active {
+    transform: scale(0.9);
+  }
 
   & > * {
     --color: #{$v-light-color-muted};
@@ -64,77 +128,26 @@ $large-font-size: 2rem;
 
   &[disabled] {
     cursor: default;
-    opacity: 0.2;
+    opacity: $disabled-opacity;
   }
 }
 
-.optional {
-  font-size: calc(var(--font-size) * 0.8);
-  opacity: 0.7;
-}
+.block-textarea {
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  field-sizing: content;
+  resize: none;
 
-.actions-input {
-  position: relative;
-  display: flex;
-  @include input-text($input-padding-x, $input-padding-y);
-
-  --font-size: #{$large-font-size};
-
-  @media (width <= 600px) {
-    --font-size: 1.5rem;
-  }
-
-  &:focus-within {
-    background-color: $v-light-color-contrast-2;
-  }
-
-  .input {
-    font-family: $font-family !important;
-    color: $v-light-color-body;
-    font-size: var(--font-size);
-    line-height: inherit;
-
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    width: 100%;
-    padding-right: 1rem;
-  }
-
-  .input.textarea {
-    field-sizing: content;
-    resize: none;
-
-    &::placeholder {
-      color: $v-light-color-muted;
-    }
-  }
-
-  .actions {
-    display: inline-flex;
-    align-self: flex-end;
-    margin-bottom: calc(var(--font-size) * 0.25);
-  }
-
-  .button {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    line-height: 0;
-    border-radius: 50%;
-    --color: #{$v-light-color-muted};
-
-    & > * {
-      --color: #{$v-light-color-muted};
-      --size: var(--font-size);
-    }
-
-    &[disabled] {
-      cursor: not-allowed;
-      opacity: 0.3;
-    }
+  &::placeholder {
+    color: $v-light-color-muted;
   }
 }
 
@@ -142,31 +155,8 @@ $large-font-size: 2rem;
   @include select($input-padding-x, $input-padding-y);
 }
 
-.submit-container {
-  display: flex;
-  justify-content: stretch;
-  position: relative;
-
-  .submit {
-    @include button();
-  }
-
-  .loader {
-    --color: #{$v-light-btn-color};
-
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding-right: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
 .result {
-  margin-top: 3rem;
+  margin-top: $gap;
 
   &--error {
     color: $v-light-color-body;
@@ -227,6 +217,9 @@ $large-font-size: 2rem;
 }
 
 .explanation {
+  margin-top: $gap;
+  padding: 0 $input-padding-x;
+
   font-size: 110%;
   line-height: 1.6;
 

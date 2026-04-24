@@ -126,12 +126,11 @@ export class VocablyFixGrammar {
               </select>
             </div>
           </div>
-          <div class="field">
-            <div class="label-with-actions">
-              <label class="label" htmlFor="fix-grammar-text">
-                Sentence to check
-              </label>
-              <div class="actions">
+
+          <label htmlFor="fix-grammar-text" class="block input-block">
+            <div class="label-wrapper">
+              <div class="label">Text to check</div>
+              <div class="label-action">
                 <button
                   class="clear-button"
                   disabled={!this.values.text.trim()}
@@ -149,28 +148,34 @@ export class VocablyFixGrammar {
                 </button>
               </div>
             </div>
-            <div class="actions-input">
-              <textarea
-                placeholder="Enter any text here"
-                id="fix-grammar-text"
-                class="input textarea"
-                required
-                ref={(el) => (this.textElement = el as HTMLTextAreaElement)}
-                value={this.values.text}
-                onInput={(e) => {
-                  this.valuesChange.emit({
-                    ...this.values,
-                    text: (e.target as HTMLTextAreaElement).value,
-                  });
-                }}
-              />
-              <div class="actions">
-                <button class="button" type="submit" disabled={!canSubmit}>
+            <div class="body-wrapper">
+              <div class="body">
+                <textarea
+                  placeholder="Enter any text here"
+                  id="fix-grammar-text"
+                  class="block-textarea"
+                  required
+                  ref={(el) => (this.textElement = el as HTMLTextAreaElement)}
+                  value={this.values.text}
+                  onInput={(e) => {
+                    this.valuesChange.emit({
+                      ...this.values,
+                      text: (e.target as HTMLTextAreaElement).value,
+                    });
+                  }}
+                />
+              </div>
+              <div class="body-actions">
+                <button
+                  class="submit-button"
+                  type="submit"
+                  disabled={!canSubmit}
+                >
                   <vocably-icon-send></vocably-icon-send>
                 </button>
               </div>
             </div>
-          </div>
+          </label>
         </form>
 
         <div ref={(el) => (this.resultElement = el as HTMLDivElement)}>
@@ -218,21 +223,23 @@ export class VocablyFixGrammar {
                       No grammar issues found
                     </div>
                   ) : (
-                    <div class="corrected-text">
-                      <div class="corrected-text__label">Corrected text</div>
-                      <div class="corrected-text__copy">
-                        <vocably-button-copy
-                          onCopy={() => {
-                            if (this.result?.success === true) {
-                              navigator.clipboard.writeText(
-                                this.result.value.text
-                              );
-                            }
-                          }}
-                        ></vocably-button-copy>
+                    <div class="block">
+                      <div class="label-wrapper">
+                        <div class="label">Corrected text</div>
                       </div>
-                      <div class="corrected-text__value">
-                        {this.result.value.text}
+                      <div class="body-wrapper">
+                        <div class="body">{this.result.value.text}</div>
+                        <div class="body-actions">
+                          <vocably-button-copy
+                            onCopy={() => {
+                              if (this.result?.success === true) {
+                                navigator.clipboard.writeText(
+                                  this.result.value.text
+                                );
+                              }
+                            }}
+                          ></vocably-button-copy>
+                        </div>
                       </div>
                     </div>
                   )}
