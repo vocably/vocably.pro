@@ -2,12 +2,14 @@
 
 :host {
   --color: #{$v-light-color-body};
-  --size: 18px;
+  --size: 24px;
 
+  display: inline-block;
   width: var(--size);
   height: var(--size);
 
-  display: inline-block;
+  // Reddit sets visibility: hidden for custom elements
+  visibility: visible !important;
 }
 
 .svg {

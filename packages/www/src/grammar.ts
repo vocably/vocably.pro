@@ -35,7 +35,7 @@ const getInitialValues = (): FixGrammarPayload => {
   };
 };
 
-const saveValues = (values: FixGrammarPayload) => {
+const updateQueryParameters = (values: FixGrammarPayload) => {
   const params = new URLSearchParams(window.location.search);
   params.set('text', values.text);
   params.set('language', values.language);
@@ -60,7 +60,7 @@ grammarFixer.addEventListener(
   'formSubmit',
   async (e: CustomEvent<FixGrammarPayload>) => {
     if (isFixGrammarPayload(e.detail)) {
-      saveValues(e.detail);
+      updateQueryParameters(e.detail);
     }
 
     await loadValues(e.detail);
@@ -73,6 +73,7 @@ grammarFixer.addEventListener(
     if (!isFixGrammarPayload(e.detail)) {
       return;
     }
+    updateQueryParameters(e.detail);
     grammarFixer.values = e.detail;
     localStorage.setItem('grammarFixerValues', JSON.stringify(e.detail));
   }

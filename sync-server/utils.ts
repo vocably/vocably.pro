@@ -7,15 +7,19 @@ export const execute = async (
   options?: ExecOptions
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const process = exec(command, options, (error, stdout, stderr) => {
-      if (error) {
-        reject(
-          new Error(`Exit Code ${error.code}: ${stderr || error.message}`)
-        );
-        return;
+    const process = exec(
+      command,
+      { ...{ maxBuffer: 1024 * 1024 * 100 }, ...options },
+      (error, stdout, stderr) => {
+        if (error) {
+          reject(
+            new Error(`Exit Code ${error.code}: ${stderr || error.message}`)
+          );
+          return;
+        }
+        resolve(stdout.toString().trim());
       }
-      resolve(stdout.toString().trim());
-    });
+    );
 
     // Real-time logging
     process.stdout?.on('data', (data) =>

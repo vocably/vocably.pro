@@ -25,6 +25,7 @@
     <link rel="canonical" href="{{htmlWebpackPlugin.options.canonicalHref}}" />
     <meta name="apple-itunes-app" content="app-id=1641258757" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    {{{_sections.manifest}}}
     <base href="/" />
     <style>
       .show-android,
@@ -43,7 +44,7 @@
   </head>
   <body id="page-top" class="d-flex flex-column min-vh-100">
     {{#unless disableAnalytics}}
-      <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ htmlWebpackPlugin.options.environment.umamiWebsiteId }}"></script>
+      <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ htmlWebpackPlugin.options.environment.umamiWebsiteId }}" data-auto-track="{{#if disabledAutoTrack}}false{{else}}true{{/if}}"></script>
     {{/unless}}
     {{#unless hideNavBar}}
       <style>
@@ -75,7 +76,7 @@
           height: 1.6rem;
         }
       </style>
-      <nav class="navbar navbar-expand-lg navbar-light sticky-menu navbar-bg sticky-top mb-4 mb-lg-0 px-4{{#if navbarAlwaysMurky}} navbar-bg-always{{/if}}{{#if navbarClass}} {{ navbarClass }}{{/if}}" style="">
+      <nav class="navbar navbar-expand-lg navbar-light{{#unless nonStickyNavbar}} sticky-menu sticky-top{{/unless}} navbar-bg mb-4 mb-lg-0 px-4{{#if navbarAlwaysMurky}} navbar-bg-always{{/if}}{{#if navbarClass}} {{ navbarClass }}{{/if}}" style="">
         <div class="{{#if navbarContainerClass}}{{ navbarContainerClass }}{{else}}container-fluid{{/if}} p-0">
           <a class="navbar-home-link" href="/">
             <img

@@ -1,0 +1,21 @@
+{
+  "short_name": "Grammar Checker",
+  "name": "Vocably Grammar Checker",
+  "icons": [
+    {
+      "src": "/assets/grammar-checker/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/assets/grammar-checkericon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/grammar.html",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "theme_color": "#000000"
+}

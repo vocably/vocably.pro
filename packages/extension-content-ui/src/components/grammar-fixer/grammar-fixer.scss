@@ -39,17 +39,103 @@ $large-font-size: 2rem;
   color: $v-light-color-muted;
 }
 
+.label-with-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-button {
+  display: inline-flex;
+  align-items: self-end;
+  gap: 0.25rem;
+  color: $v-light-color-muted;
+  cursor: pointer;
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  margin-right: 0.5rem;
+
+  & > * {
+    --color: #{$v-light-color-muted};
+    --size: 1rem;
+  }
+
+  &[disabled] {
+    cursor: default;
+    opacity: 0.2;
+  }
+}
+
 .optional {
   font-size: calc(var(--font-size) * 0.8);
   opacity: 0.7;
 }
 
-.input {
+.actions-input {
+  position: relative;
+  display: flex;
   @include input-text($input-padding-x, $input-padding-y);
-}
 
-.input.large {
-  font-size: $large-font-size !important;
+  --font-size: #{$large-font-size};
+
+  @media (width <= 600px) {
+    --font-size: 1.5rem;
+  }
+
+  &:focus-within {
+    background-color: $v-light-color-contrast-2;
+  }
+
+  .input {
+    font-family: $font-family !important;
+    color: $v-light-color-body;
+    font-size: var(--font-size);
+    line-height: inherit;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    width: 100%;
+    padding-right: 1rem;
+  }
+
+  .input.textarea {
+    field-sizing: content;
+    resize: none;
+
+    &::placeholder {
+      color: $v-light-color-muted;
+    }
+  }
+
+  .actions {
+    display: inline-flex;
+    align-self: flex-end;
+    margin-bottom: calc(var(--font-size) * 0.25);
+  }
+
+  .button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    line-height: 0;
+    border-radius: 50%;
+    --color: #{$v-light-color-muted};
+
+    & > * {
+      --color: #{$v-light-color-muted};
+      --size: var(--font-size);
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
+  }
 }
 
 .select {
@@ -89,6 +175,17 @@ $large-font-size: 2rem;
     padding: 12px;
     font-size: calc(var(--font-size) * 0.9);
   }
+
+  .skeleton-loader-title {
+    height: 32px;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+
+  .skeleton-loader-text {
+    height: 24px;
+    margin-bottom: 8px;
+  }
 }
 
 .correct-badge {
@@ -109,6 +206,13 @@ $large-font-size: 2rem;
   border-radius: $v-border-radius;
   padding: $input-padding-y $input-padding-x;
   margin-bottom: 12px;
+  position: relative;
+
+  &__copy {
+    position: absolute;
+    bottom: $input-padding-y;
+    right: $input-padding-y;
+  }
 
   &__label {
     font-size: calc(var(--font-size) * 0.8);

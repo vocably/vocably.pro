@@ -1,6 +1,6 @@
 import { postOnboardingAction } from '@vocably/api';
 import { Result, ResultError, resultify } from '@vocably/model';
-import { fetchAuthSession, getCurrentUser } from 'aws-amplify/auth';
+import { getCurrentUser } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import { get } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
@@ -22,6 +22,7 @@ import { notificationsIdentifyUser } from '../notificationsIdentifyUser';
 import { useAsync } from '../useAsync';
 import { getFlatAttributes } from './getFlatAttributes';
 import { apiEventBus } from '../apiEventBus';
+import { safeFetchAuthSession } from './safeFunctions';
 
 type LoginStatus =
   | {
@@ -153,7 +154,7 @@ export const AuthContainer: FC<{
 
   const getIdentityId = async () => {
     try {
-      const { identityId } = await fetchAuthSession();
+      const { identityId } = await safeFetchAuthSession();
       return identityId;
     } catch (err) {
       console.error('Error fetching session:', err);
@@ -208,14 +209,9 @@ export const AuthContainer: FC<{
       return;
     }
 
-    const fetchSessionResult = await resultify(
-      fetchAuthSession({
-        forceRefresh: false,
-      }),
-      {
-        reason: 'Unable to fetch auth session.',
-      }
-    );
+    const fetchSessionResult = await resultify(safeFetchAuthSession(), {
+      reason: 'Unable to fetch auth session.',
+    });
 
     if (!fetchSessionResult.success) {
       if (
@@ -368,14 +364,9 @@ export const AuthContainer: FC<{
       }
 
       await notificationsIdentifyUser();
-      const fetchSessionResult = await resultify(
-        fetchAuthSession({
-          forceRefresh: false,
-        }),
-        {
-          reason: 'Unable to fetch auth session.',
-        }
-      );
+      const fetchSessionResult = await resultify(safeFetchAuthSession(), {
+        reason: 'Unable to fetch auth session.',
+      });
 
       if (!fetchSessionResult.success) {
         setError('UNABLE_TO_FETCH_AUTH_SESSION');

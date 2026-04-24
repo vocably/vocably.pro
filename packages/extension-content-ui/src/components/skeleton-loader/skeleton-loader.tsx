@@ -9,11 +9,23 @@ export class VocablySkeletonLoader {
   render() {
     return (
       <div style={{ paddingLeft: '12px' }}>
-        <div class="skeleton skeleton-title"></div>
-        <div class="skeleton skeleton-text" style={{ width: '70%' }}></div>
-        <div class="skeleton skeleton-text" style={{ width: '71%' }}></div>
-        <div class="skeleton skeleton-text" style={{ width: '69%' }}></div>
-        <div class="skeleton skeleton-text" style={{ width: '20%' }}></div>
+        <vocably-skeleton-loader-bone class="title"></vocably-skeleton-loader-bone>
+        <vocably-skeleton-loader-bone
+          class="text"
+          style={{ width: '70%' }}
+        ></vocably-skeleton-loader-bone>
+        <vocably-skeleton-loader-bone
+          class="text"
+          style={{ width: '71%' }}
+        ></vocably-skeleton-loader-bone>
+        <vocably-skeleton-loader-bone
+          class="text"
+          style={{ width: '69%' }}
+        ></vocably-skeleton-loader-bone>
+        <vocably-skeleton-loader-bone
+          class="text"
+          style={{ width: '20%' }}
+        ></vocably-skeleton-loader-bone>
       </div>
     );
   }
