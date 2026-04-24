@@ -14,3 +14,4 @@ export * from './trimArticle';
 export * from './trimLanguage';
 export * from './getStreakDays';
 export * from './timeout';
+export * from './singlePromise';

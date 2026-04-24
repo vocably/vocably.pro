@@ -5,7 +5,6 @@ import {
   PUBLIC_API_BASE_URL,
 } from '@env';
 import { configureApi } from '@vocably/api';
-import { fetchAuthSession } from 'aws-amplify/auth';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthContainer } from './auth/AuthContainer';
@@ -21,6 +20,7 @@ import { ThemeProvider } from './ThemeProvider';
 import { TranslationPresetContainer } from './TranslationPreset/TranslationPresetContainer';
 import { UserMetadataContainer } from './UserMetadataContainer';
 import { apiEventBus } from './apiEventBus';
+import { safeFetchAuthSession } from './auth/safeFunctions';
 
 configureApi({
   publicBaseUrl: PUBLIC_API_BASE_URL,
@@ -28,7 +28,7 @@ configureApi({
   region: API_REGION,
   cardsBucket: API_CARDS_BUCKET,
   getJwtToken: () =>
-    fetchAuthSession().then(
+    safeFetchAuthSession().then(
       (session) => session.tokens?.idToken?.toString() ?? ''
     ),
   onError: (error) => {
