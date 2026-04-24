@@ -44,7 +44,7 @@
   </head>
   <body id="page-top" class="d-flex flex-column min-vh-100">
     {{#unless disableAnalytics}}
-      <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ htmlWebpackPlugin.options.environment.umamiWebsiteId }}"></script>
+      <script defer src="https://cloud.umami.is/script.js" data-website-id="{{ htmlWebpackPlugin.options.environment.umamiWebsiteId }}" data-auto-track="{{#if disabledAutoTrack}}false{{else}}true{{/if}}"></script>
     {{/unless}}
     {{#unless hideNavBar}}
       <style>

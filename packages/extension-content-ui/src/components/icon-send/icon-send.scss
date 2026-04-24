@@ -1,0 +1,20 @@
+@import '../../styles/variables';
+
+:host {
+  --color: #{$v-light-color-body};
+  --size: 24px;
+
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+
+  // Reddit sets visibility: hidden for custom elements
+  visibility: visible !important;
+}
+
+.svg {
+  height: 100%;
+  width: auto;
+
+  fill: var(--color);
+}
