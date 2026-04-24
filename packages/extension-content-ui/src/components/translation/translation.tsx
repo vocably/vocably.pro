@@ -37,6 +37,7 @@ import {
   createTranslationCards,
   getAddedToday,
 } from '@vocably/model-operations';
+import { isString } from 'lodash-es';
 
 const mdConverter = new showdown.Converter();
 
@@ -152,6 +153,18 @@ export class VocablyTranslation {
   private unsubLocale: (() => void) | undefined;
 
   connectedCallback() {
+    if (isString(this.el.getAttribute('result'))) {
+      this.result = JSON.parse(this.el.getAttribute('result')!);
+    }
+
+    if (isString(this.el.getAttribute('isLightweight'))) {
+      this.isLightweight = JSON.parse(this.el.getAttribute('isLightweight')!);
+    }
+
+    if (isString(this.el.getAttribute('showLanguages'))) {
+      this.showLanguages = JSON.parse(this.el.getAttribute('showLanguages')!);
+    }
+
     this.resultChanged(this.result);
     this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
   }

@@ -3,13 +3,14 @@
 import { listFiles } from './utils.js';
 import { readFileSync } from 'fs';
 import { existsSync, writeFileSync } from 'node:fs';
-import { AnalysisItem, UnitOfSpeech } from '@vocably/model';
+import { AnalysisItem, TranslationCards } from '@vocably/model';
 import {
   getAnalyseCacheFileName,
   sanitizeAiAnalyseResult,
   aiAnalysisToItem,
   isAiAnalysis,
 } from '@vocably/analyze';
+import { renderToString } from '@vocably/extension-content-ui/hydrate';
 
 const areAnalysisItemsEqual =
   (a: AnalysisItem) =>
@@ -74,7 +75,7 @@ for (const englishFile of files) {
     partOfSpeech,
   });
 
-  for (let translation of translations) {
+  for (let translation of translations.slice(0, 2)) {
     if (!words[translation]) {
       words[translation] = [];
     }
@@ -85,4 +86,24 @@ for (const englishFile of files) {
   }
 }
 
-console.log('Items', Object.keys(words).length);
+const wordResults: Record<string, TranslationCards> = {};
+
+for (const [word, analysisItems] of Object.entries(words)) {
+  wordResults[word] = {
+    source: word,
+    sourceLanguage: 'de',
+    targetLanguage: 'en',
+    isDirect: false,
+    deck: {
+      cards: [],
+      tags: [],
+      language: 'de',
+    },
+    items: analysisItems,
+    detectedInputType: 'word',
+    extraItems: [],
+    explanation: '',
+  };
+}
+
+writeFileSync('./search-data/de-en.json', JSON.stringify(wordResults, null, 2));

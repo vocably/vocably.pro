@@ -77,18 +77,38 @@ const saveSearchValues = (searchValues: SearchValues) => {
 };
 
 const searchContainer = document.getElementById('search');
-const resultsContainer = document.createElement('div');
-resultsContainer.classList.add('results-container');
-const searchForm = document.createElement(
-  'vocably-search-form'
-) as HTMLVocablySearchFormElement;
 
-const initialSearchValues = getInitialSearchValues();
-searchForm.values = initialSearchValues;
-updateRepoUrls(initialSearchValues.sourceLanguage);
+const existingSearchForm = searchContainer.querySelector('vocably-search-form');
+const existingResultsContainer =
+  searchContainer.querySelector('.results-container');
 
-searchContainer.appendChild(searchForm);
-searchContainer.appendChild(resultsContainer);
+const resultsContainer =
+  existingResultsContainer ?? document.createElement('div');
+if (!existingResultsContainer) {
+  resultsContainer.classList.add('results-container');
+  searchContainer.appendChild(resultsContainer);
+}
+
+const searchForm =
+  existingSearchForm ??
+  (document.createElement(
+    'vocably-search-form'
+  ) as HTMLVocablySearchFormElement);
+
+if (!existingSearchForm) {
+  const initialSearchValues = getInitialSearchValues();
+  searchForm.values = initialSearchValues;
+  updateRepoUrls(initialSearchValues.sourceLanguage);
+  searchContainer.appendChild(searchForm);
+}
+
+const existingTranslation = searchContainer.querySelector(
+  'vocably-translation'
+);
+
+if (existingTranslation) {
+  existingTranslation.playAudioPronunciation = playAudioPronunciation;
+}
 
 searchForm.addEventListener('valuesChange', (e: CustomEvent<SearchValues>) => {
   if (isSearchValues(e.detail)) {
@@ -139,7 +159,6 @@ const loadSearchValues = async (searchValues: SearchValues) => {
   const translation = document.createElement(
     'vocably-translation'
   ) as HTMLVocablyTranslationElement;
-  translation.classList.add('search-results');
   translation.isLightweight = true;
   translation.showLanguages = false;
   translation.hideChatGpt = true;

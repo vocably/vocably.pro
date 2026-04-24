@@ -100,6 +100,9 @@ module.exports = (env) => {
         filename: env.production ? '[name].[contenthash].css' : '[name].css',
       }),
       new CopyPlugin({
+        patterns: [{ from: 'src/static', to: './' }],
+      }),
+      new CopyPlugin({
         patterns: [{ from: 'src/assets', to: 'assets' }],
       }),
       new CopyPlugin({
