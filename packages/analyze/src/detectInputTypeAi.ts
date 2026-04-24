@@ -31,11 +31,13 @@ export const isInputAnalysis = (v: any): v is InputAnalysis => {
 export const detectInputTypeAi = async (
   payload: DetectInputTypeAiPayload
 ): Promise<Result<InputAnalysis>> => {
-  const fastDetectionResult = await detectInputTypeS3(payload);
+  // ToDo: fix and uncomment
 
-  if (fastDetectionResult.success) {
-    return fastDetectionResult;
-  }
+  // const fastDetectionResult = await detectInputTypeS3(payload);
+  //
+  // if (fastDetectionResult.success) {
+  //   return fastDetectionResult;
+  // }
 
   return fallback(detectInputTypeGemini(payload), () =>
     detectInputTypeChatGpt(payload)
