@@ -29,6 +29,7 @@ export class VocablyButtonCopy {
     return (
       <Host>
         <button
+          title="Copy"
           class="button"
           onClick={this.handleClick}
           onMouseDown={(e) => e.stopPropagation()}

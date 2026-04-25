@@ -132,6 +132,7 @@ export class VocablyFixGrammar {
             <div class="label-action">
               <button
                 class="clear-button"
+                title="Clear text"
                 disabled={!this.values.text.trim()}
                 type="button"
                 onClick={() => {
@@ -162,7 +163,12 @@ export class VocablyFixGrammar {
               />
             </div>
             <div class="body-actions">
-              <button class="submit-button" type="submit" disabled={!canSubmit}>
+              <button
+                class="submit-button"
+                title="Check grammar"
+                type="submit"
+                disabled={!canSubmit}
+              >
                 <vocably-icon-send></vocably-icon-send>
               </button>
             </div>

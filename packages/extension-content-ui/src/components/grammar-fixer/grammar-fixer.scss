@@ -137,6 +137,7 @@ $disabled-opacity: 0.4;
   &[disabled] {
     cursor: default;
     opacity: 0;
+    pointer-events: none;
   }
 }
 
