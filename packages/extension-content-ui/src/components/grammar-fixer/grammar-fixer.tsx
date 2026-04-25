@@ -128,52 +128,43 @@ export class VocablyFixGrammar {
           </div>
 
           <label htmlFor="fix-grammar-text" class="block input-block">
-            <div class="label-wrapper">
-              <div class="label">Text to check</div>
-              <div class="label-action">
-                <button
-                  class="clear-button"
-                  disabled={!this.values.text.trim()}
-                  type="button"
-                  onClick={() => {
-                    this.valuesChange.emit({
-                      ...this.values,
-                      text: '',
-                    });
-                    this.textElement.focus();
-                  }}
-                >
-                  <vocably-icon-remove></vocably-icon-remove>
-                  <span>Clear</span>
-                </button>
-              </div>
+            <div class="label">Text to check</div>
+            <div class="label-action">
+              <button
+                class="clear-button"
+                disabled={!this.values.text.trim()}
+                type="button"
+                onClick={() => {
+                  this.valuesChange.emit({
+                    ...this.values,
+                    text: '',
+                  });
+                  this.textElement.focus();
+                }}
+              >
+                <vocably-icon-backspace></vocably-icon-backspace>
+              </button>
             </div>
-            <div class="body-wrapper">
-              <div class="body">
-                <textarea
-                  placeholder="Enter any text here"
-                  id="fix-grammar-text"
-                  class="block-textarea"
-                  required
-                  ref={(el) => (this.textElement = el as HTMLTextAreaElement)}
-                  value={this.values.text}
-                  onInput={(e) => {
-                    this.valuesChange.emit({
-                      ...this.values,
-                      text: (e.target as HTMLTextAreaElement).value,
-                    });
-                  }}
-                />
-              </div>
-              <div class="body-actions">
-                <button
-                  class="submit-button"
-                  type="submit"
-                  disabled={!canSubmit}
-                >
-                  <vocably-icon-send></vocably-icon-send>
-                </button>
-              </div>
+            <div class="body">
+              <textarea
+                placeholder="Enter any text here"
+                id="fix-grammar-text"
+                class="block-textarea"
+                required
+                ref={(el) => (this.textElement = el as HTMLTextAreaElement)}
+                value={this.values.text}
+                onInput={(e) => {
+                  this.valuesChange.emit({
+                    ...this.values,
+                    text: (e.target as HTMLTextAreaElement).value,
+                  });
+                }}
+              />
+            </div>
+            <div class="body-actions">
+              <button class="submit-button" type="submit" disabled={!canSubmit}>
+                <vocably-icon-send></vocably-icon-send>
+              </button>
             </div>
           </label>
         </form>
@@ -224,22 +215,19 @@ export class VocablyFixGrammar {
                     </div>
                   ) : (
                     <div class="block">
-                      <div class="label-wrapper">
-                        <div class="label">Corrected text</div>
-                      </div>
-                      <div class="body-wrapper">
-                        <div class="body">{this.result.value.text}</div>
-                        <div class="body-actions">
-                          <vocably-button-copy
-                            onCopy={() => {
-                              if (this.result?.success === true) {
-                                navigator.clipboard.writeText(
-                                  this.result.value.text
-                                );
-                              }
-                            }}
-                          ></vocably-button-copy>
-                        </div>
+                      <div class="label">Corrected text</div>
+                      <div class="label-action"></div>
+                      <div class="body">{this.result.value.text}</div>
+                      <div class="body-actions">
+                        <vocably-button-copy
+                          onCopy={() => {
+                            if (this.result?.success === true) {
+                              navigator.clipboard.writeText(
+                                this.result.value.text
+                              );
+                            }
+                          }}
+                        ></vocably-button-copy>
                       </div>
                     </div>
                   )}

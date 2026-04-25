@@ -46,38 +46,37 @@ $disabled-opacity: 0.4;
   border-radius: $v-border-radius;
   padding: $input-padding-y $input-padding-x;
 
+  --big-font-size: 2rem;
+
+  @media (width <= 600px) {
+    --big-font-size: 1.5rem;
+  }
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: min-content 1fr;
+  gap: 0.5rem;
+
   &.input-block:focus-within {
     background-color: $v-light-color-contrast-2;
   }
 
-  .label-wrapper {
+  .label-action {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: center;
   }
 
-  .body-wrapper {
+  .body {
     display: flex;
-    gap: 0.5rem;
+    font-size: var(--big-font-size);
+    color: $v-light-color-body;
+  }
 
-    --font-size: 2rem;
-
-    @media (width <= 600px) {
-      --font-size: 1.5rem;
-    }
-
-    .body {
-      flex: 1;
-      display: flex;
-      color: $v-light-color-body;
-      font-size: var(--font-size);
-    }
-
-    .body-actions {
-      display: inline-flex;
-      align-self: flex-end;
-      margin-bottom: calc(var(--font-size) * 0.25);
-    }
+  .body-actions {
+    display: inline-flex;
+    align-self: flex-end;
+    margin-bottom: calc(var(--big-font-size) * 0.25);
   }
 }
 
@@ -88,7 +87,9 @@ $disabled-opacity: 0.4;
   cursor: pointer;
   line-height: 0;
   border-radius: 50%;
-  transition: transform 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
 
   &:active {
     transform: scale(0.8);
@@ -96,7 +97,7 @@ $disabled-opacity: 0.4;
 
   & > * {
     --color: #{$v-light-color-muted};
-    --size: var(--font-size);
+    --size: var(--big-font-size);
   }
 
   &[disabled] {
@@ -115,7 +116,9 @@ $disabled-opacity: 0.4;
   padding: 0;
   margin: 0;
   border: none;
-  transition: transform 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
 
   &:active {
     transform: scale(0.9);
@@ -128,7 +131,7 @@ $disabled-opacity: 0.4;
 
   &[disabled] {
     cursor: default;
-    opacity: $disabled-opacity;
+    opacity: 0;
   }
 }
 
