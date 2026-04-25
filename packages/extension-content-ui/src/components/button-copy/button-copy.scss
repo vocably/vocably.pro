@@ -1,6 +1,7 @@
 @import '../../styles/variables';
 
 :host {
+  --icon-size: 24px;
   display: inline-block;
 }
 
@@ -19,7 +20,7 @@
   }
 
   * {
-    --size: 24px;
+    --size: var(--icon-size);
     --color: #{$v-light-color-muted};
   }
 }

@@ -69,6 +69,7 @@ $disabled-opacity: 0.4;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: $input-padding-y;
   }
 
   .body {
@@ -80,7 +81,7 @@ $disabled-opacity: 0.4;
   .body-actions {
     display: inline-flex;
     align-self: flex-end;
-    margin-bottom: calc(var(--big-font-size) * 0.25);
+    padding-bottom: $input-padding-y;
   }
 }
 
@@ -101,7 +102,7 @@ $disabled-opacity: 0.4;
 
   & > * {
     --color: #{$v-light-color-muted};
-    --size: var(--big-font-size);
+    --size: 2rem;
   }
 
   &[disabled] {
@@ -130,13 +131,17 @@ $disabled-opacity: 0.4;
 
   & > * {
     --color: #{$v-light-color-muted};
-    --size: 1rem;
+    --size: 1.5rem;
   }
 
   &[disabled] {
     cursor: default;
     opacity: 0;
   }
+}
+
+vocably-button-copy {
+  --icon-size: 2rem;
 }
 
 .block-textarea {
@@ -195,31 +200,6 @@ $disabled-opacity: 0.4;
 
   .correct-icon {
     flex-shrink: 0;
-  }
-}
-
-.corrected-text {
-  background-color: $v-light-color-elevation-2;
-  border-radius: $v-border-radius;
-  padding: $input-padding-y $input-padding-x;
-  margin-bottom: 12px;
-  position: relative;
-
-  &__copy {
-    position: absolute;
-    bottom: $input-padding-y;
-    right: $input-padding-y;
-  }
-
-  &__label {
-    font-size: calc(var(--font-size) * 0.8);
-    color: $v-light-color-muted;
-    margin-bottom: 4px;
-  }
-
-  &__value {
-    font-size: $large-font-size;
-    font-weight: 400;
   }
 }
 
