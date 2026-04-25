@@ -57,8 +57,12 @@ $disabled-opacity: 0.4;
   grid-template-rows: min-content 1fr;
   gap: 0.5rem;
 
-  &.input-block:focus-within {
-    background-color: $v-light-color-contrast-2;
+  &.input-block {
+    transition: background 200ms;
+
+    &:focus-within {
+      background-color: $v-light-color-contrast-2;
+    }
   }
 
   .label-action {
