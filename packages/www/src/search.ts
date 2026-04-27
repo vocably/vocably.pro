@@ -69,11 +69,8 @@ const saveSearchValues = (searchValues: SearchValues) => {
   params.set('targetLanguage', searchValues.targetLanguage);
   params.set('text', searchValues.text);
   params.set('isReversed', searchValues.isReversed.toString());
-  window.history.replaceState(
-    {},
-    '',
-    `${window.location.pathname}?${params.toString()}`
-  );
+  window.history.pushState({}, '', `search.html?${params.toString()}`);
+  document.title = 'Vocably - Online Dictionary';
 };
 
 const searchContainer = document.getElementById('search');
@@ -215,6 +212,6 @@ searchForm.addEventListener(
   }
 );
 
-if (searchForm.values.text.length) {
+if (!existingSearchForm && searchForm.values && searchForm.values.text.length) {
   loadSearchValues(searchForm.values).then();
 }
