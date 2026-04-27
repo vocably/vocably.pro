@@ -88,7 +88,7 @@ const initialSearchValues = getInitialSearchValues();
 const applyValuesToDom = (values: SearchValues) => {
   searchForm.values = values;
 
-  updateRepoUrls(initialSearchValues.sourceLanguage);
+  updateRepoUrls(values.sourceLanguage);
 
   document
     .querySelectorAll('.social-share-btn')
