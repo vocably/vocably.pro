@@ -1,0 +1,79 @@
+@import '../../styles/component';
+
+$arrow-width: 8px;
+$arrow-gap: 4px;
+$arrow-space: $arrow-width + $arrow-gap * 2;
+
+vocably-tiny-select {
+  --padding-left: 6px;
+
+  display: inline-block;
+  vertical-align: baseline;
+  // Reddit sets visibility: hidden for custom elements
+  visibility: visible !important;
+}
+
+.tiny-select-wrapper {
+  position: relative;
+  display: inline-block;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: $arrow-gap;
+    top: 50%;
+    width: $arrow-width;
+    height: 6px;
+    margin-top: -3px;
+    pointer-events: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="11" height="7" viewBox="0 0 11 7" fill="none"><path d="M10 1 5 6 1 1" stroke="rgb(109, 109, 109)" stroke-width=".75" stroke-miterlimit="10" stroke-linecap="round"/></svg>')
+      no-repeat center / contain;
+  }
+}
+
+.tiny-select-mirror {
+  display: inline-block;
+  white-space: nowrap;
+  visibility: hidden;
+  pointer-events: none;
+  font: inherit;
+  padding-right: $arrow-space;
+  padding-left: var(--padding-left);
+  // Empty mirror still needs to take up vertical space
+  min-height: 1em;
+  min-width: 1ch;
+}
+
+.tiny-select-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  padding: 0 $arrow-space 0 var(--padding-left);
+  font: inherit;
+  color: $v-light-color-body;
+  line-height: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  outline: none;
+  text-overflow: ellipsis;
+  border-radius: $v-border-radius;
+  transition: background 200ms;
+
+  &:hover,
+  &:focus {
+    background-color: $v-light-color-contrast-2;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}

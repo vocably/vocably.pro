@@ -20,22 +20,6 @@ $disabled-opacity: 0.4;
   gap: $gap;
 }
 
-.fields-row {
-  display: flex;
-  flex-direction: row;
-  gap: $gap;
-
-  .field {
-    flex: 1;
-  }
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-
 .label {
   font-size: calc(var(--font-size) * 0.875);
   color: $v-light-color-muted;
@@ -83,6 +67,11 @@ $disabled-opacity: 0.4;
     align-self: flex-end;
     padding-bottom: $input-padding-y;
   }
+}
+
+.language {
+  --padding: 6px;
+  margin-left: -4px;
 }
 
 .submit-button {
@@ -169,16 +158,20 @@ vocably-button-copy {
 }
 
 .result {
-  margin-top: $gap;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-  &--error {
+  &.error {
     color: $v-light-color-body;
     background-color: $v-light-color-elevation-2;
     border-radius: $v-border-radius;
     padding: 12px;
     font-size: calc(var(--font-size) * 0.9);
   }
+}
 
+.loader {
   .skeleton-loader-title {
     height: 32px;
     width: 100%;
@@ -191,7 +184,7 @@ vocably-button-copy {
   }
 }
 
-.correct-badge {
+.correct-message {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -205,17 +198,28 @@ vocably-button-copy {
 }
 
 .explanation {
-  margin-top: $gap;
   padding: 0 $input-padding-x;
 
-  font-size: 110%;
-  line-height: 1.6;
+  .explanation-language {
+    font-size: 14px;
 
-  :first-child {
-    margin-top: 0;
+    vocably-tiny-select {
+      --padding-left: 6px;
+
+      margin-left: -6px;
+    }
   }
 
-  :last-child {
-    margin-bottom: 0;
+  .explanation-text {
+    font-size: 110%;
+    line-height: 1.6;
+
+    :first-child {
+      margin-top: 0;
+    }
+
+    :last-child {
+      margin-bottom: 0;
+    }
   }
 }

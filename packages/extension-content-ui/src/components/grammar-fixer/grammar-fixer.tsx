@@ -40,7 +40,6 @@ export class VocablyFixGrammar {
   @Event() formSubmit: EventEmitter<FixGrammarPayload>;
 
   private textElement: HTMLTextAreaElement;
-  private resultElement: HTMLDivElement;
   private unsubLocale: (() => void) | undefined;
 
   connectedCallback() {
@@ -69,23 +68,28 @@ export class VocablyFixGrammar {
     return (
       <Host>
         <form class="form" onSubmit={(e) => this.handleSubmit(e)}>
-          <div class="fields-row">
-            <div class="field">
-              <label class="label" htmlFor="fix-grammar-language">
-                Language
-              </label>
-              <select
-                id="fix-grammar-language"
-                class="select"
+          <label htmlFor="fix-grammar-text" class="block input-block">
+            <div class="label">
+              <vocably-tiny-select
+                class="language"
                 onChange={(e) => {
                   const val = (e.target as HTMLSelectElement).value;
                   if (!isGoogleLanguage(val)) {
                     return;
                   }
+
+                  const values = {
+                    ...this.values,
+                    language: val,
+                  };
                   this.valuesChange.emit({
                     ...this.values,
                     language: val,
                   });
+
+                  if (canSubmit) {
+                    this.formSubmit.emit(values);
+                  }
                 }}
               >
                 {languages.map(({ code, name }) => (
@@ -93,42 +97,8 @@ export class VocablyFixGrammar {
                     {name}
                   </option>
                 ))}
-              </select>
+              </vocably-tiny-select>
             </div>
-
-            <div class="field">
-              <label class="label" htmlFor="fix-grammar-explanation-language">
-                Explanation language
-              </label>
-              <select
-                id="fix-grammar-explanation-language"
-                class="select"
-                onChange={(e) => {
-                  const val = (e.target as HTMLSelectElement).value;
-                  if (!isGoogleLanguage(val)) {
-                    return;
-                  }
-
-                  this.valuesChange.emit({
-                    ...this.values,
-                    explanationLanguage: val,
-                  });
-                }}
-              >
-                {languages.map(({ code, name }) => (
-                  <option
-                    value={code}
-                    selected={this.values.explanationLanguage === code}
-                  >
-                    {name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          <label htmlFor="fix-grammar-text" class="block input-block">
-            <div class="label">Text to check</div>
             <div class="label-action">
               <button
                 class="clear-button"
@@ -141,6 +111,7 @@ export class VocablyFixGrammar {
                     text: '',
                   });
                   this.textElement.focus();
+                  this.result = null;
                 }}
               >
                 <vocably-icon-backspace></vocably-icon-backspace>
@@ -173,11 +144,9 @@ export class VocablyFixGrammar {
               </button>
             </div>
           </label>
-        </form>
 
-        <div ref={(el) => (this.resultElement = el as HTMLDivElement)}>
           {this.isLoading && (
-            <div class="result result--loading">
+            <div class="loader">
               <vocably-skeleton-loader-bone
                 class="skeleton-loader-title"
                 style={{
@@ -207,19 +176,21 @@ export class VocablyFixGrammar {
             </div>
           )}
           {!this.isLoading && this.result && (
-            <Fragment>
+            <div class="result">
               {this.result.success === false && (
-                <div class="result result--error">{this.result.reason}</div>
+                <div class="error">{this.result.reason}</div>
               )}
 
               {this.result.success === true && (
-                <div class="result">
-                  {this.result.value.isCorrect ? (
-                    <div class="correct-badge">
+                <Fragment>
+                  {this.result.value.isCorrect && (
+                    <div class="correct-message">
                       <vocably-icon-check class="correct-icon" />
                       No grammar issues found
                     </div>
-                  ) : (
+                  )}
+
+                  {!this.result.value.isCorrect && (
                     <div class="block">
                       <div class="label">Corrected text</div>
                       <div class="label-action"></div>
@@ -237,17 +208,51 @@ export class VocablyFixGrammar {
                       </div>
                     </div>
                   )}
-                  <div
-                    class="explanation"
-                    innerHTML={mdConverter.makeHtml(
-                      this.result.value.explanation
-                    )}
-                  />
-                </div>
+
+                  <div class="explanation">
+                    <div class="explanation-language">
+                      <vocably-tiny-select
+                        onChange={(e) => {
+                          const val = (e.target as HTMLSelectElement).value;
+                          if (!isGoogleLanguage(val)) {
+                            return;
+                          }
+
+                          const values = {
+                            ...this.values,
+                            explanationLanguage: val,
+                          };
+
+                          this.valuesChange.emit(values);
+
+                          if (canSubmit) {
+                            this.formSubmit.emit(values);
+                          }
+                        }}
+                      >
+                        {languages.map(({ code, name }) => (
+                          <option
+                            value={code}
+                            selected={this.values.explanationLanguage === code}
+                          >
+                            {name}
+                          </option>
+                        ))}
+                      </vocably-tiny-select>
+                    </div>
+
+                    <div
+                      class="explanation-text"
+                      innerHTML={mdConverter.makeHtml(
+                        this.result.value.explanation
+                      )}
+                    />
+                  </div>
+                </Fragment>
               )}
-            </Fragment>
+            </div>
           )}
-        </div>
+        </form>
       </Host>
     );
   }
