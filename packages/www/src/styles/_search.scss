@@ -1,9 +1,12 @@
 .results-container {
-  margin-top: 18px;
-  padding-bottom: 36px;
-
   vocably-translation {
     display: block;
     max-width: inherit;
   }
+}
+
+#search {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
