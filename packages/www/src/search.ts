@@ -84,15 +84,32 @@ const searchForm = document.createElement(
 ) as HTMLVocablySearchFormElement;
 
 const initialSearchValues = getInitialSearchValues();
-searchForm.values = initialSearchValues;
-updateRepoUrls(initialSearchValues.sourceLanguage);
+
+const applyValuesToDom = (values: SearchValues) => {
+  searchForm.values = values;
+
+  updateRepoUrls(initialSearchValues.sourceLanguage);
+
+  document
+    .querySelectorAll('.social-share-btn')
+    .forEach((el: HTMLLinkElement) => {
+      el.href = el.href.replace(
+        /search.html.*/,
+        encodeURIComponent(
+          `search.html?sourceLanguage=${values.sourceLanguage}&targetLanguage=${values.targetLanguage}`
+        )
+      );
+    });
+};
+
+applyValuesToDom(initialSearchValues);
 
 searchContainer.appendChild(searchForm);
 searchContainer.appendChild(resultsContainer);
 
 searchForm.addEventListener('valuesChange', (e: CustomEvent<SearchValues>) => {
   if (isSearchValues(e.detail)) {
-    searchForm.values = e.detail;
+    applyValuesToDom(e.detail);
   }
 });
 
