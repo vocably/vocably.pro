@@ -1,6 +1,6 @@
 {
-  "short_name": "Grammar Checker",
-  "name": "Vocably Grammar Checker",
+  "short_name": "Grammar",
+  "name": "Grammar Checker",
   "icons": [
     {
       "src": "/assets/grammar-checker/icon-192.png",
