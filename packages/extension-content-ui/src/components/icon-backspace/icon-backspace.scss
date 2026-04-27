@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+:host {
+  --color: #{$v-light-color-body};
+  --size: 24px;
+
+  width: var(--size);
+  height: var(--size);
+
+  display: inline-block;
+}
+
+.svg {
+  height: 100%;
+  width: auto;
+
+  fill: var(--color);
+}

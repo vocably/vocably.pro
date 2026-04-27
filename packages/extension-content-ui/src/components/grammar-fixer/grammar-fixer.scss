@@ -12,26 +12,12 @@ $input-padding-x: 1rem;
 $input-padding-y: 0.5rem;
 $large-font-size: 2rem;
 
+$disabled-opacity: 0.4;
+
 .form {
   display: flex;
   flex-direction: column;
   gap: $gap;
-}
-
-.fields-row {
-  display: flex;
-  flex-direction: row;
-  gap: $gap;
-
-  .field {
-    flex: 1;
-  }
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
 }
 
 .label {
@@ -39,102 +25,101 @@ $large-font-size: 2rem;
   color: $v-light-color-muted;
 }
 
-.label-with-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.block {
+  background-color: $v-light-color-elevation-2;
+  border-radius: $v-border-radius;
+  padding: $input-padding-y $input-padding-x;
+
+  --big-font-size: 2rem;
+
+  @media (width <= 600px) {
+    --big-font-size: 1.5rem;
+  }
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: min-content 1fr;
+  gap: 0.5rem;
+
+  &.input-block {
+    transition: background 200ms;
+
+    &:focus-within {
+      background-color: $v-light-color-contrast-2;
+    }
+  }
+
+  .label-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: $input-padding-y;
+  }
+
+  .body {
+    display: flex;
+    font-size: var(--big-font-size);
+    color: $v-light-color-body;
+  }
+
+  .body-actions {
+    display: inline-flex;
+    align-self: flex-end;
+    padding-bottom: $input-padding-y;
+  }
+}
+
+.language {
+  --padding: 6px;
+  margin-left: -4px;
+}
+
+.submit-button {
+  --size: 2rem;
+
+  @include icon-button();
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: $disabled-opacity;
+  }
 }
 
 .clear-button {
-  display: inline-flex;
-  align-items: self-end;
-  gap: 0.25rem;
-  color: $v-light-color-muted;
-  cursor: pointer;
-  background: none;
-  padding: 0;
-  margin: 0;
-  border: none;
-  margin-right: 0.5rem;
-
-  & > * {
-    --color: #{$v-light-color-muted};
-    --size: 1rem;
-  }
+  --size: 1.5rem;
+  @include icon-button();
 
   &[disabled] {
     cursor: default;
-    opacity: 0.2;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  & > * {
+    margin-left: -0.15rem;
   }
 }
 
-.optional {
-  font-size: calc(var(--font-size) * 0.8);
-  opacity: 0.7;
+vocably-button-copy {
+  --size: 2rem;
 }
 
-.actions-input {
-  position: relative;
-  display: flex;
-  @include input-text($input-padding-x, $input-padding-y);
+.block-textarea {
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  width: 100%;
+  field-sizing: content;
+  resize: none;
 
-  --font-size: #{$large-font-size};
-
-  @media (width <= 600px) {
-    --font-size: 1.5rem;
-  }
-
-  &:focus-within {
-    background-color: $v-light-color-contrast-2;
-  }
-
-  .input {
-    font-family: $font-family !important;
-    color: $v-light-color-body;
-    font-size: var(--font-size);
-    line-height: inherit;
-
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-    width: 100%;
-    padding-right: 1rem;
-  }
-
-  .input.textarea {
-    field-sizing: content;
-    resize: none;
-
-    &::placeholder {
-      color: $v-light-color-muted;
-    }
-  }
-
-  .actions {
-    display: inline-flex;
-    align-self: flex-end;
-    margin-bottom: calc(var(--font-size) * 0.25);
-  }
-
-  .button {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    line-height: 0;
-    border-radius: 50%;
-    --color: #{$v-light-color-muted};
-
-    & > * {
-      --color: #{$v-light-color-muted};
-      --size: var(--font-size);
-    }
-
-    &[disabled] {
-      cursor: not-allowed;
-      opacity: 0.3;
-    }
+  &::placeholder {
+    color: $v-light-color-muted;
   }
 }
 
@@ -142,40 +127,21 @@ $large-font-size: 2rem;
   @include select($input-padding-x, $input-padding-y);
 }
 
-.submit-container {
-  display: flex;
-  justify-content: stretch;
-  position: relative;
-
-  .submit {
-    @include button();
-  }
-
-  .loader {
-    --color: #{$v-light-btn-color};
-
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding-right: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
 .result {
-  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 
-  &--error {
+  &.error {
     color: $v-light-color-body;
     background-color: $v-light-color-elevation-2;
     border-radius: $v-border-radius;
     padding: 12px;
     font-size: calc(var(--font-size) * 0.9);
   }
+}
 
+.loader {
   .skeleton-loader-title {
     height: 32px;
     width: 100%;
@@ -188,53 +154,42 @@ $large-font-size: 2rem;
   }
 }
 
-.correct-badge {
+.correct-message {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   font-size: calc(var(--font-size) * 0.9);
   color: $v-light-color-muted;
-  margin-bottom: 12px;
+  padding: 0 $input-padding-x;
 
   .correct-icon {
     flex-shrink: 0;
   }
 }
 
-.corrected-text {
-  background-color: $v-light-color-elevation-2;
-  border-radius: $v-border-radius;
-  padding: $input-padding-y $input-padding-x;
-  margin-bottom: 12px;
-  position: relative;
-
-  &__copy {
-    position: absolute;
-    bottom: $input-padding-y;
-    right: $input-padding-y;
-  }
-
-  &__label {
-    font-size: calc(var(--font-size) * 0.8);
-    color: $v-light-color-muted;
-    margin-bottom: 4px;
-  }
-
-  &__value {
-    font-size: $large-font-size;
-    font-weight: 400;
-  }
-}
-
 .explanation {
-  font-size: 110%;
-  line-height: 1.6;
+  padding: 0 $input-padding-x;
 
-  :first-child {
-    margin-top: 0;
+  .explanation-language {
+    font-size: 14px;
+
+    vocably-tiny-select {
+      --padding-left: 6px;
+
+      margin-left: -6px;
+    }
   }
 
-  :last-child {
-    margin-bottom: 0;
+  .explanation-text {
+    font-size: 110%;
+    line-height: 1.6;
+
+    :first-child {
+      margin-top: 0;
+    }
+
+    :last-child {
+      margin-bottom: 0;
+    }
   }
 }

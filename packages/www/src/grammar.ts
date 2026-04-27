@@ -67,6 +67,21 @@ grammarFixer.addEventListener(
   }
 );
 
+const applyValuesToDom = (values: FixGrammarPayload) => {
+  grammarFixer.values = values;
+
+  document
+    .querySelectorAll('.social-share-btn')
+    .forEach((el: HTMLLinkElement) => {
+      el.href = el.href.replace(
+        /grammar.html.*/,
+        encodeURIComponent(
+          `grammar.html?language=${values.language}&explanationLanguage=${values.explanationLanguage}`
+        )
+      );
+    });
+};
+
 grammarFixer.addEventListener(
   'valuesChange',
   async (e: CustomEvent<FixGrammarPayload>) => {
@@ -74,12 +89,12 @@ grammarFixer.addEventListener(
       return;
     }
     updateQueryParameters(e.detail);
-    grammarFixer.values = e.detail;
+    applyValuesToDom(e.detail);
     localStorage.setItem('grammarFixerValues', JSON.stringify(e.detail));
   }
 );
 
-grammarFixer.values = getInitialValues();
+applyValuesToDom(getInitialValues());
 
 if (grammarFixer.values.text.trim().length) {
   loadValues(grammarFixer.values).then();

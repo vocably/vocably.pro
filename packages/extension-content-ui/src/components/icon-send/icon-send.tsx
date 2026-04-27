@@ -10,7 +10,7 @@ export class VocablyIconSend {
     return (
       <Host>
         <svg class="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M8,7.71V11.05L15.14,12L8,12.95V16.29L18,12L8,7.71Z" />
+          <path d="M3 20V4L22 12M5 17L16.85 12L5 7V10.5L11 12L5 13.5M5 17V7 13.5Z" />
         </svg>
       </Host>
     );

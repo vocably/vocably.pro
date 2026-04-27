@@ -79,6 +79,36 @@ const saveSearchValues = (searchValues: SearchValues) => {
 const searchContainer = document.getElementById('search');
 
 const existingSearchForm = searchContainer.querySelector('vocably-search-form');
+
+const searchForm =
+  existingSearchForm ??
+  (document.createElement(
+    'vocably-search-form'
+  ) as HTMLVocablySearchFormElement);
+
+const applyValuesToDom = (values: SearchValues) => {
+  searchForm.values = values;
+
+  updateRepoUrls(values.sourceLanguage);
+
+  document
+    .querySelectorAll('.social-share-btn')
+    .forEach((el: HTMLLinkElement) => {
+      el.href = el.href.replace(
+        /search.html.*/,
+        encodeURIComponent(
+          `search.html?sourceLanguage=${values.sourceLanguage}&targetLanguage=${values.targetLanguage}`
+        )
+      );
+    });
+};
+
+if (!existingSearchForm) {
+  const initialSearchValues = getInitialSearchValues();
+  applyValuesToDom(initialSearchValues);
+  searchContainer.appendChild(searchForm);
+}
+
 const existingResultsContainer =
   searchContainer.querySelector('.results-container');
 
@@ -87,19 +117,6 @@ const resultsContainer =
 if (!existingResultsContainer) {
   resultsContainer.classList.add('results-container');
   searchContainer.appendChild(resultsContainer);
-}
-
-const searchForm =
-  existingSearchForm ??
-  (document.createElement(
-    'vocably-search-form'
-  ) as HTMLVocablySearchFormElement);
-
-if (!existingSearchForm) {
-  const initialSearchValues = getInitialSearchValues();
-  searchForm.values = initialSearchValues;
-  updateRepoUrls(initialSearchValues.sourceLanguage);
-  searchContainer.appendChild(searchForm);
 }
 
 const existingTranslation = searchContainer.querySelector(
@@ -112,7 +129,7 @@ if (existingTranslation) {
 
 searchForm.addEventListener('valuesChange', (e: CustomEvent<SearchValues>) => {
   if (isSearchValues(e.detail)) {
-    searchForm.values = e.detail;
+    applyValuesToDom(e.detail);
   }
 });
 
