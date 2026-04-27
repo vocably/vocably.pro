@@ -6,12 +6,45 @@
     <h1 class="mb-5 text-center">About</h1>
 
     <p>
-      Vocably is an <a href="https://github.com/vocably/language-learning-tool" target="_blank" class="link-secondary">open-source</a> dictionary and a language-learning tool created by a <a href="https://sneas.io" target="_blank" class="link-secondary">Ukrainian programmer</a> who lives in the Netherlands.
+      Vocably is an <a href="https://github.com/vocably/language-learning-tool" target="_blank" class="link-secondary">open-source<i class="bi bi-github ms-1"></i></a> dictionary and a language-learning tool created by a <a href="https://sneas.io" target="_blank" class="link-secondary">Ukrainian programmer</a> who lives in the Netherlands.
     </p>
 
-    <dl class="d-flex flex-column flex-sm-row align-items-center" style="background: var(--bs-gray-100); padding: 2rem; border-radius: 1.5rem; gap: 2rem">
+    <style>
+      .speech-bubble {
+        font-size: 90%;
+        background: var(--bs-gray-100);
+        padding: 1rem;
+        border-radius: 1rem;
+        position: relative;
+      }
+
+      .speech-bubble::before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 3rem;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid var(--bs-gray-100);
+
+        @media (width < 576px) {
+          top: 0;
+          left: 3rem;
+          width: 0;
+          height: 0;
+          border: 10px solid transparent;
+          border-bottom-color: var(--bs-gray-100);
+          border-top: 0;
+          margin-top: -10px;
+        }
+      }
+    </style>
+
+    <dl class="d-flex flex-column flex-sm-row align-items-start" style="background: var(--bs-gray-200); padding: 2rem; border-radius: 1.5rem; gap: 2rem">
       <dt><img src="assets/about.webp" class="rounded-circle" alt="Photo of Dima Snisarenko" width="120"/></dt>
-      <dd style="font-size: 90%;">
+      <dd class="speech-bubble">
         <p class="mb-3">Vocably has helped me become a confident reader.</p>
 
         <p class="mb-3">
