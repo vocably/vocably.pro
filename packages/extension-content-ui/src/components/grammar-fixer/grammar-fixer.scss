@@ -75,24 +75,9 @@ $disabled-opacity: 0.4;
 }
 
 .submit-button {
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  line-height: 0;
-  border-radius: 50%;
-  transition:
-    transform 0.2s,
-    opacity 0.2s;
+  --size: 2rem;
 
-  &:active {
-    transform: scale(0.8);
-  }
-
-  & > * {
-    --color: #{$v-light-color-muted};
-    --size: 2rem;
-  }
+  @include icon-button();
 
   &[disabled] {
     cursor: not-allowed;
@@ -101,37 +86,22 @@ $disabled-opacity: 0.4;
 }
 
 .clear-button {
-  display: inline-flex;
-  align-items: self-end;
-  gap: 0.25rem;
-  color: $v-light-color-muted;
-  cursor: pointer;
-  background: none;
-  padding: 0;
-  margin: 0;
-  border: none;
-  transition:
-    transform 0.2s,
-    opacity 0.2s;
-
-  &:active {
-    transform: scale(0.9);
-  }
-
-  & > * {
-    --color: #{$v-light-color-muted};
-    --size: 1.5rem;
-  }
+  --size: 1.5rem;
+  @include icon-button();
 
   &[disabled] {
     cursor: default;
     opacity: 0;
     pointer-events: none;
   }
+
+  & > * {
+    margin-left: -0.15rem;
+  }
 }
 
 vocably-button-copy {
-  --icon-size: 2rem;
+  --size: 2rem;
 }
 
 .block-textarea {

@@ -93,3 +93,35 @@
     background-position: right $input-padding-x top 50% !important;
   }
 }
+
+@mixin icon-button() {
+  --icon-size: calc(var(--size) * 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    background-color 0.2s;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background-color: #{$v-light-color-elevation-3};
+
+  &:hover,
+  &:focus {
+    background-color: #{$v-light-color-elevation-4};
+  }
+
+  &:active {
+    transform: scale(0.8);
+  }
+
+  * {
+    --size: var(--icon-size);
+    --color: #{$v-light-color-body};
+  }
+}
