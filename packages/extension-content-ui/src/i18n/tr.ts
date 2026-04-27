@@ -38,7 +38,7 @@ export const tr = {
   'search.i_speak': 'Çeviri Dili:',
   'search.preferred_languages': 'Tercih Edilen Diller',
   'search.available_languages': 'Mevcut Diller',
-  'search.placeholder_default': 'Herhangi bir kelime veya cümle girin.',
+  'search.placeholder_default': 'Herhangi bir kelime veya cümle',
   'search.placeholder_reversed':
     '{language} dilinde kelime veya cümle girin. {source} kartları oluşturulacak.',
   'search.hint':

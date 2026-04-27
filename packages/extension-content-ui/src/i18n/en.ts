@@ -38,7 +38,7 @@ export const en = {
   'search.i_speak': 'I speak',
   'search.preferred_languages': 'Preferred Languages',
   'search.available_languages': 'Available Languages',
-  'search.placeholder_default': 'Enter any word or phrase here.',
+  'search.placeholder_default': 'Any word or phrase',
   'search.placeholder_reversed':
     'Enter {article} {language} word or phrase here. {source} cards will be created.',
   'search.hint':

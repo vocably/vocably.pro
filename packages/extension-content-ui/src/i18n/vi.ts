@@ -37,7 +37,7 @@ export const vi = {
   'search.i_speak': 'Tôi nói',
   'search.preferred_languages': 'Ngôn ngữ ưa thích',
   'search.available_languages': 'Ngôn ngữ có sẵn',
-  'search.placeholder_default': 'Nhập bất kỳ từ hoặc cụm từ nào.',
+  'search.placeholder_default': 'Bất kỳ từ hoặc cụm từ nào',
   'search.placeholder_reversed':
     'Nhập từ hoặc cụm từ {language} tại đây. Thẻ {source} sẽ được tạo.',
   'search.hint':
