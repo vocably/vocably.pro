@@ -1014,4 +1014,18 @@ describe('integration check for translate lambda', () => {
 
     expect(result.value.items.some((i) => i.source === 'wider')).toBeTruthy();
   });
+
+  it('cat french', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'fr',
+      targetLanguage: 'en',
+      source: 'cat',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    expect(result.value.items.some((i) => i.source === 'chat')).toBeTruthy();
+  });
 });
