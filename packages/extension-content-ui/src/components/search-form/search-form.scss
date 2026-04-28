@@ -4,6 +4,8 @@ $input-padding: 12px;
 
 :host {
   --font-size: 16px;
+  --search-text-font-size: 42px;
+
   display: block;
   // Reddit sets visibility: hidden for custom elements
   visibility: visible !important;
@@ -66,9 +68,12 @@ $input-padding: 12px;
   $submit-width: 40px;
   $border: none;
 
+  --height: calc(var(--search-text-font-size) * 1.6);
+
   position: relative;
 
   .input {
+    font-family: inherit;
     padding-left: $input-padding;
     padding-right: $submit-width;
     color: $v-light-color-body;
@@ -76,13 +81,18 @@ $input-padding: 12px;
     border-radius: $v-border-radius;
     background-color: $v-light-color-elevation-2;
     outline: none;
-    height: $height;
+    height: var(--height);
     box-shadow: none;
     box-sizing: border-box;
     display: block;
     width: 100%;
     transition: background-color 0.25s ease-in-out;
-    font-size: var(--font-size);
+    font-size: var(--search-text-font-size);
+    font-weight: lighter;
+
+    &::placeholder {
+      color: $v-light-color-muted;
+    }
 
     &:focus {
       background-color: $v-light-color-elevation-3;
@@ -93,7 +103,7 @@ $input-padding: 12px;
     position: absolute;
     right: 0;
     top: 0;
-    height: $height;
+    height: var(--height);
     width: $submit-width;
     display: flex;
     align-items: center;

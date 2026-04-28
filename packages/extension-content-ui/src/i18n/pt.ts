@@ -39,7 +39,7 @@ export const pt = {
   'search.i_speak': 'Falo',
   'search.preferred_languages': 'Idiomas preferidos',
   'search.available_languages': 'Idiomas disponíveis',
-  'search.placeholder_default': 'Digite qualquer palavra ou frase aqui.',
+  'search.placeholder_default': 'Qualquer palavra ou frase',
   'search.placeholder_reversed':
     'Digite {article} {language} palavra ou frase aqui. Cartões de {source} serão criados.',
   'search.hint':

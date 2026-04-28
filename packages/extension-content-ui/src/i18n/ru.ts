@@ -38,7 +38,7 @@ export const ru = {
   'search.i_speak': 'Я знаю',
   'search.preferred_languages': 'Предпочтительные языки',
   'search.available_languages': 'Доступные языки',
-  'search.placeholder_default': 'Введите любое слово или фразу.',
+  'search.placeholder_default': 'Любое слово или фраза',
   'search.placeholder_reversed':
     'Введите слово или фразу. Vocably создаст {source} карточки.',
   'search.hint':

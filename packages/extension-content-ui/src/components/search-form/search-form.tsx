@@ -214,6 +214,8 @@ export class VocablySearchForm {
   }
 
   render() {
+    const canSubmit = !(this.loading || this.values.text.trim() === '');
+
     return (
       <Host>
         <form
@@ -230,13 +232,19 @@ export class VocablySearchForm {
               hint={t('search.i_study')}
               shrinkSmall={true}
               disabled={this.loading || this.disabled}
-              onChoose={(event) =>
-                this.valuesChange.emit({
+              onChoose={(event) => {
+                const values = {
                   ...this.values,
                   sourceLanguage: event.detail,
                   targetLanguage: this.getTargetLanguageCandidate(event.detail),
-                })
-              }
+                };
+
+                this.valuesChange.emit(values);
+
+                if (canSubmit) {
+                  this.formSubmit.emit(values);
+                }
+              }}
               value={this.values.sourceLanguage}
               optionGroups={this.getSourceLanguageGroups()}
             ></vocably-hint-selector>
@@ -244,12 +252,18 @@ export class VocablySearchForm {
               <button
                 type="button"
                 class={{ direction: true, reversed: this.values.isReversed }}
-                onClick={() =>
-                  this.valuesChange.emit({
+                onClick={() => {
+                  const values = {
                     ...this.values,
                     isReversed: !this.values.isReversed,
-                  })
-                }
+                  };
+
+                  this.valuesChange.emit(values);
+
+                  if (canSubmit) {
+                    this.formSubmit.emit(values);
+                  }
+                }}
               >
                 <vocably-icon-arrow-right class="icon"></vocably-icon-arrow-right>
               </button>
@@ -259,12 +273,17 @@ export class VocablySearchForm {
               hint={t('search.i_speak')}
               shrinkSmall={true}
               disabled={this.loading || this.disabled}
-              onChoose={(event) =>
-                this.valuesChange.emit({
+              onChoose={(event) => {
+                const values = {
                   ...this.values,
                   targetLanguage: event.detail,
-                })
-              }
+                };
+                this.valuesChange.emit(values);
+
+                if (canSubmit) {
+                  this.formSubmit.emit(values);
+                }
+              }}
               value={this.values.targetLanguage}
               optionGroups={this.getTargetLanguageGroups()}
             ></vocably-hint-selector>
@@ -294,11 +313,7 @@ export class VocablySearchForm {
                 });
               }}
             />
-            <button
-              class="submit"
-              type="submit"
-              disabled={this.loading || this.values.text.trim() === ''}
-            >
+            <button class="submit" type="submit" disabled={!canSubmit}>
               <vocably-icon-magnify
                 class={{
                   magnify: true,
