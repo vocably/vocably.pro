@@ -6,6 +6,7 @@ import * as Bowser from 'bowser';
 import { track } from './analytics';
 import './bootstrap.scss';
 import './styles.scss';
+import { searchConfig } from './constants';
 
 const browser = Bowser.getParser(window.navigator.userAgent);
 const isAndroid = browser.is('android');
@@ -158,7 +159,9 @@ const getSourceLanguage = () => {
   if (params.has('l') && isGoogleLanguage(params.get('l') ?? '')) {
     return params.get('l');
   }
-  return localStorage.getItem('sourceLanguage') ?? 'en';
+  return (
+    localStorage.getItem(searchConfig.sourceLanguageLocalStorageKey) ?? 'en'
+  );
 };
 
 const getTargetLanguage = () => {

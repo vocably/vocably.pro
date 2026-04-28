@@ -1,11 +1,12 @@
 import { defineCustomElements } from '@vocably/extension-content-ui/loader';
-import { fixGrammar } from './grammar/fixGrammar';
+import { fixGrammar as requestFixGramms } from './grammar/fixGrammar';
 import {
   FixGrammarPayload,
   isFixGrammarPayload,
   isGoogleLanguage,
 } from '@vocably/model';
 import { track } from './analytics';
+import { searchConfig } from './constants';
 
 document.body.classList.add('vocably-extension-disabled');
 defineCustomElements();
@@ -20,10 +21,42 @@ const getInitialValues = (): FixGrammarPayload => {
     localStorage.getItem('grammarFixerValues') ?? '{}'
   ) as Partial<FixGrammarPayload>;
 
-  const language = params.get('language') ?? grammarFixerStorageValues.language;
+  const paramsLanguage = params.get('language');
+  const paramsExplanationLanguage = params.get('explanationLanguage');
+
+  const language =
+    paramsLanguage ??
+    grammarFixerStorageValues.language ??
+    localStorage.getItem(searchConfig.sourceLanguageLocalStorageKey);
+
   const explanationsLanguage =
-    params.get('explanationLanguage') ??
-    grammarFixerStorageValues.explanationLanguage;
+    paramsExplanationLanguage ??
+    grammarFixerStorageValues.explanationLanguage ??
+    localStorage.getItem(searchConfig.targetLanguageLocalStorageKey);
+
+  // Set search language for convenience
+  if (
+    paramsLanguage &&
+    isGoogleLanguage(paramsLanguage) &&
+    !localStorage.getItem(searchConfig.sourceLanguageLocalStorageKey)
+  ) {
+    localStorage.setItem(
+      searchConfig.sourceLanguageLocalStorageKey,
+      paramsLanguage
+    );
+  }
+
+  // Set explanation language for convenience
+  if (
+    paramsExplanationLanguage &&
+    isGoogleLanguage(paramsExplanationLanguage) &&
+    !localStorage.getItem(searchConfig.targetLanguageLocalStorageKey)
+  ) {
+    localStorage.setItem(
+      searchConfig.targetLanguageLocalStorageKey,
+      paramsExplanationLanguage
+    );
+  }
 
   return {
     text: params.get('text') || '',
@@ -48,10 +81,10 @@ const updateQueryParameters = (values: FixGrammarPayload) => {
   );
 };
 
-const loadValues = async (values: FixGrammarPayload) => {
+const fixGrammar = async (values: FixGrammarPayload) => {
   track('Fix grammar', values);
   grammarFixer.isLoading = true;
-  const result = await fixGrammar(values);
+  const result = await requestFixGramms(values);
   grammarFixer.isLoading = false;
   grammarFixer.result = result;
 };
@@ -63,7 +96,7 @@ grammarFixer.addEventListener(
       updateQueryParameters(e.detail);
     }
 
-    await loadValues(e.detail);
+    await fixGrammar(e.detail);
   }
 );
 
@@ -97,7 +130,7 @@ grammarFixer.addEventListener(
 applyValuesToDom(getInitialValues());
 
 if (grammarFixer.values.text.trim().length) {
-  loadValues(grammarFixer.values).then();
+  fixGrammar(grammarFixer.values).then();
 }
 
 document.getElementById('grammar-checker').appendChild(grammarFixer);

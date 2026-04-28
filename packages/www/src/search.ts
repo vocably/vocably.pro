@@ -10,8 +10,9 @@ import {
 } from '@vocably/model';
 import { isObject } from 'lodash-es';
 import { track } from './analytics';
-import { analyze } from './search/analyze';
+import { analyze as requestAnalyze } from './search/analyze';
 import { playAudioPronunciation } from './search/playAudioPronunciation';
+import { searchConfig } from './constants';
 
 document.body.classList.add('vocably-extension-disabled');
 defineCustomElements();
@@ -56,8 +57,14 @@ const searchValuesToAnalyzePayload = (values: SearchValues): AnalyzePayload => {
 const getInitialSearchValues = (): SearchValues => {
   const params = new URLSearchParams(window.location.search);
   return {
-    sourceLanguage: params.get('sourceLanguage') || 'de',
-    targetLanguage: params.get('targetLanguage') || 'en',
+    sourceLanguage:
+      params.get('sourceLanguage') ||
+      localStorage.getItem(searchConfig.sourceLanguageLocalStorageKey) ||
+      'de',
+    targetLanguage:
+      params.get('targetLanguage') ||
+      localStorage.getItem(searchConfig.targetLanguageLocalStorageKey) ||
+      'en',
     text: params.get('text') || '',
     isReversed: params.get('isReversed') === 'true',
   };
@@ -139,17 +146,23 @@ const createTranslationCards = (
   };
 };
 
-const loadSearchValues = async (searchValues: SearchValues) => {
+const analyze = async (searchValues: SearchValues) => {
   track('Search', searchValues);
 
   updateRepoUrls(searchValues.sourceLanguage);
 
   resultsContainer.innerHTML = `<vocably-skeleton-loader></vocably-skeleton-loader>`;
 
-  localStorage.setItem('sourceLanguage', searchValues.sourceLanguage);
-  localStorage.setItem('targetLanguage', searchValues.targetLanguage);
+  localStorage.setItem(
+    searchConfig.sourceLanguageLocalStorageKey,
+    searchValues.sourceLanguage
+  );
+  localStorage.setItem(
+    searchConfig.targetLanguageLocalStorageKey,
+    searchValues.targetLanguage
+  );
 
-  const analyzeResult = await analyze({
+  const analyzeResult = await requestAnalyze({
     ...searchValuesToAnalyzePayload(searchValues),
   });
 
@@ -169,7 +182,7 @@ const loadSearchValues = async (searchValues: SearchValues) => {
 
   translation.addEventListener('retry', () => {
     if (isSearchValues(searchForm.values)) {
-      loadSearchValues(searchForm.values).then();
+      analyze(searchForm.values).then();
     }
   });
 };
@@ -181,7 +194,7 @@ searchForm.addEventListener(
       saveSearchValues(e.detail);
     }
 
-    await loadSearchValues(e.detail);
+    await analyze(e.detail);
   }
 );
 
@@ -197,5 +210,5 @@ searchForm.addEventListener(
 );
 
 if (searchForm.values.text.length) {
-  loadSearchValues(searchForm.values).then();
+  analyze(searchForm.values).then();
 }
