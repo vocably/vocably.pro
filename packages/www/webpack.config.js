@@ -11,6 +11,8 @@ const pagesDir = `./src/pages`;
 const handlebarsExtension = `handlebars`;
 const pagesPattern = `**/*${handlebarsExtension}`;
 
+const basePath = 'https://vocably.pro';
+
 module.exports = (env) => {
   return {
     mode: env.production ? 'production' : 'development',
@@ -78,7 +80,7 @@ module.exports = (env) => {
         const pageName = handlebarsPage.replace(`.${handlebarsExtension}`, '');
         const filename = handlebarsPage.replace(handlebarsExtension, 'html');
 
-        let canonicalHref = 'https://vocably.pro';
+        let canonicalHref = basePath;
 
         if (filename !== 'index.html') {
           canonicalHref += `/${filename}`;
@@ -100,6 +102,7 @@ module.exports = (env) => {
       new StaticSearchPagePlugin({
         searchDataFolder: `${__dirname}/search-data-${env.production ? 'prod' : 'dev'}`,
         searchPageFilename: 'search.html',
+        basePath,
       }),
       new MiniCssExtractPlugin({
         filename: env.production ? '[name].[contenthash].css' : '[name].css',

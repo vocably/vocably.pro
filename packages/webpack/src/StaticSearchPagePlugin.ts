@@ -21,14 +21,19 @@ const nameTheFile = ({
 }: NameTheFileOptions) => {
   const targetLanguageName = trimLanguage(languageList[targetLanguage]);
   return (
-    `${word} in ${targetLanguageName}`.toLowerCase().replace(/\P{L}/gu, '-') +
-    `-${sourceLanguage}-${targetLanguage}`
+    `${sourceLanguage}-${targetLanguage}/` +
+    `${word} in ${targetLanguageName}`.toLowerCase().replace(/\P{L}/gu, '-')
   );
+};
+
+const escapeRegExp = (s: string): string => {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
 
 type Options = {
   searchDataFolder: string;
   searchPageFilename: string;
+  basePath: string;
 };
 
 export class StaticSearchPagePlugin {
@@ -60,6 +65,22 @@ export class StaticSearchPagePlugin {
               Error(
                 `No data files can be found in ${this.options.searchDataFolder}`
               ),
+              data
+            );
+          }
+
+          const canonicalSearchExpression = new RegExp(
+            `<link rel="canonical" href="${escapeRegExp(`${this.options.basePath}/${this.options.searchPageFilename}`)}".*?>`,
+            'gmi'
+          );
+          const searchContainerExpression = '<div id="search"></div>';
+
+          if (
+            !canonicalSearchExpression.test(templateHtml) ||
+            templateHtml.indexOf(searchContainerExpression) === -1
+          ) {
+            return callback(
+              Error(`Crucial blocks can't be found in the template`),
               data
             );
           }
@@ -102,28 +123,34 @@ export class StaticSearchPagePlugin {
                 targetLanguage: targetLanguage,
                 isReversed: false,
               };
+
+              const htmlFilename = `${nameTheFile({
+                word,
+                sourceLanguage,
+                targetLanguage,
+              })}.html`;
+
               const rendered = await renderToString(
-                templateHtml.replace(
-                  '<div id="search"></div>',
-                  `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><div class="results-container"><vocably-translation  result='${JSON.stringify(
-                    {
-                      success: true,
-                      value: translationCards,
-                    }
-                  )}' isLightweight="true" showLanguages="false"></vocably-translation></div></div>`
-                ),
+                templateHtml
+                  .replace(
+                    searchContainerExpression,
+                    `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><div class="results-container"><vocably-translation  result='${JSON.stringify(
+                      {
+                        success: true,
+                        value: translationCards,
+                      }
+                    )}' isLightweight="true" showLanguages="false"></vocably-translation></div></div>`
+                  )
+                  .replace(
+                    canonicalSearchExpression,
+                    `<link rel="canonical" href="${this.options.basePath}/${htmlFilename}">`
+                  ),
                 {
                   title: `${word} in ${sourceLanguageShortName} | Vocably`,
                 }
               );
 
-              compilation.assets[
-                `${nameTheFile({
-                  word,
-                  sourceLanguage,
-                  targetLanguage,
-                })}.html`
-              ] = {
+              compilation.assets[htmlFilename] = {
                 source: () => rendered.html,
                 size: () => rendered.html.length,
               };
