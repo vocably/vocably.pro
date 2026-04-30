@@ -100,7 +100,7 @@ module.exports = (env) => {
         });
       }),
       new StaticSearchPagePlugin({
-        searchDataFolder: `${__dirname}/search-data-dev`,
+        searchDataFolder: `${__dirname}/seo/search-data-dev`,
         searchPageFilename: 'search.html',
         basePath,
       }),

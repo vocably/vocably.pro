@@ -106,4 +106,7 @@ for (const [word, analysisItems] of Object.entries(words)) {
   };
 }
 
-writeFileSync('./search-data/de-en.json', JSON.stringify(wordResults, null, 2));
+writeFileSync(
+  '../packages/www/seo/search-data-prod/de-en.json',
+  JSON.stringify(wordResults, null, 2)
+);
