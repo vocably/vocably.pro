@@ -8,7 +8,7 @@ import {
 } from '@vocably/model';
 import { sanitizeTranscript } from '@vocably/sulna';
 import { addArticle } from './addArticle';
-import { aiAnalyse } from './aiUnitOfSpeechAnalyse';
+import { aiAnalyse, AiAnalysis } from './aiUnitOfSpeechAnalyse';
 import { translateUnitOfSpeech } from './translateUnitOfSpeech';
 
 export type AnalyseAndTranslatePayload = {
@@ -16,6 +16,59 @@ export type AnalyseAndTranslatePayload = {
   sourceLanguage: GoogleLanguage;
   targetLanguage: GoogleLanguage;
   partOfSpeech: string;
+};
+
+type AnalysisToItemPayload = {
+  sourceLanguage: GoogleLanguage;
+  partOfSpeech: string;
+  aiAnalysis: AiAnalysis;
+  translations: string[];
+};
+export const aiAnalysisToItem = ({
+  sourceLanguage,
+  aiAnalysis,
+  partOfSpeech,
+  translations,
+}: AnalysisToItemPayload): AnalysisItem => {
+  const analysisItem: AnalysisItem = {
+    source: addArticle(
+      sourceLanguage,
+      aiAnalysis.source,
+      partOfSpeech,
+      aiAnalysis
+    ),
+    translation: translations.join(', '),
+    definitions: aiAnalysis.definitions,
+    examples: aiAnalysis.examples,
+    partOfSpeech,
+    ipa: sanitizeTranscript(aiAnalysis.transcript),
+  };
+
+  if (aiAnalysis.gender) {
+    analysisItem.g = aiAnalysis.gender;
+  }
+
+  if (isAnalysisNumber(aiAnalysis.number)) {
+    analysisItem.number = aiAnalysis.number;
+  }
+
+  if (aiAnalysis.pluralForm) {
+    analysisItem.pluralForm = aiAnalysis.pluralForm;
+  }
+
+  if (aiAnalysis.pastTenses) {
+    analysisItem.pastTenses = aiAnalysis.pastTenses;
+  }
+
+  if (aiAnalysis.presentTenses) {
+    analysisItem.presentTenses = aiAnalysis.presentTenses;
+  }
+
+  if (isTense(aiAnalysis.tense)) {
+    analysisItem.tense = aiAnalysis.tense;
+  }
+
+  return analysisItem;
 };
 
 export const analyseAndTranslate = async (
@@ -37,9 +90,7 @@ export const analyseAndTranslate = async (
     };
   }
 
-  let translation = '';
-  let definitions = aiAnalyseResult.value.definitions;
-  let examples = aiAnalyseResult.value.examples;
+  let translations: string[] = [];
 
   if (payload.sourceLanguage !== payload.targetLanguage) {
     const translationResult = await translateUnitOfSpeech({
@@ -56,49 +107,16 @@ export const analyseAndTranslate = async (
       return translationResult;
     }
 
-    translation = translationResult.value.join(', ');
-  }
-
-  const analysisItem: AnalysisItem = {
-    source: addArticle(
-      payload.sourceLanguage as GoogleLanguage,
-      aiAnalyseResult.value.source,
-      payload.partOfSpeech,
-      aiAnalyseResult.value
-    ),
-    translation: translation,
-    definitions: definitions,
-    examples: examples,
-    partOfSpeech: payload.partOfSpeech,
-    ipa: sanitizeTranscript(aiAnalyseResult.value.transcript),
-  };
-
-  if (aiAnalyseResult.value.gender) {
-    analysisItem.g = aiAnalyseResult.value.gender;
-  }
-
-  if (isAnalysisNumber(aiAnalyseResult.value.number)) {
-    analysisItem.number = aiAnalyseResult.value.number;
-  }
-
-  if (aiAnalyseResult.value.pluralForm) {
-    analysisItem.pluralForm = aiAnalyseResult.value.pluralForm;
-  }
-
-  if (aiAnalyseResult.value.pastTenses) {
-    analysisItem.pastTenses = aiAnalyseResult.value.pastTenses;
-  }
-
-  if (aiAnalyseResult.value.presentTenses) {
-    analysisItem.presentTenses = aiAnalyseResult.value.presentTenses;
-  }
-
-  if (isTense(aiAnalyseResult.value.tense)) {
-    analysisItem.tense = aiAnalyseResult.value.tense;
+    translations = translationResult.value;
   }
 
   return {
     success: true,
-    value: analysisItem,
+    value: aiAnalysisToItem({
+      sourceLanguage: payload.sourceLanguage,
+      partOfSpeech: payload.partOfSpeech,
+      aiAnalysis: aiAnalyseResult.value,
+      translations,
+    }),
   };
 };

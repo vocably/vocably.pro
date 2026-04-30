@@ -18,6 +18,9 @@ export const buildConfig = ({ buildDir }: ConfigOptions): Config => ({
       type: 'www',
       serviceWorker: null, // disable service workers
     },
+    {
+      type: 'dist-hydrate-script',
+    },
     angularOutputTarget({
       componentCorePackage: '@vocably/extension-content-ui',
       directivesProxyFile:

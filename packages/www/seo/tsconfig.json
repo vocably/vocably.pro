@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./",
+    "module": "commonjs",
+    "target": "es6",
+    "moduleResolution": "node",
+    "declaration": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
+  },
+  "include": ["StaticSearchPagePlugin.ts"],
+  "exclude": ["node_modules"]
+}

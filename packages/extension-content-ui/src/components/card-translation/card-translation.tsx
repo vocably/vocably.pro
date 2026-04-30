@@ -58,6 +58,10 @@ export class VocablyCardTranslation {
   };
 
   render() {
+    if (this.card === undefined) {
+      return <div>Card is undefined</div>;
+    }
+
     if (this.disableEditing) {
       return <div class="vocably-italic">{this.card.data.translation}</div>;
     }

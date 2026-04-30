@@ -34,6 +34,8 @@
       <excludeFolder url="file://$MODULE_DIR$/dashboard/cache-batch-analyse" />
       <excludeFolder url="file://$MODULE_DIR$/dashboard/user-state" />
       <excludeFolder url="file://$MODULE_DIR$/packages/extension-angular-components/projects/library/src/lib/stencil-generated" />
+      <excludeFolder url="file://$MODULE_DIR$/platform-root/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/platform/.terraform" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

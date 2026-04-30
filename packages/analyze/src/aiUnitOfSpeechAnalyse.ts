@@ -59,7 +59,7 @@ export type AiAnalysis = {
   pluralForm?: string;
 };
 
-const isAiAnalysis = (result: any): result is AiAnalysis => {
+export const isAiAnalysis = (result: any): result is AiAnalysis => {
   if (!isSafeObject(result)) {
     return false;
   }

@@ -15,7 +15,7 @@ import {
   languageList,
   LanguagePairs,
 } from '@vocably/model';
-import { uniq } from 'lodash-es';
+import { isString, uniq } from 'lodash-es';
 import { subscribeToLocale, t } from '../../i18n';
 import { SearchValues } from './types';
 
@@ -59,6 +59,10 @@ export class VocablySearchForm {
   private unsubLocale: (() => void) | undefined;
 
   componentDidLoad() {
+    if (isString(this.el.getAttribute('values'))) {
+      this.values = JSON.parse(this.el.getAttribute('values')!);
+    }
+
     if (this.autoFocus) {
       setTimeout(() => {
         this.textInput?.focus();

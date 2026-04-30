@@ -4,7 +4,10 @@ export {
   getGptAnalyseChatGptBody,
   getGptAnalyseResult,
   handleGeminiAnalyzeResponse,
+  sanitizeAiAnalyseResult,
+  isAiAnalysis,
 } from './aiUnitOfSpeechAnalyse';
+export { aiAnalysisToItem } from './analyseAndTranslate';
 export * from './batchUnitOfSpeechAnalyse';
 export { buildBulkAnalysisResult } from './buildBulkAnalysisResult';
 export { buildResult } from './buildResult';

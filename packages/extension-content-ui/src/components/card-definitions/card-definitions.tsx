@@ -30,6 +30,10 @@ export class VocablyCardDefinitions {
   }
 
   render() {
+    if (this.card === undefined) {
+      return <div>Card is undefined</div>;
+    }
+
     const definitions = explode(this.card.data.definition);
 
     if (definitions.length === 0) {

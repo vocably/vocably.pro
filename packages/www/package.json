@@ -6,11 +6,14 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "compileSeo": "tsc --project seo/tsconfig.json",
+    "watchSeo": "tsc --watch --project seo/tsconfig.json",
+    "prebuild": "npm run compileSeo",
     "build": "webpack --env production",
     "postbuild": "node generate-sitemap.js",
     "serve": "webpack serve --env development --open",
     "watch": "webpack --watch --env development",
-    "start": "npm-run-all --parallel watch serve",
+    "start": "npm-run-all --parallel watchSeo watch serve",
     "test": "echo '@vocably/www has no tests.'",
     "www": "npm start"
   },

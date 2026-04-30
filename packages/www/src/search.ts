@@ -76,21 +76,19 @@ const saveSearchValues = (searchValues: SearchValues) => {
   params.set('targetLanguage', searchValues.targetLanguage);
   params.set('text', searchValues.text);
   params.set('isReversed', searchValues.isReversed.toString());
-  window.history.replaceState(
-    {},
-    '',
-    `${window.location.pathname}?${params.toString()}`
-  );
+  window.history.pushState({}, '', `search.html?${params.toString()}`);
+  document.title = 'Vocably - Online Dictionary';
 };
 
 const searchContainer = document.getElementById('search');
-const resultsContainer = document.createElement('div');
-resultsContainer.classList.add('results-container');
-const searchForm = document.createElement(
-  'vocably-search-form'
-) as HTMLVocablySearchFormElement;
 
-const initialSearchValues = getInitialSearchValues();
+const existingSearchForm = searchContainer.querySelector('vocably-search-form');
+
+const searchForm =
+  existingSearchForm ??
+  (document.createElement(
+    'vocably-search-form'
+  ) as HTMLVocablySearchFormElement);
 
 const applyValuesToDom = (values: SearchValues) => {
   searchForm.values = values;
@@ -109,10 +107,29 @@ const applyValuesToDom = (values: SearchValues) => {
     });
 };
 
-applyValuesToDom(initialSearchValues);
+if (!existingSearchForm) {
+  const initialSearchValues = getInitialSearchValues();
+  applyValuesToDom(initialSearchValues);
+  searchContainer.appendChild(searchForm);
+}
 
-searchContainer.appendChild(searchForm);
-searchContainer.appendChild(resultsContainer);
+const existingResultsContainer =
+  searchContainer.querySelector('.results-container');
+
+const resultsContainer =
+  existingResultsContainer ?? document.createElement('div');
+if (!existingResultsContainer) {
+  resultsContainer.classList.add('results-container');
+  searchContainer.appendChild(resultsContainer);
+}
+
+const existingTranslation = searchContainer.querySelector(
+  'vocably-translation'
+);
+
+if (existingTranslation) {
+  existingTranslation.playAudioPronunciation = playAudioPronunciation;
+}
 
 searchForm.addEventListener('valuesChange', (e: CustomEvent<SearchValues>) => {
   if (isSearchValues(e.detail)) {
@@ -169,7 +186,6 @@ const analyze = async (searchValues: SearchValues) => {
   const translation = document.createElement(
     'vocably-translation'
   ) as HTMLVocablyTranslationElement;
-  translation.classList.add('search-results');
   translation.isLightweight = true;
   translation.showLanguages = false;
   translation.hideChatGpt = true;
@@ -209,6 +225,6 @@ searchForm.addEventListener(
   }
 );
 
-if (searchForm.values.text.length) {
+if (!existingSearchForm && searchForm.values && searchForm.values.text.length) {
   analyze(searchForm.values).then();
 }
