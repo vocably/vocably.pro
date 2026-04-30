@@ -9,7 +9,7 @@ import {
 } from '@vocably/model';
 import { join } from 'node:path';
 
-type NameTheFileOptions = {
+type ContentOptions = {
   word: string;
   sourceLanguage: string;
   targetLanguage: string;
@@ -18,7 +18,7 @@ const nameTheFile = ({
   word,
   sourceLanguage,
   targetLanguage,
-}: NameTheFileOptions) => {
+}: ContentOptions) => {
   const targetLanguageName = trimLanguage(languageList[targetLanguage]);
   return (
     `${sourceLanguage}-${targetLanguage}/` +
@@ -26,8 +26,29 @@ const nameTheFile = ({
   );
 };
 
-const escapeRegExp = (s: string): string => {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const buildTitle = ({ word, sourceLanguage }: ContentOptions) => {
+  const sourceLanguageShortName = trimLanguage(languageList[sourceLanguage]);
+  return `"${word}" in ${sourceLanguageShortName} | Vocably`;
+};
+
+const buildDescription = ({ word, sourceLanguage }: ContentOptions) => {
+  const sourceLanguageShortName = trimLanguage(languageList[sourceLanguage]);
+  return `"${word}" in ${sourceLanguageShortName} | Vocably - a dictionary for ${sourceLanguageShortName} learners`;
+};
+
+const escapeRegExp = (str: string): string => {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+};
+
+const htmlSpecialChars = (str: string): string => {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;',
+  };
+  return str.replace(/[&<>"']/g, (m) => map[m]);
 };
 
 type Options = {
@@ -69,20 +90,35 @@ export class StaticSearchPagePlugin {
             );
           }
 
-          const canonicalSearchExpression = new RegExp(
-            `<link rel="canonical" href="${escapeRegExp(`${this.options.basePath}/${this.options.searchPageFilename}`)}".*?>`,
-            'gmi'
-          );
-          const searchContainerExpression = '<div id="search"></div>';
+          const replaceExpressions = {
+            canonical: new RegExp(
+              `<link rel="canonical" href="${escapeRegExp(`${this.options.basePath}/${this.options.searchPageFilename}`)}".*?>`,
+              'gmi'
+            ),
+            container: new RegExp(
+              escapeRegExp('<div id="search"></div>'),
+              'gmi'
+            ),
+            description: new RegExp(`<meta name="description".*?>`, 'gmi'),
+            ogDescription: new RegExp(
+              `<meta property="og:description".*?>`,
+              'gmi'
+            ),
+            ogTitle: new RegExp(`<meta property="og:title".*?>`, 'gmi'),
+            ogUrl: new RegExp(`<meta property="og:url".*?>`, 'gmi'),
+          };
 
-          if (
-            !canonicalSearchExpression.test(templateHtml) ||
-            templateHtml.indexOf(searchContainerExpression) === -1
-          ) {
-            return callback(
-              Error(`Crucial blocks can't be found in the template`),
-              data
-            );
+          for (const [containerName, expression] of Object.entries(
+            replaceExpressions
+          )) {
+            if (!expression.test(templateHtml)) {
+              return callback(
+                Error(
+                  `A crucial block can't be found in the template: ${containerName}`
+                ),
+                data
+              );
+            }
           }
 
           for (const dataFileName of dataFiles) {
@@ -102,10 +138,6 @@ export class StaticSearchPagePlugin {
               );
             }
 
-            const sourceLanguageShortName = trimLanguage(
-              languageList[sourceLanguage]
-            );
-
             const wordResults: Record<string, TranslationCards> = JSON.parse(
               readFileSync(dataFileName, 'utf-8')
             );
@@ -117,6 +149,12 @@ export class StaticSearchPagePlugin {
             );
 
             for (const [word, translationCards] of words) {
+              const contentOptions: ContentOptions = {
+                word,
+                sourceLanguage,
+                targetLanguage,
+              };
+
               const searchValues = {
                 text: word,
                 sourceLanguage: sourceLanguage,
@@ -124,16 +162,13 @@ export class StaticSearchPagePlugin {
                 isReversed: false,
               };
 
-              const htmlFilename = `${nameTheFile({
-                word,
-                sourceLanguage,
-                targetLanguage,
-              })}.html`;
+              const htmlFilename = `${nameTheFile(contentOptions)}.html`;
+              const canonicalUrl = `${this.options.basePath}/${htmlFilename}`;
 
               const rendered = await renderToString(
                 templateHtml
                   .replace(
-                    searchContainerExpression,
+                    replaceExpressions.container,
                     `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><div class="results-container"><vocably-translation  result='${JSON.stringify(
                       {
                         success: true,
@@ -142,11 +177,27 @@ export class StaticSearchPagePlugin {
                     )}' isLightweight="true" showLanguages="false"></vocably-translation></div></div>`
                   )
                   .replace(
-                    canonicalSearchExpression,
-                    `<link rel="canonical" href="${this.options.basePath}/${htmlFilename}">`
+                    replaceExpressions.canonical,
+                    `<link rel="canonical" href="${canonicalUrl}">`
+                  )
+                  .replace(
+                    replaceExpressions.description,
+                    `<meta name="description" content="${htmlSpecialChars(buildDescription(contentOptions))}" />`
+                  )
+                  .replace(
+                    replaceExpressions.ogTitle,
+                    `<meta property="og:title" content="${htmlSpecialChars(buildTitle(contentOptions))}" />`
+                  )
+                  .replace(
+                    replaceExpressions.ogDescription,
+                    `<meta property="og:description" content="${htmlSpecialChars(buildDescription(contentOptions))}" />`
+                  )
+                  .replace(
+                    replaceExpressions.ogUrl,
+                    `<meta property="og:url" content="${canonicalUrl}" />`
                   ),
                 {
-                  title: `${word} in ${sourceLanguageShortName} | Vocably`,
+                  title: buildTitle(contentOptions),
                 }
               );
 
