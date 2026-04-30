@@ -5,7 +5,7 @@ const WebpackWatchPlugin = require('webpack-watch-files-plugin').default;
 const { environment } = require('./environment');
 const glob = require('glob');
 const { templateOptions } = require('./template-options');
-const { StaticSearchPagePlugin } = require('@vocably/webpack');
+const { StaticSearchPagePlugin } = require('./seo/StaticSearchPagePlugin');
 
 const pagesDir = `./src/pages`;
 const handlebarsExtension = `handlebars`;
@@ -100,7 +100,7 @@ module.exports = (env) => {
         });
       }),
       new StaticSearchPagePlugin({
-        searchDataFolder: `${__dirname}/search-data-${env.production ? 'prod' : 'dev'}`,
+        searchDataFolder: `${__dirname}/search-data-dev`,
         searchPageFilename: 'search.html',
         basePath,
       }),

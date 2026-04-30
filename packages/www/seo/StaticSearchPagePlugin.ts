@@ -1,5 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import { renderToString } from '@vocably/extension-content-ui/hydrate/index.js';
+import { renderToString } from '@vocably/extension-content-ui/hydrate';
 import { trimLanguage } from '@vocably/sulna';
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import {
