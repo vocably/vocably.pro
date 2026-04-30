@@ -19,6 +19,10 @@ export class VocablyCardSource {
   ) => Promise<Result<true>>;
 
   render() {
+    if (this.card === undefined) {
+      return <div>Card is undefined</div>;
+    }
+
     const past = this.card.data.tense !== 'past' && this.card.data.pastTenses;
     return (
       <Host>
