@@ -120,6 +120,15 @@ module.exports = {
     ],
     reviews: [
       {
+        name: 'Masha Glynchak',
+        date: '28 Apr 2026',
+        text: 'amazing app for integrating language learning in your real life internet browsing and learning new words as you go in new language to finally cross into b2/c1 territory and start using the language',
+        stars: 5,
+        url: 'https://chromewebstore.google.com/reviews/f2950848-576f-4f86-b9e9-25e29f4a0862',
+        image:
+          'https://lh3.googleusercontent.com/a/ACg8ocIPNawCxbxvhBufVgKi7dxzizs54qjZu07ykaQrdbGtjPq_ZQ=s96-w96-h96',
+      },
+      {
         name: 'Stewart L',
         date: '14 Mar 2025',
         text: 'Very good extension. Simple to understand, light, fast.',
