@@ -19,10 +19,12 @@ const nameTheFile = ({
   sourceLanguage,
   targetLanguage,
 }: ContentOptions) => {
-  const targetLanguageName = trimLanguage(languageList[targetLanguage]);
+  const sourceLanguageShortName = trimLanguage(languageList[sourceLanguage]);
   return (
     `${sourceLanguage}-${targetLanguage}/` +
-    `${word} in ${targetLanguageName}`.toLowerCase().replace(/\P{L}/gu, '-')
+    `${word} in ${sourceLanguageShortName}`
+      .toLowerCase()
+      .replace(/\P{L}/gu, '-')
   );
 };
 
