@@ -103,6 +103,7 @@ module.exports = (env) => {
         searchDataFolder: `${__dirname}/seo/${environment.searchSeoDataFolder}`,
         searchPageFilename: 'search.html',
         basePath,
+        disabled: env.production,
       }),
       new MiniCssExtractPlugin({
         filename: env.production ? '[name].[contenthash].css' : '[name].css',

@@ -8,9 +8,9 @@
   "scripts": {
     "compileSeo": "tsc --project seo/tsconfig.json",
     "watchSeo": "tsc --watch --project seo/tsconfig.json",
-    "prebuild": "npm run compileSeo",
+    "prebuild": "npx rimraf dist && npm run compileSeo",
     "build": "webpack --env production",
-    "postbuild": "node generate-sitemap.js",
+    "postbuild": "npx rimraf ./seo/cache && npx vite-node ./seo/build.mts && node generate-sitemap.js",
     "serve": "webpack serve --env development --open",
     "watch": "webpack --watch --env development",
     "start": "npm-run-all --parallel watchSeo watch serve",
@@ -21,6 +21,7 @@
     "type": "git",
     "url": "https://github.com/sneas/green-blocker.git"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "vite-node": "^6.0.0"
+  }
 }
