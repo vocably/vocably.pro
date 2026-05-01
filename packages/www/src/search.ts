@@ -17,6 +17,11 @@ import { searchConfig } from './constants';
 document.body.classList.add('vocably-extension-disabled');
 defineCustomElements();
 
+// Force reload page on browser back
+window.addEventListener('popstate', (event) => {
+  window.location.reload();
+});
+
 const updateRepoUrls = (language: string) => {
   let repoUrl = `https://github.com/vocably`;
   if (isGoogleLanguage(language)) {
