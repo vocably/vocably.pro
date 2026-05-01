@@ -9,7 +9,7 @@ module.exports = {
     paddleMonthlyPriceId: '${var.paddle_monthly_premium_id}',
     paddleYearlyPriceId: '${var.paddle_yearly_premium_id}',
     paddleLifetimePriceId: '${var.paddle_lifetime_premium_id}',
-    seoDataFolder: '',
+    searchSeoDataFolder: '${var.www_search_seo_data_folder}',
   },
 };
   EOT
