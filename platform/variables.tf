@@ -177,6 +177,11 @@ variable "public_api_throttle_burst_limit" {
   default = 20
 }
 
+variable "www_search_seo_data_folder" {
+  type    = string
+  default = "search-data-dev"
+}
+
 # Public API route-specific throttle limits
 
 variable "public_api_analyze_throttle_rate_limit" {

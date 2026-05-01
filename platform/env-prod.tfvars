@@ -17,6 +17,7 @@ endtest_latest_env_suite                  = "non-existing"
 umami_website_id                          = "8792afdd-a74f-4780-8dde-9b48b3963c44"
 public_api_throttle_rate_limit            = 60
 public_api_throttle_burst_limit           = 20
+www_search_seo_data_folder                = "search-data-prod"
 
 # Public API route-specific throttle limits
 public_api_analyze_throttle_rate_limit                   = 120
