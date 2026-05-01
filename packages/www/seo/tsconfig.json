@@ -9,6 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["StaticSearchPagePlugin.ts"],
+  "include": ["./*.ts"],
   "exclude": ["node_modules"]
 }

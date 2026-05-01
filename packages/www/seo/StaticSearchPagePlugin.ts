@@ -8,6 +8,7 @@ import {
   TranslationCards,
 } from '@vocably/model';
 import { join } from 'node:path';
+import { generateSitemap } from './generateSitemap';
 
 type ContentOptions = {
   word: string;
@@ -150,6 +151,8 @@ export class StaticSearchPagePlugin {
               `Compiling ${words.length} ${sourceLanguage}-${targetLanguage} words to HTML...`
             );
 
+            let files: string[] = [];
+
             for (const [word, translationCards] of words) {
               const contentOptions: ContentOptions = {
                 word,
@@ -203,11 +206,35 @@ export class StaticSearchPagePlugin {
                 }
               );
 
+              files.push(htmlFilename);
+
               compilation.assets[htmlFilename] = {
                 source: () => rendered.html,
                 size: () => rendered.html.length,
               };
             }
+
+            const filesToValidateLastMod = [
+              dataFileName,
+              './src/pages/search.handlebars',
+              '../extension-content-ui/src/components/translation/translation.tsx',
+              '../extension-content-ui/src/components/translation-cards/translation-cards.tsx',
+            ];
+
+            const sitemap = generateSitemap({
+              pages: files.map((path) => ({
+                path: path,
+                priority: '0.5',
+                filesToValidateLastMod,
+              })),
+            });
+
+            compilation.assets[
+              `${sourceLanguage}-${targetLanguage}/sitemap.xml`
+            ] = {
+              source: () => sitemap,
+              size: () => sitemap.length,
+            };
           }
 
           this.hasBeenBuilt = true;
