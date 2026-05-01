@@ -19,6 +19,7 @@ paddle_client_side_token                  = "test_36e6911acf8912e58cde7765548"
 paddle_monthly_premium_id                 = "pri_01jyzzammkt25f6mmf8tjsxr9p"
 paddle_yearly_premium_id                  = "pri_01jz0ps01b1kcz9brm2877cbhg"
 paddle_lifetime_premium_id                = "pri_01jz0pve2gry96kxkrk4n237qa"
+www_search_seo_data_folder                = "search-data-prod"
 
 # Public API route-specific throttle limits
 public_api_analyze_throttle_rate_limit                   = 20

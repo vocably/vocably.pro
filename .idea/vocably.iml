@@ -36,6 +36,7 @@
       <excludeFolder url="file://$MODULE_DIR$/packages/extension-angular-components/projects/library/src/lib/stencil-generated" />
       <excludeFolder url="file://$MODULE_DIR$/platform-root/.terraform" />
       <excludeFolder url="file://$MODULE_DIR$/platform/.terraform" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/www/seo/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,13 +1,19 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { renderToString } from '@vocably/extension-content-ui/hydrate';
 import { trimLanguage } from '@vocably/sulna';
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import {
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync as nativeWriteFileSync,
+} from 'node:fs';
 import {
   isGoogleLanguage,
   languageList,
   TranslationCards,
 } from '@vocably/model';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import { generateSitemap } from './generateSitemap';
 
 type ContentOptions = {
@@ -208,9 +214,13 @@ export class StaticSearchPagePlugin {
 
               files.push(htmlFilename);
 
+              writeFileSync(`./seo/cache/${htmlFilename}`, rendered.html);
+              const fileSize = rendered.html.length;
+
               compilation.assets[htmlFilename] = {
-                source: () => rendered.html,
-                size: () => rendered.html.length,
+                source: () =>
+                  readFileSync(`./seo/cache/${htmlFilename}`, 'utf-8'),
+                size: () => fileSize,
               };
             }
 
@@ -260,4 +270,10 @@ function getAllFilesSync(dirPath: string, fileList: string[] = []): string[] {
   });
 
   return fileList;
+}
+
+function writeFileSync(fileName: string, contents: string) {
+  const dirPath = dirname(fileName);
+  mkdirSync(dirPath, { recursive: true });
+  nativeWriteFileSync(fileName, contents, 'utf-8');
 }
