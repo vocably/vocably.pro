@@ -1042,4 +1042,19 @@ describe('integration check for translate lambda', () => {
 
     expect(result.value.items[0].source).toEqual('de taille');
   });
+
+  it('de pad', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'nl',
+      targetLanguage: 'en',
+      source: 'de pad',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    expect(result.value.items[0].source).toEqual('de pad');
+    expect(result.value.items[0].partOfSpeech).toEqual('noun');
+  });
 });

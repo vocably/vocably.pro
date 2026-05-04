@@ -11,6 +11,7 @@ import { sentenceAnalysis } from './buildDirectResult/sentenceAnalysis';
 import { unitOfSpeechAnalysis } from './buildDirectResult/unitOfSpeechAnalysis';
 import { detectInputTypeAi } from './detectInputTypeAi';
 import { sanitizePayload } from './sanitizePayload';
+import { trimArticle } from '@vocably/sulna';
 
 export const buildDirectResult = async (
   rawPayload: DirectAnalyzePayload
@@ -19,7 +20,7 @@ export const buildDirectResult = async (
 
   const detectedTypeResult = await detectInputTypeAi({
     language: payload.sourceLanguage,
-    source: payload.source,
+    source: trimArticle(payload.sourceLanguage, payload.source).source,
   });
 
   if (!detectedTypeResult.success) {
