@@ -59,4 +59,25 @@ describe('fixGrammar', () => {
     expect(result.value.text).toEqual('my name is dima');
     expect(result.value.isCorrect).toEqual(true);
   });
+
+  it('keeps line breaks', async () => {
+    const result = await fixGrammar({
+      language: 'en',
+      context: '',
+      text: `my name is dima
+
+i live in ukraine`,
+      explanationLanguage: 'en',
+    });
+
+    expect(result.success).toEqual(true);
+    if (result.success === false) {
+      return;
+    }
+    console.log(result.value);
+    expect(result.value.text).toEqual(`my name is dima
+
+i live in Ukraine`);
+    expect(result.value.isCorrect).toEqual(false);
+  });
 });

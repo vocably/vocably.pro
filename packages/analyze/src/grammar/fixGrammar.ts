@@ -39,7 +39,8 @@ export const fixGrammar = async ({
             `User provides a text and an optional context`,
             `Fix the text according to ${languageList[language]} grammar rules and explain the reasoning`,
             `Ignore punctuation and capitalization`,
-          ],
+            text.indexOf(`\n`) > -1 ? `Keep the line breaks` : '',
+          ].filter(Boolean),
           thinkingConfig: {
             thinkingBudget: 0, // Disables thinking
           },
