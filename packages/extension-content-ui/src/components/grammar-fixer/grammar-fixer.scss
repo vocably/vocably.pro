@@ -117,6 +117,7 @@ vocably-button-copy {
   width: 100%;
   field-sizing: content;
   resize: none;
+  overflow-wrap: anywhere;
 
   &::placeholder {
     color: $v-light-color-muted;
