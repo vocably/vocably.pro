@@ -3,3 +3,5 @@ User-agent: *
 Disallow: /console.html$
 
 Allow: /
+
+Sitemap: https://vocably.pro/sitemap.xml
