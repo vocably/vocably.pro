@@ -6,6 +6,7 @@ export {
   handleGeminiAnalyzeResponse,
   sanitizeAiAnalyseResult,
   isAiAnalysis,
+  AiAnalysis,
 } from './aiUnitOfSpeechAnalyse';
 export { aiAnalysisToItem } from './analyseAndTranslate';
 export * from './batchUnitOfSpeechAnalyse';

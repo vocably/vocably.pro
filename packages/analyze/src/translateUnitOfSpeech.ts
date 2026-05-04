@@ -352,7 +352,10 @@ export const translateUnitOfSpeechNoCache = async (
 };
 
 export const getUnitOfSpeechTranslationFileName = (
-  payload: Payload
+  payload: Pick<
+    Payload,
+    'sourceLanguage' | 'targetLanguage' | 'source' | 'partOfSpeech'
+  >
 ): string => {
   return `${payload.sourceLanguage.toLowerCase()}/translations/${payload.source
     .toLowerCase()
