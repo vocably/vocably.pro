@@ -648,7 +648,7 @@ describe('integration check for translate lambda', () => {
       throw 'Unexpected result';
     }
 
-    expect(result.value.items[0].source).toEqual('mather');
+    expect(result.value.items[0].source).toEqual('mother');
     expect(result.value.items[0].definitions.length).toEqual(0);
   });
 
@@ -1027,5 +1027,19 @@ describe('integration check for translate lambda', () => {
     }
 
     expect(result.value.items.some((i) => i.source === 'chat')).toBeTruthy();
+  });
+
+  it('dutch taille', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'nl',
+      targetLanguage: 'en',
+      source: 'taille',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    expect(result.value.items[0].source).toEqual('de taille');
   });
 });

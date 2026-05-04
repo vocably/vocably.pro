@@ -184,4 +184,20 @@ describe('detectInputTypeChatGpt', () => {
     expect(responseResult.value.type).toEqual('word');
     expect(responseResult.value.isDirect).toEqual(true);
   });
+
+  it('dutch taille', async () => {
+    const responseResult = await detectInputTypeChatGpt({
+      language: 'nl',
+      source: 'taille',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.isDirect).toEqual(true);
+  });
 });

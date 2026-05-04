@@ -1,6 +1,12 @@
 import { createUserContent, GoogleGenAI } from '@google/genai';
 import { parseJson } from '@vocably/api';
-import { inputTypes, languageList, Result, resultify } from '@vocably/model';
+import {
+  GoogleLanguage,
+  inputTypes,
+  languageList,
+  Result,
+  resultify,
+} from '@vocably/model';
 import { config } from './config';
 import {
   DetectInputTypeAiPayload,
@@ -8,6 +14,28 @@ import {
   isInputAnalysis,
 } from './detectInputTypeAi';
 import { timeout } from '@vocably/sulna';
+
+const languagesThatDontUseSpaces: GoogleLanguage[] = [
+  'zh',
+  'zh-TW',
+  'ja',
+  'th',
+  'lo',
+  'km',
+  'my',
+  'am',
+];
+
+const isQuiteLikelyAWord = ({
+  source,
+  language,
+}: DetectInputTypeAiPayload): boolean => {
+  if (languagesThatDontUseSpaces.includes(language)) {
+    return false;
+  }
+
+  return !/\s/.test(source.trim());
+};
 
 export const detectInputTypeGemini = async ({
   source,
@@ -19,6 +47,8 @@ export const detectInputTypeGemini = async ({
 
   const abortController = new AbortController();
   const abortSignal = abortController.signal;
+
+  const quiteLikelyAWord = isQuiteLikelyAWord({ source, language });
 
   const result = await resultify(
     timeout(
@@ -43,7 +73,7 @@ export const detectInputTypeGemini = async ({
               },
               isDirect: {
                 type: 'boolean',
-                description: `true if the input can be ${languageList[language]}`,
+                description: `true when the input ${quiteLikelyAWord ? 'exists in' : 'can be'} ${languageList[language]}`,
               },
             },
             required: ['type', 'isDirect'],
