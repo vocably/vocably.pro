@@ -76,7 +76,7 @@
           height: 1.6rem;
         }
       </style>
-      <nav class="navbar navbar-expand-lg navbar-light{{#unless nonStickyNavbar}} sticky-menu sticky-top{{/unless}} navbar-bg mb-4 mb-lg-0 px-4{{#if navbarAlwaysMurky}} navbar-bg-always{{/if}}{{#if navbarClass}} {{ navbarClass }}{{/if}}" style="">
+      <nav class="navbar navbar-expand-lg navbar-light{{#unless nonStickyNavbar}} sticky-menu sticky-top{{/unless}} navbar-bg px-4{{#if navbarAlwaysMurky}} navbar-bg-always{{/if}} {{#if navbarSpacing}}{{ navbarSpacing }}{{else}}mb-4 mb-lg-0{{/if}}" style="">
         <div class="{{#if navbarContainerClass}}{{ navbarContainerClass }}{{else}}container-fluid{{/if}} p-0">
           <a class="navbar-home-link" href="/">
             <img
