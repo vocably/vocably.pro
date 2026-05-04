@@ -30,4 +30,4 @@ const xml = generateSitemap({
 
 console.log(xml);
 
-writeFileSync('./dist/sitemap.xml', xml);
+writeFileSync('./dist/sitemap-main.xml', xml);
