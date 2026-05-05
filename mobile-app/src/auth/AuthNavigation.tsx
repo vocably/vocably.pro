@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { FC } from 'react';
-import { Platform } from 'react-native';
+import { Platform, useWindowDimensions } from 'react-native';
 import { Appbar, Button, useTheme } from 'react-native-paper';
 import { LanguageSelectorModal } from '../LanguageSelectorModal';
 import { LanguageScreen } from './LanguageScreen';
@@ -14,9 +14,12 @@ type Props = {};
 export const AuthNavigation: FC<Props> = () => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const { fontScale } = useWindowDimensions();
+
   return (
     <Stack.Navigator
       screenOptions={{
+        headerTitleAllowFontScaling: false,
         headerLeft: () => {
           if (!navigation.canGoBack()) {
             return <></>;
@@ -33,6 +36,8 @@ export const AuthNavigation: FC<Props> = () => {
           <Button
             style={{ marginRight: 16 }}
             onPress={() => navigation.navigate('login')}
+            maxFontSizeMultiplier={1}
+            compact={true}
           >
             Sign in
           </Button>

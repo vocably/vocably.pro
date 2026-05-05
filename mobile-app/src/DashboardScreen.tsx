@@ -568,6 +568,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
             keyExtractor={keyExtractor}
             stickySectionHeadersEnabled={true}
             renderSectionHeader={(section) => {
+              const fontSizeMultiplier = 1 / Math.min(2.2, fontScale);
               return (
                 <>
                   <TouchableRipple
@@ -586,12 +587,12 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                       style={{
                         flexDirection: 'row',
                         alignItems: 'center',
-                        gap: 16,
+                        gap: 16 * fontSizeMultiplier,
                       }}
                     >
                       <Text
                         style={{
-                          fontSize: 22,
+                          fontSize: 22 * fontSizeMultiplier,
                           color: theme.colors.secondary,
                         }}
                       >
@@ -607,7 +608,12 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                           backgroundColor: theme.colors.secondary,
                         }}
                       >
-                        <Text style={{ color: theme.colors.onSecondary }}>
+                        <Text
+                          style={{
+                            color: theme.colors.onSecondary,
+                            fontSize: 14 * fontSizeMultiplier,
+                          }}
+                        >
                           {section.section.all.length}
                         </Text>
                       </View>
@@ -625,6 +631,10 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                       {section.section.id === 'tomorrow' && (
                         <Button
                           style={{ marginLeft: 'auto' }}
+                          labelStyle={{
+                            fontSize: 14 * fontSizeMultiplier,
+                          }}
+                          compact={true}
                           disabled={
                             section.section.all.filter(
                               hasStudied(now.getTime())

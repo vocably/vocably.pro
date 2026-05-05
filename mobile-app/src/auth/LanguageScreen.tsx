@@ -64,8 +64,11 @@ export const LanguageScreen: FC<Props> = () => {
 
   return (
     <ScrollView
-      contentContainerStyle={{
+      style={{
         flex: 1,
+      }}
+      contentContainerStyle={{
+        flexGrow: 1,
         alignItems: 'stretch',
         justifyContent: 'center',
         paddingLeft: insets.left + mainPadding,
