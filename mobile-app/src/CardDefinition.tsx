@@ -2,9 +2,10 @@ import { Card } from '@vocably/model';
 import { explode, isGoodPlural } from '@vocably/sulna';
 import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
-import { Pressable, StyleProp, View } from 'react-native';
+import { PixelRatio, Platform, Pressable, StyleProp, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
+import { get } from 'lodash-es';
 
 type Props = {
   card: Card;
@@ -66,11 +67,11 @@ export const CardDefinition: FC<Props> = ({
             style={{
               marginTop: 4,
               flexDirection: 'row',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               gap: 4,
             }}
           >
-            <Text>{bul}</Text>
+            <Text style={textStyle}>{bul}</Text>
 
             <Pressable
               style={({ pressed }) => [

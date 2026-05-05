@@ -69,6 +69,8 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
       },
     }));
 
+    const fontScale = PixelRatio.getFontScale();
+
     return (
       <>
         {examples.map((text, index) => (
@@ -77,7 +79,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
             style={{
               marginTop: 6,
               flexDirection: 'row',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               gap: 4,
             }}
           >
@@ -88,16 +90,17 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
                 }}
                 text={text}
                 language={language}
-                size={20}
+                size={get(textStyle, 'fontSize', 14) * fontScale}
                 hitSlop={4}
                 disabled={playDisabled}
                 style={{
-                  alignSelf: 'flex-start',
+                  height: get(textStyle, 'fontSize', 14) * 1.4 * fontScale,
+                  justifyContent: 'center',
                   opacity: playDisabled ? 0.8 : 0.2,
                 }}
               />
             ) : (
-              <Text>{bul}</Text>
+              <Text style={textStyle}>{bul}</Text>
             )}
 
             <Pressable
