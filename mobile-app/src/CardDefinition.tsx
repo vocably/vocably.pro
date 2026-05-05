@@ -23,7 +23,6 @@ export const CardDefinition: FC<Props> = ({
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const globalLookupEnabled = !maskSource;
 
   let definitions = explode(card.definition).map((text) => ({
     text,
@@ -60,7 +59,7 @@ export const CardDefinition: FC<Props> = ({
   return (
     <>
       {definitions.map((item, index) => {
-        const lookUpEnabled = item.lookUpEnabled && globalLookupEnabled;
+        const lookUpEnabled = item.lookUpEnabled;
         return (
           <View
             key={index}

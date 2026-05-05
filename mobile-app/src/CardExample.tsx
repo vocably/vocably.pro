@@ -51,8 +51,6 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
 
     const playSoundRefs = useRef<(PlaySoundRef | null)[]>([]);
 
-    const lookUpEnabled = mask === undefined;
-
     useImperativeHandle(ref, () => ({
       play: async () => {
         if (!isGoogleTTSLanguage(language) || playDisabled) {
@@ -104,22 +102,18 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
 
             <Pressable
               style={({ pressed }) => [
-                { opacity: pressed && lookUpEnabled ? 0.6 : 1.0 },
+                { opacity: pressed ? 0.6 : 1.0 },
                 {
                   flexShrink: 1,
                 },
               ]}
               onPress={onPress}
-              onLongPress={
-                lookUpEnabled
-                  ? () => {
-                      // @ts-ignore
-                      navigation.push('LookUpModal', {
-                        text,
-                      });
-                    }
-                  : undefined
-              }
+              onLongPress={() => {
+                // @ts-ignore
+                navigation.push('LookUpModal', {
+                  text,
+                });
+              }}
             >
               <Text style={textStyle}>{text}</Text>
             </Pressable>
