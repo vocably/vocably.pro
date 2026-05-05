@@ -92,7 +92,7 @@ export const CardDefinition: FC<Props> = ({
                   : undefined
               }
             >
-              <Text style={item.style}>{item.text}</Text>
+              <Text style={[item.style, textStyle]}>{item.text}</Text>
             </Pressable>
           </View>
         );
