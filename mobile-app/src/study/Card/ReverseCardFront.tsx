@@ -10,10 +10,15 @@ export type ReverseCardFrontRef = {
   playExample: () => Promise<void>;
 };
 
-type Props = { card: CardItem; hasChecked: boolean; requiredAction?: string };
+type Props = {
+  card: CardItem;
+  hasChecked: boolean;
+  requiredAction?: string;
+  onPress?: () => unknown;
+};
 
 export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
-  ({ card, hasChecked, requiredAction = 'Guess' }, ref) => {
+  ({ card, hasChecked, requiredAction = 'Guess', onPress }, ref) => {
     const theme = useTheme();
 
     let examples = card.data.example ? explode(card.data.example) : [];
@@ -69,6 +74,7 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
               example={join(examples)}
               language={card.data.language}
               textStyle={{ fontSize: 18 }}
+              onPress={onPress}
             />
           </>
         )}

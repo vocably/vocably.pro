@@ -11,6 +11,7 @@ type Props = {
   autoPlay: boolean;
   playRandomExample: boolean;
   showInflections?: boolean;
+  onPress?: () => unknown;
 };
 
 export const CardFront: FC<Props> = ({
@@ -18,6 +19,7 @@ export const CardFront: FC<Props> = ({
   autoPlay,
   playRandomExample,
   showInflections = false,
+  onPress,
 }) => {
   const theme = useTheme();
 
@@ -133,6 +135,7 @@ export const CardFront: FC<Props> = ({
             example={card.data.example}
             textStyle={{ fontSize: 18 }}
             language={card.data.language}
+            onPress={onPress}
           />
         </View>
       )}

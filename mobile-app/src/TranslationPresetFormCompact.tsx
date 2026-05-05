@@ -1,28 +1,36 @@
 import { NavigationProp } from '@react-navigation/native';
 import { FC, useContext, useEffect, useRef, useState } from 'react';
-import { Animated, useWindowDimensions, View } from 'react-native';
+import {
+  Animated,
+  StyleProp,
+  useWindowDimensions,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { LanguagesContext } from '../languages/LanguagesContainer';
-import { SourceLanguageButton } from '../SourceLanguageButton';
-import { TargetLanguageButton } from '../TargetLanguageButton';
-import { Preset } from '../TranslationPreset/TranslationPresetContainer';
-import { LanguagePairs } from '../TranslationPreset/useLanguagePairs';
+import { LanguagesContext } from './languages/LanguagesContainer';
+import { SourceLanguageButton } from './SourceLanguageButton';
+import { TargetLanguageButton } from './TargetLanguageButton';
+import { Preset } from './TranslationPreset/TranslationPresetContainer';
+import { LanguagePairs } from './TranslationPreset/useLanguagePairs';
 
 type Props = {
   navigation: NavigationProp<any>;
   preset: Preset;
   onChange: (preset: Preset) => void;
   languagePairs: LanguagePairs;
+  contentStyle?: StyleProp<ViewStyle>;
 };
 
 const reverseButtonWidth = 65;
 
-export const GenerateTranslationPresetForm: FC<Props> = ({
+export const TranslationPresetFormCompact: FC<Props> = ({
   navigation,
   preset,
   onChange,
   languagePairs,
+  contentStyle,
 }) => {
   const theme = useTheme();
   const { languages: existingDeckLanguages } = useContext(LanguagesContext);
@@ -87,12 +95,15 @@ export const GenerateTranslationPresetForm: FC<Props> = ({
         onLayout={(event) =>
           setPresetContainerWidth(event.nativeEvent.layout.width)
         }
-        style={{
-          alignItems: 'center',
-          justifyContent: 'flex-end',
-          flexDirection: 'row',
-          gap: 4,
-        }}
+        style={[
+          {
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            flexDirection: 'row',
+            gap: 4,
+          },
+          contentStyle,
+        ]}
       >
         <SourceLanguageButton
           navigation={navigation}
