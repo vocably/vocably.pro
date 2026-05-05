@@ -145,6 +145,7 @@ export const Card: FC<Props> = ({
                 autoPlay={autoPlay && isFlipped}
                 playRandomExample={playRandomExample}
                 card={card}
+                onPress={onPress}
               />
             ) : (
               <CardBack card={card} />
@@ -155,12 +156,17 @@ export const Card: FC<Props> = ({
             pointerEvents={isFlipped ? 'none' : 'auto'}
           >
             {isReverse ? (
-              <ReverseCardFront card={card} hasChecked={hasChecked} />
+              <ReverseCardFront
+                card={card}
+                hasChecked={hasChecked}
+                onPress={onPress}
+              />
             ) : (
               <CardFront
                 autoPlay={autoPlay && !isFlipped}
                 playRandomExample={playRandomExample}
                 card={card}
+                onPress={onPress}
               />
             )}
           </Animated.View>

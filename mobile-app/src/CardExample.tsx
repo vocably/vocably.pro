@@ -1,6 +1,13 @@
 import { explode } from '@vocably/sulna';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { Alert, PixelRatio, Platform, StyleProp } from 'react-native';
+import {
+  Alert,
+  PixelRatio,
+  Platform,
+  Pressable,
+  StyleProp,
+  View,
+} from 'react-native';
 import { Text } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
 import { PlaySound, PlaySoundRef } from './PlaySound';
@@ -22,10 +29,11 @@ type Props = {
   language: string;
   textStyle?: StyleProp<Text>;
   mask?: Mask;
+  onPress?: () => unknown;
 };
 
 export const CardExample = forwardRef<CardExampleRef, Props>(
-  ({ example, textStyle, mask, language }, ref) => {
+  ({ example, textStyle, mask, language, onPress }, ref) => {
     let examples = explode(example);
 
     const navigation = useNavigation();
@@ -44,6 +52,8 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
     const playDisabled = mask !== undefined;
 
     const playSoundRefs = useRef<(PlaySoundRef | null)[]>([]);
+
+    const lookUpEnabled = mask === undefined;
 
     useImperativeHandle(ref, () => ({
       play: async () => {
@@ -66,19 +76,13 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
     return (
       <>
         {examples.map((text, index) => (
-          <Text
+          <View
             key={index}
-            style={[
-              textStyle,
-              {
-                marginTop: 6,
-              },
-            ]}
-            onLongPress={() => {
-              // @ts-ignore
-              navigation.push('LookUpModal', {
-                text,
-              });
+            style={{
+              marginTop: 6,
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 4,
             }}
           >
             {isGoogleTTSLanguage(language) ? (
@@ -92,15 +96,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
                 hitSlop={4}
                 disabled={playDisabled}
                 style={{
-                  transform: [
-                    {
-                      translateY:
-                        (28 - get(textStyle, 'fontSize', 14)) *
-                        fontScale *
-                        (Platform.OS === 'ios' ? 0.35 : 0.4),
-                    },
-                    { translateX: -2 },
-                  ],
+                  alignSelf: 'flex-start',
                   opacity: playDisabled ? 0.8 : 0.2,
                 }}
               />
@@ -108,8 +104,28 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
               bul
             )}
 
-            {text}
-          </Text>
+            <Pressable
+              style={({ pressed }) => [
+                { opacity: pressed && lookUpEnabled ? 0.6 : 1.0 },
+                {
+                  flexShrink: 1,
+                },
+              ]}
+              onPress={onPress}
+              onLongPress={
+                lookUpEnabled
+                  ? () => {
+                      // @ts-ignore
+                      navigation.push('LookUpModal', {
+                        text,
+                      });
+                    }
+                  : undefined
+              }
+            >
+              <Text style={textStyle}>{text}</Text>
+            </Pressable>
+          </View>
         ))}
       </>
     );

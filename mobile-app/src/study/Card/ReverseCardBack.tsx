@@ -8,12 +8,14 @@ type Props = {
   card: CardItem;
   autoPlay: boolean;
   playRandomExample: boolean;
+  onPress?: () => unknown;
 };
 
 export const ReverseCardBack: FC<Props> = ({
   card,
   autoPlay,
   playRandomExample,
+  onPress,
 }) => {
   return (
     <View>
@@ -23,6 +25,7 @@ export const ReverseCardBack: FC<Props> = ({
         playRandomExample={playRandomExample}
         card={card}
         showInflections={true}
+        onPress={onPress}
       />
     </View>
   );
