@@ -56,6 +56,7 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
           card={card.data}
           textStyle={{ fontSize: 24 }}
           maskSource={!hasChecked}
+          onPress={onPress}
         />
         {examples.length > 0 && (
           <>

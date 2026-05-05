@@ -1,7 +1,8 @@
 import { Card } from '@vocably/model';
 import { explode, isGoodPlural } from '@vocably/sulna';
+import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
-import { StyleProp } from 'react-native';
+import { Pressable, StyleProp, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
 
@@ -10,6 +11,7 @@ type Props = {
   textStyle?: StyleProp<Text>;
   maskSource?: boolean;
   showInflections?: boolean;
+  onPress?: () => unknown;
 };
 
 export const CardDefinition: FC<Props> = ({
@@ -17,12 +19,16 @@ export const CardDefinition: FC<Props> = ({
   textStyle,
   maskSource = false,
   showInflections = false,
+  onPress,
 }) => {
   const theme = useTheme();
+  const navigation = useNavigation();
+  const globalLookupEnabled = !maskSource;
 
   let definitions = explode(card.definition).map((text) => ({
     text,
     style: {},
+    lookUpEnabled: true,
   }));
 
   if (maskSource) {
@@ -45,16 +51,52 @@ export const CardDefinition: FC<Props> = ({
       style: {
         color: theme.colors.secondary,
       },
+      lookUpEnabled: false,
     });
   }
 
+  const bul = definitions.length === 1 ? '' : '\u2022 ';
+
   return (
     <>
-      {definitions.map((item, index) => (
-        <Text key={index} style={textStyle}>
-          <Text style={item.style}>{`\u2022 ${item.text}`}</Text>
-        </Text>
-      ))}
+      {definitions.map((item, index) => {
+        const lookUpEnabled = item.lookUpEnabled && globalLookupEnabled;
+        return (
+          <View
+            key={index}
+            style={{
+              marginTop: 4,
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
+            <Text>{bul}</Text>
+
+            <Pressable
+              style={({ pressed }) => [
+                { opacity: pressed && lookUpEnabled && item ? 0.6 : 1.0 },
+                {
+                  flexShrink: 1,
+                },
+              ]}
+              onPress={onPress}
+              onLongPress={
+                lookUpEnabled
+                  ? () => {
+                      // @ts-ignore
+                      navigation.push('LookUpModal', {
+                        text: item.text,
+                      });
+                    }
+                  : undefined
+              }
+            >
+              <Text style={item.style}>{item.text}</Text>
+            </Pressable>
+          </View>
+        );
+      })}
       {showInflections && card.presentTenses && (
         <Text
           style={[

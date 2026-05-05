@@ -148,7 +148,7 @@ export const Card: FC<Props> = ({
                 onPress={onPress}
               />
             ) : (
-              <CardBack card={card} />
+              <CardBack card={card} onPress={onPress} />
             )}
           </Animated.View>
           <Animated.View

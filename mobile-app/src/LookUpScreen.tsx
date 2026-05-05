@@ -310,7 +310,7 @@ export const LookUpScreen: FC<Props> = ({
                     onPress={() => {
                       navigation.goBack();
                     }}
-                    style={{ backgroundColor: 'transparent' }}
+                    style={{ backgroundColor: 'transparent', marginRight: -4 }}
                   />
                 </View>
               )}

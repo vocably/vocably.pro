@@ -3,7 +3,12 @@ import React, { FC } from 'react';
 import { Text } from 'react-native-paper';
 import { CardDefinition } from '../../CardDefinition';
 
-export const CardBack: FC<{ card: CardItem }> = ({ card }) => {
+type Props = {
+  card: CardItem;
+  onPress?: () => unknown;
+};
+
+export const CardBack: FC<Props> = ({ card, onPress }) => {
   if (!card.data.translation && !card.data.definition) {
     return (
       <Text style={{ fontSize: 24 }}>
@@ -13,6 +18,7 @@ export const CardBack: FC<{ card: CardItem }> = ({ card }) => {
   }
   return (
     <CardDefinition
+      onPress={onPress}
       card={card.data}
       textStyle={{ fontSize: 24 }}
       showInflections={true}

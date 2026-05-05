@@ -47,8 +47,6 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
 
     const bul = examples.length === 1 ? '' : '\u2022 ';
 
-    const fontScale = PixelRatio.getFontScale();
-
     const playDisabled = mask !== undefined;
 
     const playSoundRefs = useRef<(PlaySoundRef | null)[]>([]);
@@ -101,7 +99,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
                 }}
               />
             ) : (
-              bul
+              <Text>{bul}</Text>
             )}
 
             <Pressable
