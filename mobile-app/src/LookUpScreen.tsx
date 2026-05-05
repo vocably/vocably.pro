@@ -278,6 +278,7 @@ export const LookUpScreen: FC<Props> = ({
             <View
               style={{
                 padding: padding,
+                paddingVertical: 4,
                 width: '100%',
                 paddingBottom: 12,
               }}
@@ -299,18 +300,18 @@ export const LookUpScreen: FC<Props> = ({
                     justifyContent: 'space-between',
                   }}
                 >
-                  <TranslationPresetFormCompact
-                    navigation={navigation}
-                    languagePairs={translationPresetState.languagePairs}
-                    preset={translationPresetState.preset}
-                    onChange={translationPresetState.setPreset}
-                  />
                   <IconButton
                     icon="close"
                     onPress={() => {
                       navigation.goBack();
                     }}
-                    style={{ backgroundColor: 'transparent', marginRight: -4 }}
+                    style={{ backgroundColor: 'transparent', marginLeft: -6 }}
+                  />
+                  <TranslationPresetFormCompact
+                    navigation={navigation}
+                    languagePairs={translationPresetState.languagePairs}
+                    preset={translationPresetState.preset}
+                    onChange={translationPresetState.setPreset}
                   />
                 </View>
               )}
