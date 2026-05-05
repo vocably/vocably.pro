@@ -15,6 +15,7 @@ import { StudySettingsScreen } from './Settings/StudySettingsScreen';
 import { StudyScreen } from './study/StudyScreen';
 import { TabsNavigator } from './TabsNavigator';
 import { WelcomeScreen } from './Welcome/WelcomeScreen';
+import { LookUpModal } from './LookUpModal';
 
 const Stack = createStackNavigator();
 
@@ -140,6 +141,14 @@ export const RootModalStack = () => {
           options={{
             headerShown: true,
             title: 'Export deck',
+          }}
+        />
+        <Stack.Screen
+          name="LookUpModal"
+          component={LookUpModal}
+          options={{
+            headerShown: false,
+            title: '',
           }}
         />
       </Stack.Group>

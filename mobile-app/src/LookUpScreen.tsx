@@ -4,7 +4,13 @@ import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, Linking, ScrollView, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
-import { Button, Surface, Text, useTheme } from 'react-native-paper';
+import {
+  Button,
+  IconButton,
+  Surface,
+  Text,
+  useTheme,
+} from 'react-native-paper';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome6';
@@ -26,6 +32,7 @@ import { publicExplain } from '@vocably/api';
 import { createExplainPayload } from '@vocably/model-operations';
 import UnitsOfSpeechAnalyze from './GenerateCards/UnitsOfSpeechAnalyze';
 import { Thinking } from './Chat/Thinking';
+import { TranslationPresetFormCompact } from './TranslationPresetFormCompact';
 
 const padding = 16;
 
@@ -47,12 +54,14 @@ type Props = {
   navigation: NavigationProp<any>;
   initialText?: string;
   isSharedLookUp?: boolean;
+  isModal?: boolean;
 };
 
 export const LookUpScreen: FC<Props> = ({
   navigation,
   initialText = '',
   isSharedLookUp = false,
+  isModal = false,
 }) => {
   const translationPresetState = useTranslationPreset();
   const [lookUpText, setLookUpText] = useState(initialText);
@@ -239,7 +248,7 @@ export const LookUpScreen: FC<Props> = ({
           <Surface
             elevation={1}
             style={{
-              paddingTop: insets.top,
+              paddingTop: !isModal ? insets.top : 0,
               paddingLeft: insets.left,
               paddingRight: insets.right,
               paddingBottom: 24,
@@ -273,12 +282,38 @@ export const LookUpScreen: FC<Props> = ({
                 paddingBottom: 12,
               }}
             >
-              <TranslationPresetForm
-                navigation={navigation}
-                languagePairs={translationPresetState.languagePairs}
-                preset={translationPresetState.preset}
-                onChange={translationPresetState.setPreset}
-              />
+              {!isModal && (
+                <TranslationPresetForm
+                  navigation={navigation}
+                  languagePairs={translationPresetState.languagePairs}
+                  preset={translationPresetState.preset}
+                  onChange={translationPresetState.setPreset}
+                />
+              )}
+
+              {isModal && (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <TranslationPresetFormCompact
+                    navigation={navigation}
+                    languagePairs={translationPresetState.languagePairs}
+                    preset={translationPresetState.preset}
+                    onChange={translationPresetState.setPreset}
+                  />
+                  <IconButton
+                    icon="close"
+                    onPress={() => {
+                      navigation.goBack();
+                    }}
+                    style={{ backgroundColor: 'transparent' }}
+                  />
+                </View>
+              )}
             </View>
             <View
               style={{

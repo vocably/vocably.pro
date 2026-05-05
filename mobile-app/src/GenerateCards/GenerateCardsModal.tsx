@@ -23,7 +23,7 @@ import { Loader } from '../loaders/Loader';
 import { useTranslationPreset } from '../TranslationPreset/useTranslationPreset';
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { useAnalyzeOperations } from '../useAnalyzeOperations';
-import { GenerateTranslationPresetForm } from './GenerateTranslationPresetForm';
+import { TranslationPresetFormCompact } from '../TranslationPresetFormCompact';
 import UnitsOfSpeechAnalyze from './UnitsOfSpeechAnalyze';
 import { useCardsLimit } from '../useCardsLimit';
 
@@ -335,7 +335,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
               borderTopColor: theme.colors.elevation.level5,
             }}
           >
-            <GenerateTranslationPresetForm
+            <TranslationPresetFormCompact
               navigation={navigation}
               languagePairs={translationPresetState.languagePairs}
               preset={translationPresetState.preset}

@@ -1,11 +1,12 @@
 import { explode } from '@vocably/sulna';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
-import { PixelRatio, Platform, StyleProp } from 'react-native';
+import { Alert, PixelRatio, Platform, StyleProp } from 'react-native';
 import { Text } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
 import { PlaySound, PlaySoundRef } from './PlaySound';
 import { isGoogleTTSLanguage } from '@vocably/model';
 import { get, shuffle } from 'lodash-es';
+import { useNavigation } from '@react-navigation/native';
 
 export type Mask = {
   text: string;
@@ -26,6 +27,8 @@ type Props = {
 export const CardExample = forwardRef<CardExampleRef, Props>(
   ({ example, textStyle, mask, language }, ref) => {
     let examples = explode(example);
+
+    const navigation = useNavigation();
 
     if (mask) {
       examples = examples
@@ -71,6 +74,12 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
                 marginTop: 6,
               },
             ]}
+            onLongPress={() => {
+              // @ts-ignore
+              navigation.push('LookUpModal', {
+                text,
+              });
+            }}
           >
             {isGoogleTTSLanguage(language) ? (
               <PlaySound
