@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import Markdown from 'react-native-markdown-display';
 import { useTheme } from 'react-native-paper';
 import { fixMarkdown } from '../fixMarkdown';
@@ -8,9 +8,15 @@ type Props = {
   message: string;
   direction: 'fromAi' | 'toAi';
   error?: boolean;
+  style?: StyleProp<ViewStyle>;
 };
 
-export const Message: FC<Props> = ({ message, direction, error = false }) => {
+export const Message: FC<Props> = ({
+  message,
+  direction,
+  error = false,
+  style,
+}) => {
   const theme = useTheme();
   const markdownStyles = {
     body: {
@@ -28,20 +34,22 @@ export const Message: FC<Props> = ({ message, direction, error = false }) => {
 
   return (
     <View
-      style={{
-        alignSelf: direction === 'fromAi' ? 'flex-start' : 'flex-end',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        backgroundColor:
-          direction === 'fromAi'
-            ? theme.colors.elevation.level5
-            : theme.colors.primary,
-        borderRadius: 16,
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        marginBottom: 8,
-      }}
+      style={[
+        {
+          alignSelf: direction === 'fromAi' ? 'flex-start' : 'flex-end',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+          backgroundColor:
+            direction === 'fromAi'
+              ? theme.colors.elevation.level5
+              : theme.colors.primary,
+          borderRadius: 16,
+          paddingHorizontal: 16,
+          paddingVertical: 8,
+        },
+        style,
+      ]}
     >
       <Markdown style={markdownStyles}>{fixMarkdown(message)}</Markdown>
     </View>

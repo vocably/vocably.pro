@@ -107,6 +107,10 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
     setIsThinking(false);
   };
 
+  const messageWrapperStyle = {
+    marginBottom: 8,
+  };
+
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -125,20 +129,26 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
             }}
             ref={scrollViewRef}
           >
-            <Message direction="fromAi" message={getInitialMessage(card)} />
+            <Message
+              direction="fromAi"
+              message={getInitialMessage(card)}
+              style={messageWrapperStyle}
+            />
             {messages.map((message) => (
               <Message
                 key={message.timestamp}
                 message={message.message}
                 direction={message.role === 'assistant' ? 'fromAi' : 'toAi'}
+                style={messageWrapperStyle}
               />
             ))}
-            {isThinking && <Thinking />}
+            {isThinking && <Thinking style={messageWrapperStyle} />}
             {lastMessageError && (
               <Message
                 direction="fromAi"
                 message={lastMessageError}
                 error={true}
+                style={messageWrapperStyle}
               />
             )}
           </ScrollView>
