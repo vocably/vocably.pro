@@ -104,7 +104,7 @@ export const LookUpScreen: FC<Props> = ({
 
   useEffect(() => {
     return navigation.addListener('focus', () => {
-      if (searchInputRef.current && !generateIsOpened) {
+      if (searchInputRef.current && !generateIsOpened && !isModal) {
         searchInputRef.current.focus();
       }
 
