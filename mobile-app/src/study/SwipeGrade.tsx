@@ -11,6 +11,7 @@ import { Text, TouchableRipple, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { PADDING_VERTICAL } from './StudyScreen';
+import { usePostHog } from 'posthog-react-native';
 
 const WEAK_SCORE = 0;
 const MEDIUM_SCORE = 3;
@@ -35,6 +36,7 @@ export const SwipeGrade: FC<{
   children: ReactNode;
 }> = ({ onGrade, children }) => {
   const theme = useTheme();
+  const postHog = usePostHog();
 
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const insets = useSafeAreaInsets();
@@ -127,16 +129,25 @@ export const SwipeGrade: FC<{
       },
       onPanResponderRelease: async (_, gestureState) => {
         if ((weakVisibility as any)._value === 1) {
+          postHog.capture('swipe_grade', {
+            score: 0,
+          });
           onGrade(0);
           return;
         }
 
         if ((mediumVisibility as any)._value === 1) {
+          postHog.capture('swipe_grade', {
+            score: 3,
+          });
           onGrade(3);
           return;
         }
 
         if ((strongVisibility as any)._value === 1) {
+          postHog.capture('swipe_grade', {
+            score: 5,
+          });
           onGrade(5);
           return;
         }
@@ -152,6 +163,9 @@ export const SwipeGrade: FC<{
               duration: fastReleaseAnimationDuration,
               useNativeDriver: true,
             }).start(() => {
+              postHog.capture('swipe_grade', {
+                score: WEAK_SCORE,
+              });
               onGrade(WEAK_SCORE);
             });
             return;
@@ -166,6 +180,9 @@ export const SwipeGrade: FC<{
               duration: fastReleaseAnimationDuration,
               useNativeDriver: true,
             }).start(() => {
+              postHog.capture('swipe_grade', {
+                score: MEDIUM_SCORE,
+              });
               onGrade(MEDIUM_SCORE);
             });
             return;
@@ -180,6 +197,9 @@ export const SwipeGrade: FC<{
               duration: fastReleaseAnimationDuration,
               useNativeDriver: true,
             }).start(() => {
+              postHog.capture('swipe_grade', {
+                score: STRONG_SCORE,
+              });
               onGrade(STRONG_SCORE);
             });
             return;
