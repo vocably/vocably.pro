@@ -94,7 +94,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
                 hitSlop={4}
                 disabled={playDisabled}
                 style={{
-                  height: get(textStyle, 'fontSize', 14) * 1.4 * fontScale,
+                  height: get(textStyle, 'fontSize', 14) * 1.3 * fontScale,
                   justifyContent: 'center',
                   opacity: playDisabled ? 0.8 : 0.2,
                 }}
