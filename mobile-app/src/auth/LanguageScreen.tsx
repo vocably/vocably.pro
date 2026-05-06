@@ -25,8 +25,6 @@ export const LanguageScreen: FC<Props> = () => {
   const theme = useTheme();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const { createAnonymousUser } = useContext(AuthContext);
-  const posthog = usePostHog();
 
   const [sourceLanguage, setSourceLanguage] = useState('');
   const [targetLanguage, setTargetLanguage] = useState('');
@@ -38,27 +36,13 @@ export const LanguageScreen: FC<Props> = () => {
     setTargetLanguage(preset.translationLanguage);
   };
 
-  const createAnonymousAccount = async () => {
+  const savePreferencesAndProceed = async () => {
     await storeSelectedLanguage(sourceLanguage);
     await saveSelectedLanguageToStorage(sourceLanguage);
-    if (isGoogleLanguage(sourceLanguage) && isGoogleLanguage(targetLanguage))
-      await storeLanguagePairs({
-        [sourceLanguage]: {
-          translationLanguage: targetLanguage,
-          availableLanguages: [targetLanguage],
-        },
-      });
 
-    await createAnonymousUser();
-    await saveDecksToStorage({
-      [sourceLanguage]: createDefaultLanguageContainerDeck(sourceLanguage),
-    });
-    posthog.capture('$set', {
-      $set: {
-        nativeLanguage: targetLanguage,
-        studyLanguage: sourceLanguage,
-        mobileOS: Platform.OS,
-      },
+    navigation.navigate('discovery', {
+      sourceLanguage: sourceLanguage,
+      targetLanguage: targetLanguage,
     });
   };
 
@@ -148,7 +132,7 @@ export const LanguageScreen: FC<Props> = () => {
           <Button
             mode="elevated"
             elevation={2}
-            onPress={createAnonymousAccount}
+            onPress={savePreferencesAndProceed}
           >
             Next
           </Button>

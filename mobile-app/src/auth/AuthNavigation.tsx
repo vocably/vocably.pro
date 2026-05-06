@@ -6,6 +6,7 @@ import { Appbar, Button, useTheme } from 'react-native-paper';
 import { LanguageSelectorModal } from '../LanguageSelectorModal';
 import { LanguageScreen } from './LanguageScreen';
 import { LoginScreen } from './LoginScreen';
+import { DiscoverySurveyScreen } from './DiscoverySurveyScreen';
 
 const Stack = createStackNavigator();
 
@@ -14,7 +15,6 @@ type Props = {};
 export const AuthNavigation: FC<Props> = () => {
   const theme = useTheme();
   const navigation = useNavigation();
-  const { fontScale } = useWindowDimensions();
 
   return (
     <Stack.Navigator
@@ -47,6 +47,13 @@ export const AuthNavigation: FC<Props> = () => {
       <Stack.Screen
         name="language"
         component={LanguageScreen}
+        options={{
+          title: '',
+        }}
+      />
+      <Stack.Screen
+        name="discovery"
+        component={DiscoverySurveyScreen}
         options={{
           title: '',
         }}
