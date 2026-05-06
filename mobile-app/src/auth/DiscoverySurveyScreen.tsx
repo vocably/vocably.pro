@@ -1,19 +1,19 @@
-import { Route, useNavigation } from '@react-navigation/native';
+import { Route } from '@react-navigation/native';
 import { GoogleLanguage, isGoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useContext, useState } from 'react';
 import { Platform, ScrollView, TextInput, View } from 'react-native';
-import { Button, Divider, Text, useTheme } from 'react-native-paper';
+import { Button, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   createDefaultLanguageContainerDeck,
   saveDecksToStorage,
-  saveSelectedLanguageToStorage,
 } from '../languages/LanguagesContainer';
 import { mainPadding } from '../styles';
 import { AuthContext } from './AuthContainer';
 import { storeLanguagePairs } from '../TranslationPreset/useLanguagePairs';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 
 export type RouteParams = {
   sourceLanguage: GoogleLanguage;
@@ -87,71 +87,84 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
   };
 
   return (
-    <ScrollView
-      style={{
-        flex: 1,
-      }}
-      contentContainerStyle={{
-        flexGrow: 1,
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        paddingLeft: insets.left + mainPadding,
-        paddingRight: insets.right + mainPadding,
-        gap: 16,
-      }}
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === 'android' ? 64 : 94}
     >
-      <Text
+      <ScrollView
         style={{
-          textAlign: 'center',
-          fontSize: 18,
-          color: theme.colors.secondary,
+          flex: 1,
         }}
-      >
-        How did you hear about Vocably?
-      </Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
+        contentContainerStyle={{
+          flexGrow: 1,
+          alignItems: 'stretch',
           justifyContent: 'center',
-          flexWrap: 'wrap',
-          gap: 8,
+          paddingLeft: insets.left + mainPadding,
+          paddingRight: insets.right + mainPadding,
+          paddingBottom: 24,
+          gap: 16,
         }}
       >
-        {sources.map((source) => (
-          <Button mode="outlined" key={source} onPress={() => onSelect(source)}>
-            {source}
-          </Button>
-        ))}
-      </View>
-      {showOther && (
-        <Animated.View
-          entering={FadeInDown}
+        <Text
           style={{
-            marginTop: 24,
-            gap: 16,
+            textAlign: 'center',
+            fontSize: 18,
+            color: theme.colors.secondary,
           }}
         >
-          <Text>What is it?</Text>
-          <View
+          How did you hear about Vocably?
+        </Text>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            gap: 8,
+          }}
+        >
+          {sources.map((source) => (
+            <Button
+              mode={selectedSource === source ? 'contained' : 'outlined'}
+              key={source}
+              onPress={() => onSelect(source)}
+            >
+              {source}
+            </Button>
+          ))}
+        </View>
+        {showOther && (
+          <Animated.View
+            entering={FadeInDown}
             style={{
-              backgroundColor: theme.colors.elevation.level5,
-              padding: 16,
-              borderRadius: 16,
-              width: '100%',
+              marginTop: 24,
+              gap: 16,
             }}
           >
-            <TextInput
-              autoFocus={true}
-              value={otherSource}
-              onChangeText={setOtherSource}
-            />
-          </View>
-          <Button mode="elevated" elevation={1} onPress={onNext}>
-            Next
-          </Button>
-        </Animated.View>
-      )}
-    </ScrollView>
+            <Text>What is it?</Text>
+            <View
+              style={{
+                backgroundColor: theme.colors.elevation.level5,
+                padding: 16,
+                borderRadius: 16,
+                width: '100%',
+              }}
+            >
+              <TextInput
+                autoFocus={true}
+                value={otherSource}
+                onChangeText={setOtherSource}
+                onSubmitEditing={onNext}
+                returnKeyType="done"
+              />
+            </View>
+            <Button mode="elevated" elevation={1} onPress={onNext}>
+              Next
+            </Button>
+          </Animated.View>
+        )}
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
