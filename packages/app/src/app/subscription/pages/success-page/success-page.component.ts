@@ -7,6 +7,7 @@ import {
   getSubscriptionProducts,
   SubscriptionProduct,
 } from '../../../subscription-products';
+import posthog from 'posthog-js';
 
 type ProductResult =
   | {
@@ -54,6 +55,11 @@ export class SuccessPageComponent implements OnInit {
         return;
       }
 
+      posthog.capture('$set', {
+        $set: {
+          isPaidOrTrial: true,
+        },
+      });
       this.productResult = { status: 'product', product };
     });
   }

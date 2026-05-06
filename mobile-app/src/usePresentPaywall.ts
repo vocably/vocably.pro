@@ -28,6 +28,11 @@ export const usePresentPaywall = () => {
 
     if (isPaid) {
       navigation.navigate('PaymentSuccessModal');
+      posthog.capture('$set', {
+        $set: {
+          isPaidOrTrial: true,
+        },
+      });
     }
   };
 };
