@@ -280,6 +280,7 @@ export const AuthContainer: FC<{
     }
 
     if (authStatusResult.value.status === 'anonymous-logged-in') {
+      posthog.identify(authStatusResult.value.id);
       posthog.capture('$set', {
         $set: {
           anonymousId: authStatusResult.value.id,
