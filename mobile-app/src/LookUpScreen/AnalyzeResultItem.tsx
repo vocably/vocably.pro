@@ -23,6 +23,7 @@ type AnalyzeResultItem = FC<{
   cardsLimit?: CardsLimit;
   style?: StyleProp<ViewStyle>;
   isSharedLookup?: boolean;
+  onLookUpModalOpen?: () => void;
 }>;
 
 export const AnalyzeResultItem: AnalyzeResultItem = ({
@@ -37,6 +38,7 @@ export const AnalyzeResultItem: AnalyzeResultItem = ({
   cardsLimit = 'unlimited',
   style,
   isSharedLookup = false,
+  onLookUpModalOpen,
 }) => {
   const theme = useTheme();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -113,6 +115,7 @@ export const AnalyzeResultItem: AnalyzeResultItem = ({
           onTagsChange={onTagsChange}
           allowCopy={true}
           aiButton={isSharedLookup ? 'none' : 'bright'}
+          onLookUpModalOpen={onLookUpModalOpen}
         />
         {!hideOperations && (
           <View

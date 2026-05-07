@@ -30,10 +30,11 @@ type Props = {
   textStyle?: StyleProp<Text>;
   mask?: Mask;
   onPress?: () => unknown;
+  onLookUpModalOpen?: () => void;
 };
 
 export const CardExample = forwardRef<CardExampleRef, Props>(
-  ({ example, textStyle, mask, language, onPress }, ref) => {
+  ({ example, textStyle, mask, language, onPress, onLookUpModalOpen }, ref) => {
     let examples = explode(example);
 
     const navigation = useNavigation();
@@ -116,6 +117,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
                 navigation.push('LookUpModal', {
                   text,
                 });
+                onLookUpModalOpen && onLookUpModalOpen();
               }}
             >
               <Text style={textStyle}>{text}</Text>

@@ -65,7 +65,7 @@ export const LookUpScreen: FC<Props> = ({
 }) => {
   const translationPresetState = useTranslationPreset();
   const [lookUpText, setLookUpText] = useState(initialText);
-  const [generateIsOpened, setGenerateIsOpened] = useState(false);
+  const [noFocusOnReturn, setNoFocusOnReturn] = useState(false);
   const [isAnalyzingPreset, setIsAnalyzingPreset] = useState<Preset | false>(
     false
   );
@@ -104,13 +104,13 @@ export const LookUpScreen: FC<Props> = ({
 
   useEffect(() => {
     return navigation.addListener('focus', () => {
-      if (searchInputRef.current && !generateIsOpened && !isModal) {
+      if (searchInputRef.current && !noFocusOnReturn && !isModal) {
         searchInputRef.current.focus();
       }
 
-      setGenerateIsOpened(false);
+      setNoFocusOnReturn(false);
     });
-  }, [generateIsOpened]);
+  }, [noFocusOnReturn]);
 
   useEffect(() => {
     if (lookUpText === '') {
@@ -235,6 +235,10 @@ export const LookUpScreen: FC<Props> = ({
   if (translationPresetState.status === 'unknown') {
     return <Loader>Loading translation preset...</Loader>;
   }
+
+  const onLookUpModalOpen = () => {
+    setNoFocusOnReturn(true);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -372,7 +376,7 @@ export const LookUpScreen: FC<Props> = ({
                     }}
                     mode={'outlined'}
                     onPress={() => {
-                      setGenerateIsOpened(true);
+                      setNoFocusOnReturn(true);
                       if (searchInputRef.current) {
                         searchInputRef.current.blur();
                       }
@@ -462,6 +466,7 @@ export const LookUpScreen: FC<Props> = ({
                   onTagsChange={onTagsChange}
                   deck={deck}
                   isSharedLookup={isSharedLookUp}
+                  onLookUpModalOpen={onLookUpModalOpen}
                 />
                 {explainStatus.status === 'loading' && (
                   <View

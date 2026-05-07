@@ -30,6 +30,7 @@ type Props = {
   showExamples?: boolean;
   savingTagsInProgress?: boolean;
   onTagsChange?: (tags: TagItem[]) => Promise<any>;
+  onLookUpModalOpen?: () => void;
   allowCopy?: boolean;
   aiButton?: 'dimmed' | 'bright' | 'none';
 };
@@ -43,6 +44,7 @@ export const CardListItem: FC<Props> = ({
   showExamples = false,
   savingTagsInProgress = false,
   onTagsChange = () => null,
+  onLookUpModalOpen,
   allowCopy = false,
   aiButton = 'dimmed',
 }) => {
@@ -223,12 +225,16 @@ export const CardListItem: FC<Props> = ({
         </Portal>
       )}
       <View style={{ marginTop: 8 }}>
-        <CardDefinition card={card} />
+        <CardDefinition card={card} onLookUpModalOpen={onLookUpModalOpen} />
       </View>
       {showExamples && card.example && (
         <View style={{ marginTop: 8 }}>
           <Text style={{ fontWeight: 'bold' }}>Examples</Text>
-          <CardExample example={card.example} language={card.language} />
+          <CardExample
+            onLookUpModalOpen={onLookUpModalOpen}
+            example={card.example}
+            language={card.language}
+          />
         </View>
       )}
       {(card.tags.length > 0 || savingTagsInProgress) && (
