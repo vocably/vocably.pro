@@ -25,7 +25,7 @@ initializePaddle({
 });
 
 posthog.init('phc_vke56i7RTlBbFYHZHsoH7VhgWi2DwvKtEzusfcFemgT', {
-  api_host: 'https://us.i.posthog.com',
+  api_host: 'https://api-b.vocably.pro',
   person_profiles: 'identified_only',
 });
 
