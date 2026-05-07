@@ -33,6 +33,7 @@ type Props = {
   onLookUpModalOpen?: () => void;
   allowCopy?: boolean;
   aiButton?: 'dimmed' | 'bright' | 'none';
+  disabledModalLookup?: boolean;
 };
 
 const textTransform = [{ translateY: 6 }];
@@ -47,6 +48,7 @@ export const CardListItem: FC<Props> = ({
   onLookUpModalOpen,
   allowCopy = false,
   aiButton = 'dimmed',
+  disabledModalLookup = false,
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
@@ -225,7 +227,11 @@ export const CardListItem: FC<Props> = ({
         </Portal>
       )}
       <View style={{ marginTop: 8 }}>
-        <CardDefinition card={card} onLookUpModalOpen={onLookUpModalOpen} />
+        <CardDefinition
+          card={card}
+          onLookUpModalOpen={onLookUpModalOpen}
+          lookUpDisabled={disabledModalLookup}
+        />
       </View>
       {showExamples && card.example && (
         <View style={{ marginTop: 8 }}>
@@ -234,6 +240,7 @@ export const CardListItem: FC<Props> = ({
             onLookUpModalOpen={onLookUpModalOpen}
             example={card.example}
             language={card.language}
+            lookUpDisabled={disabledModalLookup}
           />
         </View>
       )}

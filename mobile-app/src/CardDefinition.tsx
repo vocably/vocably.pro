@@ -14,6 +14,7 @@ type Props = {
   showInflections?: boolean;
   onPress?: () => unknown;
   onLookUpModalOpen?: () => void;
+  lookUpDisabled?: boolean;
 };
 
 export const CardDefinition: FC<Props> = ({
@@ -23,6 +24,7 @@ export const CardDefinition: FC<Props> = ({
   showInflections = false,
   onPress,
   onLookUpModalOpen,
+  lookUpDisabled = false,
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
@@ -62,7 +64,7 @@ export const CardDefinition: FC<Props> = ({
   return (
     <>
       {definitions.map((item, index) => {
-        const lookUpEnabled = item.lookUpEnabled;
+        const lookUpEnabled = !lookUpDisabled && item.lookUpEnabled;
         return (
           <View
             key={index}

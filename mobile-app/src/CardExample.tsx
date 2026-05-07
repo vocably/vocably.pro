@@ -31,10 +31,22 @@ type Props = {
   mask?: Mask;
   onPress?: () => unknown;
   onLookUpModalOpen?: () => void;
+  lookUpDisabled?: boolean;
 };
 
 export const CardExample = forwardRef<CardExampleRef, Props>(
-  ({ example, textStyle, mask, language, onPress, onLookUpModalOpen }, ref) => {
+  (
+    {
+      example,
+      textStyle,
+      mask,
+      language,
+      onPress,
+      onLookUpModalOpen,
+      lookUpDisabled = false,
+    },
+    ref
+  ) => {
     let examples = explode(example);
 
     const navigation = useNavigation();
@@ -106,19 +118,23 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
 
             <Pressable
               style={({ pressed }) => [
-                { opacity: pressed ? 0.6 : 1.0 },
+                { opacity: pressed && !lookUpDisabled ? 0.6 : 1.0 },
                 {
                   flexShrink: 1,
                 },
               ]}
               onPress={onPress}
-              onLongPress={() => {
-                // @ts-ignore
-                navigation.push('LookUpModal', {
-                  text,
-                });
-                onLookUpModalOpen && onLookUpModalOpen();
-              }}
+              onLongPress={
+                lookUpDisabled
+                  ? undefined
+                  : () => {
+                      // @ts-ignore
+                      navigation.push('LookUpModal', {
+                        text,
+                      });
+                      onLookUpModalOpen && onLookUpModalOpen();
+                    }
+              }
             >
               <Text style={textStyle}>{text}</Text>
             </Pressable>
