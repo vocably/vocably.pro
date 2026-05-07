@@ -14,6 +14,7 @@ import { TranslationPresetContainer } from '../TranslationPreset/TranslationPres
 import { Login } from './Login';
 import { ShareIntentLookUpScreen } from './ShareIntentLookUpScreen';
 import { Viewport } from './Viewport';
+import { LookUpModal } from '../LookUpModal';
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,15 @@ export const ShareIntentAppBase: FC<Props> = ({ os }) => {
                             component={LanguageSelectorModal}
                             options={{
                               headerShown: true,
+                              presentation: 'modal',
+                              gestureEnabled: true,
+                            }}
+                          />
+                          <Stack.Screen
+                            name="LookUpModal"
+                            component={LookUpModal}
+                            options={{
+                              headerShown: false,
                               presentation: 'modal',
                               gestureEnabled: true,
                             }}
