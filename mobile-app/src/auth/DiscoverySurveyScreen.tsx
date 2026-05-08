@@ -14,6 +14,7 @@ import { mainPadding } from '../styles';
 import { AuthContext } from './AuthContainer';
 import { storeLanguagePairs } from '../TranslationPreset/useLanguagePairs';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { AppTheme } from '../ThemeProvider';
 
 export type RouteParams = {
   sourceLanguage: GoogleLanguage;
@@ -37,7 +38,7 @@ const sources = [
 export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
   const { sourceLanguage, targetLanguage } = route.params as RouteParams;
 
-  const theme = useTheme();
+  const theme = useTheme() as AppTheme;
   const insets = useSafeAreaInsets();
   const posthog = usePostHog();
 
@@ -145,7 +146,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
             <Text>What is it?</Text>
             <View
               style={{
-                backgroundColor: theme.colors.elevation.level5,
+                backgroundColor: theme.colors.inputBgFocused,
                 padding: 16,
                 borderRadius: 16,
                 width: '100%',
@@ -157,6 +158,12 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
                 onChangeText={setOtherSource}
                 onSubmitEditing={onNext}
                 returnKeyType="done"
+                placeholder="Type here"
+                style={{
+                  fontSize: 18,
+                  color: theme.colors.onBackground,
+                }}
+                placeholderTextColor={theme.colors.tertiary}
               />
             </View>
             <Button mode="elevated" elevation={1} onPress={onNext}>

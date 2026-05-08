@@ -20,6 +20,10 @@ export const AuthNavigation: FC<Props> = () => {
     <Stack.Navigator
       screenOptions={{
         headerTitleAllowFontScaling: false,
+        headerTransparent: true,
+        headerTitleStyle: {
+          color: theme.colors.secondary,
+        },
         headerLeft: () => {
           if (!navigation.canGoBack()) {
             return <></>;
@@ -55,7 +59,7 @@ export const AuthNavigation: FC<Props> = () => {
         name="discovery"
         component={DiscoverySurveyScreen}
         options={{
-          title: '',
+          title: 'Last question',
         }}
       />
       <Stack.Screen
@@ -94,6 +98,7 @@ export const AuthNavigation: FC<Props> = () => {
           component={LanguageSelectorModal}
           options={{
             headerShown: true,
+            headerTransparent: false,
           }}
         />
       </Stack.Group>

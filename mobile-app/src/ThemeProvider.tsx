@@ -10,7 +10,7 @@ import { useColorScheme } from './useColorScheme';
 
 type ThemeProvider = FC<PropsWithChildren<{}>>;
 
-type AppTheme = MD3Theme & {
+export type AppTheme = MD3Theme & {
   colors: MD3Theme['colors'] & {
     backgroundRgb: string;
     inputBg: string;
