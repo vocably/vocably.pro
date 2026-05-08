@@ -1,4 +1,12 @@
-import { Card, CardItem, Result, SrsCard, Tag, TagItem } from '@vocably/model';
+import {
+  Card,
+  CardItem,
+  DeckSettings,
+  Result,
+  SrsCard,
+  Tag,
+  TagItem,
+} from '@vocably/model';
 import { buildTagMap } from '@vocably/model-operations';
 import { createSrsItem } from '@vocably/srs';
 import { useCallback, useContext, useMemo } from 'react';
@@ -22,6 +30,7 @@ export type Deck = {
   setSelectedTagIds: (ids: string[]) => Promise<unknown>;
   noTags: boolean;
   setNoTags: (noTags: boolean) => Promise<unknown>;
+  updateSettings: (settings: DeckSettings) => Promise<unknown>;
 };
 
 type Options = {
@@ -39,6 +48,7 @@ export const useLanguageDeck = ({ language, autoReload }: Options): Deck => {
     addTag: collectionAddTag,
     updateTag: collectionUpdateTag,
     removeTag: collectionRemoveTag,
+    updateSettings: collectionUpdateSettings,
   } = useContext(LanguagesContext);
 
   const deck: LanguageContainerDeck =
@@ -136,6 +146,10 @@ export const useLanguageDeck = ({ language, autoReload }: Options): Deck => {
     });
   }, [deck.deck.cards, deck.selectedTags, deck.noTags]);
 
+  const updateSettings = async (settings: DeckSettings): Promise<unknown> => {
+    return collectionUpdateSettings(language, settings);
+  };
+
   return {
     add,
     update,
@@ -150,5 +164,6 @@ export const useLanguageDeck = ({ language, autoReload }: Options): Deck => {
     filteredCards,
     noTags: deck.noTags,
     setNoTags,
+    updateSettings,
   };
 };

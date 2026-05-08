@@ -15,6 +15,13 @@ type Props = {
   onPress?: () => unknown;
   onLookUpModalOpen?: () => void;
   lookUpDisabled?: boolean;
+  hideDefinitions?: boolean;
+};
+
+type Definition = {
+  text: string;
+  style: StyleProp<Text>;
+  lookUpEnabled: boolean;
 };
 
 export const CardDefinition: FC<Props> = ({
@@ -25,28 +32,34 @@ export const CardDefinition: FC<Props> = ({
   onPress,
   onLookUpModalOpen,
   lookUpDisabled = false,
+  hideDefinitions = false,
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
 
-  let definitions = explode(card.definition).map((text) => ({
-    text,
-    style: {},
-    lookUpEnabled: true,
-  }));
+  let definitions: Definition[] = [];
 
-  if (maskSource) {
-    definitions = definitions
-      .filter(
-        (definition) =>
-          !(definition.text.includes('[') && definition.text.includes(']'))
-      )
-      .map((definition) => {
-        return {
-          ...definition,
-          text: maskTheWord(card.source, card.language)(definition.text).value,
-        };
-      });
+  if (!hideDefinitions) {
+    definitions = explode(card.definition).map((text) => ({
+      text,
+      style: {},
+      lookUpEnabled: true,
+    }));
+
+    if (maskSource) {
+      definitions = definitions
+        .filter(
+          (definition) =>
+            !(definition.text.includes('[') && definition.text.includes(']'))
+        )
+        .map((definition) => {
+          return {
+            ...definition,
+            text: maskTheWord(card.source, card.language)(definition.text)
+              .value,
+          };
+        });
+    }
   }
 
   if (card.translation) {
@@ -59,7 +72,7 @@ export const CardDefinition: FC<Props> = ({
     });
   }
 
-  const bul = definitions.length === 1 ? '' : '\u2022 ';
+  const bul = '\u2022 ';
 
   return (
     <>

@@ -10,6 +10,7 @@ import { CustomScrollView } from './ui/CustomScrollView';
 import { CustomSurface } from './ui/CustomSurface';
 import { ListItem } from './ui/ListItem';
 import { useCurrentLanguageName } from './useCurrentLanguageName';
+import { ListSwitch } from './ui/ListSwitch';
 
 type Props = {
   navigation: NavigationProp<any>;
@@ -92,9 +93,31 @@ export const EditDeckScreen: FC<Props> = ({ navigation }) => {
         )}
       </View>
 
-      <CustomSurface style={{ marginBottom: 32 }}>
-        <DeleteDeckButton />
-      </CustomSurface>
+      <>
+        <CustomSurface style={{ marginBottom: 8 }}>
+          <ListSwitch
+            title="Hide definitions"
+            value={deck.deck.settings?.hideDefinitions ?? false}
+            onChange={async (value: boolean) => {
+              await deck.updateSettings({
+                ...deck.deck.settings,
+                hideDefinitions: value,
+              });
+            }}
+          />
+        </CustomSurface>
+        <View
+          style={{
+            paddingHorizontal: 16,
+            marginBottom: 32,
+          }}
+        >
+          <Text>
+            The app will make an attempt to show less definitions in My cards
+            and during the study.
+          </Text>
+        </View>
+      </>
 
       <CustomSurface style={{ marginBottom: 8 }}>
         <ListItem
@@ -103,12 +126,16 @@ export const EditDeckScreen: FC<Props> = ({ navigation }) => {
           onPress={() => navigation.navigate('Feedback')}
         />
       </CustomSurface>
-      <View style={{ paddingHorizontal: 16 }}>
+      <View style={{ paddingHorizontal: 16, marginBottom: 64 }}>
         <Text>
           Are you missing any crucial feature or simply want to share your
           opinion about Vocably with me? I would love to hear from you!
         </Text>
       </View>
+
+      <CustomSurface>
+        <DeleteDeckButton />
+      </CustomSurface>
     </CustomScrollView>
   );
 };

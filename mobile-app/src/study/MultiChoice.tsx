@@ -1,4 +1,9 @@
-import { CardItem, GoogleLanguage, isGoogleTTSLanguage } from '@vocably/model';
+import {
+  CardItem,
+  DeckSettings,
+  GoogleLanguage,
+  isGoogleTTSLanguage,
+} from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { sanitizeTranscript } from '@vocably/sulna';
 import { shuffle } from 'lodash-es';
@@ -19,6 +24,7 @@ type Props = {
   onGrade: (score: SrsScore) => void;
   alternatives: CardItem[];
   direction: 'front' | 'back';
+  deckSettings: DeckSettings;
 };
 
 const buttonBorderRadius = 16;
@@ -41,6 +47,7 @@ export const MultiChoice: FC<Props> = ({
   autoPlay,
   playRandomExample,
   direction,
+  deckSettings,
 }) => {
   const theme = useTheme();
 
@@ -131,6 +138,7 @@ export const MultiChoice: FC<Props> = ({
                   card={card.data}
                   textStyle={{ fontSize: 24 }}
                   maskSource={true}
+                  hideDefinitions={deckSettings.hideDefinitions}
                 />
               </View>
             </>
@@ -142,6 +150,7 @@ export const MultiChoice: FC<Props> = ({
                 autoPlay={autoPlay}
                 playRandomExample={playRandomExample}
                 showInflections={true}
+                deckSettings={deckSettings}
               />
             </>
           )}

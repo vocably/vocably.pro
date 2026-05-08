@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CardItem } from '@vocably/model';
+import { CardItem, DeckSettings } from '@vocably/model';
 import React, { FC, useCallback, useRef, useState } from 'react';
 import {
   Animated,
@@ -54,6 +54,7 @@ type Props = {
   playRandomExample: boolean;
   card: CardItem;
   direction: 'front' | 'back';
+  deckSettings: DeckSettings;
 };
 
 export const Card: FC<Props> = ({
@@ -61,6 +62,7 @@ export const Card: FC<Props> = ({
   autoPlay,
   playRandomExample,
   direction,
+  deckSettings,
 }) => {
   const flipAnimation = useRef(new Animated.Value(0)).current;
   const flipToFrontStyle = {
@@ -142,13 +144,18 @@ export const Card: FC<Props> = ({
           >
             {isReverse ? (
               <ReverseCardBack
+                deckSettings={deckSettings}
                 autoPlay={autoPlay && isFlipped}
                 playRandomExample={playRandomExample}
                 card={card}
                 onPress={onPress}
               />
             ) : (
-              <CardBack card={card} onPress={onPress} />
+              <CardBack
+                deckSettings={deckSettings}
+                card={card}
+                onPress={onPress}
+              />
             )}
           </Animated.View>
           <Animated.View
@@ -160,9 +167,11 @@ export const Card: FC<Props> = ({
                 card={card}
                 hasChecked={hasChecked}
                 onPress={onPress}
+                deckSettings={deckSettings}
               />
             ) : (
               <CardFront
+                deckSettings={deckSettings}
                 autoPlay={autoPlay && !isFlipped}
                 playRandomExample={playRandomExample}
                 card={card}

@@ -1,4 +1,4 @@
-import { CardItem, isGoogleTTSLanguage } from '@vocably/model';
+import { CardItem, DeckSettings, isGoogleTTSLanguage } from '@vocably/model';
 import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { PixelRatio, View } from 'react-native';
@@ -12,6 +12,7 @@ type Props = {
   playRandomExample: boolean;
   showInflections?: boolean;
   onPress?: () => unknown;
+  deckSettings: DeckSettings;
 };
 
 export const CardFront: FC<Props> = ({

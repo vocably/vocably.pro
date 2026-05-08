@@ -34,6 +34,7 @@ type Props = {
   allowCopy?: boolean;
   aiButton?: 'dimmed' | 'bright' | 'none';
   disabledModalLookup?: boolean;
+  hideDefinitions?: boolean;
 };
 
 const textTransform = [{ translateY: 6 }];
@@ -49,6 +50,7 @@ export const CardListItem: FC<Props> = ({
   allowCopy = false,
   aiButton = 'dimmed',
   disabledModalLookup = false,
+  hideDefinitions = false,
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
@@ -231,6 +233,7 @@ export const CardListItem: FC<Props> = ({
           card={card}
           onLookUpModalOpen={onLookUpModalOpen}
           lookUpDisabled={disabledModalLookup}
+          hideDefinitions={hideDefinitions}
         />
       </View>
       {showExamples && card.example && (

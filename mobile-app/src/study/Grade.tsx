@@ -1,4 +1,4 @@
-import { CardItem, StudyFlowType } from '@vocably/model';
+import { CardItem, DeckSettings, StudyFlowType } from '@vocably/model';
 import { craftTheStrategy, SrsScore } from '@vocably/srs';
 import React, { FC } from 'react';
 import { ArrangeByLetters } from './ArrangeByLetters';
@@ -14,6 +14,7 @@ type Props = {
   onGrade: (score: SrsScore) => void;
   existingCards: CardItem[];
   prerenderedCards: CardItem[];
+  deckSettings: DeckSettings;
 };
 
 export const Grade: FC<Props> = ({
@@ -24,6 +25,7 @@ export const Grade: FC<Props> = ({
   playRandomExample,
   onGrade,
   prerenderedCards,
+  deckSettings,
 }) => {
   const { immediateStep } = craftTheStrategy({
     studySteps,
@@ -38,6 +40,7 @@ export const Grade: FC<Props> = ({
         return (
           <SwipeGrade onGrade={onGrade} key={card.id}>
             <Card
+              deckSettings={deckSettings}
               autoPlay={autoPlay}
               playRandomExample={playRandomExample}
               card={card}
@@ -48,6 +51,7 @@ export const Grade: FC<Props> = ({
       case 'mf':
         return (
           <MultiChoice
+            deckSettings={deckSettings}
             key={card.id}
             autoPlay={autoPlay}
             playRandomExample={playRandomExample}
@@ -60,6 +64,7 @@ export const Grade: FC<Props> = ({
       case 'mb':
         return (
           <MultiChoice
+            deckSettings={deckSettings}
             key={card.id}
             autoPlay={autoPlay}
             playRandomExample={playRandomExample}
@@ -72,6 +77,7 @@ export const Grade: FC<Props> = ({
       case 'ab':
         return (
           <ArrangeByLetters
+            deckSettings={deckSettings}
             autoPlay={autoPlay}
             playRandomExample={playRandomExample}
             key={card.id}
@@ -83,6 +89,7 @@ export const Grade: FC<Props> = ({
         return (
           <SwipeGrade onGrade={onGrade} key={card.id}>
             <Card
+              deckSettings={deckSettings}
               autoPlay={autoPlay}
               playRandomExample={playRandomExample}
               card={card}

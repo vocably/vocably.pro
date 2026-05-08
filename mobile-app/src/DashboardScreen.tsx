@@ -103,10 +103,12 @@ const filterByLowercasedText =
     return false;
   };
 
-export const keyExtractor: (item: CardItem) => string = (item) =>
+export const buildKeyExtractor: (
+  prefix: string
+) => (item: CardItem) => string = (prefix) => (item) =>
   // The tags thingy is needed to forcefully recalculate the height
   // of the row so left and right swipe buttons look nice
-  item.id + item.data.tags.map((tag) => tag.id).join('');
+  prefix + item.id + item.data.tags.map((tag) => tag.id).join('');
 
 type Props = {
   navigation: NavigationProp<any>;
@@ -335,6 +337,8 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   };
 
   const hasTags = deck.tags.length > 0;
+
+  const keyExtractor = buildKeyExtractor(JSON.stringify(deck.settings));
 
   return (
     <ScreenLayout
@@ -679,6 +683,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                   card={item.data}
                   style={{ flex: 1 }}
                   onTagsChange={onTagsChange(item)}
+                  hideDefinitions={deck.settings?.hideDefinitions ?? false}
                 />
                 {isRandomEnabledResult.value === false &&
                   todayTs < item.data.dueDate && (

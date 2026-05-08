@@ -93,10 +93,15 @@ export type CardItem = {
   data: SrsCard;
 };
 
+export type DeckSettings = {
+  hideDefinitions?: boolean;
+};
+
 export type LanguageDeck = {
   language: string;
   cards: CardItem[];
   tags: TagItem[];
+  settings?: DeckSettings;
 };
 
 export const byDate = (a: CardItem, b: CardItem): number => {

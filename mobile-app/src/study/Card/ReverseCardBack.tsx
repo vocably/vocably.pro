@@ -1,4 +1,4 @@
-import { CardItem } from '@vocably/model';
+import { CardItem, DeckSettings } from '@vocably/model';
 import React, { FC } from 'react';
 import { View } from 'react-native';
 import { Text } from 'react-native-paper';
@@ -9,6 +9,7 @@ type Props = {
   autoPlay: boolean;
   playRandomExample: boolean;
   onPress?: () => unknown;
+  deckSettings: DeckSettings;
 };
 
 export const ReverseCardBack: FC<Props> = ({
@@ -16,11 +17,13 @@ export const ReverseCardBack: FC<Props> = ({
   autoPlay,
   playRandomExample,
   onPress,
+  deckSettings,
 }) => {
   return (
     <View>
       <Text style={{ fontSize: 18, marginBottom: 8 }}>The answer is</Text>
       <CardFront
+        deckSettings={deckSettings}
         autoPlay={autoPlay}
         playRandomExample={playRandomExample}
         card={card}

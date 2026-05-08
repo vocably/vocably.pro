@@ -1,4 +1,4 @@
-import { CardItem } from '@vocably/model';
+import { CardItem, DeckSettings } from '@vocably/model';
 import { explode, join } from '@vocably/sulna';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { View } from 'react-native';
@@ -15,10 +15,14 @@ type Props = {
   hasChecked: boolean;
   requiredAction?: string;
   onPress?: () => unknown;
+  deckSettings: DeckSettings;
 };
 
 export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
-  ({ card, hasChecked, requiredAction = 'Guess', onPress }, ref) => {
+  (
+    { card, hasChecked, requiredAction = 'Guess', onPress, deckSettings },
+    ref
+  ) => {
     const theme = useTheme();
 
     let examples = card.data.example ? explode(card.data.example) : [];
@@ -57,6 +61,7 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
           textStyle={{ fontSize: 24 }}
           maskSource={!hasChecked}
           onPress={onPress}
+          hideDefinitions={deckSettings.hideDefinitions}
         />
         {examples.length > 0 && (
           <>

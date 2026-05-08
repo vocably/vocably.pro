@@ -1,5 +1,12 @@
 import { makeDelete, makeUpdate } from '@vocably/crud';
-import { CardItem, LanguageDeck, SrsCard, Tag, TagItem } from '@vocably/model';
+import {
+  CardItem,
+  DeckSettings,
+  LanguageDeck,
+  SrsCard,
+  Tag,
+  TagItem,
+} from '@vocably/model';
 
 export type TransformationAddCard = {
   type: 'addCard';
@@ -33,13 +40,19 @@ export type TransformationRemoveTag = {
   id: string;
 };
 
+export type TransformationUpdateSettings = {
+  type: 'updateSettings';
+  data: DeckSettings;
+};
+
 export type LanguageDeckTransformation =
   | TransformationAddCard
   | TransformationUpdateCard
   | TransformationRemoveCard
   | TransformationAddTag
   | TransformationRemoveTag
-  | TransformationUpdateTag;
+  | TransformationUpdateTag
+  | TransformationUpdateSettings;
 
 export const applyTransformation = (
   deck: LanguageDeck,
@@ -91,6 +104,10 @@ export const applyTransformation = (
     deck.cards.forEach((card) => {
       card.data.tags = card.data.tags.filter((t) => t.id !== transformation.id);
     });
+  }
+
+  if (transformation.type === 'updateSettings') {
+    deck.settings = transformation.data;
   }
 
   return {

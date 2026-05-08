@@ -1,4 +1,4 @@
-import { CardItem, isGoogleTTSLanguage } from '@vocably/model';
+import { CardItem, DeckSettings, isGoogleTTSLanguage } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { shuffle } from 'lodash-es';
 import { FC, useEffect, useRef, useState } from 'react';
@@ -28,6 +28,7 @@ type Props = {
   onGrade: (score: SrsScore) => void;
   autoPlay?: boolean;
   playRandomExample?: boolean;
+  deckSettings: DeckSettings;
 };
 
 export const ArrangeByLetters: FC<Props> = ({

@@ -75,7 +75,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     status: loadDeckStatus,
     update,
     filteredCards,
-    deck: { language, cards: allCards },
+    deck: { language, cards: allCards, settings: deckSettings },
   } = useSelectedDeck({
     autoReload: false,
   });
@@ -379,6 +379,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
           {cards.length > currentCardIndex && (
             <Grade
               key={cards[currentCardIndex].id}
+              deckSettings={deckSettings ?? {}}
               card={cards[currentCardIndex]}
               onGrade={onGrade}
               autoPlay={autoPlayResult.value}

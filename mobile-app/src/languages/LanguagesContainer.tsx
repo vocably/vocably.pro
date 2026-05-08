@@ -1,6 +1,7 @@
 import { makeCreate } from '@vocably/crud';
 import {
   CardItem,
+  DeckSettings,
   LanguageDeck,
   Result,
   SrsCard,
@@ -56,6 +57,9 @@ const createDefaultLanguageDeck = (language: string): LanguageDeck => ({
   language,
   cards: [],
   tags: [],
+  settings: {
+    hideDefinitions: false,
+  },
 });
 
 export const createDefaultLanguageContainerDeck = (
@@ -118,6 +122,10 @@ type Languages = {
     data: Partial<Tag>
   ) => Promise<Result<TagItem>>;
   removeTag: (language: string, id: string) => Promise<Result<unknown>>;
+  updateSettings: (
+    language: string,
+    settings: DeckSettings
+  ) => Promise<Result<unknown>>;
 };
 
 export const LanguagesContext = createContext<Languages>({
@@ -162,6 +170,10 @@ export const LanguagesContext = createContext<Languages>({
   removeTag: async () => ({
     success: false,
     reason: 'Remove tag is not defined',
+  }),
+  updateSettings: async () => ({
+    success: false,
+    reason: 'updateSettings is not defined',
   }),
 });
 
@@ -331,8 +343,8 @@ export const LanguagesContainer: FC<Props> = ({
         const deck =
           loadedLanguageDeck.loadResult.success === true
             ? loadedLanguageDeck.loadResult.value
-            : storedDeckContainer?.deck ??
-              createDefaultLanguageDeck(loadedLanguageDeck.language);
+            : (storedDeckContainer?.deck ??
+              createDefaultLanguageDeck(loadedLanguageDeck.language));
 
         return {
           ...acc,
@@ -788,6 +800,51 @@ export const LanguagesContainer: FC<Props> = ({
     };
   };
 
+  const updateSettings = async (
+    language: string,
+    settings: DeckSettings
+  ): Promise<Result<unknown>> => {
+    if (decks.status !== 'loaded') {
+      return {
+        success: false,
+        reason:
+          'Unable to remove tag while decks are not loaded from the memory yet.',
+      };
+    }
+
+    const container = decks.value[language] ?? {
+      status: 'initial',
+      deck: createDefaultLanguageDeck(language),
+      selectedTags: [],
+    };
+
+    const transformation: LanguageDeckTransformation = {
+      type: 'updateSettings',
+      data: settings,
+    };
+
+    const storeResult = await storeDeck({
+      ...container,
+      deck: applyTransformation(container.deck, transformation),
+    });
+
+    if (!storeResult.success) {
+      return storeResult;
+    }
+
+    getTransformations(language).push(transformation);
+    await saveTransformations();
+
+    syncDecks().catch(() => {
+      console.error('Sync failed');
+    });
+
+    return {
+      success: true,
+      value: null,
+    };
+  };
+
   const value: Languages = {
     status: listLoadingStatus,
     languages,
@@ -806,6 +863,7 @@ export const LanguagesContainer: FC<Props> = ({
     addTag,
     updateTag,
     removeTag,
+    updateSettings,
   };
 
   return (

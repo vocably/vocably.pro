@@ -25,6 +25,7 @@ const syncSingleDeck = async (
 
       return [...acc, fromCard];
     }, loadDeckResult.value.cards),
+    settings: fromDeck.settings,
   };
 
   const saveResult = await saveLanguageDeck(syncedDeck);
