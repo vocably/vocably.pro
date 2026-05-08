@@ -44,5 +44,6 @@ export const deserializeDeck = (
       },
     })),
     tags: serializedDeck.tags ?? [],
+    settings: serializedDeck.settings ?? {},
   };
 };

@@ -42,6 +42,7 @@ export const loadLanguageDeck = async (
           language,
           cards: [],
           tags: [],
+          settings: {},
         },
       };
     }
