@@ -1,5 +1,5 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { CardItem } from '@vocably/model';
+import { CardItem, DeckSettings } from '@vocably/model';
 import React, { FC } from 'react';
 import { View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
@@ -14,6 +14,7 @@ import { ScreenLayout } from '../ui/ScreenLayout';
 type PreviewParams = {
   card: CardItem;
   step: ImmediateStep;
+  deckSettings: DeckSettings;
 };
 
 type Props = {
@@ -22,7 +23,13 @@ type Props = {
 };
 
 export const PreviewStudyStepModal: FC<Props> = ({ route, navigation }) => {
-  const { card, step } = route.params as PreviewParams;
+  const { card, step, deckSettings } = route.params as PreviewParams;
+
+  if (!card || !step || !deckSettings) {
+    navigation.goBack();
+    return;
+  }
+
   const insets = useSafeAreaInsets();
   const theme = useTheme();
 
@@ -45,19 +52,37 @@ export const PreviewStudyStepModal: FC<Props> = ({ route, navigation }) => {
         >
           {step.step === 'sf' && (
             <SwipeGrade onGrade={onGrade}>
-              <Card autoPlay={false} card={card} direction="front" />
+              <Card
+                playRandomExample={false}
+                deckSettings={deckSettings}
+                autoPlay={false}
+                card={card}
+                direction="front"
+              />
             </SwipeGrade>
           )}
           {step.step === 'sb' && (
             <SwipeGrade onGrade={onGrade}>
-              <Card autoPlay={false} card={card} direction="back" />
+              <Card
+                playRandomExample={false}
+                deckSettings={deckSettings}
+                autoPlay={false}
+                card={card}
+                direction="back"
+              />
             </SwipeGrade>
           )}
           {step.step === 'ab' && (
-            <ArrangeByLetters card={card} onGrade={onGrade} />
+            <ArrangeByLetters
+              deckSettings={deckSettings}
+              card={card}
+              onGrade={onGrade}
+            />
           )}
           {step.step === 'mf' && (
             <MultiChoice
+              playRandomExample={false}
+              deckSettings={deckSettings}
               autoPlay={false}
               card={card}
               onGrade={onGrade}
@@ -67,6 +92,8 @@ export const PreviewStudyStepModal: FC<Props> = ({ route, navigation }) => {
           )}
           {step.step === 'mb' && (
             <MultiChoice
+              playRandomExample={false}
+              deckSettings={deckSettings}
               autoPlay={false}
               card={card}
               onGrade={onGrade}

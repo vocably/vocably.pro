@@ -50,7 +50,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
   const studyFlow = userMetadata.studyFlow ?? defaultStudyFlow;
 
   const {
-    deck: { language, cards },
+    deck: { language, cards, settings: deckSettings },
   } = useSelectedDeck({
     autoReload: false,
   });
@@ -231,6 +231,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
                       navigation.navigate('PreviewStudyStepModal', {
                         card: previewStep.card,
                         step: previewStep.step,
+                        deckSettings: deckSettings,
                       });
                     }}
                   >

@@ -36,6 +36,7 @@ export const ArrangeByLetters: FC<Props> = ({
   onGrade,
   autoPlay = false,
   playRandomExample = true,
+  deckSettings,
 }) => {
   const displayerRef = useRef<DisplayerRef>(null);
   const theme = useTheme();
@@ -219,6 +220,7 @@ export const ArrangeByLetters: FC<Props> = ({
         }}
       >
         <ReverseCardFront
+          deckSettings={deckSettings}
           ref={reverseCardFrontRef}
           hasChecked={isAnswerVisible}
           card={card}
