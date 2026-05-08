@@ -47,7 +47,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [otherSource, setOtherSource] = useState('');
 
-  const startUsingTheApp = async () => {
+  const startUsingTheApp = async (source?: string) => {
     if (isGoogleLanguage(sourceLanguage) && isGoogleLanguage(targetLanguage))
       await storeLanguagePairs({
         [sourceLanguage]: {
@@ -66,7 +66,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
         nativeLanguage: targetLanguage,
         studyLanguage: sourceLanguage,
         mobileOS: Platform.OS,
-        discovered: selectedSource,
+        discovered: source ?? selectedSource,
         discoveredOther: otherSource,
       },
     });
@@ -75,7 +75,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
   const onSelect = async (source: string) => {
     setSelectedSource(source);
     if (source !== 'Other') {
-      await startUsingTheApp();
+      await startUsingTheApp(source);
       return;
     }
 
