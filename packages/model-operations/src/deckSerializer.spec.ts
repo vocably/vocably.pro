@@ -7,6 +7,7 @@ import {
 
 const languageDeck: LanguageDeck = {
   language: 'nl',
+  settings: {},
   cards: [
     {
       id: 'c1',
@@ -65,6 +66,7 @@ const languageDeck: LanguageDeck = {
 
 const serializedLanguageDeck: SerializedLanguageDeck = {
   language: 'nl',
+  settings: {},
   cards: [
     {
       id: 'c1',
