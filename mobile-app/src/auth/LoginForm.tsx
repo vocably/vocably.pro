@@ -46,16 +46,6 @@ export const LoginForm: FC<Props> = ({ loading = false }) => {
         </Text>
         .
       </Text>
-      {Platform.OS === 'ios' && (
-        <Text
-          onPress={() => signInWithAnIdioticCognitoFlow()}
-          style={{
-            color: theme.colors.primary,
-          }}
-        >
-          I want to sign in with another Google Account.
-        </Text>
-      )}
     </View>
   );
 };
