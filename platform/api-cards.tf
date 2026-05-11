@@ -161,7 +161,7 @@ resource "aws_api_gateway_integration" "put_language" {
   http_method             = aws_api_gateway_method.put_language.http_method
   type                    = "AWS"
   integration_http_method = "PUT"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.cards.bucket}/{userId}/languages/{language}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.cards.bucket}/{userId}/languages/{language}"
   credentials             = aws_iam_role.cards_api_bucket.arn
 
   request_parameters = {
@@ -242,7 +242,7 @@ resource "aws_api_gateway_integration" "get_language" {
   http_method             = aws_api_gateway_method.get_language.http_method
   type                    = "AWS"
   integration_http_method = "GET"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.cards.bucket}/{userId}/languages/{language}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.cards.bucket}/{userId}/languages/{language}"
   credentials             = aws_iam_role.cards_api_bucket.arn
 
   request_parameters = {
@@ -320,7 +320,7 @@ resource "aws_api_gateway_integration" "delete_language" {
   http_method             = aws_api_gateway_method.delete_language.http_method
   type                    = "AWS"
   integration_http_method = "DELETE"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.cards.bucket}/{userId}/languages/{language}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.cards.bucket}/{userId}/languages/{language}"
   credentials             = aws_iam_role.cards_api_bucket.arn
 
   request_parameters = {
@@ -383,7 +383,7 @@ resource "aws_api_gateway_integration" "list_languages" {
   http_method             = aws_api_gateway_method.list_languages.http_method
   type                    = "AWS"
   integration_http_method = "GET"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.cards.bucket}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.cards.bucket}"
   credentials             = aws_iam_role.cards_api_bucket.arn
 
   request_parameters = {

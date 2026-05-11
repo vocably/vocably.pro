@@ -175,7 +175,7 @@ resource "aws_api_gateway_integration" "get_public_static_file" {
   http_method             = aws_api_gateway_method.get_public_static_file.http_method
   type                    = "AWS"
   integration_http_method = "GET"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.public_static_files.bucket}/{file}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.public_static_files.bucket}/{file}"
   credentials             = aws_iam_role.public_static_files_api_bucket.arn
 
   request_parameters = {

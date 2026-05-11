@@ -18,7 +18,7 @@ export const environmentLocal = {
   paddleYearlyPriceId: '${var.paddle_yearly_premium_id}',
   paddleLifetimePriceId: '${var.paddle_lifetime_premium_id}',
   auth: {
-    region: '${data.aws_region.current.name}',
+    region: '${data.aws_region.current.region}',
     userPoolId: '${aws_cognito_user_pool.users.id}',
     userPoolWebClientId: '${aws_cognito_user_pool_client.client.id}',
     oauth: {
@@ -33,7 +33,7 @@ export const environmentLocal = {
   api: {
     baseUrl: '${local.api_base_url}',
     publicBaseUrl: '${local.public_api_base_url}',
-    region: '${data.aws_region.current.name}',
+    region: '${data.aws_region.current.region}',
     cardsBucket: '${aws_s3_bucket.cards.bucket}'
   },
 };
@@ -53,13 +53,13 @@ locals {
   extension_env_content = <<EOT
 NAME_PREFIX="${var.extension_name_prefix}"
 KEY=${local.extension_key_json_param}
-AUTH_REGION="${data.aws_region.current.name}"
+AUTH_REGION="${data.aws_region.current.region}"
 AUTH_USER_POOL_ID="${aws_cognito_user_pool.users.id}"
 AUTH_USER_POOL_WEB_CLIENT_ID="${aws_cognito_user_pool_client.client.id}"
 APP_BASE_URL="${local.app_url}"
 API_BASE_URL="${local.api_base_url}"
 PUBLIC_API_BASE_URL="${local.public_api_base_url}"
-API_REGION="${data.aws_region.current.name}"
+API_REGION="${data.aws_region.current.region}"
 API_CARDS_BUCKET="${aws_s3_bucket.cards.bucket}"
 CONTENT_SCRIPT_EXCLUDED_MATCHES='${var.extension_content_script_excluded_matches}'
 EXTERNALLY_CONNECTABLE_MATCHES='${var.extension_externally_connectable_matches}'
@@ -169,7 +169,7 @@ resource "local_file" "extension_popup_environment" {
 locals {
   scripts_environment_content = <<EOT
 USERNAME="${var.test_user_username}"
-AWS_REGION="${data.aws_region.current.name}"
+AWS_REGION="${data.aws_region.current.region}"
 USER_POOL_ID="${aws_cognito_user_pool.users.id}"
 DECKS_BUCKET="${aws_s3_bucket.cards.bucket}"
 ENDTEST_APP_ID="${var.endtest_app_id}"

@@ -176,7 +176,7 @@ resource "aws_api_gateway_integration" "get_static_user_file" {
   http_method             = aws_api_gateway_method.get_static_user_file.http_method
   type                    = "AWS"
   integration_http_method = "GET"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.user_static_files.bucket}/{userId}/{userFile}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.user_static_files.bucket}/{userId}/{userFile}"
   credentials             = aws_iam_role.user_static_files_api_bucket.arn
 
   request_parameters = {

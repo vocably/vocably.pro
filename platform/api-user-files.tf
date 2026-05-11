@@ -162,7 +162,7 @@ resource "aws_api_gateway_integration" "put_user_file" {
   http_method             = aws_api_gateway_method.put_user_file.http_method
   type                    = "AWS"
   integration_http_method = "PUT"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.user_files.bucket}/{userId}/files/{userFile}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.user_files.bucket}/{userId}/files/{userFile}"
   credentials             = aws_iam_role.user_files_api_bucket.arn
 
   request_parameters = {
@@ -243,7 +243,7 @@ resource "aws_api_gateway_integration" "get_user_file" {
   http_method             = aws_api_gateway_method.get_user_file.http_method
   type                    = "AWS"
   integration_http_method = "GET"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.user_files.bucket}/{userId}/files/{userFile}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.user_files.bucket}/{userId}/files/{userFile}"
   credentials             = aws_iam_role.user_files_api_bucket.arn
 
   request_parameters = {
@@ -321,7 +321,7 @@ resource "aws_api_gateway_integration" "delete_user_file" {
   http_method             = aws_api_gateway_method.delete_user_file.http_method
   type                    = "AWS"
   integration_http_method = "DELETE"
-  uri                     = "arn:aws:apigateway:${data.aws_region.current.name}:s3:path/${aws_s3_bucket.user_files.bucket}/{userId}/files/{userFile}"
+  uri                     = "arn:aws:apigateway:${data.aws_region.current.region}:s3:path/${aws_s3_bucket.user_files.bucket}/{userId}/files/{userFile}"
   credentials             = aws_iam_role.user_files_api_bucket.arn
 
   request_parameters = {
