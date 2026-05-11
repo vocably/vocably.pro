@@ -35,15 +35,6 @@ export const LoggedOutForm: FC<Props> = ({ onSignOut = () => {} }) => {
       >
         Sign in again
       </Button>
-      {Platform.OS === 'ios' && (
-        <Button
-          mode="outlined"
-          onPress={() => signInWithAnIdioticCognitoFlow()}
-          style={{ alignSelf: 'stretch' }}
-        >
-          Sign in with another Google Account
-        </Button>
-      )}
       <Button
         mode="outlined"
         style={{ alignSelf: 'stretch' }}
