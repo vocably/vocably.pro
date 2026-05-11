@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0050ff; stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#0050ff; stop-opacity:0.2" />
+    </linearGradient>
+    
+    <radialGradient id="grad2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#0050ff; stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#0050ff; stop-opacity:0.1" />
+    </radialGradient>
+    
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0050ff; stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#0050ff; stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#f8faff" />
+
+  <path d="M-100,-100 L400,-100 L460,280 L-100,500 Z" fill="url(#grad1)" />
+  
+  <circle cx="850" cy="50" r="350" fill="url(#grad2)" />
+  
+  <rect x="650" y="260" width="450" height="200" rx="12" fill="url(#grad3)" />
+</svg>

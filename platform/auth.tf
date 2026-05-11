@@ -294,9 +294,10 @@ resource "aws_cognito_identity_provider" "apple" {
 }
 
 resource "aws_cognito_user_pool_domain" "auth" {
-  domain          = local.auth_domain
-  certificate_arn = aws_acm_certificate.primary-global.arn
-  user_pool_id    = aws_cognito_user_pool.users.id
+  domain                = local.auth_domain
+  certificate_arn       = aws_acm_certificate.primary-global.arn
+  user_pool_id          = aws_cognito_user_pool.users.id
+  managed_login_version = 2
 
   depends_on = [aws_route53_record.www]
 }
@@ -480,14 +481,33 @@ resource "aws_cognito_identity_pool_roles_attachment" "user" {
   }
 }
 
-resource "aws_cognito_user_pool_ui_customization" "auth" {
-  image_file = filebase64("www-logo.png")
+resource "aws_cognito_managed_login_branding" "auth" {
+  client_id    = aws_cognito_user_pool_client.client.id
+  user_pool_id = aws_cognito_user_pool.users.id
 
-  css = file("hosted-ui.css")
+  asset {
+    category   = "PAGE_HEADER_LOGO"
+    color_mode = "LIGHT"
+    extension  = "SVG"
+    bytes      = filebase64("${path.module}/auth-assets/logo.svg")
+  }
 
-  # Refer to the aws_cognito_user_pool_domain resource's
-  # user_pool_id attribute to ensure it is in an 'Active' state
-  user_pool_id = aws_cognito_user_pool_domain.auth.user_pool_id
+  asset {
+    category   = "FAVICON_ICO"
+    color_mode = "LIGHT"
+    extension  = "ICO"
+    bytes      = filebase64("${path.module}/auth-assets/favicon.ico")
+  }
+
+  asset {
+    category   = "FAVICON_SVG"
+    color_mode = "LIGHT"
+    extension  = "SVG"
+    bytes      = filebase64("${path.module}/auth-assets/favicon.svg")
+  }
+
+  settings   = file("${path.module}/auth-assets/settings.json")
+  depends_on = [aws_cognito_user_pool_domain.auth]
 }
 
 
