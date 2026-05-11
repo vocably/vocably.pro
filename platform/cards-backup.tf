@@ -16,6 +16,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "bucket-config" {
 
   rule {
     id = "backup"
+    filter {}
     expiration {
       days = 30
     }
