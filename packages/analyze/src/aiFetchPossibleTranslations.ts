@@ -329,11 +329,13 @@ export const aiFetchPossibleTranslationsCached = async (
     return result;
   }
 
-  await nodePutS3File(
-    config.unitsOfSpeechBucket,
-    fileName,
-    JSON.stringify(result.value)
-  );
+  if (payload.inputType !== 'sentence') {
+    await nodePutS3File(
+      config.unitsOfSpeechBucket,
+      fileName,
+      JSON.stringify(result.value)
+    );
+  }
 
   return result;
 };
