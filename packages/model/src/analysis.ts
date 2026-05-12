@@ -12,6 +12,16 @@ export type Translation = {
   isDirect?: boolean;
 };
 
+export const isTranslation = (o: any): o is Translation => {
+  return (
+    o &&
+    typeof o['source'] === 'string' &&
+    typeof o['sourceLanguage'] === 'string' &&
+    typeof o['target'] === 'string' &&
+    typeof o['targetLanguage'] === 'string'
+  );
+};
+
 export type AiTranslation = Translation &
   Required<
     Pick<Translation, 'partOfSpeech' | 'lemma' | 'lemmaPos' | 'transcript'>

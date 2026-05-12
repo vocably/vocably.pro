@@ -1,9 +1,15 @@
 import { createUserContent, GoogleGenAI } from '@google/genai';
 import { parseJson } from '@vocably/api';
-import { chatGptRequest, GPT_4O } from '@vocably/lambda-shared';
+import {
+  chatGptRequest,
+  GPT_4O,
+  nodeFetchS3File,
+  nodePutS3File,
+} from '@vocably/lambda-shared';
 import {
   DetectedInputType,
   GoogleLanguage,
+  isTranslation,
   languageList,
   Result,
   resultify,
@@ -277,4 +283,57 @@ export const aiFetchPossibleTranslations = async (
     success: true,
     value: [translations[0], ...translations.slice(1)],
   };
+};
+
+const getTranslationsCacheFileName = ({
+  source,
+  sourceLanguage,
+  targetLanguage,
+  inputType,
+}: Payload): string => {
+  const inputTypePart = inputType ? `/${inputType}` : '';
+
+  return `_reverse-translations/${sourceLanguage.toLowerCase()}/${targetLanguage.toLocaleLowerCase()}/${source
+    .toLowerCase()
+    .replace(/\//g, '-')}${inputTypePart}.json`;
+};
+
+const isValidTranslations = (data: any): data is ValidTranslations => {
+  return isArray(data) && data.length > 0 && data.every(isTranslation);
+};
+
+export const aiFetchPossibleTranslationsCached = async (
+  payload: Payload
+): Promise<Result<ValidTranslations>> => {
+  const fileName = getTranslationsCacheFileName(payload);
+
+  const s3FetchResult = await nodeFetchS3File(
+    config.unitsOfSpeechBucket,
+    fileName
+  );
+
+  if (s3FetchResult.success && s3FetchResult.value !== null) {
+    const parseResult = parseJson(s3FetchResult.value);
+
+    if (parseResult.success && isValidTranslations(parseResult.value)) {
+      return {
+        success: true,
+        value: parseResult.value,
+      };
+    }
+  }
+
+  const result = await aiFetchPossibleTranslations(payload);
+
+  if (!result.success) {
+    return result;
+  }
+
+  const putResult = await nodePutS3File(
+    config.unitsOfSpeechBucket,
+    fileName,
+    JSON.stringify(result.value)
+  );
+
+  return result;
 };

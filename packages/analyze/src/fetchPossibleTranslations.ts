@@ -4,7 +4,10 @@ import {
   Result,
   Translation,
 } from '@vocably/model';
-import { aiFetchPossibleTranslations } from './aiFetchPossibleTranslations';
+import {
+  aiFetchPossibleTranslations,
+  aiFetchPossibleTranslationsCached,
+} from './aiFetchPossibleTranslations';
 import { googleTranslate } from './googleTranslate';
 
 type Payload = {
@@ -19,7 +22,7 @@ export type ValidTranslations = [Translation, ...Translation[]];
 export const fetchPossibleTranslations = async (
   payload: Payload
 ): Promise<Result<ValidTranslations>> => {
-  const aiTranslationResult = await aiFetchPossibleTranslations(payload);
+  const aiTranslationResult = await aiFetchPossibleTranslationsCached(payload);
 
   if (aiTranslationResult.success) {
     return aiTranslationResult;

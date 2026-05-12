@@ -2,6 +2,7 @@ import '@vocably/jest';
 import { inspect } from '@vocably/node-sulna';
 import {
   aiFetchPossibleTranslations,
+  aiFetchPossibleTranslationsCached,
   translateWithGemini,
   truncateText,
 } from './aiFetchPossibleTranslations';
@@ -167,5 +168,26 @@ describe('aiReverseTranslate', () => {
     expect(result.value.every((e) => /^[a-z ]+$/.test(e.translation))).toEqual(
       true
     );
+  });
+
+  it('cached', async () => {
+    const result = await aiFetchPossibleTranslationsCached({
+      source: 'cover',
+      targetLanguage: 'nl',
+      sourceLanguage: 'en',
+    });
+
+    if (result.success !== true) {
+      expect(result.reason).toBeFalsy();
+      return;
+    }
+
+    const variants =
+      'deksel, cover, bedekking, omslag, bedekken, coveren, dekken, hoes, kaft, hoever, dekking, afdekken, omslaan';
+
+    expect(result.value.length).toBeGreaterThanOrEqual(3);
+    expect(result.value[0].target).toHaveSomeOf(variants);
+    expect(result.value[1].target).toHaveSomeOf(variants);
+    expect(result.value[2].target).toHaveSomeOf(variants);
   });
 });
