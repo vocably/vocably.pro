@@ -293,7 +293,7 @@ const getTranslationsCacheFileName = ({
 }: Payload): string => {
   const inputTypePart = inputType ? `/${inputType}` : '';
 
-  return `_reverse-translations/${sourceLanguage.toLowerCase()}/${targetLanguage.toLocaleLowerCase()}/${source
+  return `_reverse-translations/${targetLanguage.toLowerCase()}/${sourceLanguage.toLocaleLowerCase()}/${source
     .toLowerCase()
     .replace(/\//g, '-')}${inputTypePart}.json`;
 };
@@ -329,7 +329,7 @@ export const aiFetchPossibleTranslationsCached = async (
     return result;
   }
 
-  const putResult = await nodePutS3File(
+  await nodePutS3File(
     config.unitsOfSpeechBucket,
     fileName,
     JSON.stringify(result.value)
