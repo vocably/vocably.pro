@@ -2,32 +2,42 @@
   <ion-spinner name="dots" class="mr-1"></ion-spinner
   >{{ 'welcome.second.loading' | transloco }}
 </div>
-<div class="mb-2" *ngIf="targetLanguage">
-  <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
-</div>
-<div
-  *ngIf="sourceLanguage && targetLanguage"
-  class="contrast-panel rounded mb-2"
->
-  <span [innerHTML]="studySentenceHtml"></span>
-  <a href="/welcome" style="margin-left: 8px">{{
-    'welcome.second.change' | transloco
-  }}</a
-  >.
+<div class="row mb-2">
+  <div class="col1">
+    <ng-container *ngIf="!isLoading && exampleHtml">
+      <div class="mat-headline-1 mb-2">
+        <span highlight>{{
+          'welcome.second.select_highlight' | transloco
+        }}</span>
+        {{ 'welcome.second.select_rest' | transloco }}
+      </div>
+    </ng-container>
+    <div
+      *ngIf="sourceLanguage && targetLanguage"
+      class="contrast-panel rounded"
+    >
+      <span [innerHTML]="studySentenceHtml"></span>
+      <a href="/welcome" style="margin-left: 8px">{{
+        'welcome.second.change' | transloco
+      }}</a
+      >.
+    </div>
+  </div>
+  <div class="col2" *ngIf="targetLanguage">
+    <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
+  </div>
 </div>
 <ng-container *ngIf="!isLoading && exampleHtml">
-  <div class="mat-headline-1 mb-2">
-    <span highlight>{{ 'welcome.second.select_highlight' | transloco }}</span>
-    {{ 'welcome.second.select_rest' | transloco }}
-  </div>
-  <div class="mb-2">
-    {{ 'welcome.second.try_select' | transloco }}
-    <mat-icon style="vertical-align: middle">arrow_downward</mat-icon>
-  </div>
-  <div class="mb-2">
+  <div class="text-example rounded">
+    <div class="mb-2">
+      <mat-icon style="vertical-align: middle"
+        >text_select_move_forward_character</mat-icon
+      >
+      {{ 'welcome.second.try_select' | transloco }}:
+    </div>
     <div
+      class="large"
       *ngIf="!isLoading && exampleHtml"
-      class="text-example rounded"
       [lang]="sourceLanguage"
       [innerHTML]="exampleHtml"
     ></div>

@@ -29,6 +29,7 @@ import { GenericInstructionComponent } from '../../generic-instruction/generic-i
 import { HighlightComponent } from '../../highlight/highlight.component';
 import { HowToVideoComponent } from '../../how-to-video/how-to-video.component';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
+import { ContainerService } from '../../container-service';
 
 const getOnboardedTargetLanguages = (): string[] => {
   return JSON.parse(localStorage.getItem('onboardedLanguages') ?? '[]');
@@ -91,7 +92,8 @@ export class SecondPageComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private transloco: TranslocoService
+    private transloco: TranslocoService,
+    private containerSize: ContainerService
   ) {}
 
   get studySentenceHtml(): string {
@@ -280,6 +282,8 @@ export class SecondPageComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.exampleHtml = response;
       });
+
+    this.containerSize.size.next('large');
   }
 
   ngOnDestroy() {

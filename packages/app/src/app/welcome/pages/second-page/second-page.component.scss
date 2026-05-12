@@ -2,11 +2,37 @@
 
 .text-example {
   padding: 2rem;
-  color: var(--emphasize-color);
-  background: var(--contrast-bg);
-  font-size: 140%;
+  border: 1px solid var(--contrast-bg);
+  border-radius: $border-radius;
+
+  .large {
+    color: var(--emphasize-color);
+    font-size: 140%;
+  }
 }
 
 .text-example ::ng-deep *:last-child {
   margin-bottom: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-end;
+
+  @media (width < 900px) {
+    flex-direction: column;
+  }
+}
+
+.col1 {
+  flex: 0 0 50%;
+}
+
+.col2 {
+  flex: 1;
+}
+
+.instruction {
 }

@@ -1,7 +1,15 @@
-<div class="container top">
+<div
+  class="top"
+  [class.container]="size === 'normal'"
+  [class.container-xl]="size === 'large'"
+>
   <app-header></app-header>
 </div>
-<div class="container bottom">
+<div
+  class="bottom"
+  [class.container]="size === 'normal'"
+  [class.container-xl]="size === 'large'"
+>
   <div class="hero">
     <div *ngIf="extensionCanBeInstalled && extensionIsInstalled === false">
       <p>

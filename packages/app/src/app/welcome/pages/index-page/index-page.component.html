@@ -1,12 +1,11 @@
-<p class="mat-headline-4 mb-2 text-emphasize">
-  {{ 'welcome.index.headline' | transloco }}
-</p>
-
-<div class="display-flex align-items-center mb-2" *ngIf="targetLanguage">
-  <div class="mat-h2 m-0 mr-1">
+<div
+  class="display-flex flex-direction-column align-items-stretch flex-gap-1 mb-2"
+  *ngIf="targetLanguage"
+>
+  <div class="strong">
     {{ 'welcome.index.mother_tongue' | transloco }}
   </div>
-  <div class="flex-1">
+  <div>
     <app-language-input
       [value]="targetLanguage"
       (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
@@ -15,7 +14,9 @@
 </div>
 
 <div class="text-left">
-  <div class="mat-h2 mt-1 mb-2">{{ 'welcome.index.i_study' | transloco }}</div>
+  <div class="mt-1 mb-1 strong">
+    {{ 'welcome.index.i_study' | transloco }}
+  </div>
 </div>
 <div class="grid-container mb-2">
   <div

@@ -1,3 +1,33 @@
+@import '../../../styles/variables';
+
 .opacity-50 {
   opacity: 0.5;
+}
+
+:host {
+  /* For Outlined */
+  --mdc-outlined-text-field-outline-color: transparent;
+  --mdc-outlined-text-field-focus-outline-color: transparent;
+  --mdc-outlined-text-field-hover-outline-color: transparent;
+
+  position: relative;
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper {
+  border-radius: $border-radius;
+  background-color: var(--contrast-bg);
+}
+
+:host ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--focused {
+  background-color: var(--contrast-bg-hover);
+}
+
+.icon-container {
+  position: absolute;
+  right: 1rem;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
 }

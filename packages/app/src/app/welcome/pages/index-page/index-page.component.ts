@@ -18,6 +18,7 @@ import { LanguageButtonComponent } from '../../language-button/language-button.c
 import { detectTargetLanguage } from './detectTargetLanguage';
 import { publicPredefinedOptions, saveUserMetadata } from '@vocably/api';
 import { TranslocoModule } from '@jsverse/transloco';
+import { ContainerService } from '../../container-service';
 
 @Component({
   selector: 'app-index-page',
@@ -44,11 +45,13 @@ export class IndexPageComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private containerSize: ContainerService
   ) {}
 
   async ngOnInit() {
     this.targetLanguage = await this.getInitialLanguageInputValue();
+    this.containerSize.size.next('normal');
   }
 
   private async getInitialLanguageInputValue(): Promise<GoogleLanguage> {

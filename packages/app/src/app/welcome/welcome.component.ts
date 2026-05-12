@@ -11,6 +11,7 @@ import { ExpansionComponent } from '../components/expansion/expansion.component'
 import { HeaderComponent } from '../header/header.component';
 import { isExtensionInstalled$ } from '../isExtensionInstalled';
 import { TranslocoModule } from '@jsverse/transloco';
+import { ContainerService } from './container-service';
 
 @Component({
   selector: 'app-welcome',
@@ -31,8 +32,9 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public extensionCanBeInstalled = canExtensionBeInstalled;
   public extensionIsInstalled: boolean | undefined = undefined;
   public extensionInstallUrl = extensionInstallationUrl;
+  public size: 'normal' | 'large' = 'normal';
 
-  constructor() {}
+  constructor(private containerService: ContainerService) {}
 
   ngOnInit(): void {
     isExtensionInstalled$
@@ -45,6 +47,12 @@ export class WelcomeComponent implements OnInit, OnDestroy {
         }
 
         this.extensionIsInstalled = isInstalled;
+      });
+
+    this.containerService.size
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((size) => {
+        this.size = size;
       });
   }
 

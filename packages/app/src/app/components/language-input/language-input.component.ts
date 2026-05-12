@@ -21,6 +21,7 @@ import { TranslocoService } from '@jsverse/transloco';
 import { languageTranslations } from '@vocably/browser-i18n';
 import { GoogleLanguage, Locale, languageList } from '@vocably/model';
 import { map, Observable, startWith, Subject } from 'rxjs';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-language-input',
@@ -35,6 +36,7 @@ import { map, Observable, startWith, Subject } from 'rxjs';
     NgFor,
     MatOption,
     AsyncPipe,
+    MatIcon,
   ],
 })
 export class LanguageInputComponent implements OnInit, OnDestroy, OnChanges {

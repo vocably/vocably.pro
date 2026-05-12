@@ -1,0 +1,9 @@
+@import '../../../styles/variables';
+
+:host {
+  display: block;
+  line-height: 0;
+
+  border: 1px solid var(--contrast-bg);
+  border-radius: $border-radius;
+}
