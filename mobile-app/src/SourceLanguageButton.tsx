@@ -1,5 +1,9 @@
 import { NavigationProp } from '@react-navigation/native';
-import { GoogleLanguage, languageList } from '@vocably/model';
+import {
+  GoogleLanguage,
+  languageList,
+  shortenedLanguageList,
+} from '@vocably/model';
 import { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -95,7 +99,8 @@ export const SourceLanguageButton: FC<Props> = ({
       compact={compact}
     >
       {preset.sourceLanguage
-        ? languageList[preset.sourceLanguage as GoogleLanguage]
+        ? (shortenedLanguageList[preset.sourceLanguage as GoogleLanguage] ??
+          languageList[preset.sourceLanguage as GoogleLanguage])
         : emptyText}
     </Button>
   );

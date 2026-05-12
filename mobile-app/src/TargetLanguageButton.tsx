@@ -1,5 +1,9 @@
 import { NavigationProp } from '@react-navigation/native';
-import { GoogleLanguage, languageList } from '@vocably/model';
+import {
+  GoogleLanguage,
+  languageList,
+  shortenedLanguageList,
+} from '@vocably/model';
 import { FC } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
@@ -38,9 +42,9 @@ export const TargetLanguageButton: FC<Props> = ({
     ? // @ts-ignore
       languagePairs[preset.sourceLanguage].availableLanguages
     : // @ts-ignore
-    languageList[deviceLanguage]
-    ? [deviceLanguage]
-    : [];
+      languageList[deviceLanguage]
+      ? [deviceLanguage]
+      : [];
 
   // @ts-ignore
   const preferredLanguagesTitle =
@@ -82,7 +86,9 @@ export const TargetLanguageButton: FC<Props> = ({
       compact={false}
     >
       {preset.translationLanguage
-        ? languageList[preset.translationLanguage as GoogleLanguage]
+        ? (shortenedLanguageList[
+            preset.translationLanguage as GoogleLanguage
+          ] ?? languageList[preset.translationLanguage as GoogleLanguage])
         : 'Select'}
     </Button>
   );

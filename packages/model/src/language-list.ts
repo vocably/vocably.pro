@@ -117,3 +117,14 @@ export const getFullLanguageName = (code: string): string => {
   // @ts-ignore
   return languageList[code] ?? code;
 };
+
+export const shortenedLanguageList: Partial<Record<GoogleLanguage, string>> = {
+  'en-GB': 'English (UK)',
+  tl: 'Tagalog',
+  si: 'Sinhala',
+  zh: 'Chinese (S)',
+  'zh-TW': 'Chinese (Tr)',
+  'pt-PT': 'Portuguese (PT)',
+  pt: 'Portuguese (BR)',
+  hyw: 'Armenian (W)',
+};
