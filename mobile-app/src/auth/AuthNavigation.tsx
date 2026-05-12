@@ -20,7 +20,10 @@ export const AuthNavigation: FC<Props> = () => {
     <Stack.Navigator
       screenOptions={{
         headerTitleAllowFontScaling: false,
-        headerTransparent: true,
+        headerStyle: {
+          backgroundColor: theme.colors.background,
+          borderWidth: 0,
+        },
         headerTitleStyle: {
           color: theme.colors.secondary,
         },
