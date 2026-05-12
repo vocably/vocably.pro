@@ -198,8 +198,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
             )}
             {!isRegisteredUser && (
               <Text>
-                Study reminders are temporarily disabled for unregistered users.
-                I am working to resolve this.
+                Study reminders are not available for unregistered users.
               </Text>
             )}
           </View>
