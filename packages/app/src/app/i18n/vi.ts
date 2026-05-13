@@ -7,18 +7,14 @@ export const vi = {
   'welcome.scan_qr': 'Quét mã QR bên dưới:',
   'welcome.open_mobile_link':
     'Hoặc mở liên kết này trên thiết bị di động của bạn:',
-  'welcome.index.headline': 'Chào mừng đến với Vocably. Hãy cùng thiết lập.',
   'welcome.index.mother_tongue': 'Tiếng mẹ đẻ của tôi là',
   'welcome.index.i_study': 'Tôi học',
   'welcome.index.show_more': 'Hiển thị thêm ngôn ngữ',
   'welcome.index.multilang': 'Tôi muốn học nhiều ngôn ngữ.',
   'welcome.second.loading': 'Đang tải văn bản mẫu...',
   'welcome.second.study_sentence':
-    'Bạn đang học <strong>{{sourceLanguage}}</strong> và tiếng mẹ đẻ của bạn là <strong>{{targetLanguage}}</strong>.',
+    'Bạn đang học <strong class="text-emphasize">{{sourceLanguage}}</strong> và tiếng mẹ đẻ của bạn là <strong class="text-emphasize">{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Thay đổi',
-  'welcome.second.select_highlight': 'Tô sáng',
-  'welcome.second.select_rest':
-    'bất kỳ từ hoặc cụm từ nào trên bất kỳ trang web nào để xem nghĩa của nó.',
   'welcome.second.try_select':
     'Để hiểu cách hoạt động của tiện ích mở rộng, hãy thử tô sáng bất kỳ từ hoặc cụm từ nào trong văn bản bên dưới.',
   'welcome.second.how_it_works': 'Cách hoạt động —',

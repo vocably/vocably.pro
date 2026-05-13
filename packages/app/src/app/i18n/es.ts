@@ -6,18 +6,14 @@ export const es = {
   'welcome.use_mobile': 'Puedes usar la aplicación móvil.',
   'welcome.scan_qr': 'Escanea el código QR a continuación:',
   'welcome.open_mobile_link': 'O abre este enlace en tu dispositivo móvil:',
-  'welcome.index.headline': 'Bienvenido a Vocably. Vamos a configurarlo.',
   'welcome.index.mother_tongue': 'Mi lengua materna es',
   'welcome.index.i_study': 'Estudio',
   'welcome.index.show_more': 'Mostrar más idiomas',
   'welcome.index.multilang': 'Me gustaría aprender varios idiomas.',
   'welcome.second.loading': 'Cargando texto de ejemplo...',
   'welcome.second.study_sentence':
-    'Estudias <strong>{{sourceLanguage}}</strong> y tu lengua materna es <strong>{{targetLanguage}}</strong>.',
+    'Estudias <strong class="text-emphasize">{{sourceLanguage}}</strong> y tu lengua materna es <strong class="text-emphasize">{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Cambiar',
-  'welcome.second.select_highlight': 'Selecciona',
-  'welcome.second.select_rest':
-    'cualquier palabra o frase en cualquier sitio web para ver su significado.',
   'welcome.second.try_select':
     'Para entender cómo funciona la extensión, intenta seleccionar cualquier palabra o frase en el texto a continuación.',
   'welcome.second.how_it_works': 'Cómo funciona —',

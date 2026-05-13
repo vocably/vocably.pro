@@ -6,18 +6,14 @@ export const tr = {
   'welcome.use_mobile': 'Mobil uygulamayı kullanabilirsiniz.',
   'welcome.scan_qr': 'Aşağıdaki QR kodunu tarayın:',
   'welcome.open_mobile_link': 'Veya bu bağlantıyı mobil cihazınızda açın:',
-  'welcome.index.headline': "Vocably'ye hoş geldiniz. Hadi sizi ayarlayalım.",
   'welcome.index.mother_tongue': 'Anadilim',
   'welcome.index.i_study': 'Öğreniyorum',
   'welcome.index.show_more': 'Daha fazla dil göster',
   'welcome.index.multilang': 'Birden fazla dil öğrenmek istiyorum.',
   'welcome.second.loading': 'Örnek metin yükleniyor...',
   'welcome.second.study_sentence':
-    '<strong>{{sourceLanguage}}</strong> öğreniyorsunuz ve anadiliniz <strong>{{targetLanguage}}</strong>.',
+    '<strong class="text-emphasize">{{sourceLanguage}}</strong> öğreniyorsunuz ve anadiliniz <strong class="text-emphasize">{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Değiştir',
-  'welcome.second.select_highlight': 'İşaretleyin',
-  'welcome.second.select_rest':
-    'anlamını görmek için herhangi bir web sitesinde herhangi bir kelime veya ifadeyi.',
   'welcome.second.try_select':
     'Uzantının nasıl çalıştığını anlamak için aşağıdaki metindeki herhangi bir kelime veya ifadeyi işaretlemeyi deneyin.',
   'welcome.second.how_it_works': 'Nasıl çalışır —',

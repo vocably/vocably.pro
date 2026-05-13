@@ -14,28 +14,6 @@
   margin-bottom: 0;
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  align-items: flex-end;
-
-  @media (width < 900px) {
-    flex-direction: column;
-  }
-}
-
-.col1 {
-  flex: 0 0 50%;
-}
-
-.col2 {
-  flex: 1;
-}
-
-.instruction {
-}
-
 .steps {
   display: flex;
   flex-direction: row;
@@ -54,7 +32,7 @@
     display: flex;
 
     .icon {
-      width: 3rem;
+      flex: 0 0 2rem;
     }
 
     .text {

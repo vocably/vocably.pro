@@ -2,32 +2,15 @@
   <ion-spinner name="dots" class="mr-1"></ion-spinner
   >{{ 'welcome.second.loading' | transloco }}
 </div>
-<div class="row mb-3">
-  <div class="col1">
-    <ng-container *ngIf="!isLoading && exampleHtml">
-      <div class="mat-h1 mb-2">
-        <span highlight>{{
-          'welcome.second.select_highlight' | transloco
-        }}</span>
-        {{ 'welcome.second.select_rest' | transloco }}
-      </div>
-    </ng-container>
-    <div
-      *ngIf="sourceLanguage && targetLanguage"
-      class="contrast-panel rounded elevation-1-bg contrast-bg"
-    >
-      <span [innerHTML]="studySentenceHtml"></span>
-      <a
-        href="/welcome"
-        class="button outline small"
-        style="margin-left: 8px"
-        >{{ 'welcome.second.change' | transloco }}</a
-      >
-    </div>
-  </div>
-  <div class="col2" *ngIf="targetLanguage">
-    <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
-  </div>
+
+<div
+  *ngIf="sourceLanguage && targetLanguage"
+  class="contrast-panel rounded contrast-bg mb-3"
+>
+  <span [innerHTML]="studySentenceHtml"></span>
+  <a href="/welcome" class="button outline small" style="margin-left: 8px">{{
+    'welcome.second.change' | transloco
+  }}</a>
 </div>
 
 <h1 class="mat-h1 mb-3">
@@ -71,24 +54,30 @@
   </div>
 </div>
 
-<ng-container *ngIf="!isLoading && exampleHtml">
-  <div class="text-example rounded contrast-bg">
-    <div class="mb-2">
-      <mat-icon style="vertical-align: middle" class="text-primary"
-        >text_select_move_forward_character</mat-icon
-      >
-      {{ 'welcome.second.try_select' | transloco }}
-    </div>
-    <div
-      class="large"
-      *ngIf="!isLoading && exampleHtml"
-      [lang]="sourceLanguage"
-      [innerHTML]="exampleHtml"
-    ></div>
+<div
+  class="text-example rounded contrast-bg mb-3"
+  *ngIf="!isLoading && exampleHtml"
+>
+  <div class="mb-2">
+    <mat-icon style="vertical-align: middle" class="text-primary"
+      >text_select_move_forward_character</mat-icon
+    >
+    {{ 'welcome.second.try_select' | transloco }}
   </div>
-</ng-container>
+  <div
+    class="large"
+    *ngIf="!isLoading && exampleHtml"
+    [lang]="sourceLanguage"
+    [innerHTML]="exampleHtml"
+  ></div>
+</div>
+
 <app-generic-instruction
   [sourceLanguage]="sourceLanguage"
   [targetLanguage]="targetLanguage"
   *ngIf="sourceLanguage && targetLanguage && !isLoading && !exampleHtml"
 ></app-generic-instruction>
+
+<div class="mb-3" *ngIf="targetLanguage">
+  <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
+</div>

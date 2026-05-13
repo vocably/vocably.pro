@@ -7,19 +7,14 @@ export const ru = {
   'welcome.scan_qr': 'Отсканируйте QR-код ниже:',
   'welcome.open_mobile_link':
     'Или откройте эту ссылку на мобильном устройстве:',
-  'welcome.index.headline':
-    'Добро пожаловать в Vocably. Давайте настроим приложение.',
   'welcome.index.mother_tongue': 'Мой родной язык',
   'welcome.index.i_study': 'Я изучаю',
   'welcome.index.show_more': 'Показать больше языков',
   'welcome.index.multilang': 'Я хочу учить несколько языков.',
   'welcome.second.loading': 'Загрузка примера текста...',
   'welcome.second.study_sentence':
-    'Вы изучаете — <strong>{{sourceLanguage}}</strong>, а ваш родной язык — <strong>{{targetLanguage}}</strong>.',
+    'Вы изучаете — <strong class="text-emphasize">{{sourceLanguage}}</strong>, а ваш родной язык — <strong class="text-emphasize">{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Изменить',
-  'welcome.second.select_highlight': 'Выделите',
-  'welcome.second.select_rest':
-    'любое слово или фразу на любом сайте, чтобы узнать значение.',
   'welcome.second.try_select':
     'Чтобы понять механику работы экстеншена, попробуйте выделить любое слово или фразу в тексте ниже.',
   'welcome.second.how_it_works': 'Как это работает —',

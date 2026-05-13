@@ -7,19 +7,14 @@ export const uk = {
   'welcome.scan_qr': 'Відскануйте QR-код нижче:',
   'welcome.open_mobile_link':
     'Або відкрийте це посилання на мобільному пристрої:',
-  'welcome.index.headline':
-    'Ласкаво просимо до Vocably. Давайте налаштуємо додаток.',
   'welcome.index.mother_tongue': 'Моя рідна мова',
   'welcome.index.i_study': 'Мова, яку я вивчаю',
   'welcome.index.show_more': 'Показати більше мов',
   'welcome.index.multilang': 'Я хочу вивчати кілька мов.',
   'welcome.second.loading': 'Завантаження прикладу тексту...',
   'welcome.second.study_sentence':
-    'Мова, яку ви вивчаєте — <strong>{{sourceLanguage}}</strong>, а ваша рідна мова — <strong>{{targetLanguage}}</strong>.',
+    'Мова, яку ви вивчаєте — <strong class="text-emphasize">{{sourceLanguage}}</strong>, а ваша рідна мова — <strong class="text-emphasize">{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Змінити',
-  'welcome.second.select_highlight': 'Виділіть',
-  'welcome.second.select_rest':
-    'будь-яке слово або фразу на будь-якому сайті, щоб дізнатися значення.',
   'welcome.second.try_select':
     'Щоб зрозуміти, як працює розширення, спробуйте виділити будь-яке слово або фразу в тексті нижче.',
   'welcome.second.how_it_works': 'Як це працює —',
