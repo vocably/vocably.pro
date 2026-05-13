@@ -20,7 +20,17 @@ export const vi = {
   'welcome.second.select_rest':
     'bất kỳ từ hoặc cụm từ nào trên bất kỳ trang web nào để xem nghĩa của nó.',
   'welcome.second.try_select':
-    'Thử tô sáng bất kỳ từ hoặc cụm từ nào trong văn bản này',
+    'Để hiểu cách hoạt động của tiện ích mở rộng, hãy thử tô sáng bất kỳ từ hoặc cụm từ nào trong văn bản bên dưới.',
+  'welcome.second.how_it_works': 'Cách hoạt động —',
+  'welcome.second.three_steps': 'chỉ 3 bước',
+  'welcome.second.step1_heading': 'Tô sáng',
+  'welcome.second.step1_desc':
+    'Bất kỳ từ hoặc cụm từ nào trên bất kỳ trang web nào.',
+  'welcome.second.step2_heading': 'Tìm hiểu nghĩa',
+  'welcome.second.step2_desc': 'Vocably sẽ hiển thị bản dịch và ví dụ sử dụng.',
+  'welcome.second.step3_heading': 'Lưu và học',
+  'welcome.second.step3_desc':
+    'Học các từ đã lưu ngay trên trang web này hoặc trong ứng dụng di động.',
   'welcome.multilang.p1': 'Vocably rất tiện lợi để học nhiều ngôn ngữ.',
   'welcome.multilang.p2':
     'Tiện ích mở rộng tự động phát hiện ngôn ngữ của trang web bạn đang xem và sử dụng ngôn ngữ dịch phù hợp.',

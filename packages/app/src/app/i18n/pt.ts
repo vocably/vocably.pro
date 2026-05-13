@@ -19,7 +19,16 @@ export const pt = {
   'welcome.second.select_rest':
     'qualquer palavra ou frase em qualquer site para ver seu significado.',
   'welcome.second.try_select':
-    'Tente selecionar qualquer palavra ou frase neste texto',
+    'Para entender como a extensão funciona, tente selecionar qualquer palavra ou frase no texto abaixo.',
+  'welcome.second.how_it_works': 'Como funciona —',
+  'welcome.second.three_steps': 'apenas 3 passos',
+  'welcome.second.step1_heading': 'Selecione',
+  'welcome.second.step1_desc': 'Qualquer palavra ou frase em qualquer site.',
+  'welcome.second.step2_heading': 'Descubra o significado',
+  'welcome.second.step2_desc': 'Vocably mostrará a tradução e exemplos de uso.',
+  'welcome.second.step3_heading': 'Salve e aprenda',
+  'welcome.second.step3_desc':
+    'Estude suas palavras salvas diretamente neste site ou no aplicativo móvel.',
   'welcome.multilang.p1':
     'O Vocably é muito conveniente para estudar vários idiomas.',
   'welcome.multilang.p2':

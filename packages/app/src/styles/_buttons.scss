@@ -7,4 +7,9 @@ button.unstyled {
 
 .button {
   @include button();
+
+  &.small {
+    padding: 0 0.5rem;
+    font-size: 90%;
+  }
 }

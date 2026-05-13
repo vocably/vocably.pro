@@ -99,6 +99,8 @@ $dark-theme: (
 
   product-card-shadow-color: rgba(0, 0, 0, 0.69),
   highlight-color: #6689b0,
+
+  elevation-1: $v-dark-color-elevation-1,
 );
 
 $light-theme: (
@@ -135,4 +137,6 @@ $light-theme: (
 
   product-card-shadow-color: rgba(0, 0, 0, 0.69),
   highlight-color: #b4d7ff,
+
+  elevation-1: $v-light-color-elevation-1,
 );

@@ -19,7 +19,18 @@ export const tr = {
   'welcome.second.select_rest':
     'anlamını görmek için herhangi bir web sitesinde herhangi bir kelime veya ifadeyi.',
   'welcome.second.try_select':
-    'Bu metinden herhangi bir kelime veya ifadeyi işaretlemeyi deneyin',
+    'Uzantının nasıl çalıştığını anlamak için aşağıdaki metindeki herhangi bir kelime veya ifadeyi işaretlemeyi deneyin.',
+  'welcome.second.how_it_works': 'Nasıl çalışır —',
+  'welcome.second.three_steps': 'sadece 3 adım',
+  'welcome.second.step1_heading': 'İşaretleyin',
+  'welcome.second.step1_desc':
+    'Herhangi bir web sitesinde herhangi bir kelime veya ifadeyi.',
+  'welcome.second.step2_heading': 'Anlamını öğrenin',
+  'welcome.second.step2_desc':
+    'Vocably çeviriyi ve kullanım örneklerini gösterecek.',
+  'welcome.second.step3_heading': 'Kaydedin ve öğrenin',
+  'welcome.second.step3_desc':
+    'Kaydettiğiniz kelimeleri doğrudan bu sitede veya mobil uygulamada çalışın.',
   'welcome.multilang.p1':
     'Vocably, birden fazla dil öğrenmek için çok uygundur.',
   'welcome.multilang.p2':

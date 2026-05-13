@@ -2,7 +2,6 @@
 
 .text-example {
   padding: 2rem;
-  border: 1px solid var(--contrast-bg);
   border-radius: $border-radius;
 
   .large {
@@ -35,4 +34,45 @@
 }
 
 .instruction {
+}
+
+.steps {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: stretch;
+
+  @media (width < 900px) {
+    flex-direction: column;
+  }
+
+  .step {
+    flex: 1;
+    border-radius: $border-radius;
+    padding: 1rem;
+
+    display: flex;
+
+    .icon {
+      width: 3rem;
+    }
+
+    .text {
+      .h {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.mb-3 {
+  margin-bottom: 3rem;
+}
+
+.contrast-bg {
+  background-color: var(--elevation-1);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--contrast-bg);
+  }
 }

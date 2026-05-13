@@ -19,7 +19,18 @@ export const es = {
   'welcome.second.select_rest':
     'cualquier palabra o frase en cualquier sitio web para ver su significado.',
   'welcome.second.try_select':
-    'Intenta seleccionar cualquier palabra o frase en este texto',
+    'Para entender cómo funciona la extensión, intenta seleccionar cualquier palabra o frase en el texto a continuación.',
+  'welcome.second.how_it_works': 'Cómo funciona —',
+  'welcome.second.three_steps': 'solo 3 pasos',
+  'welcome.second.step1_heading': 'Selecciona',
+  'welcome.second.step1_desc':
+    'Cualquier palabra o frase en cualquier sitio web.',
+  'welcome.second.step2_heading': 'Descubre el significado',
+  'welcome.second.step2_desc':
+    'Vocably mostrará la traducción y ejemplos de uso.',
+  'welcome.second.step3_heading': 'Guarda y aprende',
+  'welcome.second.step3_desc':
+    'Estudia tus palabras guardadas directamente en este sitio o en la aplicación móvil.',
   'welcome.multilang.p1':
     'Vocably es muy conveniente para estudiar varios idiomas.',
   'welcome.multilang.p2':

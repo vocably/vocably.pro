@@ -19,7 +19,17 @@ export const en = {
   'welcome.second.select_rest':
     'any word or phrase on any website to see its meaning.',
   'welcome.second.try_select':
-    'Try highlighting any word or phrase in this text',
+    'To understand how the extension works, try highlighting any word or phrase in the text below.',
+  'welcome.second.how_it_works': 'How it works —',
+  'welcome.second.three_steps': 'just 3 steps',
+  'welcome.second.step1_heading': 'Highlight',
+  'welcome.second.step1_desc': 'Any word or phrase on any website.',
+  'welcome.second.step2_heading': 'Discover its meaning',
+  'welcome.second.step2_desc':
+    'Vocably will show the translation and usage examples.',
+  'welcome.second.step3_heading': 'Save and learn',
+  'welcome.second.step3_desc':
+    'Study your saved words right on this site or in the mobile app.',
   'welcome.multilang.p1':
     'Vocably makes it super convenient to study multiple languages.',
   'welcome.multilang.p2':

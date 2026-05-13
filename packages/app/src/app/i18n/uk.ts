@@ -21,7 +21,17 @@ export const uk = {
   'welcome.second.select_rest':
     'будь-яке слово або фразу на будь-якому сайті, щоб дізнатися значення.',
   'welcome.second.try_select':
-    'Спробуйте виділити будь-яке слово або фразу в цьому тексті',
+    'Щоб зрозуміти, як працює розширення, спробуйте виділити будь-яке слово або фразу в тексті нижче.',
+  'welcome.second.how_it_works': 'Як це працює —',
+  'welcome.second.three_steps': 'лише 3 кроки',
+  'welcome.second.step1_heading': 'Виділіть',
+  'welcome.second.step1_desc': 'Будь-яке слово або фразу на будь-якому сайті.',
+  'welcome.second.step2_heading': 'Дізнайтесь значення',
+  'welcome.second.step2_desc':
+    'Vocably покаже переклад і приклади використання.',
+  'welcome.second.step3_heading': 'Збережіть і вчіть',
+  'welcome.second.step3_desc':
+    'Вчіть збережені слова прямо на цьому сайті або в мобільному додатку.',
   'welcome.multilang.p1': 'Vocably дуже зручний для вивчення кількох мов.',
   'welcome.multilang.p2':
     'Розширення автоматично визначає мову сайту та використовує правильну мову перекладу.',

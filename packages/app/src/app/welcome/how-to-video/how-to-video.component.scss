@@ -7,3 +7,23 @@
   border: 1px solid var(--contrast-bg);
   border-radius: $border-radius;
 }
+
+video::-webkit-media-controls-panel {
+  background-image: none !important;
+  background: transparent !important;
+}
+
+/* Darken the play/mute/fullscreen buttons */
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display,
+video::-webkit-media-controls-mute-button,
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-fullscreen-button {
+  filter: brightness(0.5) invert(1); /* Invert to make icons white, then lower brightness */
+}
+
+video::-webkit-media-controls-enclosure {
+  /* Using invert and brightness to change black to white or other colors */
+  filter: brightness(0.5);
+}

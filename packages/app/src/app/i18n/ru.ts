@@ -21,7 +21,17 @@ export const ru = {
   'welcome.second.select_rest':
     'любое слово или фразу на любом сайте, чтобы узнать значение.',
   'welcome.second.try_select':
-    'Попробуйте выделить любое слово или фразу в этом тексте',
+    'Чтобы понять механику работы экстеншена, попробуйте выделить любое слово или фразу в тексте ниже.',
+  'welcome.second.how_it_works': 'Как это работает —',
+  'welcome.second.three_steps': 'всего 3 шага',
+  'welcome.second.step1_heading': 'Выделите',
+  'welcome.second.step1_desc': 'Любое слово или фразу на любом вебсайте.',
+  'welcome.second.step2_heading': 'Узнайте значение',
+  'welcome.second.step2_desc':
+    'Vocably покажет перевод и примеры использования.',
+  'welcome.second.step3_heading': 'Сохраните и выучите',
+  'welcome.second.step3_desc':
+    'Учите сохранённые слова прямо на этом сайте или в мобильном приложении.',
   'welcome.multilang.p1':
     'Vocably очень удобен для изучения нескольких языков.',
   'welcome.multilang.p2':

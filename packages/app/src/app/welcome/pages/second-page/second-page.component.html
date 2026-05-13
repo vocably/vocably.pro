@@ -2,10 +2,10 @@
   <ion-spinner name="dots" class="mr-1"></ion-spinner
   >{{ 'welcome.second.loading' | transloco }}
 </div>
-<div class="row mb-2">
+<div class="row mb-3">
   <div class="col1">
     <ng-container *ngIf="!isLoading && exampleHtml">
-      <div class="mat-headline-1 mb-2">
+      <div class="mat-h1 mb-2">
         <span highlight>{{
           'welcome.second.select_highlight' | transloco
         }}</span>
@@ -14,26 +14,70 @@
     </ng-container>
     <div
       *ngIf="sourceLanguage && targetLanguage"
-      class="contrast-panel rounded"
+      class="contrast-panel rounded elevation-1-bg contrast-bg"
     >
       <span [innerHTML]="studySentenceHtml"></span>
-      <a href="/welcome" style="margin-left: 8px">{{
-        'welcome.second.change' | transloco
-      }}</a
-      >.
+      <a
+        href="/welcome"
+        class="button outline small"
+        style="margin-left: 8px"
+        >{{ 'welcome.second.change' | transloco }}</a
+      >
     </div>
   </div>
   <div class="col2" *ngIf="targetLanguage">
     <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
   </div>
 </div>
-<ng-container *ngIf="!isLoading && exampleHtml">
-  <div class="text-example rounded">
-    <div class="mb-2">
-      <mat-icon style="vertical-align: middle"
+
+<h1 class="mat-h1 mb-3">
+  {{ 'welcome.second.how_it_works' | transloco }}
+  <span class="text-emphasize">{{
+    'welcome.second.three_steps' | transloco
+  }}</span>
+</h1>
+
+<div class="steps mb-3">
+  <div class="step contrast-bg">
+    <div class="icon">
+      <mat-icon class="text-primary"
         >text_select_move_forward_character</mat-icon
       >
-      {{ 'welcome.second.try_select' | transloco }}:
+    </div>
+    <div class="text">
+      <div class="h">{{ 'welcome.second.step1_heading' | transloco }}</div>
+      <div class="d">{{ 'welcome.second.step1_desc' | transloco }}</div>
+    </div>
+  </div>
+
+  <div class="step contrast-bg">
+    <div class="icon">
+      <mat-icon class="text-primary">translate</mat-icon>
+    </div>
+    <div class="text">
+      <div class="h">{{ 'welcome.second.step2_heading' | transloco }}</div>
+      <div class="d">{{ 'welcome.second.step2_desc' | transloco }}</div>
+    </div>
+  </div>
+
+  <div class="step contrast-bg">
+    <div class="icon">
+      <mat-icon class="text-primary">bookmark_check</mat-icon>
+    </div>
+    <div class="text">
+      <div class="h">{{ 'welcome.second.step3_heading' | transloco }}</div>
+      <div class="d">{{ 'welcome.second.step3_desc' | transloco }}</div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="!isLoading && exampleHtml">
+  <div class="text-example rounded contrast-bg">
+    <div class="mb-2">
+      <mat-icon style="vertical-align: middle" class="text-primary"
+        >text_select_move_forward_character</mat-icon
+      >
+      {{ 'welcome.second.try_select' | transloco }}
     </div>
     <div
       class="large"
