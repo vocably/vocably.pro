@@ -80,6 +80,13 @@ android {
     compileSdk rootProject.ext.compileSdkVersion
 
     namespace "com.vocablypro"
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+
     defaultConfig {
         applicationId "com.vocablypro"
         minSdkVersion rootProject.ext.minSdkVersion
