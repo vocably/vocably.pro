@@ -14,6 +14,8 @@ import { StudySteps } from './StudySteps';
 
 const RANDOMIZER_ENABLED_KEY = 'isRandomizerEnabled';
 const MAXIMUM_CARDS_PER_SESSION_KEY = 'maximumCardsPerSession';
+const MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY =
+  'maximumNeverStudiedCardsPerDay';
 const PLAY_RANDOM_EXAMPLE_KEY = 'playRandomExample';
 
 export const getRandomizerEnabled = () =>
@@ -23,10 +25,18 @@ const setRandomizerEnabled = (isEnabled: boolean) =>
   setItem(RANDOMIZER_ENABLED_KEY, isEnabled ? 'true' : 'false');
 
 export const getMaximumCardsPerSession = () =>
-  getItem(MAXIMUM_CARDS_PER_SESSION_KEY).then((res) => Number(res ?? 10));
+  getItem(MAXIMUM_CARDS_PER_SESSION_KEY).then((res) => Number(res ?? 40));
 
 export const setMaximumCardsPerSession = (cardsPerSession: number) =>
   setItem(MAXIMUM_CARDS_PER_SESSION_KEY, cardsPerSession.toString());
+
+export const getMaximumNeverStudiedCardsPerDay = () =>
+  getItem(MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY).then((res) =>
+    Number(res ?? 40)
+  );
+
+export const setMaximumNeverStudiedCardsPerDay = (cardsPerDay: number) =>
+  setItem(MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY, cardsPerDay.toString());
 
 export const getPlayRandomExample = () =>
   getItem(PLAY_RANDOM_EXAMPLE_KEY).then((res) => res !== 'false');
@@ -49,6 +59,12 @@ export const StudySettingsScreen: FC<Props> = () => {
     getMaximumCardsPerSession,
     setMaximumCardsPerSession
   );
+
+  const [maximumNeverStudiedCardsPerDay, mutateMaximumNeverStudiedCardsPerDay] =
+    useAsync(
+      getMaximumNeverStudiedCardsPerDay,
+      setMaximumNeverStudiedCardsPerDay
+    );
 
   const [playRandomExample, mutatePlayRandomExample] = useAsync(
     getPlayRandomExample,
@@ -124,6 +140,58 @@ export const StudySettingsScreen: FC<Props> = () => {
           </View>
         )}
       </CustomSurface>
+
+      <CustomSurface
+        style={{
+          marginBottom: 8,
+          gap: 16,
+          padding: 16,
+          paddingHorizontal: 32,
+        }}
+      >
+        <View>
+          <Text style={{ fontSize: 16 }}>
+            Maximum "never studied" cards that can be picked up per day
+          </Text>
+        </View>
+        {maximumNeverStudiedCardsPerDay.status === 'loaded' && (
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 8,
+            }}
+          >
+            <Text style={{ fontSize: 16, width: 24 * fontScale }}>
+              {maximumNeverStudiedCardsPerDay.value}
+            </Text>
+            <View style={{ flex: 1 }}>
+              <Slider
+                minimumValue={0}
+                maximumValue={40}
+                step={1}
+                minimumTrackTintColor={theme.colors.primary}
+                thumbTintColor={theme.colors.primary}
+                value={maximumNeverStudiedCardsPerDay.value}
+                onValueChange={(value) => {
+                  mutateMaximumNeverStudiedCardsPerDay(value[0]);
+                }}
+              ></Slider>
+            </View>
+          </View>
+        )}
+      </CustomSurface>
+      <View
+        style={{
+          paddingHorizontal: 8,
+          marginBottom: 32,
+        }}
+      >
+        <Text>
+          This option only makes sense for experienced users who have a lot of
+          new cards stacked in "Never studied" group.
+        </Text>
+      </View>
 
       {playRandomExample.status === 'loaded' && (
         <>

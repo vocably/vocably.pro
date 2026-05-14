@@ -44,7 +44,7 @@ export const getBody = (deck: LanguageDeck): NotificationBody => {
     return getGenericBody(deck.language);
   }
 
-  const card = first(slice(new Date(), 1, deck.cards.sort(byDate)));
+  const card = first(slice(new Date(), 1, 40, deck.cards.sort(byDate)));
 
   if (!card) {
     return getGenericBody(deck.language);

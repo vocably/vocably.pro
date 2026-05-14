@@ -1,6 +1,7 @@
 import { CardItem } from '@vocably/model';
 import { shuffle } from 'lodash-es';
 import { studyPlan } from './studyPlan';
+import { isToday } from '@vocably/sulna';
 
 export const STUDY_DELAY_MS = 1_800_000; // 1_800_000 is 30 minutes in milliseconds
 
@@ -14,9 +15,21 @@ export const hasStudied =
     return now - item.data.lastStudied > STUDY_DELAY_MS;
   };
 
+const calculateNewCardsPickedUpToday = (list: CardItem[]): number => {
+  let pickedUpToday = 0;
+  for (const cardItem of list) {
+    if (isToday(cardItem.data.firstStudied)) {
+      pickedUpToday += 1;
+    }
+  }
+
+  return pickedUpToday;
+};
+
 export const slice = (
   today: Date,
   maxCards: number,
+  maxNeverStudiedCards: number,
   list: CardItem[],
   planSection?: string
 ): CardItem[] => {
@@ -52,7 +65,15 @@ export const slice = (
     return result;
   }
 
-  result.push(...plan.notStarted.slice(0, maxCards - result.length));
+  const pickedUpToday = calculateNewCardsPickedUpToday(list);
+
+  if (pickedUpToday < maxNeverStudiedCards) {
+    result.push(
+      ...plan.notStarted
+        .slice(0, maxCards - result.length)
+        .slice(0, maxNeverStudiedCards - pickedUpToday)
+    );
+  }
 
   if (result.length > 0) {
     return result;

@@ -134,6 +134,7 @@ export class StudyPageComponent implements OnInit, OnDestroy {
       this.cards = slice(
         new Date(),
         studySettings.cardsPerSession,
+        40,
         this.allCards
       );
     }

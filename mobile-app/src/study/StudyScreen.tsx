@@ -23,6 +23,7 @@ import { Loader } from '../loaders/Loader';
 import { useNumberOfStudySessions } from '../RequestFeedback/useNumberOfStudySessions';
 import {
   getMaximumCardsPerSession,
+  getMaximumNeverStudiedCardsPerDay,
   getPlayRandomExample,
   getRandomizerEnabled,
 } from '../Settings/StudySettingsScreen';
@@ -83,6 +84,9 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
   const [isRandomizerEnabledResult] = useAsync(getRandomizerEnabled);
   const [maximumCardsPerSessionResult] = useAsync(getMaximumCardsPerSession);
+  const [maximumNewCardsPerDayResult] = useAsync(
+    getMaximumNeverStudiedCardsPerDay
+  );
 
   const [cards, setCards] = useState<CardItem[]>();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -121,7 +125,8 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     if (
       cardsStudied === -1 &&
       isRandomizerEnabledResult.status === 'loaded' &&
-      maximumCardsPerSessionResult.status === 'loaded'
+      maximumCardsPerSessionResult.status === 'loaded' &&
+      maximumNewCardsPerDayResult.status === 'loaded'
     ) {
       let sessionCards: CardItem[];
       if (isRandomizerEnabledResult.value) {
@@ -133,6 +138,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
         sessionCards = slice(
           new Date(),
           maximumCardsPerSessionResult.value,
+          maximumNewCardsPerDayResult.value,
           filteredCards,
           planSection
         );
