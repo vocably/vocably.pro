@@ -156,7 +156,8 @@ export class StudyPageComponent implements OnInit, OnDestroy {
     const item = grade(
       gradeResult.cardItem.data,
       gradeResult.score,
-      strategy.strategy
+      strategy.strategy,
+      gradeResult.cardItem.created
     );
 
     this.deckService

@@ -36,6 +36,7 @@ export const grade = (
   item: SrsItem,
   score: SrsScore,
   studyStrategy: StudyStrategy,
+  createdTimestamp: number,
   now = new Date()
 ): SrsItem => {
   let nextInterval: number;
@@ -123,12 +124,20 @@ export const grade = (
 
   const nextState = pickNextItemState(item, score, studyStrategy);
 
+  let firstStudied = item.firstStudied ?? new Date().getTime();
+  // The firstStudied field was introduced way after lastStudied
+  // The IF below is the attempt to make "adequate" firstStudied
+  if (!item.firstStudied && item.lastStudied) {
+    firstStudied = createdTimestamp;
+  }
+
   return {
     interval: nextInterval,
     repetition: nextRepetition,
     eFactor: Math.round(nextEFactor * 100) / 100,
     dueDate: dueDate,
     state: nextState,
+    firstStudied: firstStudied,
     lastStudied: new Date().getTime(),
   };
 };

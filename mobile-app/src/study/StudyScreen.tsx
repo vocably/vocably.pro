@@ -45,6 +45,7 @@ const srsFieldsObject: Record<keyof SrsItem, true> = {
   dueDate: true,
   eFactor: true,
   interval: true,
+  firstStudied: true,
   lastStudied: true,
   repetition: true,
 };
@@ -206,7 +207,12 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
     update(
       cards[currentCardIndex].id,
-      grade(cards[currentCardIndex].data, score, strategy)
+      grade(
+        cards[currentCardIndex].data,
+        score,
+        strategy,
+        cards[currentCardIndex].created
+      )
     ).then(async (result) => {
       if (result.success === false) {
         Alert.alert(

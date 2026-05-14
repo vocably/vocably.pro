@@ -13,22 +13,22 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 5, strategy);
+    item = grade(item, 5, strategy, 1);
     expect(item.repetition).toEqual(1);
     expect(item.interval).toEqual(1);
     expect(item.state.s).toEqual('sf');
 
-    item = grade(item, 5, strategy);
+    item = grade(item, 5, strategy, 1);
     expect(item.repetition).toEqual(2);
     expect(item.interval).toEqual(1);
     expect(item.state.s).toEqual('mb');
 
-    item = grade(item, 5, strategy);
+    item = grade(item, 5, strategy, 1);
     expect(item.repetition).toEqual(3);
     expect(item.interval).toEqual(1);
     expect(item.state.s).toEqual('sb');
 
-    item = grade(item, 5, strategy);
+    item = grade(item, 5, strategy, 1);
     expect(item.repetition).toEqual(4);
     expect(item.interval).toEqual(3);
     expect(item.state.s).toEqual('mf');
@@ -51,7 +51,7 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 3, strategy);
+    item = grade(item, 3, strategy, 1);
     expect(item.repetition).toEqual(5);
     expect(item.interval).toEqual(4);
     expect(item.state.s).toEqual('sb');
@@ -76,7 +76,7 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 5, strategy);
+    item = grade(item, 5, strategy, 1);
     expect(item.repetition).toEqual(9);
     expect(item.interval).toEqual(6);
     expect(item.state.s).toEqual('sb');
@@ -109,7 +109,7 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 5, strategy, now);
+    item = grade(item, 5, strategy, 1, now);
 
     expect(item.repetition).toEqual(5);
     expect(item.interval).toEqual(6);
@@ -142,7 +142,7 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 3, strategy, now);
+    item = grade(item, 3, strategy, 1, now);
 
     expect(item.repetition).toEqual(4);
     expect(item.interval).toEqual(6);
@@ -180,7 +180,7 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 5, strategy, now);
+    item = grade(item, 5, strategy, 1, now);
 
     expect(item.repetition).toEqual(4);
     expect(item.interval).toEqual(3);
@@ -213,7 +213,7 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 5, strategy, now);
+    item = grade(item, 5, strategy, 1, now);
 
     expect(item.repetition).toEqual(11);
     expect(item.eFactor).toEqual(2.58);
@@ -248,12 +248,45 @@ describe('grade', () => {
       { step: 'sb', allowedFailures: 0 },
     ];
 
-    item = grade(item, 5, strategy, now);
+    item = grade(item, 5, strategy, 1, now);
 
     expect(item.repetition).toEqual(11);
     expect(item.eFactor).toEqual(2.5);
     expect(item.interval).toEqual(15);
     expect(item.dueDate).toEqual(threeDaysTs);
+  });
+
+  describe('firstStudied', () => {
+    const strategy: StudyStrategy = [
+      { step: 'mf', allowedFailures: null },
+      { step: 'sf', allowedFailures: 0 },
+    ];
+    const createdTimestamp = 1000;
+
+    it('should preserve existing firstStudied', () => {
+      const item = createSrsItem();
+      item.firstStudied = 42;
+      const result = grade(item, 5, strategy, createdTimestamp);
+      expect(result.firstStudied).toEqual(42);
+    });
+
+    it('should use createdTimestamp for legacy items that have lastStudied but no firstStudied', () => {
+      const item = createSrsItem();
+      item.lastStudied = 9999;
+      // firstStudied is intentionally absent
+      const result = grade(item, 5, strategy, createdTimestamp);
+      expect(result.firstStudied).toEqual(createdTimestamp);
+    });
+
+    it('should set firstStudied to current time for brand-new items', () => {
+      const before = new Date().getTime();
+      const item = createSrsItem();
+      // neither firstStudied nor lastStudied
+      const result = grade(item, 5, strategy, createdTimestamp);
+      const after = new Date().getTime();
+      expect(result.firstStudied).toBeGreaterThanOrEqual(before);
+      expect(result.firstStudied).toBeLessThanOrEqual(after);
+    });
   });
 
   it('should see a weak as strong option of there are no strong queued', () => {
@@ -279,7 +312,7 @@ describe('grade', () => {
       { step: 'mb', allowedFailures: null },
     ];
 
-    item = grade(item, 5, strategy, now);
+    item = grade(item, 5, strategy, 1, now);
 
     expect(item.repetition).toEqual(11);
     expect(item.eFactor).toEqual(2.53);
