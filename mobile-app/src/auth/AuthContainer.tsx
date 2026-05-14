@@ -135,6 +135,18 @@ export const saveLoginStatusToStorage = async (status: LoginStatus) => {
   await asyncAppStorage.setItem('loginStatus', JSON.stringify(status));
 };
 
+export const getStorageValuesToLog = async (): Promise<
+  Record<string, string>
+> => {
+  return Object.fromEntries(
+    Object.entries(await getAll()).filter(([key]) => {
+      return !key.endsWith('.languageDecks');
+    })
+  );
+};
+
+getStorageValuesToLog().then(console.log);
+
 export const AuthContainer: FC<{
   children?: ReactNode;
 }> = ({ children }) => {
@@ -323,19 +335,21 @@ export const AuthContainer: FC<{
       console.log('Auth event', event);
 
       if (event.payload.event === 'tokenRefresh_failure') {
-        if (event.payload.data.error?.name === 'NotAuthorizedException') {
-          await forcefulSignOut();
-          await setLoginStatus({ reason: 'logged-out' });
-          await setAuthStatus({
-            status: 'undefined',
-          });
+        if (event.payload.data.error?.name !== 'NotAuthorizedException') {
+          return;
         }
+
+        await forcefulSignOut();
+        await setLoginStatus({ reason: 'logged-out' });
+        await setAuthStatus({
+          status: 'undefined',
+        });
 
         //@ts-ignore
         Sentry.captureMessage('tokenRefreshFailure', { ...event.payload });
         setError('UNABLE_TO_REFRESH_TOKEN');
 
-        const allValues = await getAll();
+        const allValues = await getStorageValuesToLog();
 
         //@ts-ignore
         posthog.capture('tokenRefreshFailure', {
