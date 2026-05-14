@@ -2,6 +2,7 @@ import { SrsItem, StrategyStep, StudyStrategy } from '@vocably/model';
 import { last } from 'lodash-es';
 import { buildDueDate } from './dueDate';
 import { pickNextItemState } from './pickNextItemState';
+import { isToday } from '@vocably/sulna';
 
 export type SrsScore = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -59,6 +60,8 @@ export const grade = (
     strongSteps.includes(currentStrategyStep) ||
     !studyStrategy.some((s) => strongSteps.includes(s.step));
 
+  const hasStudiedToday = isToday(item.lastStudied ?? 0, now);
+
   if (score === 5) {
     // The first cycle is always 1 day
     if (item.repetition < studyStrategy.length - 1) {
@@ -76,13 +79,14 @@ export const grade = (
       isLastStrategyResponse(item, studyStrategy) ||
       (item.repetition + 1) % studyStrategy.length === 0
     ) {
-      nextInterval = isStrongStep
-        ? Math.max(
-            item.interval,
-            Math.min(365, Math.round(item.interval * item.eFactor)) -
-              daysDifference
-          )
-        : item.interval;
+      nextInterval =
+        isStrongStep && !hasStudiedToday
+          ? Math.max(
+              item.interval,
+              Math.min(365, Math.round(item.interval * item.eFactor)) -
+                daysDifference
+            )
+          : item.interval;
       nextRepetition = item.repetition + 1;
       dueDate = isStrongStep
         ? Math.max(item.dueDate, buildDueDate(nextInterval))
@@ -94,11 +98,12 @@ export const grade = (
       dueDate = Math.max(item.dueDate, buildDueDate(1));
     }
 
-    nextEFactor = isStrongStep
-      ? item.eFactor +
-        (0.1 - (5 - score) * (0.08 + (5 - score) * 0.02)) *
-          (stepWeights[currentStrategyStep] ?? 1)
-      : item.eFactor;
+    nextEFactor =
+      isStrongStep && !hasStudiedToday
+        ? item.eFactor +
+          (0.1 - (5 - score) * (0.08 + (5 - score) * 0.02)) *
+            (stepWeights[currentStrategyStep] ?? 1)
+        : item.eFactor;
   } else if (score >= 3) {
     nextInterval = item.interval;
     nextRepetition = item.repetition;

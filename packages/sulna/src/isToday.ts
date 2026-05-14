@@ -1,5 +1,4 @@
-export const isToday = (ts: number): boolean => {
-  const now = new Date();
+export const isToday = (ts: number, now = new Date()): boolean => {
   const tsDate = new Date(ts);
 
   return (
