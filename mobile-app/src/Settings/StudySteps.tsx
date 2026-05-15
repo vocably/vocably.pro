@@ -194,7 +194,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
             <View
               style={{
                 flexDirection: 'row',
-                gap: 8,
+                gap: 12,
                 alignItems: 'center',
               }}
             >
@@ -252,6 +252,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
                         flexDirection: 'row',
                         gap: 8,
                         alignItems: 'center',
+                        paddingRight: 8,
                       }}
                     >
                       <Icon
