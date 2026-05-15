@@ -1,5 +1,12 @@
 import { SrsScore } from '@vocably/srs';
-import React, { FC, ReactNode, useRef, useState } from 'react';
+import React, {
+  createContext,
+  FC,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {
   Animated,
   PanResponder,
@@ -30,6 +37,16 @@ const AnimatedIcon = Animated.createAnimatedComponent(Icon);
 const iconSize = 80;
 const buttonBigBorderRadius = 16;
 const buttonSmallBorderRadius = 4;
+const buttonsBottom = 18;
+
+type SwipeGradeContextType = {
+  setCardIsBiggerThanContainer: (isBigger: boolean) => void;
+};
+export const SwipeGradeContext = createContext<SwipeGradeContextType>({
+  setCardIsBiggerThanContainer: () => {},
+});
+
+let rankButtonsHeightCache = 0;
 
 export const SwipeGrade: FC<{
   onGrade: (score: SrsScore) => void;
@@ -44,9 +61,13 @@ export const SwipeGrade: FC<{
   const sufficientHorizontalDisplacement = Math.min(windowWidth / 4, 110);
   const sufficientVerticalDisplacement = Math.min(windowHeight / 5, 110);
   const minimalQuickDisplacement = 10;
-  const [rankButtonsHeight, setRankButtonsHeight] = useState(0);
+  const [rankButtonsHeight, setRankButtonsHeight] = useState(
+    rankButtonsHeightCache
+  );
 
   const [selectedGrade, setSelectedGrade] = useState(-1);
+
+  const cardIsBiggerThanContainer = useRef(false);
 
   const pan = useRef(
     new Animated.ValueXY(undefined, {
@@ -117,9 +138,11 @@ export const SwipeGrade: FC<{
             y: 0,
           });
         } else if (movementRef.current === 'vertical') {
-          mediumVisibility.setValue(
-            Math.min(1, gestureState.dy / sufficientVerticalDisplacement)
-          );
+          if (!cardIsBiggerThanContainer.current) {
+            mediumVisibility.setValue(
+              Math.min(1, gestureState.dy / sufficientVerticalDisplacement)
+            );
+          }
 
           pan.setValue({
             x: 0,
@@ -136,7 +159,10 @@ export const SwipeGrade: FC<{
           return;
         }
 
-        if ((mediumVisibility as any)._value === 1) {
+        if (
+          (mediumVisibility as any)._value === 1 &&
+          !cardIsBiggerThanContainer.current
+        ) {
           postHog.capture('swipe_grade', {
             score: 3,
           });
@@ -173,7 +199,8 @@ export const SwipeGrade: FC<{
 
           if (
             (mediumVisibility as any)._value > 0 &&
-            Math.abs(gestureState.dy) >= minimalQuickDisplacement
+            Math.abs(gestureState.dy) >= minimalQuickDisplacement &&
+            !cardIsBiggerThanContainer.current
           ) {
             Animated.timing(mediumVisibility, {
               toValue: 1,
@@ -282,84 +309,102 @@ export const SwipeGrade: FC<{
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        paddingBottom: PADDING_VERTICAL,
       }}
     >
-      {/* We need the below container to move icons a bit upper to consider bottom padding */}
       <View
         style={{
-          pointerEvents: 'none',
-          position: 'absolute',
-          left: 0,
-          right: 0,
-          top: 0,
-          bottom: PADDING_VERTICAL + 24,
+          flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
+          width: '100%',
+          overflow: 'hidden',
+          marginBottom: rankButtonsHeight,
+          opacity: rankButtonsHeight === 0 ? 0 : 1,
         }}
       >
-        <AnimatedIcon
-          style={[
-            styles.icon,
-            {
-              color: theme.colors.primary,
-            },
-            {
-              opacity: strongVisibility,
-              transform: [{ scale: strongVisibility }],
-            },
-          ]}
-          name="check-all"
-          size={iconSize}
-        ></AnimatedIcon>
-        <AnimatedIcon
-          style={[
-            styles.icon,
-            {
-              color: theme.colors.primary,
-            },
-            {
-              opacity: mediumVisibility,
-              transform: [{ scale: mediumVisibility }],
-            },
-          ]}
-          name="check"
-          size={iconSize}
-        ></AnimatedIcon>
-        <AnimatedIcon
-          style={[
-            styles.icon,
-            {
-              color: theme.colors.error,
-            },
-            {
-              opacity: weakVisibility,
-              transform: [{ scale: weakVisibility }],
-            },
-          ]}
-          name="close"
-          size={iconSize}
-        ></AnimatedIcon>
-      </View>
-      <Animated.View
-        style={[
-          {
-            flex: 1,
+        {/* We need the below container to move icons a bit upper to consider bottom padding */}
+        <View
+          style={{
+            pointerEvents: 'none',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: PADDING_VERTICAL + 24,
             alignItems: 'center',
             justifyContent: 'center',
-            width: '100%',
-            paddingBottom: rankButtonsHeight,
-          },
-          { transform: [{ translateX: pan.x }, { translateY: pan.y }] },
-        ]}
-        {...panResponder.panHandlers}
-      >
-        {children}
-      </Animated.View>
+          }}
+        >
+          <AnimatedIcon
+            style={[
+              styles.icon,
+              {
+                color: theme.colors.primary,
+              },
+              {
+                opacity: strongVisibility,
+                transform: [{ scale: strongVisibility }],
+              },
+            ]}
+            name="check-all"
+            size={iconSize}
+          ></AnimatedIcon>
+          <AnimatedIcon
+            style={[
+              styles.icon,
+              {
+                color: theme.colors.primary,
+              },
+              {
+                opacity: mediumVisibility,
+                transform: [{ scale: mediumVisibility }],
+              },
+            ]}
+            name="check"
+            size={iconSize}
+          ></AnimatedIcon>
+          <AnimatedIcon
+            style={[
+              styles.icon,
+              {
+                color: theme.colors.error,
+              },
+              {
+                opacity: weakVisibility,
+                transform: [{ scale: weakVisibility }],
+              },
+            ]}
+            name="close"
+            size={iconSize}
+          ></AnimatedIcon>
+        </View>
+        <Animated.View
+          style={[
+            {
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '100%',
+            },
+            { transform: [{ translateX: pan.x }, { translateY: pan.y }] },
+          ]}
+          {...panResponder.panHandlers}
+        >
+          <SwipeGradeContext.Provider
+            value={{
+              setCardIsBiggerThanContainer: (yes: boolean) => {
+                cardIsBiggerThanContainer.current = yes;
+              },
+            }}
+          >
+            {children}
+          </SwipeGradeContext.Provider>
+        </Animated.View>
+      </View>
       <View
         style={{
           position: 'absolute',
-          bottom: 36,
+          bottom: buttonsBottom,
           paddingLeft: 16 + insets.left,
           paddingRight: 16 + insets.right,
           left: 0,
@@ -369,7 +414,9 @@ export const SwipeGrade: FC<{
           gap: 6,
         }}
         onLayout={(event) => {
-          setRankButtonsHeight(event.nativeEvent.layout.height);
+          rankButtonsHeightCache =
+            event.nativeEvent.layout.height + buttonsBottom;
+          setRankButtonsHeight(rankButtonsHeightCache);
         }}
       >
         <TouchableRipple
