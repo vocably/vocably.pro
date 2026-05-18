@@ -75,7 +75,11 @@ export const CardDefinition: FC<Props> = ({
   const bul = '\u2022 ';
 
   return (
-    <>
+    <View
+      style={{
+        maxWidth: '100%',
+      }}
+    >
       {definitions.map((item, index) => {
         const lookUpEnabled = !lookUpDisabled && item.lookUpEnabled;
         return (
@@ -94,7 +98,7 @@ export const CardDefinition: FC<Props> = ({
               style={({ pressed }) => [
                 { opacity: pressed && lookUpEnabled && item ? 0.6 : 1.0 },
                 {
-                  flexBasis: '100%',
+                  flexShrink: 1,
                 },
               ]}
               onPress={onPress}
@@ -163,6 +167,6 @@ export const CardDefinition: FC<Props> = ({
             </Text>
           </Text>
         )}
-    </>
+    </View>
   );
 };

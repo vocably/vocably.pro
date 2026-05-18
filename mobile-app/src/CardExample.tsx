@@ -85,7 +85,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
     const fontScale = PixelRatio.getFontScale();
 
     return (
-      <>
+      <View style={{ maxWidth: '100%' }}>
         {examples.map((text, index) => (
           <View
             key={index}
@@ -120,7 +120,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
               style={({ pressed }) => [
                 { opacity: pressed && !lookUpDisabled ? 0.6 : 1.0 },
                 {
-                  flexBasis: '100%',
+                  flexShrink: 1,
                 },
               ]}
               onPress={onPress}
@@ -140,7 +140,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
             </Pressable>
           </View>
         ))}
-      </>
+      </View>
     );
   }
 );
