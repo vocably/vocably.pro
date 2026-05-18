@@ -3,26 +3,30 @@
   url='/pricing.html'
   navbarAlwaysMurky=true
 }}
-  <div class="container-md text-center">
-    <h1 class="mb-5 text-center">Pricing</h1>
+  <div class="container-md">
+    <h1 class="mb-4 text-center">Pricing</h1>
+  </div>
+  <div class="container-md mb-5">
     <p>Translations with Vocably are always free and unlimited. I am <a href="/about.html" class="link-secondary">working hard</a> to keep it this way.</p>
 
     <p>The <strong>Free Plan</strong> lets you save <strong>{{ htmlWebpackPlugin.options.environment.usageLimit.maxCollectionLength }} words</strong> in your study collection. When your collection reaches {{ htmlWebpackPlugin.options.environment.usageLimit.maxCollectionLength }} words, you can save <strong>{{ htmlWebpackPlugin.options.environment.usageLimit.cardsPerDay }} new words per day</strong>. All translations remain free and unlimited.</p>
 
-    <p>With <strong>Premium</strong>, you can <strong>save unlimited words</strong> and get <strong>one more type of practice question</strong>:</p>
-    <div style="text-align: center;"><video
-      autoplay
-      loop
-      muted
-      playsinline
-      style="width: 184px; height: 400px"
-    >
-      <source src="assets/arrange-by-letters/mobile.mov" type="video/quicktime" />
-      <source src="assets/arrange-by-letters/mobile.webm" type="video/webm" />
-      The video is not supported by your browser.
-    </video></div>
+    <div class="hide-other">
+      <p>With <strong>Premium</strong>, you can <strong>save unlimited words</strong> and get <strong>one more type of practice question</strong>:</p>
+      <div style="text-align: center;"><video
+        autoplay
+        loop
+        muted
+        playsinline
+        style="width: 184px; height: 400px"
+      >
+        <source src="assets/arrange-by-letters/mobile.mov" type="video/quicktime" />
+        <source src="assets/arrange-by-letters/mobile.webm" type="video/webm" />
+        The video is not supported by your browser.
+      </video></div>
+    </div>
   </div>
-  {{#> text-container }}
+  <div class="container-lg">
     <style>
       .features-table {
         th:not(:first-child), td:not(:first-child) {
@@ -130,6 +134,11 @@
         </tr>
       </table>
     </div>
-  {{/text-container}}
+  </div>
+  <div style="background: #f9f9f9; padding-top: 5rem; padding-bottom: 4rem; margin-top: 2rem;">
+    <div class="text-center container-md">
+      {{> cta }}
+    </div>
+  </div>
 {{/layout}}
 
