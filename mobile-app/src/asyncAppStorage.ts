@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import * as iosGroupStorage from './asyncAppStorage/iosGroupStorage';
 import { mmkvStorage } from './mmkvStorage';
+import { Sentry } from './BetterSentry';
 
 const getAllAsyncValues = async () => {
   const allKeys = await AsyncStorage.getAllKeys();
@@ -23,28 +24,6 @@ const getAllAsyncValues = async () => {
   return allValues;
 };
 
-// ToDo: do I even need this?
-const clearAllAsyncValues = async () => {
-  const whiteListedKeys = [
-    '.posthog-rn.json',
-    'auth',
-    'vocablyAuthStatus',
-    'userStaticMetadata',
-    'userMetadata',
-    'studyStreak',
-    'languageDecks',
-    'languagesContainerSelectedLanguage',
-    'last-recalibration',
-    'translationPresetSelectedLanguage',
-    'languagePairs',
-    'languageTransformations',
-  ];
-
-  const allKeys = (await AsyncStorage.getAllKeys()).filter((k) =>
-    whiteListedKeys.some((wk) => k.endsWith(wk))
-  );
-};
-
 const populateMMKV = (values: Record<string, string>) => {
   for (let [key, value] of Object.entries(values)) {
     mmkvStorage.set(key, value);
@@ -52,10 +31,22 @@ const populateMMKV = (values: Record<string, string>) => {
 };
 
 const migrateToMMKV = new Promise<void>(async (resolve) => {
+  const migrationStartTime = performance.now();
+  let isMigrating = false;
+  const intervalId = setInterval(() => {
+    const migrationEndTime = performance.now();
+    Sentry.captureMessage(
+      `Migration to MMKV took unexpectedly long: ${migrationEndTime - migrationStartTime}ms. Is migrating: ${isMigrating}.`
+    );
+  }, 500);
+
   if (mmkvStorage.getBoolean('mmkvMigrated')) {
+    clearInterval(intervalId);
     resolve();
     return;
   }
+
+  isMigrating = true;
 
   if (Platform.OS === 'ios') {
     const values = await iosGroupStorage.getAllValues();
@@ -70,6 +61,8 @@ const migrateToMMKV = new Promise<void>(async (resolve) => {
   }
 
   mmkvStorage.set('mmkvMigrated', true);
+
+  clearInterval(intervalId);
   resolve();
 });
 

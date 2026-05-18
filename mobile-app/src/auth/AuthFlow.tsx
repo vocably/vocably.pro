@@ -3,6 +3,7 @@ import { Loader } from '../loaders/Loader';
 import { AuthContext } from './AuthContainer';
 import { AuthNavigation } from './AuthNavigation';
 import { LoggedOutForm } from './LoggedOutForm';
+import { Sentry } from '../BetterSentry';
 
 export const AuthFlow: FC<{
   children?: ReactNode;
@@ -10,6 +11,11 @@ export const AuthFlow: FC<{
   const authStatus = useContext(AuthContext);
 
   if (authStatus.status === 'undefined') {
+    Sentry.captureException(
+      new Error(
+        'The auth status is undefined, which should not happen. Weird...'
+      )
+    );
     return <Loader>Authenticating...</Loader>;
   }
 
