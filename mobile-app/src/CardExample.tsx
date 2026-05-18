@@ -120,7 +120,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
               style={({ pressed }) => [
                 { opacity: pressed && !lookUpDisabled ? 0.6 : 1.0 },
                 {
-                  flexShrink: 1,
+                  flexBasis: '100%',
                 },
               ]}
               onPress={onPress}

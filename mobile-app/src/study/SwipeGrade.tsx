@@ -39,13 +39,6 @@ const buttonBigBorderRadius = 16;
 const buttonSmallBorderRadius = 4;
 const buttonsBottom = 18;
 
-type SwipeGradeContextType = {
-  setCardIsBiggerThanContainer: (isBigger: boolean) => void;
-};
-export const SwipeGradeContext = createContext<SwipeGradeContextType>({
-  setCardIsBiggerThanContainer: () => {},
-});
-
 let rankButtonsHeightCache = 0;
 
 export const SwipeGrade: FC<{
@@ -66,8 +59,6 @@ export const SwipeGrade: FC<{
   );
 
   const [selectedGrade, setSelectedGrade] = useState(-1);
-
-  const cardIsBiggerThanContainer = useRef(false);
 
   const pan = useRef(
     new Animated.ValueXY(undefined, {
@@ -138,11 +129,9 @@ export const SwipeGrade: FC<{
             y: 0,
           });
         } else if (movementRef.current === 'vertical') {
-          if (!cardIsBiggerThanContainer.current) {
-            mediumVisibility.setValue(
-              Math.min(1, gestureState.dy / sufficientVerticalDisplacement)
-            );
-          }
+          mediumVisibility.setValue(
+            Math.min(1, gestureState.dy / sufficientVerticalDisplacement)
+          );
 
           pan.setValue({
             x: 0,
@@ -159,10 +148,7 @@ export const SwipeGrade: FC<{
           return;
         }
 
-        if (
-          (mediumVisibility as any)._value === 1 &&
-          !cardIsBiggerThanContainer.current
-        ) {
+        if ((mediumVisibility as any)._value === 1) {
           postHog.capture('swipe_grade', {
             score: 3,
           });
@@ -199,8 +185,7 @@ export const SwipeGrade: FC<{
 
           if (
             (mediumVisibility as any)._value > 0 &&
-            Math.abs(gestureState.dy) >= minimalQuickDisplacement &&
-            !cardIsBiggerThanContainer.current
+            Math.abs(gestureState.dy) >= minimalQuickDisplacement
           ) {
             Animated.timing(mediumVisibility, {
               toValue: 1,
@@ -390,15 +375,7 @@ export const SwipeGrade: FC<{
           ]}
           {...panResponder.panHandlers}
         >
-          <SwipeGradeContext.Provider
-            value={{
-              setCardIsBiggerThanContainer: (yes: boolean) => {
-                cardIsBiggerThanContainer.current = yes;
-              },
-            }}
-          >
-            {children}
-          </SwipeGradeContext.Provider>
+          {children}
         </Animated.View>
       </View>
       <View

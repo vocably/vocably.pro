@@ -1,13 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CardItem, DeckSettings } from '@vocably/model';
-import React, {
-  FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { FC, useCallback, useRef, useState } from 'react';
 import { Animated, TouchableWithoutFeedback, View } from 'react-native';
 import { useAsync } from '../useAsync';
 import { CardBack } from './Card/CardBack';
@@ -16,7 +9,6 @@ import { ReverseCardBack } from './Card/ReverseCardBack';
 import { ReverseCardFront } from './Card/ReverseCardFront';
 import { TapDot } from './Card/TapDot';
 import { Displayer } from './Displayer';
-import { SwipeGradeContext } from './SwipeGrade';
 
 const loadTapHelperIsNeeded = () =>
   AsyncStorage.getItem('swiperTapHelperIsNeeded').then(
@@ -44,13 +36,8 @@ export const Card: FC<Props> = ({
 }) => {
   const [containerHeight, setContainerHeight] = useState(300);
   const [cardSideHeight, setCardSideHeight] = useState(0);
-  const { setCardIsBiggerThanContainer } = useContext(SwipeGradeContext);
 
   const cardIsBiggerThanContainer = cardSideHeight > containerHeight;
-
-  useEffect(() => {
-    setCardIsBiggerThanContainer(cardIsBiggerThanContainer);
-  }, [cardIsBiggerThanContainer]);
 
   const flipAnimation = useRef(new Animated.Value(0)).current;
   const flipToFrontStyle = {

@@ -94,7 +94,7 @@ export const CardDefinition: FC<Props> = ({
               style={({ pressed }) => [
                 { opacity: pressed && lookUpEnabled && item ? 0.6 : 1.0 },
                 {
-                  flexShrink: 1,
+                  flexBasis: '100%',
                 },
               ]}
               onPress={onPress}
