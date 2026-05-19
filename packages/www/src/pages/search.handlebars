@@ -8,7 +8,7 @@
   hidePricing=true
   nonStickyNavbar=true
 }}
-  <div class="container-md py-5">
+  <div class="container-md pb-5 pt-1 pt-md-5">
     <div id="search"></div>
   </div>
   <div style="background: #f9f9f9;">
@@ -24,10 +24,30 @@
         Each time you look up a word with Vocably, you contribute to improving the language ecosystem.
       </div>
       <div class="mb-5"><strong>New Discord group</strong>: if you find a problem with any dictionary entry, join the <a href="https://discord.gg/9aRwbJ3qeh" class="link-secondary" style="white-space: nowrap;" target="_blank"><i class="bi bi-discord" style="margin-right: 4px; font-size: 90%;"></i>Discord group</a> and report it so it can be fixed.</div>
-      <div class="mb-4">
-        {{> social-share
-          page="search.html"
-        }}
+      <div class="row align-items-center mb-4">
+        <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+          {{> social-share
+            page="search.html"
+          }}
+        </div>
+        <div class="col-12 col-sm-6 text-start text-sm-center">
+          <style>
+            .mobile-button {
+              opacity: 0.6;
+              filter: grayscale(100%);
+              transition: all 0.3s ease-in-out;
+
+              &:hover {
+                opacity: 1;
+                filter: grayscale(0%);
+              }
+            }
+          </style>
+          <a id="mobile-app-ios-link" href="https://apps.apple.com/app/vocably-pro-language-cards/id1641258757" target="_blank" class="d-inline-block mobile-button" data-umami-event="Search CTA Click"
+             data-umami-event-label="iOS"><img src="assets/download-on-app-store.svg" alt="Download on App Store" height="30" /></a>
+          <a id="mobile-app-android-link" href="https://play.google.com/store/apps/details?id=com.vocablypro" target="_blank" class="d-inline-block ms-2 mobile-button" data-umami-event="Search CTA Click"
+             data-umami-event-label="Android"><img src="assets/get-it-on-google-play.svg" alt="Get it on Google Play" height="30" /></a>
+        </div>
       </div>
     </div>
   </div>
