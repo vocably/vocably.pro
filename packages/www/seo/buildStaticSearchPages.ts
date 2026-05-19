@@ -13,7 +13,11 @@ import {
   TranslationCards,
 } from '@vocably/model';
 import { dirname, join } from 'node:path';
-import { generateSitemap } from './generateSitemap';
+import { getExistingSeoSearchSitemap } from './getExistingSeoSearchSitemap';
+import { generateSeoSearchSitemap } from './generateSeoSearchSitemap';
+import { createHash } from 'node:crypto';
+
+const globalVersion = 1;
 
 type ContentOptions = {
   word: string;
@@ -121,6 +125,11 @@ export const buildStaticSearchPages = async ({
       return;
     }
 
+    const existingSitemap = await getExistingSeoSearchSitemap(
+      sourceLanguage,
+      targetLanguage
+    );
+
     const wordResults: Record<string, TranslationCards> = JSON.parse(
       readFileSync(dataFileName, 'utf-8')
     );
@@ -131,7 +140,10 @@ export const buildStaticSearchPages = async ({
       `Compiling ${words.length} ${sourceLanguage}-${targetLanguage} words to HTML...`
     );
 
-    const files: string[] = [];
+    const files: Array<{
+      relativePath: string;
+      hash: string;
+    }> = [];
 
     for (const [word, translationCards] of words) {
       const contentOptions: ContentOptions = {
@@ -187,26 +199,29 @@ export const buildStaticSearchPages = async ({
       );
 
       writeFileSync(`./seo/cache/${htmlFilename}`, rendered.html);
-      files.push(htmlFilename);
+      files.push({
+        relativePath: htmlFilename,
+        hash: sha256(
+          JSON.stringify({
+            word,
+            translationCards,
+            globalVersion,
+          })
+        ),
+      });
       result.push({
         fileName: htmlFilename,
         size: rendered.html.length,
       });
     }
 
-    const filesToValidateLastMod = [
-      dataFileName,
-      './src/pages/search.handlebars',
-      '../extension-content-ui/src/components/translation/translation.tsx',
-      '../extension-content-ui/src/components/translation-cards/translation-cards.tsx',
-    ];
-
-    const sitemap = generateSitemap({
-      pages: files.map((path) => ({
-        path: path,
+    const sitemap = generateSeoSearchSitemap({
+      pages: files.map(({ relativePath, hash }) => ({
+        loc: `https://vocably.pro/${relativePath}`,
         priority: '0.5',
-        filesToValidateLastMod,
+        hash: hash,
       })),
+      existingSitemap,
     });
 
     result.push({
@@ -245,4 +260,8 @@ function writeFileSync(fileName: string, contents: string) {
   const dirPath = dirname(fileName);
   mkdirSync(dirPath, { recursive: true });
   nativeWriteFileSync(fileName, contents, 'utf-8');
+}
+
+function sha256(input: string): string {
+  return createHash('sha256').update(JSON.stringify(input)).digest('hex');
 }
