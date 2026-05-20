@@ -1,5 +1,5 @@
 import { renderToString } from '@vocably/extension-content-ui/hydrate';
-import { trimLanguage } from '@vocably/sulna';
+import { trimLanguage, join as joinDefinitions } from '@vocably/sulna';
 import {
   cpSync,
   mkdirSync,
@@ -17,6 +17,7 @@ import { dirname, join } from 'node:path';
 import { getExistingSeoSearchSitemap } from './getExistingSeoSearchSitemap';
 import { generateSeoSearchSitemap } from './generateSeoSearchSitemap';
 import { createHash } from 'node:crypto';
+import { cardToLocationHash } from '@vocably/model-operations';
 
 const globalVersion = 1;
 
@@ -39,9 +40,13 @@ const nameTheFile = ({
   );
 };
 
-const buildTitle = ({ word, sourceLanguage }: ContentOptions) => {
+const buildPageName = ({ word, sourceLanguage }: ContentOptions) => {
   const sourceLanguageShortName = trimLanguage(languageList[sourceLanguage]);
-  return `"${word}" in ${sourceLanguageShortName} | Vocably`;
+  return `"${word}" in ${sourceLanguageShortName}`;
+};
+
+const buildTitle = (options: ContentOptions) => {
+  return `${buildPageName(options)} | Vocably`;
 };
 
 const buildDescription = ({ word, sourceLanguage }: ContentOptions) => {
@@ -193,6 +198,36 @@ export const buildStaticSearchPages = async ({
           .replace(
             replaceExpressions.ogUrl,
             `<meta property="og:url" content="${canonicalUrl}" />`
+          )
+          .replace(
+            `</head>`,
+            `<script type="application/ld+json">
+${JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  '@id': canonicalUrl,
+  name: buildPageName(contentOptions),
+  hasDefinedTerm: translationCards.items.map((item) => ({
+    '@type': 'DefinedTerm',
+    '@id':
+      canonicalUrl +
+      cardToLocationHash({
+        source: item.source,
+        partOfSpeech: item.partOfSpeech,
+      }),
+    termCode: item.source,
+    name: {
+      '@value': item.source,
+      '@language': sourceLanguage,
+    },
+    alternateName: {
+      '@value': item.translation,
+      '@language': targetLanguage,
+    },
+    description: joinDefinitions(item.definitions),
+  })),
+})}
+</script></head>`
           ),
         {
           title: buildTitle(contentOptions),

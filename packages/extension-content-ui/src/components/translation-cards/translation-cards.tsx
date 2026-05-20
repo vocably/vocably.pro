@@ -32,6 +32,8 @@ import {
 } from '@vocably/model';
 import { subscribeToLocale, t } from '../../i18n';
 import { getSelectedTagIds } from '../translation/getSelectedTagIds';
+import { toLocationHash } from '@vocably/sulna';
+import { cardToLocationHash } from '@vocably/model-operations';
 
 @Component({
   tag: 'vocably-translation-cards',
@@ -278,7 +280,7 @@ export class VocablyTranslationCards {
     return (
       <Host>
         {this.cards.map((card, itemIndex, cardsArray) => (
-          <div key={itemIndex}>
+          <div key={itemIndex} id={cardToLocationHash(card.data)}>
             {!this.canAdd && this.cardsLimit !== 'unlimited' && (
               <div
                 class={{
