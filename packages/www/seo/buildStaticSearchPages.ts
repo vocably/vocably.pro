@@ -1,6 +1,7 @@
 import { renderToString } from '@vocably/extension-content-ui/hydrate';
 import { trimLanguage } from '@vocably/sulna';
 import {
+  cpSync,
   mkdirSync,
   readdirSync,
   readFileSync,
@@ -236,6 +237,8 @@ export const buildStaticSearchPages = async ({
       size: sitemap.length,
     });
   }
+
+  cpSync('./seo/cache', './dist', { recursive: true, force: true });
 
   return result;
 };

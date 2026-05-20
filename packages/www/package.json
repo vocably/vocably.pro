@@ -10,7 +10,7 @@
     "watchSeo": "tsc --watch --project seo/tsconfig.json",
     "prebuild": "npx rimraf dist && npm run compileSeo",
     "build": "webpack --env production",
-    "postbuild": "npx rimraf ./seo/cache && npx vite-node ./seo/build.mts && node generate-sitemap.js",
+    "postbuild": "npx rimraf ./seo/cache && npx vite-node ./seo/build.mts",
     "serve": "webpack serve --env development --open",
     "watch": "webpack --watch --env development",
     "start": "npm-run-all --parallel watchSeo watch serve",

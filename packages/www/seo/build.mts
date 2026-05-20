@@ -2,6 +2,8 @@
 
 import { buildStaticSearchPages } from './buildStaticSearchPages';
 import { cpSync, readFileSync } from 'node:fs';
+import { buildMainSitemap } from './buildMainSitemap';
+import { buildSitemapIndex } from './buildSitemapIndex';
 
 // @ts-ignore
 await buildStaticSearchPages({
@@ -11,4 +13,5 @@ await buildStaticSearchPages({
   searchPageFileName: 'search.html',
 });
 
-cpSync('./seo/cache', './dist', { recursive: true, force: true });
+buildMainSitemap();
+await buildSitemapIndex();
