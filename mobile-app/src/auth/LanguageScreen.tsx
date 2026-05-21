@@ -1,23 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import { isGoogleLanguage } from '@vocably/model';
-import { usePostHog } from 'posthog-react-native';
-import React, { FC, useContext, useState } from 'react';
-import { Platform, ScrollView } from 'react-native';
+import React, { FC, useState } from 'react';
+import { ScrollView } from 'react-native';
 import { Button, Divider, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import {
-  createDefaultLanguageContainerDeck,
-  saveDecksToStorage,
-  saveSelectedLanguageToStorage,
-} from '../languages/LanguagesContainer';
+import { saveSelectedLanguageToStorage } from '../languages/LanguagesContainer';
 import { SourceLanguageButton } from '../SourceLanguageButton';
 import { mainPadding } from '../styles';
 import { TargetLanguageButton } from '../TargetLanguageButton';
 import { Preset } from '../TranslationPreset/TranslationPresetContainer';
-import { storeLanguagePairs } from '../TranslationPreset/useLanguagePairs';
 import { storeSelectedLanguage } from '../TranslationPreset/useTranslationPresetSelectedLanguage';
-import { AuthContext } from './AuthContainer';
 
 type Props = {};
 

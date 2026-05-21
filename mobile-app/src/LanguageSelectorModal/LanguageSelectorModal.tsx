@@ -1,6 +1,10 @@
 import { NavigationProp, Route } from '@react-navigation/native';
 import { FC, useCallback, useLayoutEffect, useState } from 'react';
-import { ListRenderItem, Pressable, SectionList } from 'react-native';
+import {
+  ListRenderItem,
+  Pressable,
+  SectionList as NativeSectionList,
+} from 'react-native';
 import { Divider, Surface, Text, useTheme } from 'react-native-paper';
 import { EdgeInsets, useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,6 +12,12 @@ import { SearchInput } from '../SearchInput';
 import { mainPadding } from '../styles';
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { createLanguageList, LanguageListItem } from './createLanguageList';
+import { createNativeWrapper } from 'react-native-gesture-handler';
+
+const SectionList = createNativeWrapper(NativeSectionList, {
+  disallowInterruption: true,
+  shouldActivateOnStart: true,
+});
 
 type CreateItemProps = {
   insets: EdgeInsets;
