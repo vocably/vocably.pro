@@ -5,6 +5,7 @@ import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useState } from 'react';
 import {
   PixelRatio,
+  Platform,
   Pressable,
   StyleProp,
   View,
@@ -98,7 +99,9 @@ export const CardListItem: FC<Props> = ({
                   language={card.language}
                   size={22}
                   style={{
-                    transform: [{ translateY: 4 }],
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 5 : 1 },
+                    ],
                   }}
                 />{' '}
               </>

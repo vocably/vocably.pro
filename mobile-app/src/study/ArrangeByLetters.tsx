@@ -340,7 +340,13 @@ export const ArrangeByLetters: FC<Props> = ({
             </Button>
           )}
           {isAnswerVisible && (
-            <Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 4,
+              }}
+            >
               {isGoogleTTSLanguage(card.data.language) && (
                 <>
                   <PlaySound
@@ -348,18 +354,11 @@ export const ArrangeByLetters: FC<Props> = ({
                     text={card.data.source}
                     language={card.data.language}
                     size={24}
-                    style={{
-                      transform: [
-                        {
-                          translateY: 7 * fontScale,
-                        },
-                      ],
-                    }}
                   />{' '}
                 </>
               )}
               <Text>{correctString}</Text>
-            </Text>
+            </View>
           )}
         </View>
       </Displayer>
