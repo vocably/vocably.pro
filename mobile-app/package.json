@@ -64,7 +64,7 @@
     "react-native-screens": "4.25.2",
     "react-native-shared-group-preferences": "^1.1.24",
     "react-native-sortables": "^1.9.2",
-    "react-native-sound": "0.11.2",
+    "react-native-sound": "^0.13.0",
     "react-native-swipe-list-view": "3.2.9",
     "react-native-swiper": "^1.6.0",
     "react-native-vector-icons": "10.0.3",

@@ -2303,11 +2303,28 @@ PODS:
     - Yoga
   - RNShareMenu (6.0.0):
     - React
-  - RNSound (0.11.2):
+  - RNSound (0.13.0):
+    - hermes-engine
+    - RCTRequired
+    - RCTTypeSafety
     - React-Core
-    - RNSound/Core (= 0.11.2)
-  - RNSound/Core (0.11.2):
-    - React-Core
+    - React-Core-prebuilt
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - ReactNativeDependencies
+    - Yoga
   - RNSVG (15.15.5):
     - hermes-engine
     - RCTRequired
@@ -2879,7 +2896,7 @@ SPEC CHECKSUMS:
   RNScreens: 032083414633a4d94cbcf08f8ab5019d72d1ba36
   RNSentry: 76a510d7e87873d048b44d5d98e2d6828d723135
   RNShareMenu: cb9dac548c8bf147d06f0bf07296ad51ea9f5fc3
-  RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
+  RNSound: 0c24533b80b985c43bf9881cbfbdecef03c58124
   RNSVG: a37350c7bc37452fd2b209efa0806f1de0f847ae
   RNVectorIcons: ef8dd6e01bdeaa2b1a19703925f9b98ac028cf6a
   RNWorklets: 32b9ca9e0588b838ce3202a9ea3971f553c9011c
