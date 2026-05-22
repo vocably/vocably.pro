@@ -39,7 +39,7 @@ type Props = {
 };
 
 const textTransform = [{ translateY: 6 }];
-const lineHeight = 24;
+const lineHeight = Platform.OS === 'ios' ? 26 : 20;
 
 export const CardListItem: FC<Props> = ({
   card,
@@ -154,7 +154,9 @@ export const CardListItem: FC<Props> = ({
                   }}
                   style={({ pressed }) => ({
                     opacity: pressed ? 0.4 : 1,
-                    transform: [{ translateY: 3 }],
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 6 : 0 },
+                    ],
                   })}
                 >
                   <Icon
