@@ -1,0 +1,290 @@
+diff --git a/node_modules/react-native-shared-group-preferences/android/build.gradle b/node_modules/react-native-shared-group-preferences/android/build.gradle
+index a0014bc..1188964 100644
+--- a/node_modules/react-native-shared-group-preferences/android/build.gradle
++++ b/node_modules/react-native-shared-group-preferences/android/build.gradle
+@@ -1,7 +1,8 @@
+ 
+ buildscript {
+     repositories {
+-        jcenter()
++        google()
++        mavenCentral()
+     }
+ 
+     dependencies {
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/.transforms/59f7386df7a657a96e0bd3387c57b53b/results.bin b/node_modules/react-native-shared-group-preferences/android/build/.transforms/59f7386df7a657a96e0bd3387c57b53b/results.bin
+new file mode 100644
+index 0000000..0d259dd
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/.transforms/59f7386df7a657a96e0bd3387c57b53b/results.bin
+@@ -0,0 +1 @@
++o/classes
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/.transforms/59f7386df7a657a96e0bd3387c57b53b/transformed/classes/classes_dex/classes.dex b/node_modules/react-native-shared-group-preferences/android/build/.transforms/59f7386df7a657a96e0bd3387c57b53b/transformed/classes/classes_dex/classes.dex
+new file mode 100644
+index 0000000..c3bf7d7
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/.transforms/59f7386df7a657a96e0bd3387c57b53b/transformed/classes/classes_dex/classes.dex differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/results.bin b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/results.bin
+new file mode 100644
+index 0000000..e1640c9
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/results.bin
+@@ -0,0 +1 @@
++o/bundleLibRuntimeToDirRelease
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.dex b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.dex
+new file mode 100644
+index 0000000..94ce6aa
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.dex differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.dex b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.dex
+new file mode 100644
+index 0000000..cab1c0b
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.dex differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.dex b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.dex
+new file mode 100644
+index 0000000..37e5f66
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/bundleLibRuntimeToDirRelease_dex/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.dex differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/desugar_graph.bin b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/desugar_graph.bin
+new file mode 100644
+index 0000000..601f245
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/.transforms/71ea2c06ea479bb1e7c5336fc535b6a3/transformed/bundleLibRuntimeToDirRelease/desugar_graph.bin differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/generated/source/buildConfig/release/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.java b/node_modules/react-native-shared-group-preferences/android/build/generated/source/buildConfig/release/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.java
+new file mode 100644
+index 0000000..e32fcb6
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/generated/source/buildConfig/release/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.java
+@@ -0,0 +1,10 @@
++/**
++ * Automatically generated file. DO NOT MODIFY
++ */
++package com.poppop.RNReactNativeSharedGroupPreferences;
++
++public final class BuildConfig {
++  public static final boolean DEBUG = false;
++  public static final String LIBRARY_PACKAGE_NAME = "com.poppop.RNReactNativeSharedGroupPreferences";
++  public static final String BUILD_TYPE = "release";
++}
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/aapt_friendly_merged_manifests/release/processReleaseManifest/aapt/AndroidManifest.xml b/node_modules/react-native-shared-group-preferences/android/build/intermediates/aapt_friendly_merged_manifests/release/processReleaseManifest/aapt/AndroidManifest.xml
+new file mode 100644
+index 0000000..1143a46
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/aapt_friendly_merged_manifests/release/processReleaseManifest/aapt/AndroidManifest.xml
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.poppop.RNReactNativeSharedGroupPreferences" >
++
++    <uses-sdk android:minSdkVersion="21" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/aapt_friendly_merged_manifests/release/processReleaseManifest/aapt/output-metadata.json b/node_modules/react-native-shared-group-preferences/android/build/intermediates/aapt_friendly_merged_manifests/release/processReleaseManifest/aapt/output-metadata.json
+new file mode 100644
+index 0000000..c40b1c6
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/aapt_friendly_merged_manifests/release/processReleaseManifest/aapt/output-metadata.json
+@@ -0,0 +1,18 @@
++{
++  "version": 3,
++  "artifactType": {
++    "type": "AAPT_FRIENDLY_MERGED_MANIFESTS",
++    "kind": "Directory"
++  },
++  "applicationId": "com.poppop.RNReactNativeSharedGroupPreferences",
++  "variantName": "release",
++  "elements": [
++    {
++      "type": "SINGLE",
++      "filters": [],
++      "attributes": [],
++      "outputFile": "AndroidManifest.xml"
++    }
++  ],
++  "elementType": "File"
++}
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/aar_metadata/release/writeReleaseAarMetadata/aar-metadata.properties b/node_modules/react-native-shared-group-preferences/android/build/intermediates/aar_metadata/release/writeReleaseAarMetadata/aar-metadata.properties
+new file mode 100644
+index 0000000..1211b1e
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/aar_metadata/release/writeReleaseAarMetadata/aar-metadata.properties
+@@ -0,0 +1,6 @@
++aarFormatVersion=1.0
++aarMetadataVersion=1.0
++minCompileSdk=1
++minCompileSdkExtension=0
++minAndroidGradlePluginVersion=1.0.0
++coreLibraryDesugaringEnabled=false
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/annotation_processor_list/release/javaPreCompileRelease/annotationProcessors.json b/node_modules/react-native-shared-group-preferences/android/build/intermediates/annotation_processor_list/release/javaPreCompileRelease/annotationProcessors.json
+new file mode 100644
+index 0000000..9e26dfe
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/annotation_processor_list/release/javaPreCompileRelease/annotationProcessors.json
+@@ -0,0 +1 @@
++{}
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar b/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar
+new file mode 100644
+index 0000000..e820d17
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_library_classes_jar/release/bundleLibCompileToJarRelease/classes.jar differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar b/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar
+new file mode 100644
+index 0000000..4f16700
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_r_class_jar/release/generateReleaseRFile/R.jar differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_symbol_list/release/generateReleaseRFile/R.txt b/node_modules/react-native-shared-group-preferences/android/build/intermediates/compile_symbol_list/release/generateReleaseRFile/R.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml
+new file mode 100644
+index 0000000..a4747b1
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/mergeReleaseJniLibFolders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/jniLibs"/></dataSet><dataSet config="release" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/release/jniLibs"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/mergeReleaseShaders/merger.xml b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/mergeReleaseShaders/merger.xml
+new file mode 100644
+index 0000000..7bcb0d9
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/mergeReleaseShaders/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/shaders"/></dataSet><dataSet config="release" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/release/shaders"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/packageReleaseAssets/merger.xml b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/packageReleaseAssets/merger.xml
+new file mode 100644
+index 0000000..95357a4
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/packageReleaseAssets/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet config="main" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/assets"/></dataSet><dataSet config="release" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/release/assets"/></dataSet><dataSet config="generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/build/intermediates/shader_assets/release/compileReleaseShaders/out"/></dataSet></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/release/packageReleaseResources/compile-file-map.properties b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/release/packageReleaseResources/compile-file-map.properties
+new file mode 100644
+index 0000000..76b1633
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/release/packageReleaseResources/compile-file-map.properties
+@@ -0,0 +1 @@
++#Tue May 19 08:51:27 CEST 2026
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/release/packageReleaseResources/merger.xml b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/release/packageReleaseResources/merger.xml
+new file mode 100644
+index 0000000..7462256
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/incremental/release/packageReleaseResources/merger.xml
+@@ -0,0 +1,2 @@
++<?xml version="1.0" encoding="utf-8"?>
++<merger version="3"><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="main" generated-set="main$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="release$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/release/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="release" generated-set="release$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/release/res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/build/generated/res/resValues/release"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="/Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/build/generated/res/resValues/release"/></dataSet><mergedItems/></merger>
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.class b/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.class
+new file mode 100644
+index 0000000..4e87176
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.class differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.class b/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.class
+new file mode 100644
+index 0000000..3dd62f3
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.class differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.class b/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.class
+new file mode 100644
+index 0000000..8454c89
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/javac/release/compileReleaseJavaWithJavac/classes/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.class differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/local_only_symbol_list/release/parseReleaseLocalResources/R-def.txt b/node_modules/react-native-shared-group-preferences/android/build/intermediates/local_only_symbol_list/release/parseReleaseLocalResources/R-def.txt
+new file mode 100644
+index 0000000..78ac5b8
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/local_only_symbol_list/release/parseReleaseLocalResources/R-def.txt
+@@ -0,0 +1,2 @@
++R_DEF: Internal format may change without notice
++local
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/manifest_merge_blame_file/release/processReleaseManifest/manifest-merger-blame-release-report.txt b/node_modules/react-native-shared-group-preferences/android/build/intermediates/manifest_merge_blame_file/release/processReleaseManifest/manifest-merger-blame-release-report.txt
+new file mode 100644
+index 0000000..7c795af
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/manifest_merge_blame_file/release/processReleaseManifest/manifest-merger-blame-release-report.txt
+@@ -0,0 +1,7 @@
++1<?xml version="1.0" encoding="utf-8"?>
++2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++3    package="com.poppop.RNReactNativeSharedGroupPreferences" >
++4
++5    <uses-sdk android:minSdkVersion="21" />
++6
++7</manifest>
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml b/node_modules/react-native-shared-group-preferences/android/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml
+new file mode 100644
+index 0000000..1143a46
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/merged_manifest/release/processReleaseManifest/AndroidManifest.xml
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="utf-8"?>
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.poppop.RNReactNativeSharedGroupPreferences" >
++
++    <uses-sdk android:minSdkVersion="21" />
++
++</manifest>
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/navigation_json/release/extractDeepLinksRelease/navigation.json b/node_modules/react-native-shared-group-preferences/android/build/intermediates/navigation_json/release/extractDeepLinksRelease/navigation.json
+new file mode 100644
+index 0000000..0637a08
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/navigation_json/release/extractDeepLinksRelease/navigation.json
+@@ -0,0 +1 @@
++[]
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/nested_resources_validation_report/release/generateReleaseResources/nestedResourcesValidationReport.txt b/node_modules/react-native-shared-group-preferences/android/build/intermediates/nested_resources_validation_report/release/generateReleaseResources/nestedResourcesValidationReport.txt
+new file mode 100644
+index 0000000..08f4ebe
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/nested_resources_validation_report/release/generateReleaseResources/nestedResourcesValidationReport.txt
+@@ -0,0 +1 @@
++0 Warning/Error
+\ No newline at end of file
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.class b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.class
+new file mode 100644
+index 0000000..4e87176
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/BuildConfig.class differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.class b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.class
+new file mode 100644
+index 0000000..3dd62f3
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesModule.class differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.class b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.class
+new file mode 100644
+index 0000000..8454c89
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_dir/release/bundleLibRuntimeToDirRelease/com/poppop/RNReactNativeSharedGroupPreferences/RNReactNativeSharedGroupPreferencesPackage.class differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_jar/release/bundleLibRuntimeToJarRelease/classes.jar b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_jar/release/bundleLibRuntimeToJarRelease/classes.jar
+new file mode 100644
+index 0000000..1932458
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/intermediates/runtime_library_classes_jar/release/bundleLibRuntimeToJarRelease/classes.jar differ
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/intermediates/symbol_list_with_package_name/release/generateReleaseRFile/package-aware-r.txt b/node_modules/react-native-shared-group-preferences/android/build/intermediates/symbol_list_with_package_name/release/generateReleaseRFile/package-aware-r.txt
+new file mode 100644
+index 0000000..c3e91ca
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/intermediates/symbol_list_with_package_name/release/generateReleaseRFile/package-aware-r.txt
+@@ -0,0 +1 @@
++com.poppop.RNReactNativeSharedGroupPreferences
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/outputs/logs/manifest-merger-release-report.txt b/node_modules/react-native-shared-group-preferences/android/build/outputs/logs/manifest-merger-release-report.txt
+new file mode 100644
+index 0000000..0b5936e
+--- /dev/null
++++ b/node_modules/react-native-shared-group-preferences/android/build/outputs/logs/manifest-merger-release-report.txt
+@@ -0,0 +1,17 @@
++-- Merging decision tree log ---
++manifest
++ADDED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml:2:1-5:12
++INJECTED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml:2:1-5:12
++	package
++		ADDED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml:3:11-67
++		INJECTED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml
++	xmlns:android
++		ADDED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml:2:11-69
++uses-sdk
++INJECTED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
++INJECTED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml
++INJECTED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml
++	android:targetSdkVersion
++		INJECTED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml
++	android:minSdkVersion
++		INJECTED from /Users/dima/Documents/vocably/mobile-app/node_modules/react-native-shared-group-preferences/android/src/main/AndroidManifest.xml
+diff --git a/node_modules/react-native-shared-group-preferences/android/build/tmp/compileReleaseJavaWithJavac/previous-compilation-data.bin b/node_modules/react-native-shared-group-preferences/android/build/tmp/compileReleaseJavaWithJavac/previous-compilation-data.bin
+new file mode 100644
+index 0000000..1a16ca3
+Binary files /dev/null and b/node_modules/react-native-shared-group-preferences/android/build/tmp/compileReleaseJavaWithJavac/previous-compilation-data.bin differ
