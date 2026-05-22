@@ -16,7 +16,6 @@ import { createNativeWrapper } from 'react-native-gesture-handler';
 
 const SectionList = createNativeWrapper(NativeSectionList, {
   disallowInterruption: true,
-  shouldActivateOnStart: true,
 });
 
 type CreateItemProps = {
