@@ -85,7 +85,7 @@ export const CardListItem: FC<Props> = ({
           width: '100%',
         }}
       >
-        <View>
+        <View style={{ width: '100%' }}>
           <Text
             style={{
               fontSize: 16,
@@ -99,9 +99,8 @@ export const CardListItem: FC<Props> = ({
                   language={card.language}
                   size={22}
                   style={{
-                    height: 24 * 1.3 * fontScale,
                     transform: [
-                      { translateY: Platform.OS === 'android' ? 10 : 8 },
+                      { translateY: Platform.OS === 'android' ? 6 : 2 },
                     ],
                     justifyContent: 'center',
                   }}
@@ -127,7 +126,9 @@ export const CardListItem: FC<Props> = ({
                   }}
                   style={({ pressed }) => ({
                     opacity: pressed ? 0.4 : 1,
-                    transform: [{ translateY: 3 }],
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 6 : 0 },
+                    ],
                   })}
                 >
                   <Icon
