@@ -1,7 +1,7 @@
 import { CardItem, DeckSettings, isGoogleTTSLanguage } from '@vocably/model';
 import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { PixelRatio, View } from 'react-native';
+import { PixelRatio, Platform, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { CardExample, CardExampleRef } from '../../CardExample';
 import { PlaySound, PlaySoundRef } from '../../PlaySound';
@@ -88,7 +88,10 @@ export const CardFront: FC<Props> = ({
                 style={{
                   transform: [
                     {
-                      translateY: 4 * fontScale,
+                      translateY:
+                        Platform.OS === 'ios'
+                          ? -1 * fontScale
+                          : 5 * 1.2 * fontScale,
                     },
                   ],
                 }}

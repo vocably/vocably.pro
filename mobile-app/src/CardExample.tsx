@@ -103,7 +103,7 @@ export const CardExample = forwardRef<CardExampleRef, Props>(
                 }}
                 text={text}
                 language={language}
-                size={get(textStyle, 'fontSize', 14) * fontScale}
+                size={get(textStyle, 'fontSize', 14)}
                 hitSlop={4}
                 disabled={playDisabled}
                 style={{

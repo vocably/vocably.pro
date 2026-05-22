@@ -99,9 +99,11 @@ export const CardListItem: FC<Props> = ({
                   language={card.language}
                   size={22}
                   style={{
+                    height: 24 * 1.3 * fontScale,
                     transform: [
-                      { translateY: Platform.OS === 'android' ? 5 : 1 },
+                      { translateY: Platform.OS === 'android' ? 10 : 8 },
                     ],
+                    justifyContent: 'center',
                   }}
                 />{' '}
               </>

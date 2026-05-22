@@ -348,14 +348,12 @@ export const ArrangeByLetters: FC<Props> = ({
               }}
             >
               {isGoogleTTSLanguage(card.data.language) && (
-                <>
-                  <PlaySound
-                    ref={playSoundRef}
-                    text={card.data.source}
-                    language={card.data.language}
-                    size={24}
-                  />{' '}
-                </>
+                <PlaySound
+                  ref={playSoundRef}
+                  text={card.data.source}
+                  language={card.data.language}
+                  size={24}
+                />
               )}
               <Text>{correctString}</Text>
             </View>
