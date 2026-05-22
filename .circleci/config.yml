@@ -155,7 +155,6 @@ workflows:
   bumpNewVersion:
     when:
       equal: ['webhook', << pipeline.trigger_source >>]
-    max_auto_reruns: 3
     jobs:
       - bumpNewVersion:
           <<: *main_only

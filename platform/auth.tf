@@ -342,6 +342,21 @@ resource "aws_cognito_user_pool_client" "client" {
   allowed_oauth_flows_user_pool_client = true
   supported_identity_providers         = ["Google", "SignInWithApple"]
   depends_on                           = [aws_cognito_identity_provider.google]
+
+  refresh_token_validity = 30
+  access_token_validity  = 60
+  id_token_validity      = 60
+
+  token_validity_units {
+    refresh_token = "days"
+    access_token  = "minutes"
+    id_token      = "minutes"
+  }
+
+  refresh_token_rotation {
+    feature                    = "DISABLED"
+    retry_grace_period_seconds = 0
+  }
 }
 
 resource "aws_cognito_identity_pool" "users" {
