@@ -21,6 +21,9 @@ import { TranslationPresetContainer } from './TranslationPreset/TranslationPrese
 import { UserMetadataContainer } from './UserMetadataContainer';
 import { apiEventBus } from './apiEventBus';
 import { safeFetchAuthSession } from './auth/safeFunctions';
+import { fixGhostSound } from './fixGhostSound';
+
+fixGhostSound();
 
 configureApi({
   publicBaseUrl: PUBLIC_API_BASE_URL,
