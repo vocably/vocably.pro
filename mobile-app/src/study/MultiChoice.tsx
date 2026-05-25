@@ -8,7 +8,7 @@ import { SrsScore } from '@vocably/srs';
 import { sanitizeTranscript } from '@vocably/sulna';
 import { shuffle } from 'lodash-es';
 import React, { FC, useMemo, useRef, useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Text, TouchableRipple, useTheme } from 'react-native-paper';
 import { CardDefinition } from '../CardDefinition';
@@ -259,7 +259,10 @@ export const MultiChoice: FC<Props> = ({
                             top: '50%',
                             display: playSoundIconVisible ? 'flex' : 'none',
                             transform: [
-                              { translateY: -12 }, // half of the size
+                              {
+                                translateY:
+                                  Platform.OS === 'android' ? -12 : -13,
+                              }, // half of the size
                             ],
                           }}
                           color={

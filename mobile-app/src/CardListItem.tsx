@@ -5,6 +5,7 @@ import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useState } from 'react';
 import {
   PixelRatio,
+  Platform,
   Pressable,
   StyleProp,
   View,
@@ -38,7 +39,7 @@ type Props = {
 };
 
 const textTransform = [{ translateY: 6 }];
-const lineHeight = 24;
+const lineHeight = Platform.OS === 'ios' ? 26 : 20;
 
 export const CardListItem: FC<Props> = ({
   card,
@@ -84,7 +85,7 @@ export const CardListItem: FC<Props> = ({
           width: '100%',
         }}
       >
-        <View>
+        <View style={{ width: '100%' }}>
           <Text
             style={{
               fontSize: 16,
@@ -98,7 +99,10 @@ export const CardListItem: FC<Props> = ({
                   language={card.language}
                   size={22}
                   style={{
-                    transform: [{ translateY: 4 }],
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 6 : 2 },
+                    ],
+                    justifyContent: 'center',
                   }}
                 />{' '}
               </>
@@ -122,7 +126,9 @@ export const CardListItem: FC<Props> = ({
                   }}
                   style={({ pressed }) => ({
                     opacity: pressed ? 0.4 : 1,
-                    transform: [{ translateY: 3 }],
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 6 : 0 },
+                    ],
                   })}
                 >
                   <Icon
@@ -148,7 +154,9 @@ export const CardListItem: FC<Props> = ({
                   }}
                   style={({ pressed }) => ({
                     opacity: pressed ? 0.4 : 1,
-                    transform: [{ translateY: 3 }],
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 6 : 0 },
+                    ],
                   })}
                 >
                   <Icon
