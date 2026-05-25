@@ -397,7 +397,7 @@ export const LookUpScreen: FC<Props> = ({
                 >
                   <View
                     style={{
-                      backgroundColor: theme.colors.elevation.level1,
+                      backgroundColor: theme.colors.elevation.level2,
                       padding: 16,
                       borderRadius: 8,
                       gap: 8,

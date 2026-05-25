@@ -21,11 +21,8 @@ import { TranslationPresetContainer } from './TranslationPreset/TranslationPrese
 import { UserMetadataContainer } from './UserMetadataContainer';
 import { apiEventBus } from './apiEventBus';
 import { safeFetchAuthSession } from './auth/safeFunctions';
-import { fixGhostSound } from './fixGhostSound';
 import { StatusBar } from 'react-native';
 import { useColorScheme } from './useColorScheme';
-
-fixGhostSound();
 
 configureApi({
   publicBaseUrl: PUBLIC_API_BASE_URL,
