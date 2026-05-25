@@ -11,7 +11,12 @@ import {
   Text,
   useTheme,
 } from 'react-native-paper';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import Animated, {
+  FadeIn,
+  FadeOut,
+  SlideInUp,
+  SlideOutUp,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import { analyze } from './api';
@@ -33,8 +38,25 @@ import { createExplainPayload } from '@vocably/model-operations';
 import UnitsOfSpeechAnalyze from './GenerateCards/UnitsOfSpeechAnalyze';
 import { Thinking } from './Chat/Thinking';
 import { TranslationPresetFormCompact } from './TranslationPresetFormCompact';
+import Markdown from 'react-native-markdown-display';
+import { greeting } from './LookUpScreen/greeting';
 
 const padding = 16;
+
+const hello = [
+  'hello',
+  'hi',
+  'hey',
+  'hola',
+  'halo',
+  'aloha',
+  'bonjour',
+  'ciao',
+  'salut',
+  'oi',
+  'привет',
+  'nihao',
+];
 
 type ExplainStatus =
   | {
@@ -122,6 +144,8 @@ export const LookUpScreen: FC<Props> = ({
 
   const abortControllerRef = useRef<AbortController | null>(null);
 
+  const [showHelloMessage, setShowHelloMessage] = useState(false);
+
   const lookUp = async () => {
     cancelThePreviousLookUp();
 
@@ -131,6 +155,11 @@ export const LookUpScreen: FC<Props> = ({
 
     if (translationPresetState.status === 'unknown') {
       return;
+    }
+
+    if (hello.includes(lookUpText.toLowerCase())) {
+      posthog.capture('greetingShowedUp');
+      setShowHelloMessage(true);
     }
 
     Keyboard.dismiss();
@@ -347,6 +376,81 @@ export const LookUpScreen: FC<Props> = ({
               paddingBottom: insets.bottom + padding - 2,
             }}
           >
+            {showHelloMessage && (
+              <Animated.View
+                entering={SlideInUp.duration(300)}
+                exiting={SlideOutUp.duration(300)}
+                style={{
+                  width: '100%',
+                  alignItems: 'stretch',
+                  flex: 1,
+                  overflow: 'hidden',
+                }}
+              >
+                <View
+                  style={{
+                    paddingLeft: insets.left + padding,
+                    paddingRight: insets.right + padding,
+                    paddingVertical: padding,
+                    position: 'relative',
+                  }}
+                >
+                  <View
+                    style={{
+                      backgroundColor: theme.colors.elevation.level1,
+                      padding: 16,
+                      borderRadius: 8,
+                      gap: 8,
+                    }}
+                  >
+                    <Markdown
+                      style={{
+                        body: {
+                          color: theme.colors.onBackground,
+                        },
+                      }}
+                    >
+                      {greeting[
+                        translationPresetState.preset
+                          .translationLanguage as GoogleLanguage
+                      ]?.body ?? greeting['en']?.body}
+                    </Markdown>
+
+                    <Button
+                      icon={'robot-outline'}
+                      textColor={theme.colors.onBackground}
+                      style={{
+                        borderColor: theme.colors.onBackground,
+                      }}
+                      mode={'outlined'}
+                      onPress={() => {
+                        setNoFocusOnReturn(true);
+                        if (searchInputRef.current) {
+                          searchInputRef.current.blur();
+                        }
+                        navigation.navigate('GenerateCards');
+                      }}
+                    >
+                      {greeting[
+                        translationPresetState.preset
+                          .translationLanguage as GoogleLanguage
+                      ]?.button ?? greeting['en']?.button}
+                    </Button>
+                  </View>
+
+                  <IconButton
+                    icon={'close'}
+                    style={{
+                      position: 'absolute',
+                      right: padding + 8,
+                      top: padding + 12,
+                    }}
+                    size={16}
+                    onPress={() => setShowHelloMessage(false)}
+                  />
+                </View>
+              </Animated.View>
+            )}
             {!isAnalyzingPreset && !lookUpResult && !isSharedLookUp && (
               <View
                 style={{
