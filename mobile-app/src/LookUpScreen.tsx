@@ -1,7 +1,7 @@
 import { NavigationProp } from '@react-navigation/native';
 import { AnalyzePayload, GoogleLanguage, UnitOfSpeech } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
-import { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, Linking, ScrollView, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import {
@@ -363,6 +363,7 @@ export const LookUpScreen: FC<Props> = ({
                     gap: 12,
                     alignItems: 'stretch',
                     justifyContent: 'center',
+                    width: '90%',
                   }}
                 >
                   <Text style={{ textAlign: 'center' }}>

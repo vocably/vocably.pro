@@ -2,6 +2,7 @@
 {
   "extends": "@react-native/typescript-config/tsconfig.json",
   "compilerOptions": {
+    "jsx": "react-native",
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
