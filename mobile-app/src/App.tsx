@@ -22,6 +22,8 @@ import { UserMetadataContainer } from './UserMetadataContainer';
 import { apiEventBus } from './apiEventBus';
 import { safeFetchAuthSession } from './auth/safeFunctions';
 import { fixGhostSound } from './fixGhostSound';
+import { StatusBar } from 'react-native';
+import { useColorScheme } from './useColorScheme';
 
 fixGhostSound();
 
@@ -41,8 +43,14 @@ configureApi({
 
 const App = () => {
   configurePurchases();
+  const colorScheme = useColorScheme();
   return (
     <KeyboardProvider>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent={false}
+        barStyle={colorScheme === 'light' ? 'dark-content' : 'light-content'}
+      />
       <ThemeProvider>
         <NavigationContainer>
           <PostHogProvider>
