@@ -632,6 +632,23 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                         size={24}
                         color={theme.colors.onBackground}
                       />
+                      {section.section.id === 'notStarted' && (
+                        <Button
+                          style={{ marginLeft: 'auto' }}
+                          labelStyle={{
+                            fontSize: 14 * fontSizeMultiplier,
+                          }}
+                          compact={true}
+                          onPress={() => {
+                            postHog.capture('studyNeverStudied');
+                            navigation.navigate('Study', {
+                              planSection: section.section.id,
+                            });
+                          }}
+                        >
+                          Study
+                        </Button>
+                      )}
                       {section.section.id === 'tomorrow' && (
                         <Button
                           style={{ marginLeft: 'auto' }}
