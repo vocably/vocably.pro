@@ -74,5 +74,40 @@
     "detectedInputType": "word",
     "extraItems": [],
     "explanation": ""
+  },
+  "scoop": {
+    "source": "scoop",
+    "sourceLanguage": "de",
+    "targetLanguage": "en",
+    "isDirect": false,
+    "deck": {
+      "cards": [],
+      "tags": [],
+      "language": "de"
+    },
+    "items": [
+      {
+        "source": "schöpfen",
+        "translation": "scoop, draw, create",
+        "definitions": [
+          "Wasser oder andere Flüssigkeiten aus einem Behälter entnehmen",
+          "etwas Neues oder Originelles hervorbringen, kreieren",
+          "Mut, Kraft oder Hoffnung gewinnen"
+        ],
+        "examples": [
+          "Wasser aus dem Brunnen schöpfen.",
+          "Neue Ideen schöpfen.",
+          "Kraft aus der Natur schöpfen."
+        ],
+        "partOfSpeech": "verb",
+        "ipa": "ˈʃœp͡fn̩",
+        "pastTenses": "schöpfte, hat geschöpft",
+        "presentTenses": "ich schöpfe, du schöpfst, er/sie/es schöpft",
+        "tense": "present"
+      }
+    ],
+    "detectedInputType": "word",
+    "extraItems": [],
+    "explanation": ""
   }
 }

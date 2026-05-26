@@ -9,6 +9,7 @@ import {
   writeFileSync as nativeWriteFileSync,
 } from 'node:fs';
 import {
+  AnalysisItem,
   isGoogleLanguage,
   languageList,
   TranslationCards,
@@ -19,7 +20,7 @@ import { generateSeoSearchSitemap } from './generateSeoSearchSitemap';
 import { createHash } from 'node:crypto';
 import { cardToLocationHash } from '@vocably/model-operations';
 
-const globalVersion = 1;
+const globalVersion = 2;
 
 type ContentOptions = {
   word: string;
@@ -79,6 +80,30 @@ type Options = {
 type StaticPage = {
   fileName: string;
   size: number;
+};
+
+const htmlEntities = (rawText: string): string =>
+  rawText.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
+    return '&#' + i.charCodeAt(0) + ';';
+  });
+
+const itemMeaning = (item: AnalysisItem): string =>
+  `<strong class="text-nowrap">${htmlEntities(item.source)}</strong>${item.partOfSpeech ? ` (${htmlEntities(item.partOfSpeech)})` : ''}`;
+
+const buildSeoParagraph = (translationCards: TranslationCards): string => {
+  const start = `<strong>${htmlEntities(translationCards.source)}</strong> in ${languageList[translationCards.sourceLanguage]}`;
+  if (translationCards.items.length === 1) {
+    return start + ` is ${itemMeaning(translationCards.items[0])}.`;
+  }
+
+  const meaning = translationCards.items.map(itemMeaning);
+
+  return (
+    start +
+    ` can be: ` +
+    [meaning.slice(0, -1).join(', '), meaning.slice(-1)].join(' or ') +
+    '.'
+  );
 };
 
 export const buildStaticSearchPages = async ({
@@ -172,7 +197,7 @@ export const buildStaticSearchPages = async ({
         templateHtml
           .replace(
             replaceExpressions.container,
-            `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><div class="results-container"><vocably-translation  result='${JSON.stringify(
+            `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><p class="mb-2" style="margin-left: 12px;">${buildSeoParagraph(translationCards)}</p><div class="results-container"><vocably-translation  result='${JSON.stringify(
               {
                 success: true,
                 value: translationCards,
