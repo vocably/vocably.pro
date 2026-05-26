@@ -92,12 +92,6 @@ const loadAudio = async (
   });
 };
 
-const releaseOnAndroid = (audio: Sound) => {
-  if (Platform.OS === 'android') {
-    audio.release();
-  }
-};
-
 export const PlaySoundContainer: FC<PropsWithChildren> = ({ children }) => {
   const [playing, setPlaying] = useState<PlayingKey | null>(null);
   const audioRef = useRef<Sound | null>(null);
@@ -117,7 +111,9 @@ export const PlaySoundContainer: FC<PropsWithChildren> = ({ children }) => {
           audio.release();
         });
       } else {
-        audio.stop();
+        audio.stop(() => {
+          audio.release();
+        });
       }
     }
 
@@ -145,7 +141,7 @@ export const PlaySoundContainer: FC<PropsWithChildren> = ({ children }) => {
       if (token !== playTokenRef.current) {
         if (loadedAudioResult.success) {
           const { audio } = loadedAudioResult.value;
-          releaseOnAndroid(audio);
+          audio.release();
         }
         return { success: false, reason: 'Play sound was stopped.' };
       }
@@ -161,13 +157,11 @@ export const PlaySoundContainer: FC<PropsWithChildren> = ({ children }) => {
       return new Promise<Result<unknown>>((resolve) => {
         resolverRef.current = resolve;
         audio.play((success: any) => {
-          // A newer play() / stop() already handled cleanup and resolved us.
+          audio.release();
           if (token !== playTokenRef.current) {
-            releaseOnAndroid(audio);
             return;
           }
 
-          releaseOnAndroid(audio);
           audioRef.current = null;
           resolverRef.current = null;
           setPlaying(null);
