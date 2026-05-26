@@ -9,6 +9,7 @@ import { CustomerInfoContainer } from '../CustomerInfoContainer';
 import { LanguagesContainer } from '../languages/LanguagesContainer';
 import { LanguageSelectorModal } from '../LanguageSelectorModal';
 import { NavigationContainer } from '../NavigationContainer';
+import { PlaySoundContainer } from '../PlaySoundContainer';
 import { PostHogProvider } from '../PostHogProvider';
 import { ThemeProvider } from '../ThemeProvider';
 import { TranslationPresetContainer } from '../TranslationPreset/TranslationPresetContainer';
@@ -36,41 +37,43 @@ export const ShareIntentAppBase: FC<Props> = ({ os }) => {
               <AuthContainer>
                 <Login os={os}>
                   <CustomerInfoContainer>
-                    <LanguagesContainer>
-                      <TranslationPresetContainer>
-                        <SafeAreaProvider>
-                          <Stack.Navigator>
-                            <Stack.Screen
-                              name="Vocably"
-                              component={ShareIntentLookUpScreen}
-                              options={{
-                                headerShown: false,
-                                presentation: 'card',
-                                gestureEnabled: true,
-                              }}
-                            />
-                            <Stack.Screen
-                              name="LanguageSelector"
-                              component={LanguageSelectorModal}
-                              options={{
-                                headerShown: true,
-                                presentation: 'modal',
-                                gestureEnabled: true,
-                              }}
-                            />
-                            <Stack.Screen
-                              name="LookUpModal"
-                              component={LookUpModal}
-                              options={{
-                                headerShown: false,
-                                presentation: 'modal',
-                                gestureEnabled: true,
-                              }}
-                            />
-                          </Stack.Navigator>
-                        </SafeAreaProvider>
-                      </TranslationPresetContainer>
-                    </LanguagesContainer>
+                    <PlaySoundContainer>
+                      <LanguagesContainer>
+                        <TranslationPresetContainer>
+                          <SafeAreaProvider>
+                            <Stack.Navigator>
+                              <Stack.Screen
+                                name="Vocably"
+                                component={ShareIntentLookUpScreen}
+                                options={{
+                                  headerShown: false,
+                                  presentation: 'card',
+                                  gestureEnabled: true,
+                                }}
+                              />
+                              <Stack.Screen
+                                name="LanguageSelector"
+                                component={LanguageSelectorModal}
+                                options={{
+                                  headerShown: true,
+                                  presentation: 'modal',
+                                  gestureEnabled: true,
+                                }}
+                              />
+                              <Stack.Screen
+                                name="LookUpModal"
+                                component={LookUpModal}
+                                options={{
+                                  headerShown: false,
+                                  presentation: 'modal',
+                                  gestureEnabled: true,
+                                }}
+                              />
+                            </Stack.Navigator>
+                          </SafeAreaProvider>
+                        </TranslationPresetContainer>
+                      </LanguagesContainer>
+                    </PlaySoundContainer>
                   </CustomerInfoContainer>
                 </Login>
               </AuthContainer>

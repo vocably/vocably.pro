@@ -14,6 +14,7 @@ import { CustomerInfoContainer } from './CustomerInfoContainer';
 import { LanguagesContainer } from './languages/LanguagesContainer';
 import { NavigationContainer } from './NavigationContainer';
 import { NotificationsContainer } from './NotificationsContainer';
+import { PlaySoundContainer } from './PlaySoundContainer';
 import { PostHogProvider } from './PostHogProvider';
 import { RootModalStack } from './RootModalStack';
 import { ThemeProvider } from './ThemeProvider';
@@ -55,15 +56,17 @@ const App = () => {
               <AuthFlow>
                 <CustomerInfoContainer>
                   <NotificationsContainer>
-                    <UserMetadataContainer>
-                      <LanguagesContainer refreshLanguagesOnActive={true}>
-                        <TranslationPresetContainer>
-                          <SafeAreaProvider>
-                            <RootModalStack />
-                          </SafeAreaProvider>
-                        </TranslationPresetContainer>
-                      </LanguagesContainer>
-                    </UserMetadataContainer>
+                    <PlaySoundContainer>
+                      <UserMetadataContainer>
+                        <LanguagesContainer refreshLanguagesOnActive={true}>
+                          <TranslationPresetContainer>
+                            <SafeAreaProvider>
+                              <RootModalStack />
+                            </SafeAreaProvider>
+                          </TranslationPresetContainer>
+                        </LanguagesContainer>
+                      </UserMetadataContainer>
+                    </PlaySoundContainer>
                   </NotificationsContainer>
                 </CustomerInfoContainer>
               </AuthFlow>
