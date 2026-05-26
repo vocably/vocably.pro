@@ -323,11 +323,11 @@ export class VocablySearchForm {
             </button>
           </div>
           {!this.hideHint && (
-            <div class="hint">
+            <small class="hint">
               {t('search.hint', {
                 language: t(`objective_${this.values.sourceLanguage}`),
               })}
-            </div>
+            </small>
           )}
         </form>
       </Host>
