@@ -333,7 +333,7 @@ export const aiFetchPossibleTranslationsCached = async (
     await nodePutS3File(
       config.unitsOfSpeechBucket,
       fileName,
-      JSON.stringify(result.value)
+      JSON.stringify(result.value, null, 2)
     );
   }
 
