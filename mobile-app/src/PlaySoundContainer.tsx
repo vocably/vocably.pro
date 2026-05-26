@@ -10,6 +10,7 @@ import React, {
   useState,
 } from 'react';
 import { Platform } from 'react-native';
+import RNBlobUtil from 'react-native-blob-util';
 import Sound from 'react-native-sound';
 import { Sentry } from './BetterSentry';
 
@@ -33,54 +34,60 @@ export const PlaySoundContext = createContext<PlaySoundContextValue>({
 export const usePlaySound = (): PlaySoundContextValue =>
   useContext(PlaySoundContext);
 
-const loadAudio = (
+type LoadedAudio = { audio: Sound };
+
+const loadAudio = async (
   text: string,
   language: GoogleTTSLanguage
-): Promise<Result<Sound>> => {
-  return new Promise((resolve) => {
+): Promise<Result<LoadedAudio>> => {
+  return new Promise(async (resolve) => {
     const soundUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
       text
     )}&tl=${languageToGoogleTranslateLanguage(language)}&client=tw-ob`;
+
+    const localPath = `${RNBlobUtil.fs.dirs.CacheDir}/vocably_tts_${Date.now()}.mp3`;
+
+    RNBlobUtil.fs.ls(RNBlobUtil.fs.dirs.CacheDir).then(async (files) => {
+      for (const file of files) {
+        if (file.startsWith(`vocably_tts_`)) {
+          try {
+            await RNBlobUtil.fs.unlink(
+              `${RNBlobUtil.fs.dirs.CacheDir}/${file}`
+            );
+          } catch (unlinkError) {
+            Sentry.captureException(new Error('Play sound unlink error'), {
+              extra: { file, error: JSON.stringify(unlinkError) },
+            });
+          }
+        }
+      }
+    });
+
     Sound.setCategory('Playback');
 
-    let settled = false;
     let audio: Sound | null = null;
-    const timeout = setTimeout(() => {
-      console.log('timeoutout');
-      if (!settled) {
-        settled = true;
-        audio?.release();
-        resolve({
-          success: false,
-          reason: 'Sound loading timed out',
-        });
-      }
-    }, 4000);
 
-    audio = new Sound(soundUrl, '', (error) => {
-      if (settled) return;
-      settled = true;
-      clearTimeout(timeout);
+    try {
+      await RNBlobUtil.config({ path: localPath, timeout: 4000 }).fetch(
+        'GET',
+        soundUrl
+      );
+    } catch (downloadError) {
+      resolve({ success: false, reason: 'Unable to download sound resource' });
+      return;
+    }
 
+    audio = new Sound(localPath, '', (error: any) => {
       if (error === null) {
-        resolve({
-          success: true,
-          value: audio,
-        });
+        resolve({ success: true, value: { audio: audio as Sound } });
         return;
       }
-      if (error) {
-        resolve({
-          success: false,
-          reason: 'Unable to load sound resource',
-        });
-        Sentry.captureException(new Error(`Play sound error`), {
-          extra: {
-            soundUrl,
-            error: JSON.stringify(error),
-          },
-        });
-      }
+
+      RNBlobUtil.fs.unlink(localPath).catch(() => {});
+      resolve({ success: false, reason: 'Unable to load sound resource' });
+      Sentry.captureException(new Error('Play sound error'), {
+        extra: { localPath, error: JSON.stringify(error) },
+      });
     });
   });
 };
@@ -137,7 +144,8 @@ export const PlaySoundContainer: FC<PropsWithChildren> = ({ children }) => {
 
       if (token !== playTokenRef.current) {
         if (loadedAudioResult.success) {
-          releaseOnAndroid(loadedAudioResult.value);
+          const { audio } = loadedAudioResult.value;
+          releaseOnAndroid(audio);
         }
         return { success: false, reason: 'Play sound was stopped.' };
       }
@@ -147,12 +155,12 @@ export const PlaySoundContainer: FC<PropsWithChildren> = ({ children }) => {
         return loadedAudioResult;
       }
 
-      const audio = loadedAudioResult.value;
+      const { audio } = loadedAudioResult.value;
       audioRef.current = audio;
 
       return new Promise<Result<unknown>>((resolve) => {
         resolverRef.current = resolve;
-        audio.play((success) => {
+        audio.play((success: any) => {
           // A newer play() / stop() already handled cleanup and resolved us.
           if (token !== playTokenRef.current) {
             releaseOnAndroid(audio);
