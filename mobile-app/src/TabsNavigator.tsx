@@ -34,7 +34,8 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
           'showingWelcomeScreen',
           Object.fromEntries(
             Object.entries(await getAll()).filter(
-              ([key]) => !key.endsWith('.languageDecks')
+              ([key]) =>
+                !key.endsWith('posthog-rn.json') && !key.endsWith('auth')
             )
           )
         );
