@@ -212,6 +212,7 @@ searchForm.addEventListener(
   'formSubmit',
   async (e: CustomEvent<SearchValues>) => {
     if (isSearchValues(e.detail)) {
+      document.getElementById('explanation')?.remove();
       saveSearchValues(e.detail);
     }
 

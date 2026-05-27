@@ -197,7 +197,7 @@ export const buildStaticSearchPages = async ({
         templateHtml
           .replace(
             replaceExpressions.container,
-            `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><p class="mb-2" style="margin-left: 12px;">${buildSeoParagraph(translationCards)}</p><div class="results-container"><vocably-translation  result='${JSON.stringify(
+            `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><p class="mb-2" style="margin-left: 12px;" id="explanation">${buildSeoParagraph(translationCards)}</p><div class="results-container"><vocably-translation  result='${JSON.stringify(
               {
                 success: true,
                 value: translationCards,
