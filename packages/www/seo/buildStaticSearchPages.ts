@@ -1,5 +1,9 @@
 import { renderToString } from '@vocably/extension-content-ui/hydrate';
-import { trimLanguage, join as joinDefinitions } from '@vocably/sulna';
+import {
+  trimLanguage,
+  join as joinDefinitions,
+  htmlSpecialChars,
+} from '@vocably/sulna';
 import {
   cpSync,
   mkdirSync,
@@ -59,17 +63,6 @@ const escapeRegExp = (str: string): string => {
   return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 };
 
-const htmlSpecialChars = (str: string): string => {
-  const map = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;',
-  };
-  return str.replace(/[&<>"']/g, (m) => map[m]);
-};
-
 type Options = {
   templateHtml: string;
   searchDataFolder: string;
@@ -82,16 +75,11 @@ type StaticPage = {
   size: number;
 };
 
-const htmlEntities = (rawText: string): string =>
-  rawText.replace(/[\u00A0-\u9999<>\&]/gim, function (i) {
-    return '&#' + i.charCodeAt(0) + ';';
-  });
-
 const itemMeaning = (item: AnalysisItem): string =>
-  `<strong class="text-nowrap">${htmlEntities(item.source)}</strong>${item.partOfSpeech ? ` (${htmlEntities(item.partOfSpeech)})` : ''}`;
+  `<strong class="text-nowrap">${htmlSpecialChars(item.source)}</strong>${item.partOfSpeech ? ` (${htmlSpecialChars(item.partOfSpeech)})` : ''}`;
 
 const buildSeoParagraph = (translationCards: TranslationCards): string => {
-  const start = `<strong>${htmlEntities(translationCards.source)}</strong> in ${languageList[translationCards.sourceLanguage]}`;
+  const start = `<strong>${htmlSpecialChars(translationCards.source)}</strong> in ${languageList[translationCards.sourceLanguage]}`;
   if (translationCards.items.length === 1) {
     return start + ` is ${itemMeaning(translationCards.items[0])}.`;
   }
@@ -197,12 +185,12 @@ export const buildStaticSearchPages = async ({
         templateHtml
           .replace(
             replaceExpressions.container,
-            `<div id="search"><vocably-search-form values='${JSON.stringify(searchValues)}'></vocably-search-form><p class="mb-2" style="margin-left: 12px;" id="explanation">${buildSeoParagraph(translationCards)}</p><div class="results-container"><vocably-translation  result='${JSON.stringify(
-              {
+            `<div id="search"><vocably-search-form values='${htmlSpecialChars(JSON.stringify(searchValues))}'></vocably-search-form><p class="mb-2" style="margin-left: 12px;" id="explanation">${buildSeoParagraph(translationCards)}</p><div class="results-container"><vocably-translation result="${htmlSpecialChars(
+              JSON.stringify({
                 success: true,
                 value: translationCards,
-              }
-            )}' isLightweight="true" showLanguages="false"></vocably-translation></div></div>`
+              })
+            )}" isLightweight="true" showLanguages="false"></vocably-translation></div></div>`
           )
           .replace(
             replaceExpressions.canonical,
