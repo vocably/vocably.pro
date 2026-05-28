@@ -1,6 +1,7 @@
 import { isError, Result } from '@vocably/model';
 import { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
+import { i18n } from './i18n';
 import { Sentry } from './BetterSentry';
 
 type AsyncSuccess<T> = {
@@ -25,7 +26,7 @@ export const useAsync = <T>(
 ): [
   AsyncResult<T>,
   (newValue: T) => Promise<Result<unknown>>,
-  () => Promise<unknown>
+  () => Promise<unknown>,
 ] => {
   const [result, setResult] = useState<AsyncResult<T>>({
     status: 'loading',
@@ -92,7 +93,7 @@ export const useAsync = <T>(
           value: null,
         };
       } catch (error) {
-        Alert.alert('Error', 'Unable to perform the operation.');
+        Alert.alert(i18n.t('common.error'), i18n.t('common.operationFailed'));
         console.error('Mutation failed', error);
         setResult(lastResult);
 

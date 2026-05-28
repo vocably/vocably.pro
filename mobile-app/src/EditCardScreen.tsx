@@ -10,6 +10,7 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
 import { Button, Chip, Text, useTheme } from 'react-native-paper';
 import { CardForm } from './CardForm';
@@ -43,6 +44,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
   const [isResettingStudyProgress, setResettingStudyProgress] = useState(false);
   const [hasReset, setHasReset] = useState(false);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setCardData({ ...card.data });
@@ -53,12 +55,12 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
     const updateResult = await deck.update(card.id, cardData);
     if (updateResult.success === false) {
       Alert.alert(
-        'Error: Card update failed',
-        `Oops! Something went wrong while attempting to update the card. Please try again.`
+        t('editCard.updateFailedTitle'),
+        t('editCard.updateFailedMessage')
       );
     }
     navigation.goBack();
-  }, [cardData, deck.update, card]);
+  }, [cardData, deck.update, card, t]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -71,7 +73,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
           textColor={theme.colors.primary}
           buttonColor={theme.colors.background}
         >
-          Save
+          {t('common.save')}
         </Button>
       ),
     });
@@ -84,32 +86,32 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
     setSavingTags(false);
     if (updateResult.success === false) {
       Alert.alert(
-        'Error: Card update failed',
-        `Oops! Something went wrong while attempting to update the card. Please try again.`
+        t('editCard.updateFailedTitle'),
+        t('editCard.updateFailedMessage')
       );
     }
   };
 
   const onDelete = async () => {
     Alert.alert(
-      'Delete this card?',
-      'This operation can not be undone.',
+      t('editCard.deletePrompt.title'),
+      t('editCard.deletePrompt.message'),
       [
         {
-          text: 'Delete',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: async () => {
             setIsDeleting(true);
             const deleteResult = await deck.remove(card.id);
             if (deleteResult.success === false) {
               setIsDeleting(false);
-              Alert.alert('Unable to delete the card. Please try again.');
+              Alert.alert(t('editCard.unableToDelete'));
               return;
             }
             navigation.goBack();
           },
         },
-        { text: 'Cancel', onPress: () => {} },
+        { text: t('common.cancel'), onPress: () => {} },
       ],
       { cancelable: true }
     );
@@ -118,18 +120,18 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
   if (isDeleting) {
     return (
       <View style={{ flex: 1 }}>
-        <Loader>Deleting card...</Loader>
+        <Loader>{t('editCard.deletingCard')}</Loader>
       </View>
     );
   }
 
   const resetStudyProgress = () => {
     Alert.alert(
-      'Reset study progress?',
-      'This operation can not be undone.',
+      t('editCard.resetPrompt.title'),
+      t('editCard.resetPrompt.message'),
       [
         {
-          text: 'Reset',
+          text: t('editCard.resetPrompt.confirm'),
           style: 'destructive',
           onPress: async () => {
             setResettingStudyProgress(true);
@@ -145,7 +147,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
 
             if (updateResult.success === false) {
               setIsDeleting(false);
-              Alert.alert('Unable to reset study progress. Please try again.');
+              Alert.alert(t('editCard.unableToReset'));
               return;
             }
 
@@ -156,7 +158,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
             setHasReset(true);
           },
         },
-        { text: 'Cancel', onPress: () => {} },
+        { text: t('common.cancel'), onPress: () => {} },
       ],
       { cancelable: true }
     );
@@ -181,7 +183,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
                 icon={'tag'}
                 loading={savingTags}
               >
-                Add or remove card tags (folders)
+                {t('editCard.addOrRemoveTags')}
               </Button>
             )}
           />
@@ -228,7 +230,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
             textColor={theme.colors.error}
             onPress={onDelete}
           >
-            Delete
+            {t('common.delete')}
           </Button>
           {
             <Button
@@ -237,7 +239,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
               loading={isResettingStudyProgress}
               onPress={resetStudyProgress}
             >
-              Reset study progress
+              {t('editCard.resetStudyProgress')}
             </Button>
           }
         </View>
@@ -250,7 +252,7 @@ export const EditCardScreen: FC<Props> = ({ route, navigation }) => {
             }}
             elevation={0}
           >
-            <Text>Raw Card Data (Visible in Dev Mode only)</Text>
+            <Text>{t('editCard.rawCardData')}</Text>
 
             <Text>
               {JSON.stringify(

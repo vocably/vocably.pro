@@ -1,0 +1,379 @@
+{
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "save": "Save",
+    "done": "Done",
+    "close": "Close",
+    "back": "Back",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No",
+    "error": "Error",
+    "goBack": "Go back",
+    "operationFailed": "Unable to perform the operation."
+  },
+  "appLanguagePicker": {
+    "title": "App language"
+  },
+  "nav": {
+    "myCards": "My cards",
+    "lookUp": "Look up",
+    "tips": "Tips",
+    "settings": "Settings",
+    "studySettings": "Study settings",
+    "editCard": "Edit card",
+    "chatWithCard": "Chat about the card",
+    "cardGenerator": "Card generator",
+    "feedback": "Feedback",
+    "createAccount": "Create an account",
+    "previewStudyStep": "Preview study step",
+    "exportDeck": "Export deck"
+  },
+  "settings": {
+    "notRegistered": "Not registered yet.",
+    "createAccount": "Create an account",
+    "appLanguage": "App language: {{label}}",
+    "studySettings": "Study settings",
+    "studyReminders": {
+      "title": "Study reminders",
+      "body": "Study reminders are sent once a day to remind you to review your <bold>{{languageName}}</bold> cards.",
+      "perLanguageHint": "Every language has its own reminder settings available in the \"Edit deck\" screen.",
+      "unregisteredHint": "Study reminders are not available for unregistered users."
+    },
+    "feedback": {
+      "title": "Provide feedback",
+      "body": "Are you missing any crucial feature or simply want to share your opinion about Vocably with me? I would love to hear from you!"
+    },
+    "signOut": "Sign out",
+    "deleteAccount": {
+      "menuItem": "Delete my account",
+      "title": "Delete your account?",
+      "message": "This operation cannot be undone."
+    },
+    "deleteData": {
+      "menuItem": "Delete my data",
+      "title": "Delete your data?",
+      "message": "This operation cannot be undone."
+    },
+    "version": "Version: {{version}}"
+  },
+  "feedback": {
+    "thanksTitle": "Thank you for your feedback.",
+    "thanksFollowUp": "I will follow up with you via email shortly.",
+    "sendFailed": "Something went wrong. Your feedback has not been sent. Please try again or contact me via email at d@vocably.pro.",
+    "noEmailTitle": "No email",
+    "noEmailMessage": "Please include an email address right in the message so I can get back to you with an answer.",
+    "send": "Send",
+    "intro": "Have questions or feature requests? Reach out anytime.",
+    "personalReply": "I handle every inquiry personally and will get back to your email within few days.",
+    "willReplyTo": "I'll reply to you at your email address <bold>{{email}}</bold>.",
+    "privateRelayNote": "It looks like you shared a private Apple email with me during registration, but no worries — it should work just fine.",
+    "provideEmail": "Please provide your email address so I can send a personal reply to your feedback.",
+    "yourMessage": "Your message"
+  },
+  "error": {
+    "clearData": {
+      "title": "Clear the app data?",
+      "message": "Clearing app data will permanently delete all progress for unregistered users. Proceed?"
+    },
+    "tryAgain": "Try again",
+    "tryHarder": "Try harder!",
+    "clearAndSignOut": "Clear the app data and sign out"
+  },
+  "howToGroupCards": {
+    "intro": "Grouping can be done with tags.",
+    "swipeLeft": "Swipe any existing card left and press <tagPlusIcon /> button.",
+    "tapOnNew": "Or press the <tagPlusIcon /> button on a newly added card.",
+    "studyByTag": "When at least one tag is created, press the <tagIcon /> icon on the Study button to study a selected tag or a group of selected tags.",
+    "swipeToEdit": "Swipe any tag in the list to edit or delete it. Your cards will not be deleted."
+  },
+  "subscription": {
+    "loadingCustomerStatus": "Loading customer status",
+    "goPremium": "Go Premium"
+  },
+  "premium": {
+    "label": "Premium",
+    "nextPayment": "Next payment: {{date}}",
+    "validUntil": "Valid until: {{date}}",
+    "manageSubscription": "Manage your subscription",
+    "refreshHint": "It takes a couple of minutes for your changes to reflect in the app.",
+    "refresh": "Refresh"
+  },
+  "paidAccount": {
+    "youArePremium": "You are a Premium user",
+    "why": "Why?",
+    "iDontKnow": "I don't know.",
+    "possibleReasons": "Possible reasons:",
+    "reasonEarlyUser": "You are one of the first active users of Vocably",
+    "reasonILikeYou": "I like you",
+    "enjoyPremium": "Anyway, enjoy your Premium.",
+    "wantToHelp": "Want to help this app? <rate>Rate it on {{storeName}}</rate>."
+  },
+  "debug": {
+    "menuTitle": "Debug Menu",
+    "languageTransformations": "Language Transformations",
+    "studyStreak": "Study Streak",
+    "clearStorage": "Clear storage data"
+  },
+  "studySettings": {
+    "maxCardsPerSession": "Maximum cards per study session",
+    "maxNeverStudiedPerDay": "Maximum \"never studied\" cards that can be picked up per day",
+    "maxNeverStudiedHint": "This option only makes sense for experienced users who have a lot of new cards stacked in \"Never studied\" group.",
+    "pronounceExample": "Pronounce an example sentence",
+    "pronounceExampleHint": "This option makes the app play a random example sentence when appropriate during the study session. The <icon /> option should be turned on — this option is in the top-right corner of the Study screen.",
+    "randomize": "Randomly select cards to study",
+    "randomizeHint": "<warningIcon /> Enabling this option is generally a <bold>bad idea</bold>. This option disables the smart study algorithm. People who disable the smart study algorithm eventually get frustrated with their study progress.",
+    "srsLink": "Read how Vocably uses the smart study algorithm to help you learn more words in a shorter time."
+  },
+  "studyFlow": {
+    "mf": "Choose the correct translation (multichoice question)",
+    "sf": "Recall the correct translation",
+    "mb": "Choose the correct word or phrase (multichoice question)",
+    "ab": "Arrange the correct word or phrase by letters",
+    "sb": "Recall the correct word or phrase",
+    "default": "New step",
+    "preview": "Preview",
+    "premiumOnly": "Available to premium users",
+    "upgradeToPremium": "Upgrade to Premium",
+    "heading": "Study steps per card",
+    "rearrangeHintBefore": "Use ",
+    "rearrangeHintAfter": " to rearrange the steps."
+  },
+  "cardsLimit": {
+    "openVocablySettings": "Open Vocably → Settings to upgrade.",
+    "upgradeToPremium": "Upgrade to Premium",
+    "collectionHas": {
+      "one": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
+      "other": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit."
+    },
+    "collectionHasMoreThan": {
+      "one": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
+      "other": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit."
+    }
+  },
+  "chat": {
+    "thinking": "Thinking...",
+    "errorOccurred": "An error occurred. Please try again.",
+    "explain": "Explain",
+    "examples": "Examples",
+    "remember": "Remember",
+    "inputDisabled": "This input is disabled now.",
+    "inputPlaceholder": "Type your message here...",
+    "initialMessage": "You can ask anything about **{{source}}**, like:\n\n  * explain the meaning\n  * provide examples\n  * help to remember",
+    "initialMessageWithPartOfSpeech": "You can ask anything about the {{partOfSpeech}} **{{source}}**, like:\n\n  * explain the meaning\n  * provide examples\n  * help to remember"
+  },
+  "dashboard": {
+    "loadingCards": "Loading cards...",
+    "study": "Study",
+    "studySelectedTags": "Study selected tags",
+    "tagsLabel": "Tags:",
+    "cardsWithNoTags": "Cards with no tags",
+    "cantWait": "I can't wait",
+    "deleteCardFailedTitle": "Error: Card deletion failed",
+    "deleteCardFailedMessage": "Oops! Something went wrong while attempting to delete the card. Please try again later.",
+    "searchPlaceholder": "Search in your collection...",
+    "section": {
+      "today": "Planned for today",
+      "expired": "To catch up",
+      "notStarted": "Never studied",
+      "tomorrow": "Tomorrow",
+      "future": "Planned"
+    },
+    "empty": {
+      "noCardsYet": "No <bold>{{languageName}}</bold> cards yet.",
+      "headOverToLookUp": "Head over to the Look Up tab to find and add some new words.",
+      "goToLookUp": "Go to Look up",
+      "noCardsForSearch": "No cards found for <bold>{{searchText}}</bold>.",
+      "noCardsForTag": "You don't have any cards tagged with <bold>{{tagTitle}}</bold>.",
+      "noCardsForTags": "No cards found for the selected tags."
+    },
+    "mayBeStudiedIn": {
+      "one": "May be studied in {{count}} minute.",
+      "other": "May be studied in {{count}} minutes."
+    }
+  },
+  "deck": {
+    "editDeckTitle": "Edit {{languageName}} deck",
+    "studyRemindersTitle": "Study reminders for {{languageName}}"
+  },
+  "editCard": {
+    "updateFailedTitle": "Error: Card update failed",
+    "updateFailedMessage": "Oops! Something went wrong while attempting to update the card. Please try again.",
+    "deletePrompt": {
+      "title": "Delete this card?",
+      "message": "This operation can not be undone."
+    },
+    "unableToDelete": "Unable to delete the card. Please try again.",
+    "deletingCard": "Deleting card...",
+    "resetPrompt": {
+      "title": "Reset study progress?",
+      "message": "This operation can not be undone.",
+      "confirm": "Reset"
+    },
+    "unableToReset": "Unable to reset study progress. Please try again.",
+    "addOrRemoveTags": "Add or remove card tags (folders)",
+    "resetStudyProgress": "Reset study progress",
+    "rawCardData": "Raw card data"
+  },
+  "editDeck": {
+    "studySettings": "Study settings",
+    "exportDeck": "Export deck",
+    "studyReminders": "Study reminders",
+    "studyRemindersUnregisteredHint": "Study reminders are temporarily disabled for unregistered users.",
+    "hideDefinitions": "Hide definitions",
+    "hideDefinitionsHint": "The app will make an attempt to show less definitions in My cards and during the study.",
+    "deckContainsCards": {
+      "one": "The deck contains {{count}} card",
+      "other": "The deck contains {{count}} cards"
+    }
+  },
+  "generateCards": {
+    "loadingPreset": "Loading translation preset...",
+    "errorUnable": "Unable to generate cards. Please try again.",
+    "intro": "Type what you need, and Vocably will generate cards for you.",
+    "experimental": "This is an experimental feature. <feedback>Let me know</feedback> if you find any bugs or have any suggestions.",
+    "examplesToTry": "Some examples to try:",
+    "exampleIrregularVerbs": "irregular verbs",
+    "exampleAnimals": "animals",
+    "examplePopularIdioms": "popular idioms",
+    "placeholder": "Just anything...",
+    "generating": "Generating cards...",
+    "followingWillBeGenerated": "The following cards will be generated:"
+  },
+  "languageSelector": {
+    "addNewLanguage": "Add new language",
+    "popularLanguages": "Popular languages",
+    "selected": "Selected",
+    "availableLanguages": "Available languages",
+    "select": "Select",
+    "studyLanguage": "Study Language",
+    "yourLanguages": "Your languages",
+    "deviceLanguage": "Device language",
+    "preferredLanguages": "Preferred languages",
+    "motherTongue": "Mother Tongue",
+    "preferred": "Popular languages",
+    "search": "Search..."
+  },
+  "lookUp": {
+    "loadingPreset": "Loading translation preset...",
+    "lookUpFailedTitle": "Error: Look up failed",
+    "lookUpFailedMessage": "Oops! Something went wrong while attempting to look up. Please try again later.",
+    "searchPlaceholder": "Any word in any language",
+    "lookingForCollections": "Looking for card collections?",
+    "tryAiGenerator": "Try the AI card generator",
+    "questionsOrSuggestions": "Questions or suggestions?",
+    "connectOnTelegram": "Connect on Telegram",
+    "joinDiscord": "Join Discord",
+    "sendMessage": "Send a message",
+    "conductingAnalysis": "Conducting further analysis...",
+    "selectLanguageLearning": "Select language you're learning.",
+    "selectMotherTongue": "Select your mother tongue"
+  },
+  "notifications": {
+    "checking": "Checking...",
+    "loadingPreset": "Loading preset...",
+    "loadFailed": {
+      "sorry": "I'm very sorry.",
+      "cannotLoad": "The system can't load the study reminders status.",
+      "informed": "I have already been informed about it.",
+      "tryAgain": "Please try again later."
+    },
+    "enabledFor": "Enabled for {{languageString}}",
+    "remindersDescription": "Study reminders are sent once a day to remind you to review your {{languageName}} cards.",
+    "failedTitle": "Study reminders failed",
+    "failedAndroidMessage": "Study reminders can't be set through the app. Please enable them in the App Info settings.",
+    "failedIosMessage": "Study reminders can't be set through the app. Please enable them in Settings → Vocably.",
+    "deniedAndroidMessage": "Notifications can't be set through the app. Please enable them in the App Info settings.",
+    "deniedIosMessage": "Notifications can't be set through the app. Please enable them in Settings → Vocably.",
+    "openSettings": "Open Settings",
+    "enableReminders": "Enable reminders",
+    "receiveAt": "Receive at"
+  },
+  "study": {
+    "loading": "Loading...",
+    "finish": "Finish",
+    "takeOneMoreRound": "Take one more round",
+    "cardUpdateFailedTitle": "Error: Card update failed",
+    "cardUpdateNetworkError": "Your answer wasn't saved due to a lost connection. The session will stop and resume from the failed answer.",
+    "cardUpdateTechnicalError": "Oops! Unable to continue study session due to a technical issue. Please try again later.",
+    "exitStudySession": "Exit study session",
+    "tapDot": {
+      "touch": "Touch"
+    },
+    "swipeGrade": {
+      "notYet": "Not yet",
+      "almost": "Almost",
+      "gotIt": "Got it!"
+    },
+    "arrangeByLetters": {
+      "typeIn": "Type in",
+      "showMeTheAnswer": "Show me the answer"
+    },
+    "cardBack": {
+      "emptyCardMessage": "This card has no translations nor definitions. Edit this card."
+    },
+    "cardFront": {
+      "presentTenses": "(present: {{value}})",
+      "pastTenses": "(past: {{value}})",
+      "plural": "(plural: {{value}})"
+    },
+    "multiChoice": {
+      "meaning": "meaning",
+      "showCorrectAnswer": "Show the correct answer",
+      "selectCorrectAnswerFor": "Select the correct answer for the <highlighted>{{partOfSpeech}}</highlighted>:"
+    },
+    "reverseCardBack": {
+      "theAnswerIs": "The answer is"
+    },
+    "reverseCardFront": {
+      "guess": "Guess",
+      "meaning": "meaning",
+      "examples": {
+        "one": "Example:",
+        "other": "Examples:"
+      },
+      "actionForPartOfSpeech": "{{action}} the <highlighted>{{partOfSpeech}}</highlighted>:"
+    },
+    "motivationalQuotes": {
+      "0": "Perseverance is not a long race; it is many short races one after the other.",
+      "1": "A river cuts through rock not because of its power, but because of its persistence.",
+      "2": "Persistence guarantees that results are inevitable.",
+      "3": "Patience and persistence are the keys to unlocking greatness.",
+      "4": "Every step forward, no matter how small, is the progress.",
+      "5": "Persistence turns dreams into reality; every effort is a seed for success.",
+      "6": "Every time you push forward, you rewrite your story to include success.",
+      "7": "Keep believing in yourself — your persistence is your superpower.",
+      "8": "Success is built on the bricks of persistence, laid one by one.",
+      "9": "The universe moves for those who never stop moving forward.",
+      "10": "The energy you put in today fuels the success of tomorrow.",
+      "11": "Persistence transforms the impossible into the inevitable.",
+      "12": "Each word you learn brings you closer to understanding a new culture.",
+      "13": "Language learning is a marathon, not a sprint. You are good!",
+      "14": "Persistence is the secret ingredient in becoming fluent. Keep going!",
+      "15": "Practice doesn't make perfect — it makes progress, and that's what matters.",
+      "16": "A second language is not just a skill, but a gift that keeps giving.",
+      "17": "Each time you study, you're rewriting your brain for success.",
+      "18": "A language learner is a world explorer in disguise.",
+      "19": "Every mistake you make while learning is proof that you're growing.",
+      "20": "Languages are the keys to the world; every word you master unlocks new doors.",
+      "21": "Fluency is not about speed; it's about showing up and practicing every day.",
+      "22": "A new language doesn't just teach you words; it teaches you new ways of thinking.",
+      "23": "Small, consistent efforts lead to big, life-changing results in language learning.",
+      "24": "You'll never regret the time you spend learning a language — it's an investment in yourself.",
+      "25": "Every language you learn adds a new dimension to your identity.",
+      "26": "Even if it feels hard today, tomorrow your efforts will make you smile.",
+      "27": "The journey to fluency is a story worth telling — keep writing it."
+    }
+  },
+  "welcome": {
+    "formIntro": "To get started, please answer a few questions.",
+    "questionStudyLanguage": "What language do you study?",
+    "multipleLanguagesHint": "You can learn multiple languages. For now, just pick one to get started.",
+    "setup": "Setup",
+    "previous": "Previous",
+    "next": "Next",
+    "skip": "Skip",
+    "goToApp": "Go to the app"
+  }
+}

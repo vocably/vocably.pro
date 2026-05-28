@@ -1,6 +1,7 @@
 import { CardItem, DeckSettings } from '@vocably/model';
 import React, { FC } from 'react';
 import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text } from 'react-native-paper';
 import { CardFront } from './CardFront';
 
@@ -19,9 +20,12 @@ export const ReverseCardBack: FC<Props> = ({
   onPress,
   deckSettings,
 }) => {
+  const { t } = useTranslation();
   return (
     <View>
-      <Text style={{ fontSize: 18, marginBottom: 8 }}>The answer is</Text>
+      <Text style={{ fontSize: 18, marginBottom: 8 }}>
+        {t('study.reverseCardBack.theAnswerIs')}
+      </Text>
       <CardFront
         deckSettings={deckSettings}
         autoPlay={autoPlay}

@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { Divider, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -13,6 +14,7 @@ import { WelcomeScrollView } from './WelcomeScrollView';
 type Props = {};
 
 export const WelcomeForm: FC<Props> = () => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const navigation = useNavigation();
   const translationPresetState = useWelcomeTranslationPreset();
@@ -41,7 +43,7 @@ export const WelcomeForm: FC<Props> = () => {
         }}
       >
         <Text style={{ textAlign: 'center', fontSize: 24, marginBottom: 24 }}>
-          To get started, please answer a few questions.
+          {t('welcome.formIntro')}
         </Text>
 
         <View
@@ -56,7 +58,7 @@ export const WelcomeForm: FC<Props> = () => {
               color: theme.colors.onBackground,
             }}
           >
-            What language do you study?
+            {t('welcome.questionStudyLanguage')}
           </Text>
           <View style={{ width: '100%' }}>
             <SourceLanguageButton
@@ -64,16 +66,13 @@ export const WelcomeForm: FC<Props> = () => {
               preset={translationPresetState.preset}
               onChange={onSourceLanguageChange}
               languagePairs={translationPresetState.languagePairs}
-              emptyText="Select"
+              emptyText={t('languageSelector.select')}
               existingLanguages={languages}
             />
           </View>
         </View>
         <View style={{ alignItems: 'flex-end' }}>
-          <Text>
-            You can learn multiple languages. For now, just pick one to get
-            started.
-          </Text>
+          <Text>{t('welcome.multipleLanguagesHint')}</Text>
         </View>
         {translationPresetState.preset.sourceLanguage && (
           <Animated.View

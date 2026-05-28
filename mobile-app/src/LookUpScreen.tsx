@@ -2,6 +2,7 @@ import { NavigationProp } from '@react-navigation/native';
 import { AnalyzePayload, GoogleLanguage, UnitOfSpeech } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert, Keyboard, Linking, ScrollView, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import {
@@ -86,6 +87,7 @@ export const LookUpScreen: FC<Props> = ({
   isModal = false,
 }) => {
   const translationPresetState = useTranslationPreset();
+  const { t } = useTranslation();
   const [lookUpText, setLookUpText] = useState(initialText);
   const [noFocusOnReturn, setNoFocusOnReturn] = useState(false);
   const [isAnalyzingPreset, setIsAnalyzingPreset] = useState<Preset | false>(
@@ -186,8 +188,8 @@ export const LookUpScreen: FC<Props> = ({
       lookupResult.errorCode !== 'API_REQUEST_ABORTED'
     ) {
       Alert.alert(
-        'Error: Look up failed',
-        'Oops! Something went wrong while attempting to look up. Please try again later.'
+        t('lookUp.lookUpFailedTitle'),
+        t('lookUp.lookUpFailedMessage')
       );
     }
 
@@ -262,7 +264,7 @@ export const LookUpScreen: FC<Props> = ({
   });
 
   if (translationPresetState.status === 'unknown') {
-    return <Loader>Loading translation preset...</Loader>;
+    return <Loader>{t('lookUp.loadingPreset')}</Loader>;
   }
 
   const onLookUpModalOpen = () => {
@@ -304,7 +306,7 @@ export const LookUpScreen: FC<Props> = ({
                     exitSharedScreen();
                   }}
                 >
-                  Done
+                  {t('common.done')}
                 </Button>
               </View>
             )}
@@ -358,7 +360,7 @@ export const LookUpScreen: FC<Props> = ({
                 ref={searchInputRef}
                 value={lookUpText}
                 multiline={false}
-                placeholder={'Any word in any language'}
+                placeholder={t('lookUp.searchPlaceholder')}
                 onChange={setLookUpText}
                 onSubmit={lookUp}
                 pasteFromClipboard={true}
@@ -471,7 +473,7 @@ export const LookUpScreen: FC<Props> = ({
                   }}
                 >
                   <Text style={{ textAlign: 'center' }}>
-                    Looking for card collections?
+                    {t('lookUp.lookingForCollections')}
                   </Text>
                   <Button
                     icon={'robot-outline'}
@@ -488,10 +490,10 @@ export const LookUpScreen: FC<Props> = ({
                       navigation.navigate('GenerateCards');
                     }}
                   >
-                    Try the AI card generator
+                    {t('lookUp.tryAiGenerator')}
                   </Button>
                   <Text style={{ textAlign: 'center', marginTop: 24 }}>
-                    Questions or suggestions?
+                    {t('lookUp.questionsOrSuggestions')}
                   </Text>
                   <Button
                     textColor={theme.colors.onBackground}
@@ -504,7 +506,7 @@ export const LookUpScreen: FC<Props> = ({
                     mode={'outlined'}
                     onPress={() => Linking.openURL('https://t.me/vocably')}
                   >
-                    Connect on Telegram
+                    {t('lookUp.connectOnTelegram')}
                   </Button>
 
                   <Button
@@ -520,7 +522,7 @@ export const LookUpScreen: FC<Props> = ({
                       Linking.openURL('https://discord.gg/9aRwbJ3qeh')
                     }
                   >
-                    Join Discord
+                    {t('lookUp.joinDiscord')}
                   </Button>
 
                   <Button
@@ -532,7 +534,7 @@ export const LookUpScreen: FC<Props> = ({
                     mode={'outlined'}
                     onPress={() => navigation.navigate('Feedback')}
                   >
-                    Send a message
+                    {t('lookUp.sendMessage')}
                   </Button>
                 </View>
               </View>
@@ -580,7 +582,7 @@ export const LookUpScreen: FC<Props> = ({
                       paddingRight: insets.right + padding + 8,
                     }}
                   >
-                    <Thinking message="Conducting further analysis..." />
+                    <Thinking message={t('lookUp.conductingAnalysis')} />
                   </View>
                 )}
                 {explainStatus.status === 'loaded' && (

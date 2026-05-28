@@ -2,6 +2,7 @@ import { NavigationProp, Route } from '@react-navigation/native';
 import { sendPublicUserFeedback } from '@vocably/api';
 import { FC, useContext, useEffect, useState } from 'react';
 import { Alert, Platform, View } from 'react-native';
+import { Trans, useTranslation } from 'react-i18next';
 import { Button, Text } from 'react-native-paper';
 import { useUserEmail } from './auth/useUserEmail';
 import { useTranslationPreset } from './TranslationPreset/useTranslationPreset';
@@ -23,6 +24,7 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
   const [text, setText] = useState('');
   const [isSending, setIsSending] = useState(false);
   const userEmail = useUserEmail();
+  const { t } = useTranslation();
 
   const authContext = useContext(AuthContext);
 
@@ -45,11 +47,11 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
     if (res.success === true) {
       const hasEmail = userEmail || containsEmail(text);
       Alert.alert(
-        'Thank you for your feedback.',
-        hasEmail ? 'I will follow up with you via email shortly.' : '',
+        t('feedback.thanksTitle'),
+        hasEmail ? t('feedback.thanksFollowUp') : '',
         [
           {
-            text: 'Go back',
+            text: t('common.goBack'),
             onPress: () => {
               setText('');
               navigation.goBack();
@@ -58,9 +60,7 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
         ]
       );
     } else {
-      Alert.alert(
-        'Something went wrong. Your feedback has not been sent. Please try again or contact me via email at d@vocably.pro.'
-      );
+      Alert.alert(t('feedback.sendFailed'));
     }
 
     setIsSending(false);
@@ -68,21 +68,17 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
 
   const sendFeedback = async () => {
     if (!userEmail && !containsEmail(text)) {
-      Alert.alert(
-        'No email',
-        'Please include an email address right in the message so I can get back to you with an answer.',
-        [
-          {
-            text: 'Cancel',
-            style: 'cancel',
-          },
-          {
-            text: 'Send',
-            style: 'default',
-            onPress: () => reallySend(),
-          },
-        ]
-      );
+      Alert.alert(t('feedback.noEmailTitle'), t('feedback.noEmailMessage'), [
+        {
+          text: t('common.cancel'),
+          style: 'cancel',
+        },
+        {
+          text: t('feedback.send'),
+          style: 'default',
+          onPress: () => reallySend(),
+        },
+      ]);
     } else {
       await reallySend();
     }
@@ -97,46 +93,39 @@ export const FeedbackModal: FC<Props> = ({ navigation, route }) => {
           loading={isSending}
           style={{ marginRight: 8 }}
         >
-          Send
+          {t('feedback.send')}
         </Button>
       ),
     });
-  }, [text, sendFeedback, isSending]);
+  }, [text, sendFeedback, isSending, t]);
 
   return (
     <CustomScrollView automaticallyAdjustKeyboardInsets={true}>
       <View style={{ gap: 16, marginBottom: 16 }}>
-        <Text>Have questions or feature requests? Reach out anytime.</Text>
+        <Text>{t('feedback.intro')}</Text>
         {userEmail && (
           <>
+            <Text>{t('feedback.personalReply')}</Text>
             <Text>
-              I handle every inquiry personally and will get back to your email
-              within few days.
-            </Text>
-            <Text>
-              I'll reply to you at your email address{' '}
-              <Text style={{ fontWeight: 'bold' }}>{userEmail}</Text>.
+              <Trans
+                i18nKey="feedback.willReplyTo"
+                values={{ email: userEmail }}
+                components={{ bold: <Text style={{ fontWeight: 'bold' }} /> }}
+              />
               {userEmail.includes('privaterelay') && (
-                <Text>
-                  {' '}
-                  It looks like you shared a private Apple email with me during
-                  registration, but no worries — it should work just fine.
-                </Text>
+                <Text> {t('feedback.privateRelayNote')}</Text>
               )}
             </Text>
           </>
         )}
         {!userEmail && (
           <>
-            <Text>
-              Please provide your email address so I can send a personal reply
-              to your feedback.
-            </Text>
+            <Text>{t('feedback.provideEmail')}</Text>
           </>
         )}
       </View>
       <FormText
-        label="Your message"
+        label={t('feedback.yourMessage')}
         multiline
         inputStyle={{ minHeight: 128 }}
         onChangeText={setText}

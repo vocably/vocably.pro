@@ -1,6 +1,10 @@
 /**
  * @format
  */
+// Side-effect import: initializes react-i18next synchronously before any
+// component renders. Covers both the main app and the share extension because
+// both are registered through this same entry file.
+import './src/i18n';
 import {
   initializePushNotifications,
   onTokenReceived,

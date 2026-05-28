@@ -1,4 +1,5 @@
 import { GoogleLanguage, languageList } from '@vocably/model';
+import { i18n } from '../i18n';
 
 export type LanguageListItem = {
   selected: boolean;
@@ -32,7 +33,7 @@ export const createLanguageList = ({
 
   if (selected && filteredLanguageList[selected as GoogleLanguage]) {
     data.push({
-      title: 'Selected',
+      title: i18n.t('languageSelector.selected'),
       data: [
         {
           key: selected,
@@ -59,7 +60,7 @@ export const createLanguageList = ({
   }
 
   data.push({
-    title: 'Available languages',
+    title: i18n.t('languageSelector.availableLanguages'),
     data: Object.entries(filteredLanguageList).map(([key, label]) => ({
       key,
       label,

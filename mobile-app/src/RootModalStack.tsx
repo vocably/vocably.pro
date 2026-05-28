@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Appbar, useTheme } from 'react-native-paper';
 import { LoginModal } from './auth/LoginModal';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
@@ -22,6 +23,7 @@ const Stack = createStackNavigator();
 export const RootModalStack = () => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <Stack.Navigator>
@@ -75,7 +77,7 @@ export const RootModalStack = () => {
           component={EditCardScreen}
           options={{
             headerShown: true,
-            headerTitle: 'Edit card',
+            headerTitle: t('nav.editCard'),
           }}
         />
         <Stack.Screen
@@ -83,13 +85,13 @@ export const RootModalStack = () => {
           component={ChatWithCardModal}
           options={{
             headerShown: true,
-            headerTitle: 'Chat about the card',
+            headerTitle: t('nav.chatWithCard'),
           }}
         />
         <Stack.Screen
           name={'GenerateCards'}
           component={GenerateCardsModal}
-          options={{ headerShown: true, title: 'Card generator' }}
+          options={{ headerShown: true, title: t('nav.cardGenerator') }}
         />
         <Stack.Screen
           name="PaymentSuccessModal"
@@ -109,14 +111,14 @@ export const RootModalStack = () => {
         <Stack.Screen
           name={'Feedback'}
           component={FeedbackModal}
-          options={{ headerShown: true, title: 'Feedback' }}
+          options={{ headerShown: true, title: t('nav.feedback') }}
         />
         <Stack.Screen
           name="LoginModal"
           component={LoginModal}
           options={{
             headerShown: true,
-            title: 'Create an account',
+            title: t('nav.createAccount'),
           }}
         />
         <Stack.Screen
@@ -124,7 +126,7 @@ export const RootModalStack = () => {
           component={PreviewStudyStepModal}
           options={{
             headerShown: true,
-            title: 'Preview study step',
+            title: t('nav.previewStudyStep'),
           }}
         />
         <Stack.Screen
@@ -132,7 +134,7 @@ export const RootModalStack = () => {
           component={StudySettingsScreen}
           options={{
             headerShown: true,
-            title: 'Study settings',
+            title: t('nav.studySettings'),
           }}
         />
         <Stack.Screen
@@ -140,7 +142,7 @@ export const RootModalStack = () => {
           component={ExportDeckModal}
           options={{
             headerShown: true,
-            title: 'Export deck',
+            title: t('nav.exportDeck'),
           }}
         />
         <Stack.Screen

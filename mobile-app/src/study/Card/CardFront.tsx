@@ -2,6 +2,7 @@ import { CardItem, DeckSettings, isGoogleTTSLanguage } from '@vocably/model';
 import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { PixelRatio, Platform, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import { CardExample, CardExampleRef } from '../../CardExample';
 import { PlaySound, PlaySoundRef } from '../../PlaySound';
@@ -23,6 +24,7 @@ export const CardFront: FC<Props> = ({
   onPress,
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [isAutoPlayed, setIsAutoPlayed] = useState(false);
   const playRef = useRef<PlaySoundRef>(null);
@@ -52,11 +54,11 @@ export const CardFront: FC<Props> = ({
   const fontScale = PixelRatio.getFontScale();
 
   const present = card.data.presentTenses
-    ? `(present: ${card.data.presentTenses})`
+    ? t('study.cardFront.presentTenses', { value: card.data.presentTenses })
     : false;
   const past =
     card.data.tense === 'present' && card.data.pastTenses
-      ? `(past: ${card.data.pastTenses})`
+      ? t('study.cardFront.pastTenses', { value: card.data.pastTenses })
       : false;
 
   const presentAndPast = [present, past].filter(Boolean).join(`\n`);
@@ -128,7 +130,11 @@ export const CardFront: FC<Props> = ({
           {showInflections &&
             card.data.number === 'singular' &&
             isGoodPlural(card.data.pluralForm) && (
-              <Text>(plural: {card.data.pluralForm})</Text>
+              <Text>
+                {t('study.cardFront.plural', {
+                  value: card.data.pluralForm,
+                })}
+              </Text>
             )}
         </View>
       )}

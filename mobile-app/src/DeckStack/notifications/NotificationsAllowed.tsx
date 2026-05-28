@@ -9,6 +9,7 @@ import { get } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useState } from 'react';
 import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { getTimeZone } from 'react-native-localize';
 import { Text } from 'react-native-paper';
 import { InlineLoader } from '../../loaders/InlineLoader';
@@ -73,6 +74,7 @@ export const NotificationsAllowed: FC<Props> = ({ language }) => {
     setNotificationTime(language)
   );
   const posthog = usePostHog();
+  const { t } = useTranslation();
   const [isSwitching, setIsSwitching] = useState(false);
 
   const languageString = trimLanguage(get(languageList, language, ''));
@@ -119,29 +121,32 @@ export const NotificationsAllowed: FC<Props> = ({ language }) => {
   return (
     <>
       {loadNotificationsResult.status === 'loading' && (
-        <InlineLoader center={false}>Loading preset...</InlineLoader>
+        <InlineLoader center={false}>
+          {t('notifications.loadingPreset')}
+        </InlineLoader>
       )}
       {loadNotificationsResult.status === 'failed' && (
         <>
-          <Text>I'm very sorry.</Text>
-          <Text>The system can't load the study reminders status.</Text>
-          <Text>I have already been informed about it.</Text>
-          <Text>Please try again later.</Text>
+          <Text>{t('notifications.loadFailed.sorry')}</Text>
+          <Text>{t('notifications.loadFailed.cannotLoad')}</Text>
+          <Text>{t('notifications.loadFailed.informed')}</Text>
+          <Text>{t('notifications.loadFailed.tryAgain')}</Text>
         </>
       )}
       {loadNotificationsResult.status === 'loaded' && (
         <>
           <CustomSurface style={{ marginBottom: 8 }}>
             <ListSwitch
-              title={`Enabled for ${languageString}`}
+              title={t('notifications.enabledFor', { languageString })}
               value={loadNotificationsResult.value.exists}
               onChange={enableOrDisableNotificationTime}
             />
           </CustomSurface>
           <View style={{ paddingHorizontal: 16, marginBottom: 32 }}>
             <Text>
-              Study reminders are sent once a day to remind you to review your{' '}
-              {languageString} cards.
+              {t('notifications.remindersDescription', {
+                languageName: languageString,
+              })}
             </Text>
           </View>
           {loadNotificationsResult.value.exists && (

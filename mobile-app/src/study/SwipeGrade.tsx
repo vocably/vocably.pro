@@ -14,6 +14,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text, TouchableRipple, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -46,6 +47,7 @@ export const SwipeGrade: FC<{
   children: ReactNode;
 }> = ({ onGrade, children }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const postHog = usePostHog();
 
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
@@ -437,7 +439,7 @@ export const SwipeGrade: FC<{
                     : theme.colors.primary,
               }}
             >
-              Not yet
+              {t('study.swipeGrade.notYet')}
             </Text>
           </View>
         </TouchableRipple>
@@ -480,7 +482,7 @@ export const SwipeGrade: FC<{
                     : theme.colors.primary,
               }}
             >
-              Almost
+              {t('study.swipeGrade.almost')}
             </Text>
           </View>
         </TouchableRipple>
@@ -526,7 +528,7 @@ export const SwipeGrade: FC<{
                     : theme.colors.primary,
               }}
             >
-              Got it!
+              {t('study.swipeGrade.gotIt')}
             </Text>
           </View>
         </TouchableRipple>

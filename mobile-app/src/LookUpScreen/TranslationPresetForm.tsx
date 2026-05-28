@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Animated, useWindowDimensions, View } from 'react-native';
 import { IconButton, Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -32,6 +33,7 @@ export const TranslationPresetForm: FC<Props> = ({
   languagePairs,
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const { languages: existingDeckLanguages } = useContext(LanguagesContext);
 
@@ -183,7 +185,7 @@ export const TranslationPresetForm: FC<Props> = ({
         >
           <Icon name="arrow-up-thin" size={48} color={theme.colors.secondary} />
           <Text style={{ color: theme.colors.secondary }}>
-            Select language you're learning.
+            {t('lookUp.selectLanguageLearning')}
           </Text>
         </View>
       )}
@@ -199,7 +201,7 @@ export const TranslationPresetForm: FC<Props> = ({
           }}
         >
           <Text style={{ color: theme.colors.secondary }}>
-            Select your mother tongue
+            {t('lookUp.selectMotherTongue')}
           </Text>
           <Icon name="arrow-up-thin" size={48} color={theme.colors.secondary} />
         </View>

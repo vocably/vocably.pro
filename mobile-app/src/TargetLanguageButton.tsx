@@ -5,6 +5,7 @@ import {
   shortenedLanguageList,
 } from '@vocably/model';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
 import { getDeviceLanguage } from './getDeviceLanguage';
@@ -30,6 +31,7 @@ export const TargetLanguageButton: FC<Props> = ({
   style,
   compact = false,
 }) => {
+  const { t } = useTranslation();
   const onTranslationSelection = (translationLanguage: string) => {
     onChange({
       ...preset,
@@ -50,12 +52,12 @@ export const TargetLanguageButton: FC<Props> = ({
   const preferredLanguagesTitle =
     // @ts-ignore
     !preset.translationLanguage && languageList[deviceLanguage]
-      ? 'Device language'
-      : 'Preferred languages';
+      ? t('languageSelector.deviceLanguage')
+      : t('languageSelector.preferredLanguages');
 
   const selectTranslationLanguage = () => {
     navigation.navigate('LanguageSelector', {
-      title: 'Mother Tongue',
+      title: t('languageSelector.motherTongue'),
       // @ts-ignore
       preferred: preferredLanguages,
       preferredTitle: preferredLanguagesTitle,
@@ -89,7 +91,7 @@ export const TargetLanguageButton: FC<Props> = ({
         ? (shortenedLanguageList[
             preset.translationLanguage as GoogleLanguage
           ] ?? languageList[preset.translationLanguage as GoogleLanguage])
-        : 'Select'}
+        : t('languageSelector.select')}
     </Button>
   );
 };

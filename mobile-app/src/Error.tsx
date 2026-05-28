@@ -1,6 +1,7 @@
 import { signOut } from '@aws-amplify/auth';
 import { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { Alert, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Button, Text } from 'react-native-paper';
 import { clearAll } from './asyncAppStorage';
 
@@ -13,6 +14,7 @@ type Error = FC<
 export const Error: Error = ({ children, onRetry }) => {
   const [retrying, setRetrying] = useState(false);
   const [nRetries, nRetriesSet] = useState(0);
+  const { t } = useTranslation();
   const retry = useCallback(() => {
     if (!onRetry) {
       return;
@@ -28,24 +30,20 @@ export const Error: Error = ({ children, onRetry }) => {
   }, [onRetry, nRetries, nRetriesSet]);
 
   const clearStorageAndLogOut = async () => {
-    Alert.alert(
-      'Clear the app data?',
-      'Clearing app data will permanently delete all progress for unregistered users. Proceed?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
+    Alert.alert(t('error.clearData.title'), t('error.clearData.message'), [
+      {
+        text: t('common.cancel'),
+        style: 'cancel',
+      },
+      {
+        text: t('common.yes'),
+        onPress: async () => {
+          await clearAll();
+          await signOut();
         },
-        {
-          text: 'Yes',
-          onPress: async () => {
-            await clearAll();
-            await signOut();
-          },
-          style: 'destructive',
-        },
-      ]
-    );
+        style: 'destructive',
+      },
+    ]);
   };
 
   return (
@@ -66,11 +64,11 @@ export const Error: Error = ({ children, onRetry }) => {
           loading={retrying}
           onPress={retry}
         >
-          Try {nRetries >= 2 ? 'harder!' : 'again'}
+          {nRetries >= 2 ? t('error.tryHarder') : t('error.tryAgain')}
         </Button>
       )}
       <Button mode="text" onPress={clearStorageAndLogOut}>
-        Clear the app data and sign out
+        {t('error.clearAndSignOut')}
       </Button>
     </View>
   );

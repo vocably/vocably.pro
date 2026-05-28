@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
 import { Animated, StyleProp, ViewStyle } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -11,6 +12,7 @@ const animationTDuration: number = 200;
 
 export const TapDot: FC<Props> = ({ style }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const opacity = useRef(new Animated.Value(0.2)).current;
   const scale = useRef(new Animated.Value(0.8)).current;
@@ -72,7 +74,9 @@ export const TapDot: FC<Props> = ({ style }) => {
       ]}
     >
       <Icon name="gesture-tap" size={60} color={theme.colors.secondary} />
-      <Text style={{ fontSize: 16, color: theme.colors.secondary }}>Touch</Text>
+      <Text style={{ fontSize: 16, color: theme.colors.secondary }}>
+        {t('study.tapDot.touch')}
+      </Text>
     </Animated.View>
   );
 };

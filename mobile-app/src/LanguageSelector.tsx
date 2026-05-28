@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getFullLanguageName } from '@vocably/model';
 import { FC, useContext, useState } from 'react';
 import { PixelRatio, StyleProp, View, ViewStyle } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   Divider,
   Menu,
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export const LanguageSelector: FC<Props> = ({ style }) => {
+  const { t } = useTranslation();
   const { languages, selectedLanguage, selectLanguage, addNewLanguage } =
     useContext(LanguagesContext);
 
@@ -49,10 +51,10 @@ export const LanguageSelector: FC<Props> = ({ style }) => {
   const onAddNewLanguageClick = () => {
     closeMenu();
     navigation.navigate('LanguageSelector', {
-      title: 'Add new language',
+      title: t('languageSelector.addNewLanguage'),
       onSelect: onLanguageSelect,
       preferred: popularLanguages,
-      preferredTitle: 'Popular languages',
+      preferredTitle: t('languageSelector.popularLanguages'),
     });
   };
 
@@ -98,7 +100,7 @@ export const LanguageSelector: FC<Props> = ({ style }) => {
         ))}
         <Divider />
         <Menu.Item
-          title={'Add new language'}
+          title={t('languageSelector.addNewLanguage')}
           onPress={onAddNewLanguageClick}
           titleStyle={{ color: theme.colors.secondary }}
           leadingIcon={'plus'}

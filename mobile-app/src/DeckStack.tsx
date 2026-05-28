@@ -1,4 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
+import { useTranslation } from 'react-i18next';
 
 import { DashboardScreen } from './DashboardScreen';
 import { NotificationsScreen } from './DeckStack/NotificationsScreen';
@@ -10,6 +11,7 @@ const Stack = createStackNavigator();
 
 export const DeckStack = () => {
   const languageName = useCurrentLanguageName();
+  const { t } = useTranslation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -23,12 +25,14 @@ export const DeckStack = () => {
       />
       <Stack.Screen
         name="EditDeck"
-        options={{ title: `Edit ${languageName} deck` }}
+        options={{ title: t('deck.editDeckTitle', { languageName }) }}
         component={EditDeckScreen}
       />
       <Stack.Screen
         name="Notifications"
-        options={{ title: `Study reminders for ${languageName}` }}
+        options={{
+          title: t('deck.studyRemindersTitle', { languageName }),
+        }}
         component={NotificationsScreen}
       />
     </Stack.Navigator>

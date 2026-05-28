@@ -2,6 +2,7 @@ import { CardItem, DeckSettings } from '@vocably/model';
 import { explode, join } from '@vocably/sulna';
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { View } from 'react-native';
+import { Trans, useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import { CardDefinition } from '../../CardDefinition';
 import { CardExample, CardExampleRef, Mask } from '../../CardExample';
@@ -19,11 +20,10 @@ type Props = {
 };
 
 export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
-  (
-    { card, hasChecked, requiredAction = 'Guess', onPress, deckSettings },
-    ref
-  ) => {
+  ({ card, hasChecked, requiredAction, onPress, deckSettings }, ref) => {
     const theme = useTheme();
+    const { t } = useTranslation();
+    const actionText = requiredAction ?? t('study.reverseCardFront.guess');
 
     let examples = card.data.example ? explode(card.data.example) : [];
 
@@ -46,15 +46,21 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
     return (
       <View>
         <Text style={{ fontSize: 24, marginBottom: 12 }}>
-          {requiredAction} the{' '}
-          {card.data.partOfSpeech ? (
-            <Text style={{ color: theme.colors.secondary }}>
-              {card.data.partOfSpeech}
-            </Text>
-          ) : (
-            'meaning'
-          )}
-          {':'}
+          <Trans
+            i18nKey="study.reverseCardFront.actionForPartOfSpeech"
+            values={{
+              action: actionText,
+              partOfSpeech:
+                card.data.partOfSpeech || t('study.reverseCardFront.meaning'),
+            }}
+            components={{
+              highlighted: card.data.partOfSpeech ? (
+                <Text style={{ color: theme.colors.secondary }} />
+              ) : (
+                <Text />
+              ),
+            }}
+          />
         </Text>
         <CardDefinition
           card={card.data}
@@ -72,7 +78,9 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
                 marginBottom: 12,
               }}
             >
-              Example{examples.length > 1 ? 's' : ''}:
+              {t('study.reverseCardFront.examples', {
+                count: examples.length,
+              })}
             </Text>
             <CardExample
               ref={cardExampleRef}
