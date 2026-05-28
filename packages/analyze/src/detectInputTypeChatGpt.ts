@@ -5,16 +5,20 @@ import {
   InputAnalysis,
   isInputAnalysis,
 } from './detectInputTypeAi';
+import { isQuiteLikelyAWord } from './isQuiteLikelyAWord';
 
 export const detectInputTypeChatGpt = async ({
   source,
   language,
 }: DetectInputTypeAiPayload): Promise<Result<InputAnalysis>> => {
+  const quiteLikelyAWord = isQuiteLikelyAWord({ source, language });
+
   const prompt = [
+    `You are a ${languageList[language]} dictionary`,
     `User provides an input`,
     `Respond with a JSON object`,
     `- type - ${inputTypes.join(', ')}`,
-    `- isDirect - true if the input can be ${languageList[language]}`,
+    `- isDirect - true when the input ${quiteLikelyAWord ? `is a ${languageList[language]} word` : `can be ${languageList[language]}`}`,
   ]
     .filter((s) => !!s)
     .join('\n');

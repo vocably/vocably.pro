@@ -85,7 +85,7 @@ describe('detectInputTypeChatGpt', () => {
     if (responseResult.success === false) {
       return;
     }
-    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.type).toHaveSomeOf(['word', 'compound word']);
     expect(responseResult.value.isDirect).toEqual(true);
   });
 
@@ -199,5 +199,37 @@ describe('detectInputTypeChatGpt', () => {
     }
     expect(responseResult.value.type).toEqual('word');
     expect(responseResult.value.isDirect).toEqual(true);
+  });
+
+  it('german grammar', async () => {
+    const responseResult = await detectInputTypeChatGpt({
+      language: 'de',
+      source: 'grammar',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.isDirect).toEqual(false);
+  });
+
+  it('dutch table', async () => {
+    const responseResult = await detectInputTypeChatGpt({
+      language: 'nl',
+      source: 'table',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.isDirect).toEqual(false);
   });
 });

@@ -232,4 +232,36 @@ describe('detectInputTypeGemini', () => {
     expect(responseResult.value.type).toEqual('word');
     expect(responseResult.value.isDirect).toEqual(false);
   });
+
+  it('german grammar', async () => {
+    const responseResult = await detectInputTypeGemini({
+      language: 'de',
+      source: 'grammar',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.isDirect).toEqual(false);
+  });
+
+  it('dutch table', async () => {
+    const responseResult = await detectInputTypeGemini({
+      language: 'nl',
+      source: 'table',
+    });
+
+    console.log(inspect(responseResult));
+
+    expect(responseResult.success).toEqual(true);
+    if (responseResult.success === false) {
+      return;
+    }
+    expect(responseResult.value.type).toEqual('word');
+    expect(responseResult.value.isDirect).toEqual(false);
+  });
 });
