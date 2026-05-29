@@ -392,5 +392,17 @@
     "next": "Next",
     "skip": "Skip",
     "goToApp": "Go to the app"
+  },
+  "discoverySurvey": {
+    "screenTitle": "Last question",
+    "question": "How did you hear about Vocably?",
+    "whatIsIt": "What is it?",
+    "typePlaceholder": "Type here",
+    "sources": {
+      "playStore": "Play Store",
+      "appStore": "App Store",
+      "fromAFriend": "From a friend",
+      "other": "Other"
+    }
   }
 }

@@ -64,7 +64,7 @@ export const AuthNavigation: FC<Props> = () => {
         name="discovery"
         component={DiscoverySurveyScreen}
         options={{
-          title: 'Last question',
+          title: i18n.t('discoverySurvey.screenTitle'),
         }}
       />
       <Stack.Screen

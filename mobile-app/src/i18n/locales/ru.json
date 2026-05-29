@@ -402,5 +402,17 @@
     "next": "Далее",
     "skip": "Пропустить",
     "goToApp": "Войти в приложение"
+  },
+  "discoverySurvey": {
+    "screenTitle": "Последний вопрос",
+    "question": "Как вы узнали о Vocably?",
+    "whatIsIt": "Как именно?",
+    "typePlaceholder": "Введите здесь",
+    "sources": {
+      "playStore": "Play Store",
+      "appStore": "App Store",
+      "fromAFriend": "От друга",
+      "other": "Другое"
+    }
   }
 }

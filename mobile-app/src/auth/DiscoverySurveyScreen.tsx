@@ -6,6 +6,7 @@ import { Platform, ScrollView, TextInput, View } from 'react-native';
 import { Button, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import {
   createDefaultLanguageContainerDeck,
   saveDecksToStorage,
@@ -25,28 +26,35 @@ type Props = {
   route: Route<string, any>;
 };
 
-const sources = [
-  'Reddit',
-  'LinkedIn',
-  'Google',
-  'AI',
-  Platform.OS === 'android' ? 'Play Store' : 'App Store',
-  'From a friend',
-  'Other',
-];
-
 export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
   const { sourceLanguage, targetLanguage } = route.params as RouteParams;
 
   const theme = useTheme() as AppTheme;
   const insets = useSafeAreaInsets();
   const posthog = usePostHog();
+  const { t } = useTranslation();
 
   const { createAnonymousUser } = useContext(AuthContext);
 
   const [showOther, setShowOther] = useState(false);
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [otherSource, setOtherSource] = useState('');
+
+  const sources = [
+    { value: 'Reddit', label: 'Reddit' },
+    { value: 'LinkedIn', label: 'LinkedIn' },
+    { value: 'Google', label: 'Google' },
+    { value: 'AI', label: 'AI' },
+    {
+      value: Platform.OS === 'android' ? 'Play Store' : 'App Store',
+      label:
+        Platform.OS === 'android'
+          ? t('discoverySurvey.sources.playStore')
+          : t('discoverySurvey.sources.appStore'),
+    },
+    { value: 'From a friend', label: t('discoverySurvey.sources.fromAFriend') },
+    { value: 'Other', label: t('discoverySurvey.sources.other') },
+  ];
 
   const startUsingTheApp = async (source?: string) => {
     if (isGoogleLanguage(sourceLanguage) && isGoogleLanguage(targetLanguage))
@@ -114,7 +122,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
             color: theme.colors.secondary,
           }}
         >
-          How did you hear about Vocably?
+          {t('discoverySurvey.question')}
         </Text>
         <View
           style={{
@@ -127,11 +135,11 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
         >
           {sources.map((source) => (
             <Button
-              mode={selectedSource === source ? 'contained' : 'outlined'}
-              key={source}
-              onPress={() => onSelect(source)}
+              mode={selectedSource === source.value ? 'contained' : 'outlined'}
+              key={source.value}
+              onPress={() => onSelect(source.value)}
             >
-              {source}
+              {source.label}
             </Button>
           ))}
         </View>
@@ -143,7 +151,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
               gap: 16,
             }}
           >
-            <Text>What is it?</Text>
+            <Text>{t('discoverySurvey.whatIsIt')}</Text>
             <View
               style={{
                 backgroundColor: theme.colors.inputBgFocused,
@@ -158,7 +166,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
                 onChangeText={setOtherSource}
                 onSubmitEditing={onNext}
                 returnKeyType="done"
-                placeholder="Type here"
+                placeholder={t('discoverySurvey.typePlaceholder')}
                 style={{
                   fontSize: 18,
                   color: theme.colors.onBackground,
@@ -167,7 +175,7 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
               />
             </View>
             <Button mode="elevated" elevation={1} onPress={onNext}>
-              Next
+              {t('welcome.next')}
             </Button>
           </Animated.View>
         )}
