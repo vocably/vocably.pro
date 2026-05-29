@@ -188,7 +188,7 @@
     "mayBeStudiedIn_other": "May be studied in {{count}} minutes."
   },
   "deck": {
-    "editDeckTitle": "Edit {{languageName}} deck",
+    "editDeckTitle": "Edit {{languageName}}",
     "studyRemindersTitle": "Study reminders for {{languageName}}"
   },
   "editCard": {

@@ -194,7 +194,7 @@
     "mayBeStudiedIn_other": "Можно изучать через {{count}} минуты."
   },
   "deck": {
-    "editDeckTitle": "Редактировать колоду {{languageName}}",
+    "editDeckTitle": "Редактировать {{languageName}}",
     "studyRemindersTitle": "Напоминания для {{languageName}}"
   },
   "editCard": {
