@@ -242,7 +242,7 @@
     "exampleAnimals": "животные",
     "examplePopularIdioms": "популярные идиомы",
     "placeholder": "Что угодно...",
-    "generating": "Генерируем карточки...",
+    "generating": "Создаю карточки...",
     "followingWillBeGenerated": "Будут созданы следующие карточки:"
   },
   "languageSelector": {
@@ -270,7 +270,7 @@
     "connectOnTelegram": "Написать в Telegram",
     "joinDiscord": "Присоединиться в Discord",
     "sendMessage": "Отправить сообщение",
-    "conductingAnalysis": "Проводим дополнительный анализ...",
+    "conductingAnalysis": "Анализирую...",
     "selectLanguageLearning": "Выберите язык, который вы изучаете.",
     "selectMotherTongue": "Выберите ваш родной язык"
   },

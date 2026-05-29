@@ -50,8 +50,12 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
             i18nKey="study.reverseCardFront.actionForPartOfSpeech"
             values={{
               action: actionText,
-              partOfSpeech:
-                card.data.partOfSpeech || t('study.reverseCardFront.meaning'),
+              partOfSpeech: card.data.partOfSpeech
+                ? t(
+                    `language.${card.data.partOfSpeech}`,
+                    card.data.partOfSpeech
+                  )
+                : t('study.reverseCardFront.meaning'),
             }}
             components={{
               highlighted: card.data.partOfSpeech ? (

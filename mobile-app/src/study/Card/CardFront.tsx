@@ -125,7 +125,11 @@ export const CardFront: FC<Props> = ({
         >
           {card.data.ipa && <Text>/{sanitizeTranscript(card.data.ipa)}/</Text>}
           {card.data.g && <Text>({card.data.g})</Text>}
-          {card.data.partOfSpeech && <Text>{card.data.partOfSpeech}</Text>}
+          {card.data.partOfSpeech && (
+            <Text>
+              {t(`language.${card.data.partOfSpeech}`, card.data.partOfSpeech)}
+            </Text>
+          )}
           {showInflections && presentAndPast && <Text>{presentAndPast}</Text>}
           {showInflections &&
             card.data.number === 'singular' &&

@@ -128,8 +128,12 @@ export const MultiChoice: FC<Props> = ({
                 <Trans
                   i18nKey="study.multiChoice.selectCorrectAnswerFor"
                   values={{
-                    partOfSpeech:
-                      card.data.partOfSpeech || t('study.multiChoice.meaning'),
+                    partOfSpeech: card.data.partOfSpeech
+                      ? t(
+                          `language.${card.data.partOfSpeech}`,
+                          card.data.partOfSpeech
+                        )
+                      : t('study.multiChoice.meaning'),
                   }}
                   components={{
                     highlighted: card.data.partOfSpeech ? (
