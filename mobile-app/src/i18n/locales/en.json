@@ -396,7 +396,11 @@
     "goToApp": "Go to the app"
   },
   "auth": {
-    "authenticating": "Authenticating..."
+    "authenticating": "Authenticating...",
+    "anonymousUserError": {
+      "title": "Unable to create anonymous user",
+      "message": "A critical error while creating an anonymous user occurred."
+    }
   },
   "discoverySurvey": {
     "screenTitle": "Last question",

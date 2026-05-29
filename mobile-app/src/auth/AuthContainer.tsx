@@ -12,6 +12,7 @@ import React, {
   useState,
 } from 'react';
 import { Alert } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import * as asyncAppStorage from '../asyncAppStorage';
 import { clearAll, getAll } from '../asyncAppStorage';
 import { Sentry } from '../BetterSentry';
@@ -150,6 +151,7 @@ getStorageValuesToLog().then(console.log);
 export const AuthContainer: FC<{
   children?: ReactNode;
 }> = ({ children }) => {
+  const { t } = useTranslation();
   const [authStatusResult, setAuthStatus] = useAsync(
     loadAuthStatusFromStorage,
     saveAuthStatusToStorage
@@ -178,8 +180,8 @@ export const AuthContainer: FC<{
 
     if (id === undefined) {
       Alert.alert(
-        'Unable to create anonymous user',
-        'A critical error while creating an anonymous user occurred.'
+        t('auth.anonymousUserError.title'),
+        t('auth.anonymousUserError.message')
       );
       Sentry.captureException(
         new Error('Unable to create anonymous user'),
@@ -428,7 +430,7 @@ export const AuthContainer: FC<{
     authStatusResult.status !== 'loaded' ||
     loginStatusResult.status !== 'loaded'
   ) {
-    return <Loader>Authenticating...</Loader>;
+    return <Loader>{t('auth.authenticating')}</Loader>;
   }
 
   return (
