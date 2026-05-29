@@ -7,6 +7,8 @@ import { LanguageSelectorModal } from '../LanguageSelectorModal';
 import { LanguageScreen } from './LanguageScreen';
 import { LoginScreen } from './LoginScreen';
 import { DiscoverySurveyScreen } from './DiscoverySurveyScreen';
+import { Trans } from 'react-i18next';
+import { i18n } from '../i18n';
 
 const Stack = createStackNavigator();
 
@@ -46,7 +48,7 @@ export const AuthNavigation: FC<Props> = () => {
             maxFontSizeMultiplier={1}
             compact={true}
           >
-            Sign in
+            <Trans i18nKey={'common.signIn'} />
           </Button>
         ),
       }}
@@ -69,7 +71,7 @@ export const AuthNavigation: FC<Props> = () => {
         name="login"
         component={LoginScreen}
         options={{
-          title: 'Sign in or Register',
+          title: i18n.t('loginForm.screenTitle'),
           headerRight: () => <></>,
         }}
       />

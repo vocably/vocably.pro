@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
 import { Button, Divider, Text, useTheme } from 'react-native-paper';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -14,6 +15,7 @@ import { storeSelectedLanguage } from '../TranslationPreset/useTranslationPreset
 type Props = {};
 
 export const LanguageScreen: FC<Props> = () => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
@@ -60,10 +62,10 @@ export const LanguageScreen: FC<Props> = () => {
             textAlign: 'center',
           }}
         >
-          What is your mother{'\u00A0'}tongue?
+          {t('languageScreen.motherTongueQuestion')}
         </Text>
         <Text style={{ textAlign: 'center' }}>
-          Select the language you can speak.
+          {t('languageScreen.motherTongueHint')}
         </Text>
         <TargetLanguageButton
           navigation={navigation}
@@ -92,7 +94,7 @@ export const LanguageScreen: FC<Props> = () => {
               textAlign: 'center',
             }}
           >
-            What language do you study?
+            {t('welcome.questionStudyLanguage')}
           </Text>
           <SourceLanguageButton
             navigation={navigation}
@@ -104,11 +106,10 @@ export const LanguageScreen: FC<Props> = () => {
             }}
             onChange={onSourceLanguageChange}
             languagePairs={{}}
-            emptyText="Select"
+            emptyText={t('languageSelector.select')}
           />
           <Text style={{ textAlign: 'center' }}>
-            You can learn multiple languages. For now, just pick one to get
-            started.
+            {t('welcome.multipleLanguagesHint')}
           </Text>
         </Animated.View>
       )}
@@ -126,7 +127,7 @@ export const LanguageScreen: FC<Props> = () => {
             elevation={2}
             onPress={savePreferencesAndProceed}
           >
-            Next
+            {t('welcome.next')}
           </Button>
         </Animated.View>
       )}

@@ -11,7 +11,8 @@
     "no": "Нет",
     "error": "Ошибка",
     "goBack": "Вернуться",
-    "operationFailed": "Не удалось выполнить операцию."
+    "operationFailed": "Не удалось выполнить операцию.",
+    "signIn": "Войти"
   },
   "appLanguagePicker": {
     "title": "Язык приложения"
@@ -381,11 +382,16 @@
     "importExportCsv": "Импортируйте и экспортируйте CSV"
   },
   "loginForm": {
+    "screenTitle": "Войти в приложение",
     "signIn": "Войти или зарегистрироваться",
     "bySigningInYouAgreeToOur": "Регистрируясь в приложение, вы соглашаетесь с нашими",
     "termsAndConditions": "Условиями использования",
     "and": "и",
     "privacyPolicy": "Политикой конфиденциальности"
+  },
+  "languageScreen": {
+    "motherTongueQuestion": "Какой ваш родной язык?",
+    "motherTongueHint": "Выберите язык, на котором вы свободно говорите."
   },
   "welcome": {
     "formIntro": "Для начала ответьте на несколько вопросов.",

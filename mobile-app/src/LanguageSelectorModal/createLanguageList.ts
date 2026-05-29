@@ -27,11 +27,13 @@ export const createLanguageList = ({
 }): LanguageList => {
   const data: LanguageList = [];
 
-  const allLanguages = Object.keys(languageList).map((key) => ({
-    key,
-    alias: languageList[key as GoogleLanguage],
-    label: i18n.t(`language.nominative_${key}`),
-  }));
+  const allLanguages = Object.keys(languageList)
+    .map((key) => ({
+      key,
+      alias: languageList[key as GoogleLanguage],
+      label: i18n.t(`language.nominative_${key}`),
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label));
 
   const filteredLanguageList = Object.fromEntries(
     allLanguages

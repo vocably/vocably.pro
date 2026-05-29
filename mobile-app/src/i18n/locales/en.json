@@ -11,7 +11,8 @@
     "no": "No",
     "error": "Error",
     "goBack": "Go back",
-    "operationFailed": "Unable to perform the operation."
+    "operationFailed": "Unable to perform the operation.",
+    "signIn": "Sign in"
   },
   "appLanguagePicker": {
     "title": "App language"
@@ -371,11 +372,16 @@
     "importExportCsv": "Import and export CSV data"
   },
   "loginForm": {
+    "screenTitle": "Sign in or Register",
     "signIn": "Sign in or Create an account",
     "bySigningInYouAgreeToOur": "By signing in, you agree to our",
     "termsAndConditions": "Terms and Conditions",
     "and": "and",
     "privacyPolicy": "Privacy Policy"
+  },
+  "languageScreen": {
+    "motherTongueQuestion": "What is your mother tongue?",
+    "motherTongueHint": "Select the language you can speak fluently."
   },
   "welcome": {
     "formIntro": "To get started, please answer a few questions.",
