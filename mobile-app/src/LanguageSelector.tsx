@@ -13,6 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LanguagesContext } from './languages/LanguagesContainer';
 import { popularLanguages } from './SourceLanguageButton';
+import { upperFirst } from 'lodash-es';
 
 type Props = {
   style?: StyleProp<ViewStyle>;
@@ -87,7 +88,7 @@ export const LanguageSelector: FC<Props> = ({ style }) => {
         {languages.map((language) => (
           <Menu.Item
             key={language}
-            title={getFullLanguageName(language)}
+            title={upperFirst(t(`language.nominative_${language}`))}
             onPress={() => onSelect(language)}
             titleStyle={{
               color: theme.colors.secondary,
