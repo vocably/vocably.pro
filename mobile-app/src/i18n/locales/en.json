@@ -397,6 +397,8 @@
   },
   "auth": {
     "authenticating": "Authenticating...",
+    "sessionExpired": "Your authentication session is expired.",
+    "signInAgain": "Sign in again",
     "anonymousUserError": {
       "title": "Unable to create anonymous user",
       "message": "A critical error while creating an anonymous user occurred."

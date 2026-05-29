@@ -1,17 +1,18 @@
 import { signOut } from '@aws-amplify/auth';
 import React, { FC } from 'react';
-import { Platform, ScrollView } from 'react-native';
-import { Button, Text, useTheme } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
+import { ScrollView } from 'react-native';
+import { Button, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { mainPadding } from '../styles';
-import { signIn, signInWithAnIdioticCognitoFlow } from './logInFunctions';
+import { signIn } from './logInFunctions';
 
 type Props = {
   onSignOut?: () => void;
 };
 
 export const LoggedOutForm: FC<Props> = ({ onSignOut = () => {} }) => {
-  const theme = useTheme();
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
   return (
@@ -26,14 +27,14 @@ export const LoggedOutForm: FC<Props> = ({ onSignOut = () => {} }) => {
       }}
     >
       <Text variant="bodyLarge" style={{ textAlign: 'center' }}>
-        Your authentication session is expired.
+        {t('auth.sessionExpired')}
       </Text>
       <Button
         mode="contained"
         onPress={signIn}
         style={{ alignSelf: 'stretch' }}
       >
-        Sign in again
+        {t('auth.signInAgain')}
       </Button>
       <Button
         mode="outlined"
@@ -43,7 +44,7 @@ export const LoggedOutForm: FC<Props> = ({ onSignOut = () => {} }) => {
           onSignOut();
         }}
       >
-        Sign out
+        {t('settings.signOut')}
       </Button>
     </ScrollView>
   );

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Linking, Platform, View } from 'react-native';
 import { Button, Text, useTheme } from 'react-native-paper';
 import { useTranslation } from 'react-i18next';
-import { signIn, signInWithAnIdioticCognitoFlow } from './logInFunctions';
+import { signIn } from './logInFunctions';
 
 type Props = {
   loading?: boolean;
