@@ -37,6 +37,15 @@ npm run list-devices      # List available iOS simulators
 
 There is no testing or linting configured for this project.
 
+## User interface language
+
+The system interface expected to be translated into following languages:
+
+- English (en) - default
+- Russian (ru)
+
+The translation files are located in `src/i18n/locales`.
+
 ## Architecture
 
 ### App Structure
