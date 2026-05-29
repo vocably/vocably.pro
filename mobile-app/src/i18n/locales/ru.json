@@ -375,6 +375,11 @@
     "copyToClipboard": "Скопировать в буфер обмена",
     "copiedToClipboard": "Скопировано в буфер обмена."
   },
+  "loginModal": {
+    "syncAcrossDevices": "Синхронизируйтесь между устройствами",
+    "useBrowserExtensions": "Используйте расширение для браузера",
+    "importExportCsv": "Импортируйте и экспортируйте CSV"
+  },
   "welcome": {
     "formIntro": "Для начала ответьте на несколько вопросов.",
     "questionStudyLanguage": "Какой язык вы изучаете?",

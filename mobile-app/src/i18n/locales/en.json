@@ -365,6 +365,11 @@
     "copyToClipboard": "Copy to Clipboard",
     "copiedToClipboard": "Copied to clipboard."
   },
+  "loginModal": {
+    "syncAcrossDevices": "Synchronize across devices",
+    "useBrowserExtensions": "Use browser extensions",
+    "importExportCsv": "Import and export CSV data"
+  },
   "welcome": {
     "formIntro": "To get started, please answer a few questions.",
     "questionStudyLanguage": "What language do you study?",

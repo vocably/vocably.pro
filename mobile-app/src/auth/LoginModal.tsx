@@ -2,6 +2,7 @@ import { Route } from '@react-navigation/native';
 import { StudyStreak, UserMetadata } from '@vocably/model';
 import { safeStringify } from '@vocably/sulna';
 import React, { FC, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
 import { Divider, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -134,6 +135,8 @@ export const LoginModal: FC<Props> = ({ route }) => {
     anonymousStudyStreak,
   ]);
 
+  const { t } = useTranslation();
+
   const listColor = theme.colors.onBackground;
   const textStyle = {
     fontSize: 18,
@@ -154,17 +157,17 @@ export const LoginModal: FC<Props> = ({ route }) => {
       <View style={{ width: '90%', gap: 8, marginBottom: 24 }}>
         <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
           <Icon name="cloud-outline" size={24} color={listColor} />
-          <Text style={textStyle}>Synchronize across devices</Text>
+          <Text style={textStyle}>{t('loginModal.syncAcrossDevices')}</Text>
         </View>
         <Divider />
         <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
           <Icon name="puzzle-outline" size={24} color={listColor} />
-          <Text style={textStyle}>Use browser extensions</Text>
+          <Text style={textStyle}>{t('loginModal.useBrowserExtensions')}</Text>
         </View>
         <Divider />
         <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
           <Icon name="file-delimited-outline" size={24} color={listColor} />
-          <Text style={textStyle}>Import and export CSV data</Text>
+          <Text style={textStyle}>{t('loginModal.importExportCsv')}</Text>
         </View>
       </View>
       <LoginForm loading={synchronizing} />
