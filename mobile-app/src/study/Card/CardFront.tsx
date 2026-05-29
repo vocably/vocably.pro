@@ -54,11 +54,11 @@ export const CardFront: FC<Props> = ({
   const fontScale = PixelRatio.getFontScale();
 
   const present = card.data.presentTenses
-    ? t('study.cardFront.presentTenses', { value: card.data.presentTenses })
+    ? t('common.presentTenses', { value: card.data.presentTenses })
     : false;
   const past =
     card.data.tense === 'present' && card.data.pastTenses
-      ? t('study.cardFront.pastTenses', { value: card.data.pastTenses })
+      ? t('common.pastTenses', { value: card.data.pastTenses })
       : false;
 
   const presentAndPast = [present, past].filter(Boolean).join(`\n`);
@@ -135,7 +135,7 @@ export const CardFront: FC<Props> = ({
             card.data.number === 'singular' &&
             isGoodPlural(card.data.pluralForm) && (
               <Text>
-                {t('study.cardFront.plural', {
+                {t('common.plural', {
                   value: card.data.pluralForm,
                 })}
               </Text>

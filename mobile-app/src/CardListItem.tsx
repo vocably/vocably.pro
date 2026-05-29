@@ -67,11 +67,11 @@ export const CardListItem: FC<Props> = ({
   const fontScale = PixelRatio.getFontScale();
 
   const present = card.presentTenses
-    ? t('study.cardFront.presentTenses', { value: card.presentTenses })
+    ? t('common.presentTenses', { value: card.presentTenses })
     : false;
   const past =
     card.tense === 'present' && card.pastTenses
-      ? t('study.cardFront.pastTenses', { value: card.pastTenses })
+      ? t('common.pastTenses', { value: card.pastTenses })
       : false;
 
   const presentAndPast = [present, past].filter(Boolean).join(`\n`);
@@ -221,7 +221,7 @@ export const CardListItem: FC<Props> = ({
                 {' '}
                 <View style={{ transform: textTransform }}>
                   <Text style={{ lineHeight }}>
-                    {t('study.cardFront.plural', { value: card.pluralForm })}
+                    {t('common.plural', { value: card.pluralForm })}
                   </Text>
                 </View>
               </>
@@ -250,7 +250,7 @@ export const CardListItem: FC<Props> = ({
       </View>
       {showExamples && card.example && (
         <View style={{ marginTop: 8 }}>
-          <Text style={{ fontWeight: 'bold' }}>{t('chat.examples')}</Text>
+          <Text style={{ fontWeight: 'bold' }}>{t('common.examples')}</Text>
           <CardExample
             onLookUpModalOpen={onLookUpModalOpen}
             example={card.example}

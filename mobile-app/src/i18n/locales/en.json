@@ -12,7 +12,11 @@
     "error": "Error",
     "goBack": "Go back",
     "operationFailed": "Unable to perform the operation.",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "presentTenses": "(present: {{value}})",
+    "pastTenses": "(past: {{value}})",
+    "plural": "(plural: {{value}})",
+    "examples": "Examples"
   },
   "appLanguagePicker": {
     "title": "App language"
@@ -308,11 +312,6 @@
     },
     "cardBack": {
       "emptyCardMessage": "This card has no translations nor definitions. Edit this card."
-    },
-    "cardFront": {
-      "presentTenses": "(present: {{value}})",
-      "pastTenses": "(past: {{value}})",
-      "plural": "(plural: {{value}})"
     },
     "multiChoice": {
       "meaning": "meaning",

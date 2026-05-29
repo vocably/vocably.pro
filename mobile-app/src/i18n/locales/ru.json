@@ -12,7 +12,11 @@
     "error": "Ошибка",
     "goBack": "Вернуться",
     "operationFailed": "Не удалось выполнить операцию.",
-    "signIn": "Войти"
+    "signIn": "Войти",
+    "presentTenses": "(настоящее: {{value}})",
+    "pastTenses": "(прошедшее: {{value}})",
+    "plural": "(мн.ч.: {{value}})",
+    "examples": "Примеры"
   },
   "appLanguagePicker": {
     "title": "Язык приложения"
@@ -316,11 +320,6 @@
     },
     "cardBack": {
       "emptyCardMessage": "Эта карточка не содержит перевода или определения. Отредактируйте её."
-    },
-    "cardFront": {
-      "presentTenses": "(настоящее: {{value}})",
-      "pastTenses": "(прошедшее: {{value}})",
-      "plural": "(мн.ч.: {{value}})"
     },
     "multiChoice": {
       "meaning": "значение",
