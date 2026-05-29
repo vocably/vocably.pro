@@ -444,5 +444,39 @@
       "fromAFriend": "From a friend",
       "other": "Other"
     }
+  },
+  "tips": {
+    "menu": {
+      "editCards": "Edit cards",
+      "groupCards": "Group cards (in folders)",
+      "importExportCsv": "Import and export CSV",
+      "studyPlan": "Study plan",
+      "androidTranslate": "How to translate any selected text in any app on your mobile.",
+      "iosTranslate": "Translate any word on any website with Vocably iOS Safari Extension.",
+      "desktopExtension": "Are you using Chrome or Safari on your computer? Try the Vocably extension.",
+      "provideFeedback": "Provide feedback",
+      "feedbackBody": "Are you missing any crucial feature or simply want to share your opinion about Vocably with me? I would love to hear from you!"
+    },
+    "howToEditCards": {
+      "title": "Edit cards",
+      "intro": "You can edit cards in two ways:",
+      "myCardsItem": "• <bold>My cards screen</bold>: Swipe a card left to reveal the edit menu.",
+      "studySessionItem": "• <bold>Study session</bold>: Tap the \"Edit\" (<editIcon/>) button."
+    },
+    "howToGroupCards": {
+      "title": "Group cards"
+    },
+    "howToImportAndExport": {
+      "title": "Import and export CSV",
+      "importCards": "Import cards",
+      "importNote": "<alertIcon/> Import is available only for registered users. You will be redirected to the website.",
+      "exportCards": "Export your {{languageName}} cards"
+    },
+    "howToViewStudyStatistics": {
+      "title": "Study plan",
+      "para1": "The <bold>Study Plan</bold> is enabled by default and provides an overview of the cards scheduled for today, upcoming days, and those that have expired and need review. This helps you stay on track, catch up on overdue cards, and approach your learning more strategically.",
+      "para2": "To view your study plan, go to the <myCards>My cards</myCards> tab and tap the <chartBoxIcon/> button in the top-left corner.",
+      "para3": "<bold>Important:</bold> the study plan is not available when cards for study are selected randomly. To disable the random card selection, go to <studySettings>Study settings</studySettings>."
+    }
   }
 }

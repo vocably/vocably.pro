@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,7 +10,9 @@ type Props = {};
 
 export const HowToViewStudyStatisticsScreen: FC<Props> = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation();
+  navigation.setOptions({ title: t('tips.howToViewStudyStatistics.title') });
 
   const navigateToStudySettings = async () => {
     navigation.navigate('Settings');
@@ -18,42 +21,43 @@ export const HowToViewStudyStatisticsScreen: FC<Props> = () => {
     }, 200);
   };
 
+  const bold = <Text style={{ fontWeight: 'bold' }} />;
+  const chartBoxIcon = <Icon name={'chart-box-outline'} size={24} />;
+  const myCards = (
+    <Text
+      style={{ color: theme.colors.primary }}
+      onPress={() => navigation.navigate('Dashboard')}
+    />
+  );
+  const studySettings = (
+    <Text
+      onPress={navigateToStudySettings}
+      style={{ color: theme.colors.primary }}
+    />
+  );
+
   return (
     <CustomScrollView>
       <View style={{ gap: 8, marginBottom: 32, paddingHorizontal: 16 }}>
         <Text style={{ fontSize: 18 }}>
-          The <Text style={{ fontWeight: 'bold' }}>Study Plan</Text> is enabled
-          by default and provides an overview of the cards scheduled for today,
-          upcoming days, and those that have expired and need review. This helps
-          you stay on track, catch up on overdue cards, and approach your
-          learning more strategically.
+          <Trans
+            i18nKey="tips.howToViewStudyStatistics.para1"
+            components={{ bold }}
+          />
         </Text>
 
         <Text style={{ fontSize: 18 }}>
-          To view your study plan, go to the{' '}
-          <Text
-            style={{ color: theme.colors.primary }}
-            onPress={() => navigation.navigate('Dashboard')}
-          >
-            <Icon name={'card-multiple-outline'} size={24} />
-            {'\u00A0'}My{'\u00A0'}cards
-          </Text>{' '}
-          tab and tap the <Icon name={'chart-box-outline'} size={24} /> button
-          in the top-left corner.
+          <Trans
+            i18nKey="tips.howToViewStudyStatistics.para2"
+            components={{ myCards, chartBoxIcon }}
+          />
         </Text>
 
         <Text style={{ fontSize: 18 }}>
-          <Text style={{ fontWeight: 'bold' }}>Important:</Text> the study plan
-          is not available when cards for study are selected randomly. To
-          disable the random card selection, go to{' '}
-          <Text
-            onPress={navigateToStudySettings}
-            style={{ color: theme.colors.primary }}
-          >
-            <Icon name={'school-outline'} size={24} />
-            {'\u00A0'}Study{'\u00A0'}settings
-          </Text>
-          .
+          <Trans
+            i18nKey="tips.howToViewStudyStatistics.para3"
+            components={{ bold, studySettings }}
+          />
         </Text>
       </View>
     </CustomScrollView>
