@@ -5,9 +5,15 @@ import { AsyncResult } from './useAsync';
 import { usePostHog } from 'posthog-react-native';
 
 export const useWelcomeRequired = (): AsyncResult<boolean> => {
-  const { languages } = useContext(LanguagesContext);
+  const { status, languages } = useContext(LanguagesContext);
   const preset = useTranslationPreset();
   const posthog = usePostHog();
+
+  if (status !== 'loaded') {
+    return {
+      status: 'loading',
+    };
+  }
 
   if (preset.status !== 'known') {
     return {
