@@ -407,6 +407,17 @@
       "message": "A critical error while creating an anonymous user occurred."
     }
   },
+  "tagMenu": {
+    "intro": "Tags are like groups, or folders, but better. Press \"Add new tag\" to begin.",
+    "addNewTag": "Add new tag",
+    "editTag": "Edit {{title}}",
+    "swipeLeftToEdit": "Swipe left to edit the tag.",
+    "swipeRightToDelete": "Swipe right to delete the tag. Your cards will not be deleted.",
+    "removeTagError": "An error occurred while removing the tag. Please try again.",
+    "updateTagError": "An error occurred while updating the tag. Please try again.",
+    "add": "Add",
+    "newTagName": "New tag name"
+  },
   "cardForm": {
     "wordOrPhrase": "Word or phrase",
     "translation": "Translation",

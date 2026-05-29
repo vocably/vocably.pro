@@ -4,6 +4,7 @@ import { useTheme } from 'react-native-paper';
 
 type Props = {
   value?: string;
+  placeholder?: string;
   autoFocus?: boolean;
   onChange?: (value: string) => any;
   onSubmit?: (value: string) => any;
@@ -11,6 +12,7 @@ type Props = {
 
 export const VocablyInputText: FC<Props> = ({
   value: initialValue = '',
+  placeholder,
   onChange,
   onSubmit,
   autoFocus = false,
@@ -52,7 +54,7 @@ export const VocablyInputText: FC<Props> = ({
           color: theme.colors.secondary,
           fontSize: 18,
         }}
-        placeholder="New tag name"
+        placeholder={placeholder}
         autoFocus={autoFocus}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
