@@ -250,13 +250,18 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                       -{' '}
                       <Text
                         style={linkStyle}
-                        onPress={runExample('irregular verbs')}
+                        onPress={runExample(
+                          t('generateCards.exampleIrregularVerbs')
+                        )}
                       >
                         {t('generateCards.exampleIrregularVerbs')}
                       </Text>
                     </Text>
                   )}
-                  <Text style={infoTextStyle} onPress={runExample('animals')}>
+                  <Text
+                    style={infoTextStyle}
+                    onPress={runExample(t('generateCards.exampleAnimals'))}
+                  >
                     -{' '}
                     <Text style={linkStyle}>
                       {t('generateCards.exampleAnimals')}
@@ -264,7 +269,9 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                   </Text>
                   <Text
                     style={infoTextStyle}
-                    onPress={runExample('popular idioms')}
+                    onPress={runExample(
+                      t('generateCards.examplePopularIdioms')
+                    )}
                   >
                     -{' '}
                     <Text style={linkStyle}>
