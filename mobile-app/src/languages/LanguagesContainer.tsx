@@ -17,6 +17,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AppState } from 'react-native';
 import {
   deleteLanguageDeck,
@@ -186,6 +187,7 @@ export const LanguagesContainer: FC<Props> = ({
   children,
   refreshLanguagesOnActive = false,
 }) => {
+  const { t } = useTranslation();
   const [listLoadingStatus, setListLoadingStatus] =
     useState<Languages['status']>('loading');
   const [decks, setDecks, refreshDeckStorage] = useAsync(
@@ -870,7 +872,9 @@ export const LanguagesContainer: FC<Props> = ({
     <LanguagesContext.Provider value={value}>
       {(listLoadingStatus === 'loading' ||
         selectedLanguage.status === 'loading' ||
-        decks.status === 'loading') && <Loader>Loading languages...</Loader>}
+        decks.status === 'loading') && (
+        <Loader>{t('languages.loading')}</Loader>
+      )}
       {(listLoadingStatus === 'error' ||
         selectedLanguage.status === 'failed' ||
         decks.status === 'failed') && (

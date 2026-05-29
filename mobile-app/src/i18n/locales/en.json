@@ -395,6 +395,9 @@
     "skip": "Skip",
     "goToApp": "Go to the app"
   },
+  "languages": {
+    "loading": "Loading languages..."
+  },
   "auth": {
     "authenticating": "Authenticating...",
     "sessionExpired": "Your authentication session is expired.",
