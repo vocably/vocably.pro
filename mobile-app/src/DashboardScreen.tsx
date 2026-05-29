@@ -867,7 +867,6 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                       <Text style={{ fontSize: 16 }}>
                         <Trans
                           i18nKey="dashboard.empty.noCardsYet"
-                          values={{ languageName }}
                           components={{
                             bold: <Text style={{ fontWeight: 'bold' }} />,
                           }}

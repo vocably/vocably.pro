@@ -177,7 +177,7 @@
       "future": "Planned"
     },
     "empty": {
-      "noCardsYet": "No <bold>{{languageName}}</bold> cards yet.",
+      "noCardsYet": "You have no study cards yet.",
       "headOverToLookUp": "Head over to the Look Up tab to find and add some new words.",
       "goToLookUp": "Go to Look up",
       "noCardsForSearch": "No cards found for <bold>{{searchText}}</bold>.",

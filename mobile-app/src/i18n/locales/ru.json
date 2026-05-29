@@ -181,7 +181,7 @@
       "future": "Запланировано"
     },
     "empty": {
-      "noCardsYet": "Пока нет карточек для <bold>{{languageName}}</bold>.",
+      "noCardsYet": "У вас пока нет карточек для изучения.",
       "headOverToLookUp": "Откройте вкладку «Перевод», чтобы найти и добавить новые слова.",
       "goToLookUp": "Перейти к переводу",
       "noCardsForSearch": "Карточки для <bold>{{searchText}}</bold> не найдены.",
