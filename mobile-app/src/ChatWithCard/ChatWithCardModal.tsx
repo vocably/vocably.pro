@@ -189,7 +189,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
                 }}
                 disabled={isThinking}
                 onPress={() => {
-                  send('Explain');
+                  send(t('chat.explainMessage'));
                 }}
               >
                 {t('chat.explain')}
@@ -209,7 +209,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
                 }}
                 disabled={isThinking}
                 onPress={() => {
-                  send('Provide several example sentences');
+                  send(t('chat.examplesMessage'));
                 }}
               >
                 {t('chat.examples')}
@@ -229,7 +229,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
                 }}
                 disabled={isThinking}
                 onPress={() => {
-                  send('Help me to remember this card');
+                  send(t('chat.rememberMessage'));
                 }}
               >
                 {t('chat.remember')}
