@@ -395,6 +395,9 @@
     "skip": "Skip",
     "goToApp": "Go to the app"
   },
+  "auth": {
+    "authenticating": "Authenticating..."
+  },
   "discoverySurvey": {
     "screenTitle": "Last question",
     "question": "How did you hear about Vocably?",

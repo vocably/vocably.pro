@@ -405,6 +405,9 @@
     "skip": "Пропустить",
     "goToApp": "Войти в приложение"
   },
+  "auth": {
+    "authenticating": "Авторизация..."
+  },
   "discoverySurvey": {
     "screenTitle": "Последний вопрос",
     "question": "Как вы узнали о Вокебли?",
