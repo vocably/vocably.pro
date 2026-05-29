@@ -403,7 +403,39 @@
     "previous": "Назад",
     "next": "Далее",
     "skip": "Пропустить",
-    "goToApp": "Перейти в приложение"
+    "goToApp": "Перейти в приложение",
+    "slideCard": {
+      "looksUpWords": "Вокебли находит слова и создаёт вот такие карточки:",
+      "translatesWords": "Вокебли переводит слова и создаёт вот такие карточки:",
+      "fallbackNote": "Примечание от автора Вокебли",
+      "fallbackBody": "Эти примеры карточек неточны и могут вводить в заблуждение. Приношу свои извинения. Я работаю над точными примерами для пользователей, которые изучают {{sourceLang}} и говорят на {{targetLang}}.",
+      "saveFlashcardsBefore": "Вы можете сохранять",
+      "saveFlashcardsAfter": "карточки и изучать их с помощью системы интервального повторения."
+    },
+    "slideLookUp": {
+      "intro": "Видите или слышите новое",
+      "andSave_lookItUp": "слово? Найдите его и сохраните как карточку!",
+      "andSave_translateIt": "слово? Переведите его и сохраните как карточку!"
+    },
+    "slideReverseTranslate": {
+      "intro": "Хотите сказать что-то на",
+      "butDontKnow": "но не знаете нужное слово? Найдите его на"
+    },
+    "slideSelectToTranslate": {
+      "intro": "Видите новое",
+      "iosAfterLang_lookItUp": "слово в Mobile Safari? Найдите его с помощью",
+      "iosAfterLang_translateIt": "слово в Mobile Safari? Переведите его с помощью",
+      "iosVocablyExtension": "расширения Вокебли",
+      "androidAfterLang": "слово на экране вашего Android-устройства?",
+      "androidStep1": "Выделите слово",
+      "androidStep2": "Нажмите",
+      "androidStep3": "Нажмите «Перевести с Вокебли»"
+    },
+    "slideDesktopBrowser": {
+      "intro": "Пользуетесь компьютером? Установите",
+      "or": "или",
+      "browserExtensionSuffix": "расширение для браузера, чтобы просматривать сайты на"
+    }
   },
   "languages": {
     "loading": "Загружаем языки..."

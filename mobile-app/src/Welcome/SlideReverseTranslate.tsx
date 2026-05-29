@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GoogleLanguage, languageList } from '@vocably/model';
 import { trimLanguage } from '@vocably/sulna';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Divider, Text, useTheme } from 'react-native-paper';
@@ -22,6 +23,7 @@ export const SlideReverseTranslate: FC<Props> = ({
   sourceLanguage,
   targetLanguage,
 }) => {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const onboardingData = getOnboardingData(sourceLanguage, targetLanguage);
@@ -30,11 +32,11 @@ export const SlideReverseTranslate: FC<Props> = ({
   return (
     <WelcomeScrollView style={{ gap: 16 }}>
       <Text style={{ fontSize: 22, textAlign: 'center' }}>
-        Do you want to say something in{' '}
+        {t('welcome.slideReverseTranslate.intro')}{' '}
         <Text style={{ fontWeight: 'bold' }}>
           {trimLanguage(languageList[sourceLanguage])}
         </Text>{' '}
-        but don't know the word? Look it up in{' '}
+        {t('welcome.slideReverseTranslate.butDontKnow')}{' '}
         <Text style={{ fontWeight: 'bold' }}>
           {trimLanguage(languageList[targetLanguage])}
         </Text>

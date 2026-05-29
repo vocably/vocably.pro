@@ -393,7 +393,39 @@
     "previous": "Previous",
     "next": "Next",
     "skip": "Skip",
-    "goToApp": "Go to the app"
+    "goToApp": "Go to the app",
+    "slideCard": {
+      "looksUpWords": "Vocably looks up words and makes flashcards like this one:",
+      "translatesWords": "Vocably translates words and makes flashcards like this one:",
+      "fallbackNote": "Note from the author of Vocably",
+      "fallbackBody": "These card samples are inaccurate and confusing. I apologize for that. I'm working on accurate examples for onboarding users who study {{sourceLang}} and speak {{targetLang}}.",
+      "saveFlashcardsBefore": "You can save",
+      "saveFlashcardsAfter": "your flashcards and study them with spaced repetition system."
+    },
+    "slideLookUp": {
+      "intro": "Do you see or hear a new",
+      "andSave_lookItUp": "word? Look it up and save it as a flashcard!",
+      "andSave_translateIt": "word? Translate it and save it as a flashcard!"
+    },
+    "slideReverseTranslate": {
+      "intro": "Do you want to say something in",
+      "butDontKnow": "but don't know the word? Look it up in"
+    },
+    "slideSelectToTranslate": {
+      "intro": "Do you see a new",
+      "iosAfterLang_lookItUp": "word in Mobile Safari? Look it up with the",
+      "iosAfterLang_translateIt": "word in Mobile Safari? Translate it with the",
+      "iosVocablyExtension": "Vocably extension",
+      "androidAfterLang": "word on the screen of your Android device?",
+      "androidStep1": "Select the word",
+      "androidStep2": "Click",
+      "androidStep3": "Click \"Translate with Vocably\""
+    },
+    "slideDesktopBrowser": {
+      "intro": "Do you use a desktop computer? Install",
+      "or": "or",
+      "browserExtensionSuffix": "browser extension to surf the web in"
+    }
   },
   "languages": {
     "loading": "Loading languages..."

@@ -94,7 +94,7 @@ export const WelcomeForm: FC<Props> = () => {
                   color: theme.colors.onBackground,
                 }}
               >
-                What is your mother{'\u00A0'}tongue?
+                {t('languageScreen.motherTongueQuestion')}
               </Text>
               <View style={{ width: '100%' }}>
                 <TargetLanguageButton

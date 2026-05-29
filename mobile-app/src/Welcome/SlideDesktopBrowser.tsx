@@ -2,6 +2,7 @@ import { GoogleLanguage, languageList } from '@vocably/model';
 import { trimLanguage } from '@vocably/sulna';
 import { usePostHog } from 'posthog-react-native';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Image, Linking } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { WelcomeScrollView } from './WelcomeScrollView';
@@ -15,13 +16,14 @@ export const SlideDesktopBrowser: FC<Props> = ({
   sourceLanguage,
   targetLanguage,
 }) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const posthog = usePostHog();
 
   return (
     <WelcomeScrollView style={{ gap: 16, alignItems: 'center' }}>
       <Text style={{ fontSize: 22, textAlign: 'center' }}>
-        Do you use a desktop computer? Install{' '}
+        {t('welcome.slideDesktopBrowser.intro')}{' '}
         <Text
           style={{ color: theme.colors.primary }}
           onPress={() => {
@@ -33,7 +35,7 @@ export const SlideDesktopBrowser: FC<Props> = ({
         >
           Chrome
         </Text>{' '}
-        or{' '}
+        {t('welcome.slideDesktopBrowser.or')}{' '}
         <Text
           style={{ color: theme.colors.primary }}
           onPress={() => {
@@ -43,7 +45,7 @@ export const SlideDesktopBrowser: FC<Props> = ({
         >
           Safari
         </Text>{' '}
-        browser extension to surf the web in{' '}
+        {t('welcome.slideDesktopBrowser.browserExtensionSuffix')}{' '}
         <Text style={{ fontWeight: 'bold' }}>
           {trimLanguage(languageList[sourceLanguage])}
         </Text>
