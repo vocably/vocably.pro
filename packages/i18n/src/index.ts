@@ -12,6 +12,7 @@ export type Translations = Record<Locale, Record<string, string>>;
 
 export type LanguageTranslationOption =
   | `nominative_${GoogleLanguage}`
+  | `nominative_short_${GoogleLanguage}`
   | `objective_${GoogleLanguage}`;
 
 export const languageTranslations: Translations = {

@@ -11,6 +11,7 @@ import { Button } from 'react-native-paper';
 import { getDeviceLanguage } from './getDeviceLanguage';
 import { Preset } from './TranslationPreset/TranslationPresetContainer';
 import { LanguagePairs } from './TranslationPreset/useLanguagePairs';
+import { upperFirst } from 'lodash-es';
 
 const deviceLanguage = getDeviceLanguage();
 
@@ -88,9 +89,9 @@ export const TargetLanguageButton: FC<Props> = ({
       compact={false}
     >
       {preset.translationLanguage
-        ? (shortenedLanguageList[
-            preset.translationLanguage as GoogleLanguage
-          ] ?? languageList[preset.translationLanguage as GoogleLanguage])
+        ? upperFirst(
+            t(`language.nominative_short_${preset.translationLanguage}`)
+          )
         : t('languageSelector.select')}
     </Button>
   );

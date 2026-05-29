@@ -1,5 +1,6 @@
 import { GoogleLanguage, languageList } from '@vocably/model';
 import { i18n } from '../i18n';
+import { upperFirst } from 'lodash-es';
 
 export type LanguageListItem = {
   selected: boolean;
@@ -26,10 +27,18 @@ export const createLanguageList = ({
 }): LanguageList => {
   const data: LanguageList = [];
 
+  const allLanguages = Object.keys(languageList).map((key) => ({
+    key,
+    alias: languageList[key as GoogleLanguage],
+    label: i18n.t(`language.nominative_${key}`),
+  }));
+
   const filteredLanguageList = Object.fromEntries(
-    Object.entries(languageList).filter(([languageKey, languageName]) =>
-      languageName.toLowerCase().includes(searchText.toLowerCase())
-    )
+    allLanguages
+      .filter(({ key, alias, label }) =>
+        `${label} ${alias}`.toLowerCase().includes(searchText.toLowerCase())
+      )
+      .map(({ key, alias }) => [key, alias])
   );
 
   if (selected && filteredLanguageList[selected as GoogleLanguage]) {
@@ -38,7 +47,7 @@ export const createLanguageList = ({
       data: [
         {
           key: selected,
-          label: i18n.t(`language.nominative_${selected}`),
+          label: upperFirst(i18n.t(`language.nominative_${selected}`)),
           alias: filteredLanguageList[selected as GoogleLanguage],
           selected: true,
         },
@@ -56,7 +65,7 @@ export const createLanguageList = ({
       data: filteredPreferred.map((key) => ({
         key,
         selected: false,
-        label: i18n.t(`language.nominative_${key}`),
+        label: upperFirst(i18n.t(`language.nominative_${key}`)),
         alias: filteredLanguageList[key as GoogleLanguage],
       })),
     });
@@ -66,7 +75,7 @@ export const createLanguageList = ({
     title: i18n.t('languageSelector.availableLanguages'),
     data: Object.entries(filteredLanguageList).map(([key, alias]) => ({
       key,
-      label: i18n.t(`language.nominative_${key}`),
+      label: upperFirst(i18n.t(`language.nominative_${key}`)),
       alias,
       selected: false,
     })),

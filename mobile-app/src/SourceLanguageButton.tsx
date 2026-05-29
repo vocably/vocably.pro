@@ -10,6 +10,7 @@ import { StyleProp, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Preset } from './LookUpScreen/TranslationPresetForm';
 import { LanguagePairs } from './TranslationPreset/useLanguagePairs';
+import { upperFirst } from 'lodash-es';
 
 type Props = {
   navigation: NavigationProp<any>;
@@ -104,8 +105,7 @@ export const SourceLanguageButton: FC<Props> = ({
       compact={compact}
     >
       {preset.sourceLanguage
-        ? (shortenedLanguageList[preset.sourceLanguage as GoogleLanguage] ??
-          languageList[preset.sourceLanguage as GoogleLanguage])
+        ? upperFirst(t(`language.nominative_short_${preset.sourceLanguage}`))
         : resolvedEmptyText}
     </Button>
   );
