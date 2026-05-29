@@ -143,14 +143,10 @@
   "cardsLimit": {
     "openVocablySettings": "Open Vocably → Settings to upgrade.",
     "upgradeToPremium": "Upgrade to Premium",
-    "collectionHas": {
-      "one": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
-      "other": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit."
-    },
-    "collectionHasMoreThan": {
-      "one": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
-      "other": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit."
-    }
+    "collectionHas_one": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
+    "collectionHas_other": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit.",
+    "collectionHasMoreThan_one": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
+    "collectionHasMoreThan_other": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit."
   },
   "chat": {
     "thinking": "Thinking...",
@@ -188,10 +184,8 @@
       "noCardsForTag": "You don't have any cards tagged with <bold>{{tagTitle}}</bold>.",
       "noCardsForTags": "No cards found for the selected tags."
     },
-    "mayBeStudiedIn": {
-      "one": "May be studied in {{count}} minute.",
-      "other": "May be studied in {{count}} minutes."
-    }
+    "mayBeStudiedIn_one": "May be studied in {{count}} minute.",
+    "mayBeStudiedIn_other": "May be studied in {{count}} minutes."
   },
   "deck": {
     "editDeckTitle": "Edit {{languageName}} deck",
@@ -223,10 +217,8 @@
     "studyRemindersUnregisteredHint": "Study reminders are temporarily disabled for unregistered users.",
     "hideDefinitions": "Hide definitions",
     "hideDefinitionsHint": "The app will make an attempt to show less definitions in My cards and during the study.",
-    "deckContainsCards": {
-      "one": "The deck contains {{count}} card",
-      "other": "The deck contains {{count}} cards"
-    }
+    "deckContainsCards_one": "The deck contains {{count}} card",
+    "deckContainsCards_other": "The deck contains {{count}} cards"
   },
   "generateCards": {
     "loadingPreset": "Loading translation preset...",
@@ -329,10 +321,8 @@
     "reverseCardFront": {
       "guess": "Guess",
       "meaning": "meaning",
-      "examples": {
-        "one": "Example:",
-        "other": "Examples:"
-      },
+      "examples_one": "Example:",
+      "examples_other": "Examples:",
       "actionForPartOfSpeech": "{{action}} the <highlighted>{{partOfSpeech}}</highlighted>:"
     },
     "motivationalQuotes": {

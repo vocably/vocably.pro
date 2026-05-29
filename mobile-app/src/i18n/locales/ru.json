@@ -143,18 +143,14 @@
   "cardsLimit": {
     "openVocablySettings": "Откройте Vocably → Настройки для перехода на Premium.",
     "upgradeToPremium": "Перейти на Premium",
-    "collectionHas": {
-      "one": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточку в день.</bold> Пользователи Premium не имеют этого ограничения.",
-      "few": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения.",
-      "many": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточек в день.</bold> Пользователи Premium не имеют этого ограничения.",
-      "other": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения."
-    },
-    "collectionHasMoreThan": {
-      "one": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточку в день.</bold> Пользователи Premium не имеют этого ограничения.",
-      "few": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения.",
-      "many": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточек в день.</bold> Пользователи Premium не имеют этого ограничения.",
-      "other": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения."
-    }
+    "collectionHas_one": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточку в день.</bold> Пользователи Premium не имеют этого ограничения.",
+    "collectionHas_few": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения.",
+    "collectionHas_many": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточек в день.</bold> Пользователи Premium не имеют этого ограничения.",
+    "collectionHas_other": "В вашей коллекции <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения.",
+    "collectionHasMoreThan_one": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточку в день.</bold> Пользователи Premium не имеют этого ограничения.",
+    "collectionHasMoreThan_few": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения.",
+    "collectionHasMoreThan_many": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточек в день.</bold> Пользователи Premium не имеют этого ограничения.",
+    "collectionHasMoreThan_other": "В вашей коллекции более <bold>{{maxCards}}</bold> карточек. Теперь вы можете сохранять <bold>{{count}} карточки в день.</bold> Пользователи Premium не имеют этого ограничения."
   },
   "chat": {
     "thinking": "Думаю...",
@@ -192,12 +188,10 @@
       "noCardsForTag": "У вас нет карточек с тегом <bold>{{tagTitle}}</bold>.",
       "noCardsForTags": "Карточки для выбранных тегов не найдены."
     },
-    "mayBeStudiedIn": {
-      "one": "Можно изучать через {{count}} минуту.",
-      "few": "Можно изучать через {{count}} минуты.",
-      "many": "Можно изучать через {{count}} минут.",
-      "other": "Можно изучать через {{count}} минуты."
-    }
+    "mayBeStudiedIn_one": "Можно изучать через {{count}} минуту.",
+    "mayBeStudiedIn_few": "Можно изучать через {{count}} минуты.",
+    "mayBeStudiedIn_many": "Можно изучать через {{count}} минут.",
+    "mayBeStudiedIn_other": "Можно изучать через {{count}} минуты."
   },
   "deck": {
     "editDeckTitle": "Редактировать колоду {{languageName}}",
@@ -229,12 +223,10 @@
     "studyRemindersUnregisteredHint": "Напоминания об изучении временно недоступны для незарегистрированных пользователей.",
     "hideDefinitions": "Скрывать определения",
     "hideDefinitionsHint": "Приложение постарается показывать меньше определений в разделе «Мои карточки» и во время изучения.",
-    "deckContainsCards": {
-      "one": "В колоде {{count}} карточка",
-      "few": "В колоде {{count}} карточки",
-      "many": "В колоде {{count}} карточек",
-      "other": "В колоде {{count}} карточки"
-    }
+    "deckContainsCards_one": "В колоде {{count}} карточка",
+    "deckContainsCards_few": "В колоде {{count}} карточки",
+    "deckContainsCards_many": "В колоде {{count}} карточек",
+    "deckContainsCards_other": "В колоде {{count}} карточки"
   },
   "generateCards": {
     "loadingPreset": "Загружаем настройки перевода...",
@@ -337,12 +329,10 @@
     "reverseCardFront": {
       "guess": "Угадайте",
       "meaning": "значение",
-      "examples": {
-        "one": "Пример:",
-        "few": "Примеры:",
-        "many": "Примеры:",
-        "other": "Примеры:"
-      },
+      "examples_one": "Пример:",
+      "examples_few": "Примеры:",
+      "examples_many": "Примеры:",
+      "examples_other": "Примеры:",
       "actionForPartOfSpeech": "{{action}} <highlighted>{{partOfSpeech}}</highlighted>:"
     },
     "motivationalQuotes": {
