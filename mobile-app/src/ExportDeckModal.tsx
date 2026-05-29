@@ -1,18 +1,14 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { NavigationProp, Route } from '@react-navigation/native';
-import { languageList } from '@vocably/model';
 import { cardsToCsv } from '@vocably/model-operations';
-import { trimLanguage } from '@vocably/sulna';
-import { get } from 'lodash-es';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Linking, ScrollView, View } from 'react-native';
 import { Button, Portal, Snackbar, Text, useTheme } from 'react-native-paper';
-import { useSelectedDeck } from './languageDeck/useSelectedDeck';
 import { CustomScrollView } from './ui/CustomScrollView';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useLanguageDeck } from './languageDeck/useLanguageDeck';
-import { Loader } from './loaders/Loader';
 import { InlineLoader } from './loaders/InlineLoader';
+import { i18n } from './i18n';
 
 export type ExportDeckParams = {
   language: string;
@@ -30,10 +26,12 @@ export const ExportDeckModal: FC<Props> = ({ route, navigation }) => {
   const theme = useTheme();
   const [copied, setCopied] = useState(false);
 
-  const languageName = trimLanguage(get(languageList, language, ''));
+  const languageName = i18n.t(`language.nominative_short_${language}`, '');
 
   useEffect(() => {
-    navigation.setOptions({ title: `Export ${languageName} deck` });
+    navigation.setOptions({
+      title: i18n.t('exportDeck.title', { languageName }),
+    });
   }, [languageName]);
 
   const { csv, lexicalaSkipped } = useMemo(
@@ -49,7 +47,7 @@ export const ExportDeckModal: FC<Props> = ({ route, navigation }) => {
   if (status === 'loading') {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <InlineLoader>Loading cards...</InlineLoader>
+        <InlineLoader>{i18n.t('exportDeck.loadingCards')}</InlineLoader>
       </View>
     );
   }
@@ -62,8 +60,7 @@ export const ExportDeckModal: FC<Props> = ({ route, navigation }) => {
         }}
       >
         <Text style={{ fontSize: 16 }}>
-          A more advanced export functionality is available in the web browser
-          only for registered users.{' '}
+          {i18n.t('exportDeck.advancedExportInfo')}{' '}
           <Text
             onPress={() =>
               Linking.openURL(
@@ -77,19 +74,18 @@ export const ExportDeckModal: FC<Props> = ({ route, navigation }) => {
                 textDecorationStyle: 'solid',
               }}
             >
-              Login with your account
+              {i18n.t('exportDeck.loginWithAccount')}
             </Text>{' '}
             <Icon name="open-in-new" size={13} />
           </Text>
         </Text>
         {lexicalaSkipped && (
           <Text style={{ marginBottom: 16 }}>
-            Some cards were excluded because they were created with a deprecated
-            dictionary provider.
+            {i18n.t('exportDeck.deprecatedCardsExcluded')}
           </Text>
         )}
         <Button icon={'content-copy'} onPress={handleCopy} mode="outlined">
-          Copy to Clipboard
+          {i18n.t('exportDeck.copyToClipboard')}
         </Button>
         <ScrollView
           style={{
@@ -119,7 +115,7 @@ export const ExportDeckModal: FC<Props> = ({ route, navigation }) => {
           onDismiss={() => setCopied(false)}
           duration={2000}
         >
-          Copied to clipboard.
+          {i18n.t('exportDeck.copiedToClipboard')}
         </Snackbar>
       </Portal>
     </>

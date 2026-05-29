@@ -366,6 +366,15 @@
       "27": "The journey to fluency is a story worth telling — keep writing it."
     }
   },
+  "exportDeck": {
+    "title": "Export {{languageName}}",
+    "loadingCards": "Loading cards...",
+    "advancedExportInfo": "A more advanced export functionality is available in the web browser only for registered users.",
+    "loginWithAccount": "Login with your account",
+    "deprecatedCardsExcluded": "Some cards were excluded because they were created with a deprecated dictionary provider.",
+    "copyToClipboard": "Copy to Clipboard",
+    "copiedToClipboard": "Copied to clipboard."
+  },
   "welcome": {
     "formIntro": "To get started, please answer a few questions.",
     "questionStudyLanguage": "What language do you study?",

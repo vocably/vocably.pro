@@ -1,9 +1,5 @@
 import { NavigationProp } from '@react-navigation/native';
-import {
-  GoogleLanguage,
-  languageList,
-  shortenedLanguageList,
-} from '@vocably/model';
+import { languageList } from '@vocably/model';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleProp, ViewStyle } from 'react-native';
