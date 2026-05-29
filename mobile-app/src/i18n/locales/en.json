@@ -370,6 +370,13 @@
     "useBrowserExtensions": "Use browser extensions",
     "importExportCsv": "Import and export CSV data"
   },
+  "loginForm": {
+    "signIn": "Sign in or Create an account",
+    "bySigningInYouAgreeToOur": "By signing in, you agree to our",
+    "termsAndConditions": "Terms and Conditions",
+    "and": "and",
+    "privacyPolicy": "Privacy Policy"
+  },
   "welcome": {
     "formIntro": "To get started, please answer a few questions.",
     "questionStudyLanguage": "What language do you study?",
