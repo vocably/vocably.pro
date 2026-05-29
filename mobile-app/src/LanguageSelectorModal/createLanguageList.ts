@@ -5,6 +5,7 @@ export type LanguageListItem = {
   selected: boolean;
   key: string;
   label: string;
+  alias: string;
 };
 
 export type LanguageList = {
@@ -37,7 +38,8 @@ export const createLanguageList = ({
       data: [
         {
           key: selected,
-          label: filteredLanguageList[selected as GoogleLanguage],
+          label: i18n.t(`language.nominative_${selected}`),
+          alias: filteredLanguageList[selected as GoogleLanguage],
           selected: true,
         },
       ],
@@ -54,16 +56,18 @@ export const createLanguageList = ({
       data: filteredPreferred.map((key) => ({
         key,
         selected: false,
-        label: filteredLanguageList[key as GoogleLanguage],
+        label: i18n.t(`language.nominative_${key}`),
+        alias: filteredLanguageList[key as GoogleLanguage],
       })),
     });
   }
 
   data.push({
     title: i18n.t('languageSelector.availableLanguages'),
-    data: Object.entries(filteredLanguageList).map(([key, label]) => ({
+    data: Object.entries(filteredLanguageList).map(([key, alias]) => ({
       key,
-      label,
+      label: i18n.t(`language.nominative_${key}`),
+      alias,
       selected: false,
     })),
   });

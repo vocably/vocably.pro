@@ -8,6 +8,7 @@ const {
 const sharedPackages = [
   'api',
   'model',
+  'i18n',
   'crud',
   'sulna',
   'srs',

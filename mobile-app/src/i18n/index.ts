@@ -2,10 +2,21 @@ import 'intl-pluralrules';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { detectInitialLocale } from './detectLocale';
+import { languageTranslations } from '@vocably/i18n';
+
+console.log('i18n: loading locales', languageTranslations);
+
 // `require` (rather than ESM default import) sidesteps the local tsconfig's
 // missing esModuleInterop relay; the bundler treats JSON imports the same way.
-const en = require('./locales/en.json');
-const ru = require('./locales/ru.json');
+const en = {
+  ...require('./locales/en.json'),
+  language: languageTranslations.en,
+};
+const ru = {
+  ...require('./locales/ru.json'),
+  language: languageTranslations.ru,
+};
+
 import { DEFAULT_LOCALE } from './supportedLocales';
 
 void i18n.use(initReactI18next).init({
