@@ -182,11 +182,11 @@
     "deleteCardFailedMessage": "Что-то пошло не так при попытке удалить карточку. Попробуйте ещё раз.",
     "searchPlaceholder": "Поиск в вашей коллекции...",
     "section": {
-      "today": "Запланировано на сегодня",
+      "today": "На сегодня",
       "expired": "Нужно наверстать",
       "notStarted": "Не изучалось",
-      "tomorrow": "Завтра",
-      "future": "Запланировано"
+      "tomorrow": "На завтра",
+      "future": "На будущее"
     },
     "empty": {
       "noCardsYet": "У вас пока нет карточек для изучения.",
@@ -415,6 +415,21 @@
     "anonymousUserError": {
       "title": "Не удалось создать анонимного пользователя",
       "message": "При создании анонимного пользователя произошла критическая ошибка."
+    }
+  },
+  "cardForm": {
+    "wordOrPhrase": "Слово или фраза",
+    "translation": "Перевод",
+    "partOfSpeech": "Часть речи",
+    "transcriptionIpa": "Транскрипция (IPA)",
+    "definition": "Определение",
+    "example": "Пример",
+    "partsOfSpeech": {
+      "noun": "существительное",
+      "verb": "глагол",
+      "adjective": "прилагательное",
+      "adverb": "наречие",
+      "phrase": "фраза"
     }
   },
   "discoverySurvey": {

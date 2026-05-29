@@ -407,6 +407,21 @@
       "message": "A critical error while creating an anonymous user occurred."
     }
   },
+  "cardForm": {
+    "wordOrPhrase": "Word or phrase",
+    "translation": "Translation",
+    "partOfSpeech": "Part of Speech",
+    "transcriptionIpa": "Transcription (IPA)",
+    "definition": "Definition",
+    "example": "Example",
+    "partsOfSpeech": {
+      "noun": "noun",
+      "verb": "verb",
+      "adjective": "adjective",
+      "adverb": "adverb",
+      "phrase": "phrase"
+    }
+  },
   "discoverySurvey": {
     "screenTitle": "Last question",
     "question": "How did you hear about Vocably?",
