@@ -145,7 +145,7 @@ export const NotificationsAllowed: FC<Props> = ({ language }) => {
           <View style={{ paddingHorizontal: 16, marginBottom: 32 }}>
             <Text>
               {t('notifications.remindersDescription', {
-                languageName: languageString,
+                languageName: trimLanguage(t(`language.objective_${language}`)),
               })}
             </Text>
           </View>

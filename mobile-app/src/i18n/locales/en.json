@@ -33,7 +33,7 @@
     "feedback": "Feedback",
     "createAccount": "Create an account",
     "previewStudyStep": "Preview study step",
-    "exportDeck": "Export deck"
+    "exportDeck": "Export cards"
   },
   "settings": {
     "notRegistered": "Not registered yet.",
@@ -43,7 +43,7 @@
     "studyReminders": {
       "title": "Study reminders",
       "body": "Study reminders are sent once a day to remind you to review your <bold>{{languageName}}</bold> cards.",
-      "perLanguageHint": "Every language has its own reminder settings available in the \"Edit deck\" screen.",
+      "perLanguageHint": "Every language has its own reminder settings available in the \"Edit language\" screen.",
       "unregisteredHint": "Study reminders are not available for unregistered users."
     },
     "feedback": {
@@ -225,21 +225,21 @@
   },
   "editDeck": {
     "studySettings": "Study settings",
-    "exportDeck": "Export deck",
+    "exportDeck": "Export language",
     "studyReminders": "Study reminders",
     "studyRemindersUnregisteredHint": "Study reminders are temporarily disabled for unregistered users.",
     "hideDefinitions": "Hide definitions",
     "hideDefinitionsHint": "The app will make an attempt to show less definitions in My cards and during the study.",
-    "deckContainsCards_one": "The deck contains {{count}} card",
-    "deckContainsCards_other": "The deck contains {{count}} cards",
-    "deleteDeck": "Delete this deck",
+    "deckContainsCards_one": "You have {{count}} card.",
+    "deckContainsCards_other": "You have {{count}} cards.",
+    "deleteDeck": "Delete this language",
     "deleteDeckPrompt": {
-      "title": "Delete {{languageName}} deck?",
+      "title": "Delete {{languageName}}?",
       "message": "This operation cannot be undone."
     },
     "deleteDeckError": {
-      "title": "Error: Trouble deleting deck",
-      "message": "Oops! Something went wrong while attempting to delete the deck. Please try again later."
+      "title": "Error: Trouble deleting language",
+      "message": "Oops! Something went wrong while attempting to delete the language. Please try again later."
     }
   },
   "generateCards": {

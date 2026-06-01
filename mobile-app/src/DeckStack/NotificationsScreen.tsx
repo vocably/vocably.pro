@@ -18,9 +18,9 @@ import { notificationsIdentifyUser } from '../notificationsIdentifyUser';
 import { CustomScrollView } from '../ui/CustomScrollView';
 import { CustomSurface } from '../ui/CustomSurface';
 import { ListItem } from '../ui/ListItem';
-import { useCurrentLanguageName } from '../useCurrentLanguageName';
 import { NotificationsAllowed } from './notifications/NotificationsAllowed';
 import { NotificationsDenied } from './notifications/NotificationsDenied';
+import { trimLanguage } from '@vocably/sulna';
 
 type Props = {};
 
@@ -55,8 +55,6 @@ export const NotificationsScreen: FC<Props> = () => {
   const {
     deck: { language },
   } = useSelectedDeck({ autoReload: false });
-
-  const languageName = useCurrentLanguageName();
 
   const postHog = usePostHog();
 
@@ -144,7 +142,9 @@ export const NotificationsScreen: FC<Props> = () => {
           </CustomSurface>
           <View style={{ paddingHorizontal: 16 }}>
             <Text>
-              {t('notifications.remindersDescription', { languageName })}
+              {t('notifications.remindersDescription', {
+                languageName: trimLanguage(t(`language.objective_${language}`)),
+              })}
             </Text>
           </View>
         </>
