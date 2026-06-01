@@ -518,5 +518,11 @@
       "para2": "To view your study plan, go to the <myCards>My cards</myCards> tab and tap the <chartBoxIcon/> button in the top-left corner.",
       "para3": "<bold>Important:</bold> the study plan is not available when cards for study are selected randomly. To disable the random card selection, go to <studySettings>Study settings</studySettings>."
     }
+  },
+  "shareIntent": {
+    "login": {
+      "openVocablyToSignIn": "Open Vocably to sign in.",
+      "openVocably": "Open Vocably"
+    }
   }
 }

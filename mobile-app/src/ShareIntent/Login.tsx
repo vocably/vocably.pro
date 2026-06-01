@@ -2,6 +2,7 @@ import { FC, PropsWithChildren, useContext } from 'react';
 import { Linking, View } from 'react-native';
 import { Button, IconButton, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../auth/AuthContainer';
 import { exitSharedScreen } from '../exitSharedScreen';
 import { Loader } from '../loaders/Loader';
@@ -13,9 +14,10 @@ type Props = {
 export const Login: FC<PropsWithChildren<Props>> = ({ children, os }) => {
   const authStatus = useContext(AuthContext);
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   if (authStatus.status === 'undefined') {
-    return <Loader>Authenticating...</Loader>;
+    return <Loader>{t('auth.authenticating')}</Loader>;
   }
 
   if (
@@ -52,13 +54,15 @@ export const Login: FC<PropsWithChildren<Props>> = ({ children, os }) => {
           style={{ alignSelf: 'flex-end' }}
         />
       </View>
-      <Text variant="bodyLarge">Open Vocably to sign in.</Text>
+      <Text variant="bodyLarge">
+        {t('shareIntent.login.openVocablyToSignIn')}
+      </Text>
       {os === 'android' && (
         <Button
           mode="contained"
           onPress={() => Linking.openURL('vocably-pro://login')}
         >
-          Open Vocably
+          {t('shareIntent.login.openVocably')}
         </Button>
       )}
     </View>
