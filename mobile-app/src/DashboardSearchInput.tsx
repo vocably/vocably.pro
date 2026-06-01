@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, StyleProp, TextInput, View, ViewStyle } from 'react-native';
 import { IconButton, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,6 +18,7 @@ export type DashboardSearchInputRef = {
 export const DashboardSearchInput = forwardRef<DashboardSearchInputRef, Props>(
   ({ style, value, onChange }, ref) => {
     const theme = useTheme();
+    const { t } = useTranslation();
 
     const [isFocused, setIsFocused] = useState(false);
     const inputRef = useRef<TextInput>(null);
@@ -79,7 +81,7 @@ export const DashboardSearchInput = forwardRef<DashboardSearchInputRef, Props>(
               color: theme.colors.secondary,
               padding: 0,
             }}
-            placeholder="Search in your collection..."
+            placeholder={t('dashboard.searchPlaceholder')}
             value={value}
             onChangeText={onChange}
             returnKeyType={'done'}

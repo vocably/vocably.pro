@@ -15,12 +15,3 @@ export const signIn = async () => {
     }
   }
 };
-
-export const signInWithAnIdioticCognitoFlow = async () => {
-  await signInWithRedirect({
-    provider: 'Google',
-    options: {
-      preferPrivateSession: true,
-    },
-  });
-};

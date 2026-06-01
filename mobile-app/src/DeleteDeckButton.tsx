@@ -1,29 +1,27 @@
 import { useNavigation } from '@react-navigation/native';
 import { FC, useContext, useState } from 'react';
 import { Alert } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-native-paper';
 import { LanguagesContext } from './languages/LanguagesContainer';
 import { ListItem } from './ui/ListItem';
 import { useCurrentLanguageName } from './useCurrentLanguageName';
 
 export const DeleteDeckButton: FC = () => {
-  const [isDeleting, setIsDeleting] = useState(false);
   const { selectedLanguage, deleteLanguage, languages } =
     useContext(LanguagesContext);
   const navigation = useNavigation();
   const theme = useTheme();
   const languageName = useCurrentLanguageName();
+  const { t } = useTranslation();
 
   const deleteAfterConfirmation = async () => {
-    setIsDeleting(true);
     const deleteResult = await deleteLanguage(selectedLanguage);
-    setIsDeleting(false);
 
     if (deleteResult.success === false) {
       Alert.alert(
-        'Error: Trouble deleting deck',
-        // `Oops! Something went wrong while attempting to delete the deck. Please try again later and don't hesitate to let the support know if the issue persists.`
-        `Oops! Something went wrong while attempting to delete the deck. Please try again later.`
+        t('editDeck.deleteDeckError.title'),
+        t('editDeck.deleteDeckError.message')
       );
     }
 
@@ -34,18 +32,18 @@ export const DeleteDeckButton: FC = () => {
 
   const onClick = () => {
     Alert.alert(
-      `Delete ${languageName} deck?`,
-      'This operation cannot be undone.',
+      t('editDeck.deleteDeckPrompt.title', { languageName }),
+      t('editDeck.deleteDeckPrompt.message'),
       [
         {
-          text: 'Delete',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: async () => {
             deleteAfterConfirmation();
           },
         },
         {
-          text: 'Cancel',
+          text: t('common.cancel'),
         },
       ]
     );
@@ -55,7 +53,7 @@ export const DeleteDeckButton: FC = () => {
     <ListItem
       leftIcon="delete"
       rightIcon=""
-      title="Delete this deck"
+      title={t('editDeck.deleteDeck')}
       onPress={onClick}
       color={theme.colors.error}
     />

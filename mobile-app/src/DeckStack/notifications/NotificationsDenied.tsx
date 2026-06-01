@@ -1,10 +1,12 @@
 import { FC } from 'react';
 import { Linking, Platform, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Button, Text } from 'react-native-paper';
 
 type Props = {};
 
 export const NotificationsDenied: FC<Props> = () => {
+  const { t } = useTranslation();
   return (
     <View
       style={{
@@ -15,19 +17,13 @@ export const NotificationsDenied: FC<Props> = () => {
       }}
     >
       {Platform.OS !== 'ios' && (
-        <Text>
-          Notifications can't be set through the app. Please enable them in the
-          App Info settings.
-        </Text>
+        <Text>{t('notifications.deniedAndroidMessage')}</Text>
       )}
       {Platform.OS === 'ios' && (
         <>
-          <Text>
-            Notifications can't be set through the app. Please enable them in
-            Settings → Vocably.
-          </Text>
+          <Text>{t('notifications.deniedIosMessage')}</Text>
           <Button mode="contained" onPress={() => Linking.openSettings()}>
-            Open Settings
+            {t('notifications.openSettings')}
           </Button>
         </>
       )}

@@ -11,6 +11,7 @@ const packages = [
   'crud',
   'srs',
   'model-operations',
+  'i18n',
   'browser-i18n',
   'webpack',
   'api',

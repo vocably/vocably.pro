@@ -2,6 +2,7 @@ import { deleteUser, signOut } from '@aws-amplify/auth';
 import { NavigationProp } from '@react-navigation/native';
 import React, { FC, useContext, useState } from 'react';
 import { Alert, Pressable, RefreshControl, View } from 'react-native';
+import { Trans, useTranslation } from 'react-i18next';
 import { Divider, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -15,6 +16,7 @@ import { clearAll } from '../asyncAppStorage';
 import { AuthContext } from '../auth/AuthContainer';
 import { useUserEmail } from '../auth/useUserEmail';
 import { CustomerInfoContext } from '../CustomerInfoContainer';
+import { getLocaleLabel } from '../i18n/supportedLocales';
 import { LanguagesContext } from '../languages/LanguagesContainer';
 import { CustomScrollView } from '../ui/CustomScrollView';
 import { CustomSurface } from '../ui/CustomSurface';
@@ -34,11 +36,13 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
   const { refresh: refreshCustomerInfo } = useContext(CustomerInfoContext);
   const { refresh: refreshUserMetadata } = useContext(UserMetadataContext);
   const { status: authStatus } = useContext(AuthContext);
+  const { t, i18n } = useTranslation();
 
   const { selectedLanguage, languages, syncDecks } =
     useContext(LanguagesContext);
 
   const languageName = trimLanguage(get(languageList, selectedLanguage, ''));
+  const appLanguageLabel = getLocaleLabel(i18n.language);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -50,35 +54,43 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
   };
 
   const onAccountDelete = () => {
-    Alert.alert('Delete your account?', 'This operation cannot be undone.', [
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: async () => {
-          await deleteUser();
-          await signOut();
+    Alert.alert(
+      t('settings.deleteAccount.title'),
+      t('settings.deleteAccount.message'),
+      [
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: async () => {
+            await deleteUser();
+            await signOut();
+          },
         },
-      },
-      {
-        text: 'Cancel',
-      },
-    ]);
+        {
+          text: t('common.cancel'),
+        },
+      ]
+    );
   };
 
   const onDataDelete = () => {
-    Alert.alert('Delete your data?', 'This operation cannot be undone.', [
-      {
-        text: 'Delete',
-        style: 'destructive',
-        onPress: async () => {
-          await clearAll();
-          await signOut();
+    Alert.alert(
+      t('settings.deleteData.title'),
+      t('settings.deleteData.message'),
+      [
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: async () => {
+            await clearAll();
+            await signOut();
+          },
         },
-      },
-      {
-        text: 'Cancel',
-      },
-    ]);
+        {
+          text: t('common.cancel'),
+        },
+      ]
+    );
   };
 
   const onCreateAccount = async () => {
@@ -138,7 +150,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
           size={24}
         />
         <Text style={{ fontSize: 16 }}>
-          {isRegisteredUser ? userEmail : 'Not registered yet.'}
+          {isRegisteredUser ? userEmail : t('settings.notRegistered')}
         </Text>
       </View>
 
@@ -147,7 +159,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
           <>
             <ListItem
               order="first"
-              title="Create an account"
+              title={t('settings.createAccount')}
               onPress={onCreateAccount}
               leftIcon="plus"
             />
@@ -163,8 +175,16 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
 
       <CustomSurface style={{ marginBottom: marginBottom }}>
         <ListItem
+          leftIcon="translate"
+          title={t('settings.appLanguage', { label: appLanguageLabel })}
+          onPress={() => navigation.navigate('AppLanguage')}
+        />
+      </CustomSurface>
+
+      <CustomSurface style={{ marginBottom: marginBottom }}>
+        <ListItem
           leftIcon="school-outline"
-          title="Study settings"
+          title={t('settings.studySettings')}
           onPress={() => navigation.navigate('StudySettings')}
         />
       </CustomSurface>
@@ -174,7 +194,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
           <CustomSurface style={{ marginBottom: 8 }}>
             <ListItem
               leftIcon="bell-outline"
-              title="Study reminders"
+              title={t('settings.studyReminders.title')}
               onPress={goToStudyReminders}
               disabled={!isRegisteredUser}
             />
@@ -183,23 +203,21 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
             {isRegisteredUser && (
               <>
                 <Text>
-                  Study reminders are sent once a day to remind you to review
-                  your{' '}
-                  <Text style={{ fontWeight: 'bold' }}>{languageName}</Text>{' '}
-                  cards.
+                  <Trans
+                    i18nKey="settings.studyReminders.body"
+                    values={{ languageName }}
+                    components={{
+                      bold: <Text style={{ fontWeight: 'bold' }} />,
+                    }}
+                  />
                 </Text>
                 {languages.length > 1 && (
-                  <Text>
-                    Every language has it's own reminder settings available in
-                    the "Edit deck" screen.
-                  </Text>
+                  <Text>{t('settings.studyReminders.perLanguageHint')}</Text>
                 )}
               </>
             )}
             {!isRegisteredUser && (
-              <Text>
-                Study reminders are not available for unregistered users.
-              </Text>
+              <Text>{t('settings.studyReminders.unregisteredHint')}</Text>
             )}
           </View>
         </>
@@ -208,23 +226,20 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
       <CustomSurface style={{ marginBottom: 8 }}>
         <ListItem
           leftIcon="message-text-outline"
-          title="Provide feedback"
+          title={t('settings.feedback.title')}
           onPress={() => navigation.navigate('Feedback')}
         />
       </CustomSurface>
 
       <View style={{ paddingHorizontal: 16, marginBottom: marginBottom }}>
-        <Text>
-          Are you missing any crucial feature or simply want to share your
-          opinion about Vocably with me? I would love to hear from you!
-        </Text>
+        <Text>{t('settings.feedback.body')}</Text>
       </View>
 
       {isRegisteredUser && (
         <CustomSurface style={{ marginBottom: marginBottom }}>
           <ListItem
             order="first"
-            title="Sign out"
+            title={t('settings.signOut')}
             onPress={onSignOut}
             leftIcon="logout"
             rightIcon=""
@@ -232,7 +247,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
           <Divider />
           <ListItem
             order="last"
-            title="Delete my account"
+            title={t('settings.deleteAccount.menuItem')}
             onPress={onAccountDelete}
             color={theme.colors.error}
             leftIcon="trash-can-outline"
@@ -244,7 +259,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
       {!isRegisteredUser && (
         <CustomSurface style={{ marginBottom: marginBottom }}>
           <ListItem
-            title="Delete my data"
+            title={t('settings.deleteData.menuItem')}
             onPress={onDataDelete}
             color={theme.colors.error}
             leftIcon="trash-can-outline"
@@ -274,13 +289,13 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
             style={{ backgroundColor: 'transparent' }}
           >
             <Text>
-              Version:{' '}
-              {`${VersionNumber.appVersion}${
-                (VersionNumber.buildVersion !== VersionNumber.appVersion &&
-                  ` (${VersionNumber.buildVersion})`) ||
-                ``
-              }`}
-              {ENV_SUFFIX ?? ''}
+              {t('settings.version', {
+                version: `${VersionNumber.appVersion}${
+                  (VersionNumber.buildVersion !== VersionNumber.appVersion &&
+                    ` (${VersionNumber.buildVersion})`) ||
+                  ``
+                }${ENV_SUFFIX ?? ''}`,
+              })}
             </Text>
           </Pressable>
         </View>

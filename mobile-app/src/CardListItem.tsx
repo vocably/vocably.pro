@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Card, isGoogleTTSLanguage, TagItem } from '@vocably/model';
 import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   PixelRatio,
   Platform,
@@ -53,6 +54,7 @@ export const CardListItem: FC<Props> = ({
   disabledModalLookup = false,
   hideDefinitions = false,
 }) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const navigation = useNavigation();
 
@@ -65,11 +67,11 @@ export const CardListItem: FC<Props> = ({
   const fontScale = PixelRatio.getFontScale();
 
   const present = card.presentTenses
-    ? `(present: ${card.presentTenses})`
+    ? t('common.presentTenses', { value: card.presentTenses })
     : false;
   const past =
     card.tense === 'present' && card.pastTenses
-      ? `(past: ${card.pastTenses})`
+      ? t('common.pastTenses', { value: card.pastTenses })
       : false;
 
   const presentAndPast = [present, past].filter(Boolean).join(`\n`);
@@ -198,7 +200,9 @@ export const CardListItem: FC<Props> = ({
               <>
                 {' '}
                 <View style={{ transform: textTransform }}>
-                  <Text style={{ lineHeight }}>{card.partOfSpeech}</Text>
+                  <Text style={{ lineHeight }}>
+                    {t(`language.${card.partOfSpeech}`, card.partOfSpeech)}
+                  </Text>
                 </View>
               </>
             )}
@@ -217,7 +221,7 @@ export const CardListItem: FC<Props> = ({
                 {' '}
                 <View style={{ transform: textTransform }}>
                   <Text style={{ lineHeight }}>
-                    (plural: {card.pluralForm})
+                    {t('common.plural', { value: card.pluralForm })}
                   </Text>
                 </View>
               </>
@@ -232,7 +236,7 @@ export const CardListItem: FC<Props> = ({
             onDismiss={() => copied && setCopied(false)}
             duration={2000}
           >
-            Copied to clipboard.
+            {t('exportDeck.copiedToClipboard')}
           </Snackbar>
         </Portal>
       )}
@@ -246,7 +250,7 @@ export const CardListItem: FC<Props> = ({
       </View>
       {showExamples && card.example && (
         <View style={{ marginTop: 8 }}>
-          <Text style={{ fontWeight: 'bold' }}>Examples</Text>
+          <Text style={{ fontWeight: 'bold' }}>{t('common.examples')}</Text>
           <CardExample
             onLookUpModalOpen={onLookUpModalOpen}
             example={card.example}

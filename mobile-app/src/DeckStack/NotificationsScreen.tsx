@@ -8,6 +8,7 @@ import {
 import { usePostHog } from 'posthog-react-native';
 import { FC, useEffect, useState } from 'react';
 import { Alert, Platform, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { getTimeZone } from 'react-native-localize';
 import { Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -17,9 +18,9 @@ import { notificationsIdentifyUser } from '../notificationsIdentifyUser';
 import { CustomScrollView } from '../ui/CustomScrollView';
 import { CustomSurface } from '../ui/CustomSurface';
 import { ListItem } from '../ui/ListItem';
-import { useCurrentLanguageName } from '../useCurrentLanguageName';
 import { NotificationsAllowed } from './notifications/NotificationsAllowed';
 import { NotificationsDenied } from './notifications/NotificationsDenied';
+import { trimLanguage } from '@vocably/sulna';
 
 type Props = {};
 
@@ -44,6 +45,7 @@ const enableNotificationIfNecessary = async (
 
 export const NotificationsScreen: FC<Props> = () => {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const [notificationsStatus, setNotificationsStatus] = useState<
     GetPermissionStatusOutput | 'loading'
   >('loading');
@@ -53,8 +55,6 @@ export const NotificationsScreen: FC<Props> = () => {
   const {
     deck: { language },
   } = useSelectedDeck({ autoReload: false });
-
-  const languageName = useCurrentLanguageName();
 
   const postHog = usePostHog();
 
@@ -86,10 +86,10 @@ export const NotificationsScreen: FC<Props> = () => {
       .then(async (enabled) => {
         if (!enabled) {
           Alert.alert(
-            'Study reminders failed',
+            t('notifications.failedTitle'),
             Platform.OS === 'android'
-              ? "Study reminders can't be set through the app. Please enable them in the App Info settings."
-              : "Study reminders can't be set through the app. Please enable them in Settings → Vocably."
+              ? t('notifications.failedAndroidMessage')
+              : t('notifications.failedIosMessage')
           );
         }
 
@@ -118,7 +118,9 @@ export const NotificationsScreen: FC<Props> = () => {
   return (
     <CustomScrollView>
       {notificationsStatus === 'loading' && (
-        <InlineLoader center={false}>Checking...</InlineLoader>
+        <InlineLoader center={false}>
+          {t('notifications.checking')}
+        </InlineLoader>
       )}
 
       {notificationsStatus === 'granted' && !enablingNotifications && (
@@ -132,7 +134,7 @@ export const NotificationsScreen: FC<Props> = () => {
           <CustomSurface style={{ marginBottom: 8 }}>
             <ListItem
               leftIcon="bell"
-              title="Enable reminders"
+              title={t('notifications.enableReminders')}
               onPress={requestPermissions}
               disabled={enablingNotifications}
               rightIcon=""
@@ -140,8 +142,9 @@ export const NotificationsScreen: FC<Props> = () => {
           </CustomSurface>
           <View style={{ paddingHorizontal: 16 }}>
             <Text>
-              Study reminders are sent once a day to remind you to review your{' '}
-              {languageName} cards.
+              {t('notifications.remindersDescription', {
+                languageName: trimLanguage(t(`language.objective_${language}`)),
+              })}
             </Text>
           </View>
         </>

@@ -1,0 +1,23 @@
+{
+  "name": "@vocably/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "main": "dist/commonjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "scripts": {
+    "build": "tsc && tsc --project tsconfig.commonjs.json",
+    "watch-esm": "tsc --watch",
+    "watch-commonjs": "tsc --watch --project tsconfig.commonjs.json",
+    "start": "run-p watch*",
+    "test": "echo '@vocably/browser-i18n has no tests.'",
+    "i18n": "npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vocably-pro/vocably.git"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   Button,
@@ -82,6 +83,7 @@ export const TagsMenu: FC<Props> = ({
   const [editTag, setEditTag] = useState<Tag | null>(null);
   const theme = useTheme();
   const postHog = usePostHog();
+  const { t } = useTranslation();
 
   const { height } = useWindowDimensions();
 
@@ -168,9 +170,7 @@ export const TagsMenu: FC<Props> = ({
     setIsRemovingTagId(tag.id);
     const removeResult = await removeTag(tag.id);
     if (removeResult.success === false) {
-      Alert.alert(
-        'An error occurred while removing the tag. Please try again.'
-      );
+      Alert.alert(t('tagMenu.removeTagError'));
     }
     setSelectedTags(selectedTags.filter((t) => t.id !== tag.id));
     setIsRemovingTagId(null);
@@ -202,9 +202,7 @@ export const TagsMenu: FC<Props> = ({
       const result = await updateTag(id, data);
       setUpdatingId(null);
       if (result.success === false) {
-        Alert.alert(
-          'An error occurred while update the tag. Please try again.'
-        );
+        Alert.alert(t('tagMenu.updateTagError'));
         return;
       }
 
@@ -273,10 +271,7 @@ export const TagsMenu: FC<Props> = ({
                   padding: 12,
                 }}
               >
-                <Text>
-                  Tags are like groups, or folders, but better. Press "Add new
-                  tag" to begin.
-                </Text>
+                <Text>{t('tagMenu.intro')}</Text>
               </View>
               <Divider />
             </>
@@ -294,7 +289,7 @@ export const TagsMenu: FC<Props> = ({
                 />
               )}
               onPress={() => displayCreateModal()}
-              title="Add new tag"
+              title={t('tagMenu.addNewTag')}
               titleStyle={{
                 fontSize: ITEM_FONT_SIZE,
               }}
@@ -450,7 +445,7 @@ export const TagsMenu: FC<Props> = ({
                           flexGrow: 1,
                         }}
                       >
-                        Cards with no tags
+                        {t('dashboard.cardsWithNoTags')}
                       </Text>
                       <Icon
                         name={
@@ -480,10 +475,8 @@ export const TagsMenu: FC<Props> = ({
                   gap: 12,
                 }}
               >
-                <Text>Swipe left to edit the tag.</Text>
-                <Text>
-                  Swipe right to delete the tag. Your cards will not be deleted.
-                </Text>
+                <Text>{t('tagMenu.swipeLeftToEdit')}</Text>
+                <Text>{t('tagMenu.swipeRightToDelete')}</Text>
               </View>
             </>
           )}
@@ -501,12 +494,13 @@ export const TagsMenu: FC<Props> = ({
             >
               <Dialog.Title>
                 {editTag === null
-                  ? `Add new tag`
-                  : `Edit ${editTag.data.title}`}
+                  ? t('tagMenu.addNewTag')
+                  : t('tagMenu.editTag', { title: editTag.data.title })}
               </Dialog.Title>
               <Dialog.Content>
                 <VocablyInputText
                   value={tagFormValue}
+                  placeholder={t('tagMenu.newTagName')}
                   onChange={(value) => setTagFormValue(value)}
                   onSubmit={(title) => {
                     addNewTag(title);
@@ -516,7 +510,9 @@ export const TagsMenu: FC<Props> = ({
                 />
               </Dialog.Content>
               <Dialog.Actions>
-                <Button onPress={() => setShowTagForm(false)}>Cancel</Button>
+                <Button onPress={() => setShowTagForm(false)}>
+                  {t('common.cancel')}
+                </Button>
                 <Button
                   onPress={() => {
                     const title = tagFormValue.trim();
@@ -544,7 +540,7 @@ export const TagsMenu: FC<Props> = ({
                   }}
                   disabled={tagFormValue.trim().length === 0}
                 >
-                  {editTag === null ? 'Add' : 'Save'}
+                  {editTag === null ? t('tagMenu.add') : t('common.save')}
                 </Button>
               </Dialog.Actions>
             </Dialog>

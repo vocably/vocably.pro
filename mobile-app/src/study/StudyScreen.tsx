@@ -12,6 +12,7 @@ import React, {
   useState,
 } from 'react';
 import { Alert, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { IconButton, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
@@ -62,6 +63,7 @@ type Props = FC<{
 
 export const StudyScreen: Props = ({ route, navigation }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const isPremium = usePremium();
 
   const [autoPlayResult, setAutoPlay] = useAsync(
@@ -222,13 +224,13 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     ).then(async (result) => {
       if (result.success === false) {
         Alert.alert(
-          `Error: Card update failed`,
+          t('study.cardUpdateFailedTitle'),
           result.errorCode === 'NETWORK_REQUEST_ERROR'
-            ? `Your answer wasn't saved due to a lost connection. The session will stop and resume from the failed answer.`
-            : `Oops! Unable to continue study session due to a technical issue. Please try again later.`,
+            ? t('study.cardUpdateNetworkError')
+            : t('study.cardUpdateTechnicalError'),
           [
             {
-              text: 'Exit study session',
+              text: t('study.exitStudySession'),
               onPress: () => navigation.goBack(),
             },
           ]
@@ -368,7 +370,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
     streakHasShownToday.status !== 'loaded' ||
     playRandomExampleResult.status !== 'loaded'
   ) {
-    return <Loader>Loading...</Loader>;
+    return <Loader>{t('study.loading')}</Loader>;
   }
 
   const previousIsPossible = currentCardIndex > 0;

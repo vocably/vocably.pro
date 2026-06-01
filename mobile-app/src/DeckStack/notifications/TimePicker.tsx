@@ -1,6 +1,7 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { FC, useState } from 'react';
 import { Platform, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text } from 'react-native-paper';
 import { ListItem } from '../../ui/ListItem';
 
@@ -13,6 +14,7 @@ type Props = {
 export const TimePicker: FC<Props> = ({ time, onChange, disabled = false }) => {
   const [hours, minutes] = time.split(':');
   const value = new Date(2025, 2, 4, Number(hours), Number(minutes));
+  const { t } = useTranslation();
 
   const [isAndroidVisible, setIsAndroidVisible] = useState(false);
 
@@ -25,7 +27,9 @@ export const TimePicker: FC<Props> = ({ time, onChange, disabled = false }) => {
     >
       {Platform.OS === 'ios' && (
         <>
-          <Text style={{ fontSize: 24, marginVertical: 32 }}>Receive at</Text>
+          <Text style={{ fontSize: 24, marginVertical: 32 }}>
+            {t('notifications.receiveAt')}
+          </Text>
           <DateTimePicker
             value={value}
             minuteInterval={15}

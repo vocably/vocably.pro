@@ -4,6 +4,7 @@ import { first, get, shuffle } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useCallback, useContext, useEffect, useState } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import { AnimatedRef } from 'react-native-reanimated';
 import Sortable, {
@@ -46,6 +47,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
   const [changeIsEnabled, setChangeIsEnabled] = useState(true);
   const navigation = useNavigation();
   const posthog = usePostHog();
+  const { t } = useTranslation();
 
   const studyFlow = userMetadata.studyFlow ?? defaultStudyFlow;
 
@@ -216,7 +218,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
                 }}
               >
                 <View>
-                  <Text>{defaultValues.name}</Text>
+                  <Text>{t(defaultValues.nameKey)}</Text>
                 </View>
                 {previewStep && (
                   <PressableScale
@@ -241,7 +243,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
                       size={16}
                     />
                     <Text style={{ fontSize: 16, color: theme.colors.primary }}>
-                      Preview
+                      {t('studyFlow.preview')}
                     </Text>
                   </PressableScale>
                 )}
@@ -261,7 +263,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
                         color={theme.colors.onBackground}
                       />
                       <Text style={{ fontSize: 16 }}>
-                        Available to premium users
+                        {t('studyFlow.premiumOnly')}
                       </Text>
                     </View>
                     <PressableScale
@@ -281,7 +283,7 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
                       <Text
                         style={{ fontSize: 16, color: theme.colors.primary }}
                       >
-                        Upgrade to Premium
+                        {t('studyFlow.upgradeToPremium')}
                       </Text>
                     </PressableScale>
                   </>
@@ -312,9 +314,11 @@ export const StudySteps: FC<Props> = ({ style, scrollableRef }) => {
       ]}
     >
       <View style={{ paddingHorizontal: 8, gap: 8 }}>
-        <Text style={{ fontSize: 24 }}>Study steps per card</Text>
+        <Text style={{ fontSize: 24 }}>{t('studyFlow.heading')}</Text>
         <Text>
-          Use <Icon name="drag-vertical" /> to rearrange the steps.
+          {t('studyFlow.rearrangeHintBefore')}
+          <Icon name="drag-vertical" />
+          {t('studyFlow.rearrangeHintAfter')}
         </Text>
       </View>
       <Sortable.Grid

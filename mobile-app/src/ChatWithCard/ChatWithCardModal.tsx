@@ -3,6 +3,7 @@ import { ChatCard, ChatWithCardMessage } from '@vocably/model';
 import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, ScrollView, View } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Button, useTheme } from 'react-native-paper';
@@ -24,6 +25,7 @@ type Props = {
 };
 
 export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const { card } = route.params as ChatWithCardParams;
   const insets = useSafeAreaInsets();
   const scrollViewRef = useRef<ScrollView>(null);
@@ -98,7 +100,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
     if (chatResult.success === true) {
       setMessages(chatResult.value.messages);
     } else {
-      setLastMessageError('An error occurred. Please try again.');
+      setLastMessageError(t('chat.errorOccurred'));
       const lastMessage = last(newMessages);
       lastMessage && setInputValue(lastMessage.message);
       setMessages(newMessages.slice(0, -1));
@@ -187,10 +189,10 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
                 }}
                 disabled={isThinking}
                 onPress={() => {
-                  send('Explain');
+                  send(t('chat.explainMessage'));
                 }}
               >
-                Explain
+                {t('chat.explain')}
               </Button>
               <Button
                 mode="outlined"
@@ -207,10 +209,10 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
                 }}
                 disabled={isThinking}
                 onPress={() => {
-                  send('Provide several example sentences');
+                  send(t('chat.examplesMessage'));
                 }}
               >
-                Examples
+                {t('chat.examples')}
               </Button>
               <Button
                 mode="outlined"
@@ -227,10 +229,10 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
                 }}
                 disabled={isThinking}
                 onPress={() => {
-                  send('Help me to remember this card');
+                  send(t('chat.rememberMessage'));
                 }}
               >
-                Remember
+                {t('chat.remember')}
               </Button>
             </View>
             <ChatTextInput
@@ -238,8 +240,8 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               value={inputValue}
               placeholder={
                 isThinking
-                  ? 'This input is disabled now.'
-                  : 'Type your message here...'
+                  ? t('chat.inputDisabled')
+                  : t('chat.inputPlaceholder')
               }
               multiline={true}
               onChange={setInputValue}

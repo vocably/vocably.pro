@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GoogleLanguage, languageList } from '@vocably/model';
 import { trimLanguage } from '@vocably/sulna';
 import { FC } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Divider, Text, useTheme } from 'react-native-paper';
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export const SlideLookUp: FC<Props> = ({ sourceLanguage, targetLanguage }) => {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const onboardingData = getOnboardingData(sourceLanguage, targetLanguage);
@@ -27,13 +29,11 @@ export const SlideLookUp: FC<Props> = ({ sourceLanguage, targetLanguage }) => {
   return (
     <WelcomeScrollView style={{ gap: 16 }}>
       <Text style={{ fontSize: 22, textAlign: 'center' }}>
-        Do you see or hear a new{' '}
-        <Text style={{ fontWeight: 'bold' }}>
-          {trimLanguage(languageList[sourceLanguage])}
-        </Text>{' '}
-        word?{' '}
-        {sourceLanguage === targetLanguage ? 'Look it up' : 'Translate it'} and
-        save it as a flashcard!
+        <Trans
+          i18nKey="welcome.slideLookUp.intro"
+          values={{ sourceLanguage: t(`language.in_${sourceLanguage}`) }}
+          components={{ bold: <Text style={{ fontWeight: 'bold' }} /> }}
+        ></Trans>
       </Text>
 
       <View style={{ width: '100%', alignItems: 'center' }}>

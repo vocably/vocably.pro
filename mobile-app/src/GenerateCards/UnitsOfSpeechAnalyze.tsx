@@ -9,6 +9,7 @@ import {
 } from '@vocably/model';
 import { chunk } from 'lodash-es';
 import React, { FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import { Text } from 'react-native-paper';
 import { analyzeUnitsOfSpeech } from '../api';
@@ -50,6 +51,7 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
   rightInset,
   cardsLimit,
 }) => {
+  const { t } = useTranslation();
   const [analysisItems, setAnalysisItems] = useState<AnalysisItem[]>([]);
   const [unitsToProcess, setUnitsToProcess] = useState(unitsOfSpeech);
 
@@ -126,9 +128,9 @@ const UnitsOfSpeechAnalyze: FC<Props> = ({
       />
       {unitsToProcess.length > 0 && (
         <View style={[wrapperStyle, { gap: 16 }]}>
-          <Thinking message="Generating cards..." />
+          <Thinking message={t('generateCards.generating')} />
           <View style={{ paddingLeft: 16, gap: 4 }}>
-            <Text>The following cards will be generated:</Text>
+            <Text>{t('generateCards.followingWillBeGenerated')}</Text>
             {unitsToProcess.map((unitOfSpeech) => (
               <Text key={unitOfSpeech.headword + unitOfSpeech.partOfSpeech}>
                 - {unitOfSpeech.headword}

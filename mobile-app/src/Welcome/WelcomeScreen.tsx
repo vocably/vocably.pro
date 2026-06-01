@@ -3,6 +3,7 @@ import { postOnboardingAction } from '@vocably/api';
 import { GoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useContext, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Platform, View } from 'react-native';
 import { Button, Surface, Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -25,6 +26,7 @@ type Props = {
 };
 
 export const WelcomeScreen: FC<Props> = ({ navigation }) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const insets = useSafeAreaInsets();
   const swiperRef = useRef<Swiper>(null);
@@ -111,7 +113,7 @@ export const WelcomeScreen: FC<Props> = ({ navigation }) => {
                 swiperRef.current && swiperRef.current.scrollBy(-1)
               }
             >
-              Previous
+              {t('welcome.previous')}
             </Button>
           </View>
 
@@ -129,7 +131,7 @@ export const WelcomeScreen: FC<Props> = ({ navigation }) => {
               />
             )}
             {(!isSet || swiperIndex === 0) && (
-              <Text style={{ fontWeight: 'bold' }}>Setup</Text>
+              <Text style={{ fontWeight: 'bold' }}>{t('welcome.setup')}</Text>
             )}
           </View>
 
@@ -144,7 +146,7 @@ export const WelcomeScreen: FC<Props> = ({ navigation }) => {
                 navigation.goBack();
               }}
             >
-              Skip
+              {t('welcome.skip')}
             </Button>
           </View>
         </Surface>
@@ -253,7 +255,7 @@ export const WelcomeScreen: FC<Props> = ({ navigation }) => {
                     swiperRef.current && swiperRef.current.scrollBy(1);
                   }}
                 >
-                  Next
+                  {t('welcome.next')}
                 </Button>
               )}
               {totalSlides !== 1 && swiperIndex === totalSlides - 1 && (
@@ -267,7 +269,7 @@ export const WelcomeScreen: FC<Props> = ({ navigation }) => {
                     navigation.goBack();
                   }}
                 >
-                  Go to the app
+                  {t('welcome.goToApp')}
                 </Button>
               )}
             </Surface>

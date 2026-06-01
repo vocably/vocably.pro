@@ -6,6 +6,7 @@
     "strict": true,
     "skipLibCheck": true,
     "moduleResolution": "node",
-    "allowImportingTsExtensions": false
+    "allowImportingTsExtensions": false,
+    "resolveJsonModule": true
   },
 }

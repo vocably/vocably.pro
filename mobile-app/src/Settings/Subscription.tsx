@@ -1,5 +1,6 @@
 import { FC, useContext } from 'react';
 import { View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-native-paper';
 import { CustomerInfo } from 'react-native-purchases';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -28,6 +29,7 @@ export const Subscription: FC<Props> = ({
 }) => {
   const theme = useTheme();
   const presentPaywall = usePresentPaywall();
+  const { t } = useTranslation();
 
   const customerInfoStatus = useContext(CustomerInfoContext);
   const authStatus = useContext(AuthContext);
@@ -46,7 +48,9 @@ export const Subscription: FC<Props> = ({
     <>
       {customerInfoStatus.status === 'undefined' && (
         <View style={{ padding: 16 }}>
-          <InlineLoader center={false}>Loading customer status</InlineLoader>
+          <InlineLoader center={false}>
+            {t('subscription.loadingCustomerStatus')}
+          </InlineLoader>
         </View>
       )}
       {customerInfoStatus.status === 'loaded' && (
@@ -78,7 +82,7 @@ export const Subscription: FC<Props> = ({
               order={isInGroup ? 'last' : 'single'}
               leftIcon="crown-outline"
               rightIcon=""
-              title="Go Premium"
+              title={t('subscription.goPremium')}
               onPress={() => presentPaywall('mobile-premium')}
             />
           )}

@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { Trans, useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -13,27 +14,29 @@ const styles = StyleSheet.create({
 
 export const HowToGroupCards: FC<Props> = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
+  const tagPlusIcon = <Icon name={'tag-plus'} size={24} />;
+  const tagIcon = <Icon name={'tag'} size={24} />;
 
   return (
     <View style={{ display: 'flex', gap: 12 }}>
-      <Text style={styles.text}>Grouping can be done with tags.</Text>
+      <Text style={styles.text}>{t('howToGroupCards.intro')}</Text>
       <Text style={styles.text}>
-        Swipe any existing card left and press{' '}
-        <Icon name={'tag-plus'} size={24} /> button.
+        <Trans
+          i18nKey="howToGroupCards.swipeLeft"
+          components={{ tagPlusIcon }}
+        />
       </Text>
       <Text style={styles.text}>
-        Or press the <Icon name={'tag-plus'} size={24} /> button on a newly
-        added card.
+        <Trans
+          i18nKey="howToGroupCards.tapOnNew"
+          components={{ tagPlusIcon }}
+        />
       </Text>
       <Text style={styles.text}>
-        When at least one tag is created, press the{' '}
-        <Icon name={'tag'} size={24} /> icon on the Study button to study a
-        selected tag or a group of selected tags.
+        <Trans i18nKey="howToGroupCards.studyByTag" components={{ tagIcon }} />
       </Text>
-      <Text style={styles.text}>
-        Swipe any tag in the list to edit or delete it. Your cards will not be
-        deleted.
-      </Text>
+      <Text style={styles.text}>{t('howToGroupCards.swipeToEdit')}</Text>
     </View>
   );
 };

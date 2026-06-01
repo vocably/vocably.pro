@@ -1,13 +1,14 @@
 import { ChatCard } from '@vocably/model';
+import { i18n } from '../i18n';
 
 export const getInitialMessage = (card: ChatCard): string => {
-  return `You can ask ChatGPT anything about${
-    card.partOfSpeech ? ` the ${card.partOfSpeech}` : ''
-  } **${card.source}**, like:
-
-  * explain the meaning
-  * provide examples
-  * help to remember
-
-This is a beta feature.`;
+  return card.partOfSpeech
+    ? i18n.t('chat.initialMessageWithPartOfSpeech', {
+        partOfSpeech: i18n.t(
+          `language.${card.partOfSpeech}`,
+          card.partOfSpeech
+        ),
+        source: card.source,
+      })
+    : i18n.t('chat.initialMessage', { source: card.source });
 };

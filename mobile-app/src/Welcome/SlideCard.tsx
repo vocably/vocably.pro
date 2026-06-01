@@ -1,6 +1,7 @@
 import { GoogleLanguage, languageList } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,6 +18,7 @@ type Props = {
 };
 
 export const SlideCard: FC<Props> = ({ sourceLanguage, targetLanguage }) => {
+  const { t } = useTranslation();
   const onboardingData = getOnboardingData(sourceLanguage, targetLanguage);
   const posthog = usePostHog();
   const theme = useTheme();
@@ -37,20 +39,21 @@ export const SlideCard: FC<Props> = ({ sourceLanguage, targetLanguage }) => {
   return (
     <WelcomeScrollView style={{ gap: 16 }}>
       <Text style={{ fontSize: 22, textAlign: 'center' }}>
-        Vocably {sourceLanguage === targetLanguage ? 'looks up' : 'translates'}{' '}
-        words and makes flashcards like this one:
+        {sourceLanguage === targetLanguage
+          ? t('welcome.slideCard.looksUpWords')
+          : t('welcome.slideCard.translatesWords')}
       </Text>
 
       {onboardingData.isFallback && (
         <View>
           <Text style={{ fontWeight: 'bold' }}>
-            Note from the author of Vocably
+            {t('welcome.slideCard.fallbackNote')}
           </Text>
           <Text>
-            These card samples are inaccurate and confusing. I apologize for
-            that. I'm working on accurate examples for onboarding users who
-            study {languageList[sourceLanguage]} and speak{' '}
-            {languageList[targetLanguage]}.
+            {t('welcome.slideCard.fallbackBody', {
+              sourceLang: languageList[sourceLanguage],
+              targetLang: languageList[targetLanguage],
+            })}
           </Text>
         </View>
       )}
@@ -99,8 +102,9 @@ export const SlideCard: FC<Props> = ({ sourceLanguage, targetLanguage }) => {
         />
       </View>
       <Text style={{ fontSize: 22, textAlign: 'center' }}>
-        You can save <Icon name="plus-circle-outline" size={18} /> your
-        flashcards and study them with spaced repetition system.
+        {t('welcome.slideCard.saveFlashcardsBefore')}{' '}
+        <Icon name="plus-circle-outline" size={18} />{' '}
+        {t('welcome.slideCard.saveFlashcardsAfter')}
       </Text>
     </WelcomeScrollView>
   );

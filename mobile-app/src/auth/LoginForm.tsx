@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { Linking, Platform, View } from 'react-native';
 import { Button, Text, useTheme } from 'react-native-paper';
-import { signIn, signInWithAnIdioticCognitoFlow } from './logInFunctions';
+import { useTranslation } from 'react-i18next';
+import { signIn } from './logInFunctions';
 
 type Props = {
   loading?: boolean;
@@ -9,6 +10,7 @@ type Props = {
 
 export const LoginForm: FC<Props> = ({ loading = false }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   return (
     <View
       style={{
@@ -23,26 +25,26 @@ export const LoginForm: FC<Props> = ({ loading = false }) => {
         style={{ alignSelf: 'stretch' }}
         loading={loading}
       >
-        Sign in or Create an account
+        {t('loginForm.signIn')}
       </Button>
       <Text style={{ textAlign: 'center' }}>
-        By signing in, you agree to our{' '}
+        {t('loginForm.bySigningInYouAgreeToOur')}{' '}
         <Text
           style={{ color: theme.colors.primary }}
           onPress={() =>
             Linking.openURL('https://vocably.pro/terms-and-conditions.html')
           }
         >
-          Terms and Conditions
+          {t('loginForm.termsAndConditions')}
         </Text>{' '}
-        and{' '}
+        {t('loginForm.and')}{' '}
         <Text
           style={{ color: theme.colors.primary }}
           onPress={() =>
             Linking.openURL('https://vocably.pro/privacy-policy.html')
           }
         >
-          Privacy Policy
+          {t('loginForm.privacyPolicy')}
         </Text>
         .
       </Text>

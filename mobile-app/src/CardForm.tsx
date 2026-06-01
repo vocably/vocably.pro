@@ -2,6 +2,7 @@ import { Card } from '@vocably/model';
 import { FC, useState } from 'react';
 import { View } from 'react-native';
 import { IconButton, Menu, useTheme } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 import { FormText } from './ui/FormText';
 
 type CardFormCard = Pick<
@@ -22,23 +23,32 @@ export const CardForm: FC<Props> = ({ card, onChange }) => {
     });
   };
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [partOfSpeechMenuVisible, setPartOfSpeechMenuVisible] = useState(false);
+
+  const partsOfSpeech = [
+    'noun',
+    'verb',
+    'adjective',
+    'adverb',
+    'phrase',
+  ] as const;
 
   return (
     <View style={{ gap: 8 }}>
       <FormText
-        label="Word or phrase"
+        label={t('cardForm.wordOrPhrase')}
         value={card.source}
         onChangeText={onTextChange('source')}
       />
       <FormText
-        label="Translation"
+        label={t('cardForm.translation')}
         value={card.translation}
         onChangeText={onTextChange('translation')}
       />
       <FormText
-        label={'Part of Speech'}
+        label={t('cardForm.partOfSpeech')}
         value={card.partOfSpeech}
         onChangeText={onTextChange('partOfSpeech')}
         right={
@@ -56,32 +66,32 @@ export const CardForm: FC<Props> = ({ card, onChange }) => {
               />
             }
           >
-            {['noun', 'verb', 'adjective', 'adverb', 'phrase'].map((pos) => (
+            {partsOfSpeech.map((pos) => (
               <Menu.Item
                 key={pos}
                 onPress={() => {
                   onTextChange('partOfSpeech')(pos);
                   setPartOfSpeechMenuVisible(false);
                 }}
-                title={pos}
+                title={t(`cardForm.partsOfSpeech.${pos}`)}
               />
             ))}
           </Menu>
         }
       />
       <FormText
-        label={'Transcription (IPA)'}
+        label={t('cardForm.transcriptionIpa')}
         value={card.ipa}
         onChangeText={onTextChange('ipa')}
       />
       <FormText
-        label={'Definition'}
+        label={t('cardForm.definition')}
         value={card.definition}
         multiline={true}
         onChangeText={onTextChange('definition')}
       />
       <FormText
-        label={'Example'}
+        label={t('cardForm.example')}
         value={card.example}
         multiline={true}
         onChangeText={onTextChange('example')}

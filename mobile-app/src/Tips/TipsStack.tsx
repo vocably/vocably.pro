@@ -28,12 +28,12 @@ export const TipsStack: FC = () => {
 
       <Stack.Screen
         name="HowToEditCards"
-        options={{ title: `Edit cards` }}
+        options={{}}
         component={HowToEditCardsScreen}
       />
       <Stack.Screen
         name="HowToGroupCards"
-        options={{ title: `Group cards` }}
+        options={{}}
         component={HowToGroupCardsScreen}
       />
       <Stack.Screen
@@ -43,7 +43,7 @@ export const TipsStack: FC = () => {
       />
       <Stack.Screen
         name="HowToViewStudyStatistics"
-        options={{ title: `Study plan` }}
+        options={{}}
         component={HowToViewStudyStatisticsScreen}
       />
     </Stack.Navigator>

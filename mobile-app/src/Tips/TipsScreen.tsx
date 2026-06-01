@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Linking, Platform, View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -16,6 +17,7 @@ export const TipsScreen: FC<Props> = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const posthog = usePostHog();
+  const { t } = useTranslation();
 
   const translationPreset = useTranslationPreset();
 
@@ -48,7 +50,7 @@ export const TipsScreen: FC<Props> = () => {
       <CustomSurface style={{ marginBottom: 32 }}>
         <ListItem
           order="first"
-          title="Edit cards"
+          title={t('tips.menu.editCards')}
           onPress={() => {
             navigation.navigate('HowToEditCards');
             posthog.capture('tip-edit-card-clicked');
@@ -59,7 +61,7 @@ export const TipsScreen: FC<Props> = () => {
         <Divider style={{ alignSelf: 'stretch' }} />
         <ListItem
           order="middle"
-          title="Group cards (in folders)"
+          title={t('tips.menu.groupCards')}
           onPress={() => {
             navigation.navigate('HowToGroupCards');
             posthog.capture('tip-group-cards-clicked');
@@ -70,7 +72,7 @@ export const TipsScreen: FC<Props> = () => {
         <Divider style={{ alignSelf: 'stretch' }} />
         <ListItem
           order="middle"
-          title={'Import and export CSV'}
+          title={t('tips.menu.importExportCsv')}
           onPress={() => {
             navigation.navigate('HowToImportAndExport');
             posthog.capture('tip-import-export-clicked');
@@ -81,7 +83,7 @@ export const TipsScreen: FC<Props> = () => {
         <Divider style={{ alignSelf: 'stretch' }} />
         <ListItem
           order="last"
-          title="Study plan"
+          title={t('tips.menu.studyPlan')}
           onPress={() => {
             navigation.navigate('HowToViewStudyStatistics');
             posthog.capture('tip-view-stats-clicked');
@@ -95,7 +97,7 @@ export const TipsScreen: FC<Props> = () => {
         {Platform.OS === 'android' && (
           <ListItem
             order="first"
-            title="How to translate any selected text in any app on your mobile."
+            title={t('tips.menu.androidTranslate')}
             onPress={() => {
               posthog.capture('tip-android-translate-clicked');
               Linking.openURL(
@@ -109,7 +111,7 @@ export const TipsScreen: FC<Props> = () => {
         {Platform.OS === 'ios' && (
           <ListItem
             order="first"
-            title="Translate any word on any website with Vocably iOS Safari Extension."
+            title={t('tips.menu.iosTranslate')}
             onPress={() => {
               {
                 posthog.capture('tip-ios-translate-clicked');
@@ -126,7 +128,7 @@ export const TipsScreen: FC<Props> = () => {
         <ListItem
           order="last"
           leftIcon="laptop"
-          title="Are you using Chrome or Safari on your computer? Try the Vocably extension."
+          title={t('tips.menu.desktopExtension')}
           onPress={() => {
             posthog.capture('tip-desktop-extension-clicked');
             Linking.openURL(`https://vocably.pro`);
@@ -137,7 +139,7 @@ export const TipsScreen: FC<Props> = () => {
       <CustomSurface style={{ marginBottom: 8 }}>
         <ListItem
           leftIcon="message-text-outline"
-          title="Provide feedback"
+          title={t('tips.menu.provideFeedback')}
           onPress={() => {
             posthog.capture('tip-feedback-clicked');
             navigation.navigate('Feedback');
@@ -145,10 +147,7 @@ export const TipsScreen: FC<Props> = () => {
         />
       </CustomSurface>
       <View style={{ paddingHorizontal: 16 }}>
-        <Text>
-          Are you missing any crucial feature or simply want to share your
-          opinion about Vocably with me? I would love to hear from you!
-        </Text>
+        <Text>{t('tips.menu.feedbackBody')}</Text>
       </View>
     </CustomScrollView>
   );

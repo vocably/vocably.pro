@@ -12,6 +12,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import {
   Alert,
   AppState,
@@ -146,6 +147,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
 
   const { refreshLanguages } = useContext(LanguagesContext);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const [refreshing, setRefreshing] = useState(false);
   const [toBeDeletedId, setToBeDeletedId] = useState<string | null>(null);
@@ -193,8 +195,8 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
       const deleteResult = await remove(id);
       if (deleteResult.success === false) {
         Alert.alert(
-          'Error: Card deletion failed',
-          `Oops! Something went wrong while attempting to delete the card. Please try again later.`
+          t('dashboard.deleteCardFailedTitle'),
+          t('dashboard.deleteCardFailedMessage')
         );
       }
       setToBeDeletedId(null);
@@ -242,31 +244,31 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   const sections: Section[] = useMemo(() => {
     const result = [
       {
-        title: 'Planned for today',
+        title: t('dashboard.section.today'),
         data: collapsedSections.includes('today') ? [] : plan.today,
         all: plan.today,
         id: 'today',
       },
       {
-        title: 'To catch up',
+        title: t('dashboard.section.expired'),
         data: collapsedSections.includes('expired') ? [] : plan.expired,
         all: plan.expired,
         id: 'expired',
       },
       {
-        title: 'Never studied',
+        title: t('dashboard.section.notStarted'),
         data: collapsedSections.includes('notStarted') ? [] : plan.notStarted,
         all: plan.notStarted,
         id: 'notStarted',
       },
       {
-        title: 'Tomorrow',
+        title: t('dashboard.section.tomorrow'),
         data: collapsedSections.includes('tomorrow') ? [] : plan.tomorrow,
         all: plan.tomorrow,
         id: 'tomorrow',
       },
       {
-        title: 'Planned',
+        title: t('dashboard.section.future'),
         data: collapsedSections.includes('future') ? [] : plan.future,
         all: plan.future,
         id: 'future',
@@ -274,7 +276,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
     ].filter((item) => item.all.length > 0);
 
     return result;
-  }, [plan, collapsedSections]);
+  }, [plan, collapsedSections, t]);
 
   const searchInputRef = useRef<DashboardSearchInputRef>(null);
 
@@ -319,7 +321,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
     isRandomEnabledResult.status !== 'loaded' ||
     isStatsViewEnabledResult.status !== 'loaded'
   ) {
-    return <Loader>Loading cards...</Loader>;
+    return <Loader>{t('dashboard.loadingCards')}</Loader>;
   }
 
   const isEmpty = deck.cards.length === 0;
@@ -438,8 +440,9 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                   onPress={() => navigation.navigate('Study')}
                   disabled={cards.length === 0}
                 >
-                  Study
-                  {noTags || selectedTags.length > 0 ? ' selected tags' : ''}
+                  {noTags || selectedTags.length > 0
+                    ? t('dashboard.studySelectedTags')
+                    : t('dashboard.study')}
                 </Button>
                 {hasTags && (
                   <View
@@ -503,7 +506,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                     flexWrap: 'wrap',
                   }}
                 >
-                  <Text>Tags: </Text>
+                  <Text>{t('dashboard.tagsLabel')}</Text>
                   {selectedTags.map((tag) => (
                     // Wrap the chip in view to fix the close button on Android
                     <View key={tag.id}>
@@ -537,7 +540,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                         }}
                         onClose={() => setNoTags(false)}
                       >
-                        Cards with no tags
+                        {t('dashboard.cardsWithNoTags')}
                       </Chip>
                     </View>
                   )}
@@ -646,7 +649,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                             });
                           }}
                         >
-                          Study
+                          {t('dashboard.study')}
                         </Button>
                       )}
                       {section.section.id === 'tomorrow' && (
@@ -670,7 +673,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                             });
                           }}
                         >
-                          I can't wait
+                          {t('dashboard.cantWait')}
                         </Button>
                       )}
                     </View>
@@ -721,16 +724,13 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                       {nowTs - (item.data.lastStudied ?? 0) <
                         STUDY_DELAY_MS && (
                         <Text>
-                          - May be studied in{' '}
-                          {plural(
-                            Math.round(
+                          {t('dashboard.mayBeStudiedIn', {
+                            count: Math.round(
                               (STUDY_DELAY_MS -
                                 (nowTs - (item.data.lastStudied ?? 0))) /
                                 60_000
                             ),
-                            'minute'
-                          )}
-                          .
+                          })}
                         </Text>
                       )}
                     </View>
@@ -865,21 +865,21 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                       }}
                     >
                       <Text style={{ fontSize: 16 }}>
-                        No{' '}
-                        <Text style={{ fontWeight: 'bold' }}>
-                          {languageName}
-                        </Text>{' '}
-                        cards yet.
+                        <Trans
+                          i18nKey="dashboard.empty.noCardsYet"
+                          components={{
+                            bold: <Text style={{ fontWeight: 'bold' }} />,
+                          }}
+                        />
                       </Text>
                       <Text style={{ fontSize: 16 }}>
-                        Head over to the Look Up tab to find and add some new
-                        words.
+                        {t('dashboard.empty.headOverToLookUp')}
                       </Text>
                     </View>
                     <CustomSurface>
                       <ListItem
                         leftIcon="translate"
-                        title="Go to Look up"
+                        title={t('dashboard.empty.goToLookUp')}
                         onPress={() => {
                           navigation.navigate('LookUp');
                           if (presetState.status === 'known') {
@@ -898,22 +898,29 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                 )}
                 {isSearching && searchText && (
                   <Text style={{ fontSize: 16 }}>
-                    No cards found for{' '}
-                    <Text style={{ fontWeight: 'bold' }}>{searchText}</Text>.
+                    <Trans
+                      i18nKey="dashboard.empty.noCardsForSearch"
+                      values={{ searchText }}
+                      components={{
+                        bold: <Text style={{ fontWeight: 'bold' }} />,
+                      }}
+                    />
                   </Text>
                 )}
                 {selectedTags.length === 1 && (
                   <Text style={{ fontSize: 16 }}>
-                    You don’t have any cards tagged with{' '}
-                    <Text style={{ fontWeight: 'bold' }}>
-                      {selectedTags[0].data.title}
-                    </Text>
-                    .
+                    <Trans
+                      i18nKey="dashboard.empty.noCardsForTag"
+                      values={{ tagTitle: selectedTags[0].data.title }}
+                      components={{
+                        bold: <Text style={{ fontWeight: 'bold' }} />,
+                      }}
+                    />
                   </Text>
                 )}
                 {selectedTags.length > 1 && (
                   <Text style={{ fontSize: 16 }}>
-                    You don't yet have cards under the selected tags.
+                    {t('dashboard.empty.noCardsForTags')}
                   </Text>
                 )}
               </View>

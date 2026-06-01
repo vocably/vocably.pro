@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getFullLanguageName } from '@vocably/model';
 import { FC, useContext, useState } from 'react';
 import { PixelRatio, StyleProp, View, ViewStyle } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import {
   Divider,
   Menu,
@@ -12,12 +13,14 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { LanguagesContext } from './languages/LanguagesContainer';
 import { popularLanguages } from './SourceLanguageButton';
+import { upperFirst } from 'lodash-es';
 
 type Props = {
   style?: StyleProp<ViewStyle>;
 };
 
 export const LanguageSelector: FC<Props> = ({ style }) => {
+  const { t } = useTranslation();
   const { languages, selectedLanguage, selectLanguage, addNewLanguage } =
     useContext(LanguagesContext);
 
@@ -49,10 +52,10 @@ export const LanguageSelector: FC<Props> = ({ style }) => {
   const onAddNewLanguageClick = () => {
     closeMenu();
     navigation.navigate('LanguageSelector', {
-      title: 'Add new language',
+      title: t('languageSelector.addNewLanguage'),
       onSelect: onLanguageSelect,
       preferred: popularLanguages,
-      preferredTitle: 'Popular languages',
+      preferredTitle: t('languageSelector.popularLanguages'),
     });
   };
 
@@ -85,7 +88,7 @@ export const LanguageSelector: FC<Props> = ({ style }) => {
         {languages.map((language) => (
           <Menu.Item
             key={language}
-            title={getFullLanguageName(language)}
+            title={upperFirst(t(`language.nominative_${language}`))}
             onPress={() => onSelect(language)}
             titleStyle={{
               color: theme.colors.secondary,
@@ -98,7 +101,7 @@ export const LanguageSelector: FC<Props> = ({ style }) => {
         ))}
         <Divider />
         <Menu.Item
-          title={'Add new language'}
+          title={t('languageSelector.addNewLanguage')}
           onPress={onAddNewLanguageClick}
           titleStyle={{ color: theme.colors.secondary }}
           leadingIcon={'plus'}

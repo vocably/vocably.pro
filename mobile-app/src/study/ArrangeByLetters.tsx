@@ -2,6 +2,7 @@ import { CardItem, DeckSettings, isGoogleTTSLanguage } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { shuffle } from 'lodash-es';
 import { FC, useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Animated,
   Easing,
@@ -40,6 +41,7 @@ export const ArrangeByLetters: FC<Props> = ({
 }) => {
   const displayerRef = useRef<DisplayerRef>(null);
   const theme = useTheme();
+  const { t } = useTranslation();
   const scrollViewRef = useRef<ScrollView>(null);
   const x = useRef(new Animated.Value(0)).current;
   const [hintedOrMistaken, setHintedOrMistaken] = useState(false);
@@ -224,7 +226,7 @@ export const ArrangeByLetters: FC<Props> = ({
           ref={reverseCardFrontRef}
           hasChecked={isAnswerVisible}
           card={card}
-          requiredAction="Type in"
+          requiredAction={t('study.arrangeByLetters.typeIn')}
         />
         <Animated.View
           style={[
@@ -336,7 +338,7 @@ export const ArrangeByLetters: FC<Props> = ({
                 setHintedOrMistaken(true);
               }}
             >
-              Show me the answer
+              {t('study.arrangeByLetters.showMeTheAnswer')}
             </Button>
           )}
           {isAnswerVisible && (

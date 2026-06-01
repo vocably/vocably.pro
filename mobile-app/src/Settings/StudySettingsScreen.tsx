@@ -1,6 +1,7 @@
 import { Slider } from '@miblanchard/react-native-slider';
 import { FC } from 'react';
 import { Linking, PixelRatio, View } from 'react-native';
+import { Trans, useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import Animated, { useAnimatedRef } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -49,6 +50,7 @@ type Props = {};
 export const StudySettingsScreen: FC<Props> = () => {
   const theme = useTheme();
   const scrollableRef = useAnimatedRef<Animated.ScrollView>();
+  const { t } = useTranslation();
 
   const [isRandomizerEnabled, mutateIsRandomizerEnabled] = useAsync(
     getRandomizerEnabled,
@@ -111,7 +113,9 @@ export const StudySettingsScreen: FC<Props> = () => {
         }}
       >
         <View>
-          <Text style={{ fontSize: 16 }}>Maximum cards per study session</Text>
+          <Text style={{ fontSize: 16 }}>
+            {t('studySettings.maxCardsPerSession')}
+          </Text>
         </View>
         {maximumCardsPerSession.status === 'loaded' && (
           <View
@@ -151,7 +155,7 @@ export const StudySettingsScreen: FC<Props> = () => {
       >
         <View>
           <Text style={{ fontSize: 16 }}>
-            Maximum "never studied" cards that can be picked up per day
+            {t('studySettings.maxNeverStudiedPerDay')}
           </Text>
         </View>
         {maximumNeverStudiedCardsPerDay.status === 'loaded' && (
@@ -187,17 +191,14 @@ export const StudySettingsScreen: FC<Props> = () => {
           marginBottom: 32,
         }}
       >
-        <Text>
-          This option only makes sense for experienced users who have a lot of
-          new cards stacked in "Never studied" group.
-        </Text>
+        <Text>{t('studySettings.maxNeverStudiedHint')}</Text>
       </View>
 
       {playRandomExample.status === 'loaded' && (
         <>
           <CustomSurface style={{ marginBottom: 8 }}>
             <ListSwitch
-              title="Pronounce an example sentence"
+              title={t('studySettings.pronounceExample')}
               value={playRandomExample.value}
               onChange={onPlayRandomExampleChange}
             />
@@ -209,10 +210,10 @@ export const StudySettingsScreen: FC<Props> = () => {
             }}
           >
             <Text>
-              This option makes the app play a random example sentence when
-              appropriate during the study session. The{' '}
-              <Icon name="volume-high" size={16} /> option should be turned on —
-              this option is in the top-right corner of the Study screen.
+              <Trans
+                i18nKey="studySettings.pronounceExampleHint"
+                components={{ icon: <Icon name="volume-high" size={16} /> }}
+              />
             </Text>
           </View>
         </>
@@ -221,7 +222,7 @@ export const StudySettingsScreen: FC<Props> = () => {
       {isRandomizerEnabled.status === 'loaded' && (
         <CustomSurface style={{ marginBottom: 8 }}>
           <ListSwitch
-            title="Randomly select cards to study"
+            title={t('studySettings.randomize')}
             value={isRandomizerEnabled.value}
             onChange={onRandomizerEnabledChange}
           />
@@ -233,11 +234,13 @@ export const StudySettingsScreen: FC<Props> = () => {
         }}
       >
         <Text>
-          <Icon name="alert-outline" size={16} /> Enabling this option is
-          generally a <Text style={{ fontWeight: 'bold' }}>bad idea</Text>. This
-          option disables the smart study algorithm. People who disable the
-          smart study algorithm eventually get frustrated with their study
-          progress.{' '}
+          <Trans
+            i18nKey="studySettings.randomizeHint"
+            components={{
+              warningIcon: <Icon name="alert-outline" size={16} />,
+              bold: <Text style={{ fontWeight: 'bold' }} />,
+            }}
+          />{' '}
           <Text onPress={() => Linking.openURL('https://vocably.pro/srs.html')}>
             <Text
               style={{
@@ -245,8 +248,7 @@ export const StudySettingsScreen: FC<Props> = () => {
                 color: theme.colors.primary,
               }}
             >
-              Read how Vocably uses the smart study algorithm to help you learn
-              more words in a shorter time.
+              {t('studySettings.srsLink')}
             </Text>
             {''}
             <Text

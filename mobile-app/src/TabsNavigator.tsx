@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationProp } from '@react-navigation/native';
 import { FC, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useTheme } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { DeckStack } from './DeckStack';
@@ -21,6 +22,7 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
   const welcomeIsRequiredResult = useWelcomeRequired();
   const theme = useTheme();
   const posthog = usePostHog();
+  const { t } = useTranslation();
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -75,7 +77,7 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
           name="DeckScreen"
           options={{
             headerShown: false,
-            title: 'My cards',
+            title: t('nav.myCards'),
             tabBarIcon: ({ color }) => (
               <Icon name="card-multiple-outline" color={color} size={24} />
             ),
@@ -87,7 +89,7 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
           component={LookUpScreen}
           options={{
             headerShown: false,
-            title: 'Look up',
+            title: t('nav.lookUp'),
             tabBarIcon: ({ color }) => (
               <Icon name="translate" color={color} size={24} />
             ),
@@ -98,7 +100,7 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
           component={TipsStack}
           options={{
             headerShown: false,
-            title: 'Tips',
+            title: t('nav.tips'),
             tabBarIcon: ({ color }) => (
               <Icon name="information-outline" color={color} size={24} />
             ),
@@ -108,7 +110,7 @@ export const TabsNavigator: FC<Props> = ({ navigation }) => {
           name="Settings"
           component={SettingsStack}
           options={{
-            title: 'Settings',
+            title: t('nav.settings'),
             headerShown: false,
             tabBarIcon: ({ color }) => (
               <Icon name="tune-variant" color={color} size={24} />

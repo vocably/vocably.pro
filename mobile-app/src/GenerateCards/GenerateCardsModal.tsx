@@ -7,6 +7,7 @@ import {
 import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { Platform, ScrollView, Text, View } from 'react-native';
 import {
   KeyboardAvoidingView,
@@ -51,6 +52,7 @@ const languagesWithIrregularVerbs = [
 ];
 
 export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
+  const { t } = useTranslation();
   const insets = useSafeAreaInsets();
   const translationPresetState = useTranslationPreset();
   const theme = useTheme();
@@ -149,7 +151,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     });
 
     if (generateUnitsOfSpeechResult.success === false) {
-      setLastMessageError('Unable to generate cards. Please try again.');
+      setLastMessageError(t('generateCards.errorUnable'));
       const lastMessage = last(newMessages);
       if (lastMessage?.role === 'assistant') {
         setIsThinking(false);
@@ -177,7 +179,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
   };
 
   if (translationPresetState.status === 'unknown') {
-    return <Loader>Loading translation preset...</Loader>;
+    return <Loader>{t('generateCards.loadingPreset')}</Loader>;
   }
 
   const linkStyle = {
@@ -222,20 +224,23 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                   gap: 8,
                 }}
               >
+                <Text style={infoTextStyle}>{t('generateCards.intro')}</Text>
                 <Text style={infoTextStyle}>
-                  Type what you need, and Vocably will generate cards for you.
+                  <Trans
+                    i18nKey="generateCards.experimental"
+                    components={{
+                      feedback: (
+                        <Text
+                          style={linkStyle}
+                          onPress={() => navigation.navigate('Feedback')}
+                        />
+                      ),
+                    }}
+                  />
                 </Text>
                 <Text style={infoTextStyle}>
-                  This is an experimental feature.{' '}
-                  <Text
-                    style={linkStyle}
-                    onPress={() => navigation.navigate('Feedback')}
-                  >
-                    Let me know
-                  </Text>{' '}
-                  if you find any bugs or have any suggestions.
+                  {t('generateCards.examplesToTry')}
                 </Text>
-                <Text style={infoTextStyle}>Some examples to try:</Text>
 
                 <View style={{ gap: 4 }}>
                   {languagesWithIrregularVerbs.includes(
@@ -245,20 +250,33 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
                       -{' '}
                       <Text
                         style={linkStyle}
-                        onPress={runExample('irregular verbs')}
+                        onPress={runExample(
+                          t('generateCards.exampleIrregularVerbs')
+                        )}
                       >
-                        irregular verbs
+                        {t('generateCards.exampleIrregularVerbs')}
                       </Text>
                     </Text>
                   )}
-                  <Text style={infoTextStyle} onPress={runExample('animals')}>
-                    - <Text style={linkStyle}>animals</Text>
+                  <Text
+                    style={infoTextStyle}
+                    onPress={runExample(t('generateCards.exampleAnimals'))}
+                  >
+                    -{' '}
+                    <Text style={linkStyle}>
+                      {t('generateCards.exampleAnimals')}
+                    </Text>
                   </Text>
                   <Text
                     style={infoTextStyle}
-                    onPress={runExample('popular idioms')}
+                    onPress={runExample(
+                      t('generateCards.examplePopularIdioms')
+                    )}
                   >
-                    - <Text style={linkStyle}>popular idioms</Text>
+                    -{' '}
+                    <Text style={linkStyle}>
+                      {t('generateCards.examplePopularIdioms')}
+                    </Text>
                   </Text>
                 </View>
               </View>
@@ -308,7 +326,7 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
             ))}
             {isThinking && (
               <View style={messageWrapperStyle}>
-                <Thinking message={'Thinking...'} />
+                <Thinking message={t('chat.thinking')} />
               </View>
             )}
             {lastMessageError && (
@@ -344,7 +362,9 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
             <ChatTextInput
               value={inputText}
               onChange={setInputText}
-              placeholder={messages.length === 0 ? 'Just anything...' : ''}
+              placeholder={
+                messages.length === 0 ? t('generateCards.placeholder') : ''
+              }
               onSubmit={send}
               disabled={isThinking}
               multiline={true}

@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { Linking, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Button, Text, useTheme } from 'react-native-paper';
 import { CustomerInfo } from 'react-native-purchases';
 
@@ -15,6 +16,7 @@ export const Premium: FC<Props> = ({
   onRefresh = () => null,
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const premium = customerInfo.entitlements.active['premium'];
 
@@ -27,13 +29,13 @@ export const Premium: FC<Props> = ({
   return (
     <View style={{ gap: 4 }}>
       <Text style={{ fontSize: 16, color: theme.colors.secondary }}>
-        Premium
+        {t('premium.label')}
       </Text>
       {premium.willRenew && expirationDate && (
-        <Text>Next payment: {expirationDate}</Text>
+        <Text>{t('premium.nextPayment', { date: expirationDate })}</Text>
       )}
       {!premium.willRenew && expirationDate && (
-        <Text>Valid until: {expirationDate}</Text>
+        <Text>{t('premium.validUntil', { date: expirationDate })}</Text>
       )}
       {premium.willRenew && customerInfo.managementURL && (
         <Text
@@ -43,15 +45,13 @@ export const Premium: FC<Props> = ({
             setTimeout(() => setShowRefresh(true), 200);
           }}
         >
-          Manage your subscription
+          {t('premium.manageSubscription')}
         </Text>
       )}
 
       {showRefresh && (
         <>
-          <Text>
-            It takes a couple of minutes for your changes to reflect in the app.
-          </Text>
+          <Text>{t('premium.refreshHint')}</Text>
 
           <Button
             icon={'refresh'}
@@ -63,7 +63,7 @@ export const Premium: FC<Props> = ({
               marginTop: 8,
             }}
           >
-            Refresh
+            {t('premium.refresh')}
           </Button>
         </>
       )}

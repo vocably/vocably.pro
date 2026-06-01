@@ -1,10 +1,10 @@
 import { CardItem, CardsLimit } from '@vocably/model';
 import { FC, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { Linking, View } from 'react-native';
 import { Button, Dialog, Portal, Text, useTheme } from 'react-native-paper';
 import { mainPadding } from '../styles';
 import { usePresentPaywall } from '../usePresentPaywall';
-import { plural } from '../plural';
 
 type Props = {
   leftInset: number;
@@ -25,6 +25,7 @@ export const AddLimitationMessage: FC<Props> = ({
 
   const presentPaywall = usePresentPaywall();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   if (maxCards === 'unlimited') {
     return <></>;
@@ -50,12 +51,12 @@ export const AddLimitationMessage: FC<Props> = ({
         <Dialog visible={upgradeDialogVisible}>
           <Dialog.Content>
             <Text variant="bodyMedium">
-              Open Vocably {'->'} Settings to upgrade.
+              {t('cardsLimit.openVocablySettings')}
             </Text>
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={() => setUpgradeDialogVisibility(false)}>
-              Okay
+              {t('common.ok')}
             </Button>
           </Dialog.Actions>
         </Dialog>
@@ -71,19 +72,30 @@ export const AddLimitationMessage: FC<Props> = ({
         }}
       >
         <Text>
-          Your collection has
-          {cards.length > maxCards.maxCards ? ' more  than' : ''}{' '}
-          <Text style={{ fontWeight: 'bold', color: theme.colors.secondary }}>
-            {maxCards.maxCards}
-          </Text>{' '}
-          cards. Now you can save{' '}
-          <Text style={{ fontWeight: 'bold', color: theme.colors.secondary }}>
-            {plural(maxCards.cardsPerDay, 'card', true)} per day.
-          </Text>{' '}
-          Premium users don't have this limit.
+          <Trans
+            i18nKey={
+              cards.length > maxCards.maxCards
+                ? 'cardsLimit.collectionHasMoreThan'
+                : 'cardsLimit.collectionHas'
+            }
+            values={{
+              maxCards: maxCards.maxCards,
+              count: maxCards.cardsPerDay,
+            }}
+            components={{
+              bold: (
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    color: theme.colors.secondary,
+                  }}
+                />
+              ),
+            }}
+          />
         </Text>
         <Button mode="contained" onPress={upgradeClick}>
-          Upgrade to Premium
+          {t('cardsLimit.upgradeToPremium')}
         </Button>
       </View>
     </>

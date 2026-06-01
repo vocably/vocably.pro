@@ -1,14 +1,11 @@
 import { NavigationProp } from '@react-navigation/native';
-import {
-  GoogleLanguage,
-  languageList,
-  shortenedLanguageList,
-} from '@vocably/model';
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
 import { Preset } from './LookUpScreen/TranslationPresetForm';
 import { LanguagePairs } from './TranslationPreset/useLanguagePairs';
+import { upperFirst } from 'lodash-es';
 
 type Props = {
   navigation: NavigationProp<any>;
@@ -56,23 +53,27 @@ export const SourceLanguageButton: FC<Props> = ({
   preset,
   onChange,
   languagePairs,
-  emptyText = 'Select',
+  emptyText,
   style,
   compact = false,
   existingLanguages,
 }) => {
+  const { t } = useTranslation();
+  const resolvedEmptyText = emptyText ?? t('languageSelector.select');
   const onSourceSelection = (sourceLanguage: string) => {
     onChange(setSourceLanguage(sourceLanguage, preset, languagePairs));
   };
 
   const selectSourceLanguage = () => {
     navigation.navigate('LanguageSelector', {
-      title: 'Study Language',
+      title: t('languageSelector.studyLanguage'),
       selected: preset.sourceLanguage,
       preferred:
         existingLanguages.length === 0 ? popularLanguages : existingLanguages,
       preferredTitle:
-        existingLanguages.length > 0 ? 'Your languages' : 'Popular Languages',
+        existingLanguages.length > 0
+          ? t('languageSelector.yourLanguages')
+          : t('languageSelector.popularLanguages'),
       onSelect: onSourceSelection,
     });
   };
@@ -99,9 +100,8 @@ export const SourceLanguageButton: FC<Props> = ({
       compact={compact}
     >
       {preset.sourceLanguage
-        ? (shortenedLanguageList[preset.sourceLanguage as GoogleLanguage] ??
-          languageList[preset.sourceLanguage as GoogleLanguage])
-        : emptyText}
+        ? upperFirst(t(`language.nominative_short_${preset.sourceLanguage}`))
+        : resolvedEmptyText}
     </Button>
   );
 };

@@ -1,5 +1,6 @@
 import { NavigationProp, Route } from '@react-navigation/native';
 import { FC, useCallback, useLayoutEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   ListRenderItem,
   Pressable,
@@ -74,11 +75,12 @@ export const LanguageSelectorModal: LanguageSelectorModal = ({
   route,
   navigation,
 }) => {
+  const { t } = useTranslation();
   const {
     title,
     selected,
     preferred = [],
-    preferredTitle = 'Preferred',
+    preferredTitle = t('languageSelector.preferred'),
     onSelect,
   } = route.params;
   const theme = useTheme();
@@ -115,7 +117,7 @@ export const LanguageSelectorModal: LanguageSelectorModal = ({
         >
           <SearchInput
             value={searchText}
-            placeholder="Search"
+            placeholder={t('languageSelector.search')}
             onChange={(value) => {
               setSearchText(value);
             }}
