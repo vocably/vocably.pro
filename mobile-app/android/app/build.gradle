@@ -91,8 +91,8 @@ android {
         applicationId "com.vocablypro"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 315
-        versionName "111"
+        versionCode 316
+        versionName "112"
     }
 
     signingConfigs {

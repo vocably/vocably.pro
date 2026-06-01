@@ -128,8 +128,8 @@ export const isLoggedIn$: Observable<boolean> = timer(0, 2000).pipe(
 export const registerServiceWorker = (
   registerServiceWorkerOptions: RegisterServiceWorkerOptions
 ) => {
-  posthog.init('phc_vke56i7RTlBbFYHZHsoH7VhgWi2DwvKtEzusfcFemgT', {
-    api_host: 'https://us.i.posthog.com',
+  posthog.init('phc_zSkRhQ7tE4RDFRdxIVXzWwJ66ACL9QAHnyrRpRknyHj', {
+    api_host: 'https://api-e.vocably.pro',
     person_profiles: 'identified_only',
     persistence: 'localStorage',
     disable_external_dependency_loading: true,
