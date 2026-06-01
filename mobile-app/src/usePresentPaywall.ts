@@ -3,6 +3,7 @@ import { usePostHog } from 'posthog-react-native';
 import { useContext, useRef } from 'react';
 import { OfferingId, presentPaywall } from './presentPaywall';
 import { UserMetadataContext } from './UserMetadataContainer';
+import { i18n } from './i18n';
 
 export const usePresentPaywall = () => {
   const navigation = useNavigation();
@@ -19,7 +20,7 @@ export const usePresentPaywall = () => {
     paywallIsPresentRef.current = true;
 
     posthog.capture('paywall-showed', { offeringId });
-    const isPaid = await presentPaywall(offeringId, {
+    const isPaid = await presentPaywall(offeringId, i18n.language, {
       maxCardsInCollection: userStaticMetadata.max_cards,
       maxCardsPerDay: userStaticMetadata.cards_per_day,
     });

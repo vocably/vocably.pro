@@ -3,7 +3,6 @@ import RevenueCatUI, {
   CustomVariableValue,
   PAYWALL_RESULT,
 } from 'react-native-purchases-ui';
-import { CardsLimit } from '@vocably/model';
 
 export type OfferingId =
   | 'mobile-premium'
@@ -12,6 +11,7 @@ export type OfferingId =
 
 export const presentPaywall = async (
   offeringId: OfferingId = 'mobile-premium',
+  locale: string,
   variables: {
     maxCardsInCollection: number;
     maxCardsPerDay: number;
@@ -19,6 +19,7 @@ export const presentPaywall = async (
 ): Promise<boolean> => {
   const offerings = await Purchases.getOfferings();
   const offering = offerings.all[offeringId];
+  await Purchases.overridePreferredLocale(locale);
 
   // Present paywall for current offering:
   const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
