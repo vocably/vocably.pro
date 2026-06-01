@@ -46,6 +46,8 @@ The system interface expected to be translated into following languages:
 
 The translation files are located in `src/i18n/locales`.
 
+Avoid plurals app states (e.g. "Загружаю" instead of "Загружаем"). There is only one person behind the app. Using plurals as "We" or "Us" is not appropriate.
+
 ## Architecture
 
 ### App Structure

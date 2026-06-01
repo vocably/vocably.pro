@@ -535,6 +535,7 @@
     "login": {
       "openVocablyToSignIn": "Откройте Вокебли для входа.",
       "openVocably": "Открыть Вокебли"
-    }
+    },
+    "receivingText": "Получаю текст..."
   }
 }

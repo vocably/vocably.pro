@@ -523,6 +523,7 @@
     "login": {
       "openVocablyToSignIn": "Open Vocably to sign in.",
       "openVocably": "Open Vocably"
-    }
+    },
+    "receivingText": "Receiving the text..."
   }
 }
