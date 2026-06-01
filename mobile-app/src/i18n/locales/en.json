@@ -417,20 +417,14 @@
       "saveFlashcardsAfter": "your flashcards and study them with spaced repetition system."
     },
     "slideLookUp": {
-      "intro": "Do you see or hear a new",
-      "andSave_lookItUp": "word? Look it up and save it as a flashcard!",
-      "andSave_translateIt": "word? Translate it and save it as a flashcard!"
+      "intro": "Do you see or hear a new word or phrase in <bold>{{sourceLanguage}}</bold>? Look it up and save it as a flashcard!"
     },
     "slideReverseTranslate": {
-      "intro": "Do you want to say something in",
-      "butDontKnow": "but don't know the word? Look it up in"
+      "intro": "Do you want to say something in <bold>{{sourceLanguage}}</bold> but don't know the word? Look it up in <bold>{{targetLanguage}}</bold>."
     },
     "slideSelectToTranslate": {
-      "intro": "Do you see a new",
-      "iosAfterLang_lookItUp": "word in Mobile Safari? Look it up with the",
-      "iosAfterLang_translateIt": "word in Mobile Safari? Translate it with the",
-      "iosVocablyExtension": "Vocably extension",
-      "androidAfterLang": "word on the screen of your Android device?",
+      "into_Safari": "Do you see a new word in Mobile Safari? Look it up with the <bold>Vocably extension</bold>.",
+      "into_Android": "Do you see a new word on the screen of your Android device?",
       "androidStep1": "Select the word",
       "androidStep2": "Click",
       "androidStep3": "Click \"Translate with Vocably\""

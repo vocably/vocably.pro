@@ -47,9 +47,9 @@ export const SlideDesktopBrowser: FC<Props> = ({
         </Text>{' '}
         {t('welcome.slideDesktopBrowser.browserExtensionSuffix')}{' '}
         <Text style={{ fontWeight: 'bold' }}>
-          {trimLanguage(languageList[sourceLanguage])}
+          {t(`language.in_${sourceLanguage}`)}
         </Text>
-        !
+        .
       </Text>
       <Image
         source={require('./Desktop.png')}

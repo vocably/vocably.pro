@@ -429,23 +429,17 @@
       "saveFlashcardsAfter": "карточки и изучать их с помощью системы интервального повторения."
     },
     "slideLookUp": {
-      "intro": "Видите или слышите новое",
-      "andSave_lookItUp": "слово? Найдите его и сохраните как карточку!",
-      "andSave_translateIt": "слово? Переведите его и сохраните как карточку!"
+      "intro": "Видите или слышите новое слово или фразу на <bold>{{sourceLanguage}}</bold>? Найдите его и сохраните как карточку!"
     },
     "slideReverseTranslate": {
-      "intro": "Хотите сказать что-то на",
-      "butDontKnow": "но не знаете нужное слово? Найдите его на"
+      "intro": "Хотите сказать что-то на <bold>{{sourceLanguage}}</bold> но не знаете нужное слово? Найдите его на <bold>{{targetLanguage}}</bold>."
     },
     "slideSelectToTranslate": {
-      "intro": "Видите новое",
-      "iosAfterLang_lookItUp": "слово в Mobile Safari? Найдите его с помощью",
-      "iosAfterLang_translateIt": "слово в Mobile Safari? Переведите его с помощью",
-      "iosVocablyExtension": "расширения Вокебли",
-      "androidAfterLang": "слово на экране вашего Android-устройства?",
+      "into_Safari": "Увидели новое слово в мобильном Safari? Переведите его при помощи <bold>расширения Вокебли</bold>.",
+      "into_Android": "Увидели новое слово на экране вашего Android-устройства?",
       "androidStep1": "Выделите слово",
       "androidStep2": "Нажмите",
-      "androidStep3": "Нажмите «Перевести с Вокебли»"
+      "androidStep3": "Нажмите «Translate with Vocably»"
     },
     "slideDesktopBrowser": {
       "intro": "Пользуетесь компьютером? Установите",

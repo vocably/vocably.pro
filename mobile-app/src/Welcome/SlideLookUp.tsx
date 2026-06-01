@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { GoogleLanguage, languageList } from '@vocably/model';
 import { trimLanguage } from '@vocably/sulna';
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Divider, Text, useTheme } from 'react-native-paper';
@@ -29,13 +29,11 @@ export const SlideLookUp: FC<Props> = ({ sourceLanguage, targetLanguage }) => {
   return (
     <WelcomeScrollView style={{ gap: 16 }}>
       <Text style={{ fontSize: 22, textAlign: 'center' }}>
-        {t('welcome.slideLookUp.intro')}{' '}
-        <Text style={{ fontWeight: 'bold' }}>
-          {trimLanguage(languageList[sourceLanguage])}
-        </Text>{' '}
-        {sourceLanguage === targetLanguage
-          ? t('welcome.slideLookUp.andSave_lookItUp')
-          : t('welcome.slideLookUp.andSave_translateIt')}
+        <Trans
+          i18nKey="welcome.slideLookUp.intro"
+          values={{ sourceLanguage: t(`language.in_${sourceLanguage}`) }}
+          components={{ bold: <Text style={{ fontWeight: 'bold' }} /> }}
+        ></Trans>
       </Text>
 
       <View style={{ width: '100%', alignItems: 'center' }}>

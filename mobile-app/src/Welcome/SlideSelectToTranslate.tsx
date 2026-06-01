@@ -1,8 +1,7 @@
-import { GoogleLanguage, languageList } from '@vocably/model';
-import { trimLanguage } from '@vocably/sulna';
+import { GoogleLanguage } from '@vocably/model';
 import { usePostHog } from 'posthog-react-native';
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Linking, Platform, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Divider, Text, useTheme } from 'react-native-paper';
@@ -33,33 +32,28 @@ export const SlideSelectToTranslate: FC<Props> = ({
     <WelcomeScrollView style={{ gap: 16 }}>
       {!isAndroid && (
         <Text style={{ fontSize: 22, textAlign: 'center' }}>
-          {t('welcome.slideSelectToTranslate.intro')}{' '}
-          <Text style={{ fontWeight: 'bold' }}>
-            {trimLanguage(languageList[sourceLanguage])}
-          </Text>{' '}
-          {sourceLanguage === targetLanguage
-            ? t('welcome.slideSelectToTranslate.iosAfterLang_lookItUp')
-            : t('welcome.slideSelectToTranslate.iosAfterLang_translateIt')}{' '}
-          <Text
-            style={{ color: theme.colors.primary }}
-            onPress={() => {
-              Linking.openURL('https://vocably.pro/ios-safari-extension.html');
-              posthog.capture('onboardingMobileSafariClicked');
+          <Trans
+            i18nKey="welcome.slideSelectToTranslate.into_Safari"
+            components={{
+              bold: (
+                <Text
+                  style={{ color: theme.colors.primary }}
+                  onPress={() => {
+                    Linking.openURL(
+                      'https://vocably.pro/ios-safari-extension.html'
+                    );
+                    posthog.capture('onboardingMobileSafariClicked');
+                  }}
+                />
+              ),
             }}
-          >
-            {t('welcome.slideSelectToTranslate.iosVocablyExtension')}
-          </Text>
-          !
+          ></Trans>
         </Text>
       )}
       {isAndroid && (
         <View style={{ gap: 8 }}>
           <Text style={{ fontSize: 22, textAlign: 'center' }}>
-            {t('welcome.slideSelectToTranslate.intro')}{' '}
-            <Text style={{ fontWeight: 'bold' }}>
-              {trimLanguage(languageList[sourceLanguage])}
-            </Text>{' '}
-            {t('welcome.slideSelectToTranslate.androidAfterLang')}
+            <Trans i18nKey="welcome.slideSelectToTranslate.into_Android"></Trans>
           </Text>
           <Text style={{ fontSize: 22, textAlign: 'center' }}>
             {t('welcome.slideSelectToTranslate.androidStep1')}{' '}
