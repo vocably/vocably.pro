@@ -137,7 +137,9 @@ export const NotificationsAllowed: FC<Props> = ({ language }) => {
         <>
           <CustomSurface style={{ marginBottom: 8 }}>
             <ListSwitch
-              title={t('notifications.enabledFor', { languageString })}
+              title={t('notifications.enabledFor', {
+                languageString: t(`language.for_${language}`),
+              })}
               value={loadNotificationsResult.value.exists}
               onChange={enableOrDisableNotificationTime}
             />

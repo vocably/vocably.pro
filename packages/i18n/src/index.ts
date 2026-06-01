@@ -52,6 +52,7 @@ export type LanguageTranslationOption =
   | `nominative_short_${GoogleLanguage}`
   | `objective_${GoogleLanguage}`
   | `in_${GoogleLanguage}`
+  | `for_${GoogleLanguage}`
   | PartOfSpeech;
 
 export const languageTranslations: Translations = {
