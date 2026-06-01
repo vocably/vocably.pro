@@ -193,7 +193,12 @@
       "noCardsForTags": "No cards found for the selected tags."
     },
     "mayBeStudiedIn_one": "May be studied in {{count}} minute.",
-    "mayBeStudiedIn_other": "May be studied in {{count}} minutes."
+    "mayBeStudiedIn_other": "May be studied in {{count}} minutes.",
+    "dueDate": {
+      "tomorrow": "tomorrow",
+      "inDays_one": "in {{count}} day",
+      "inDays_other": "in {{count}} days"
+    }
   },
   "deck": {
     "editDeckTitle": "Edit {{languageName}}",

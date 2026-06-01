@@ -199,7 +199,14 @@
     "mayBeStudiedIn_one": "Можно изучать через {{count}} минуту.",
     "mayBeStudiedIn_few": "Можно изучать через {{count}} минуты.",
     "mayBeStudiedIn_many": "Можно изучать через {{count}} минут.",
-    "mayBeStudiedIn_other": "Можно изучать через {{count}} минуты."
+    "mayBeStudiedIn_other": "Можно изучать через {{count}} минуты.",
+    "dueDate": {
+      "tomorrow": "завтра",
+      "inDays_one": "через {{count}} день",
+      "inDays_few": "через {{count}} дня",
+      "inDays_many": "через {{count}} дней",
+      "inDays_other": "через {{count}} дня"
+    }
   },
   "deck": {
     "editDeckTitle": "Редактировать {{languageName}}",
