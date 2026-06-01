@@ -103,7 +103,7 @@ type Languages = {
   languages: string[];
   decks: DecksCollection;
   storeDeck: (deck: LanguageContainerDeck) => void;
-  deleteLanguage: (language: string) => Promise<unknown>;
+  deleteLanguage: (language: string) => Promise<Result<unknown>>;
   selectedLanguage: string;
   selectLanguage: (language: string) => Promise<Result<unknown>>;
   syncDecks: () => Promise<unknown>;

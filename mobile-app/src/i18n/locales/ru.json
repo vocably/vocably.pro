@@ -241,7 +241,16 @@
     "deckContainsCards_one": "В колоде {{count}} карточка",
     "deckContainsCards_few": "В колоде {{count}} карточки",
     "deckContainsCards_many": "В колоде {{count}} карточек",
-    "deckContainsCards_other": "В колоде {{count}} карточки"
+    "deckContainsCards_other": "В колоде {{count}} карточки",
+    "deleteDeck": "Удалить эту колоду",
+    "deleteDeckPrompt": {
+      "title": "Удалить колоду {{languageName}}?",
+      "message": "Это действие нельзя отменить."
+    },
+    "deleteDeckError": {
+      "title": "Ошибка: не удалось удалить колоду",
+      "message": "Что-то пошло не так при удалении колоды. Пожалуйста, попробуйте ещё раз."
+    }
   },
   "generateCards": {
     "loadingPreset": "Загружаем настройки перевода...",
