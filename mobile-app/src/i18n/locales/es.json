@@ -1,0 +1,557 @@
+{
+  "common": {
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "save": "Guardar",
+    "done": "Listo",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "ok": "OK",
+    "yes": "Sí",
+    "no": "No",
+    "error": "Error",
+    "goBack": "Volver",
+    "operationFailed": "No se pudo realizar la operación.",
+    "signIn": "Iniciar sesión",
+    "presentTenses": "(presente: {{value}})",
+    "pastTenses": "(pasado: {{value}})",
+    "plural": "(plural: {{value}})",
+    "examples": "Ejemplos"
+  },
+  "appLanguagePicker": {
+    "title": "Idioma de la app"
+  },
+  "nav": {
+    "myCards": "Mis tarjetas",
+    "lookUp": "Buscar",
+    "tips": "Consejos",
+    "settings": "Ajustes",
+    "studySettings": "Ajustes de estudio",
+    "editCard": "Editar tarjeta",
+    "chatWithCard": "Chat sobre la tarjeta",
+    "cardGenerator": "Generador de tarjetas",
+    "feedback": "Comentarios",
+    "createAccount": "Crear cuenta",
+    "previewStudyStep": "Vista previa del paso",
+    "exportDeck": "Exportar tarjetas"
+  },
+  "settings": {
+    "notRegistered": "Aún no estás registrado.",
+    "createAccount": "Crear cuenta",
+    "appLanguage": "Idioma de la app: {{label}}",
+    "studySettings": "Ajustes de estudio",
+    "studyReminders": {
+      "title": "Recordatorios de estudio",
+      "body": "Los recordatorios de estudio se envían una vez al día para que repases tus tarjetas de <bold>{{languageName}}</bold>.",
+      "perLanguageHint": "Cada idioma tiene sus propios ajustes de recordatorio, disponibles en la pantalla «Editar idioma».",
+      "unregisteredHint": "Los recordatorios de estudio no están disponibles para usuarios no registrados."
+    },
+    "feedback": {
+      "title": "Enviar comentarios",
+      "body": "¿Te falta alguna función importante o simplemente quieres compartir tu opinión sobre Vocably? Me encantará leerte."
+    },
+    "signOut": "Cerrar sesión",
+    "deleteAccount": {
+      "menuItem": "Eliminar mi cuenta",
+      "title": "¿Eliminar tu cuenta?",
+      "message": "Esta acción no se puede deshacer."
+    },
+    "deleteData": {
+      "menuItem": "Eliminar mis datos",
+      "title": "¿Eliminar tus datos?",
+      "message": "Esta acción no se puede deshacer."
+    },
+    "version": "Versión: {{version}}"
+  },
+  "feedback": {
+    "thanksTitle": "Gracias por tus comentarios.",
+    "thanksFollowUp": "Te escribiré por correo electrónico en breve.",
+    "sendFailed": "Algo salió mal. Tus comentarios no se han enviado. Inténtalo de nuevo o escríbeme a d@vocably.pro.",
+    "noEmailTitle": "Sin correo",
+    "noEmailMessage": "Por favor, incluye tu dirección de correo en el mensaje para que pueda responderte.",
+    "send": "Enviar",
+    "intro": "¿Tienes preguntas o sugerencias? Escríbeme cuando quieras.",
+    "personalReply": "Yo me ocupo de cada consulta personalmente y te responderé por correo en pocos días.",
+    "willReplyTo": "Te responderé a <bold>{{email}}</bold>.",
+    "privateRelayNote": "Parece que compartiste un correo privado de Apple al registrarte, pero tranquilo, debería funcionar bien.",
+    "provideEmail": "Por favor, indica tu correo electrónico para que pueda enviarte una respuesta personal.",
+    "yourMessage": "Tu mensaje"
+  },
+  "error": {
+    "clearData": {
+      "title": "¿Borrar los datos de la app?",
+      "message": "Borrar los datos eliminará permanentemente todo el progreso de los usuarios no registrados. ¿Continuar?"
+    },
+    "tryAgain": "Intentar de nuevo",
+    "tryHarder": "¡Esfuérzate más!",
+    "clearAndSignOut": "Borrar los datos y cerrar sesión"
+  },
+  "howToGroupCards": {
+    "intro": "Puedes agrupar tarjetas con etiquetas.",
+    "swipeLeft": "Desliza cualquier tarjeta hacia la izquierda y pulsa el botón <tagPlusIcon />.",
+    "tapOnNew": "O pulsa el botón <tagPlusIcon /> en una tarjeta recién añadida.",
+    "studyByTag": "Cuando haya al menos una etiqueta, pulsa el icono <tagIcon /> del botón Estudiar para estudiar una etiqueta o un grupo de ellas.",
+    "swipeToEdit": "Desliza cualquier etiqueta de la lista para editarla o eliminarla. Tus tarjetas no se eliminarán."
+  },
+  "subscription": {
+    "loadingCustomerStatus": "Cargando estado del cliente",
+    "goPremium": "Hazte Premium"
+  },
+  "premium": {
+    "label": "Premium",
+    "nextPayment": "Próximo pago: {{date}}",
+    "validUntil": "Válido hasta: {{date}}",
+    "manageSubscription": "Gestionar la suscripción",
+    "refreshHint": "Los cambios pueden tardar unos minutos en reflejarse en la app.",
+    "refresh": "Actualizar"
+  },
+  "paidAccount": {
+    "youArePremium": "Eres usuario Premium",
+    "why": "¿Por qué?",
+    "iDontKnow": "No lo sé.",
+    "possibleReasons": "Posibles razones:",
+    "reasonEarlyUser": "Eres uno de los primeros usuarios activos de Vocably",
+    "reasonILikeYou": "Me caes bien",
+    "enjoyPremium": "En cualquier caso, disfruta de Premium.",
+    "wantToHelp": "¿Quieres ayudar a esta app? <rate>Valórala en {{storeName}}</rate>."
+  },
+  "debug": {
+    "menuTitle": "Menú de depuración",
+    "languageTransformations": "Transformaciones de idioma",
+    "studyStreak": "Racha de estudio",
+    "clearStorage": "Borrar datos almacenados"
+  },
+  "studySettings": {
+    "maxCardsPerSession": "Máximo de tarjetas por sesión de estudio",
+    "maxNeverStudiedPerDay": "Máximo de tarjetas «nunca estudiadas» que se pueden tomar al día",
+    "maxNeverStudiedHint": "Esta opción solo tiene sentido para usuarios con experiencia que tengan muchas tarjetas nuevas acumuladas en el grupo «Nunca estudiadas».",
+    "pronounceExample": "Pronunciar una frase de ejemplo",
+    "pronounceExampleHint": "Esta opción hace que la app reproduzca una frase de ejemplo aleatoria cuando corresponda durante la sesión. La opción <icon /> debe estar activada — está en la esquina superior derecha de la pantalla de Estudio.",
+    "randomize": "Seleccionar tarjetas para estudiar al azar",
+    "randomizeHint": "<warningIcon /> Activar esta opción suele ser una <bold>mala idea</bold>. Desactiva el algoritmo inteligente de estudio. Quienes lo desactivan acaban frustrados con su progreso.",
+    "srsLink": "Lee cómo Vocably utiliza el algoritmo inteligente de estudio para ayudarte a aprender más palabras en menos tiempo."
+  },
+  "studyFlow": {
+    "mf": "Elige la traducción correcta (pregunta de opción múltiple)",
+    "sf": "Recuerda la traducción correcta",
+    "mb": "Elige la palabra o frase correcta (pregunta de opción múltiple)",
+    "ab": "Ordena la palabra o frase correcta por letras",
+    "sb": "Recuerda la palabra o frase correcta",
+    "default": "Nuevo paso",
+    "preview": "Vista previa",
+    "premiumOnly": "Disponible para usuarios Premium",
+    "upgradeToPremium": "Pasar a Premium",
+    "heading": "Pasos de estudio por tarjeta",
+    "rearrangeHintBefore": "Usa ",
+    "rearrangeHintAfter": " para reordenar los pasos."
+  },
+  "cardsLimit": {
+    "openVocablySettings": "Abre Vocably → Ajustes para mejorar tu plan.",
+    "upgradeToPremium": "Pasar a Premium",
+    "collectionHas_one": "Tu colección tiene <bold>{{maxCards}}</bold> tarjetas. Ahora puedes guardar <bold>{{count}} tarjeta al día.</bold> Los usuarios Premium no tienen este límite.",
+    "collectionHas_other": "Tu colección tiene <bold>{{maxCards}}</bold> tarjetas. Ahora puedes guardar <bold>{{count}} tarjetas al día.</bold> Los usuarios Premium no tienen este límite.",
+    "collectionHasMoreThan_one": "Tu colección tiene más de <bold>{{maxCards}}</bold> tarjetas. Ahora puedes guardar <bold>{{count}} tarjeta al día.</bold> Los usuarios Premium no tienen este límite.",
+    "collectionHasMoreThan_other": "Tu colección tiene más de <bold>{{maxCards}}</bold> tarjetas. Ahora puedes guardar <bold>{{count}} tarjetas al día.</bold> Los usuarios Premium no tienen este límite."
+  },
+  "chat": {
+    "thinking": "Pensando...",
+    "errorOccurred": "Ha ocurrido un error. Inténtalo de nuevo.",
+    "explain": "Explicar",
+    "examples": "Ejemplos",
+    "remember": "Recordar",
+    "explainMessage": "Explica",
+    "examplesMessage": "Dame varias frases de ejemplo",
+    "rememberMessage": "Ayúdame a recordar esta tarjeta",
+    "inputDisabled": "Esta entrada está desactivada por ahora.",
+    "inputPlaceholder": "Escribe tu mensaje aquí...",
+    "initialMessage": "Puedes preguntar lo que quieras sobre **{{source}}**, por ejemplo:\n\n  * explicar el significado\n  * dar ejemplos\n  * ayudarte a recordarla",
+    "initialMessageWithPartOfSpeech": "Puedes preguntar lo que quieras sobre el/la {{partOfSpeech}} **{{source}}**, por ejemplo:\n\n  * explicar el significado\n  * dar ejemplos\n  * ayudarte a recordarla"
+  },
+  "dashboard": {
+    "loadingCards": "Cargando tarjetas...",
+    "study": "Estudiar",
+    "studySelectedTags": "Estudiar etiquetas seleccionadas",
+    "tagsLabel": "Etiquetas:",
+    "cardsWithNoTags": "Tarjetas sin etiquetas",
+    "cantWait": "No puedo esperar",
+    "deleteCardFailedTitle": "Error: no se pudo eliminar la tarjeta",
+    "deleteCardFailedMessage": "¡Ups! Algo salió mal al intentar eliminar la tarjeta. Inténtalo de nuevo más tarde.",
+    "searchPlaceholder": "Buscar en tu colección...",
+    "section": {
+      "today": "Planificadas para hoy",
+      "expired": "Para ponerse al día",
+      "notStarted": "Nunca estudiadas",
+      "tomorrow": "Mañana",
+      "future": "Planificadas"
+    },
+    "empty": {
+      "noCardsYet": "Aún no tienes tarjetas de estudio.",
+      "headOverToLookUp": "Ve a la pestaña Buscar para encontrar y añadir nuevas palabras.",
+      "goToLookUp": "Ir a Buscar",
+      "noCardsForSearch": "No se encontraron tarjetas para <bold>{{searchText}}</bold>.",
+      "noCardsForTag": "No tienes tarjetas con la etiqueta <bold>{{tagTitle}}</bold>.",
+      "noCardsForTags": "No se encontraron tarjetas para las etiquetas seleccionadas."
+    },
+    "mayBeStudiedIn_one": "Se podrá estudiar en {{count}} minuto.",
+    "mayBeStudiedIn_other": "Se podrá estudiar en {{count}} minutos.",
+    "dueDate": {
+      "tomorrow": "mañana",
+      "inDays_one": "en {{count}} día",
+      "inDays_other": "en {{count}} días"
+    }
+  },
+  "deck": {
+    "editDeckTitle": "Editar {{languageName}}",
+    "studyRemindersTitle": "Recordatorios de estudio de {{languageName}}"
+  },
+  "editCard": {
+    "updateFailedTitle": "Error: no se pudo actualizar la tarjeta",
+    "updateFailedMessage": "¡Ups! Algo salió mal al intentar actualizar la tarjeta. Inténtalo de nuevo.",
+    "deletePrompt": {
+      "title": "¿Eliminar esta tarjeta?",
+      "message": "Esta acción no se puede deshacer."
+    },
+    "unableToDelete": "No se pudo eliminar la tarjeta. Inténtalo de nuevo.",
+    "deletingCard": "Eliminando tarjeta...",
+    "resetPrompt": {
+      "title": "¿Reiniciar el progreso de estudio?",
+      "message": "Esta acción no se puede deshacer.",
+      "confirm": "Reiniciar"
+    },
+    "unableToReset": "No se pudo reiniciar el progreso. Inténtalo de nuevo.",
+    "addOrRemoveTags": "Añadir o quitar etiquetas de la tarjeta (carpetas)",
+    "resetStudyProgress": "Reiniciar progreso de estudio",
+    "rawCardData": "Datos en bruto de la tarjeta"
+  },
+  "editDeck": {
+    "studySettings": "Ajustes de estudio",
+    "exportDeck": "Exportar idioma",
+    "studyReminders": "Recordatorios de estudio",
+    "studyRemindersUnregisteredHint": "Los recordatorios de estudio están desactivados temporalmente para usuarios no registrados.",
+    "hideDefinitions": "Ocultar definiciones",
+    "hideDefinitionsHint": "La app intentará mostrar menos definiciones en Mis tarjetas y durante el estudio.",
+    "deckContainsCards_one": "Tienes {{count}} tarjeta.",
+    "deckContainsCards_other": "Tienes {{count}} tarjetas.",
+    "deleteDeck": "Eliminar este idioma",
+    "deleteDeckPrompt": {
+      "title": "¿Eliminar {{languageName}}?",
+      "message": "Esta acción no se puede deshacer."
+    },
+    "deleteDeckError": {
+      "title": "Error al eliminar el idioma",
+      "message": "¡Ups! Algo salió mal al intentar eliminar el idioma. Inténtalo de nuevo más tarde."
+    }
+  },
+  "generateCards": {
+    "loadingPreset": "Cargando preajuste de traducción...",
+    "errorUnable": "No se pudieron generar las tarjetas. Inténtalo de nuevo.",
+    "intro": "Escribe lo que necesites y Vocably generará las tarjetas por ti.",
+    "experimental": "Esta es una función experimental. <feedback>Avísame</feedback> si encuentras errores o tienes sugerencias.",
+    "examplesToTry": "Algunos ejemplos para probar:",
+    "exampleIrregularVerbs": "verbos irregulares",
+    "exampleAnimals": "animales",
+    "examplePopularIdioms": "expresiones populares",
+    "placeholder": "Cualquier cosa...",
+    "generating": "Generando tarjetas...",
+    "followingWillBeGenerated": "Se generarán las siguientes tarjetas:"
+  },
+  "languageSelector": {
+    "addNewLanguage": "Añadir nuevo idioma",
+    "popularLanguages": "Idiomas populares",
+    "selected": "Seleccionado",
+    "availableLanguages": "Idiomas disponibles",
+    "select": "Seleccionar",
+    "studyLanguage": "Idioma de estudio",
+    "yourLanguages": "Tus idiomas",
+    "deviceLanguage": "Idioma del dispositivo",
+    "preferredLanguages": "Idiomas preferidos",
+    "motherTongue": "Lengua materna",
+    "preferred": "Idiomas populares",
+    "search": "Buscar..."
+  },
+  "lookUp": {
+    "loadingPreset": "Cargando preajuste de traducción...",
+    "lookUpFailedTitle": "Error: búsqueda fallida",
+    "lookUpFailedMessage": "¡Ups! Algo salió mal al hacer la búsqueda. Inténtalo de nuevo más tarde.",
+    "searchPlaceholder": "Cualquier palabra en cualquier idioma",
+    "lookingForCollections": "¿Buscas colecciones de tarjetas?",
+    "tryAiGenerator": "Prueba el generador de tarjetas con IA",
+    "questionsOrSuggestions": "¿Preguntas o sugerencias?",
+    "connectOnTelegram": "Contactar por Telegram",
+    "joinDiscord": "Unirse a Discord",
+    "sendMessage": "Enviar un mensaje",
+    "conductingAnalysis": "Realizando un análisis más detallado...",
+    "selectLanguageLearning": "Elige el idioma que estás aprendiendo.",
+    "selectMotherTongue": "Elige tu lengua materna"
+  },
+  "notifications": {
+    "checking": "Comprobando...",
+    "loadingPreset": "Cargando preajuste...",
+    "loadFailed": {
+      "sorry": "Lo siento mucho.",
+      "cannotLoad": "El sistema no puede cargar el estado de los recordatorios de estudio.",
+      "informed": "Ya me han informado de ello.",
+      "tryAgain": "Inténtalo de nuevo más tarde."
+    },
+    "enabledFor": "Activado para {{languageString}}",
+    "remindersDescription": "Los recordatorios de estudio se envían una vez al día para que repases tus tarjetas de {{languageName}}.",
+    "failedTitle": "Fallo en los recordatorios de estudio",
+    "failedAndroidMessage": "Las notificaciones no se pueden activar automáticamente. Actívalas en los ajustes de la app.",
+    "failedIosMessage": "Las notificaciones no se pueden activar automáticamente. Actívalas en Ajustes → Vocably.",
+    "deniedAndroidMessage": "Las notificaciones no se pueden activar automáticamente. Actívalas en los ajustes de la app.",
+    "deniedIosMessage": "Las notificaciones no se pueden activar automáticamente. Actívalas en Ajustes → Vocably.",
+    "openSettings": "Abrir Ajustes",
+    "enableReminders": "Activar recordatorios",
+    "receiveAt": "Recibir a las"
+  },
+  "study": {
+    "loading": "Cargando...",
+    "finish": "Finalizar",
+    "takeOneMoreRound": "Una ronda más",
+    "cardUpdateFailedTitle": "Error: no se pudo actualizar la tarjeta",
+    "cardUpdateNetworkError": "Tu respuesta no se guardó por una pérdida de conexión. La sesión se detendrá y se reanudará desde la respuesta fallida.",
+    "cardUpdateTechnicalError": "¡Ups! No es posible continuar la sesión por un problema técnico. Inténtalo de nuevo más tarde.",
+    "exitStudySession": "Salir de la sesión de estudio",
+    "tapDot": {
+      "touch": "Toca"
+    },
+    "swipeGrade": {
+      "notYet": "Aún no",
+      "almost": "Casi",
+      "gotIt": "¡Lo tengo!"
+    },
+    "arrangeByLetters": {
+      "showMeTheAnswer": "Mostrar la respuesta"
+    },
+    "cardBack": {
+      "emptyCardMessage": "Esta tarjeta no tiene traducciones ni definiciones. Edítala."
+    },
+    "multiChoice": {
+      "showCorrectAnswer": "Mostrar la respuesta correcta"
+    },
+    "reverseCardBack": {
+      "theAnswerIs": "La respuesta es"
+    },
+    "reverseCardFront": {
+      "examples_one": "Ejemplo:",
+      "examples_other": "Ejemplos:"
+    },
+    "motivationalQuotes": {
+      "0": "La perseverancia no es una carrera larga; son muchas carreras cortas, una tras otra.",
+      "1": "Un río atraviesa la roca no por su fuerza, sino por su constancia.",
+      "2": "La constancia garantiza que los resultados sean inevitables.",
+      "3": "La paciencia y la perseverancia son las llaves de la grandeza.",
+      "4": "Cada paso adelante, por pequeño que sea, es un avance.",
+      "5": "La constancia convierte los sueños en realidad; cada esfuerzo es una semilla del éxito.",
+      "6": "Cada vez que avanzas, reescribes tu historia hacia el éxito.",
+      "7": "Sigue creyendo en ti: tu constancia es tu superpoder.",
+      "8": "El éxito se construye con los ladrillos de la perseverancia, uno a uno.",
+      "9": "El universo se mueve por quienes nunca dejan de avanzar.",
+      "10": "La energía que pones hoy alimenta el éxito del mañana.",
+      "11": "La perseverancia transforma lo imposible en inevitable.",
+      "12": "Cada palabra que aprendes te acerca a comprender una nueva cultura.",
+      "13": "Aprender un idioma es un maratón, no un sprint. ¡Vas bien!",
+      "14": "La constancia es el ingrediente secreto para llegar a la fluidez. ¡Sigue así!",
+      "15": "La práctica no te hace perfecto: te hace progresar, y eso es lo que importa.",
+      "16": "Un segundo idioma no es solo una habilidad, es un regalo que sigue dando.",
+      "17": "Cada vez que estudias, reprogramas tu cerebro hacia el éxito.",
+      "18": "Quien aprende un idioma es un explorador del mundo de incógnito.",
+      "19": "Cada error que cometes al aprender demuestra que estás creciendo.",
+      "20": "Los idiomas son las llaves del mundo; cada palabra que dominas abre nuevas puertas.",
+      "21": "La fluidez no es velocidad; es aparecer y practicar cada día.",
+      "22": "Un nuevo idioma no solo te enseña palabras; te enseña nuevas formas de pensar.",
+      "23": "Pequeños esfuerzos constantes traen grandes resultados que cambian la vida al aprender idiomas.",
+      "24": "Nunca te arrepentirás del tiempo que dediques a aprender un idioma: es una inversión en ti.",
+      "25": "Cada idioma que aprendes añade una nueva dimensión a tu identidad.",
+      "26": "Aunque hoy parezca difícil, mañana tu esfuerzo te hará sonreír.",
+      "27": "El camino hacia la fluidez es una historia que merece ser contada: sigue escribiéndola."
+    }
+  },
+  "exportDeck": {
+    "title": "Exportar {{languageName}}",
+    "loadingCards": "Cargando tarjetas...",
+    "advancedExportInfo": "Hay una funcionalidad de exportación más avanzada disponible solo en el navegador para usuarios registrados.",
+    "loginWithAccount": "Iniciar sesión con tu cuenta",
+    "deprecatedCardsExcluded": "Se han excluido algunas tarjetas porque se crearon con un proveedor de diccionario obsoleto.",
+    "copyToClipboard": "Copiar al portapapeles",
+    "copiedToClipboard": "Copiado al portapapeles."
+  },
+  "loginModal": {
+    "syncAcrossDevices": "Sincroniza entre dispositivos",
+    "useBrowserExtensions": "Usa las extensiones de navegador",
+    "importExportCsv": "Importa y exporta datos CSV"
+  },
+  "loginForm": {
+    "screenTitle": "Iniciar sesión o registrarse",
+    "signIn": "Iniciar sesión o crear cuenta",
+    "bySigningInYouAgreeToOur": "Al iniciar sesión, aceptas nuestros",
+    "termsAndConditions": "Términos y condiciones",
+    "and": "y",
+    "privacyPolicy": "Política de privacidad"
+  },
+  "languageScreen": {
+    "motherTongueQuestion": "¿Cuál es tu lengua materna?",
+    "motherTongueHint": "Elige el idioma que hablas con fluidez."
+  },
+  "welcome": {
+    "formIntro": "Para empezar, responde a unas pocas preguntas.",
+    "questionStudyLanguage": "¿Qué idioma estudias?",
+    "multipleLanguagesHint": "Puedes aprender varios idiomas. Por ahora, elige solo uno para empezar.",
+    "setup": "Configurar",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "skip": "Omitir",
+    "goToApp": "Ir a la app",
+    "slideCard": {
+      "looksUpWords": "Vocably busca palabras y crea tarjetas como esta:",
+      "translatesWords": "Vocably traduce palabras y crea tarjetas como esta:",
+      "fallbackNote": "Nota del autor de Vocably",
+      "fallbackBody": "Estas tarjetas de muestra son inexactas y confusas. Pido disculpas por ello. Estoy trabajando en ejemplos precisos para usuarios que estudian {{sourceLang}} y hablan {{targetLang}}.",
+      "saveFlashcardsBefore": "Puedes guardar",
+      "saveFlashcardsAfter": "tus tarjetas y estudiarlas con el sistema de repetición espaciada."
+    },
+    "slideLookUp": {
+      "intro": "¿Ves o escuchas una palabra o frase nueva en <bold>{{sourceLanguage}}</bold>? ¡Búscala y guárdala como tarjeta!"
+    },
+    "slideReverseTranslate": {
+      "intro": "¿Quieres decir algo en <bold>{{sourceLanguage}}</bold> pero no sabes la palabra? Búscala en <bold>{{targetLanguage}}</bold>."
+    },
+    "slideSelectToTranslate": {
+      "into_Safari": "¿Ves una palabra nueva en Safari móvil? Búscala con la <bold>extensión de Vocably</bold>.",
+      "into_Android": "¿Ves una palabra nueva en la pantalla de tu dispositivo Android?",
+      "androidStep1": "Selecciona la palabra",
+      "androidStep2": "Pulsa",
+      "androidStep3": "Pulsa «Translate with Vocably»"
+    },
+    "slideDesktopBrowser": {
+      "intro": "¿Usas un ordenador? Instala la",
+      "or": "o",
+      "browserExtensionSuffix": "extensión de navegador para navegar por la web en"
+    }
+  },
+  "languages": {
+    "loading": "Cargando idiomas..."
+  },
+  "auth": {
+    "authenticating": "Autenticando...",
+    "sessionExpired": "Tu sesión de autenticación ha expirado.",
+    "signInAgain": "Iniciar sesión de nuevo",
+    "anonymousUserError": {
+      "title": "No se pudo crear el usuario anónimo",
+      "message": "Se produjo un error crítico al crear un usuario anónimo."
+    }
+  },
+  "tagMenu": {
+    "intro": "Las etiquetas son como grupos o carpetas, pero mejor. Pulsa «Añadir etiqueta» para empezar.",
+    "addNewTag": "Añadir etiqueta",
+    "editTag": "Editar {{title}}",
+    "swipeLeftToEdit": "Desliza a la izquierda para editar la etiqueta.",
+    "swipeRightToDelete": "Desliza a la derecha para eliminar la etiqueta. Tus tarjetas no se eliminarán.",
+    "removeTagError": "Se produjo un error al eliminar la etiqueta. Inténtalo de nuevo.",
+    "updateTagError": "Se produjo un error al actualizar la etiqueta. Inténtalo de nuevo.",
+    "add": "Añadir",
+    "newTagName": "Nombre de la nueva etiqueta"
+  },
+  "cardForm": {
+    "wordOrPhrase": "Palabra o frase",
+    "translation": "Traducción",
+    "partOfSpeech": "Categoría gramatical",
+    "transcriptionIpa": "Transcripción (IPA)",
+    "definition": "Definición",
+    "example": "Ejemplo",
+    "partsOfSpeech": {
+      "noun": "sustantivo",
+      "verb": "verbo",
+      "adjective": "adjetivo",
+      "adverb": "adverbio",
+      "phrase": "frase"
+    }
+  },
+  "discoverySurvey": {
+    "screenTitle": "Última pregunta",
+    "question": "¿Cómo conociste Vocably?",
+    "whatIsIt": "¿De qué forma?",
+    "typePlaceholder": "Escribe aquí",
+    "sources": {
+      "playStore": "Play Store",
+      "appStore": "App Store",
+      "fromAFriend": "Por un amigo",
+      "other": "Otro"
+    }
+  },
+  "tips": {
+    "menu": {
+      "editCards": "Editar tarjetas",
+      "groupCards": "Agrupar tarjetas (en carpetas)",
+      "importExportCsv": "Importar y exportar CSV",
+      "studyPlan": "Plan de estudio",
+      "androidTranslate": "Cómo traducir cualquier texto seleccionado en cualquier app del móvil.",
+      "iosTranslate": "Traduce cualquier palabra en cualquier web con la extensión de Vocably para iOS Safari.",
+      "desktopExtension": "¿Usas Chrome o Safari en tu ordenador? Prueba la extensión de Vocably.",
+      "provideFeedback": "Enviar comentarios",
+      "feedbackBody": "¿Te falta alguna función importante o simplemente quieres compartir tu opinión sobre Vocably? Me encantará leerte."
+    },
+    "howToEditCards": {
+      "title": "Editar tarjetas",
+      "intro": "Puedes editar tarjetas de dos formas:",
+      "myCardsItem": "• <bold>Pantalla Mis tarjetas</bold>: desliza una tarjeta hacia la izquierda para mostrar el menú de edición.",
+      "studySessionItem": "• <bold>Sesión de estudio</bold>: pulsa el botón «Editar» (<editIcon/>)."
+    },
+    "howToGroupCards": {
+      "title": "Agrupar tarjetas"
+    },
+    "howToImportAndExport": {
+      "title": "Importar y exportar CSV",
+      "importCards": "Importar tarjetas",
+      "importNote": "<alertIcon/> La importación solo está disponible para usuarios registrados. Serás redirigido al sitio web.",
+      "exportCards": "Exportar tus tarjetas de {{languageName}}"
+    },
+    "howToViewStudyStatistics": {
+      "title": "Plan de estudio",
+      "para1": "El <bold>Plan de estudio</bold> está activado por defecto y muestra un resumen de las tarjetas previstas para hoy, los próximos días y las que han caducado y necesitan repaso. Esto te ayuda a no perder el ritmo, recuperar las atrasadas y enfocar el aprendizaje de forma más estratégica.",
+      "para2": "Para ver tu plan de estudio, ve a la pestaña <myCards>Mis tarjetas</myCards> y pulsa el botón <chartBoxIcon/> de la esquina superior izquierda.",
+      "para3": "<bold>Importante:</bold> el plan de estudio no está disponible cuando las tarjetas se eligen al azar. Para desactivar la selección aleatoria, ve a <studySettings>Ajustes de estudio</studySettings>."
+    }
+  },
+  "shareIntent": {
+    "login": {
+      "openVocablyToSignIn": "Abre Vocably para iniciar sesión.",
+      "openVocably": "Abrir Vocably"
+    },
+    "receivingText": "Recibiendo el texto..."
+  },
+  "paymentSuccess": {
+    "thankYou": "Gracias por darle una oportunidad a Vocably. Tu apoyo significa mucho para mí.",
+    "rateButton": "Valorar Vocably en {{storeName}}",
+    "feedbackBefore": "Si te falta algo o no te gusta, siempre puedes decírmelo en Discord, Telegram o",
+    "feedbackLink": "desde la propia app",
+    "feedbackAfter": ". Me tomo en serio cada comentario."
+  },
+  "requestFeedback": {
+    "question": "¿Te gusta Vocably? Valorarlo en {{storeName}} te llevará menos de un minuto y ayudará a este proyecto.",
+    "rateButton": "Valorar Vocably en {{storeName}}",
+    "later": "Pregúntame más tarde",
+    "feedbackBefore": "Si te falta algo o no te gusta, siempre puedes",
+    "feedbackLink": "decírmelo",
+    "feedbackAfter": ". Me tomo en serio cada comentario.",
+    "neverAgain": "No quiero volver a ver este mensaje"
+  },
+  "cardDefinition": {
+    "present": "Presente:",
+    "past": "Pasado:",
+    "plural": "Plural:"
+  },
+  "streak": {
+    "consecutiveDays_one": "día consecutivo.",
+    "consecutiveDays_other": "días consecutivos.",
+    "days": {
+      "0": "Dom",
+      "1": "Lun",
+      "2": "Mar",
+      "3": "Mié",
+      "4": "Jue",
+      "5": "Vie",
+      "6": "Sáb"
+    }
+  }
+}

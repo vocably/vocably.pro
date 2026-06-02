@@ -1,0 +1,550 @@
+{
+  "common": {
+    "cancel": "Hủy",
+    "delete": "Xóa",
+    "save": "Lưu",
+    "done": "Xong",
+    "close": "Đóng",
+    "back": "Quay lại",
+    "ok": "OK",
+    "yes": "Có",
+    "no": "Không",
+    "error": "Lỗi",
+    "goBack": "Trở lại",
+    "operationFailed": "Không thể thực hiện thao tác.",
+    "signIn": "Đăng nhập",
+    "presentTenses": "(hiện tại: {{value}})",
+    "pastTenses": "(quá khứ: {{value}})",
+    "plural": "(số nhiều: {{value}})",
+    "examples": "Ví dụ"
+  },
+  "appLanguagePicker": {
+    "title": "Ngôn ngữ ứng dụng"
+  },
+  "nav": {
+    "myCards": "Thẻ của tôi",
+    "lookUp": "Tra cứu",
+    "tips": "Mẹo",
+    "settings": "Cài đặt",
+    "studySettings": "Cài đặt học tập",
+    "editCard": "Chỉnh sửa thẻ",
+    "chatWithCard": "Trò chuyện về thẻ",
+    "cardGenerator": "Trình tạo thẻ",
+    "feedback": "Phản hồi",
+    "createAccount": "Tạo tài khoản",
+    "previewStudyStep": "Xem trước bước học",
+    "exportDeck": "Xuất thẻ"
+  },
+  "settings": {
+    "notRegistered": "Bạn chưa đăng ký.",
+    "createAccount": "Tạo tài khoản",
+    "appLanguage": "Ngôn ngữ ứng dụng: {{label}}",
+    "studySettings": "Cài đặt học tập",
+    "studyReminders": {
+      "title": "Nhắc nhở học tập",
+      "body": "Nhắc nhở học tập được gửi mỗi ngày một lần để bạn ôn lại các thẻ <bold>{{languageName}}</bold>.",
+      "perLanguageHint": "Mỗi ngôn ngữ có cài đặt nhắc nhở riêng, có thể chỉnh trong màn hình «Chỉnh sửa ngôn ngữ».",
+      "unregisteredHint": "Nhắc nhở học tập không khả dụng cho người dùng chưa đăng ký."
+    },
+    "feedback": {
+      "title": "Gửi phản hồi",
+      "body": "Bạn thấy thiếu tính năng quan trọng nào hay chỉ muốn chia sẻ ý kiến về Vocably? Tôi rất muốn nghe từ bạn."
+    },
+    "signOut": "Đăng xuất",
+    "deleteAccount": {
+      "menuItem": "Xóa tài khoản của tôi",
+      "title": "Xóa tài khoản của bạn?",
+      "message": "Thao tác này không thể hoàn tác."
+    },
+    "deleteData": {
+      "menuItem": "Xóa dữ liệu của tôi",
+      "title": "Xóa dữ liệu của bạn?",
+      "message": "Thao tác này không thể hoàn tác."
+    },
+    "version": "Phiên bản: {{version}}"
+  },
+  "feedback": {
+    "thanksTitle": "Cảm ơn phản hồi của bạn.",
+    "thanksFollowUp": "Tôi sẽ liên hệ với bạn qua email sớm.",
+    "sendFailed": "Đã có lỗi xảy ra. Phản hồi của bạn chưa được gửi. Vui lòng thử lại hoặc liên hệ với tôi qua email d@vocably.pro.",
+    "noEmailTitle": "Không có email",
+    "noEmailMessage": "Vui lòng đính kèm địa chỉ email ngay trong tin nhắn để tôi có thể phản hồi bạn.",
+    "send": "Gửi",
+    "intro": "Có câu hỏi hoặc đề xuất? Hãy liên hệ với tôi bất cứ lúc nào.",
+    "personalReply": "Tôi đích thân xử lý mọi câu hỏi và sẽ phản hồi email của bạn trong vài ngày.",
+    "willReplyTo": "Tôi sẽ trả lời bạn qua địa chỉ email <bold>{{email}}</bold>.",
+    "privateRelayNote": "Có vẻ bạn đã chia sẻ địa chỉ email riêng tư của Apple khi đăng ký, nhưng đừng lo — nó vẫn hoạt động bình thường.",
+    "provideEmail": "Vui lòng cung cấp địa chỉ email để tôi có thể gửi phản hồi cá nhân cho bạn.",
+    "yourMessage": "Tin nhắn của bạn"
+  },
+  "error": {
+    "clearData": {
+      "title": "Xóa dữ liệu ứng dụng?",
+      "message": "Xóa dữ liệu ứng dụng sẽ vĩnh viễn xóa toàn bộ tiến trình cho người dùng chưa đăng ký. Tiếp tục?"
+    },
+    "tryAgain": "Thử lại",
+    "tryHarder": "Cố gắng hơn nữa!",
+    "clearAndSignOut": "Xóa dữ liệu ứng dụng và đăng xuất"
+  },
+  "howToGroupCards": {
+    "intro": "Bạn có thể nhóm thẻ bằng các thẻ tag.",
+    "swipeLeft": "Vuốt thẻ hiện có sang trái và nhấn nút <tagPlusIcon />.",
+    "tapOnNew": "Hoặc nhấn nút <tagPlusIcon /> trên thẻ vừa được thêm.",
+    "studyByTag": "Khi đã tạo ít nhất một tag, nhấn biểu tượng <tagIcon /> trên nút Học để học một tag hoặc nhóm tag đã chọn.",
+    "swipeToEdit": "Vuốt bất kỳ tag nào trong danh sách để chỉnh sửa hoặc xóa. Các thẻ của bạn sẽ không bị xóa."
+  },
+  "subscription": {
+    "loadingCustomerStatus": "Đang tải trạng thái khách hàng",
+    "goPremium": "Nâng cấp Premium"
+  },
+  "premium": {
+    "label": "Premium",
+    "nextPayment": "Lần thanh toán tiếp theo: {{date}}",
+    "validUntil": "Hiệu lực đến: {{date}}",
+    "manageSubscription": "Quản lý đăng ký",
+    "refreshHint": "Có thể mất vài phút để các thay đổi hiển thị trong ứng dụng.",
+    "refresh": "Làm mới"
+  },
+  "paidAccount": {
+    "youArePremium": "Bạn là người dùng Premium",
+    "why": "Vì sao?",
+    "iDontKnow": "Tôi cũng không biết.",
+    "possibleReasons": "Lý do có thể:",
+    "reasonEarlyUser": "Bạn là một trong những người dùng tích cực đầu tiên của Vocably",
+    "reasonILikeYou": "Tôi thích bạn",
+    "enjoyPremium": "Dù thế nào, hãy tận hưởng Premium nhé.",
+    "wantToHelp": "Muốn ủng hộ ứng dụng này? <rate>Hãy đánh giá trên {{storeName}}</rate>."
+  },
+  "debug": {
+    "menuTitle": "Menu gỡ lỗi",
+    "languageTransformations": "Biến đổi ngôn ngữ",
+    "studyStreak": "Chuỗi học tập",
+    "clearStorage": "Xóa dữ liệu lưu trữ"
+  },
+  "studySettings": {
+    "maxCardsPerSession": "Số thẻ tối đa mỗi phiên học",
+    "maxNeverStudiedPerDay": "Số thẻ «chưa từng học» tối đa có thể chọn mỗi ngày",
+    "maxNeverStudiedHint": "Tùy chọn này chỉ phù hợp với người dùng đã có kinh nghiệm và tồn nhiều thẻ mới trong nhóm «Chưa từng học».",
+    "pronounceExample": "Phát âm câu ví dụ",
+    "pronounceExampleHint": "Tùy chọn này khiến ứng dụng phát một câu ví dụ ngẫu nhiên vào thời điểm phù hợp trong phiên học. Tùy chọn <icon /> phải được bật — nó nằm ở góc trên bên phải màn hình Học.",
+    "randomize": "Chọn thẻ học ngẫu nhiên",
+    "randomizeHint": "<warningIcon /> Bật tùy chọn này thường là một <bold>ý tưởng tồi</bold>. Nó tắt thuật toán học thông minh. Những người tắt thuật toán thông minh thường cảm thấy thất vọng với tiến độ của mình.",
+    "srsLink": "Đọc thêm về cách Vocably sử dụng thuật toán học thông minh để giúp bạn học thêm nhiều từ trong thời gian ngắn hơn."
+  },
+  "studyFlow": {
+    "mf": "Chọn bản dịch đúng (câu hỏi nhiều lựa chọn)",
+    "sf": "Nhớ lại bản dịch đúng",
+    "mb": "Chọn từ hoặc cụm từ đúng (câu hỏi nhiều lựa chọn)",
+    "ab": "Sắp xếp từ hoặc cụm từ đúng theo chữ cái",
+    "sb": "Nhớ lại từ hoặc cụm từ đúng",
+    "default": "Bước mới",
+    "preview": "Xem trước",
+    "premiumOnly": "Chỉ dành cho người dùng Premium",
+    "upgradeToPremium": "Nâng cấp Premium",
+    "heading": "Các bước học cho mỗi thẻ",
+    "rearrangeHintBefore": "Dùng ",
+    "rearrangeHintAfter": " để sắp xếp lại các bước."
+  },
+  "cardsLimit": {
+    "openVocablySettings": "Mở Vocably → Cài đặt để nâng cấp.",
+    "upgradeToPremium": "Nâng cấp Premium",
+    "collectionHas_other": "Bộ sưu tập của bạn có <bold>{{maxCards}}</bold> thẻ. Bây giờ bạn có thể lưu <bold>{{count}} thẻ mỗi ngày.</bold> Người dùng Premium không bị giới hạn này.",
+    "collectionHasMoreThan_other": "Bộ sưu tập của bạn có hơn <bold>{{maxCards}}</bold> thẻ. Bây giờ bạn có thể lưu <bold>{{count}} thẻ mỗi ngày.</bold> Người dùng Premium không bị giới hạn này."
+  },
+  "chat": {
+    "thinking": "Đang suy nghĩ...",
+    "errorOccurred": "Đã xảy ra lỗi. Vui lòng thử lại.",
+    "explain": "Giải thích",
+    "examples": "Ví dụ",
+    "remember": "Ghi nhớ",
+    "explainMessage": "Giải thích",
+    "examplesMessage": "Cho tôi vài câu ví dụ",
+    "rememberMessage": "Giúp tôi ghi nhớ thẻ này",
+    "inputDisabled": "Ô nhập này đang bị tắt.",
+    "inputPlaceholder": "Nhập tin nhắn của bạn ở đây...",
+    "initialMessage": "Bạn có thể hỏi bất cứ điều gì về **{{source}}**, ví dụ:\n\n  * giải thích nghĩa\n  * cung cấp ví dụ\n  * giúp ghi nhớ",
+    "initialMessageWithPartOfSpeech": "Bạn có thể hỏi bất cứ điều gì về {{partOfSpeech}} **{{source}}**, ví dụ:\n\n  * giải thích nghĩa\n  * cung cấp ví dụ\n  * giúp ghi nhớ"
+  },
+  "dashboard": {
+    "loadingCards": "Đang tải thẻ...",
+    "study": "Học",
+    "studySelectedTags": "Học các tag đã chọn",
+    "tagsLabel": "Tag:",
+    "cardsWithNoTags": "Thẻ không có tag",
+    "cantWait": "Tôi không thể chờ được",
+    "deleteCardFailedTitle": "Lỗi: không thể xóa thẻ",
+    "deleteCardFailedMessage": "Rất tiếc! Đã có lỗi xảy ra khi xóa thẻ. Vui lòng thử lại sau.",
+    "searchPlaceholder": "Tìm trong bộ sưu tập của bạn...",
+    "section": {
+      "today": "Dự kiến hôm nay",
+      "expired": "Cần ôn lại",
+      "notStarted": "Chưa từng học",
+      "tomorrow": "Ngày mai",
+      "future": "Dự kiến"
+    },
+    "empty": {
+      "noCardsYet": "Bạn chưa có thẻ học nào.",
+      "headOverToLookUp": "Hãy chuyển sang tab Tra cứu để tìm và thêm từ mới.",
+      "goToLookUp": "Đến Tra cứu",
+      "noCardsForSearch": "Không tìm thấy thẻ nào cho <bold>{{searchText}}</bold>.",
+      "noCardsForTag": "Bạn không có thẻ nào gắn với tag <bold>{{tagTitle}}</bold>.",
+      "noCardsForTags": "Không tìm thấy thẻ nào cho các tag đã chọn."
+    },
+    "mayBeStudiedIn_other": "Có thể học sau {{count}} phút.",
+    "dueDate": {
+      "tomorrow": "ngày mai",
+      "inDays_other": "sau {{count}} ngày"
+    }
+  },
+  "deck": {
+    "editDeckTitle": "Chỉnh sửa {{languageName}}",
+    "studyRemindersTitle": "Nhắc nhở học tập cho {{languageName}}"
+  },
+  "editCard": {
+    "updateFailedTitle": "Lỗi: không thể cập nhật thẻ",
+    "updateFailedMessage": "Rất tiếc! Đã có lỗi xảy ra khi cập nhật thẻ. Vui lòng thử lại.",
+    "deletePrompt": {
+      "title": "Xóa thẻ này?",
+      "message": "Thao tác này không thể hoàn tác."
+    },
+    "unableToDelete": "Không thể xóa thẻ. Vui lòng thử lại.",
+    "deletingCard": "Đang xóa thẻ...",
+    "resetPrompt": {
+      "title": "Đặt lại tiến trình học?",
+      "message": "Thao tác này không thể hoàn tác.",
+      "confirm": "Đặt lại"
+    },
+    "unableToReset": "Không thể đặt lại tiến trình. Vui lòng thử lại.",
+    "addOrRemoveTags": "Thêm hoặc xóa tag của thẻ (thư mục)",
+    "resetStudyProgress": "Đặt lại tiến trình học",
+    "rawCardData": "Dữ liệu thô của thẻ"
+  },
+  "editDeck": {
+    "studySettings": "Cài đặt học tập",
+    "exportDeck": "Xuất ngôn ngữ",
+    "studyReminders": "Nhắc nhở học tập",
+    "studyRemindersUnregisteredHint": "Nhắc nhở học tập tạm thời bị tắt với người dùng chưa đăng ký.",
+    "hideDefinitions": "Ẩn định nghĩa",
+    "hideDefinitionsHint": "Ứng dụng sẽ cố gắng hiển thị ít định nghĩa hơn trong Thẻ của tôi và trong khi học.",
+    "deckContainsCards_other": "Bạn có {{count}} thẻ.",
+    "deleteDeck": "Xóa ngôn ngữ này",
+    "deleteDeckPrompt": {
+      "title": "Xóa {{languageName}}?",
+      "message": "Thao tác này không thể hoàn tác."
+    },
+    "deleteDeckError": {
+      "title": "Lỗi khi xóa ngôn ngữ",
+      "message": "Rất tiếc! Đã có lỗi xảy ra khi xóa ngôn ngữ. Vui lòng thử lại sau."
+    }
+  },
+  "generateCards": {
+    "loadingPreset": "Đang tải cài đặt dịch...",
+    "errorUnable": "Không thể tạo thẻ. Vui lòng thử lại.",
+    "intro": "Hãy nhập điều bạn cần và Vocably sẽ tạo thẻ cho bạn.",
+    "experimental": "Đây là một tính năng thử nghiệm. <feedback>Hãy cho tôi biết</feedback> nếu bạn gặp lỗi hoặc có đề xuất.",
+    "examplesToTry": "Một vài ví dụ để thử:",
+    "exampleIrregularVerbs": "động từ bất quy tắc",
+    "exampleAnimals": "động vật",
+    "examplePopularIdioms": "thành ngữ phổ biến",
+    "placeholder": "Bất cứ thứ gì...",
+    "generating": "Đang tạo thẻ...",
+    "followingWillBeGenerated": "Các thẻ sau sẽ được tạo:"
+  },
+  "languageSelector": {
+    "addNewLanguage": "Thêm ngôn ngữ mới",
+    "popularLanguages": "Ngôn ngữ phổ biến",
+    "selected": "Đã chọn",
+    "availableLanguages": "Ngôn ngữ có sẵn",
+    "select": "Chọn",
+    "studyLanguage": "Ngôn ngữ học",
+    "yourLanguages": "Ngôn ngữ của bạn",
+    "deviceLanguage": "Ngôn ngữ thiết bị",
+    "preferredLanguages": "Ngôn ngữ ưu tiên",
+    "motherTongue": "Tiếng mẹ đẻ",
+    "preferred": "Ngôn ngữ phổ biến",
+    "search": "Tìm kiếm..."
+  },
+  "lookUp": {
+    "loadingPreset": "Đang tải cài đặt dịch...",
+    "lookUpFailedTitle": "Lỗi: tra cứu thất bại",
+    "lookUpFailedMessage": "Rất tiếc! Đã có lỗi xảy ra khi tra cứu. Vui lòng thử lại sau.",
+    "searchPlaceholder": "Bất kỳ từ nào trong bất kỳ ngôn ngữ nào",
+    "lookingForCollections": "Đang tìm bộ sưu tập thẻ?",
+    "tryAiGenerator": "Hãy thử trình tạo thẻ bằng AI",
+    "questionsOrSuggestions": "Câu hỏi hoặc đề xuất?",
+    "connectOnTelegram": "Kết nối qua Telegram",
+    "joinDiscord": "Tham gia Discord",
+    "sendMessage": "Gửi tin nhắn",
+    "conductingAnalysis": "Đang phân tích kỹ hơn...",
+    "selectLanguageLearning": "Chọn ngôn ngữ bạn đang học.",
+    "selectMotherTongue": "Chọn tiếng mẹ đẻ của bạn"
+  },
+  "notifications": {
+    "checking": "Đang kiểm tra...",
+    "loadingPreset": "Đang tải cài đặt...",
+    "loadFailed": {
+      "sorry": "Tôi rất tiếc.",
+      "cannotLoad": "Hệ thống không thể tải trạng thái nhắc nhở học tập.",
+      "informed": "Tôi đã được thông báo về việc này.",
+      "tryAgain": "Vui lòng thử lại sau."
+    },
+    "enabledFor": "Đã bật cho {{languageString}}",
+    "remindersDescription": "Nhắc nhở học tập được gửi mỗi ngày một lần để bạn ôn lại các thẻ {{languageName}}.",
+    "failedTitle": "Nhắc nhở học tập thất bại",
+    "failedAndroidMessage": "Không thể tự động đặt thông báo. Vui lòng bật trong cài đặt Thông tin ứng dụng.",
+    "failedIosMessage": "Không thể tự động đặt thông báo. Vui lòng bật trong Cài đặt → Vocably.",
+    "deniedAndroidMessage": "Không thể tự động đặt thông báo. Vui lòng bật trong cài đặt Thông tin ứng dụng.",
+    "deniedIosMessage": "Không thể tự động đặt thông báo. Vui lòng bật trong Cài đặt → Vocably.",
+    "openSettings": "Mở Cài đặt",
+    "enableReminders": "Bật nhắc nhở",
+    "receiveAt": "Nhận lúc"
+  },
+  "study": {
+    "loading": "Đang tải...",
+    "finish": "Kết thúc",
+    "takeOneMoreRound": "Thêm một vòng nữa",
+    "cardUpdateFailedTitle": "Lỗi: không thể cập nhật thẻ",
+    "cardUpdateNetworkError": "Câu trả lời của bạn không được lưu do mất kết nối. Phiên học sẽ dừng và tiếp tục từ câu trả lời bị lỗi.",
+    "cardUpdateTechnicalError": "Rất tiếc! Không thể tiếp tục phiên học do sự cố kỹ thuật. Vui lòng thử lại sau.",
+    "exitStudySession": "Thoát phiên học",
+    "tapDot": {
+      "touch": "Chạm"
+    },
+    "swipeGrade": {
+      "notYet": "Chưa biết",
+      "almost": "Gần đúng",
+      "gotIt": "Đã nhớ!"
+    },
+    "arrangeByLetters": {
+      "showMeTheAnswer": "Hiển thị câu trả lời"
+    },
+    "cardBack": {
+      "emptyCardMessage": "Thẻ này không có bản dịch hay định nghĩa. Hãy chỉnh sửa thẻ."
+    },
+    "multiChoice": {
+      "showCorrectAnswer": "Hiển thị câu trả lời đúng"
+    },
+    "reverseCardBack": {
+      "theAnswerIs": "Câu trả lời là"
+    },
+    "reverseCardFront": {
+      "examples_other": "Ví dụ:"
+    },
+    "motivationalQuotes": {
+      "0": "Kiên trì không phải là một cuộc đua dài; đó là nhiều cuộc đua ngắn nối tiếp nhau.",
+      "1": "Dòng sông xuyên qua đá không phải bằng sức mạnh, mà bằng sự bền bỉ.",
+      "2": "Sự bền bỉ đảm bảo kết quả là điều tất yếu.",
+      "3": "Kiên nhẫn và bền bỉ là chìa khóa để mở cánh cửa của sự vĩ đại.",
+      "4": "Mỗi bước tiến, dù nhỏ đến đâu, đều là sự tiến bộ.",
+      "5": "Sự bền bỉ biến giấc mơ thành hiện thực; mỗi nỗ lực là một hạt giống của thành công.",
+      "6": "Mỗi lần bạn tiến lên, bạn viết lại câu chuyện của mình theo hướng thành công.",
+      "7": "Hãy tiếp tục tin vào chính mình — sự bền bỉ chính là siêu năng lực của bạn.",
+      "8": "Thành công được xây từ những viên gạch bền bỉ, đặt từng viên một.",
+      "9": "Vũ trụ chuyển động vì những người không bao giờ ngừng tiến về phía trước.",
+      "10": "Năng lượng bạn bỏ ra hôm nay là nhiên liệu cho thành công ngày mai.",
+      "11": "Sự bền bỉ biến điều không thể thành điều tất yếu.",
+      "12": "Mỗi từ bạn học đưa bạn đến gần hơn với một nền văn hóa mới.",
+      "13": "Học ngôn ngữ là một cuộc marathon, không phải cuộc chạy nước rút. Bạn đang làm rất tốt!",
+      "14": "Sự bền bỉ là bí quyết để trở nên thông thạo. Hãy tiếp tục!",
+      "15": "Luyện tập không tạo ra sự hoàn hảo — nó tạo ra sự tiến bộ, và điều đó mới quan trọng.",
+      "16": "Một ngôn ngữ thứ hai không chỉ là một kỹ năng, mà là món quà cho đi không ngừng.",
+      "17": "Mỗi lần bạn học, bạn đang lập trình lại bộ não của mình để thành công.",
+      "18": "Người học ngôn ngữ là một nhà thám hiểm thế giới trá hình.",
+      "19": "Mỗi sai lầm bạn mắc phải khi học là bằng chứng cho thấy bạn đang trưởng thành.",
+      "20": "Ngôn ngữ là chìa khóa của thế giới; mỗi từ bạn làm chủ mở ra những cánh cửa mới.",
+      "21": "Sự thông thạo không phải là tốc độ; đó là việc xuất hiện và luyện tập mỗi ngày.",
+      "22": "Một ngôn ngữ mới không chỉ dạy bạn từ vựng; nó dạy bạn những cách suy nghĩ mới.",
+      "23": "Những nỗ lực nhỏ nhưng đều đặn dẫn đến những kết quả to lớn thay đổi cuộc đời trong việc học ngôn ngữ.",
+      "24": "Bạn sẽ không bao giờ tiếc thời gian dành để học ngôn ngữ — đó là khoản đầu tư cho chính bạn.",
+      "25": "Mỗi ngôn ngữ bạn học thêm vào một chiều kích mới cho danh tính của bạn.",
+      "26": "Dù hôm nay có khó khăn, ngày mai những nỗ lực của bạn sẽ khiến bạn mỉm cười.",
+      "27": "Hành trình đến với sự thông thạo là một câu chuyện đáng kể — hãy tiếp tục viết nó."
+    }
+  },
+  "exportDeck": {
+    "title": "Xuất {{languageName}}",
+    "loadingCards": "Đang tải thẻ...",
+    "advancedExportInfo": "Tính năng xuất nâng cao hơn chỉ khả dụng trên trình duyệt web cho người dùng đã đăng ký.",
+    "loginWithAccount": "Đăng nhập bằng tài khoản của bạn",
+    "deprecatedCardsExcluded": "Một số thẻ đã bị loại bỏ vì được tạo bằng nhà cung cấp từ điển không còn được hỗ trợ.",
+    "copyToClipboard": "Sao chép vào bộ nhớ tạm",
+    "copiedToClipboard": "Đã sao chép vào bộ nhớ tạm."
+  },
+  "loginModal": {
+    "syncAcrossDevices": "Đồng bộ trên các thiết bị",
+    "useBrowserExtensions": "Sử dụng tiện ích mở rộng trình duyệt",
+    "importExportCsv": "Nhập và xuất dữ liệu CSV"
+  },
+  "loginForm": {
+    "screenTitle": "Đăng nhập hoặc đăng ký",
+    "signIn": "Đăng nhập hoặc tạo tài khoản",
+    "bySigningInYouAgreeToOur": "Khi đăng nhập, bạn đồng ý với",
+    "termsAndConditions": "Điều khoản và Điều kiện",
+    "and": "và",
+    "privacyPolicy": "Chính sách Bảo mật"
+  },
+  "languageScreen": {
+    "motherTongueQuestion": "Tiếng mẹ đẻ của bạn là gì?",
+    "motherTongueHint": "Chọn ngôn ngữ mà bạn có thể nói trôi chảy."
+  },
+  "welcome": {
+    "formIntro": "Để bắt đầu, hãy trả lời một vài câu hỏi.",
+    "questionStudyLanguage": "Bạn đang học ngôn ngữ nào?",
+    "multipleLanguagesHint": "Bạn có thể học nhiều ngôn ngữ. Bây giờ hãy chọn một để bắt đầu.",
+    "setup": "Thiết lập",
+    "previous": "Trước",
+    "next": "Tiếp",
+    "skip": "Bỏ qua",
+    "goToApp": "Vào ứng dụng",
+    "slideCard": {
+      "looksUpWords": "Vocably tra cứu các từ và tạo thẻ học như thế này:",
+      "translatesWords": "Vocably dịch các từ và tạo thẻ học như thế này:",
+      "fallbackNote": "Ghi chú từ tác giả của Vocably",
+      "fallbackBody": "Các thẻ mẫu này chưa chính xác và có thể gây nhầm lẫn. Tôi xin lỗi vì điều đó. Tôi đang làm việc trên các ví dụ chính xác cho người dùng học {{sourceLang}} và nói {{targetLang}}.",
+      "saveFlashcardsBefore": "Bạn có thể lưu",
+      "saveFlashcardsAfter": "các thẻ học và ôn tập với hệ thống lặp lại ngắt quãng."
+    },
+    "slideLookUp": {
+      "intro": "Thấy hoặc nghe một từ hay cụm từ mới bằng <bold>{{sourceLanguage}}</bold>? Hãy tra cứu và lưu lại làm thẻ học!"
+    },
+    "slideReverseTranslate": {
+      "intro": "Muốn nói gì đó bằng <bold>{{sourceLanguage}}</bold> nhưng không biết từ? Hãy tra cứu bằng <bold>{{targetLanguage}}</bold>."
+    },
+    "slideSelectToTranslate": {
+      "into_Safari": "Thấy một từ mới trong Safari di động? Tra cứu nó bằng <bold>tiện ích mở rộng Vocably</bold>.",
+      "into_Android": "Thấy một từ mới trên màn hình thiết bị Android của bạn?",
+      "androidStep1": "Chọn từ",
+      "androidStep2": "Nhấn",
+      "androidStep3": "Nhấn «Translate with Vocably»"
+    },
+    "slideDesktopBrowser": {
+      "intro": "Bạn dùng máy tính để bàn? Hãy cài",
+      "or": "hoặc",
+      "browserExtensionSuffix": "tiện ích mở rộng trình duyệt để duyệt web bằng"
+    }
+  },
+  "languages": {
+    "loading": "Đang tải ngôn ngữ..."
+  },
+  "auth": {
+    "authenticating": "Đang xác thực...",
+    "sessionExpired": "Phiên xác thực của bạn đã hết hạn.",
+    "signInAgain": "Đăng nhập lại",
+    "anonymousUserError": {
+      "title": "Không thể tạo người dùng ẩn danh",
+      "message": "Đã xảy ra lỗi nghiêm trọng khi tạo người dùng ẩn danh."
+    }
+  },
+  "tagMenu": {
+    "intro": "Tag giống như nhóm hoặc thư mục, nhưng tốt hơn. Nhấn «Thêm tag mới» để bắt đầu.",
+    "addNewTag": "Thêm tag mới",
+    "editTag": "Chỉnh sửa {{title}}",
+    "swipeLeftToEdit": "Vuốt sang trái để chỉnh sửa tag.",
+    "swipeRightToDelete": "Vuốt sang phải để xóa tag. Các thẻ của bạn sẽ không bị xóa.",
+    "removeTagError": "Đã xảy ra lỗi khi xóa tag. Vui lòng thử lại.",
+    "updateTagError": "Đã xảy ra lỗi khi cập nhật tag. Vui lòng thử lại.",
+    "add": "Thêm",
+    "newTagName": "Tên tag mới"
+  },
+  "cardForm": {
+    "wordOrPhrase": "Từ hoặc cụm từ",
+    "translation": "Bản dịch",
+    "partOfSpeech": "Từ loại",
+    "transcriptionIpa": "Phiên âm (IPA)",
+    "definition": "Định nghĩa",
+    "example": "Ví dụ",
+    "partsOfSpeech": {
+      "noun": "danh từ",
+      "verb": "động từ",
+      "adjective": "tính từ",
+      "adverb": "trạng từ",
+      "phrase": "cụm từ"
+    }
+  },
+  "discoverySurvey": {
+    "screenTitle": "Câu hỏi cuối",
+    "question": "Bạn biết đến Vocably bằng cách nào?",
+    "whatIsIt": "Cụ thể là gì?",
+    "typePlaceholder": "Nhập ở đây",
+    "sources": {
+      "playStore": "Play Store",
+      "appStore": "App Store",
+      "fromAFriend": "Từ một người bạn",
+      "other": "Khác"
+    }
+  },
+  "tips": {
+    "menu": {
+      "editCards": "Chỉnh sửa thẻ",
+      "groupCards": "Nhóm thẻ (theo thư mục)",
+      "importExportCsv": "Nhập và xuất CSV",
+      "studyPlan": "Kế hoạch học",
+      "androidTranslate": "Cách dịch bất kỳ văn bản được chọn nào trong bất kỳ ứng dụng nào trên di động.",
+      "iosTranslate": "Dịch bất kỳ từ nào trên bất kỳ trang web nào với tiện ích Vocably cho iOS Safari.",
+      "desktopExtension": "Bạn dùng Chrome hay Safari trên máy tính? Hãy thử tiện ích mở rộng Vocably.",
+      "provideFeedback": "Gửi phản hồi",
+      "feedbackBody": "Bạn thấy thiếu tính năng quan trọng nào hay chỉ muốn chia sẻ ý kiến về Vocably? Tôi rất muốn nghe từ bạn."
+    },
+    "howToEditCards": {
+      "title": "Chỉnh sửa thẻ",
+      "intro": "Bạn có thể chỉnh sửa thẻ theo hai cách:",
+      "myCardsItem": "• <bold>Màn hình Thẻ của tôi</bold>: vuốt thẻ sang trái để hiện menu chỉnh sửa.",
+      "studySessionItem": "• <bold>Phiên học</bold>: chạm vào nút «Chỉnh sửa» (<editIcon/>)."
+    },
+    "howToGroupCards": {
+      "title": "Nhóm thẻ"
+    },
+    "howToImportAndExport": {
+      "title": "Nhập và xuất CSV",
+      "importCards": "Nhập thẻ",
+      "importNote": "<alertIcon/> Tính năng nhập chỉ khả dụng cho người dùng đã đăng ký. Bạn sẽ được chuyển hướng đến trang web.",
+      "exportCards": "Xuất các thẻ {{languageName}} của bạn"
+    },
+    "howToViewStudyStatistics": {
+      "title": "Kế hoạch học",
+      "para1": "<bold>Kế hoạch học</bold> được bật mặc định và cung cấp tổng quan về các thẻ cần học hôm nay, những ngày sắp tới, và những thẻ đã hết hạn cần ôn lại. Điều này giúp bạn bám sát kế hoạch, theo kịp thẻ quá hạn và tiếp cận việc học một cách chiến lược hơn.",
+      "para2": "Để xem kế hoạch học, vào tab <myCards>Thẻ của tôi</myCards> và chạm vào nút <chartBoxIcon/> ở góc trên bên trái.",
+      "para3": "<bold>Quan trọng:</bold> kế hoạch học không khả dụng khi thẻ được chọn ngẫu nhiên. Để tắt chọn thẻ ngẫu nhiên, vào <studySettings>Cài đặt học tập</studySettings>."
+    }
+  },
+  "shareIntent": {
+    "login": {
+      "openVocablyToSignIn": "Mở Vocably để đăng nhập.",
+      "openVocably": "Mở Vocably"
+    },
+    "receivingText": "Đang nhận văn bản..."
+  },
+  "paymentSuccess": {
+    "thankYou": "Cảm ơn bạn đã cho Vocably một cơ hội. Sự ủng hộ của bạn có ý nghĩa rất lớn với tôi.",
+    "rateButton": "Đánh giá Vocably trên {{storeName}}",
+    "feedbackBefore": "Nếu bạn thấy thiếu hoặc không thích điều gì, bạn luôn có thể cho tôi biết trên Discord, Telegram hoặc",
+    "feedbackLink": "ngay trong ứng dụng",
+    "feedbackAfter": ". Tôi xem trọng mọi phản hồi."
+  },
+  "requestFeedback": {
+    "question": "Bạn có thích Vocably không? Đánh giá trên {{storeName}} chỉ mất chưa đầy một phút và sẽ giúp dự án này rất nhiều.",
+    "rateButton": "Đánh giá Vocably trên {{storeName}}",
+    "later": "Hỏi tôi sau",
+    "feedbackBefore": "Nếu bạn thấy thiếu hoặc không thích điều gì, bạn luôn có thể",
+    "feedbackLink": "cho tôi biết",
+    "feedbackAfter": ". Tôi xem trọng mọi phản hồi.",
+    "neverAgain": "Tôi không muốn thấy thông báo này nữa"
+  },
+  "cardDefinition": {
+    "present": "Hiện tại:",
+    "past": "Quá khứ:",
+    "plural": "Số nhiều:"
+  },
+  "streak": {
+    "consecutiveDays_other": "ngày liên tiếp.",
+    "days": {
+      "0": "CN",
+      "1": "T2",
+      "2": "T3",
+      "3": "T4",
+      "4": "T5",
+      "5": "T6",
+      "6": "T7"
+    }
+  }
+}

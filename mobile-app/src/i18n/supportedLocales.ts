@@ -1,11 +1,16 @@
-export type SupportedLocale = 'en' | 'ru';
+export type SupportedLocale = 'en' | 'ru' | 'pt' | 'es' | 'uk' | 'vi' | 'tr';
 
 export const SUPPORTED_LOCALES: ReadonlyArray<{
   code: SupportedLocale;
   label: string;
 }> = [
   { code: 'en', label: 'English' },
+  { code: 'es', label: 'Español' },
+  { code: 'pt', label: 'Português (Brasil)' },
   { code: 'ru', label: 'Русский' },
+  { code: 'tr', label: 'Türkçe' },
+  { code: 'uk', label: 'Українська' },
+  { code: 'vi', label: 'Tiếng Việt' },
 ];
 
 export const SUPPORTED_LOCALE_CODES: ReadonlyArray<SupportedLocale> =

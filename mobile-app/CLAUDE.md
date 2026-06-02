@@ -43,6 +43,11 @@ The system interface expected to be translated into following languages:
 
 - English (en) - default
 - Russian (ru)
+- Ukrainian (uk)
+- Brazilian Portuguese (pt)
+- Spanish (es)
+- Turkish (tr)
+- Vietnamese (vi)
 
 The translation files are located in `src/i18n/locales`.
 
