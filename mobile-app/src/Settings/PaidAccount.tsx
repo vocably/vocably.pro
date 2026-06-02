@@ -24,7 +24,9 @@ export const PaidAccount: FC<Props> = ({ style }) => {
           style={{
             flexDirection: 'row',
             gap: 16,
+            rowGap: 6,
             alignItems: 'center',
+            flexWrap: 'wrap',
           }}
         >
           <Icon
