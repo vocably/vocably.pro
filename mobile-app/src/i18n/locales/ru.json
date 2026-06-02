@@ -531,5 +531,20 @@
       "openVocably": "Открыть Вокебли"
     },
     "receivingText": "Получаю текст..."
+  },
+  "streak": {
+    "consecutiveDays_one": "день подряд.",
+    "consecutiveDays_few": "дня подряд.",
+    "consecutiveDays_many": "дней подряд.",
+    "consecutiveDays_other": "дня подряд.",
+    "days": {
+      "0": "Вс",
+      "1": "Пн",
+      "2": "Вт",
+      "3": "Ср",
+      "4": "Чт",
+      "5": "Пт",
+      "6": "Сб"
+    }
   }
 }

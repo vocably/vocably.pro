@@ -1,27 +1,13 @@
-import { get } from 'lodash-es';
 import { FC, useEffect, useRef } from 'react';
 import { Animated, View } from 'react-native';
 import { getCountry } from 'react-native-localize';
 import { Text, useTheme } from 'react-native-paper';
+import { useTranslation } from 'react-i18next';
 import { getStreakDays, StreakDay } from '@vocably/sulna';
 
 type Props = {
   consecutiveDays: number;
   hasBeenShown: boolean;
-};
-
-const days = {
-  0: 'Sun',
-  1: 'Mon',
-  2: 'Tue',
-  3: 'Wed',
-  4: 'Thu',
-  5: 'Fri',
-  6: 'Sat',
-};
-
-const dayToString = (day: number): string => {
-  return get(days, day, '');
 };
 
 const isLastChecked = (index: number, days: StreakDay[]): boolean => {
@@ -31,6 +17,7 @@ const isLastChecked = (index: number, days: StreakDay[]): boolean => {
 
 export const Streak: FC<Props> = ({ consecutiveDays, hasBeenShown }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const days = getStreakDays(consecutiveDays, new Date(), getCountry());
   const dayScale = useRef(new Animated.Value(1)).current;
@@ -133,7 +120,11 @@ export const Streak: FC<Props> = ({ consecutiveDays, hasBeenShown }) => {
         </Animated.View>
       </View>
       <View style={{ marginBottom: 12 }}>
-        <Text>consecutive day{consecutiveDays === 1 ? '' : 's'}.</Text>
+        <Text>
+          {t('streak.consecutiveDays', {
+            count: consecutiveDays === 0 ? 1 : consecutiveDays,
+          })}
+        </Text>
       </View>
       <View
         style={{
@@ -176,7 +167,7 @@ export const Streak: FC<Props> = ({ consecutiveDays, hasBeenShown }) => {
                     : theme.colors.onTertiary,
                 }}
               >
-                {dayToString(streakDay.day)}
+                {t(`streak.days.${streakDay.day}`)}
               </Text>
             </Animated.View>
           );
