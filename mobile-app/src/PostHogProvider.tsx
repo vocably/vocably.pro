@@ -16,10 +16,10 @@ export const PostHogProvider: FC<PropsWithChildren<Props>> = ({
 }) => {
   return (
     <OriginalPostHogProvider
-      apiKey="phc_vke56i7RTlBbFYHZHsoH7VhgWi2DwvKtEzusfcFemgT"
+      apiKey="phc_zSkRhQ7tE4RDFRdxIVXzWwJ66ACL9QAHnyrRpRknyHj"
       options={{
         ...options,
-        host: 'https://us.i.posthog.com',
+        host: 'https://api-e.vocably.pro',
         customStorage: postHogCustomStorage,
         enableSessionReplay: false,
         disabled: ANALYTICS_DISABLED === 'true',
