@@ -6,6 +6,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import { CardDefinition } from '../../CardDefinition';
 import { CardExample, CardExampleRef, Mask } from '../../CardExample';
+import { studySmallFontSize } from '../../styles';
 
 export type ReverseCardFrontRef = {
   playExample: () => Promise<void>;
@@ -49,6 +50,7 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
           onPress={onPress}
           hideDefinitions={deckSettings.hideDefinitions}
           enrichWithPartOfSpeech={true}
+          partOfSpeechFontSize={studySmallFontSize}
         />
         {examples.length > 0 && (
           <>
@@ -68,7 +70,7 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
               mask={mask}
               example={join(examples)}
               language={card.data.language}
-              textStyle={{ fontSize: 18 }}
+              textStyle={{ fontSize: studySmallFontSize }}
               onPress={onPress}
             />
           </>

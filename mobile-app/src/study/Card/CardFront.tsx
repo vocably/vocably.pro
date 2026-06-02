@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import { CardExample, CardExampleRef } from '../../CardExample';
 import { PlaySound, PlaySoundRef } from '../../PlaySound';
+import { studySmallFontSize } from '../../styles';
 
 type Props = {
   card: CardItem;
@@ -147,7 +148,7 @@ export const CardFront: FC<Props> = ({
           <CardExample
             ref={cardExampleRef}
             example={card.data.example}
-            textStyle={{ fontSize: 18 }}
+            textStyle={{ fontSize: studySmallFontSize }}
             language={card.data.language}
             onPress={onPress}
           />

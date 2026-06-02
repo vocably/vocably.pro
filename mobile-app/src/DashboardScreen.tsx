@@ -45,7 +45,6 @@ import { useSelectedDeck } from './languageDeck/useSelectedDeck';
 import { LanguagesContext } from './languages/LanguagesContainer';
 import { LanguageSelector } from './LanguageSelector';
 import { Loader } from './loaders/Loader';
-import { plural } from './plural';
 import { getRandomizerEnabled } from './Settings/StudySettingsScreen';
 import { setSourceLanguage } from './SourceLanguageButton';
 import { swipeListButtonPressOpacity } from './stupidConstants';

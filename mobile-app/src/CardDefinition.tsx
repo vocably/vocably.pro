@@ -18,6 +18,7 @@ type Props = {
   lookUpDisabled?: boolean;
   hideDefinitions?: boolean;
   enrichWithPartOfSpeech?: boolean;
+  partOfSpeechFontSize?: number;
 };
 
 type Definition = {
@@ -38,6 +39,7 @@ export const CardDefinition: FC<Props> = ({
   lookUpDisabled = false,
   hideDefinitions = false,
   enrichWithPartOfSpeech = false,
+  partOfSpeechFontSize,
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
@@ -88,7 +90,7 @@ export const CardDefinition: FC<Props> = ({
   if (partOfSpeech) {
     definitions.unshift({
       text: partOfSpeech + ':',
-      style: { color: theme.colors.secondary },
+      style: { fontSize: partOfSpeechFontSize },
       lookUpEnabled: false,
       bulStyle: { opacity: 0 },
     });
@@ -119,6 +121,7 @@ export const CardDefinition: FC<Props> = ({
                 { opacity: pressed && lookUpEnabled && item ? 0.6 : 1.0 },
                 {
                   flexShrink: 1,
+                  alignSelf: 'flex-end',
                 },
               ]}
               onPress={onPress}
@@ -134,7 +137,7 @@ export const CardDefinition: FC<Props> = ({
                   : undefined
               }
             >
-              <Text style={[item.style, textStyle]}>{item.text}</Text>
+              <Text style={[textStyle, item.style]}>{item.text}</Text>
             </Pressable>
           </View>
         );
