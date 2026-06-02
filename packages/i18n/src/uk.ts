@@ -577,7 +577,7 @@ export const uk: Record<LanguageTranslationOption, string> = {
   postposition: 'постпозиційний прийменник',
   classifier: 'класифікатор',
   particle: 'частка',
-  proverb: 'про-дієслово',
+  proverb: "прислів'я",
   proadverb: 'про-прислівник',
   proadjective: 'про-прикметник',
   ideophone: 'ідеофон',

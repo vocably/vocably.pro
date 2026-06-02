@@ -577,7 +577,7 @@ export const ru: Record<LanguageTranslationOption, string> = {
   postposition: 'послелог',
   classifier: 'классификатор',
   particle: 'частица',
-  proverb: 'про-глагол',
+  proverb: 'поговорка',
   proadverb: 'про-наречие',
   proadjective: 'про-прилагательное',
   ideophone: 'идеофон',

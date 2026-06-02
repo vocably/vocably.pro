@@ -577,7 +577,7 @@ export const tr: Record<LanguageTranslationOption, string> = {
   postposition: 'ilgeç',
   classifier: 'sınıflandırıcı',
   particle: 'parçacık',
-  proverb: 'pro-fiil',
+  proverb: 'atasözü',
   proadverb: 'pro-zarf',
   proadjective: 'pro-sıfat',
   ideophone: 'ideofon',

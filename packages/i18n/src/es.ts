@@ -577,7 +577,7 @@ export const es: Record<LanguageTranslationOption, string> = {
   postposition: 'posposición',
   classifier: 'clasificador',
   particle: 'partícula',
-  proverb: 'pro-verbo',
+  proverb: 'proverbio',
   proadverb: 'proadverbio',
   proadjective: 'proadjetivo',
   ideophone: 'ideófono',

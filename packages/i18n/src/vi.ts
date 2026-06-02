@@ -577,7 +577,7 @@ export const vi: Record<LanguageTranslationOption, string> = {
   postposition: 'hậu giới từ',
   classifier: 'loại từ',
   particle: 'tiểu từ',
-  proverb: 'pro-động từ',
+  proverb: 'tục ngữ',
   proadverb: 'pro-trạng từ',
   proadjective: 'pro-tính từ',
   ideophone: 'từ tượng thanh',
