@@ -72,7 +72,7 @@
     "send": "Enviar",
     "intro": "Tem dúvidas ou sugestões? Pode falar comigo a qualquer momento.",
     "personalReply": "Eu cuido de cada mensagem pessoalmente e responderei por e-mail em poucos dias.",
-    "willReplyTo": "Responderei para o seu e-mail <bold>{{email}}</bold>.",
+    "willReplyTo": "Responderei para o e-mail <bold>{{email}}</bold>.",
     "privateRelayNote": "Parece que você compartilhou um e-mail privado da Apple no cadastro, mas não se preocupe — deve funcionar normalmente.",
     "provideEmail": "Por favor, informe seu endereço de e-mail para que eu possa lhe enviar uma resposta pessoal.",
     "yourMessage": "Sua mensagem"

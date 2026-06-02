@@ -163,7 +163,7 @@
     "examplesMessage": "Dame varias frases de ejemplo",
     "rememberMessage": "Ayúdame a recordar esta tarjeta",
     "inputDisabled": "Esta entrada está desactivada por ahora.",
-    "inputPlaceholder": "Su mensaje...",
+    "inputPlaceholder": "Tu mensaje...",
     "initialMessage": "Puedes preguntar lo que quieras sobre **{{source}}**, por ejemplo:\n\n  * explicar el significado\n  * dar ejemplos\n  * ayudarte a recordarla",
     "initialMessageWithPartOfSpeech": "Puedes preguntar lo que quieras sobre el/la {{partOfSpeech}} **{{source}}**, por ejemplo:\n\n  * explicar el significado\n  * dar ejemplos\n  * ayudarte a recordarla"
   },

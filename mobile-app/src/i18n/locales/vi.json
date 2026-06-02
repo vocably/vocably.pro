@@ -87,7 +87,7 @@
     "clearAndSignOut": "Xóa dữ liệu ứng dụng và đăng xuất"
   },
   "howToGroupCards": {
-    "intro": "Bạn có thể nhóm thẻ bằng các thẻ tag.",
+    "intro": "Bạn có thể nhóm thẻ bằng các tag.",
     "swipeLeft": "Vuốt thẻ hiện có sang trái và nhấn nút <tagPlusIcon />.",
     "tapOnNew": "Hoặc nhấn nút <tagPlusIcon /> trên thẻ vừa được thêm.",
     "studyByTag": "Khi đã tạo ít nhất một tag, nhấn biểu tượng <tagIcon /> trên nút Học để học một tag hoặc nhóm tag đã chọn.",
@@ -148,8 +148,8 @@
   "cardsLimit": {
     "openVocablySettings": "Mở Vocably → Cài đặt để nâng cấp.",
     "upgradeToPremium": "Nâng cấp Premium",
-    "collectionHas_other": "Bộ sưu tập của bạn có <bold>{{maxCards}}</bold> thẻ. Bây giờ bạn có thể lưu <bold>{{count}} thẻ mỗi ngày.</bold> Người dùng Premium không bị giới hạn này.",
-    "collectionHasMoreThan_other": "Bộ sưu tập của bạn có hơn <bold>{{maxCards}}</bold> thẻ. Bây giờ bạn có thể lưu <bold>{{count}} thẻ mỗi ngày.</bold> Người dùng Premium không bị giới hạn này."
+    "collectionHas_other": "Bộ sưu tập của bạn có <bold>{{maxCards}}</bold> thẻ. Bây giờ bạn có thể lưu <bold>{{count}} thẻ mỗi ngày.</bold> Người dùng Premium không có giới hạn này.",
+    "collectionHasMoreThan_other": "Bộ sưu tập của bạn có hơn <bold>{{maxCards}}</bold> thẻ. Bây giờ bạn có thể lưu <bold>{{count}} thẻ mỗi ngày.</bold> Người dùng Premium không có giới hạn này."
   },
   "chat": {
     "thinking": "Đang suy nghĩ...",

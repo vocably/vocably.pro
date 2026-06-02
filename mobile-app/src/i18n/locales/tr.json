@@ -72,7 +72,7 @@
     "send": "Gönder",
     "intro": "Soruların veya özellik istekleri mi var? Bana istediğin zaman ulaşabilirsin.",
     "personalReply": "Her başvuruyu kişisel olarak ben yanıtlarım ve birkaç gün içinde e-postana dönerim.",
-    "willReplyTo": "Sana <bold>{{email}}</bold> adresinden cevap vereceğim.",
+    "willReplyTo": "Sana <bold>{{email}}</bold> adresine cevap vereceğim.",
     "privateRelayNote": "Kayıt sırasında özel bir Apple e-postası paylaşmışsın gibi görünüyor, ama merak etme — sorunsuz çalışmalı.",
     "provideEmail": "Geri bildirimine kişisel bir yanıt verebilmem için lütfen e-posta adresini yaz.",
     "yourMessage": "Mesajın"
@@ -189,7 +189,7 @@
       "headOverToLookUp": "Yeni kelimeler bulup eklemek için Ara sekmesine geç. Vocably, yerleşik bir öğrenme sistemine sahip bir sözlüktür.",
       "headOverToGenerator": "Ya da kart oluşturucuyu kullanarak ilk koleksiyonunu oluştur.",
       "goToLookUp": "Ara'ya git",
-      "goToGenerator": "Kart oluşturucuyu kullanın",
+      "goToGenerator": "Kart oluşturucuyu kullan",
       "noCardsForSearch": "<bold>{{searchText}}</bold> için kart bulunamadı.",
       "noCardsForTag": "<bold>{{tagTitle}}</bold> etiketli kartın yok.",
       "noCardsForTags": "Seçili etiketler için kart bulunamadı."

@@ -146,7 +146,7 @@
     "rearrangeHintAfter": ", щоб змінити порядок кроків."
   },
   "cardsLimit": {
-    "openВокебліSettings": "Відкрийте Вокеблі → Налаштування, щоб перейти на Premium.",
+    "openVocablySettings": "Відкрийте Вокеблі → Налаштування, щоб перейти на Premium.",
     "upgradeToPremium": "Перейти на Premium",
     "collectionHas_one": "У вашій колекції <bold>{{maxCards}}</bold> карток. Тепер ви можете зберігати <bold>{{count}} картку на день.</bold> Користувачі Premium не мають цього обмеження.",
     "collectionHas_few": "У вашій колекції <bold>{{maxCards}}</bold> карток. Тепер ви можете зберігати <bold>{{count}} картки на день.</bold> Користувачі Premium не мають цього обмеження.",
@@ -529,8 +529,8 @@
   },
   "shareIntent": {
     "login": {
-      "openВокебліToSignIn": "Відкрийте Вокеблі для входу.",
-      "openВокеблі": "Відкрити Вокеблі"
+      "openVocablyToSignIn": "Відкрийте Вокеблі для входу.",
+      "openVocably": "Відкрити Вокеблі"
     },
     "receivingText": "Отримую текст..."
   },
