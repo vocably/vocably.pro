@@ -1,6 +1,5 @@
 import { postOnboardingAction } from '@vocably/api';
 import { Result, ResultError, resultify } from '@vocably/model';
-import { getCurrentUser } from 'aws-amplify/auth';
 import { Hub } from 'aws-amplify/utils';
 import { get } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
@@ -210,22 +209,11 @@ export const AuthContainer: FC<{
   };
 
   const defineAuthStatus = async () => {
-    const currentUserResult = await resultify(getCurrentUser(), {
-      reason: 'Unable to get current user.',
-    });
-
-    setError(null);
-
-    if (!currentUserResult.success) {
-      await setAuthStatus({
-        status: 'not-logged-in',
-      });
-      return;
-    }
-
     const fetchSessionResult = await resultify(safeFetchAuthSession(), {
       reason: 'Unable to fetch auth session.',
     });
+
+    setError(null);
 
     if (!fetchSessionResult.success) {
       if (

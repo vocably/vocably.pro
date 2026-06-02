@@ -1,11 +1,11 @@
 import { Result, resultify } from '@vocably/model';
-import { getCurrentUser } from 'aws-amplify/auth';
 import {
   getPermissionStatus,
   identifyUser,
 } from 'aws-amplify/push-notifications';
 import { debounce } from 'lodash-es';
 import { getFlatAttributes } from './auth/getFlatAttributes';
+import { safeFetchAuthSession } from './auth/safeFunctions';
 import { Sentry } from './BetterSentry';
 
 export const notificationsIdentifyUser = debounce(
@@ -20,13 +20,17 @@ export const notificationsIdentifyUser = debounce(
       };
     }
 
-    const userResult = await resultify(getCurrentUser(), {
+    const sessionResult = await resultify(safeFetchAuthSession(), {
       errorCode: 'AUTH_UNABLE_TO_GET_USER_SESSION',
-      reason: 'Unable to get current user',
+      reason: 'Unable to fetch auth session',
     });
 
-    if (userResult.success === false) {
-      console.log("User is not logged in. Can't identify.", userResult);
+    if (
+      sessionResult.success === false ||
+      !sessionResult.value.tokens ||
+      !sessionResult.value.userSub
+    ) {
+      console.log("User is not logged in. Can't identify.", sessionResult);
       return {
         success: true,
         value: null,
@@ -49,7 +53,7 @@ export const notificationsIdentifyUser = debounce(
 
     const identifyUserResult = await resultify(
       identifyUser({
-        userId: userResult.value.userId,
+        userId: sessionResult.value.userSub,
         userProfile: {},
         options: {
           optOut: 'NONE',
