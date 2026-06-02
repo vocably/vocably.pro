@@ -71,7 +71,7 @@
     "noEmailMessage": "Please include an email address right in the message so I can get back to you with an answer.",
     "send": "Send",
     "intro": "Have questions or feature requests? Reach out anytime.",
-    "personalReply": "I handle every inquiry personally and will get back to your email within few days.",
+    "personalReply": "I handle every inquiry personally and will get back to your email within a few days.",
     "willReplyTo": "I'll reply to you at your email address <bold>{{email}}</bold>.",
     "privateRelayNote": "It looks like you shared a private Apple email with me during registration, but no worries — it should work just fine.",
     "provideEmail": "Please provide your email address so I can send a personal reply to your feedback.",
@@ -88,7 +88,7 @@
   },
   "howToGroupCards": {
     "intro": "Grouping can be done with tags.",
-    "swipeLeft": "Swipe any existing card left and press <tagPlusIcon /> button.",
+    "swipeLeft": "Swipe any existing card left and press the <tagPlusIcon /> button.",
     "tapOnNew": "Or press the <tagPlusIcon /> button on a newly added card.",
     "studyByTag": "When at least one tag is created, press the <tagIcon /> icon on the Study button to study a selected tag or a group of selected tags.",
     "swipeToEdit": "Swipe any tag in the list to edit or delete it. Your cards will not be deleted."
@@ -124,9 +124,9 @@
   "studySettings": {
     "maxCardsPerSession": "Maximum cards per study session",
     "maxNeverStudiedPerDay": "Maximum \"never studied\" cards that can be picked up per day",
-    "maxNeverStudiedHint": "This option only makes sense for experienced users who have a lot of new cards stacked in \"Never studied\" group.",
+    "maxNeverStudiedHint": "This option only makes sense for experienced users who have a lot of new cards stacked in the \"Never studied\" group.",
     "pronounceExample": "Pronounce an example sentence",
-    "pronounceExampleHint": "This option makes the app play a random example sentence when appropriate during the study session. The <icon /> option should be turned on — this option is in the top-right corner of the Study screen.",
+    "pronounceExampleHint": "This option makes the app play a random example sentence when appropriate during the study session. The <icon /> option should be turned on — it is in the top-right corner of the Study screen.",
     "randomize": "Randomly select cards to study",
     "randomizeHint": "<warningIcon /> Enabling this option is generally a <bold>bad idea</bold>. This option disables the smart study algorithm. People who disable the smart study algorithm eventually get frustrated with their study progress.",
     "srsLink": "Read how Vocably uses the smart study algorithm to help you learn more words in a shorter time."
@@ -148,10 +148,10 @@
   "cardsLimit": {
     "openVocablySettings": "Open Vocably → Settings to upgrade.",
     "upgradeToPremium": "Upgrade to Premium",
-    "collectionHas_one": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
-    "collectionHas_other": "Your collection has <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit.",
-    "collectionHasMoreThan_one": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
-    "collectionHasMoreThan_other": "Your collection has more than <bold>{{maxCards}}</bold> cards. Now you can save <bold>{{count}} cards per day.</bold> Premium users don't have this limit."
+    "collectionHas_one": "Your collection has <bold>{{maxCards}}</bold> cards. You can now save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
+    "collectionHas_other": "Your collection has <bold>{{maxCards}}</bold> cards. You can now save <bold>{{count}} cards per day.</bold> Premium users don't have this limit.",
+    "collectionHasMoreThan_one": "Your collection has more than <bold>{{maxCards}}</bold> cards. You can now save <bold>{{count}} card per day.</bold> Premium users don't have this limit.",
+    "collectionHasMoreThan_other": "Your collection has more than <bold>{{maxCards}}</bold> cards. You can now save <bold>{{count}} cards per day.</bold> Premium users don't have this limit."
   },
   "chat": {
     "thinking": "Thinking...",
@@ -161,7 +161,7 @@
     "remember": "Remember",
     "explainMessage": "Explain",
     "examplesMessage": "Provide several example sentences",
-    "rememberMessage": "Help me to remember this card",
+    "rememberMessage": "Help me remember this card",
     "inputDisabled": "This input is disabled now.",
     "inputPlaceholder": "Type your message here...",
     "initialMessage": "You can ask anything about **{{source}}**, like:\n\n  * explain the meaning\n  * provide examples\n  * help to remember",
@@ -211,13 +211,13 @@
     "updateFailedMessage": "Oops! Something went wrong while attempting to update the card. Please try again.",
     "deletePrompt": {
       "title": "Delete this card?",
-      "message": "This operation can not be undone."
+      "message": "This operation cannot be undone."
     },
     "unableToDelete": "Unable to delete the card. Please try again.",
     "deletingCard": "Deleting card...",
     "resetPrompt": {
       "title": "Reset study progress?",
-      "message": "This operation can not be undone.",
+      "message": "This operation cannot be undone.",
       "confirm": "Reset"
     },
     "unableToReset": "Unable to reset study progress. Please try again.",
@@ -283,7 +283,7 @@
     "joinDiscord": "Join Discord",
     "sendMessage": "Send a message",
     "conductingAnalysis": "Conducting further analysis...",
-    "selectLanguageLearning": "Select language you're learning.",
+    "selectLanguageLearning": "Select the language you're learning.",
     "selectMotherTongue": "Select your mother tongue"
   },
   "notifications": {
@@ -291,7 +291,7 @@
     "loadingPreset": "Loading preset...",
     "loadFailed": {
       "sorry": "I'm very sorry.",
-      "cannotLoad": "The system can't load the study reminders status.",
+      "cannotLoad": "The system can't load the study reminder status.",
       "informed": "I have already been informed about it.",
       "tryAgain": "Please try again later."
     },
@@ -312,7 +312,7 @@
     "takeOneMoreRound": "Take one more round",
     "cardUpdateFailedTitle": "Error: Card update failed",
     "cardUpdateNetworkError": "Your answer wasn't saved due to a lost connection. The session will stop and resume from the failed answer.",
-    "cardUpdateTechnicalError": "Oops! Unable to continue study session due to a technical issue. Please try again later.",
+    "cardUpdateTechnicalError": "Oops! Unable to continue the study session due to a technical issue. Please try again later.",
     "exitStudySession": "Exit study session",
     "tapDot": {
       "touch": "Touch"
@@ -326,7 +326,7 @@
       "showMeTheAnswer": "Show me the answer"
     },
     "cardBack": {
-      "emptyCardMessage": "This card has no translations nor definitions. Edit this card."
+      "emptyCardMessage": "This card has no translations or definitions. Edit this card."
     },
     "multiChoice": {
       "showCorrectAnswer": "Show the correct answer"
@@ -343,7 +343,7 @@
       "1": "A river cuts through rock not because of its power, but because of its persistence.",
       "2": "Persistence guarantees that results are inevitable.",
       "3": "Patience and persistence are the keys to unlocking greatness.",
-      "4": "Every step forward, no matter how small, is the progress.",
+      "4": "Every step forward, no matter how small, is progress.",
       "5": "Persistence turns dreams into reality; every effort is a seed for success.",
       "6": "Every time you push forward, you rewrite your story to include success.",
       "7": "Keep believing in yourself — your persistence is your superpower.",
@@ -352,7 +352,7 @@
       "10": "The energy you put in today fuels the success of tomorrow.",
       "11": "Persistence transforms the impossible into the inevitable.",
       "12": "Each word you learn brings you closer to understanding a new culture.",
-      "13": "Language learning is a marathon, not a sprint. You are good!",
+      "13": "Language learning is a marathon, not a sprint. You're doing great!",
       "14": "Persistence is the secret ingredient in becoming fluent. Keep going!",
       "15": "Practice doesn't make perfect — it makes progress, and that's what matters.",
       "16": "A second language is not just a skill, but a gift that keeps giving.",
@@ -372,7 +372,7 @@
   "exportDeck": {
     "title": "Export {{languageName}}",
     "loadingCards": "Loading cards...",
-    "advancedExportInfo": "A more advanced export functionality is available in the web browser only for registered users.",
+    "advancedExportInfo": "More advanced export functionality is available in the web browser only for registered users.",
     "loginWithAccount": "Login with your account",
     "deprecatedCardsExcluded": "Some cards were excluded because they were created with a deprecated dictionary provider.",
     "copyToClipboard": "Copy to Clipboard",
@@ -385,7 +385,7 @@
   },
   "loginForm": {
     "screenTitle": "Sign in or Register",
-    "signIn": "Sign in or Create an account",
+    "signIn": "Sign in or create an account",
     "bySigningInYouAgreeToOur": "By signing in, you agree to our",
     "termsAndConditions": "Terms and Conditions",
     "and": "and",
@@ -410,7 +410,7 @@
       "fallbackNote": "Note from the author of Vocably",
       "fallbackBody": "These card samples are inaccurate and confusing. I apologize for that. I'm working on accurate examples for onboarding users who study {{sourceLang}} and speak {{targetLang}}.",
       "saveFlashcardsBefore": "You can save",
-      "saveFlashcardsAfter": "your flashcards and study them with spaced repetition system."
+      "saveFlashcardsAfter": "your flashcards and study them with the spaced repetition system."
     },
     "slideLookUp": {
       "intro": "Do you see or hear a new word or phrase in <bold>{{sourceLanguage}}</bold>? Look it up and save it as a flashcard!"
