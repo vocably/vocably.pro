@@ -170,10 +170,11 @@
   "dashboard": {
     "loadingCards": "Carregando cards...",
     "study": "Estudar",
-    "studySelectedTags": "Estudar tags selecionadas",
+    "studySection": "Estudar",
+    "studySelectedTags": "Estudar",
     "tagsLabel": "Tags:",
     "cardsWithNoTags": "Cards sem tags",
-    "cantWait": "Não posso esperar",
+    "cantWait": "Estudar agora",
     "deleteCardFailedTitle": "Erro: falha ao excluir o card",
     "deleteCardFailedMessage": "Opa! Algo deu errado ao tentar excluir o card. Tente novamente mais tarde.",
     "searchPlaceholder": "Buscar na sua coleção...",

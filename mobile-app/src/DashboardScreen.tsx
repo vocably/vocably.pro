@@ -649,7 +649,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                             });
                           }}
                         >
-                          {t('dashboard.study')}
+                          {t('dashboard.studySection')}
                         </Button>
                       )}
                       {section.section.id === 'tomorrow' && (

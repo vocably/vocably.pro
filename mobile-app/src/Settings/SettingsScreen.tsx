@@ -41,7 +41,9 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
   const { selectedLanguage, languages, syncDecks } =
     useContext(LanguagesContext);
 
-  const languageName = trimLanguage(get(languageList, selectedLanguage, ''));
+  const languageName = trimLanguage(
+    t(`language.objective_${selectedLanguage}`)
+  );
   const appLanguageLabel = getLocaleLabel(i18n.language);
 
   const [refreshing, setRefreshing] = useState(false);

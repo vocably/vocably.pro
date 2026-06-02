@@ -170,10 +170,11 @@
   "dashboard": {
     "loadingCards": "Kartlar yükleniyor...",
     "study": "Çalış",
-    "studySelectedTags": "Seçili etiketleri çalış",
+    "studySection": "Çalış",
+    "studySelectedTags": "Çalış",
     "tagsLabel": "Etiketler:",
     "cardsWithNoTags": "Etiketsiz kartlar",
-    "cantWait": "Bekleyemem",
+    "cantWait": "Şimdi çalış",
     "deleteCardFailedTitle": "Hata: Kart silinemedi",
     "deleteCardFailedMessage": "Hay aksi! Kart silinmeye çalışılırken bir şeyler ters gitti. Lütfen daha sonra tekrar dene.",
     "searchPlaceholder": "Koleksiyonunda ara...",

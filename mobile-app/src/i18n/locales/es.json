@@ -170,10 +170,11 @@
   "dashboard": {
     "loadingCards": "Cargando tarjetas...",
     "study": "Estudiar",
-    "studySelectedTags": "Estudiar etiquetas seleccionadas",
+    "studySection": "Estudiar",
+    "studySelectedTags": "Estudiar",
     "tagsLabel": "Etiquetas:",
     "cardsWithNoTags": "Tarjetas sin etiquetas",
-    "cantWait": "No puedo esperar",
+    "cantWait": "Estudiar ahora",
     "deleteCardFailedTitle": "Error: no se pudo eliminar la tarjeta",
     "deleteCardFailedMessage": "¡Ups! Algo salió mal al intentar eliminar la tarjeta. Inténtalo de nuevo más tarde.",
     "searchPlaceholder": "Buscar en tu colección...",
