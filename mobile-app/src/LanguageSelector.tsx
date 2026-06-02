@@ -71,16 +71,19 @@ export const LanguageSelector: FC<Props> = ({ style }) => {
             borderless={true}
             style={[{ borderRadius: 32, padding: 8 }, style]}
           >
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}
+            >
               <Icon
                 color={theme.colors.onBackground}
                 name="earth"
                 size={24 * fontScale}
-                style={{ marginRight: 8 }}
               />
-              <Text style={{ fontSize: 16, fontWeight: '500' }}>
-                {selectedLanguage.toUpperCase()}
-              </Text>
+              {languages.length > 1 && (
+                <Text style={{ fontSize: 16, fontWeight: '500' }}>
+                  {selectedLanguage.toUpperCase()}
+                </Text>
+              )}
             </View>
           </TouchableRipple>
         }
