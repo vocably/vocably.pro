@@ -713,6 +713,8 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                         flexDirection: 'row',
                         alignItems: 'center',
                         gap: 8,
+                        width: '100%',
+                        flexWrap: 'wrap',
                       }}
                     >
                       <Icon name="school" color={theme.colors.secondary} />
