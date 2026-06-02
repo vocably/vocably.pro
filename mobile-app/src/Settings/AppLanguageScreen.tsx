@@ -17,7 +17,7 @@ export const AppLanguageScreen: FC = () => {
     if (code === current) {
       return;
     }
-    await setAppLocaleOverride(code);
+    setAppLocaleOverride(code);
     await i18n.changeLanguage(code);
   };
 

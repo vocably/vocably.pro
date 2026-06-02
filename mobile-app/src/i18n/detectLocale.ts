@@ -1,5 +1,5 @@
 import * as RNLocalize from 'react-native-localize';
-import { getAppLocaleOverrideSync } from './storage';
+import { getAppLocaleOverride } from './storage';
 import {
   DEFAULT_LOCALE,
   isSupportedLocale,
@@ -17,7 +17,7 @@ import {
  * `GoogleLanguage`, the translation-target set — not the UI locale set).
  */
 export const detectInitialLocale = (): SupportedLocale => {
-  const override = getAppLocaleOverrideSync();
+  const override = getAppLocaleOverride();
   if (override) return override;
 
   const best = RNLocalize.findBestLanguageTag(
