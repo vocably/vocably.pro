@@ -183,9 +183,11 @@
       "future": "Dự kiến"
     },
     "empty": {
-      "noCardsYet": "Bạn chưa có thẻ học nào.",
-      "headOverToLookUp": "Hãy chuyển sang tab Tra cứu để tìm và thêm từ mới.",
+      "noCardsYet": "Bạn chưa có thẻ ghi nhớ nào.",
+      "headOverToLookUp": "Hãy chuyển sang tab Tra cứu để tìm và thêm từ mới. Vocably là từ điển tích hợp hệ thống học tập.",
+      "headOverToGenerator": "Hoặc dùng trình tạo thẻ học để tạo bộ sưu tập đầu tiên của bạn.",
       "goToLookUp": "Đến Tra cứu",
+      "goToGenerator": "Sử dụng trình tạo thẻ học",
       "noCardsForSearch": "Không tìm thấy thẻ nào cho <bold>{{searchText}}</bold>.",
       "noCardsForTag": "Bạn không có thẻ nào gắn với tag <bold>{{tagTitle}}</bold>.",
       "noCardsForTags": "Không tìm thấy thẻ nào cho các tag đã chọn."

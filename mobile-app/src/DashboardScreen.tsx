@@ -27,6 +27,7 @@ import {
   Appbar,
   Button,
   Chip,
+  Divider,
   Surface,
   Text,
   TouchableRipple,
@@ -876,13 +877,35 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                       <Text style={{ fontSize: 16 }}>
                         {t('dashboard.empty.headOverToLookUp')}
                       </Text>
+                      <Text style={{ fontSize: 16 }}>
+                        {t('dashboard.empty.headOverToGenerator')}
+                      </Text>
                     </View>
                     <CustomSurface>
                       <ListItem
                         leftIcon="translate"
+                        order="first"
                         title={t('dashboard.empty.goToLookUp')}
                         onPress={() => {
                           navigation.navigate('LookUp');
+                          if (presetState.status === 'known') {
+                            presetState.setPreset(
+                              setSourceLanguage(
+                                deck.language,
+                                presetState.preset,
+                                presetState.languagePairs
+                              )
+                            );
+                          }
+                        }}
+                      />
+                      <Divider />
+                      <ListItem
+                        leftIcon="robot-outline"
+                        order="last"
+                        title={t('dashboard.empty.goToGenerator')}
+                        onPress={() => {
+                          navigation.navigate('GenerateCards');
                           if (presetState.status === 'known') {
                             presetState.setPreset(
                               setSourceLanguage(

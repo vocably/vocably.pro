@@ -186,8 +186,10 @@
     },
     "empty": {
       "noCardsYet": "Você ainda não tem cards de estudo.",
-      "headOverToLookUp": "Vá para a aba Buscar para encontrar e adicionar palavras novas.",
+      "headOverToLookUp": "Vá para a aba Buscar para encontrar e adicionar palavras novas. O Vocably é um dicionário com um sistema de aprendizado integrado.",
+      "headOverToGenerator": "Ou use o gerador de cards para criar sua primeira coleção.",
       "goToLookUp": "Ir para Buscar",
+      "goToGenerator": "Utilizar o gerador de cards",
       "noCardsForSearch": "Nenhum card encontrado para <bold>{{searchText}}</bold>.",
       "noCardsForTag": "Você não tem cards marcados com <bold>{{tagTitle}}</bold>.",
       "noCardsForTags": "Nenhum card encontrado para as tags selecionadas."

@@ -186,8 +186,10 @@
     },
     "empty": {
       "noCardsYet": "Henüz çalışma kartın yok.",
-      "headOverToLookUp": "Yeni kelimeler bulup eklemek için Ara sekmesine geç.",
+      "headOverToLookUp": "Yeni kelimeler bulup eklemek için Ara sekmesine geç. Vocably, yerleşik bir öğrenme sistemine sahip bir sözlüktür.",
+      "headOverToGenerator": "Ya da kart oluşturucuyu kullanarak ilk koleksiyonunu oluştur.",
       "goToLookUp": "Ara'ya git",
+      "goToGenerator": "Kart oluşturucuyu kullanın",
       "noCardsForSearch": "<bold>{{searchText}}</bold> için kart bulunamadı.",
       "noCardsForTag": "<bold>{{tagTitle}}</bold> etiketli kartın yok.",
       "noCardsForTags": "Seçili etiketler için kart bulunamadı."
