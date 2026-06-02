@@ -161,7 +161,7 @@
     "examplesMessage": "Cho tôi vài câu ví dụ",
     "rememberMessage": "Giúp tôi ghi nhớ thẻ này",
     "inputDisabled": "Ô nhập này đang bị tắt.",
-    "inputPlaceholder": "Nhập tin nhắn của bạn ở đây...",
+    "inputPlaceholder": "Tin nhắn của bạn...",
     "initialMessage": "Bạn có thể hỏi bất cứ điều gì về **{{source}}**, ví dụ:\n\n  * giải thích nghĩa\n  * cung cấp ví dụ\n  * giúp ghi nhớ",
     "initialMessageWithPartOfSpeech": "Bạn có thể hỏi bất cứ điều gì về {{partOfSpeech}} **{{source}}**, ví dụ:\n\n  * giải thích nghĩa\n  * cung cấp ví dụ\n  * giúp ghi nhớ"
   },

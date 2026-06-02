@@ -1,4 +1,5 @@
 import { isNumber, isObject } from 'lodash-es';
+import { GoogleLanguage } from './language';
 
 export type ChatCard = {
   language: string;
@@ -9,6 +10,7 @@ export type ChatCard = {
 export type ChatWithCardPayload = {
   card: ChatCard;
   history: ChatWithCardMessage[];
+  preferredLanguage: GoogleLanguage;
 };
 
 export type ChatWithCardMessage = {

@@ -1,5 +1,9 @@
 import { NavigationProp, Route } from '@react-navigation/native';
-import { ChatCard, ChatWithCardMessage } from '@vocably/model';
+import {
+  ChatCard,
+  ChatWithCardMessage,
+  isGoogleLanguage,
+} from '@vocably/model';
 import { last } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
 import React, { FC, useEffect, useRef, useState } from 'react';
@@ -14,6 +18,7 @@ import { Message } from '../Chat/Message';
 import { Thinking } from '../Chat/Thinking';
 import { ScreenLayout } from '../ui/ScreenLayout';
 import { getInitialMessage } from './getInitialMessage';
+import { i18n } from '../i18n';
 
 export type ChatWithCardParams = {
   card: ChatCard;
@@ -87,9 +92,13 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
 
     setIsThinking(true);
 
+    const preferredLanguage = isGoogleLanguage(i18n.language)
+      ? i18n.language
+      : 'en';
     const chatResult = await chatWithCard({
       card,
       history: newMessages,
+      preferredLanguage,
     });
 
     posthog.capture('chat-with-card-message-result', {

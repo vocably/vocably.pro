@@ -61,6 +61,7 @@ export const isUnitOfSpeechGenerationMessage = (
 export type UnitOfSpeechGenerationPayload = {
   sourceLanguage: GoogleLanguage;
   messages: UnitOfSpeechGenerationMessage[];
+  preferredLanguage: GoogleLanguage;
 };
 
 export const isUnitOfSpeechGenerationPayload = (

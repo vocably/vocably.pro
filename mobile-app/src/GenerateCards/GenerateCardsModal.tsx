@@ -27,6 +27,7 @@ import { useAnalyzeOperations } from '../useAnalyzeOperations';
 import { TranslationPresetFormCompact } from '../TranslationPresetFormCompact';
 import UnitsOfSpeechAnalyze from './UnitsOfSpeechAnalyze';
 import { useCardsLimit } from '../useCardsLimit';
+import { i18n } from '../i18n';
 
 type Props = {
   route: Route<string, any>;
@@ -145,9 +146,13 @@ export const GenerateCardsModal: FC<Props> = ({ route, navigation }) => {
     setInputText('');
     setIsThinking(true);
 
+    const preferredLanguage = isGoogleLanguage(i18n.language)
+      ? i18n.language
+      : 'en';
     const generateUnitsOfSpeechResult = await generateUnitsOfSpeech({
       sourceLanguage: sourceLanguage,
       messages: newMessages,
+      preferredLanguage,
     });
 
     if (generateUnitsOfSpeechResult.success === false) {
