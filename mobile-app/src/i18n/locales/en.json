@@ -321,26 +321,20 @@
       "gotIt": "Got it!"
     },
     "arrangeByLetters": {
-      "typeIn": "Type in",
       "showMeTheAnswer": "Show me the answer"
     },
     "cardBack": {
       "emptyCardMessage": "This card has no translations nor definitions. Edit this card."
     },
     "multiChoice": {
-      "meaning": "meaning",
-      "showCorrectAnswer": "Show the correct answer",
-      "selectCorrectAnswerFor": "Select the correct answer for the <highlighted>{{partOfSpeech}}</highlighted>:"
+      "showCorrectAnswer": "Show the correct answer"
     },
     "reverseCardBack": {
       "theAnswerIs": "The answer is"
     },
     "reverseCardFront": {
-      "guess": "Guess",
-      "meaning": "meaning",
       "examples_one": "Example:",
-      "examples_other": "Examples:",
-      "actionForPartOfSpeech": "{{action}} the <highlighted>{{partOfSpeech}}</highlighted>:"
+      "examples_other": "Examples:"
     },
     "motivationalQuotes": {
       "0": "Perseverance is not a long race; it is many short races one after the other.",

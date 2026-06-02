@@ -331,28 +331,22 @@
       "gotIt": "Знаю!"
     },
     "arrangeByLetters": {
-      "typeIn": "Напишите",
       "showMeTheAnswer": "Показать ответ"
     },
     "cardBack": {
       "emptyCardMessage": "Эта карточка не содержит перевода или определения. Отредактируйте её."
     },
     "multiChoice": {
-      "meaning": "значение",
-      "showCorrectAnswer": "Показать правильный ответ",
-      "selectCorrectAnswerFor": "Выберите правильный ответ для <highlighted>{{partOfSpeech}}</highlighted>:"
+      "showCorrectAnswer": "Показать правильный ответ"
     },
     "reverseCardBack": {
       "theAnswerIs": "Ответ:"
     },
     "reverseCardFront": {
-      "guess": "Угадайте",
-      "meaning": "значение",
       "examples_one": "Пример:",
       "examples_few": "Примеры:",
       "examples_many": "Примеры:",
-      "examples_other": "Примеры:",
-      "actionForPartOfSpeech": "{{action}} <highlighted>{{partOfSpeech}}</highlighted>:"
+      "examples_other": "Примеры:"
     },
     "motivationalQuotes": {
       "0": "Упорство — не длинная гонка; это много коротких гонок одна за другой.",

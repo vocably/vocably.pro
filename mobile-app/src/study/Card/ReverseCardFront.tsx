@@ -14,16 +14,13 @@ export type ReverseCardFrontRef = {
 type Props = {
   card: CardItem;
   hasChecked: boolean;
-  requiredAction?: string;
   onPress?: () => unknown;
   deckSettings: DeckSettings;
 };
 
 export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
-  ({ card, hasChecked, requiredAction, onPress, deckSettings }, ref) => {
-    const theme = useTheme();
+  ({ card, hasChecked, onPress, deckSettings }, ref) => {
     const { t } = useTranslation();
-    const actionText = requiredAction ?? t('study.reverseCardFront.guess');
 
     let examples = card.data.example ? explode(card.data.example) : [];
 
@@ -45,33 +42,13 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
 
     return (
       <View>
-        <Text style={{ fontSize: 24, marginBottom: 12 }}>
-          <Trans
-            i18nKey="study.reverseCardFront.actionForPartOfSpeech"
-            values={{
-              action: actionText,
-              partOfSpeech: card.data.partOfSpeech
-                ? t(
-                    `language.${card.data.partOfSpeech}`,
-                    card.data.partOfSpeech
-                  )
-                : t('study.reverseCardFront.meaning'),
-            }}
-            components={{
-              highlighted: card.data.partOfSpeech ? (
-                <Text style={{ color: theme.colors.secondary }} />
-              ) : (
-                <Text />
-              ),
-            }}
-          />
-        </Text>
         <CardDefinition
           card={card.data}
           textStyle={{ fontSize: 24 }}
           maskSource={!hasChecked}
           onPress={onPress}
           hideDefinitions={deckSettings.hideDefinitions}
+          enrichWithPartOfSpeech={true}
         />
         {examples.length > 0 && (
           <>

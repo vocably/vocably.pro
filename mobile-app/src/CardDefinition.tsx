@@ -6,6 +6,7 @@ import { PixelRatio, Platform, Pressable, StyleProp, View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
 import { get } from 'lodash-es';
+import { i18n } from './i18n';
 
 type Props = {
   card: Card;
@@ -16,12 +17,15 @@ type Props = {
   onLookUpModalOpen?: () => void;
   lookUpDisabled?: boolean;
   hideDefinitions?: boolean;
+  enrichWithPartOfSpeech?: boolean;
 };
 
 type Definition = {
   text: string;
   style: StyleProp<Text>;
   lookUpEnabled: boolean;
+  partOfSpeech: string;
+  bulStyle?: StyleProp<Text>;
 };
 
 export const CardDefinition: FC<Props> = ({
@@ -33,6 +37,7 @@ export const CardDefinition: FC<Props> = ({
   onLookUpModalOpen,
   lookUpDisabled = false,
   hideDefinitions = false,
+  enrichWithPartOfSpeech = false,
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
@@ -74,6 +79,20 @@ export const CardDefinition: FC<Props> = ({
 
   const bul = '\u2022 ';
 
+  const partOfSpeech =
+    enrichWithPartOfSpeech && card.partOfSpeech
+      ? i18n.t(`language.${card.partOfSpeech}`, card.partOfSpeech)
+      : '';
+
+  if (partOfSpeech) {
+    definitions.unshift({
+      text: partOfSpeech + ':',
+      style: { color: theme.colors.secondary },
+      lookUpEnabled: false,
+      bulStyle: { opacity: 0 },
+    });
+  }
+
   return (
     <View
       style={{
@@ -92,7 +111,7 @@ export const CardDefinition: FC<Props> = ({
               gap: 4,
             }}
           >
-            <Text style={textStyle}>{bul}</Text>
+            <Text style={[textStyle, item.bulStyle]}>{bul}</Text>
 
             <Pressable
               style={({ pressed }) => [

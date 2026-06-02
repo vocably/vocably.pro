@@ -226,7 +226,6 @@ export const ArrangeByLetters: FC<Props> = ({
           ref={reverseCardFrontRef}
           hasChecked={isAnswerVisible}
           card={card}
-          requiredAction={t('study.arrangeByLetters.typeIn')}
         />
         <Animated.View
           style={[

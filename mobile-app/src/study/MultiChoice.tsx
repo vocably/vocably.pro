@@ -6,7 +6,7 @@ import {
 } from '@vocably/model';
 import { SrsScore } from '@vocably/srs';
 import { sanitizeTranscript } from '@vocably/sulna';
-import { shuffle } from 'lodash-es';
+import { shuffle, upperFirst } from 'lodash-es';
 import React, { FC, useMemo, useRef, useState } from 'react';
 import { Platform, ScrollView, View } from 'react-native';
 import { Trans, useTranslation } from 'react-i18next';
@@ -124,32 +124,13 @@ export const MultiChoice: FC<Props> = ({
         >
           {direction === 'back' && (
             <>
-              <Text style={{ fontSize: 24, marginBottom: 12 }}>
-                <Trans
-                  i18nKey="study.multiChoice.selectCorrectAnswerFor"
-                  values={{
-                    partOfSpeech: card.data.partOfSpeech
-                      ? t(
-                          `language.${card.data.partOfSpeech}`,
-                          card.data.partOfSpeech
-                        )
-                      : t('study.multiChoice.meaning'),
-                  }}
-                  components={{
-                    highlighted: card.data.partOfSpeech ? (
-                      <Text style={{ color: theme.colors.secondary }} />
-                    ) : (
-                      <Text />
-                    ),
-                  }}
-                />
-              </Text>
               <View style={{ alignSelf: 'flex-start' }}>
                 <CardDefinition
                   card={card.data}
                   textStyle={{ fontSize: 24 }}
                   maskSource={true}
                   hideDefinitions={deckSettings.hideDefinitions}
+                  enrichWithPartOfSpeech={true}
                 />
               </View>
             </>
