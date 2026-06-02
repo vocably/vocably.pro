@@ -14,6 +14,7 @@ describe('generateUnitsOfSpeech', () => {
   it('phrasal verbs en', async () => {
     const result = await generateUnitsOfSpeech({
       sourceLanguage: 'en',
+      preferredLanguage: 'en',
       messages: [
         {
           role: 'user',
@@ -35,6 +36,7 @@ describe('generateUnitsOfSpeech', () => {
   it('expect further input', async () => {
     const result = await generateUnitsOfSpeech({
       sourceLanguage: 'en',
+      preferredLanguage: 'en',
       messages: [
         {
           role: 'user',
@@ -68,6 +70,7 @@ describe('generateUnitsOfSpeech', () => {
     ];
     const result = await generateUnitsOfSpeech({
       sourceLanguage: 'en',
+      preferredLanguage: 'en',
       messages: [
         {
           role: 'user',
@@ -104,6 +107,7 @@ describe('generateUnitsOfSpeech', () => {
   it('non-english', async () => {
     const result = await generateUnitsOfSpeech({
       sourceLanguage: 'nl',
+      preferredLanguage: 'en',
       messages: [
         {
           role: 'user',
@@ -128,6 +132,7 @@ describe('generateUnitsOfSpeech', () => {
   it('interprets words as instructions', async () => {
     const result = await generateUnitsOfSpeech({
       sourceLanguage: 'nl',
+      preferredLanguage: 'en',
       messages: [
         {
           role: 'user',
@@ -149,6 +154,7 @@ describe('generateUnitsOfSpeech', () => {
   it('avoids direct translations', async () => {
     const result = await generateUnitsOfSpeech({
       sourceLanguage: 'en',
+      preferredLanguage: 'en',
       messages: [
         {
           role: 'user',
