@@ -299,7 +299,7 @@
     "deniedIosMessage": "Không thể tự động đặt thông báo. Vui lòng bật trong Cài đặt → Vocably.",
     "openSettings": "Mở Cài đặt",
     "enableReminders": "Bật nhắc nhở",
-    "receiveAt": "Nhận lúc"
+    "receiveAt": "Giờ"
   },
   "study": {
     "loading": "Đang tải...",

@@ -304,7 +304,7 @@
     "deniedIosMessage": "Notifications can't be set automatically. Please enable them in Settings → Vocably.",
     "openSettings": "Open Settings",
     "enableReminders": "Enable reminders",
-    "receiveAt": "Receive at"
+    "receiveAt": "Time"
   },
   "study": {
     "loading": "Loading...",

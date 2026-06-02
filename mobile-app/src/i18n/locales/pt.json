@@ -304,7 +304,7 @@
     "deniedIosMessage": "Não foi possível configurar as notificações automaticamente. Ative-as em Ajustes → Vocably.",
     "openSettings": "Abrir Configurações",
     "enableReminders": "Ativar lembretes",
-    "receiveAt": "Receber às"
+    "receiveAt": "Hora"
   },
   "study": {
     "loading": "Carregando...",

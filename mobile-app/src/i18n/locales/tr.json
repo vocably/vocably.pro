@@ -304,7 +304,7 @@
     "deniedIosMessage": "Bildirimler otomatik olarak ayarlanamıyor. Lütfen Ayarlar → Vocably üzerinden etkinleştir.",
     "openSettings": "Ayarları aç",
     "enableReminders": "Hatırlatıcıları etkinleştir",
-    "receiveAt": "Alma saati"
+    "receiveAt": "Saat"
   },
   "study": {
     "loading": "Yükleniyor...",
