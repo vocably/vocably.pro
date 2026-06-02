@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type Props = {
   style?: StyleProp<ViewStyle>;
-  leftIcon: string;
+  leftIcon?: string;
   title: string;
   rightIcon?: string;
   color?: string;
@@ -63,22 +63,26 @@ export const ListItem: FC<Props> = ({
           justifyContent: 'center',
         }}
       >
-        <View
-          style={{
-            width: LEFT_ICON_WIDTH,
-          }}
-        >
-          <Icon
-            name={leftIcon}
-            size={24}
-            color={color ?? theme.colors.onBackground}
-            style={{ marginLeft: 16 }}
-          />
-        </View>
+        {leftIcon && (
+          <View
+            style={{
+              width: LEFT_ICON_WIDTH,
+            }}
+          >
+            <Icon
+              name={leftIcon}
+              size={24}
+              color={color ?? theme.colors.onBackground}
+              style={{ marginLeft: 16 }}
+            />
+          </View>
+        )}
         <View
           style={{
             width:
-              itemWidth - LEFT_ICON_WIDTH - (rightIcon ? RIGHT_ICON_WIDTH : 0),
+              itemWidth -
+              (leftIcon ? LEFT_ICON_WIDTH : 32) -
+              (rightIcon ? RIGHT_ICON_WIDTH : 0),
             paddingRight: 16,
           }}
         >
@@ -95,6 +99,8 @@ export const ListItem: FC<Props> = ({
           <View
             style={{
               width: RIGHT_ICON_WIDTH,
+              alignItems: 'flex-end',
+              paddingRight: 8,
             }}
           >
             <Icon

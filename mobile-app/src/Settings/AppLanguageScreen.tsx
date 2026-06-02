@@ -37,7 +37,6 @@ export const AppLanguageScreen: FC = () => {
             <View key={locale.code}>
               <ListItem
                 order={order}
-                leftIcon="translate"
                 title={locale.label}
                 rightIcon={locale.code === current ? 'check' : ''}
                 onPress={() => onPick(locale.code)}
