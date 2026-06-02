@@ -41,14 +41,16 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
     ref
   ) => {
     const theme = useTheme();
-    const { play: contextPlay, stop: contextStop, playing } = usePlaySound();
+    const { play: contextPlay, stop: contextStop } = usePlaySound();
     const [isError, setIsError] = useState(false);
 
-    const isPlaying = playing?.text === text && playing?.language === language;
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const play = async (): Promise<Result<unknown>> => {
       setIsError(false);
+      setIsPlaying(true);
       const result = await contextPlay(text, language);
+      setIsPlaying(false);
       if (!result.success) {
         setIsError(true);
       }
@@ -58,6 +60,7 @@ export const PlaySound = forwardRef<PlaySoundRef, Props>(
     const stop = () => {
       if (isPlaying) {
         contextStop();
+        setIsPlaying(false);
       }
     };
 
