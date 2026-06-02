@@ -2,10 +2,10 @@ import { Card } from '@vocably/model';
 import { explode, isGoodPlural } from '@vocably/sulna';
 import { useNavigation } from '@react-navigation/native';
 import React, { FC } from 'react';
-import { PixelRatio, Platform, Pressable, StyleProp, View } from 'react-native';
+import { Pressable, StyleProp, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
 import { maskTheWord } from './maskTheWord';
-import { get } from 'lodash-es';
 import { i18n } from './i18n';
 
 type Props = {
@@ -41,6 +41,7 @@ export const CardDefinition: FC<Props> = ({
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   let definitions: Definition[] = [];
 
@@ -147,7 +148,7 @@ export const CardDefinition: FC<Props> = ({
             },
           ]}
         >
-          Present:{' '}
+          {t('cardDefinition.present')}{' '}
           <Text style={{ color: theme.colors.secondary }}>
             {card.presentTenses}
           </Text>
@@ -162,7 +163,7 @@ export const CardDefinition: FC<Props> = ({
             },
           ]}
         >
-          Past:{' '}
+          {t('cardDefinition.past')}{' '}
           <Text style={{ color: theme.colors.secondary }}>
             {card.pastTenses}
           </Text>
@@ -180,7 +181,7 @@ export const CardDefinition: FC<Props> = ({
               },
             ]}
           >
-            Plural:{' '}
+            {t('cardDefinition.plural')}{' '}
             <Text style={{ color: theme.colors.secondary }}>
               {card.pluralForm}
             </Text>

@@ -56,7 +56,7 @@ export const TimePicker: FC<Props> = ({ time, onChange, disabled = false }) => {
             rightIcon=""
             disabled={disabled}
             onPress={() => setIsAndroidVisible(true)}
-            title={`Receive at ${time}`}
+            title={`${t('notifications.receiveAt')} ${time}`}
           />
           {isAndroidVisible && (
             <DateTimePicker

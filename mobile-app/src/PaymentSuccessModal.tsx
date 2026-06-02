@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { usePostHog } from 'posthog-react-native';
 import { FC, useContext } from 'react';
 import { Linking, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Button, Text, useTheme } from 'react-native-paper';
 import {
   mobilePlatform,
@@ -17,6 +18,7 @@ export const PaymentSuccessModal: FC<Props> = () => {
   const navigation = useNavigation();
   const theme = useTheme();
   const posthog = usePostHog();
+  const { t } = useTranslation();
 
   const { updateUserMetadata } = useContext(UserMetadataContext);
 
@@ -51,27 +53,24 @@ export const PaymentSuccessModal: FC<Props> = () => {
             variant="headlineMedium"
             style={{ textAlign: 'center', color: theme.colors.secondary }}
           >
-            Thank{'\u00A0'}you{'\u00A0'}for giving{'\u00A0'}Vocably{'\u00A0'}a
-            {'\u00A0'}chance. Your{'\u00A0'}support means{'\u00A0'}a{'\u00A0'}
-            lot.
+            {t('paymentSuccess.thankYou')}
           </Text>
         </View>
         <View style={{ alignSelf: 'stretch' }}>
           <Button mode={'contained'} onPress={rateClick}>
-            Rate Vocably on {mobileStoreName}
+            {t('paymentSuccess.rateButton', { storeName: mobileStoreName })}
           </Button>
         </View>
         <View>
           <Text style={{ textAlign: 'center' }}>
-            If you are missing or don't like anything, you can always let me
-            know in Discord, Telegram, or{' '}
+            {t('paymentSuccess.feedbackBefore')}{' '}
             <Text
               style={{ color: theme.colors.primary }}
               onPress={() => navigation.navigate('Feedback')}
             >
-              right in the app
+              {t('paymentSuccess.feedbackLink')}
             </Text>
-            . I take every feedback seriously.
+            {t('paymentSuccess.feedbackAfter')}
           </Text>
         </View>
       </CustomScrollView>

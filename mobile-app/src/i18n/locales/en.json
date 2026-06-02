@@ -520,6 +520,27 @@
     },
     "receivingText": "Receiving the text..."
   },
+  "paymentSuccess": {
+    "thankYou": "Thank you for giving Vocably a chance. Your support means a lot to me.",
+    "rateButton": "Rate Vocably on {{storeName}}",
+    "feedbackBefore": "If you are missing or don't like anything, you can always let me know in Discord, Telegram, or",
+    "feedbackLink": "right in the app",
+    "feedbackAfter": ". I take every feedback seriously."
+  },
+  "requestFeedback": {
+    "question": "Do you like Vocably? Your rating on {{storeName}} will take less than a minute and help this project.",
+    "rateButton": "Rate Vocably on {{storeName}}",
+    "later": "Ask me later",
+    "feedbackBefore": "If you are missing or don't like something, you can always",
+    "feedbackLink": "let me know",
+    "feedbackAfter": ". I take every feedback seriously.",
+    "neverAgain": "I don't want to see this message again"
+  },
+  "cardDefinition": {
+    "present": "Present:",
+    "past": "Past:",
+    "plural": "Plural:"
+  },
   "streak": {
     "consecutiveDays_one": "consecutive day.",
     "consecutiveDays_other": "consecutive days.",

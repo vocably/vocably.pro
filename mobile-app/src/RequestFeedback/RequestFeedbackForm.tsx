@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RateInteractionPayload } from '@vocably/model';
 import React, { FC } from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Button, Divider, Text, useTheme } from 'react-native-paper';
 import { mobileStoreName } from '../mobilePlatform';
 
@@ -16,6 +17,7 @@ export const RequestFeedbackForm: FC<Props> = ({
 }) => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const { t } = useTranslation();
   return (
     <View
       style={[
@@ -31,30 +33,29 @@ export const RequestFeedbackForm: FC<Props> = ({
       <Divider style={{ width: '100%' }} />
       <View>
         <Text style={{ textAlign: 'center', fontWeight: 'bold' }}>
-          Do you like Vocably? Your rating on {mobileStoreName} will take less
-          than a minute and help this project.
+          {t('requestFeedback.question', { storeName: mobileStoreName })}
         </Text>
       </View>
       <View style={{ alignSelf: 'stretch' }}>
         <Button mode={'outlined'} onPress={() => onAction('review')}>
-          Rate Vocably on {mobileStoreName}
+          {t('requestFeedback.rateButton', { storeName: mobileStoreName })}
         </Button>
       </View>
       <View style={{ alignSelf: 'stretch' }}>
         <Button mode={'text'} onPress={() => onAction('later')}>
-          Ask me later
+          {t('requestFeedback.later')}
         </Button>
       </View>
       <View>
         <Text style={{ textAlign: 'center' }}>
-          If you are missing or don't like something, you can always{' '}
+          {t('requestFeedback.feedbackBefore')}{' '}
           <Text
             style={{ color: theme.colors.primary }}
             onPress={() => navigation.navigate('Feedback')}
           >
-            let me know
+            {t('requestFeedback.feedbackLink')}
           </Text>
-          . I take every feedback seriously.
+          {t('requestFeedback.feedbackAfter')}
         </Text>
       </View>
       <View>
@@ -63,7 +64,7 @@ export const RequestFeedbackForm: FC<Props> = ({
           textColor={theme.colors.onSurface}
           onPress={() => onAction('never')}
         >
-          I don't want to see this message again
+          {t('requestFeedback.neverAgain')}
         </Button>
       </View>
     </View>
