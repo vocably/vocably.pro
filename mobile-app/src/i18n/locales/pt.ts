@@ -25,18 +25,18 @@ const translations: BaseTranslations = {
     title: 'Idioma do app',
   },
   nav: {
-    myCards: 'Meus cards',
+    myCards: 'Meus cartões',
     lookUp: 'Buscar',
     tips: 'Dicas',
     settings: 'Configurações',
     studySettings: 'Configurações de estudo',
-    editCard: 'Editar card',
-    chatWithCard: 'Conversar sobre o card',
-    cardGenerator: 'Gerador de cards',
+    editCard: 'Editar cartão',
+    chatWithCard: 'Conversar sobre o cartão',
+    cardGenerator: 'Gerador de cartões',
     feedback: 'Feedback',
     createAccount: 'Criar conta',
     previewStudyStep: 'Pré-visualizar etapa',
-    exportDeck: 'Exportar cards',
+    exportDeck: 'Exportar cartões',
   },
   settings: {
     notRegistered: 'Ainda não cadastrado.',
@@ -45,7 +45,7 @@ const translations: BaseTranslations = {
     studySettings: 'Configurações de estudo',
     studyReminders: {
       title: 'Lembretes de estudo',
-      body: 'Os lembretes de estudo são enviados uma vez por dia para você revisar seus cards de <bold>{{languageName}}</bold>.',
+      body: 'Os lembretes de estudo são enviados uma vez por dia para você revisar seus cartões de <bold>{{languageName}}</bold>.',
       perLanguageHint:
         'Cada idioma tem suas próprias configurações de lembrete, disponíveis na tela «Editar idioma».',
       unregisteredHint:
@@ -75,7 +75,7 @@ const translations: BaseTranslations = {
       'Algo deu errado. Seu feedback não foi enviado. Tente novamente ou me envie um e-mail para d@vocably.pro.',
     noEmailTitle: 'Sem e-mail',
     noEmailMessage:
-      'Por favor, inclua um endereço de e-mail diretamente na mensagem para que eu possa retornar com uma resposta.',
+      'Por favor, inclua um endereço de e-mail diretamente na mensagem para que eu possa lhe responder.',
     send: 'Enviar',
     intro: 'Tem dúvidas ou sugestões? Pode falar comigo a qualquer momento.',
     personalReply:
@@ -100,12 +100,13 @@ const translations: BaseTranslations = {
   howToGroupCards: {
     intro: 'Você pode agrupar com tags.',
     swipeLeft:
-      'Deslize qualquer card existente para a esquerda e toque no botão <tagPlusIcon />.',
-    tapOnNew: 'Ou toque no botão <tagPlusIcon /> em um card recém-adicionado.',
+      'Deslize qualquer cartão existente para a esquerda e toque no botão <tagPlusIcon />.',
+    tapOnNew:
+      'Ou toque no botão <tagPlusIcon /> em um cartão recém-adicionado.',
     studyByTag:
       'Quando pelo menos uma tag for criada, toque no ícone <tagIcon /> no botão Estudar para estudar uma tag selecionada ou um grupo de tags.',
     swipeToEdit:
-      'Deslize qualquer tag na lista para editar ou excluir. Seus cards não serão excluídos.',
+      'Deslize qualquer tag na lista para editar ou excluir. Seus cartões não serão excluídos.',
   },
   subscription: {
     loadingCustomerStatus: 'Carregando status do cliente',
@@ -137,15 +138,15 @@ const translations: BaseTranslations = {
     clearStorage: 'Limpar dados de armazenamento',
   },
   studySettings: {
-    maxCardsPerSession: 'Máximo de cards por sessão de estudo',
+    maxCardsPerSession: 'Máximo de cartões por sessão de estudo',
     maxNeverStudiedPerDay:
-      'Máximo de cards «nunca estudados» que podem ser selecionados por dia',
+      'Máximo de cartões «nunca estudados» que podem ser selecionados por dia',
     maxNeverStudiedHint:
-      'Esta opção só faz sentido para usuários experientes que têm muitos cards novos acumulados no grupo «Nunca estudados».',
+      'Esta opção só faz sentido para usuários experientes que têm muitos cartões novos acumulados no grupo «Nunca estudados».',
     pronounceExample: 'Pronunciar uma frase de exemplo',
     pronounceExampleHint:
       'Esta opção faz o app tocar uma frase de exemplo aleatória nos momentos apropriados durante a sessão. A opção <icon /> deve estar ativada — fica no canto superior direito da tela de Estudo.',
-    randomize: 'Selecionar cards aleatoriamente para estudar',
+    randomize: 'Selecionar cartões aleatoriamente para estudar',
     randomizeHint:
       '<warningIcon /> Ativar esta opção geralmente é uma <bold>má ideia</bold>. Ela desativa o algoritmo inteligente de estudo. Quem desativa o algoritmo inteligente acaba se frustrando com o próprio progresso.',
     srsLink:
@@ -161,7 +162,7 @@ const translations: BaseTranslations = {
     preview: 'Pré-visualização',
     premiumOnly: 'Disponível para usuários Premium',
     upgradeToPremium: 'Assinar Premium',
-    heading: 'Etapas de estudo por card',
+    heading: 'Etapas de estudo por cartão',
     rearrangeHintBefore: 'Use ',
     rearrangeHintAfter: ' para reorganizar as etapas.',
   },
@@ -169,13 +170,13 @@ const translations: BaseTranslations = {
     openVocablySettings: 'Abra Vocably → Configurações para fazer upgrade.',
     upgradeToPremium: 'Assinar Premium',
     collectionHas_one:
-      'Sua coleção tem <bold>{{maxCards}}</bold> cards. Agora você pode salvar <bold>{{count}} card por dia.</bold> Usuários Premium não têm esse limite.',
+      'Sua coleção tem <bold>{{maxCards}}</bold> cartões. Agora você pode salvar <bold>{{count}} cartão por dia.</bold> Usuários Premium não têm esse limite.',
     collectionHas_other:
-      'Sua coleção tem <bold>{{maxCards}}</bold> cards. Agora você pode salvar <bold>{{count}} cards por dia.</bold> Usuários Premium não têm esse limite.',
+      'Sua coleção tem <bold>{{maxCards}}</bold> cartões. Agora você pode salvar <bold>{{count}} cartões por dia.</bold> Usuários Premium não têm esse limite.',
     collectionHasMoreThan_one:
-      'Sua coleção tem mais de <bold>{{maxCards}}</bold> cards. Agora você pode salvar <bold>{{count}} card por dia.</bold> Usuários Premium não têm esse limite.',
+      'Sua coleção tem mais de <bold>{{maxCards}}</bold> cartões. Agora você pode salvar <bold>{{count}} cartão por dia.</bold> Usuários Premium não têm esse limite.',
     collectionHasMoreThan_other:
-      'Sua coleção tem mais de <bold>{{maxCards}}</bold> cards. Agora você pode salvar <bold>{{count}} cards por dia.</bold> Usuários Premium não têm esse limite.',
+      'Sua coleção tem mais de <bold>{{maxCards}}</bold> cartões. Agora você pode salvar <bold>{{count}} cartões por dia.</bold> Usuários Premium não têm esse limite.',
   },
   chat: {
     thinking: 'Pensando...',
@@ -185,7 +186,7 @@ const translations: BaseTranslations = {
     remember: 'Memorizar',
     explainMessage: 'Explique',
     examplesMessage: 'Dê várias frases de exemplo',
-    rememberMessage: 'Me ajude a memorizar este card',
+    rememberMessage: 'Me ajude a memorizar este cartão',
     inputDisabled: 'Esta entrada está desativada agora.',
     inputPlaceholder: 'Sua mensagem...',
     initialMessage:
@@ -194,16 +195,16 @@ const translations: BaseTranslations = {
       'Você pode perguntar qualquer coisa sobre o/a {{partOfSpeech}} **{{source}}**, por exemplo:\n\n  * explicar o significado\n  * fornecer exemplos\n  * ajudar a memorizar',
   },
   dashboard: {
-    loadingCards: 'Carregando cards...',
+    loadingCards: 'Carregando cartões...',
     study: 'Estudar',
     studySection: 'Estudar',
     studySelectedTags: 'Estudar',
     tagsLabel: 'Tags:',
-    cardsWithNoTags: 'Cards sem tags',
+    cardsWithNoTags: 'Cartões sem tags',
     cantWait: 'Estudar agora',
-    deleteCardFailedTitle: 'Erro: falha ao excluir o card',
+    deleteCardFailedTitle: 'Erro: falha ao excluir o cartão',
     deleteCardFailedMessage:
-      'Opa! Algo deu errado ao tentar excluir o card. Tente novamente mais tarde.',
+      'Opa! Algo deu errado ao tentar excluir o cartão. Tente novamente mais tarde.',
     searchPlaceholder: 'Buscar na sua coleção...',
     section: {
       today: 'Planejados para hoje',
@@ -213,18 +214,18 @@ const translations: BaseTranslations = {
       future: 'Planejados',
     },
     empty: {
-      noCardsYet: 'Você ainda não tem cards de estudo.',
+      noCardsYet: 'Você ainda não tem cartões de estudo.',
       headOverToLookUp:
         'Vá para a aba Buscar para encontrar e adicionar palavras novas. O Vocably é um dicionário com um sistema de aprendizado integrado.',
       headOverToGenerator:
-        'Ou use o gerador de cards para criar sua primeira coleção.',
+        'Ou use o gerador de cartões para criar sua primeira coleção.',
       goToLookUp: 'Ir para Buscar',
-      goToGenerator: 'Utilizar o gerador de cards',
+      goToGenerator: 'Utilizar o gerador de cartões',
       noCardsForSearch:
-        'Nenhum card encontrado para <bold>{{searchText}}</bold>.',
+        'Nenhum cartão encontrado para <bold>{{searchText}}</bold>.',
       noCardsForTag:
-        'Você não tem cards marcados com <bold>{{tagTitle}}</bold>.',
-      noCardsForTags: 'Nenhum card encontrado para as tags selecionadas.',
+        'Você não tem cartões marcados com <bold>{{tagTitle}}</bold>.',
+      noCardsForTags: 'Nenhum cartão encontrado para as tags selecionadas.',
     },
     mayBeStudiedIn_one: 'Poderá ser estudado em {{count}} minuto.',
     mayBeStudiedIn_other: 'Poderá ser estudado em {{count}} minutos.',
@@ -239,24 +240,24 @@ const translations: BaseTranslations = {
     studyRemindersTitle: 'Lembretes de estudo para {{languageName}}',
   },
   editCard: {
-    updateFailedTitle: 'Erro: falha ao atualizar o card',
+    updateFailedTitle: 'Erro: falha ao atualizar o cartão',
     updateFailedMessage:
-      'Opa! Algo deu errado ao tentar atualizar o card. Tente novamente.',
+      'Opa! Algo deu errado ao tentar atualizar o cartão. Tente novamente.',
     deletePrompt: {
-      title: 'Excluir este card?',
+      title: 'Excluir este cartão?',
       message: 'Esta ação não pode ser desfeita.',
     },
-    unableToDelete: 'Não foi possível excluir o card. Tente novamente.',
-    deletingCard: 'Excluindo card...',
+    unableToDelete: 'Não foi possível excluir o cartão. Tente novamente.',
+    deletingCard: 'Excluindo cartão...',
     resetPrompt: {
       title: 'Redefinir progresso de estudo?',
       message: 'Esta ação não pode ser desfeita.',
       confirm: 'Redefinir',
     },
     unableToReset: 'Não foi possível redefinir o progresso. Tente novamente.',
-    addOrRemoveTags: 'Adicionar ou remover tags do card (pastas)',
+    addOrRemoveTags: 'Adicionar ou remover tags do cartão (pastas)',
     resetStudyProgress: 'Redefinir progresso de estudo',
-    rawCardData: 'Dados brutos do card',
+    rawCardData: 'Dados brutos do cartão',
   },
   editDeck: {
     studySettings: 'Configurações de estudo',
@@ -266,9 +267,9 @@ const translations: BaseTranslations = {
       'Os lembretes de estudo estão temporariamente desativados para usuários não cadastrados.',
     hideDefinitions: 'Ocultar definições',
     hideDefinitionsHint:
-      'O app tentará mostrar menos definições em Meus cards e durante o estudo.',
-    deckContainsCards_one: 'Você tem {{count}} card.',
-    deckContainsCards_other: 'Você tem {{count}} cards.',
+      'O app tentará mostrar menos definições em Meus cartões e durante o estudo.',
+    deckContainsCards_one: 'Você tem {{count}} cartão.',
+    deckContainsCards_other: 'Você tem {{count}} cartões.',
     deleteDeck: 'Excluir este idioma',
     deleteDeckPrompt: {
       title: 'Excluir {{languageName}}?',
@@ -282,8 +283,8 @@ const translations: BaseTranslations = {
   },
   generateCards: {
     loadingPreset: 'Carregando preset de tradução...',
-    errorUnable: 'Não foi possível gerar os cards. Tente novamente.',
-    intro: 'Digite o que precisa e o Vocably vai gerar cards para você.',
+    errorUnable: 'Não foi possível gerar os cartões. Tente novamente.',
+    intro: 'Digite o que precisa e o Vocably vai gerar cartões para você.',
     experimental:
       'Este é um recurso experimental. <feedback>Me avise</feedback> se encontrar bugs ou tiver sugestões.',
     examplesToTry: 'Alguns exemplos para experimentar:',
@@ -291,8 +292,8 @@ const translations: BaseTranslations = {
     exampleAnimals: 'animais',
     examplePopularIdioms: 'expressões populares',
     placeholder: 'Qualquer coisa...',
-    generating: 'Gerando cards...',
-    followingWillBeGenerated: 'Os seguintes cards serão gerados:',
+    generating: 'Gerando cartões...',
+    followingWillBeGenerated: 'Os seguintes cartões serão gerados:',
   },
   languageSelector: {
     addNewLanguage: 'Adicionar novo idioma',
@@ -314,8 +315,8 @@ const translations: BaseTranslations = {
     lookUpFailedMessage:
       'Opa! Algo deu errado durante a busca. Tente novamente mais tarde.',
     searchPlaceholder: 'Qualquer palavra em qualquer idioma',
-    lookingForCollections: 'Procurando coleções de cards?',
-    tryAiGenerator: 'Experimente o gerador de cards com IA',
+    lookingForCollections: 'Procurando coleções de cartões?',
+    tryAiGenerator: 'Experimente o gerador de cartões com IA',
     questionsOrSuggestions: 'Dúvidas ou sugestões?',
     connectOnTelegram: 'Falar pelo Telegram',
     joinDiscord: 'Entrar no Discord',
@@ -336,7 +337,7 @@ const translations: BaseTranslations = {
     },
     enabledFor: 'Ativado para {{languageString}}',
     remindersDescription:
-      'Os lembretes de estudo são enviados uma vez por dia para você revisar seus cards de {{languageName}}.',
+      'Os lembretes de estudo são enviados uma vez por dia para você revisar seus cartões de {{languageName}}.',
     failedTitle: 'Lembretes de estudo falharam',
     failedAndroidMessage:
       'Não foi possível configurar as notificações automaticamente. Ative-as nas configurações do app.',
@@ -354,7 +355,7 @@ const translations: BaseTranslations = {
     loading: 'Carregando...',
     finish: 'Finalizar',
     takeOneMoreRound: 'Mais uma rodada',
-    cardUpdateFailedTitle: 'Erro: falha ao atualizar o card',
+    cardUpdateFailedTitle: 'Erro: falha ao atualizar o cartão',
     cardUpdateNetworkError:
       'Sua resposta não foi salva por causa da perda de conexão. A sessão vai parar e retomar a partir da resposta que falhou.',
     cardUpdateTechnicalError:
@@ -373,7 +374,7 @@ const translations: BaseTranslations = {
     },
     cardBack: {
       emptyCardMessage:
-        'Este card não tem traduções nem definições. Edite este card.',
+        'Este cartão não tem traduções nem definições. Edite este cartão.',
     },
     multiChoice: {
       showCorrectAnswer: 'Mostrar a resposta correta',
@@ -418,12 +419,12 @@ const translations: BaseTranslations = {
   },
   exportDeck: {
     title: 'Exportar {{languageName}}',
-    loadingCards: 'Carregando cards...',
+    loadingCards: 'Carregando cartões...',
     advancedExportInfo:
       'Uma funcionalidade de exportação mais avançada está disponível apenas no navegador para usuários cadastrados.',
     loginWithAccount: 'Entrar com sua conta',
     deprecatedCardsExcluded:
-      'Alguns cards foram excluídos porque foram criados com um provedor de dicionário obsoleto.',
+      'Alguns cartões foram excluídos porque foram criados com um provedor de dicionário obsoleto.',
     copyToClipboard: 'Copiar para a área de transferência',
     copiedToClipboard: 'Copiado para a área de transferência.',
   },
@@ -459,7 +460,7 @@ const translations: BaseTranslations = {
       translatesWords: 'O Vocably traduz palavras e cria flashcards como este:',
       fallbackNote: 'Nota do autor do Vocably',
       fallbackBody:
-        'Estes cards de exemplo são imprecisos e confusos. Peço desculpas por isso. Estou trabalhando em exemplos precisos para o onboarding de usuários que estudam {{sourceLang}} e falam {{targetLang}}.',
+        'Estes cartões de exemplo são imprecisos e confusos. Peço desculpas por isso. Estou trabalhando em exemplos precisos para o onboarding de usuários que estudam {{sourceLang}} e falam {{targetLang}}.',
       saveFlashcardsBefore: 'Você pode salvar',
       saveFlashcardsAfter:
         'seus flashcards e estudá-los com repetição espaçada.',
@@ -505,7 +506,7 @@ const translations: BaseTranslations = {
     editTag: 'Editar {{title}}',
     swipeLeftToEdit: 'Deslize para a esquerda para editar a tag.',
     swipeRightToDelete:
-      'Deslize para a direita para excluir a tag. Seus cards não serão excluídos.',
+      'Deslize para a direita para excluir a tag. Seus cartões não serão excluídos.',
     removeTagError: 'Ocorreu um erro ao remover a tag. Tente novamente.',
     updateTagError: 'Ocorreu um erro ao atualizar a tag. Tente novamente.',
     add: 'Adicionar',
@@ -540,8 +541,8 @@ const translations: BaseTranslations = {
   },
   tips: {
     menu: {
-      editCards: 'Editar cards',
-      groupCards: 'Agrupar cards (em pastas)',
+      editCards: 'Editar cartões',
+      groupCards: 'Agrupar cartões (em pastas)',
       importExportCsv: 'Importar e exportar CSV',
       studyPlan: 'Plano de estudo',
       androidTranslate:
@@ -555,31 +556,31 @@ const translations: BaseTranslations = {
         'Está faltando alguma funcionalidade importante ou só quer compartilhar sua opinião sobre o Vocably? Ficarei feliz em ouvir você.',
     },
     howToEditCards: {
-      title: 'Editar cards',
-      intro: 'Você pode editar os cards de duas formas:',
+      title: 'Editar cartões',
+      intro: 'Você pode editar os cartões de duas formas:',
       myCardsItem:
-        '• <bold>Tela Meus cards</bold>: deslize um card para a esquerda para ver o menu de edição.',
+        '• <bold>Tela Meus cartões</bold>: deslize um cartão para a esquerda para ver o menu de edição.',
       studySessionItem:
         '• <bold>Sessão de estudo</bold>: toque no botão «Editar» (<editIcon/>).',
     },
     howToGroupCards: {
-      title: 'Agrupar cards',
+      title: 'Agrupar cartões',
     },
     howToImportAndExport: {
       title: 'Importar e exportar CSV',
-      importCards: 'Importar cards',
+      importCards: 'Importar cartões',
       importNote:
         '<alertIcon/> A importação está disponível apenas para usuários cadastrados. Você será redirecionado para o site.',
-      exportCards: 'Exportar seus cards de {{languageName}}',
+      exportCards: 'Exportar seus cartões de {{languageName}}',
     },
     howToViewStudyStatistics: {
       title: 'Plano de estudo',
       para1:
-        'O <bold>Plano de Estudo</bold> está ativado por padrão e oferece uma visão geral dos cards programados para hoje, próximos dias e os que estão atrasados e precisam ser revisados. Isso ajuda você a manter o ritmo, recuperar cards atrasados e estudar de forma mais estratégica.',
+        'O <bold>Plano de Estudo</bold> está ativado por padrão e oferece uma visão geral dos cartões programados para hoje, próximos dias e os que estão atrasados e precisam ser revisados. Isso ajuda você a manter o ritmo, recuperar cartões atrasados e estudar de forma mais estratégica.',
       para2:
-        'Para ver seu plano de estudo, vá para a aba <myCards>Meus cards</myCards> e toque no botão <chartBoxIcon/> no canto superior esquerdo.',
+        'Para ver seu plano de estudo, vá para a aba <myCards>Meus cartões</myCards> e toque no botão <chartBoxIcon/> no canto superior esquerdo.',
       para3:
-        '<bold>Importante:</bold> o plano de estudo não está disponível quando os cards são selecionados aleatoriamente. Para desativar a seleção aleatória, vá em <studySettings>Configurações de estudo</studySettings>.',
+        '<bold>Importante:</bold> o plano de estudo não está disponível quando os cartões são selecionados aleatoriamente. Para desativar a seleção aleatória, vá em <studySettings>Configurações de estudo</studySettings>.',
     },
   },
   shareIntent: {
