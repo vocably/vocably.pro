@@ -24,8 +24,8 @@ initializePaddle({
   debug: !environment.production,
 });
 
-posthog.init('phc_vke56i7RTlBbFYHZHsoH7VhgWi2DwvKtEzusfcFemgT', {
-  api_host: 'https://api-b.vocably.pro',
+posthog.init('phc_zSkRhQ7tE4RDFRdxIVXzWwJ66ACL9QAHnyrRpRknyHj', {
+  api_host: 'https://api-e.vocably.pro',
   person_profiles: 'identified_only',
 });
 
