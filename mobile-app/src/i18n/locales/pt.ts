@@ -402,7 +402,7 @@ const translations: BaseTranslations = {
       '12': 'Cada palavra que você aprende te aproxima de entender uma nova cultura.',
       '13': 'Aprender idiomas é uma maratona, não um sprint. Você está indo bem!',
       '14': 'A persistência é o ingrediente secreto para se tornar fluente. Continue assim!',
-      '15': 'Prática não faz a perfeição — faz o progresso, e isso é o que importa.',
+      '15': 'A prática é a chave para o sucesso no aprendizado de línguas. Você está no caminho certo!',
       '16': 'Um segundo idioma não é apenas uma habilidade, mas um presente que continua dando.',
       '17': 'Cada vez que você estuda, está reprogramando seu cérebro para o sucesso.',
       '18': 'Quem aprende idiomas é um explorador do mundo disfarçado.',

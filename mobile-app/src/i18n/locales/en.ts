@@ -399,7 +399,7 @@ const translations = {
       '12': 'Each word you learn brings you closer to understanding a new culture.',
       '13': "Language learning is a marathon, not a sprint. You're doing great!",
       '14': 'Persistence is the secret ingredient in becoming fluent. Keep going!',
-      '15': "Practice doesn't make perfect — it makes progress, and that's what matters.",
+      '15': 'Practice is the key to success in language learning. You are on the right track!',
       '16': 'A second language is not just a skill, but a gift that keeps giving.',
       '17': "Each time you study, you're rewriting your brain for success.",
       '18': 'A language learner is a world explorer in disguise.',

@@ -391,7 +391,7 @@ const translations: BaseTranslations = {
       '12': 'Mỗi từ bạn học đưa bạn đến gần hơn với một nền văn hóa mới.',
       '13': 'Học ngôn ngữ là một cuộc marathon, không phải cuộc chạy nước rút. Bạn đang làm rất tốt!',
       '14': 'Sự bền bỉ là bí quyết để trở nên thông thạo. Hãy tiếp tục!',
-      '15': 'Luyện tập không tạo ra sự hoàn hảo — nó tạo ra sự tiến bộ, và điều đó mới quan trọng.',
+      '15': 'Luyện tập là chìa khóa dẫn đến thành công trong việc học ngôn ngữ. Bạn đang đi đúng hướng đấy!"',
       '16': 'Một ngôn ngữ thứ hai không chỉ là một kỹ năng, mà là món quà cho đi không ngừng.',
       '17': 'Mỗi lần bạn học, bạn đang lập trình lại bộ não của mình để thành công.',
       '18': 'Người học ngôn ngữ là một nhà thám hiểm thế giới trá hình.',
