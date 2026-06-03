@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "reset-ios": "rm -rf ios/build ios/Pods && npx pod-install",
-    "reset-android": "rm -rf android/.gradle android/build android/app/build",
+    "reset-android": "rm -rf android/.gradle android/build android/app/build && find android -name .cxx -type d -prune -exec rm -rf {} +",
     "deploy-ios-dev": "SENTRY_DISABLE_AUTO_UPLOAD=true npm run setup-safari-extension-dev && (cd ios && fastlane ios build && fastlane ios beta)",
     "deploy-ios-prod": "npm run setup-safari-extension-prod && (npm run setup-prod-env && cd ios && fastlane ios build && npm run setup-dev-env && fastlane ios beta) && npm run setup-safari-extension-dev",
     "deploy-android": "(npm run setup-prod-env && cd android && fastlane android beta && npm run setup-dev-env)",

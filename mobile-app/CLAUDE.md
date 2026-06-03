@@ -174,9 +174,14 @@ Files with `.ios.tsx` or `.android.tsx` extensions for platform-specific impleme
 
 ```bash
 npm run reset-ios          # Clear iOS build artifacts
-npm run reset-android      # Clear Android build artifacts
+npm run reset-android      # Clear Android build artifacts (incl. stale .cxx native caches)
 cd ios && pod install      # Reinstall CocoaPods (iOS only)
 ```
+
+If an Android build/deploy fails in CMake with `Imported target "ReactAndroid::jsi"
+includes non-existent path .../.gradle/caches/.../transforms/...`, the `.cxx` native
+build cache is stale (it hard-codes a Gradle transforms path that has since been
+evicted). Run `npm run reset-android` to clear it.
 
 ### Metro Bundler
 
