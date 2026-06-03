@@ -1,6 +1,7 @@
-vocably-play-sound {
-  display: inline-block;
-  vertical-align: baseline;
+vocably-play-sound,
+:host {
+  display: inline-flex;
+  vertical-align: middle;
   // Reddit sets visibility: hidden for custom elements
   visibility: visible !important;
 }

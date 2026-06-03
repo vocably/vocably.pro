@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Vocably: Language Flashcards",
   "description": "Translate and create flashcards on any website or YouTube. Study the flashcards on your mobile device.",
-  "version": "1.760.1",
+  "version": "1.958.0",
 
   "icons": {
     "16": "images/icon-16x16.png",

@@ -10,9 +10,8 @@
  */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-var __webpack_exports__ = {};
 
-;// CONCATENATED MODULE: ../../node_modules/@vocably/hermes/dist/esm/index.js
+;// ../../node_modules/@vocably/hermes/dist/esm/index.js
 let browserEnv;
 if (typeof chrome !== 'undefined') {
     browserEnv = chrome;
@@ -78,7 +77,7 @@ const createExternalMessage = (identifier) => {
     ];
 };
 
-;// CONCATENATED MODULE: ../extension-messages/dist/esm/index.js
+;// ../extension-messages/dist/esm/index.js
 
 const createScope = (scope) => (identifier) => createMessage(`${scope}.${identifier}`);
 const createScopedMessage = createScope('vocably');
@@ -87,7 +86,7 @@ const [getSettings, onGetSettingsRequest] = createScopedMessage('getSettings');
 const [setSettings, onSetSettingsRequest] = createScopedMessage('setSettings');
 const [isActive, onIsActiveRequest] = createScopedMessage('isActive');
 const [isEligibleForTrial, onIsEligibleForTrialRequest] = createScopedMessage('isEligibleForTrial');
-const [getMaxCards, onGetMaxCardsRequest] = createScopedMessage('getMaxCards');
+const [getCardsLimit, onGetCardsLimitRequest] = createScopedMessage('getCardsLimit');
 const [getUserEmail, onGetUserEmail] = createScopedMessage('getUserEmail');
 const [analyze, onAnalyzeRequest] = createScopedMessage('analyze');
 const [explain, onExplainRequest] = createScopedMessage('explain');
@@ -98,7 +97,6 @@ const [listTargetLanguages, onListTargetLanguagesRequest] = createScopedMessage(
 const [getLocationLanguage, onGetLocationLanguageRequest] = createScopedMessage('getLocationLanguage');
 const [saveLocationLanguage, onSaveLocationLanguageRequest] = createScopedMessage('saveLocationLanguage');
 const [getLanguagePairs, onGetLanguagePairs] = createScopedMessage('getLanguagePairs');
-const [cleanUp, onCleanUpRequest] = createScopedMessage('cleanUp');
 const [ping, onPing] = createScopedMessage('ping');
 const [getInternalProxyLanguage, onGetInternalProxyLanuage] = createScopedMessage('getInternalProxyLanguage');
 const [setInternalProxyLanguage, onSetInternalProxyLanguage] = createScopedMessage('setInternalProxyLanguage');
@@ -122,8 +120,9 @@ const [attachTag, onAttachTag] = createScopedMessage('attachTag');
 const [detachTag, onDetachTag] = createScopedMessage('detachTag');
 const [updateTag, onUpdateTag] = createScopedMessage('updateTag');
 const [deleteTag, onDeleteTag] = createScopedMessage('deleteTag');
+const [analyzeUnitsOfSpeech, onAnalyzeUnitsOfSpeech] = createScopedMessage('analyzeUnitsOfSpeech');
 
-;// CONCATENATED MODULE: ./src/play-audio.ts
+;// ./src/play-audio.ts
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {

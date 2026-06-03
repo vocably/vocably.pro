@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		wZjZZJWMl2AveGOw3jBweU4whZk=
+		dwKhYuRs1G0P9rq2w590qJfmvB0=
 		</data>
 		<key>Resources/Base.lproj/Main.html</key>
 		<data>
@@ -18,19 +18,19 @@
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
-		N5mlsP+so+NA03dhE69GfMxGdvQ=
+		A13ueYQm6EAy7RDghXQpHea7+7I=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<data>
-		PIXYgVoF1oFQ64mgxj8Q4BztwYA=
+		/N4bE2XQcBENOzynZKbYfkAx+yM=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<data>
-		Hty72uv2m3CUP+GujDZ9mzOrSOg=
+		LGSuOox+fvJD/0YFz7pSRXHldM0=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<data>
-		YvCM37zeJz2LSRee3TIwWtfg42s=
+		R80WMkKskleashDpEwmKoGzNreo=
 		</data>
 		<key>Resources/Icon.png</key>
 		<data>
@@ -204,7 +204,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			EHJeW/C4xHW1PM8TCpZZgSnw1A8=
+			b3MDM3E+wksAmggsz+0D3Go6WX4=
 			</data>
 			<key>requirement</key>
 			<string>identifier "pro.vocably.Vocably.Extension" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Dmytro Snisarenko (X2D37S38M5)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -220,7 +220,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RjIai67CwPG2rzRAzMZiA1QxOoU8xoQPxuhgSj7QLIQ=
+			IvQl8Xuq0iMsPzuVqYkFpqTOZXQg6qIW14BeGs1Q79I=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.html</key>
@@ -234,28 +234,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cHhm/E5bNybTAx55OA7zvoaMFKhBEXNMFn2vL5Hos68=
+			jqYg16f6muWTx5pips+Wlipl5v8jg4rBOZjlSN1L5sg=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wVTHvOOGJ3IG/6V59XYv35zeg9k6TqartdqEENrDZL8=
+			cGY+/OwFdWKDeyNuB5+ntSEwjHh7ggN17J6ifNwT/bU=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TdXhVX0mSyvAWrrq883oMX5MCcnn80BKy+uI+lD74yc=
+			4uY1yI+QD4NRymHN8gbombPeFQ82caMcjMx6q5h6k6w=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DPR7tvc3JXRzJMH/YFnH0c1o1V6BjQCXCe9Y3uB45+g=
+			guAv8Hf8fLNR2fbPSErJHFUf4l0LHUXoMl0vS96M7iY=
 			</data>
 		</dict>
 		<key>Resources/Icon.png</key>
