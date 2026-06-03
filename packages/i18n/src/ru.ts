@@ -581,7 +581,7 @@ export const ru: Record<LanguageTranslationOption, string> = {
   proadverb: 'про-наречие',
   proadjective: 'про-прилагательное',
   ideophone: 'идеофон',
-  expletive: 'экспletив',
+  expletive: 'эксплетив',
   subordinator: 'подчинительный союз',
   coordinator: 'сочинительный союз',
   interrogative: 'вопросительное слово',

@@ -39,7 +39,7 @@ There is no testing or linting configured for this project.
 
 ## User interface language
 
-The system interface expected to be translated into following languages:
+The system interface is expected to be translated into the following languages:
 
 - English (en) - default
 - Russian (ru)
@@ -50,6 +50,8 @@ The system interface expected to be translated into following languages:
 - Vietnamese (vi)
 
 The translation files are located in `src/i18n/locales`.
+
+`src/i18n/lolcales/en.ts` is used ased as baseline that provides types for other translation typescript files.
 
 Avoid plurals app states (e.g. "Загружаю" instead of "Загружаем"). There is only one person behind the app. Using plurals as "We" or "Us" is not appropriate.
 

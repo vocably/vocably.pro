@@ -3,41 +3,18 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { detectInitialLocale } from './detectLocale';
 import { languageTranslations } from '@vocably/i18n';
-
-console.log('i18n: loading locales', languageTranslations);
-
-// `require` (rather than ESM default import) sidesteps the local tsconfig's
-// missing esModuleInterop relay; the bundler treats JSON imports the same way.
-const en = {
-  ...require('./locales/en.json'),
-  language: languageTranslations.en,
-};
-const es = {
-  ...require('./locales/es.json'),
-  language: languageTranslations.es,
-};
-const pt = {
-  ...require('./locales/pt.json'),
-  language: languageTranslations.pt,
-};
-const ru = {
-  ...require('./locales/ru.json'),
-  language: languageTranslations.ru,
-};
-const tr = {
-  ...require('./locales/tr.json'),
-  language: languageTranslations.tr,
-};
-const uk = {
-  ...require('./locales/uk.json'),
-  language: languageTranslations.uk,
-};
-const vi = {
-  ...require('./locales/vi.json'),
-  language: languageTranslations.vi,
-};
-
 import { DEFAULT_LOCALE } from './supportedLocales';
+import { MakeFlexibleSchema } from './types';
+
+import en from './locales/en';
+export type BaseTranslations = MakeFlexibleSchema<typeof en>;
+
+import es from './locales/es';
+import pt from './locales/pt';
+import ru from './locales/ru';
+import tr from './locales/tr';
+import uk from './locales/uk';
+import vi from './locales/vi';
 
 void i18n.use(initReactI18next).init({
   resources: {
