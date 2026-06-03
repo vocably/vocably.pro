@@ -218,7 +218,7 @@ const translations: BaseTranslations = {
       headOverToLookUp:
         'Ve a la pestaña Buscar para encontrar y añadir nuevas palabras. Vocably es un diccionario con un sistema de aprendizaje integrado.',
       headOverToGenerator:
-        'O usa el generador de tarjetas para crear tu primera colección.',
+        'O usa el generador de tarjetas para crear algunas tarjetas de estudio.',
       goToLookUp: 'Ir a Buscar',
       goToGenerator: 'Utilizar el generador de tarjetas',
       noCardsForSearch:

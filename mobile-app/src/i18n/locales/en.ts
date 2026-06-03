@@ -217,7 +217,7 @@ const translations = {
       headOverToLookUp:
         'Head over to the Look Up tab to find and add some new words. Vocably is a dictionary with a built-in learning system.',
       headOverToGenerator:
-        'Or use the card generator to create your first collection of cards.',
+        'Or use the card generator to create some study cards.',
       goToLookUp: 'Go to Look up',
       goToGenerator: 'Use card generator',
       noCardsForSearch: 'No cards found for <bold>{{searchText}}</bold>.',

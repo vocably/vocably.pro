@@ -218,7 +218,7 @@ const translations: BaseTranslations = {
       headOverToLookUp:
         'Yeni kelimeler bulup eklemek için Ara sekmesine geç. Vocably, yerleşik bir öğrenme sistemine sahip bir sözlüktür.',
       headOverToGenerator:
-        'Ya da kart oluşturucuyu kullanarak ilk koleksiyonunu oluştur.',
+        'Ya da kart oluşturucuyu kullanarak çalışma kartları oluştur.',
       goToLookUp: "Ara'ya git",
       goToGenerator: 'Kart oluşturucuyu kullan',
       noCardsForSearch: '<bold>{{searchText}}</bold> için kart bulunamadı.',

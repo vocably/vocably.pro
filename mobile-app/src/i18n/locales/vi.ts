@@ -212,7 +212,7 @@ const translations: BaseTranslations = {
       headOverToLookUp:
         'Hãy chuyển sang tab Tra cứu để tìm và thêm từ mới. Vocably là từ điển tích hợp hệ thống học tập.',
       headOverToGenerator:
-        'Hoặc dùng trình tạo thẻ học để tạo bộ sưu tập đầu tiên của bạn.',
+        'Hoặc dùng trình tạo thẻ học để tạo một vài thẻ học.',
       goToLookUp: 'Đến Tra cứu',
       goToGenerator: 'Sử dụng trình tạo thẻ học',
       noCardsForSearch:
