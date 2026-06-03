@@ -24,7 +24,7 @@ import { generateSeoSearchSitemap } from './generateSeoSearchSitemap';
 import { createHash } from 'node:crypto';
 import { cardToLocationHash } from '@vocably/model-operations';
 
-const globalVersion = 2;
+const globalVersion = 3;
 
 type ContentOptions = {
   word: string;
