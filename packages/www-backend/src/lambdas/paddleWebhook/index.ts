@@ -6,6 +6,7 @@ import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
 import { getSub } from '../../utils/getSub';
 import { paddle } from './paddle';
+import { isEmail } from '../../utils/isEmail';
 
 export const paddleWebhook = async (
   event: APIGatewayProxyEvent
@@ -35,9 +36,12 @@ export const paddleWebhook = async (
         return eventEntity;
       }),
       mergeMap(async (eventEntity) => {
-        const subResult = await getSub(
-          eventEntity.data.customData['revenue_cat_id']
-        );
+        const subResult = isEmail(eventEntity.data.customData['revenue_cat_id'])
+          ? await getSub(eventEntity.data.customData['revenue_cat_id'])
+          : {
+              success: true,
+              value: eventEntity.data.customData['revenue_cat_id'],
+            };
 
         if (subResult.success === false) {
           throw new Error(
