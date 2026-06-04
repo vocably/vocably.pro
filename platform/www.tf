@@ -178,6 +178,6 @@ resource "null_resource" "www_upload" {
   }
 
   provisioner "local-exec" {
-    command = "aws s3 sync ${local.www_dist}  s3://${aws_s3_bucket.www.id} --delete"
+    command = "aws s3 sync ${local.www_dist}  s3://${aws_s3_bucket.www.id} --delete --size-only"
   }
 }
