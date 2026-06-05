@@ -4,6 +4,7 @@ import {
   Result,
   ReverseAnalysis,
   ReverseAnalyzePayload,
+  Translation,
   unitOfSpeechTypes,
   ValidAnalysisItems,
 } from '@vocably/model';
@@ -16,6 +17,41 @@ import {
   ValidTranslations,
 } from './fetchPossibleTranslations';
 import { PartOfSpeech } from './getPartsOfSpeech';
+import { isQuiteLikelyAWord } from './isQuiteLikelyAWord';
+import { isOneWord } from './isOneWord';
+
+const wordPartsOfSpeech = [
+  'noun',
+  'pronoun',
+  'verb',
+  'phrasal verb',
+  'modal verb',
+  'adjective',
+  'adverb',
+  'preposition',
+  'conjunction',
+  'interjection',
+  'determiner',
+  'article',
+];
+
+export const isLikelyAUnitOfSpeech = (translation: Translation) => {
+  if (isOneWord(translation.target)) {
+    return true;
+  }
+
+  if (
+    wordPartsOfSpeech.some(
+      (wordPartsOfSpeech) =>
+        translation.partOfSpeech &&
+        translation.partOfSpeech.toLowerCase() === wordPartsOfSpeech
+    )
+  ) {
+    return true;
+  }
+
+  return false;
+};
 
 export const buildReverseResultYes = async (
   payload: ReverseAnalyzePayload,
@@ -41,7 +77,10 @@ export const buildReverseResultYes = async (
         });
       }
 
-      if (unitOfSpeechTypes.includes(inputAnalysis.type)) {
+      if (
+        unitOfSpeechTypes.includes(inputAnalysis.type) ||
+        isLikelyAUnitOfSpeech(reverseTranslation)
+      ) {
         return unitOfSpeechAnalysis({
           source: reverseTranslation.target,
           sourceLanguage: payload.sourceLanguage,

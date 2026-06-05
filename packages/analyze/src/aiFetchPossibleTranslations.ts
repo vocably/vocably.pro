@@ -236,9 +236,7 @@ const sanitizeTranslationVariant =
 const isCompound = (
   detectedInputType: DetectedInputType | undefined
 ): boolean => {
-  return ['phrase', 'sentence', 'idiom'].includes(
-    detectedInputType as DetectedInputType
-  );
+  return ['sentence'].includes(detectedInputType as DetectedInputType);
 };
 
 export const aiFetchPossibleTranslations = async (

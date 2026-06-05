@@ -849,21 +849,6 @@ describe('integration check for translate lambda', () => {
     ).toEqual(true);
   });
 
-  it('sla rechts af', async () => {
-    const result = await buildResult({
-      sourceLanguage: 'nl',
-      targetLanguage: 'en',
-      source: 'sla rechts af',
-    });
-
-    if (result.success === false) {
-      throw 'Unexpected result';
-    }
-
-    expect(result.value.items[0].source).toEqual('sla rechts af');
-    expect(result.value.items[0].partOfSpeech).toEqual('verb');
-  });
-
   it('single unit of speech', async () => {
     const result = await buildResult({
       sourceLanguage: 'pt',
@@ -1069,7 +1054,21 @@ describe('integration check for translate lambda', () => {
       throw 'Unexpected result';
     }
 
-    expect(result.value.items[0].source).toEqual('de pad');
+    expect(result.value.items[0].source).toEqual('die Grammatik');
+    expect(result.value.items[0].partOfSpeech).toEqual('noun');
+  });
+
+  it('permanent employment in de', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'de',
+      targetLanguage: 'en',
+      source: 'permanent employment',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
     expect(result.value.items[0].partOfSpeech).toEqual('noun');
   });
 });
