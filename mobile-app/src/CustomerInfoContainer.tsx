@@ -50,7 +50,7 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     }
 
     const customerId =
-      authStatus['status'] === 'logged-in' ? authStatus.email : authStatus.id;
+      authStatus['status'] === 'logged-in' ? authStatus.sub : authStatus.id;
 
     const customerInfoRefreshed = (customerInfo: CustomerInfo) => {
       setCustomerInfoStatus({

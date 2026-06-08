@@ -334,12 +334,9 @@ export const AuthContainer: FC<{
         Sentry.captureMessage('tokenRefreshFailure', { ...event.payload });
         setError('UNABLE_TO_REFRESH_TOKEN');
 
-        const allValues = await getStorageValuesToLog();
-
         //@ts-ignore
         posthog.capture('tokenRefreshFailure', {
           ...event.payload,
-          ...allValues,
         });
 
         return;
