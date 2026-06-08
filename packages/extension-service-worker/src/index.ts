@@ -55,27 +55,18 @@ import {
 import {
   Analysis,
   AnalyzePayload,
-  Card,
-  DetachedCardItem,
   Facility,
-  GoogleLanguage,
   isCardItem,
   isEligibleForTrial,
   LanguageDeck,
   mapUserAttributes,
   Platform,
   Result,
-  TranslationCard,
   TranslationCards,
 } from '@vocably/model';
-import {
-  analysisItemToCard,
-  buildTagMap,
-  equalCards,
-  updateDetachedCard,
-} from '@vocably/model-operations';
+import { buildTagMap, updateDetachedCard } from '@vocably/model-operations';
 import { createSrsItem } from '@vocably/srs';
-import { get, isEqual, uniq } from 'lodash-es';
+import { get, uniq } from 'lodash-es';
 import posthog from 'posthog-js/dist/module.no-external';
 import { distinctUntilChanged, Observable, switchMap, timer } from 'rxjs';
 import {
@@ -131,13 +122,36 @@ export const registerServiceWorker = (
   posthog.init('phc_zSkRhQ7tE4RDFRdxIVXzWwJ66ACL9QAHnyrRpRknyHj', {
     api_host: 'https://api-e.vocably.pro',
     person_profiles: 'identified_only',
-    persistence: 'localStorage',
+    persistence: 'memory',
     disable_external_dependency_loading: true,
     capture_pageview: false,
     autocapture: false,
     disable_session_recording: true,
     disable_surveys: true,
+    cookieless_mode: 'always',
+    before_send: (event) => {
+      if (event && event.properties) {
+        // 1. Remove standard device metadata properties that can aid fingerprinting
+        delete event.properties['$device_id'];
+        delete event.properties['$device_name'];
+        delete event.properties['$device_model'];
+        delete event.properties['$device_manufacturer'];
+        delete event.properties['$os_version'];
+        delete event.properties['$os_name'];
+
+        // 2. Clear out explicit network or location keys to guarantee anonymity
+        delete event.properties['$ip'];
+        delete event.properties['$geoip_city_name'];
+        delete event.properties['$geoip_country_code'];
+        delete event.properties['$geoip_country_name'];
+      }
+
+      // Return the sanitized event back to the pipeline
+      return event;
+    },
   });
+
+  posthog.identify();
 
   Auth.configure(registerServiceWorkerOptions.auth);
 
@@ -169,15 +183,7 @@ export const registerServiceWorker = (
       .catch(() => false);
 
     if (!posthog._isIdentified()) {
-      getUserAttributes().then((result) => {
-        if (!result.success) {
-          return;
-        }
-
-        posthog.identify(result.value.sub, {
-          email: result.value.email,
-        });
-      });
+      posthog.identify();
     }
 
     return sendResponse(isLoggedIn);
@@ -370,7 +376,7 @@ export const registerServiceWorker = (
     );
 
     posthog.capture('addCard', {
-      card: payload.card,
+      ...payload.card.data,
     });
 
     if (getLanguageDeckResult.success === false) {

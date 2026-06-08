@@ -111,6 +111,6 @@
   "dependencies": {
     "@aws-sdk/client-pinpoint": "^3.750.0",
     "@sneas/telephone": "^1.1.2",
-    "posthog-js": "^1.275.1"
+    "posthog-js": "^1.382.0"
   }
 }
