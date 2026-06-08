@@ -561,6 +561,11 @@ const translations: BaseTranslations = {
       provideFeedback: 'Enviar comentarios',
       feedbackBody:
         '¿Te falta alguna función importante o simplemente quieres compartir tu opinión sobre Vocably? Me encantará leerte.',
+      supportBody:
+        '¿Quieres ayudar a Vocably a crecer? Cualquiera de estas acciones supondría un apoyo increíble para este proyecto.',
+      rate: 'Valorar la app en {{storeName}}',
+      shareOnFacebook: 'Compartir la app con tus amigos en Facebook',
+      shareOnTwitter: 'Compartir la app en Twitter/X',
     },
     howToEditCards: {
       title: 'Editar tarjetas',

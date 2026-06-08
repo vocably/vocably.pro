@@ -10,6 +10,7 @@ import { CustomScrollView } from '../ui/CustomScrollView';
 import { CustomSurface } from '../ui/CustomSurface';
 import { ListItem } from '../ui/ListItem';
 import { GoogleLanguage } from '@vocably/model';
+import { mobileStoreName, mobileStoreUrl } from '../mobilePlatform';
 
 type Props = {};
 
@@ -189,7 +190,10 @@ export const TipsScreen: FC<Props> = () => {
         ></ListItem>
       </CustomSurface>
 
-      <CustomSurface style={{ marginBottom: 8 }}>
+      <View style={{ paddingHorizontal: 16, marginBottom: 8 }}>
+        <Text>{t('tips.menu.feedbackBody')}</Text>
+      </View>
+      <CustomSurface style={{ marginBottom: 32 }}>
         <ListItem
           leftIcon="message-text-outline"
           title={t('tips.menu.provideFeedback')}
@@ -199,9 +203,45 @@ export const TipsScreen: FC<Props> = () => {
           }}
         />
       </CustomSurface>
-      <View style={{ paddingHorizontal: 16 }}>
-        <Text>{t('tips.menu.feedbackBody')}</Text>
+
+      <View style={{ paddingHorizontal: 16, marginBottom: 8 }}>
+        <Text>{t('tips.menu.supportBody')}</Text>
       </View>
+      <CustomSurface style={{ marginBottom: 8 }}>
+        <ListItem
+          order="first"
+          leftIcon="star-outline"
+          title={t('tips.menu.rate', { storeName: mobileStoreName })}
+          onPress={() => {
+            posthog.capture('tip-rate-clicked');
+            Linking.openURL(mobileStoreUrl);
+          }}
+        />
+        <Divider />
+        <ListItem
+          order="middle"
+          leftIcon="facebook"
+          title={t('tips.menu.shareOnFacebook')}
+          onPress={() => {
+            posthog.capture('tip-facebook-clicked');
+            Linking.openURL(
+              'https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fvocably.pro'
+            );
+          }}
+        />
+        <Divider />
+        <ListItem
+          order="last"
+          leftIcon="twitter"
+          title={t('tips.menu.shareOnTwitter')}
+          onPress={() => {
+            posthog.capture('tip-twitter-clicked');
+            Linking.openURL(
+              'https://twitter.com/intent/tweet?url=https%3A%2F%2Fvocably.pro'
+            );
+          }}
+        />
+      </CustomSurface>
     </CustomScrollView>
   );
 };

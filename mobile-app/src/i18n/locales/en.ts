@@ -558,6 +558,11 @@ const translations = {
       provideFeedback: 'Provide feedback',
       feedbackBody:
         'Are you missing any crucial feature or simply want to share your opinion about Vocably with me? I would love to hear from you.',
+      supportBody:
+        'Want to help Vocably grow? Any of these actions would make an incredible difference for this project.',
+      rate: 'Rate the app on {{storeName}}',
+      shareOnFacebook: 'Share the app with your friends on Facebook',
+      shareOnTwitter: 'Share the app on Twitter/X',
     },
     howToEditCards: {
       title: 'Edit cards',

@@ -545,6 +545,11 @@ const translations: BaseTranslations = {
       provideFeedback: 'Gửi phản hồi',
       feedbackBody:
         'Bạn thấy thiếu tính năng quan trọng nào hay chỉ muốn chia sẻ ý kiến về Vocably? Tôi rất muốn nghe từ bạn.',
+      supportBody:
+        'Bạn muốn giúp Vocably phát triển? Bất kỳ hành động nào trong số này đều sẽ tạo ra sự khác biệt tuyệt vời cho dự án này.',
+      rate: 'Đánh giá ứng dụng trên {{storeName}}',
+      shareOnFacebook: 'Chia sẻ ứng dụng với bạn bè trên Facebook',
+      shareOnTwitter: 'Chia sẻ ứng dụng trên Twitter/X',
     },
     howToEditCards: {
       title: 'Chỉnh sửa thẻ',

@@ -555,6 +555,11 @@ const translations: BaseTranslations = {
       provideFeedback: 'Geri bildirim gönder',
       feedbackBody:
         'Önemli bir özellik mi eksik veya Vocably hakkındaki düşüncelerini benimle paylaşmak mı istiyorsun? Senden haber almayı çok isterim.',
+      supportBody:
+        "Vocably'nin büyümesine yardım etmek ister misin? Bu eylemlerden herhangi biri bu proje için inanılmaz bir fark yaratır.",
+      rate: "{{storeName}}'da uygulamayı değerlendir",
+      shareOnFacebook: "Uygulamayı Facebook'ta arkadaşlarınla paylaş",
+      shareOnTwitter: "Uygulamayı Twitter/X'te paylaş",
     },
     howToEditCards: {
       title: 'Kartları düzenle',
