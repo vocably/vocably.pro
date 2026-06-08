@@ -20,6 +20,7 @@ import { syncUserMetadata } from '../syncAnonymous/syncUserMetadata';
 import { UserMetadataContext } from '../UserMetadataContainer';
 import { AuthContext } from './AuthContainer';
 import { LoginForm } from './LoginForm';
+import { usePostHog } from 'posthog-react-native';
 
 type Props = {
   route: Route<
@@ -34,6 +35,7 @@ export const LoginModal: FC<Props> = ({ route }) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   const { onLogin } = route.params;
+  const posthog = usePostHog();
 
   const [synchronizing, setSynchronizing] = useState(false);
 
@@ -69,6 +71,8 @@ export const LoginModal: FC<Props> = ({ route }) => {
     setSynchronizing(true);
 
     const synchronize = async () => {
+      posthog.capture('anonymous-user-logged-in');
+
       // Wait for one second to make sure the shit went through
       // ToDo: delete this nonsense
       await new Promise((resolve) => setTimeout(resolve, 1000));

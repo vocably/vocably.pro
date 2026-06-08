@@ -70,6 +70,14 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
       [sourceLanguage]: createDefaultLanguageContainerDeck(sourceLanguage),
     });
 
+    posthog.capture('anonymous-registration-form-subbmitted', {
+      nativeLanguage: targetLanguage,
+      studyLanguage: sourceLanguage,
+      mobileOS: Platform.OS,
+      discovered: source ?? selectedSource,
+      discoveredOther: otherSource,
+    });
+
     posthog.capture('$set', {
       $set: {
         nativeLanguage: targetLanguage,

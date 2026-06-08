@@ -4,7 +4,6 @@ import {
   PostHogProvider as OriginalPostHogProvider,
 } from 'posthog-react-native';
 import { FC, PropsWithChildren } from 'react';
-import { postHogCustomStorage } from './postHogCustomStorage';
 
 type Props = {
   options?: PostHogOptions;
@@ -20,9 +19,10 @@ export const PostHogProvider: FC<PropsWithChildren<Props>> = ({
       options={{
         ...options,
         host: 'https://api-e.vocably.pro',
-        customStorage: postHogCustomStorage,
         enableSessionReplay: false,
         disabled: ANALYTICS_DISABLED === 'true',
+        disableGeoip: true,
+        persistence: 'memory',
       }}
       autocapture={false}
     >

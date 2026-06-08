@@ -276,16 +276,9 @@ export const AuthContainer: FC<{
     }
 
     if (authStatusResult.value.status === 'logged-in') {
-      posthog.identify(authStatusResult.value.sub, {
-        email: authStatusResult.value.email,
-      });
-    }
-
-    if (authStatusResult.value.status === 'anonymous-logged-in') {
-      posthog.identify(authStatusResult.value.id);
       posthog.capture('$set', {
         $set: {
-          anonymousId: authStatusResult.value.id,
+          registeredUser: true,
         },
       });
     }
@@ -321,6 +314,8 @@ export const AuthContainer: FC<{
   }, [authStatusResult]);
 
   useEffect(() => {
+    posthog.identify();
+
     return Hub.listen('auth', async (event) => {
       console.log('Auth event', event);
 
@@ -356,7 +351,6 @@ export const AuthContainer: FC<{
       }
 
       if (event.payload.event === 'signedOut') {
-        posthog.reset();
         setError(null);
         await setAuthStatus({
           status: 'undefined',
