@@ -1,17 +1,29 @@
 import { useNavigation } from '@react-navigation/native';
 import { usePostHog } from 'posthog-react-native';
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Linking, Platform, View } from 'react-native';
 import { Divider, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { LanguagesContext } from '../languages/LanguagesContainer';
 import { useTranslationPreset } from '../TranslationPreset/useTranslationPreset';
 import { CustomScrollView } from '../ui/CustomScrollView';
 import { CustomSurface } from '../ui/CustomSurface';
 import { ListItem } from '../ui/ListItem';
+import { GoogleLanguage } from '@vocably/model';
 
 type Props = {};
+
+const grammarCheckerExamples: Partial<Record<GoogleLanguage, string>> = {
+  en: 'She is doing a coffee.',
+  'en-GB': 'She is doing a coffee.',
+  nl: 'Ik vind dat leuk, omdat het is lekker.',
+  de: 'Ich bin kalt.',
+  es: 'Yo soy veinte años viejo.',
+  it: 'Sto andandosene a casa.',
+  no: 'Det er en stor hus.',
+  'pt-PT': 'Eu estou comendo o pequeno-almoço.',
+  pt: 'Estou a trabalhar agora.',
+};
 
 export const TipsScreen: FC<Props> = () => {
   const insets = useSafeAreaInsets();
@@ -20,8 +32,6 @@ export const TipsScreen: FC<Props> = () => {
   const { t } = useTranslation();
 
   const translationPreset = useTranslationPreset();
-
-  const { languages } = useContext(LanguagesContext);
 
   if (translationPreset.status !== 'known') {
     return <></>;
@@ -126,12 +136,55 @@ export const TipsScreen: FC<Props> = () => {
         )}
         <Divider style={{ alignSelf: 'stretch' }} />
         <ListItem
-          order="last"
           leftIcon="laptop"
+          order="middle"
           title={t('tips.menu.desktopExtension')}
           onPress={() => {
             posthog.capture('tip-desktop-extension-clicked');
             Linking.openURL(`https://vocably.pro`);
+          }}
+        ></ListItem>
+        <Divider style={{ alignSelf: 'stretch' }} />
+        <ListItem
+          order="last"
+          leftIcon="spellcheck"
+          title={t('tips.menu.grammarChecker')}
+          onPress={() => {
+            const url = new URL('https://vocably.pro/grammar.html');
+            if (
+              translationPreset.status === 'known' &&
+              translationPreset.preset.sourceLanguage
+            ) {
+              url.searchParams.append(
+                'language',
+                translationPreset.preset.sourceLanguage
+              );
+
+              if (
+                grammarCheckerExamples[
+                  translationPreset.preset.sourceLanguage as GoogleLanguage
+                ]
+              ) {
+                url.searchParams.append(
+                  'text',
+                  grammarCheckerExamples[
+                    translationPreset.preset.sourceLanguage as GoogleLanguage
+                  ] ?? ''
+                );
+              }
+            }
+
+            if (
+              translationPreset.status === 'known' &&
+              translationPreset.preset.translationLanguage
+            ) {
+              url.searchParams.append(
+                'explanationLanguage',
+                translationPreset.preset.translationLanguage
+              );
+            }
+
+            Linking.openURL(url.toString());
           }}
         ></ListItem>
       </CustomSurface>

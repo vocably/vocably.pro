@@ -540,6 +540,8 @@ const translations: BaseTranslations = {
         'Dịch bất kỳ từ nào trên bất kỳ trang web nào với tiện ích Vocably cho iOS Safari.',
       desktopExtension:
         'Bạn dùng Chrome hay Safari trên máy tính? Hãy thử tiện ích mở rộng Vocably.',
+      grammarChecker:
+        'Hãy thử công cụ kiểm tra ngữ pháp mới. Nó không chỉ sửa lỗi mà còn giải thích tại sao.',
       provideFeedback: 'Gửi phản hồi',
       feedbackBody:
         'Bạn thấy thiếu tính năng quan trọng nào hay chỉ muốn chia sẻ ý kiến về Vocably? Tôi rất muốn nghe từ bạn.',

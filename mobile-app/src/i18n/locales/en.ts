@@ -553,6 +553,8 @@ const translations = {
         'Translate any word on any website with Vocably iOS Safari Extension.',
       desktopExtension:
         'Are you using Chrome or Safari on your computer? Try the Vocably extension.',
+      grammarChecker:
+        'Try the new grammar checker tool. It will not only fix your mistakes but also explain why.',
       provideFeedback: 'Provide feedback',
       feedbackBody:
         'Are you missing any crucial feature or simply want to share your opinion about Vocably with me? I would love to hear from you.',

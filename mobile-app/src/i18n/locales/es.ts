@@ -556,6 +556,8 @@ const translations: BaseTranslations = {
         'Traduce cualquier palabra en cualquier web con la extensión de Vocably para iOS Safari.',
       desktopExtension:
         '¿Usas Chrome o Safari en tu ordenador? Prueba la extensión de Vocably.',
+      grammarChecker:
+        'Prueba la nueva herramienta de corrección gramatical. No solo corregirá tus errores, sino que también explicará por qué.',
       provideFeedback: 'Enviar comentarios',
       feedbackBody:
         '¿Te falta alguna función importante o simplemente quieres compartir tu opinión sobre Vocably? Me encantará leerte.',
