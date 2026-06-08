@@ -26,7 +26,6 @@ import {
 import { extensionId } from '../../../../extension';
 import { getFacility } from '../../../getFacility';
 import { GenericInstructionComponent } from '../../generic-instruction/generic-instruction.component';
-import { HighlightComponent } from '../../highlight/highlight.component';
 import { HowToVideoComponent } from '../../how-to-video/how-to-video.component';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ContainerService } from '../../container-service';
@@ -73,7 +72,6 @@ const onboardTargetLanguage = async (targetLanguage: string) => {
     NgIf,
     IonicModule,
     HowToVideoComponent,
-    HighlightComponent,
     MatIcon,
     GenericInstructionComponent,
     TranslocoModule,

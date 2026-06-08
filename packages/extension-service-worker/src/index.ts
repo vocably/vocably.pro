@@ -128,7 +128,7 @@ export const registerServiceWorker = (
     autocapture: false,
     disable_session_recording: true,
     disable_surveys: true,
-    cookieless_mode: 'always',
+    mask_personal_data_properties: true,
     before_send: (event) => {
       if (event && event.properties) {
         // 1. Remove standard device metadata properties that can aid fingerprinting

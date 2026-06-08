@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Auth, CognitoUser } from '@aws-amplify/auth';
 import { mapUserAttributes, UserData } from '@vocably/model';
 import { get } from 'lodash-es';
-import posthog from 'posthog-js';
 import {
   catchError,
   from,
@@ -48,17 +47,6 @@ export class AuthService {
     })
   );
 
-  public waitForCancelHook$ = this.fetchUserData$.pipe(
-    tap((userData) => {
-      this.userData$.next(userData);
-    }),
-    take(1),
-    retry({
-      delay: 1000,
-      count: 5,
-    })
-  );
-
   private refreshUserData$ = new Subject();
 
   constructor() {
@@ -81,14 +69,6 @@ export class AuthService {
 
     this.refreshUserData$.pipe(switchMap(() => refreshUserData$)).subscribe();
     refreshUserData$.subscribe();
-
-    this.userData$.subscribe((userData) => {
-      localStorage.setItem('userSub', userData.sub);
-      localStorage.setItem('userEmail', userData.email);
-      posthog.identify(userData.sub, {
-        email: userData.email,
-      });
-    });
   }
 
   async signIn() {
