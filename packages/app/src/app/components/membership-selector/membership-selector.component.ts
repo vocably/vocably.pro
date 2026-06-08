@@ -57,7 +57,7 @@ export class MembershipSelectorComponent implements OnInit, OnDestroy {
             email: userData.email,
           },
           customData: {
-            revenue_cat_id: userData.sub,
+            revenue_cat_id: userData.email,
           },
           settings: {
             successUrl:

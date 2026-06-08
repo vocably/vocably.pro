@@ -72,7 +72,7 @@ export class IndexPageComponent implements OnInit, OnDestroy {
             switchMap((userData) => {
               const purchases = Purchases.configure(
                 'rcb_npVnGSbfiQAcvvQkQxFrIEiGibAJ',
-                userData.sub
+                userData.email
               );
               return Promise.all([
                 this.authService.isPaidGroup(),
