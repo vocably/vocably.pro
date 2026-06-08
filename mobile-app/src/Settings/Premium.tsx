@@ -27,7 +27,7 @@ export const Premium: FC<Props> = ({
     : false;
 
   return (
-    <View style={{ gap: 4 }}>
+    <View style={{ gap: 4, paddingRight: 12 }}>
       <Text style={{ fontSize: 16, color: theme.colors.secondary }}>
         {t('premium.label')}
       </Text>
