@@ -4,7 +4,8 @@ $input-padding: 12px;
 
 :host {
   --font-size: 16px;
-  --search-text-font-size: 24px;
+  --search-text-font-size: 16px;
+  --search-text-font-weight: inherit;
 
   display: block;
   // Reddit sets visibility: hidden for custom elements
@@ -68,7 +69,7 @@ $input-padding: 12px;
   $submit-width: 40px;
   $border: none;
 
-  --height: calc(var(--search-text-font-size) * 1.6);
+  --height: var(--search-text-height, #{$height});
 
   position: relative;
 
@@ -88,7 +89,7 @@ $input-padding: 12px;
     width: 100%;
     transition: background-color 0.25s ease-in-out;
     font-size: var(--search-text-font-size);
-    font-weight: lighter;
+    font-weight: var(--search-text-font-weight);
 
     &::placeholder {
       color: $v-light-color-muted;
