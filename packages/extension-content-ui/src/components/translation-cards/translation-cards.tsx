@@ -408,7 +408,7 @@ export class VocablyTranslationCards {
                       </button>
                     </div>
                   )}
-                  {!this.isLightweight && isDetachedCardItem(card) && (
+                  {isDetachedCardItem(card) && (
                     <button
                       class={{
                         'vocably-card-action-button': true,

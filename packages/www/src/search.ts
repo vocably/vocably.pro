@@ -128,12 +128,18 @@ if (!existingResultsContainer) {
   searchContainer.appendChild(resultsContainer);
 }
 
+const onLearn = () => {
+  // @ts-ignore
+  new bootstrap.Modal(document.getElementById('myModal')).show();
+};
+
 const existingTranslation = searchContainer.querySelector(
   'vocably-translation'
 );
 
 if (existingTranslation) {
   existingTranslation.playAudioPronunciation = playAudioPronunciation;
+  existingTranslation.addEventListener('addCard', onLearn);
 }
 
 searchForm.addEventListener('valuesChange', (e: CustomEvent<SearchValues>) => {
@@ -197,6 +203,7 @@ const analyze = async (searchValues: SearchValues) => {
   translation.result = createTranslationCards(analyzeResult);
   translation.loading = false;
   translation.playAudioPronunciation = playAudioPronunciation;
+  translation.addEventListener('addCard', onLearn);
 
   resultsContainer.innerHTML = '';
   resultsContainer.appendChild(translation);

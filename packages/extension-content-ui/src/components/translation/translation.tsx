@@ -349,7 +349,10 @@ export class VocablyTranslation {
                 updateTag={this.updateTag}
                 deleteTag={this.deleteTag}
                 onRemoveCard={(e) => this.removeCard.emit(e.detail)}
-                onAddCard={(e) => this.addCard.emit(e.detail)}
+                onAddCard={(e) => {
+                  e.stopPropagation();
+                  this.addCard.emit(e.detail);
+                }}
                 onWatchMePaying={() => this.watchMePaying.emit()}
                 onResultUpdated={(e) => {
                   this.result = e.detail;
