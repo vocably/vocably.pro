@@ -14,6 +14,42 @@ import { analyze as requestAnalyze } from './search/analyze';
 import { playAudioPronunciation } from './search/playAudioPronunciation';
 import { searchConfig } from './constants';
 
+import posthog from 'posthog-js';
+
+posthog.init('phc_zSkRhQ7tE4RDFRdxIVXzWwJ66ACL9QAHnyrRpRknyHj', {
+  api_host: 'https://api-e.vocably.pro',
+  person_profiles: 'identified_only',
+  persistence: 'memory',
+  disable_external_dependency_loading: true,
+  capture_pageview: false,
+  autocapture: false,
+  disable_session_recording: true,
+  disable_surveys: true,
+  mask_personal_data_properties: true,
+  before_send: (event) => {
+    if (event && event.properties) {
+      // 1. Remove standard device metadata properties that can aid fingerprinting
+      delete event.properties['$device_id'];
+      delete event.properties['$device_name'];
+      delete event.properties['$device_model'];
+      delete event.properties['$device_manufacturer'];
+      delete event.properties['$os_version'];
+      delete event.properties['$os_name'];
+
+      // 2. Clear out explicit network or location keys to guarantee anonymity
+      delete event.properties['$ip'];
+      delete event.properties['$geoip_city_name'];
+      delete event.properties['$geoip_country_code'];
+      delete event.properties['$geoip_country_name'];
+    }
+
+    // Return the sanitized event back to the pipeline
+    return event;
+  },
+});
+
+posthog.identify();
+
 document.body.classList.add('vocably-extension-disabled');
 defineCustomElements();
 
@@ -128,7 +164,10 @@ if (!existingResultsContainer) {
   searchContainer.appendChild(resultsContainer);
 }
 
-const onLearn = () => {
+const onLearn = (event) => {
+  posthog.capture('search-learn-clicked', {
+    ...event.detail.card.data,
+  });
   // @ts-ignore
   new bootstrap.Modal(document.getElementById('myModal')).show();
 };
@@ -138,6 +177,7 @@ const existingTranslation = searchContainer.querySelector(
 );
 
 if (existingTranslation) {
+  posthog.capture('search-seo-page-opened');
   existingTranslation.playAudioPronunciation = playAudioPronunciation;
   existingTranslation.addEventListener('addCard', onLearn);
 }
@@ -176,6 +216,9 @@ const createTranslationCards = (
 
 const analyze = async (searchValues: SearchValues) => {
   track('Search', searchValues);
+  posthog.capture('search-analyze', {
+    ...searchValues,
+  });
 
   updateRepoUrls(searchValues.sourceLanguage);
 
