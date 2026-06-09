@@ -116,6 +116,10 @@ export const buildStaticSearchPages = async ({
     ogDescription: new RegExp(`<meta property="og:description".*?>`, 'gmi'),
     ogTitle: new RegExp(`<meta property="og:title".*?>`, 'gmi'),
     ogUrl: new RegExp(`<meta property="og:url".*?>`, 'gmi'),
+    repoLink: new RegExp(
+      `id="repo-link" href="https://github.com/vocably"`,
+      'gmi'
+    ),
   };
 
   for (const [containerName, expression] of Object.entries(
@@ -211,6 +215,10 @@ export const buildStaticSearchPages = async ({
           .replace(
             replaceExpressions.ogUrl,
             `<meta property="og:url" content="${canonicalUrl}" />`
+          )
+          .replace(
+            replaceExpressions.repoLink,
+            `id="repo-link" href="https://github.com/vocably/${sourceLanguage}"`
           )
           .replace(
             `</head>`,
