@@ -1,4 +1,4 @@
-import { getSub } from './getSub';
+import { getSubByEmail } from './getSubByEmail';
 
 describe('getSub', () => {
   jest.setTimeout(30000);
@@ -9,7 +9,7 @@ describe('getSub', () => {
   }
 
   it('works', async () => {
-    const result = await getSub('test_dev@vocably.pro');
+    const result = await getSubByEmail('test_dev@vocably.pro');
 
     if (result.success === false) {
       console.log(result);

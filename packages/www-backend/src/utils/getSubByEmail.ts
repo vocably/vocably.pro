@@ -6,7 +6,7 @@ import { Result } from '@vocably/model';
 
 const client = new CognitoIdentityProviderClient();
 
-export const getSub = async (email: string): Promise<Result<string>> => {
+export const getSubByEmail = async (email: string): Promise<Result<string>> => {
   const userPoolId = process.env.USER_POOL_ID;
 
   try {

@@ -4,7 +4,7 @@ import { lastValueFrom, mergeMap, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
-import { getSub } from '../../utils/getSub';
+import { getSubByEmail } from '../../utils/getSubByEmail';
 import { paddle } from './paddle';
 import { isEmail } from '../../utils/isEmail';
 
@@ -37,7 +37,7 @@ export const paddleWebhook = async (
       }),
       mergeMap(async (eventEntity) => {
         const subResult = isEmail(eventEntity.data.customData['revenue_cat_id'])
-          ? await getSub(eventEntity.data.customData['revenue_cat_id'])
+          ? await getSubByEmail(eventEntity.data.customData['revenue_cat_id'])
           : {
               success: true,
               value: eventEntity.data.customData['revenue_cat_id'],

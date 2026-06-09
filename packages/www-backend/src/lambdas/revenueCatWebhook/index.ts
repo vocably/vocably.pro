@@ -7,13 +7,13 @@ import {
   nodeSaveUserStaticMetadata,
 } from '@vocably/lambda-shared';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { get } from 'lodash-es';
+import { get, isArray } from 'lodash-es';
 import { lastValueFrom, mergeMap, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
-import { getSub } from '../../utils/getSub';
 import { getPartialStaticMetadata } from './getPartialStaticMetadata';
+import { getSubByAliases } from '../../utils/getSubByAliases';
 
 export const revenueCatWebhook = async (
   event: APIGatewayProxyEvent
@@ -96,7 +96,16 @@ export const revenueCatWebhook = async (
           }
         }
 
-        const subResult = await getSub(action.event.app_user_id);
+        let subResult = await getSubByAliases(
+          isArray(action.event['aliases'])
+            ? action.event['aliases']
+            : [action.event.app_user_id]
+        );
+
+        // One last attempt to get the proper sub
+        if (subResult.success === false) {
+          subResult = await getSubByAliases([action.event.app_user_id]);
+        }
 
         if (subResult.success === false) {
           console.error('Get sub error', subResult);
