@@ -4,8 +4,6 @@ $input-padding: 12px;
 
 :host {
   --font-size: 16px;
-  --search-text-font-size: 16px;
-  --search-text-font-weight: inherit;
 
   display: block;
   // Reddit sets visibility: hidden for custom elements
@@ -88,8 +86,8 @@ $input-padding: 12px;
     display: block;
     width: 100%;
     transition: background-color 0.25s ease-in-out;
-    font-size: var(--search-text-font-size);
-    font-weight: var(--search-text-font-weight);
+    font-size: var(--search-text-font-size, var(--font-size));
+    font-weight: var(--search-text-font-weight, inherit);
 
     &::placeholder {
       color: $v-light-color-muted;
