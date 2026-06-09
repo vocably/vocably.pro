@@ -14,6 +14,7 @@ import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
 import { getPartialStaticMetadata } from './getPartialStaticMetadata';
 import { getSubByAliases } from '../../utils/getSubByAliases';
+import { getEmailBySub } from '../../utils/getEmailBySub';
 
 export const revenueCatWebhook = async (
   event: APIGatewayProxyEvent
@@ -54,7 +55,41 @@ export const revenueCatWebhook = async (
           });
         }
 
+        let subResult = await getSubByAliases(
+          isArray(action.event['aliases'])
+            ? action.event['aliases']
+            : [action.event.app_user_id]
+        );
+
+        // One last attempt to get the proper sub
+        if (subResult.success === false) {
+          subResult = await getSubByAliases([action.event.app_user_id]);
+        }
+
+        if (subResult.success === false) {
+          console.error('Get sub error', subResult);
+          return buildResponse({
+            statusCode: 500,
+            body: JSON.stringify({
+              success: false,
+              reason: `Unable to get sub for "${action.event.app_user_id}".`,
+            }),
+          });
+        }
+
         if (get(action.event, 'environment') === 'SANDBOX') {
+          const emailResult = await getEmailBySub(subResult.value);
+
+          if (emailResult.success === false) {
+            return buildResponse({
+              statusCode: 200,
+              body: JSON.stringify({
+                success: false,
+                reason: `Unable to get sub for sub "${subResult.value}".`,
+              }),
+            });
+          }
+
           const allowedSandboxEmailsResult = await nodeFetchS3File(
             process.env.STATIC_USER_FILES_BUCKET,
             'allowed-sandbox-emails.json'
@@ -83,39 +118,17 @@ export const revenueCatWebhook = async (
 
           if (
             !get(parseResult.value, 'allowedEmails', []).includes(
-              action.event.app_user_id
+              emailResult.value
             )
           ) {
             return buildResponse({
               statusCode: 200,
               body: JSON.stringify({
                 success: false,
-                message: `Unable to perform the operation for not allowed user ${action.event.app_user_id}`,
+                message: `Unable to perform the operation for not allowed user ${emailResult.value}. The user should be mentioned in s3://${process.env.STATIC_USER_FILES_BUCKET}/allowed-sandbox-emails.json.`,
               }),
             });
           }
-        }
-
-        let subResult = await getSubByAliases(
-          isArray(action.event['aliases'])
-            ? action.event['aliases']
-            : [action.event.app_user_id]
-        );
-
-        // One last attempt to get the proper sub
-        if (subResult.success === false) {
-          subResult = await getSubByAliases([action.event.app_user_id]);
-        }
-
-        if (subResult.success === false) {
-          console.error('Get sub error', subResult);
-          return buildResponse({
-            statusCode: 500,
-            body: JSON.stringify({
-              success: false,
-              reason: `Unable to get sub for "${action.event.app_user_id}".`,
-            }),
-          });
         }
 
         const staticMetadataResult = await nodeFetchUserStaticMetadata(
