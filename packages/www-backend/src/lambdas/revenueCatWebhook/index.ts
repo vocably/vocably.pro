@@ -85,7 +85,7 @@ export const revenueCatWebhook = async (
               statusCode: 200,
               body: JSON.stringify({
                 success: false,
-                reason: `Unable to get sub for sub "${subResult.value}".`,
+                reason: `Unable to get email for sub "${subResult.value}".`,
               }),
             });
           }

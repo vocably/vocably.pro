@@ -7,15 +7,19 @@ config();
 
 const execute = promisify(exec);
 
-const userEmail = process.argv[2];
+const userEmailOrSub = process.argv[2];
 
-const listUsers = `aws cognito-idp list-users --user-pool-id ${process.env.USER_POOL_ID} --filter "email=\\"${userEmail}\\""`;
+let sub = userEmailOrSub;
 
-const users = JSON.parse((await execute(listUsers)).stdout);
+if (userEmailOrSub.includes('@')) {
+  const listUsers = `aws cognito-idp list-users --user-pool-id ${process.env.USER_POOL_ID} --filter "email=\\"${userEmailOrSub}\\""`;
 
-console.log('Received users', inspect(users, { depth: null }));
+  const users = JSON.parse((await execute(listUsers)).stdout);
 
-const sub = users.Users[0].Attributes.find((attr) => attr.Name === 'sub').Value;
+  console.log('Received users', inspect(users, { depth: null }));
+
+  sub = users.Users[0].Attributes.find((attr) => attr.Name === 'sub').Value;
+}
 
 let userCardCollections = [];
 
