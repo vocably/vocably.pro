@@ -4,7 +4,7 @@ import {
   identifyUser,
 } from 'aws-amplify/push-notifications';
 import { debounce } from 'lodash-es';
-import { getFlatAttributes } from './auth/getFlatAttributes';
+import { getSessionAttributes } from './auth/getSessionAttributes';
 import { safeFetchAuthSession } from './auth/safeFunctions';
 import { Sentry } from './BetterSentry';
 
@@ -37,10 +37,10 @@ export const notificationsIdentifyUser = debounce(
       };
     }
 
-    const attributes = await getFlatAttributes();
+    const attributesResult = getSessionAttributes(sessionResult.value);
 
-    if (!attributes['sub'] || !attributes['email']) {
-      console.error('Unable to get user sub and email', attributes);
+    if (!attributesResult.success) {
+      console.error('Unable to get user sub and email', sessionResult.value);
       Sentry.captureMessage(
         'Unable to get user sub and email in notificationsIdentifyUser'
       );

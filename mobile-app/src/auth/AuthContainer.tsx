@@ -1,5 +1,5 @@
 import { postOnboardingAction } from '@vocably/api';
-import { Result, ResultError, resultify } from '@vocably/model';
+import { ResultError, resultify } from '@vocably/model';
 import { Hub } from 'aws-amplify/utils';
 import { get } from 'lodash-es';
 import { usePostHog } from 'posthog-react-native';
@@ -20,7 +20,7 @@ import { forcefulSignOut } from '../forcefulSignOut';
 import { Loader } from '../loaders/Loader';
 import { notificationsIdentifyUser } from '../notificationsIdentifyUser';
 import { useAsync } from '../useAsync';
-import { getFlatAttributes } from './getFlatAttributes';
+import { getSessionAttributes } from './getSessionAttributes';
 import { apiEventBus } from '../apiEventBus';
 import { safeFetchAuthSession } from './safeFunctions';
 
@@ -74,39 +74,6 @@ export const AuthContext = createContext<ExtendedAuthStatus>({
   reset: async () => {},
 });
 
-const getAttributes = async (): Promise<
-  Result<{
-    sub: string;
-    email: string;
-  }>
-> => {
-  try {
-    const flatAttributes = await getFlatAttributes();
-
-    if (!flatAttributes || !flatAttributes['sub'] || !flatAttributes['email']) {
-      return {
-        success: false,
-        reason: 'The flat attributes have no sufficient data',
-        extra: flatAttributes,
-      };
-    }
-
-    return {
-      success: true,
-      value: {
-        sub: flatAttributes.sub,
-        email: flatAttributes.email,
-      },
-    };
-  } catch (error) {
-    return {
-      success: false,
-      reason: 'Unable to get flat attributes.',
-      extra: error,
-    };
-  }
-};
-
 export const loadAuthStatusFromStorage = async (): Promise<AuthStatus> => {
   const status = await asyncAppStorage.getItem('vocablyAuthStatus');
 
@@ -144,8 +111,6 @@ export const getStorageValuesToLog = async (): Promise<
     })
   );
 };
-
-getStorageValuesToLog().then(console.log);
 
 export const AuthContainer: FC<{
   children?: ReactNode;
@@ -241,7 +206,7 @@ export const AuthContainer: FC<{
       return;
     }
 
-    const attributesResult = await getAttributes();
+    const attributesResult = getSessionAttributes(fetchSessionResult.value);
 
     if (!attributesResult.success) {
       if (
@@ -374,7 +339,7 @@ export const AuthContainer: FC<{
         return;
       }
 
-      const attributesResult = await getAttributes();
+      const attributesResult = getSessionAttributes(fetchSessionResult.value);
 
       if (!attributesResult.success) {
         setError('UNABLE_TO_GET_ATTRIBUTES');
