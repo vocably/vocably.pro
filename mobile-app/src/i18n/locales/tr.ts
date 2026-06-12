@@ -383,7 +383,7 @@ const translations: BaseTranslations = {
       examples_other: 'Örnekler:',
     },
     motivationalQuotes: {
-      '0': 'Akıcılık bir gün gelmez; her gün biraz daha yakına gelir. Devam et.',
+      '0': 'Akıcılık bir günde gelmez; her gün biraz daha yakına gelir. Devam et.',
       '1': 'Bıraktığın yerde değil, devam ettiğin yerde dili öğrenirsin.',
       '2': 'Bugün anlamadığın cümle, yarın ezbere bildiğin cümle olacak.',
       '3': 'Her tekrar, beynine «bu kelime önemli» demenin bir yoludur.',
