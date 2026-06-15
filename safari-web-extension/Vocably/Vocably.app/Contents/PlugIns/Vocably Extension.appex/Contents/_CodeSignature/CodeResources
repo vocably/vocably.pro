@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/content-script.js</key>
 		<data>
-		XpqoXc4m+Q6PxKEEB7tb682n0KQ=
+		9gxjYbHAE/p6ftSzF18tOSc8y6k=
 		</data>
 		<key>Resources/images/icon-128x128.png</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Resources/manifest.json</key>
 		<data>
-		+INTvC/7FbT09StHwk82tKqlPJg=
+		1o3vg5TtO7XgOyLe1dCgeyYoL/Y=
 		</data>
 		<key>Resources/popup/1154.js</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Resources/popup/1165.js</key>
 		<data>
-		7jMA7Xk8JTqvh5iWalVVQLRVbsQ=
+		fBGqzFWIqlltuofjvDbCkCIgU/U=
 		</data>
 		<key>Resources/popup/1346.js</key>
 		<data>
@@ -118,7 +118,7 @@
 		</data>
 		<key>Resources/popup/2851.js</key>
 		<data>
-		ncISNVS3EblGl7gbTZIz6TqsKz8=
+		nEOGaS7ZwS9JKE1It25a0qKGkC8=
 		</data>
 		<key>Resources/popup/3009.js</key>
 		<data>
@@ -294,7 +294,7 @@
 		</data>
 		<key>Resources/popup/7711.js</key>
 		<data>
-		hd6dATPxS0UIbtXGPGyPtZsdUk8=
+		8i3Vs25IfuurTyzoO3aX4HvhY7g=
 		</data>
 		<key>Resources/popup/7714.js</key>
 		<data>
@@ -414,7 +414,7 @@
 		</data>
 		<key>Resources/service-worker.js</key>
 		<data>
-		Vvlcjz74llnyw4un5KZji7QDoHc=
+		i/VodmL643zmaNoLkgIEBoXlDR8=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -423,7 +423,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			RWSJEycuFdwmvnRtu8lPEu/KDRilODw7pxrQWowGQOk=
+			Fuy909/3EeI3TyN+dXwIPdwvhW0M+l63dqom4ZixX64=
 			</data>
 		</dict>
 		<key>Resources/images/icon-128x128.png</key>
@@ -458,7 +458,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			tbcHl30u9WXYPduXwdzdyX8bKinIQXlrxpa3FRl85qw=
+			qoPpbDg5xYQcKCCsm2yM/z7Il+fmMlabZMV+wrcFgI8=
 			</data>
 		</dict>
 		<key>Resources/popup/1154.js</key>
@@ -472,7 +472,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+zHebWwQpPb4HVJwf71kzQBqonJRBB2E7/j2cXYQ+Fc=
+			FeZkLjRocETaO2IfEVMxH/PT3zYRtci3mDQ1Z1mZXl8=
 			</data>
 		</dict>
 		<key>Resources/popup/1346.js</key>
@@ -619,7 +619,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VhSkRMUNga123cPHxzlQDACWBYfe3UxO9DFM8sVE/MY=
+			TUEr67d+dzWmTwdsWuIMVig3WRXy3cwnGr9S5tB/NFg=
 			</data>
 		</dict>
 		<key>Resources/popup/3009.js</key>
@@ -927,7 +927,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FS/I/aJtvkAFuh8rooFMnkBFgd+U7Wad2oApno78/u0=
+			z9mWEUUCqBdcYIqsCyvnDHmD7otZcyfl1UcBpPUmpI4=
 			</data>
 		</dict>
 		<key>Resources/popup/7714.js</key>
@@ -1137,7 +1137,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6H21JHuj7muGQkvzgy9dj+M/7V445ga6V8A1PDJ4+8o=
+			xeWLYPFOK8szBfap4DiZ1Ws5fLWbOPIIik7DGvsCgiE=
 			</data>
 		</dict>
 	</dict>

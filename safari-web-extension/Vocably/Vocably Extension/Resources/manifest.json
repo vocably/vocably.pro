@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Vocably: Language Flashcards",
   "description": "Translate and create flashcards on any website or YouTube. Study the flashcards on your mobile device.",
-  "version": "1.958.0",
+  "version": "1.971.2",
 
   "icons": {
     "16": "images/icon-16x16.png",
@@ -35,7 +35,7 @@
   "externally_connectable": {
     "matches": ["https://*.vocably.pro/*"]
   },
-  
+
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArKNqtdLHY0m5KYrwlINdtqAbuM24V437v3AwODOQOR6nZjb1dKz27Gjb05TgwFIF4ZjvHO4hmDsdl88FvqAM1LPReOvVpOH+uxDF0QPYrBm7F4CXwtI4QOgtAesfk0AEgFsRYU794VItbihciyFJ9rkfDWjA7riHrFkcfNic8BDuT5yrtXWdBwj2YMinWXotvBCqrG/oGc2WAYty9Ni65brVWe7F5+LiIxpkgtQhMq2imSrnUYIadQf3dyaExKAzCATM6DGjDMBxgHYS+H8tG+o4PLIarkP/zEilbFQyG4S1xL3df0AtJ1MmXHnHWlkoV6JCt1ACmo+LFzzhOstikQIDAQAB",
   "background": {
     "service_worker": "service-worker.js"
