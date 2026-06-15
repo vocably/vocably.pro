@@ -1,6 +1,7 @@
 import { GoogleGenAI } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
+  isGoogleLanguage,
   isUnitOfSpeech,
   languageList,
   Result,
@@ -14,12 +15,17 @@ import { config } from './config';
 export const generateUnitsOfSpeech = async ({
   sourceLanguage,
   messages,
+  preferredLanguage: preferredLanguageOption,
 }: UnitOfSpeechGenerationPayload): Promise<
   Result<UnitOfSpeechGenerationMessageAssistant>
 > => {
   const genAI = new GoogleGenAI({
     apiKey: config.geminiApiKey,
   });
+
+  const preferredLanguage = isGoogleLanguage(preferredLanguageOption)
+    ? languageList[preferredLanguageOption]
+    : null;
 
   const result = await resultify(
     genAI.models.generateContent({
@@ -50,7 +56,10 @@ export const generateUnitsOfSpeech = async ({
           `Interpret user request as the starting point for generation of collections of units of speech unless instructed otherwise`,
           `Avoid direct translations unless asked otherwise`,
           `Provide 1-30 items unless asked otherwise`,
-        ],
+          preferredLanguage
+            ? `User speaks ${preferredLanguage}, but may contact you in other language.`
+            : '',
+        ].filter((s) => !!s),
         thinkingConfig: {
           thinkingBudget: 0, // Disables thinking
         },
@@ -62,7 +71,11 @@ export const generateUnitsOfSpeech = async ({
           properties: {
             modelResponse: {
               type: 'string',
-              description: 'An extremely concise response',
+              description: `An extremely concise response. No filler, no praise, no agreement.${
+                preferredLanguage
+                  ? ` Respond in ${preferredLanguage} unless user contacted you in other language.`
+                  : ''
+              }`,
             },
             unitsOfSpeech: {
               type: 'array',

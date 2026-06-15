@@ -172,4 +172,26 @@ describe('generateUnitsOfSpeech', () => {
 
     expect(result.value.unitsOfSpeech.length).toBeGreaterThanOrEqual(5);
   });
+
+  it('speaks the preferred language', async () => {
+    const result = await generateUnitsOfSpeech({
+      sourceLanguage: 'nl',
+      preferredLanguage: 'uk',
+      messages: [
+        {
+          role: 'user',
+          text: 'тварини',
+        },
+      ],
+    });
+
+    if (!result.success) {
+      console.log({ inappropriateResult: result });
+      throw new Error('Failed to generate cards');
+    }
+
+    console.log('Units of speech', inspect(result.value));
+
+    expect(result.value.unitsOfSpeech.length).toBeGreaterThanOrEqual(5);
+  });
 });
