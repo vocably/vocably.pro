@@ -36,4 +36,30 @@ xdescribe('integration check for chat-with-card lambda', () => {
 
     console.log(inspect(JSON.parse(result.body)));
   });
+
+  it('it recognizes the language', async () => {
+    mockEvent.body = JSON.stringify({
+      card: {
+        language: 'nl',
+        source: 'aanranden',
+        partOfSpeech: 'verb',
+      },
+      history: [
+        {
+          role: 'user',
+          message: 'переведи',
+          timestamp: new Date().getTime(),
+        },
+      ],
+      preferredLanguage: 'uk',
+    });
+    const result = await chatWithCardFunction(mockEvent);
+
+    expect(result.statusCode).toEqual(200);
+    if (result.statusCode !== 200) {
+      return;
+    }
+
+    console.log(inspect(JSON.parse(result.body)));
+  });
 });

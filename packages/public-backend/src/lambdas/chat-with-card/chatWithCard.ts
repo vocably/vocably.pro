@@ -21,13 +21,25 @@ export const chatWithCard = async (
   const language = isGoogleLanguage(payload.card.language)
     ? languageList[payload.card.language]
     : payload.card.language;
+
+  const preferredLanguage = isGoogleLanguage(payload.preferredLanguage)
+    ? languageList[payload.preferredLanguage]
+    : null;
+
   const systemPayload = [
     payload.card.partOfSpeech
       ? `You are a smart language assistant that helps users to better understand the ${language} card that is the ${payload.card.partOfSpeech} "${payload.card.source}".`
       : `You are a smart language assistant that helps users to better understand the ${language} card "${payload.card.source}".`,
-    'Only respond to questions related to this card.',
-    'Users can ask questions in different languages.',
-  ].join('\n');
+    `Respond to questions related to "${payload.card.source}".`,
+    preferredLanguage
+      ? `User speaks ${preferredLanguage}, but may prefer other language.`
+      : '',
+    'No filler, no praise, no agreement.',
+  ]
+    .filter((s) => !!s)
+    .join('\n');
+
+  console.log(systemPayload);
 
   const responseResult = await chatGptRequest({
     responseFormat: {
