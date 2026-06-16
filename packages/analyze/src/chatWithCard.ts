@@ -30,7 +30,6 @@ export const chatWithCard = async (
     preferredLanguage
       ? `User speaks ${preferredLanguage}, but may prefer other language.`
       : '',
-    'No filler, no praise, no agreement.',
   ]
     .filter((s) => !!s)
     .join('\n');
