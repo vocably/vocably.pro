@@ -11,10 +11,6 @@ import {
   Result,
 } from '@vocably/model';
 
-setOpenAIConfig({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
 export const chatWithCard = async (
   payload: ChatWithCardPayload
 ): Promise<Result<ChatWithCardResult>> => {

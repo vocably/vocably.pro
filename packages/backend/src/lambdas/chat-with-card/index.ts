@@ -3,9 +3,17 @@ import { lastValueFrom, mergeMap, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
-import { chatWithCard } from './chatWithCard';
 import { extractPayload } from './extractPayload';
 import { sanitizePayload } from './sanitizePayload';
+import { configureAnalyzer, chatWithCard } from '@vocably/analyze';
+
+configureAnalyzer({
+  googleProjectId: process.env.GOOGLE_PROJECT_ID as string,
+  openaiApiKey: process.env.OPENAI_API_KEY as string,
+  awsRegion: process.env.AWS_REGION as string,
+  unitsOfSpeechBucket: process.env.UNITS_OF_SPEECH_BUCKET as string,
+  geminiApiKey: process.env.GEMINI_API_KEY as string,
+});
 
 export const chatWithCardFunction = async (
   event: APIGatewayProxyEvent

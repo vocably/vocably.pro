@@ -25,3 +25,4 @@ export {
 } from './translateUnitOfSpeech';
 export { validateSource } from './validateSource';
 export { fixGrammar } from './grammar/fixGrammar';
+export { chatWithCard } from './chatWithCard';
