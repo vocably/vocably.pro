@@ -4,9 +4,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { AppLanguageScreen } from './AppLanguageScreen';
-import { MainMenuHeader } from './MainMenuHeader';
 import { SettingsScreen } from './SettingsScreen';
 import { StudySettingsScreen } from './StudySettingsScreen';
+import { Header } from '../Header';
 
 const Stack = createStackNavigator();
 
@@ -22,18 +22,18 @@ export const SettingsStack: FC = () => {
       <Stack.Navigator
         screenOptions={{
           gestureEnabled: false,
+          header: Header,
         }}
       >
         <Stack.Screen
           name="MainMenu"
           options={{
-            headerShown: false,
+            title: t('nav.settings'),
           }}
           component={SettingsScreen}
         />
         <Stack.Screen
           options={{
-            header: MainMenuHeader,
             title: t('nav.studySettings'),
           }}
           name="StudySettings"
@@ -41,7 +41,6 @@ export const SettingsStack: FC = () => {
         />
         <Stack.Screen
           options={{
-            header: MainMenuHeader,
             title: t('appLanguagePicker.title'),
           }}
           name="AppLanguage"

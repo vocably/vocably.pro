@@ -134,7 +134,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       contentContainerStyle={{
-        paddingTop: insets.top + 32,
+        paddingTop: 16,
       }}
     >
       <View

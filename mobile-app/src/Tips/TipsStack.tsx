@@ -7,10 +7,12 @@ import { HowToGroupCardsScreen } from './HowToGroupCardsScreen';
 import { HowToImportAndExportScreen } from './HowToImportAndExportScreen';
 import { HowToViewStudyStatisticsScreen } from './HowToViewStudyStatisticsScreen';
 import { TipsScreen } from './TipsScreen';
+import { useTranslation } from 'react-i18next';
 
 const Stack = createStackNavigator();
 
 export const TipsStack: FC = () => {
+  const { t } = useTranslation();
   return (
     <Stack.Navigator
       screenOptions={{
@@ -21,7 +23,7 @@ export const TipsStack: FC = () => {
       <Stack.Screen
         name="MainMenu"
         options={{
-          headerShown: false,
+          title: t('nav.tips'),
         }}
         component={TipsScreen}
       />

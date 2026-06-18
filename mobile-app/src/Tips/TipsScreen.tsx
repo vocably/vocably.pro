@@ -55,7 +55,7 @@ export const TipsScreen: FC<Props> = () => {
   return (
     <CustomScrollView
       contentContainerStyle={{
-        paddingTop: insets.top + 32,
+        paddingTop: 16,
       }}
     >
       <CustomSurface style={{ marginBottom: 32 }}>
