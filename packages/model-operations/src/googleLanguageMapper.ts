@@ -1,4 +1,8 @@
-import { GoogleLanguage, GoogleTranslateLanguage } from '@vocably/model';
+import {
+  GoogleLanguage,
+  GoogleTranslateLanguage,
+  GoogleTTSLanguage,
+} from '@vocably/model';
 
 export const languageToGoogleTranslateLanguage = (
   language: GoogleLanguage
@@ -8,6 +12,19 @@ export const languageToGoogleTranslateLanguage = (
       return 'pt-BR';
     case 'hyw':
       return 'hy';
+    default:
+      return language;
+  }
+};
+
+export const googleTtsLanguageToQueryParam = (
+  language: GoogleTTSLanguage
+): string => {
+  switch (language) {
+    case 'en':
+      return 'en-US';
+    case 'pt':
+      return 'pt-BR';
     default:
       return language;
   }

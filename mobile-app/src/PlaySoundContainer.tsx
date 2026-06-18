@@ -1,5 +1,8 @@
 import { GoogleTTSLanguage, Result } from '@vocably/model';
-import { languageToGoogleTranslateLanguage } from '@vocably/model-operations';
+import {
+  googleTtsLanguageToQueryParam,
+  languageToGoogleTranslateLanguage,
+} from '@vocably/model-operations';
 import React, {
   createContext,
   FC,
@@ -43,7 +46,7 @@ const loadAudio = async (
   return new Promise(async (resolve) => {
     const soundUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(
       text
-    )}&tl=${languageToGoogleTranslateLanguage(language)}&client=tw-ob`;
+    )}&tl=${googleTtsLanguageToQueryParam(language)}&client=tw-ob`;
 
     const localPath = `${RNBlobUtil.fs.dirs.CacheDir}/vocably_tts_${Date.now()}.mp3`;
 
