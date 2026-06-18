@@ -172,8 +172,9 @@ export const LookUpScreen: FC<Props> = ({
     });
     // @ts-ignore
     const payload: AnalyzePayload = {
-      [translationPresetState.preset.isReverse ? 'target' : 'source']:
-        lookUpText,
+      [translationPresetState.preset.isReverse && !isModal
+        ? 'target'
+        : 'source']: lookUpText,
       sourceLanguage: translationPresetState.preset
         .sourceLanguage as GoogleLanguage,
       targetLanguage: translationPresetState.preset

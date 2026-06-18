@@ -30,12 +30,16 @@ export const Message: FC<Props> = ({
     paragraph: {
       color: textColor,
       fontSize: 16,
+      lineHeight: Platform.OS === 'ios' ? 20 : 22,
     },
     list: {
       color: textColor,
       fontSize: 16,
       markerColor: textColor,
       bulletColor: textColor,
+      bulletSize: 4,
+      lineHeight: Platform.OS === 'ios' ? 20 : 22,
+      gapWidth: 8,
     },
     blockquote: { color: textColor, fontSize: 16 },
     strong: { color: textColor },
@@ -51,15 +55,14 @@ export const Message: FC<Props> = ({
           alignSelf: direction === 'fromAi' ? 'flex-start' : 'flex-end',
           alignItems: 'center',
           justifyContent: 'center',
-          flexDirection: 'column',
           backgroundColor:
             direction === 'fromAi'
               ? theme.colors.elevation.level5
               : theme.colors.primary,
           borderRadius: 16,
           paddingHorizontal: 16,
-          paddingTop: Platform.OS === 'ios' ? 8 : 10,
-          paddingBottom: Platform.OS === 'ios' ? 14 : 10,
+          paddingTop: Platform.OS === 'ios' ? 10 : 10,
+          paddingBottom: Platform.OS === 'ios' ? 12 : 10,
         },
         style,
       ]}
