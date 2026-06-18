@@ -16,9 +16,6 @@ export const HowToViewStudyStatisticsScreen: FC<Props> = () => {
 
   const navigateToStudySettings = async () => {
     navigation.navigate('Settings');
-    setTimeout(() => {
-      navigation.navigate('StudySettings');
-    }, 200);
   };
 
   const bold = <Text style={{ fontWeight: 'bold' }} />;
@@ -26,7 +23,7 @@ export const HowToViewStudyStatisticsScreen: FC<Props> = () => {
   const myCards = (
     <Text
       style={{ color: theme.colors.primary }}
-      onPress={() => navigation.navigate('Dashboard')}
+      onPress={() => navigation.navigate('DeckScreen')}
     />
   );
   const studySettings = (
