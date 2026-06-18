@@ -20,6 +20,7 @@ const translations: BaseTranslations = {
     pastTenses: '(pasado: {{value}})',
     plural: '(plural: {{value}})',
     examples: 'Ejemplos',
+    lookUpWithVocably: 'Traducir con Vocably',
   },
   appLanguagePicker: {
     title: 'Idioma de la app',

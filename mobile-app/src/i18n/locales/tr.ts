@@ -20,6 +20,7 @@ const translations: BaseTranslations = {
     pastTenses: '(geçmiş: {{value}})',
     plural: '(çoğul: {{value}})',
     examples: 'Örnekler',
+    lookUpWithVocably: 'Vocably ile çevir',
   },
   appLanguagePicker: {
     title: 'Uygulama dili',

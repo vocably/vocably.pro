@@ -19,6 +19,7 @@ const translations = {
     pastTenses: '(past: {{value}})',
     plural: '(plural: {{value}})',
     examples: 'Examples',
+    lookUpWithVocably: 'Look Up with Vocably',
   },
   appLanguagePicker: {
     title: 'App language',

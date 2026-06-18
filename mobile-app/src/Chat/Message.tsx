@@ -1,8 +1,10 @@
 import { FC } from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
-import Markdown from 'react-native-markdown-display';
+import { Platform, StyleProp, View, ViewStyle } from 'react-native';
+import { EnrichedMarkdownText } from 'react-native-enriched-markdown';
 import { useTheme } from 'react-native-paper';
 import { fixMarkdown } from '../fixMarkdown';
+import { i18n } from '../i18n';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = {
   message: string;
@@ -18,18 +20,28 @@ export const Message: FC<Props> = ({
   style,
 }) => {
   const theme = useTheme();
-  const markdownStyles = {
-    body: {
-      color: error
-        ? theme.colors.error
-        : direction === 'fromAi'
-          ? theme.colors.onBackground
-          : theme.colors.onPrimary,
+  const navigation = useNavigation();
+  const textColor = error
+    ? theme.colors.error
+    : direction === 'fromAi'
+      ? theme.colors.onBackground
+      : theme.colors.onPrimary;
+  const markdownStyle = {
+    paragraph: {
+      color: textColor,
       fontSize: 16,
     },
-    hr: {
-      backgroundColor: theme.colors.onBackground,
+    list: {
+      color: textColor,
+      fontSize: 16,
+      markerColor: textColor,
+      bulletColor: textColor,
     },
+    blockquote: { color: textColor, fontSize: 16 },
+    strong: { color: textColor },
+    em: { color: textColor },
+    link: { color: textColor },
+    thematicBreak: { color: theme.colors.onBackground },
   };
 
   return (
@@ -39,19 +51,39 @@ export const Message: FC<Props> = ({
           alignSelf: direction === 'fromAi' ? 'flex-start' : 'flex-end',
           alignItems: 'center',
           justifyContent: 'center',
-          flexDirection: 'row',
+          flexDirection: 'column',
           backgroundColor:
             direction === 'fromAi'
               ? theme.colors.elevation.level5
               : theme.colors.primary,
           borderRadius: 16,
           paddingHorizontal: 16,
-          paddingVertical: 8,
+          paddingTop: Platform.OS === 'ios' ? 8 : 10,
+          paddingBottom: Platform.OS === 'ios' ? 14 : 10,
         },
         style,
       ]}
     >
-      <Markdown style={markdownStyles}>{fixMarkdown(message)}</Markdown>
+      <EnrichedMarkdownText
+        markdown={fixMarkdown(message.trim())}
+        markdownStyle={markdownStyle}
+        allowTrailingMargin={false}
+        selectionMenuConfig={{
+          copyAsMarkdown: false,
+        }}
+        contextMenuItems={[
+          {
+            icon: 'translate',
+            text: i18n.t('common.lookUpWithVocably'),
+            onPress: ({ text, selection }) => {
+              // @ts-ignore
+              navigation.push('LookUpModal', {
+                text,
+              });
+            },
+          },
+        ]}
+      />
     </View>
   );
 };

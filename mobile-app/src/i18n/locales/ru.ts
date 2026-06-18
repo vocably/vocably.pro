@@ -20,6 +20,7 @@ const translations: BaseTranslations = {
     pastTenses: '(прошедшее: {{value}})',
     plural: '(мн.ч.: {{value}})',
     examples: 'Примеры',
+    lookUpWithVocably: 'Перевести в Вокебли',
   },
   appLanguagePicker: {
     title: 'Язык приложения',

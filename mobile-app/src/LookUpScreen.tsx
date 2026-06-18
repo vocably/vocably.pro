@@ -39,7 +39,7 @@ import { createExplainPayload } from '@vocably/model-operations';
 import UnitsOfSpeechAnalyze from './GenerateCards/UnitsOfSpeechAnalyze';
 import { Thinking } from './Chat/Thinking';
 import { TranslationPresetFormCompact } from './TranslationPresetFormCompact';
-import Markdown from 'react-native-markdown-display';
+import { EnrichedMarkdownText } from 'react-native-enriched-markdown';
 import { greeting } from './LookUpScreen/greeting';
 
 const padding = 16;
@@ -405,18 +405,21 @@ export const LookUpScreen: FC<Props> = ({
                       gap: 8,
                     }}
                   >
-                    <Markdown
-                      style={{
-                        body: {
+                    <EnrichedMarkdownText
+                      markdownStyle={{
+                        paragraph: {
                           color: theme.colors.onBackground,
                         },
                       }}
-                    >
-                      {greeting[
-                        translationPresetState.preset
-                          .translationLanguage as GoogleLanguage
-                      ]?.body ?? greeting['en']?.body}
-                    </Markdown>
+                      markdown={
+                        greeting[
+                          translationPresetState.preset
+                            .translationLanguage as GoogleLanguage
+                        ]?.body ??
+                        greeting['en']?.body ??
+                        ''
+                      }
+                    />
 
                     <Button
                       icon={'robot-outline'}

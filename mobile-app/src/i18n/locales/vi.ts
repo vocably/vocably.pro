@@ -20,6 +20,7 @@ const translations: BaseTranslations = {
     pastTenses: '(quá khứ: {{value}})',
     plural: '(số nhiều: {{value}})',
     examples: 'Ví dụ',
+    lookUpWithVocably: 'Dịch với Vocably',
   },
   appLanguagePicker: {
     title: 'Ngôn ngữ ứng dụng',

@@ -137,6 +137,7 @@ export const ChatWithCardModal: FC<Props> = ({ route, navigation }) => {
               marginLeft: insets.left + 16,
               marginRight: insets.right + 16,
               flexGrow: 1,
+              paddingBottom: Platform.OS === 'android' ? 24 : 0,
             }}
             ref={scrollViewRef}
           >
