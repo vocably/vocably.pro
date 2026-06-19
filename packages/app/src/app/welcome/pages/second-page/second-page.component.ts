@@ -29,6 +29,7 @@ import { GenericInstructionComponent } from '../../generic-instruction/generic-i
 import { HowToVideoComponent } from '../../how-to-video/how-to-video.component';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ContainerService } from '../../container-service';
+import { setStats } from '../../../stats';
 
 const getOnboardedTargetLanguages = (): string[] => {
   return JSON.parse(localStorage.getItem('onboardedLanguages') ?? '[]');
@@ -125,6 +126,11 @@ export class SecondPageComponent implements OnInit, OnDestroy {
           await setProxyLanguage(extensionId, params['targetLanguage']);
           this.sourceLanguage = params['sourceLanguage'];
           this.targetLanguage = params['targetLanguage'];
+
+          setStats({
+            studyLanguage: this.sourceLanguage,
+            nativeLanguage: this.targetLanguage,
+          });
 
           posthog.capture('$set', {
             $set: {

@@ -12,6 +12,7 @@ import { HeaderComponent } from '../header/header.component';
 import { isExtensionInstalled$ } from '../isExtensionInstalled';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ContainerService } from './container-service';
+import { setStats } from '../stats';
 
 @Component({
   selector: 'app-welcome',
@@ -37,6 +38,11 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   constructor(private containerService: ContainerService) {}
 
   ngOnInit(): void {
+    setStats({
+      installedDateIso: new Date().toISOString(),
+      isLoggedIn: true,
+    });
+
     isExtensionInstalled$
       .pipe(takeUntil(this.destroy$))
       .subscribe((isInstalled) => {

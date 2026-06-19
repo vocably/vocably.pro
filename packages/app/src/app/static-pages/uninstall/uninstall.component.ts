@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import posthog from 'posthog-js';
 import { LogoComponent } from '../../header/logo/logo.component';
+import { getStats } from '../../stats';
 
 @Component({
   selector: 'app-uninstall',
@@ -12,11 +13,6 @@ export class UninstallComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    const userSub = localStorage.getItem('userSub');
-    const userEmail = localStorage.getItem('userEmail');
-
-    if (userSub && userEmail) {
-      posthog.identify(userSub, { email: userEmail });
-    }
+    posthog.capture('chrome-uninstalled', getStats());
   }
 }
