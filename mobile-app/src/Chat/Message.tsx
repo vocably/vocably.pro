@@ -1,5 +1,5 @@
-import { FC } from 'react';
-import { Platform, StyleProp, View, ViewStyle } from 'react-native';
+import { FC, useState } from 'react';
+import { Platform, StyleProp, View, ViewStyle, Text } from 'react-native';
 import { EnrichedMarkdownText } from 'react-native-enriched-markdown';
 import { useTheme } from 'react-native-paper';
 import { fixMarkdown } from '../fixMarkdown';
@@ -19,6 +19,7 @@ export const Message: FC<Props> = ({
   error = false,
   style,
 }) => {
+  const [width, setWidth] = useState(0);
   const theme = useTheme();
   const navigation = useNavigation();
   const textColor = error
@@ -48,45 +49,71 @@ export const Message: FC<Props> = ({
     thematicBreak: { color: theme.colors.onBackground },
   };
 
+  const markdownMessage = fixMarkdown(message.trim());
+
   return (
-    <View
-      style={[
-        {
-          alignSelf: direction === 'fromAi' ? 'flex-start' : 'flex-end',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor:
-            direction === 'fromAi'
-              ? theme.colors.elevation.level5
-              : theme.colors.primary,
-          borderRadius: 16,
-          paddingHorizontal: 16,
-          paddingTop: Platform.OS === 'ios' ? 10 : 10,
-          paddingBottom: Platform.OS === 'ios' ? 12 : 10,
-        },
-        style,
-      ]}
-    >
-      <EnrichedMarkdownText
-        markdown={fixMarkdown(message.trim())}
-        markdownStyle={markdownStyle}
-        allowTrailingMargin={false}
-        selectionMenuConfig={{
-          copyAsMarkdown: false,
+    <View style={{ position: 'relative' }}>
+      {/**
+        We need the Text element below to calculate the container size because
+        Anrdoid has proplems with rendering markdown in non-fixed-size container.
+      */}
+      <Text
+        style={{
+          position: 'absolute',
+          fontSize: 16,
+          pointerEvents: 'none',
+          opacity: 0,
         }}
-        contextMenuItems={[
-          {
-            icon: 'translate',
-            text: i18n.t('common.lookUpWithVocably'),
-            onPress: ({ text, selection }) => {
-              // @ts-ignore
-              navigation.push('LookUpModal', {
-                text,
-              });
+        onLayout={(e) => {
+          setWidth(e.nativeEvent.layout.width);
+        }}
+      >
+        {markdownMessage}
+      </Text>
+      {width > 0 && (
+        <View
+          style={[
+            {
+              position: 'relative',
+              alignSelf: direction === 'fromAi' ? 'flex-start' : 'flex-end',
+              width: width + 32.5,
+              maxWidth: '100%',
+              alignItems: 'stretch',
+              justifyContent: 'center',
+              backgroundColor:
+                direction === 'fromAi'
+                  ? theme.colors.elevation.level5
+                  : theme.colors.primary,
+              borderRadius: 16,
+              paddingHorizontal: 16,
+              paddingTop: Platform.OS === 'ios' ? 10 : 10,
+              paddingBottom: Platform.OS === 'ios' ? 12 : 10,
             },
-          },
-        ]}
-      />
+            style,
+          ]}
+        >
+          <EnrichedMarkdownText
+            markdown={markdownMessage}
+            markdownStyle={markdownStyle}
+            allowTrailingMargin={false}
+            selectionMenuConfig={{
+              copyAsMarkdown: false,
+            }}
+            contextMenuItems={[
+              {
+                icon: 'translate',
+                text: i18n.t('common.lookUpWithVocably'),
+                onPress: ({ text }) => {
+                  // @ts-ignore
+                  navigation.push('LookUpModal', {
+                    text,
+                  });
+                },
+              },
+            ]}
+          />
+        </View>
+      )}
     </View>
   );
 };
