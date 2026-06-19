@@ -13,6 +13,18 @@ export class UninstallComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    posthog.capture('chrome-uninstalled', getStats());
+    const stats = getStats();
+
+    const numberOfDays = stats?.installedDateIso
+      ? Math.floor(
+          (Date.now() - new Date(stats.installedDateIso).getTime()) /
+            (1000 * 60 * 60 * 24)
+        )
+      : undefined;
+
+    posthog.capture('chrome-uninstalled', {
+      ...stats,
+      numberOfDays,
+    });
   }
 }
