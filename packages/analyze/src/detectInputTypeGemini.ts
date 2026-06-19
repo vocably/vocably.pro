@@ -26,11 +26,14 @@ export const detectInputTypeGemini = async ({
   const result = await resultify(
     timeout(
       genAI.models.generateContent({
-        model: 'gemini-3-flash-preview',
+        model: 'gemini-2.5-flash',
         contents: createUserContent([source]),
         config: {
           abortSignal,
-          systemInstruction: [`Detect unit of speech type`],
+          systemInstruction: [
+            `Act as a precise linguistic classification API`,
+            `Analyze the provided text input`,
+          ],
           thinkingConfig: {
             thinkingBudget: 0, // Disables thinking
           },
@@ -46,7 +49,7 @@ export const detectInputTypeGemini = async ({
               },
               isDirect: {
                 type: 'boolean',
-                description: `true when the input ${quiteLikelyAWord ? 'is valid in' : 'can be'} ${languageList[language]}`,
+                description: `true when the input ${quiteLikelyAWord ? 'is valid in' : 'can be'} ${languageList[language]}. false when the input is not valid ${languageList[language]}`,
               },
             },
             required: ['type', 'isDirect'],
