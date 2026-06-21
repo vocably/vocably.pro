@@ -22,9 +22,8 @@ export class UninstallComponent implements OnInit {
         )
       : undefined;
 
-    posthog.capture('chrome-uninstalled', {
-      ...stats,
-      numberOfDays,
+    posthog.capture('$set', {
+      $set: { ...stats, daysBeforeUninstall: numberOfDays },
     });
   }
 }
