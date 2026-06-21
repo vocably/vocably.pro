@@ -148,6 +148,9 @@ export class UninstallComponent implements OnInit {
     }
 
     posthog.capture('extension_uninstall_survey', properties);
+    posthog.capture('$set', {
+      $set: properties,
+    });
 
     this.isSubmitting = false;
     this.submitted = true;
