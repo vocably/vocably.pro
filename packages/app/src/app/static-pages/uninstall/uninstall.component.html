@@ -1,7 +1,7 @@
 <div class="container top">
   <app-logo style="height: 30px"></app-logo>
 </div>
-<div class="container bottom pt-1">
+<div class="container bottom pt-1" style="font-size: 1.2rem">
   <h1 class="header">{{ 'uninstall.header' | transloco }}</h1>
   <ng-container *ngIf="!submitted">
     <p class="intro">{{ 'uninstall.intro' | transloco }}</p>
@@ -19,6 +19,7 @@
           </label>
           <input
             *ngIf="reason.selected && reason.withText"
+            appAutofocus
             type="text"
             class="form-control reason-text"
             name="{{ reason.id }}_text"

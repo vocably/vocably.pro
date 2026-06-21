@@ -367,7 +367,7 @@ export const en = {
   // Uninstall Survey
   'uninstall.header': 'The extension has been uninstalled.',
   'uninstall.intro':
-    "You're uninstalling the extension because there's something you don't like.\nWhat is it? Maybe I can fix it in a future release.",
+    "You've uninstalled the extension because there was something you didn't like.\nWhat was it? Maybe I can fix it in a future release.",
   'uninstall.reason.not_often': "I don't use it very often",
   'uninstall.reason.lost_motivation': 'I have lost my motivation',
   'uninstall.reason.dont_understand': "I don't understand how to use it",

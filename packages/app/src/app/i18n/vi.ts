@@ -365,7 +365,7 @@ export const vi = {
   // Uninstall Survey
   'uninstall.header': 'Tiện ích đã được gỡ cài đặt.',
   'uninstall.intro':
-    'Bạn đang gỡ tiện ích vì có điều gì đó bạn không thích.\nĐó là gì? Có thể tôi sẽ khắc phục được trong một bản cập nhật sau.',
+    'Bạn đã gỡ tiện ích vì có điều gì đó bạn không thích.\nĐó là gì? Có thể tôi sẽ khắc phục được trong một bản cập nhật sau.',
   'uninstall.reason.not_often': 'Tôi không dùng nó thường xuyên',
   'uninstall.reason.lost_motivation': 'Tôi đã mất động lực',
   'uninstall.reason.dont_understand': 'Tôi không hiểu cách sử dụng nó',

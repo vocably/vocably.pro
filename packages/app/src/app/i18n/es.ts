@@ -375,7 +375,7 @@ export const es = {
   // Uninstall Survey
   'uninstall.header': 'La extensión ha sido desinstalada.',
   'uninstall.intro':
-    'Estás desinstalando la extensión porque hay algo que no te gusta.\n¿Qué es? Quizás pueda solucionarlo en una futura versión.',
+    'Has desinstalado la extensión porque había algo que no te gustaba.\n¿Qué era? Quizás pueda solucionarlo en una futura versión.',
   'uninstall.reason.not_often': 'No la uso muy a menudo',
   'uninstall.reason.lost_motivation': 'He perdido la motivación',
   'uninstall.reason.dont_understand': 'No entiendo cómo usarla',

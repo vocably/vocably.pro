@@ -7,6 +7,7 @@ import posthog from 'posthog-js';
 import { LogoComponent } from '../../header/logo/logo.component';
 import { getStats } from '../../stats';
 import { shuffle } from 'lodash-es';
+import { AutofocusDirective } from './autofocus.directive';
 
 type ReasonId =
   | 'not_often'
@@ -37,6 +38,7 @@ type Reason = {
     FormsModule,
     IonicModule,
     TranslocoModule,
+    AutofocusDirective,
   ],
 })
 export class UninstallComponent implements OnInit {

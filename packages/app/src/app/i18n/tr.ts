@@ -376,7 +376,7 @@ export const tr = {
   // Uninstall Survey
   'uninstall.header': 'Uzantı kaldırıldı.',
   'uninstall.intro':
-    'Uzantıyı kaldırıyorsunuz çünkü hoşunuza gitmeyen bir şey var.\nNedir bu? Belki gelecek bir sürümde düzeltebilirim.',
+    'Uzantıyı kaldırdınız çünkü hoşunuza gitmeyen bir şey vardı.\nNeydi bu? Belki gelecek bir sürümde düzeltebilirim.',
   'uninstall.reason.not_often': 'Çok sık kullanmıyorum',
   'uninstall.reason.lost_motivation': 'Motivasyonumu kaybettim',
   'uninstall.reason.dont_understand': 'Nasıl kullanılacağını anlamıyorum',
