@@ -371,4 +371,24 @@ export const es = {
   'page.subscription_success': 'Éxito',
   'page.try_out': 'Prueba Vocably',
   'page.membership': 'Membresía',
+
+  // Uninstall Survey
+  'uninstall.header': 'La extensión ha sido desinstalada.',
+  'uninstall.intro':
+    'Has desinstalado la extensión porque había algo que no te gustaba.\n¿Qué era? Quizás pueda solucionarlo en una futura versión.',
+  'uninstall.reason.not_often': 'No la uso muy a menudo',
+  'uninstall.reason.lost_motivation': 'He perdido la motivación',
+  'uninstall.reason.dont_understand': 'No entiendo cómo usarla',
+  'uninstall.reason.translation_quality':
+    'No estoy satisfecho con la calidad de las traducciones',
+  'uninstall.reason.use_something_else': 'Uso otra cosa',
+  'uninstall.reason.other': 'Otro',
+  'uninstall.use_something_else_placeholder':
+    'Por favor, dime qué usas en su lugar',
+  'uninstall.other_placeholder': 'Por favor, dime qué es',
+  'uninstall.email_invite':
+    'Mejoro Vocably constantemente y es muy probable que tu problema se resuelva en una futura versión. Deja tu correo electrónico y te avisaré personalmente cuando esté solucionado.',
+  'uninstall.email_placeholder': 'Tu correo electrónico (opcional)',
+  'uninstall.submit': 'Enviar',
+  'uninstall.success': '¡Gracias por tus comentarios!',
 };

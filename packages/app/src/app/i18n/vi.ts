@@ -361,4 +361,24 @@ export const vi = {
   'page.subscription_success': 'Thành công',
   'page.try_out': 'Thử Vocably',
   'page.membership': 'Thành viên',
+
+  // Uninstall Survey
+  'uninstall.header': 'Tiện ích đã được gỡ cài đặt.',
+  'uninstall.intro':
+    'Bạn đã gỡ tiện ích vì có điều gì đó bạn không thích.\nĐó là gì? Có thể tôi sẽ khắc phục được trong một bản cập nhật sau.',
+  'uninstall.reason.not_often': 'Tôi không dùng nó thường xuyên',
+  'uninstall.reason.lost_motivation': 'Tôi đã mất động lực',
+  'uninstall.reason.dont_understand': 'Tôi không hiểu cách sử dụng nó',
+  'uninstall.reason.translation_quality':
+    'Tôi không hài lòng với chất lượng bản dịch',
+  'uninstall.reason.use_something_else': 'Tôi dùng thứ khác',
+  'uninstall.reason.other': 'Khác',
+  'uninstall.use_something_else_placeholder':
+    'Vui lòng cho tôi biết bạn dùng gì thay thế',
+  'uninstall.other_placeholder': 'Vui lòng cho tôi biết đó là gì',
+  'uninstall.email_invite':
+    'Tôi liên tục cải thiện Vocably, và rất có thể vấn đề của bạn sẽ được giải quyết trong một bản cập nhật sau. Hãy để lại email và tôi sẽ đích thân thông báo cho bạn ngay khi nó được khắc phục.',
+  'uninstall.email_placeholder': 'Email của bạn (không bắt buộc)',
+  'uninstall.submit': 'Gửi',
+  'uninstall.success': 'Cảm ơn phản hồi của bạn!',
 };
