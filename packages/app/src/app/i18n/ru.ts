@@ -370,4 +370,24 @@ export const ru = {
   'page.subscription_success': 'Успешно',
   'page.try_out': 'Попробуй Vocably',
   'page.membership': 'Членство',
+
+  // Uninstall Survey
+  'uninstall.header': 'Расширение было удалено.',
+  'uninstall.intro':
+    'Вы удаляете расширение, потому что вам что-то не нравится.\nЧто именно? Возможно, я смогу исправить это в будущей версии.',
+  'uninstall.reason.not_often': 'Я пользуюсь им не очень часто',
+  'uninstall.reason.lost_motivation': 'Я потерял мотивацию',
+  'uninstall.reason.dont_understand': 'Я не понимаю, как им пользоваться',
+  'uninstall.reason.translation_quality':
+    'Меня не устраивает качество переводов',
+  'uninstall.reason.use_something_else': 'Я пользуюсь чем-то другим',
+  'uninstall.reason.other': 'Другое',
+  'uninstall.use_something_else_placeholder':
+    'Пожалуйста, напишите, чем вы пользуетесь вместо этого',
+  'uninstall.other_placeholder': 'Пожалуйста, напишите, что именно',
+  'uninstall.email_invite':
+    'Я постоянно улучшаю Vocably, и есть большая вероятность, что ваша проблема будет решена в одной из будущих версий. Оставьте свой email, и я лично сообщу вам, когда всё будет исправлено.',
+  'uninstall.email_placeholder': 'Ваш email (необязательно)',
+  'uninstall.submit': 'Отправить',
+  'uninstall.success': 'Спасибо за ваш отзыв!',
 };

@@ -372,4 +372,23 @@ export const tr = {
   'page.subscription_success': 'Başarılı',
   'page.try_out': "Vocably'yi Dene",
   'page.membership': 'Üyelik',
+
+  // Uninstall Survey
+  'uninstall.header': 'Uzantı kaldırıldı.',
+  'uninstall.intro':
+    'Uzantıyı kaldırıyorsunuz çünkü hoşunuza gitmeyen bir şey var.\nNedir bu? Belki gelecek bir sürümde düzeltebilirim.',
+  'uninstall.reason.not_often': 'Çok sık kullanmıyorum',
+  'uninstall.reason.lost_motivation': 'Motivasyonumu kaybettim',
+  'uninstall.reason.dont_understand': 'Nasıl kullanılacağını anlamıyorum',
+  'uninstall.reason.translation_quality': 'Çeviri kalitesinden memnun değilim',
+  'uninstall.reason.use_something_else': 'Başka bir şey kullanıyorum',
+  'uninstall.reason.other': 'Diğer',
+  'uninstall.use_something_else_placeholder':
+    'Lütfen bunun yerine ne kullandığınızı söyleyin',
+  'uninstall.other_placeholder': 'Lütfen ne olduğunu söyleyin',
+  'uninstall.email_invite':
+    "Vocably'yi sürekli geliştiriyorum ve sorununuzun gelecek bir sürümde çözülmesi oldukça olası. E-postanızı bırakın, sorun çözüldüğünde sizi bizzat haberdar edeyim.",
+  'uninstall.email_placeholder': 'E-posta adresiniz (isteğe bağlı)',
+  'uninstall.submit': 'Gönder',
+  'uninstall.success': 'Geri bildiriminiz için teşekkürler!',
 };

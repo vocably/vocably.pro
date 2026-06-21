@@ -363,4 +363,24 @@ export const en = {
   'page.subscription_success': 'Success',
   'page.try_out': 'Try out Vocably',
   'page.membership': 'Membership',
+
+  // Uninstall Survey
+  'uninstall.header': 'The extension has been uninstalled.',
+  'uninstall.intro':
+    "You're uninstalling the extension because there's something you don't like.\nWhat is it? Maybe I can fix it in a future release.",
+  'uninstall.reason.not_often': "I don't use it very often",
+  'uninstall.reason.lost_motivation': 'I have lost my motivation',
+  'uninstall.reason.dont_understand': "I don't understand how to use it",
+  'uninstall.reason.translation_quality':
+    "I'm not satisfied with the quality of translations",
+  'uninstall.reason.use_something_else': 'I use something else',
+  'uninstall.reason.other': 'Other',
+  'uninstall.use_something_else_placeholder':
+    'Please tell me what you use instead',
+  'uninstall.other_placeholder': 'Please tell me what it is',
+  'uninstall.email_invite':
+    "I'm constantly improving Vocably, and there's a good chance your problem will be solved in a future release. Leave your email and I'll personally let you know once it's fixed.",
+  'uninstall.email_placeholder': 'Your email (optional)',
+  'uninstall.submit': 'Submit',
+  'uninstall.success': 'Thank you for your feedback!',
 };

@@ -1,15 +1,50 @@
-<div class="container-xl top text-center">
+<div class="container top">
   <app-logo style="height: 30px"></app-logo>
 </div>
-<div class="container bottom text-center pt-2">
-  <iframe
-    src="https://docs.google.com/forms/d/e/1FAIpQLSdMurLCVSOO6hfA9dOKvvqm260ZPDe9JKp8iNe8xwf0gbNyvQ/viewform?embedded=true"
-    width="100%"
-    height="800"
-    frameborder="0"
-    marginheight="0"
-    marginwidth="0"
-  >
-    Loading…
-  </iframe>
+<div class="container bottom pt-1">
+  <h1 class="header">{{ 'uninstall.header' | transloco }}</h1>
+  <ng-container *ngIf="!submitted">
+    <p class="intro">{{ 'uninstall.intro' | transloco }}</p>
+
+    <form (ngSubmit)="submit()">
+      <div class="reasons mb-1">
+        <div class="reason" *ngFor="let reason of reasons">
+          <label class="reason-label">
+            <input
+              type="checkbox"
+              name="{{ reason.id }}"
+              [(ngModel)]="reason.selected"
+            />
+            <span>{{ reason.labelKey | transloco }}</span>
+          </label>
+          <input
+            *ngIf="reason.selected && reason.withText"
+            type="text"
+            class="form-control reason-text"
+            name="{{ reason.id }}_text"
+            [placeholder]="reason.placeholderKey | transloco"
+            [(ngModel)]="reason.text"
+          />
+        </div>
+      </div>
+
+      <p class="email-invite">{{ 'uninstall.email_invite' | transloco }}</p>
+      <input
+        type="email"
+        class="form-control mb-1"
+        name="email"
+        [placeholder]="'uninstall.email_placeholder' | transloco"
+        [(ngModel)]="email"
+      />
+
+      <div class="mb-1">
+        <button type="submit" class="button" [disabled]="!canSubmit">
+          {{ 'uninstall.submit' | transloco }}
+        </button>
+        <ion-spinner *ngIf="isSubmitting" name="dots"></ion-spinner>
+      </div>
+    </form>
+  </ng-container>
+
+  <p *ngIf="submitted" class="success">{{ 'uninstall.success' | transloco }}</p>
 </div>
