@@ -253,3 +253,8 @@ variable "public_api_predefined_options_throttle_burst_limit" {
   type    = number
   default = 20
 }
+
+variable "google_tts_api_key" {
+  type      = string
+  sensitive = true
+}
