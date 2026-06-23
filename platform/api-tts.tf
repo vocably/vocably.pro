@@ -1,10 +1,11 @@
 // TTS endpoint that proxies directly to the Google Cloud Text-to-Speech
 // REST API without going through a Lambda. The caller POSTs `{ "text": "..." }`
-// (optionally `languageCode`, `voiceSuffix`, `audioEncoding`) and the request is
-// mapped onto the Google `text:synthesize` request body. The voice name is
-// always built as `$languageCode-Wavenet-$voiceSuffix` (default suffix `A`) so
-// the caller can never select an arbitrary, potentially expensive voice model.
-// The API key is taken
+// (optionally `languageCode`, `voiceSuffix`, `audioEncoding`, `model`) and the
+// request is mapped onto the Google `text:synthesize` request body. The voice
+// name is always built as `$languageCode-$model-$voiceSuffix` (default suffix
+// `A`). The `model` is restricted to `Standard` or `Wavenet` (default
+// `Wavenet`); any other value falls back to `Wavenet` so the caller can never
+// select an arbitrary, potentially expensive voice model. The API key is taken
 // from the `google_tts_api_key` variable and appended as a query string.
 
 resource "aws_api_gateway_resource" "tts" {
@@ -62,13 +63,15 @@ resource "aws_api_gateway_integration" "tts" {
 #if("$voiceSuffix" == "")#set($voiceSuffix = "A")#end
 #set($audioEncoding = $input.path('$.audioEncoding'))
 #if("$audioEncoding" == "")#set($audioEncoding = "MP3")#end
+#set($model = $input.path('$.model'))
+#if("$model" != "Standard" && "$model" != "Wavenet")#set($model = "Wavenet")#end
 {
   "input": {
     "text": "$util.escapeJavaScript($input.path('$.text'))"
   },
   "voice": {
     "languageCode": "$languageCode",
-    "name": "$${languageCode}-Wavenet-$${voiceSuffix}"
+    "name": "$${languageCode}-$${model}-$${voiceSuffix}"
   },
   "audioConfig": {
     "audioEncoding": "$audioEncoding"

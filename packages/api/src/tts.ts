@@ -15,13 +15,13 @@ type GoogleTTSParams = {
 
 const mapToWavenet: Record<
   GoogleTTSLanguage,
-  { languageCode: string; voiceSuffix?: string }
+  { languageCode: string; voiceSuffix?: string; model?: 'Standard' | 'Wavenet' }
 > = {
   ar: { languageCode: 'ar-XA' },
-  eu: { languageCode: 'eu-ES' },
+  eu: { languageCode: 'eu-ES', model: 'Standard', voiceSuffix: 'B' },
   bn: { languageCode: 'bn-IN' },
-  bg: { languageCode: 'bg-BG' },
-  ca: { languageCode: 'ca-ES' },
+  bg: { languageCode: 'bg-BG', model: 'Standard', voiceSuffix: 'B' },
+  ca: { languageCode: 'ca-ES', model: 'Standard', voiceSuffix: 'B' },
   cs: { languageCode: 'cs-CZ' },
   da: { languageCode: 'da-DK' },
   nl: { languageCode: 'nl-NL' },
@@ -29,8 +29,8 @@ const mapToWavenet: Record<
   en: { languageCode: 'en-US', voiceSuffix: 'C' },
   'en-GB': { languageCode: 'en-GB' },
   fi: { languageCode: 'fi-FI' },
-  fr: { languageCode: 'fr-FR' },
-  gl: { languageCode: 'gl-ES' },
+  fr: { languageCode: 'fr-FR', model: 'Standard', voiceSuffix: 'F' },
+  gl: { languageCode: 'gl-ES', model: 'Standard', voiceSuffix: 'B' },
   de: { languageCode: 'de-DE' },
   el: { languageCode: 'el-GR' },
   gu: { languageCode: 'gu-IN' },
@@ -43,8 +43,8 @@ const mapToWavenet: Record<
   ja: { languageCode: 'ja-JP' },
   kn: { languageCode: 'kn-IN' },
   ko: { languageCode: 'ko-KR' },
-  lv: { languageCode: 'lv-LV' },
-  lt: { languageCode: 'lt-LT' },
+  lv: { languageCode: 'lv-LV', model: 'Standard', voiceSuffix: 'B' },
+  lt: { languageCode: 'lt-LT', model: 'Standard', voiceSuffix: 'B' },
   ms: { languageCode: 'ms-MY' },
   ml: { languageCode: 'ml-IN' },
   mr: { languageCode: 'mr-IN' },
@@ -54,18 +54,18 @@ const mapToWavenet: Record<
   pa: { languageCode: 'pa-IN' },
   ro: { languageCode: 'ro-RO' },
   ru: { languageCode: 'ru-RU' },
-  sr: { languageCode: 'sr-RS' },
+  sr: { languageCode: 'sr-RS', model: 'Standard', voiceSuffix: 'B' },
   sk: { languageCode: 'sk-SK' },
   es: { languageCode: 'es-ES', voiceSuffix: 'C' },
   sv: { languageCode: 'sv-SE' },
   ta: { languageCode: 'ta-IN' },
   te: { languageCode: 'te-IN' },
-  th: { languageCode: 'th-TH' },
+  th: { languageCode: 'th-TH', model: 'Standard' },
   tr: { languageCode: 'tr-TR' },
   uk: { languageCode: 'uk-UA', voiceSuffix: 'B' },
   vi: { languageCode: 'vi-VN' },
-  zh: { languageCode: 'zh-CN' },
-  'zh-TW': { languageCode: 'zh-TW' },
+  zh: { languageCode: 'cmn-CN' },
+  'zh-TW': { languageCode: 'cmn-TW' },
 };
 
 const ttsPayloadToGoogleTtsParams = (payload: TTSPayload): GoogleTTSParams => {
