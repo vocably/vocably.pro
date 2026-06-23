@@ -1,5 +1,4 @@
 export const GoogleTTSLanguages = [
-  'af',
   'ar',
   'eu',
   'bn',
@@ -51,7 +50,7 @@ export const GoogleTTSLanguages = [
   'zh-TW',
 ] as const;
 
-export type GoogleTTSLanguage = typeof GoogleTTSLanguages[number];
+export type GoogleTTSLanguage = (typeof GoogleTTSLanguages)[number];
 
 export const isGoogleTTSLanguage = (
   language: string

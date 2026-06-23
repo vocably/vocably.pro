@@ -3,6 +3,7 @@ locals {
 module.exports = {
   environment: {
     baseUrl: '${local.www_base_url}',
+    apiBaseUrl: 'https://${local.api_domain}',
     umamiWebsiteId: '${var.umami_website_id}',
     publicApiBaseUrl: 'https://${local.public_api_domain}',
     paddleClientSideToken: '${var.paddle_client_side_token}',

@@ -31,3 +31,4 @@ export { getUserMetadata, saveUserMetadata } from './userMetadata';
 export { getUserStaticMetadata } from './userStaticMetadata';
 export * from './publicExplain';
 export * from './publicFixGrammar';
+export * from './tts';

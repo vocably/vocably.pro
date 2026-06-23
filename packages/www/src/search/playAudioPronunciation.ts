@@ -1,23 +1,20 @@
-import { AudioPronunciationPayload, Result } from '@vocably/model';
-import { request } from '@vocably/model-operations';
+import { Result, TTSPayload } from '@vocably/model';
+import { tts } from '@vocably/api';
 
 export const playAudioPronunciation = async (
-  payload: AudioPronunciationPayload
+  payload: TTSPayload
 ): Promise<Result<true>> => {
-  const result = await request(
-    `${window['publicApiBaseUrl']}/audio?` + new URLSearchParams(payload),
-    {
-      method: 'GET',
-    }
-  );
+  const result = await tts(window['apiBaseUrl'], payload);
 
-  if (!result.success) {
+  if (result.success === false) {
     return result;
   }
 
   return new Promise((resolve) => {
     try {
-      const audio = new Audio(result.value.url);
+      const audio = new Audio(
+        `data:audio/mpeg;base64,` + result.value.audioContent
+      );
       audio.addEventListener('ended', () => {
         resolve({
           success: true,

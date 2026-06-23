@@ -2,6 +2,7 @@
 <html lang="en" class="h-100">
   <head>
     <script>
+      window.apiBaseUrl = '{{ htmlWebpackPlugin.options.environment.apiBaseUrl }}';
       window.publicApiBaseUrl = '{{ htmlWebpackPlugin.options.environment.publicApiBaseUrl }}';
       window.paddleClientSideToken = '{{ htmlWebpackPlugin.options.environment.paddleClientSideToken }}';
       window.paddleMonthlyPriceId = '{{ htmlWebpackPlugin.options.environment.paddleMonthlyPriceId }}';
