@@ -80,11 +80,13 @@ const ttsPayloadToGoogleTtsParams = (payload: TTSPayload): GoogleTTSParams => {
 
 export const tts = async (
   baseUrl: string,
-  payload: TTSPayload
+  payload: TTSPayload,
+  abortController?: AbortController
 ): Promise<Result<TTSResponse>> => {
   const response = await request(baseUrl + '/tts', {
     method: 'POST',
     body: JSON.stringify(ttsPayloadToGoogleTtsParams(payload)),
+    signal: abortController?.signal,
   });
 
   if (response.success === false) {

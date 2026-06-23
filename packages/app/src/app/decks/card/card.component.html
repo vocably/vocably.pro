@@ -1,5 +1,9 @@
 <div>
   <div class="inline-block lead-1 text-emphasize">
+    <app-play-sound
+      [text]="item.data.source"
+      [language]="item.data.language"
+    ></app-play-sound>
     {{ item.data.source }}
   </div>
 

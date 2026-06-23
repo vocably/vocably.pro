@@ -1,5 +1,12 @@
 <div class="text-left">
-  <span class="text-emphasize">{{ card.data.source }}</span>
+  <span class="text-emphasize"
+    ><app-play-sound
+      class="play-sound"
+      [text]="card.data.source"
+      [language]="card.data.language"
+    />
+    {{ card.data.source }}</span
+  >
   @if (card.data.partOfSpeech) {
     <span class="pos muted inline-block ml-0_5">{{
       card.data.partOfSpeech
