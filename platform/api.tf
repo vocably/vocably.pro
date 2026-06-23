@@ -91,6 +91,7 @@ resource "aws_api_gateway_deployment" "deployment" {
       md5(file("${path.module}/api-notification-time.tf")),
       md5(file("${path.module}/api-recalibrate-notifications.tf")),
       md5(file("${path.module}/api-chat-with-card.tf")),
+      md5(file("${path.module}/api-tts.tf")),
       aws_lambda_function.analyze.last_modified,
       aws_lambda_function.analyze_units_of_speech.last_modified,
       aws_lambda_function.generate_units_of_speech.last_modified,
@@ -155,6 +156,9 @@ resource "aws_api_gateway_deployment" "deployment" {
     aws_lambda_function.delete_notification_time,
     aws_lambda_function.recalibrate_notifications,
     aws_lambda_function.chat_with_card,
+    aws_api_gateway_integration.tts,
+    aws_api_gateway_integration_response.tts_200,
+    module.tts_cors,
   ]
   lifecycle {
     create_before_destroy = true
