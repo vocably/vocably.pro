@@ -9,7 +9,7 @@ import {
   setSourceLanguage,
 } from '@vocably/extension-messages';
 import { GoogleLanguage, isGoogleLanguage, Locale } from '@vocably/model';
-import { languageTranslations } from '@vocably/browser-i18n';
+import { languageTranslations } from '@vocably/i18n';
 import posthog from 'posthog-js';
 import {
   catchError,

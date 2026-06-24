@@ -11,5 +11,4 @@ import { TranslocoModule } from '@jsverse/transloco';
 })
 export class ReverseFrontComponent {
   @Input() card!: CardItem;
-  @Input() expectedAction = 'srs.reverse_front.guess_the';
 }

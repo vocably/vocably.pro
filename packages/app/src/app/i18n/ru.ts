@@ -1,3 +1,5 @@
+import { languageTranslations } from '@vocably/i18n';
+
 export const ru = {
   'welcome.no_extension':
     'Похоже, у вас не установлено или не включено расширение браузера.',
@@ -390,4 +392,5 @@ export const ru = {
   'uninstall.email_placeholder': 'Ваш email (необязательно)',
   'uninstall.submit': 'Отправить',
   'uninstall.success': 'Спасибо за ваш отзыв!',
+  ...languageTranslations.ru,
 };

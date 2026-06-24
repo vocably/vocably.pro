@@ -19,10 +19,11 @@ import {
   trigger,
 } from '@angular/animations';
 import { hideAnimation } from '../hide-animation';
+import { PlaySoundComponent } from '../../components/play-sound/play-sound.component';
 
 @Component({
   selector: 'app-srs-card-ab',
-  imports: [ReverseFrontComponent, TranslocoModule],
+  imports: [ReverseFrontComponent, TranslocoModule, PlaySoundComponent],
   templateUrl: './card-ab.component.html',
   styleUrl: './card-ab.component.scss',
   animations: [

@@ -1,3 +1,5 @@
+import { languageTranslations } from '@vocably/i18n';
+
 export const uk = {
   'welcome.no_extension':
     'Схоже, у вас не встановлено або не увімкнено розширення браузера.',
@@ -388,4 +390,5 @@ export const uk = {
   'uninstall.email_placeholder': 'Ваш email (необовʼязково)',
   'uninstall.submit': 'Надіслати',
   'uninstall.success': 'Дякую за ваш відгук!',
+  ...languageTranslations.uk,
 };

@@ -1,3 +1,5 @@
+import { languageTranslations } from '@vocably/i18n';
+
 export const vi = {
   'welcome.no_extension':
     'Có vẻ như bạn chưa cài đặt hoặc bật tiện ích mở rộng trình duyệt.',
@@ -381,4 +383,5 @@ export const vi = {
   'uninstall.email_placeholder': 'Email của bạn (không bắt buộc)',
   'uninstall.submit': 'Gửi',
   'uninstall.success': 'Cảm ơn phản hồi của bạn!',
+  ...languageTranslations.vi,
 };

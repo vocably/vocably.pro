@@ -18,7 +18,7 @@ import {
 import { MatFormField } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { TranslocoService } from '@jsverse/transloco';
-import { languageTranslations } from '@vocably/browser-i18n';
+import { languageTranslations } from '@vocably/i18n';
 import { GoogleLanguage, Locale, languageList } from '@vocably/model';
 import { map, Observable, startWith, Subject } from 'rxjs';
 import { MatIcon } from '@angular/material/icon';

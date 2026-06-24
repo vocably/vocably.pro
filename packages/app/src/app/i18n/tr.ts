@@ -1,3 +1,5 @@
+import { languageTranslations } from '@vocably/i18n';
+
 export const tr = {
   'welcome.no_extension':
     'Tarayıcı uzantısının yüklü veya etkin olmadığı görünüyor.',
@@ -391,4 +393,5 @@ export const tr = {
   'uninstall.email_placeholder': 'E-posta adresiniz (isteğe bağlı)',
   'uninstall.submit': 'Gönder',
   'uninstall.success': 'Geri bildiriminiz için teşekkürler!',
+  ...languageTranslations.tr,
 };

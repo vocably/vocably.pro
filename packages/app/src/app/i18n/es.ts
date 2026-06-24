@@ -1,3 +1,5 @@
+import { languageTranslations } from '@vocably/i18n';
+
 export const es = {
   'welcome.no_extension':
     'Parece que no tienes la extensión del navegador instalada o activada.',
@@ -391,4 +393,5 @@ export const es = {
   'uninstall.email_placeholder': 'Tu correo electrónico (opcional)',
   'uninstall.submit': 'Enviar',
   'uninstall.success': '¡Gracias por tus comentarios!',
+  ...languageTranslations.es,
 };

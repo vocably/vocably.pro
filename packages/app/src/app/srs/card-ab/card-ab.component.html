@@ -2,7 +2,6 @@
   <app-srs-reverse-front
     class="srs-card-font"
     [card]="card"
-    expectedAction="srs.reverse_front.type_in_the"
   ></app-srs-reverse-front>
   <div class="answer" [@shake]="wrong">
     @for (letterIndex of answer; track $index) {
@@ -29,6 +28,10 @@
   </div>
   <div class="text-center hint">
     <div class="hint-text" [class.visible]="answerDisplayed">
+      <app-play-sound
+        [language]="card.data.language"
+        [text]="card.data.source"
+      ></app-play-sound>
       {{ correctAnswer }}
     </div>
     <button

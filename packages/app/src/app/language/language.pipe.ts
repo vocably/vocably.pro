@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subscription } from 'rxjs';
-import { languageTranslations } from '@vocably/browser-i18n';
+import { languageTranslations } from '@vocably/i18n';
 import { Locale } from '@vocably/model';
 
 @Pipe({ name: 'language', pure: false, standalone: true })

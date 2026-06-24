@@ -9,7 +9,7 @@
   >
   @if (card.data.partOfSpeech) {
     <span class="pos muted inline-block ml-0_5">{{
-      card.data.partOfSpeech
+      card.data.partOfSpeech | transloco
     }}</span>
   }
   @if (card.data.ipa) {

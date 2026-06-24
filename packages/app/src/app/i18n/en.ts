@@ -1,3 +1,5 @@
+import { languageTranslations } from '@vocably/i18n';
+
 export const en = {
   'welcome.no_extension':
     "It looks like you don't have the browser extension installed or enabled.",
@@ -383,4 +385,5 @@ export const en = {
   'uninstall.email_placeholder': 'Your email (optional)',
   'uninstall.submit': 'Submit',
   'uninstall.success': 'Thank you for your feedback!',
+  ...languageTranslations.en,
 };
