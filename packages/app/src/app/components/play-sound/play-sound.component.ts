@@ -24,15 +24,15 @@ export class PlaySoundComponent implements OnDestroy, StoppablePlayer {
 
   constructor(private playSoundService: PlaySoundService) {}
 
-  get icon(): string {
+  get svgIcon(): string | undefined {
     switch (this.status) {
       case 'error':
-        return 'error';
+        return 'alert-circle-outline';
       case 'loading':
       case 'playing':
-        return 'volume_up';
+        return 'volume-medium';
       default:
-        return 'play_circle';
+        return 'play-circle';
     }
   }
 

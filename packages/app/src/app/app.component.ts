@@ -8,6 +8,8 @@ import { distinct, firstValueFrom, map } from 'rxjs';
 import { AuthService } from './auth/auth.service';
 import { RefreshService } from './refresh.service';
 import { RouterParamsService } from './router-params.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { mdiPlayCircle, mdiVolumeHigh, mdiAlertCircleOutline } from '@mdi/js';
 
 @Component({
   selector: 'app-root',
@@ -23,10 +25,32 @@ export class AppComponent implements OnInit {
     private refreshService: RefreshService,
     public platform: Platform,
     private auth: AuthService,
-    iconRegistry: MatIconRegistry
+    iconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer
   ) {
     iconRegistry.registerFontClassAlias('material-symbols-outlined');
     iconRegistry.setDefaultFontSetClass('material-symbols-outlined');
+
+    iconRegistry.addSvgIconLiteral(
+      'play-circle',
+      this.domSanitizer.bypassSecurityTrustHtml(
+        `<svg viewBox="0 0 24 24"><path d="${mdiPlayCircle}" /></svg>`
+      )
+    );
+
+    iconRegistry.addSvgIconLiteral(
+      'volume-medium',
+      this.domSanitizer.bypassSecurityTrustHtml(
+        `<svg viewBox="0 0 24 24"><path d="${mdiVolumeHigh}" /></svg>`
+      )
+    );
+
+    iconRegistry.addSvgIconLiteral(
+      'alert-circle-outline',
+      this.domSanitizer.bypassSecurityTrustHtml(
+        `<svg viewBox="0 0 24 24"><path d="${mdiAlertCircleOutline}" /></svg>`
+      )
+    );
 
     routerParams.data$.subscribe((data) => {
       this.disabledRefresher = data['disabledRefresher'] ?? false;

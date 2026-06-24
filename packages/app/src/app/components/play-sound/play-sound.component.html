@@ -4,5 +4,9 @@
   [class.danger]="status === 'error'"
   (click)="$event.stopPropagation(); toggle()"
 >
-  <mat-icon aria-hidden="false" aria-label="Play sound">{{ icon }}</mat-icon>
+  <mat-icon
+    aria-hidden="false"
+    aria-label="Play sound"
+    [svgIcon]="svgIcon"
+  ></mat-icon>
 </button>
