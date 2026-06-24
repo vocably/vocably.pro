@@ -1,12 +1,14 @@
 // TTS endpoint that proxies directly to the Google Cloud Text-to-Speech
-// REST API without going through a Lambda. The caller POSTs `{ "text": "..." }`
-// (optionally `languageCode`, `voiceSuffix`, `audioEncoding`, `model`) and the
-// request is mapped onto the Google `text:synthesize` request body. The voice
-// name is always built as `$languageCode-$model-$voiceSuffix` (default suffix
-// `A`). The `model` is restricted to `Standard` or `Wavenet` (default
-// `Wavenet`); any other value falls back to `Wavenet` so the caller can never
-// select an arbitrary, potentially expensive voice model. The API key is taken
-// from the `google_tts_api_key` variable and appended as a query string.
+// REST API without going through a Lambda. The caller POSTs
+// `{ "language": "...", "text": "..." }` (optionally `audioEncoding`) and the
+// request is mapped onto the Google `text:synthesize` request body. The
+// template owns the mapping from a Vocably `language` to a concrete Google
+// `voice.languageCode` and `voice.name`; this map mirrors the `mapToWavenet`
+// table in `packages/api/src/tts.ts` (with the `Wavenet` model and `A` voice
+// suffix defaults already resolved into the voice name). Unknown languages fall
+// back to `en-US-Wavenet-A`, so the caller can never select an arbitrary,
+// potentially expensive voice model. The API key is taken from the
+// `google_tts_api_key` variable and appended as a query string.
 
 resource "aws_api_gateway_resource" "tts" {
   rest_api_id = aws_api_gateway_rest_api.rest_api.id
@@ -57,21 +59,70 @@ resource "aws_api_gateway_integration" "tts" {
 
   request_templates = {
     "application/json" = <<EOF
-#set($languageCode = $input.path('$.languageCode'))
-#if("$languageCode" == "")#set($languageCode = "en-US")#end
-#set($voiceSuffix = $input.path('$.voiceSuffix'))
-#if("$voiceSuffix" == "")#set($voiceSuffix = "A")#end
+#set($voices = {
+  "af": { "languageCode": "af-ZA", "name": "ar-XA-Standard-A" },
+  "ar": { "languageCode": "ar-XA", "name": "ar-XA-Wavenet-A" },
+  "eu": { "languageCode": "eu-ES", "name": "eu-ES-Standard-B" },
+  "bn": { "languageCode": "bn-IN", "name": "bn-IN-Wavenet-A" },
+  "bg": { "languageCode": "bg-BG", "name": "bg-BG-Standard-B" },
+  "ca": { "languageCode": "ca-ES", "name": "ca-ES-Standard-B" },
+  "cs": { "languageCode": "cs-CZ", "name": "cs-CZ-Wavenet-A" },
+  "da": { "languageCode": "da-DK", "name": "da-DK-Wavenet-A" },
+  "nl": { "languageCode": "nl-NL", "name": "nl-NL-Wavenet-A" },
+  "no": { "languageCode": "nb-NO", "name": "nb-NO-Wavenet-F" },
+  "en": { "languageCode": "en-US", "name": "en-US-Standard-H" },
+  "en-GB": { "languageCode": "en-GB", "name": "en-GB-Standard-F" },
+  "fi": { "languageCode": "fi-FI", "name": "fi-FI-Wavenet-A" },
+  "fr": { "languageCode": "fr-FR", "name": "fr-FR-Standard-F" },
+  "gl": { "languageCode": "gl-ES", "name": "gl-ES-Standard-B" },
+  "de": { "languageCode": "de-DE", "name": "de-DE-Wavenet-A" },
+  "el": { "languageCode": "el-GR", "name": "el-GR-Wavenet-A" },
+  "gu": { "languageCode": "gu-IN", "name": "gu-IN-Wavenet-A" },
+  "he": { "languageCode": "he-IL", "name": "he-IL-Wavenet-A" },
+  "hi": { "languageCode": "hi-IN", "name": "hi-IN-Wavenet-A" },
+  "hu": { "languageCode": "hu-HU", "name": "hu-HU-Wavenet-A" },
+  "is": { "languageCode": "is-IS", "name": "is-IS-Wavenet-A" },
+  "id": { "languageCode": "id-ID", "name": "id-ID-Wavenet-A" },
+  "it": { "languageCode": "it-IT", "name": "it-IT-Wavenet-A" },
+  "ja": { "languageCode": "ja-JP", "name": "ja-JP-Wavenet-A" },
+  "kn": { "languageCode": "kn-IN", "name": "kn-IN-Wavenet-A" },
+  "ko": { "languageCode": "ko-KR", "name": "ko-KR-Wavenet-A" },
+  "lv": { "languageCode": "lv-LV", "name": "lv-LV-Standard-B" },
+  "lt": { "languageCode": "lt-LT", "name": "lt-LT-Standard-B" },
+  "ms": { "languageCode": "ms-MY", "name": "ms-MY-Wavenet-A" },
+  "ml": { "languageCode": "ml-IN", "name": "ml-IN-Wavenet-A" },
+  "mr": { "languageCode": "mr-IN", "name": "mr-IN-Wavenet-A" },
+  "pl": { "languageCode": "pl-PL", "name": "pl-PL-Wavenet-A" },
+  "pt": { "languageCode": "pt-BR", "name": "pt-BR-Wavenet-D" },
+  "pt-PT": { "languageCode": "pt-PT", "name": "pt-PT-Wavenet-A" },
+  "pa": { "languageCode": "pa-IN", "name": "pa-IN-Wavenet-A" },
+  "ro": { "languageCode": "ro-RO", "name": "ro-RO-Wavenet-A" },
+  "ru": { "languageCode": "ru-RU", "name": "ru-RU-Wavenet-A" },
+  "sr": { "languageCode": "sr-RS", "name": "sr-RS-Standard-B" },
+  "sk": { "languageCode": "sk-SK", "name": "sk-SK-Wavenet-A" },
+  "es": { "languageCode": "es-ES", "name": "es-ES-Wavenet-C" },
+  "sv": { "languageCode": "sv-SE", "name": "sv-SE-Wavenet-A" },
+  "ta": { "languageCode": "ta-IN", "name": "ta-IN-Wavenet-A" },
+  "te": { "languageCode": "te-IN", "name": "te-IN-Wavenet-A" },
+  "th": { "languageCode": "th-TH", "name": "th-TH-Standard-A" },
+  "tr": { "languageCode": "tr-TR", "name": "tr-TR-Wavenet-A" },
+  "uk": { "languageCode": "uk-UA", "name": "uk-UA-Wavenet-B" },
+  "vi": { "languageCode": "vi-VN", "name": "vi-VN-Wavenet-A" },
+  "zh": { "languageCode": "cmn-CN", "name": "cmn-CN-Wavenet-A" },
+  "zh-TW": { "languageCode": "cmn-TW", "name": "cmn-TW-Wavenet-A" }
+})
+#set($language = $input.path('$.language'))
+#set($voice = $voices.get($language))
+#if(!$voice)#set($voice = { "languageCode": "en-US", "name": "en-US-Wavenet-C" })#end
 #set($audioEncoding = $input.path('$.audioEncoding'))
 #if("$audioEncoding" == "")#set($audioEncoding = "MP3")#end
-#set($model = $input.path('$.model'))
-#if("$model" != "Standard" && "$model" != "Wavenet")#set($model = "Wavenet")#end
 {
   "input": {
     "text": "$util.escapeJavaScript($input.path('$.text'))"
   },
   "voice": {
-    "languageCode": "$languageCode",
-    "name": "$${languageCode}-$${model}-$${voiceSuffix}"
+    "languageCode": "$voice.languageCode",
+    "name": "$voice.name"
   },
   "audioConfig": {
     "audioEncoding": "$audioEncoding"

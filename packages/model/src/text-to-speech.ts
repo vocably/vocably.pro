@@ -1,4 +1,5 @@
 export const GoogleTTSLanguages = [
+  'af',
   'ar',
   'eu',
   'bn',
