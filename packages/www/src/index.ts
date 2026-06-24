@@ -155,6 +155,10 @@ if (!browser.satisfies({ safari: '>=0' })) {
 // Search form
 
 const getSourceLanguage = () => {
+  if (isGoogleLanguage(window['searchFormSourceLanguage'])) {
+    return window['searchFormSourceLanguage'];
+  }
+
   const params = new URLSearchParams(window.location.search);
   if (params.has('l') && isGoogleLanguage(params.get('l') ?? '')) {
     return params.get('l');
@@ -194,7 +198,11 @@ document.querySelectorAll('#searchForm').forEach((searchForm) => {
   ) as HTMLSelectElement;
 
   sourceLanguageSelect.value = getSourceLanguage();
-  targetLanguageSelect.value = getTargetLanguage();
+  let targetLanguage = getTargetLanguage();
+  if (targetLanguage === 'en-GB' && sourceLanguageSelect.value === 'en') {
+    targetLanguage = 'en';
+  }
+  targetLanguageSelect.value = targetLanguage;
   const textInput = searchForm.querySelector('[name=text]') as HTMLInputElement;
 
   const updatePlaceholder = () => {
