@@ -9,6 +9,7 @@ import { isDesktop } from '../../../../browser';
 import { CardComponent } from '../../card/card.component';
 import { DeckStoreService } from '../../deck-store.service';
 import { MatIcon } from '@angular/material/icon';
+import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown.component';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -22,6 +23,7 @@ import { MatIcon } from '@angular/material/icon';
     RouterLink,
     TranslocoModule,
     MatIcon,
+    TagsDropdownComponent,
   ],
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
@@ -30,6 +32,10 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   public cardItems: CardItem[] = [];
 
   public tags: TagItem[] = [];
+
+  public selectedTags: TagItem[] = [];
+
+  public noTags = false;
 
   public isDesktop = isDesktop;
 
@@ -45,5 +51,13 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.complete();
+  }
+
+  onSelectTags(tags: TagItem[]): void {
+    this.selectedTags = tags;
+  }
+
+  onNoTags(noTags: boolean): void {
+    this.noTags = noTags;
   }
 }

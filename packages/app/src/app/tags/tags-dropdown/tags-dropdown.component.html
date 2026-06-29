@@ -1,0 +1,27 @@
+<div style="height: 100%" [matMenuTriggerFor]="menu">
+  <ng-content></ng-content>
+</div>
+<mat-menu #menu="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let tag of tags"
+    [disableRipple]="true"
+    class="tags-dropdown-item"
+    (click)="$event.stopPropagation(); toggle(tag)"
+  >
+    <mat-icon>{{
+      isChecked(tag) ? 'check_box' : 'check_box_outline_blank'
+    }}</mat-icon>
+    <span>{{ tag.data.title }}</span>
+  </button>
+  <mat-divider *ngIf="tags.length > 0"></mat-divider>
+  <button
+    mat-menu-item
+    [disableRipple]="true"
+    class="tags-dropdown-item"
+    (click)="$event.stopPropagation(); toggleNoTags()"
+  >
+    <mat-icon>{{ noTags ? 'check_box' : 'check_box_outline_blank' }}</mat-icon>
+    <span>{{ 'decks.dashboard.cards_without_tags' | transloco }}</span>
+  </button>
+</mat-menu>

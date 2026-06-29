@@ -9,7 +9,14 @@
         {{ 'decks.dashboard.study' | transloco }}
       </a>
       @if (tags.length > 0) {
-        <button class="button tags-button"><mat-icon>sell</mat-icon></button>
+        <app-tags-dropdown
+          [tags]="tags"
+          [noTags]="noTags"
+          (onSelect)="onSelectTags($event)"
+          (onNoTags)="onNoTags($event)"
+        >
+          <button class="button tags-button"><mat-icon>sell</mat-icon></button>
+        </app-tags-dropdown>
       }
     </div>
   </div>

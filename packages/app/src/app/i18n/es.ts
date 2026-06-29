@@ -92,6 +92,7 @@ export const es = {
   'decks.loading_cards': 'Cargando tarjetas...',
   'decks.dashboard.study': 'Estudiar',
   'decks.dashboard.edit_deck': 'Editar colección',
+  'decks.dashboard.cards_without_tags': 'Tarjetas sin etiquetas',
   'decks.edit.export_deck': 'Exportar colección',
   'decks.edit.delete_deck': 'Eliminar colección',
   'decks.card_form.source': 'Palabra o frase',
