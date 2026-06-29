@@ -8,6 +8,10 @@ import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
 import { isDesktop } from '../../../../browser';
 import { CardComponent } from '../../card/card.component';
 import { DeckStoreService } from '../../deck-store.service';
+import {
+  getLanguageTagStorage,
+  setLanguageTagStorage,
+} from '../../../../tagsStorage';
 import { MatIcon } from '@angular/material/icon';
 import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
 import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown.component';
@@ -45,13 +49,35 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   public isDesktop = isDesktop;
 
+  private language = '';
+
   constructor(public deckStore: DeckStoreService) {}
 
   ngOnInit(): void {
     this.deckStore.deck$.pipe(takeUntil(this.destroy$)).subscribe((deck) => {
       this.allCards$.next(deck.cards.sort(byDate));
       this.tags = deck.tags;
+      this.language = deck.language;
+
+      const storage = getLanguageTagStorage(deck.language);
+      this.noTags$.next(storage.noTags);
+      this.selectedTags$.next(
+        deck.tags.filter((tag) => storage.tagIds.includes(tag.id))
+      );
     });
+
+    combineLatest([this.selectedTags$, this.noTags$])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([selectedTags, noTags]) => {
+        if (!this.language) {
+          return;
+        }
+
+        setLanguageTagStorage(this.language, {
+          noTags,
+          tagIds: selectedTags.map((tag) => tag.id),
+        });
+      });
 
     combineLatest([this.allCards$, this.selectedTags$, this.noTags$])
       .pipe(takeUntil(this.destroy$))
