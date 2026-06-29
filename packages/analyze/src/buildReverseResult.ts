@@ -160,17 +160,21 @@ export const buildReverseResultYes = async (
 export const buildReverseResult = async (
   payload: ReverseAnalyzePayload
 ): Promise<Result<ReverseAnalysis>> => {
-  const [detectedTypeResult, translationResults] = await Promise.all([
-    detectInputTypeAi({
-      source: payload.target,
-      language: payload.targetLanguage,
-    }),
-    fetchPossibleTranslations({
-      source: payload.target,
-      sourceLanguage: payload.targetLanguage,
-      targetLanguage: payload.sourceLanguage,
-    }),
-  ]);
+  const detectedTypeResult = await detectInputTypeAi({
+    source: payload.target,
+    language: payload.targetLanguage,
+  });
+
+  if (!detectedTypeResult.success) {
+    return detectedTypeResult;
+  }
+
+  const translationResults = await fetchPossibleTranslations({
+    source: payload.target,
+    sourceLanguage: payload.targetLanguage,
+    targetLanguage: payload.sourceLanguage,
+    inputType: detectedTypeResult.value.type,
+  });
 
   if (!detectedTypeResult.success) {
     return detectedTypeResult;

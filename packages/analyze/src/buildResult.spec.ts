@@ -1071,4 +1071,18 @@ describe('integration check for translate lambda', () => {
 
     expect(result.value.items[0].partOfSpeech).toEqual('noun');
   });
+
+  it('adaptation in de', async () => {
+    const result = await buildResult({
+      sourceLanguage: 'de',
+      targetLanguage: 'en',
+      source: 'adaptation',
+    });
+
+    if (result.success === false) {
+      throw 'Unexpected result';
+    }
+
+    expect(result.value.items[0].partOfSpeech).toEqual('noun');
+  });
 });
