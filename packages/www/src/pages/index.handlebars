@@ -931,5 +931,20 @@
     });
   </script>
 
+  <script>
+    const match = window.location.pathname.match(/\/de-en\/(.+)-in-german.html/);
+    if (match[1]) {
+      const params = new URLSearchParams({
+        sourceLanguage: 'de',
+        targetLanguage: 'en',
+        text: match[1],
+      });
+
+      params.toString()
+
+      window.location.href = `/search.html?${params.toString()}`;
+    }
+  </script>
+
 {{/layout}}
 
