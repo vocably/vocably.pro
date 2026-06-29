@@ -94,6 +94,8 @@ export const tr = {
   'decks.loading_cards': 'Kartlar yükleniyor...',
   'decks.dashboard.study': 'Çalış',
   'decks.dashboard.edit_deck': 'Koleksiyonu düzenle',
+  'decks.dashboard.cards_without_tags': 'Etiketsiz kartlar',
+  'decks.dashboard.tags': 'Etiketler',
   'decks.edit.export_deck': 'Koleksiyonu dışa aktar',
   'decks.edit.delete_deck': 'Koleksiyonu sil',
   'decks.card_form.source': 'Kelime veya ifade',

@@ -1,13 +1,21 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
-import { byDate, CardItem } from '@vocably/model';
-import { Subject, takeUntil } from 'rxjs';
+import { byDate, CardItem, TagItem } from '@vocably/model';
+import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
 import { isDesktop } from '../../../../browser';
 import { CardComponent } from '../../card/card.component';
 import { DeckStoreService } from '../../deck-store.service';
+import {
+  getLanguageTagStorage,
+  setLanguageTagStorage,
+} from '../../../../tagsStorage';
+import { MatIcon } from '@angular/material/icon';
+import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
+import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown.component';
+import { filterByTags } from '../../../../filterByTags';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -20,25 +28,82 @@ import { DeckStoreService } from '../../deck-store.service';
     IonicModule,
     RouterLink,
     TranslocoModule,
+    MatIcon,
+    MatChipSet,
+    MatChip,
+    MatChipRemove,
+    TagsDropdownComponent,
   ],
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
+  @ViewChild(TagsDropdownComponent) tagsDropdown?: TagsDropdownComponent;
+
+  public tags: TagItem[] = [];
+
+  public allCards$ = new BehaviorSubject<CardItem[]>([]);
+  public selectedTags$ = new BehaviorSubject<TagItem[]>([]);
+  public noTags$ = new BehaviorSubject<boolean>(false);
+
   public cardItems: CardItem[] = [];
 
   public isDesktop = isDesktop;
+
+  private language = '';
 
   constructor(public deckStore: DeckStoreService) {}
 
   ngOnInit(): void {
     this.deckStore.deck$.pipe(takeUntil(this.destroy$)).subscribe((deck) => {
-      this.cardItems = deck.cards.sort(byDate);
+      this.allCards$.next(deck.cards.sort(byDate));
+      this.tags = deck.tags;
+      this.language = deck.language;
+
+      const storage = getLanguageTagStorage(deck.language);
+      this.noTags$.next(storage.noTags);
+      this.selectedTags$.next(
+        deck.tags.filter((tag) => storage.tagIds.includes(tag.id))
+      );
     });
+
+    combineLatest([this.selectedTags$, this.noTags$])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([selectedTags, noTags]) => {
+        if (!this.language) {
+          return;
+        }
+
+        setLanguageTagStorage(this.language, {
+          noTags,
+          tagIds: selectedTags.map((tag) => tag.id),
+        });
+      });
+
+    combineLatest([this.allCards$, this.selectedTags$, this.noTags$])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([allCards, selectedTags, noTags]) => {
+        this.cardItems = filterByTags(allCards, {
+          noTags,
+          tagIds: selectedTags.map((tag) => tag.id),
+        });
+      });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next(null);
     this.destroy$.complete();
+  }
+
+  onSelectTags(tags: TagItem[]): void {
+    this.selectedTags$.next(tags);
+  }
+
+  onNoTags(noTags: boolean): void {
+    this.noTags$.next(noTags);
+  }
+
+  removeTag(tag: TagItem): void {
+    this.tagsDropdown?.toggle(tag);
   }
 }

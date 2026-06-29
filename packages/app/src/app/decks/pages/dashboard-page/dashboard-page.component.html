@@ -1,12 +1,52 @@
 <div class="gradient">
   <div *ngIf="isDesktop" class="mb-1">
-    <a
-      class="button block track-click"
-      id="practice-button"
-      [routerLink]="['study']"
-    >
-      {{ 'decks.dashboard.study' | transloco }}
-    </a>
+    <div class="study-button-container">
+      <a
+        class="button study-button track-click"
+        id="practice-button"
+        [routerLink]="['study']"
+      >
+        {{ 'decks.dashboard.study' | transloco }}
+      </a>
+      @if (tags.length > 0) {
+        <app-tags-dropdown
+          [tags]="tags"
+          [noTags]="noTags$.value"
+          [selectedTags]="selectedTags$.value"
+          (onSelect)="onSelectTags($event)"
+          (onNoTags)="onNoTags($event)"
+        >
+          <button class="button tags-button"><mat-icon>sell</mat-icon></button>
+        </app-tags-dropdown>
+      }
+    </div>
+    @if (noTags$.value || selectedTags$.value.length > 0) {
+      <div class="selected-tags">
+        <span class="selected-tags-label">
+          {{ 'decks.dashboard.tags' | transloco }}:
+        </span>
+        <mat-chip-set>
+          @if (noTags$.value) {
+            <mat-chip [disableRipple]="true">
+              {{ 'decks.dashboard.cards_without_tags' | transloco }}
+              <button matChipRemove (click)="noTags$.next(false)">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          } @else {
+            <mat-chip
+              *ngFor="let tag of selectedTags$.value"
+              [disableRipple]="true"
+            >
+              {{ tag.data.title }}
+              <button matChipRemove (click)="removeTag(tag)">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          }
+        </mat-chip-set>
+      </div>
+    }
   </div>
   <ul class="unstyled separated mb-1" data-test="dashboard-cards">
     <li *ngFor="let item of cardItems.slice(0, 7)">

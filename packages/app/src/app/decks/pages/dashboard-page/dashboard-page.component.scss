@@ -5,8 +5,8 @@ $gradient-bottom-margin: 1rem;
 
 .gradient {
   --gradient-height: calc(
-    var(--app-height) - var(--header-height) - #{$deck-options-height} - #{$gradient-bottom-margin} -
-      var(--container-padding) * 2
+    var(--app-height) - var(--header-height) - #{$deck-options-height} -
+      #{$gradient-bottom-margin} - var(--container-padding) * 2
   );
 
   margin-bottom: $gradient-bottom-margin;
@@ -30,4 +30,42 @@ $gradient-bottom-margin: 1rem;
 .deck-options {
   line-height: $deck-options-height;
   height: $deck-options-height;
+}
+
+.selected-tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  .selected-tags-label {
+    font-weight: bold;
+  }
+}
+
+.study-button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0.2rem;
+
+  .study-button {
+    flex: 1;
+    border-radius: 0.6rem 0.2rem 0.2rem 0.6rem;
+
+    &:last-child {
+      border-radius: 0.6rem;
+    }
+  }
+
+  .tags-button {
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.2rem 0.6rem 0.6rem 0.2rem;
+    height: 100%;
+  }
 }

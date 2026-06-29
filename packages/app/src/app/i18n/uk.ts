@@ -90,6 +90,8 @@ export const uk = {
   'decks.loading_cards': 'Завантаження карток...',
   'decks.dashboard.study': 'Розпочати навчання',
   'decks.dashboard.edit_deck': 'Редагувати колекцію',
+  'decks.dashboard.cards_without_tags': 'Картки без тегів',
+  'decks.dashboard.tags': 'Теги',
   'decks.edit.export_deck': 'Експорт колекції',
   'decks.edit.delete_deck': 'Видалити колекцію',
   'decks.card_form.source': 'Слово або фраза',
