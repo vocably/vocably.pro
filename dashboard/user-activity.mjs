@@ -45,7 +45,11 @@ for (const userCardCollection of userCardCollections) {
     ).stdout || '""'
   );
 
-  console.log(userCardCollection.Key, cardCollection.cards.length);
+  console.log(
+    userCardCollection.Key,
+    cardCollection.cards.length,
+    userCardCollection.LastModified
+  );
 }
 
 try {
