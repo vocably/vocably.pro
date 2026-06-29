@@ -15,6 +15,7 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
 import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown.component';
+import { filterByTags } from '../../../../filterByTags';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -82,22 +83,10 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     combineLatest([this.allCards$, this.selectedTags$, this.noTags$])
       .pipe(takeUntil(this.destroy$))
       .subscribe(([allCards, selectedTags, noTags]) => {
-        if (noTags) {
-          this.cardItems = allCards.filter(
-            (card) => card.data.tags.length === 0
-          );
-          return;
-        }
-
-        if (selectedTags.length > 0) {
-          const selectedTagIds = new Set(selectedTags.map((tag) => tag.id));
-          this.cardItems = allCards.filter((card) =>
-            card.data.tags.some((tag) => selectedTagIds.has(tag.id))
-          );
-          return;
-        }
-
-        this.cardItems = allCards;
+        this.cardItems = filterByTags(allCards, {
+          noTags,
+          tagIds: selectedTags.map((tag) => tag.id),
+        });
       });
   }
 

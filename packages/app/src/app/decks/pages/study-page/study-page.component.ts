@@ -32,6 +32,8 @@ import { AuthService } from '../../../auth/auth.service';
 import { getStudySettings } from '../../../../study-settings';
 import { shuffle } from 'lodash-es';
 import { analysisItemToCardItem } from '../../../../analysisItemToCardItem';
+import { getLanguageTagStorage } from '../../../../tagsStorage';
+import { filterByTags } from '../../../../filterByTags';
 
 @Component({
   selector: 'app-study-page',
@@ -123,7 +125,11 @@ export class StudyPageComponent implements OnInit, OnDestroy {
 
   reloadCards() {
     const studySettings = getStudySettings();
-    this.allCards = this.deckStore.deck$.value.cards;
+    const deck = this.deckStore.deck$.value;
+
+    const tagStorage = getLanguageTagStorage(deck.language);
+
+    this.allCards = filterByTags(deck.cards, tagStorage);
 
     if (studySettings.random) {
       this.cards = shuffle(this.allCards).slice(

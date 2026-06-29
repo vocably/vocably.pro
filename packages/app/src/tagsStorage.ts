@@ -1,4 +1,4 @@
-type LanguageTagStorage = {
+export type LanguageTagStorage = {
   noTags: boolean;
   tagIds: string[];
 };
