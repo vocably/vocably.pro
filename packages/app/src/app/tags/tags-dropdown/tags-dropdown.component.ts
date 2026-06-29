@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
@@ -21,14 +21,19 @@ import { TagItem } from '@vocably/model';
     TranslocoModule,
   ],
 })
-export class TagsDropdownComponent {
+export class TagsDropdownComponent implements OnInit {
   @Input() tags: TagItem[] = [];
   @Input() noTags = false;
+  @Input() selectedTags: TagItem[] = [];
 
   @Output() onSelect = new EventEmitter<TagItem[]>();
   @Output() onNoTags = new EventEmitter<boolean>();
 
   private selectedIds = new Set<string>();
+
+  ngOnInit() {
+    this.selectedTags.forEach((tag) => this.selectedIds.add(tag.id));
+  }
 
   isChecked(tag: TagItem): boolean {
     return this.selectedIds.has(tag.id);

@@ -12,6 +12,7 @@
         <app-tags-dropdown
           [tags]="tags"
           [noTags]="noTags$.value"
+          [selectedTags]="selectedTags$.value"
           (onSelect)="onSelectTags($event)"
           (onNoTags)="onNoTags($event)"
         >
