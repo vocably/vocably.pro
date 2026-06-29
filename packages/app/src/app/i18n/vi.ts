@@ -88,6 +88,7 @@ export const vi = {
   'decks.dashboard.study': 'Học',
   'decks.dashboard.edit_deck': 'Chỉnh sửa bộ sưu tập',
   'decks.dashboard.cards_without_tags': 'Thẻ không có thẻ tag',
+  'decks.dashboard.tags': 'Thẻ tag',
   'decks.edit.export_deck': 'Xuất bộ sưu tập',
   'decks.edit.delete_deck': 'Xóa bộ sưu tập',
   'decks.card_form.source': 'Từ hoặc cụm từ',

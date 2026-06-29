@@ -32,6 +32,19 @@ $gradient-bottom-margin: 1rem;
   height: $deck-options-height;
 }
 
+.selected-tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+
+  .selected-tags-label {
+    font-weight: bold;
+  }
+}
+
 .study-button-container {
   display: flex;
   flex-direction: row;

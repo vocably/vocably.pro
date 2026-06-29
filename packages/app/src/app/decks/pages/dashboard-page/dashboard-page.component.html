@@ -19,6 +19,30 @@
         </app-tags-dropdown>
       }
     </div>
+    @if (noTags || selectedTags.length > 0) {
+      <div class="selected-tags">
+        <span class="selected-tags-label">
+          {{ 'decks.dashboard.tags' | transloco }}:
+        </span>
+        <mat-chip-set>
+          @if (noTags) {
+            <mat-chip [disableRipple]="true">
+              {{ 'decks.dashboard.cards_without_tags' | transloco }}
+              <button matChipRemove (click)="noTags = false">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          } @else {
+            <mat-chip *ngFor="let tag of selectedTags" [disableRipple]="true">
+              {{ tag.data.title }}
+              <button matChipRemove (click)="removeTag(tag)">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+          }
+        </mat-chip-set>
+      </div>
+    }
   </div>
   <ul class="unstyled separated mb-1" data-test="dashboard-cards">
     <li *ngFor="let item of cardItems.slice(0, 7)">

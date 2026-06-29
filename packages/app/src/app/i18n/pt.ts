@@ -91,6 +91,7 @@ export const pt = {
   'decks.dashboard.study': 'Estudar',
   'decks.dashboard.edit_deck': 'Editar coleção',
   'decks.dashboard.cards_without_tags': 'Cartões sem etiquetas',
+  'decks.dashboard.tags': 'Etiquetas',
   'decks.edit.export_deck': 'Exportar coleção',
   'decks.edit.delete_deck': 'Excluir coleção',
   'decks.card_form.source': 'Palavra ou frase',

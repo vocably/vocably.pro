@@ -1,5 +1,5 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
@@ -9,6 +9,7 @@ import { isDesktop } from '../../../../browser';
 import { CardComponent } from '../../card/card.component';
 import { DeckStoreService } from '../../deck-store.service';
 import { MatIcon } from '@angular/material/icon';
+import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
 import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown.component';
 
 @Component({
@@ -23,11 +24,16 @@ import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown
     RouterLink,
     TranslocoModule,
     MatIcon,
+    MatChipSet,
+    MatChip,
+    MatChipRemove,
     TagsDropdownComponent,
   ],
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
+
+  @ViewChild(TagsDropdownComponent) tagsDropdown?: TagsDropdownComponent;
 
   public cardItems: CardItem[] = [];
 
@@ -59,5 +65,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   onNoTags(noTags: boolean): void {
     this.noTags = noTags;
+  }
+
+  removeTag(tag: TagItem): void {
+    this.tagsDropdown?.toggle(tag);
   }
 }

@@ -92,6 +92,7 @@ export const ru = {
   'decks.dashboard.study': 'Приступить к обучению',
   'decks.dashboard.edit_deck': 'Редактировать коллекцию',
   'decks.dashboard.cards_without_tags': 'Карточки без тегов',
+  'decks.dashboard.tags': 'Теги',
   'decks.edit.export_deck': 'Экспорт коллекции',
   'decks.edit.delete_deck': 'Удалить коллекцию',
   'decks.card_form.source': 'Слово/фраза',

@@ -90,6 +90,7 @@ export const en = {
   'decks.dashboard.study': 'Study',
   'decks.dashboard.edit_deck': 'Edit collection',
   'decks.dashboard.cards_without_tags': 'Cards without tags',
+  'decks.dashboard.tags': 'Tags',
   'decks.edit.export_deck': 'Export Collection',
   'decks.edit.delete_deck': 'Delete Collection',
   'decks.card_form.source': 'Word or phrase',
