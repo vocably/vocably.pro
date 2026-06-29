@@ -54,6 +54,10 @@ $gradient-bottom-margin: 1rem;
   .study-button {
     flex: 1;
     border-radius: 0.6rem 0.2rem 0.2rem 0.6rem;
+
+    &:last-child {
+      border-radius: 0.6rem;
+    }
   }
 
   .tags-button {
