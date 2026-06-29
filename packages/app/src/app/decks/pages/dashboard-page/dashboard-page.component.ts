@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { byDate, CardItem, TagItem } from '@vocably/model';
-import { Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
 import { isDesktop } from '../../../../browser';
 import { CardComponent } from '../../card/card.component';
 import { DeckStoreService } from '../../deck-store.service';
@@ -35,13 +35,13 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   @ViewChild(TagsDropdownComponent) tagsDropdown?: TagsDropdownComponent;
 
-  public cardItems: CardItem[] = [];
-
   public tags: TagItem[] = [];
 
-  public selectedTags: TagItem[] = [];
+  public allCards$ = new BehaviorSubject<CardItem[]>([]);
+  public selectedTags$ = new BehaviorSubject<TagItem[]>([]);
+  public noTags$ = new BehaviorSubject<boolean>(false);
 
-  public noTags = false;
+  public cardItems: CardItem[] = [];
 
   public isDesktop = isDesktop;
 
@@ -49,9 +49,30 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.deckStore.deck$.pipe(takeUntil(this.destroy$)).subscribe((deck) => {
-      this.cardItems = deck.cards.sort(byDate);
+      this.allCards$.next(deck.cards.sort(byDate));
       this.tags = deck.tags;
     });
+
+    combineLatest([this.allCards$, this.selectedTags$, this.noTags$])
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(([allCards, selectedTags, noTags]) => {
+        if (noTags) {
+          this.cardItems = allCards.filter(
+            (card) => card.data.tags.length === 0
+          );
+          return;
+        }
+
+        if (selectedTags.length > 0) {
+          const selectedTagIds = new Set(selectedTags.map((tag) => tag.id));
+          this.cardItems = allCards.filter((card) =>
+            card.data.tags.some((tag) => selectedTagIds.has(tag.id))
+          );
+          return;
+        }
+
+        this.cardItems = allCards;
+      });
   }
 
   ngOnDestroy(): void {
@@ -60,11 +81,11 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   }
 
   onSelectTags(tags: TagItem[]): void {
-    this.selectedTags = tags;
+    this.selectedTags$.next(tags);
   }
 
   onNoTags(noTags: boolean): void {
-    this.noTags = noTags;
+    this.noTags$.next(noTags);
   }
 
   removeTag(tag: TagItem): void {
