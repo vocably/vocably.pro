@@ -1,12 +1,17 @@
 <div class="gradient">
   <div *ngIf="isDesktop" class="mb-1">
-    <a
-      class="button block track-click"
-      id="practice-button"
-      [routerLink]="['study']"
-    >
-      {{ 'decks.dashboard.study' | transloco }}
-    </a>
+    <div class="study-button-container">
+      <a
+        class="button study-button track-click"
+        id="practice-button"
+        [routerLink]="['study']"
+      >
+        {{ 'decks.dashboard.study' | transloco }}
+      </a>
+      @if (tags.length > 0) {
+        <button class="button tags-button"><mat-icon>sell</mat-icon></button>
+      }
+    </div>
   </div>
   <ul class="unstyled separated mb-1" data-test="dashboard-cards">
     <li *ngFor="let item of cardItems.slice(0, 7)">
