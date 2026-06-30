@@ -116,19 +116,25 @@
     window['searchFormSourceLanguage'] = '{{sourceLanguage}}';
   </script>
 {{/if}}
-<form class='search-form' id='searchForm' action='/search.html'>
+<form
+  class='search-form'
+  id='searchForm'
+  action='/search.html'
+  role='search'
+  aria-label='Translate a word or phrase'
+>
   <div class='language-selector-wrapper'>
-    <div class='label'></div>
-    <select name='sourceLanguage'>
+    <div class='label' aria-hidden='true'></div>
+    <select name='sourceLanguage' aria-label='Source language'>
       {{#each htmlWebpackPlugin.options.environment.languages}}
         <option value='{{this.code}}'>{{this.label}}</option>
       {{/each}}
     </select>
   </div>
-  <i class='bi bi-chevron-compact-right'></i>
+  <i class='bi bi-chevron-compact-right' aria-hidden='true'></i>
   <div class='language-selector-wrapper delimiter'>
-    <div class='label'></div>
-    <select name='targetLanguage'>
+    <div class='label' aria-hidden='true'></div>
+    <select name='targetLanguage' aria-label='Target language'>
       {{#each htmlWebpackPlugin.options.environment.languages}}
         <option value='{{this.code}}'>{{this.label}}</option>
       {{/each}}
@@ -138,13 +144,15 @@
     type='text'
     class='text-input'
     name='text'
+    aria-label='Word or phrase to translate'
     autocomplete='off'
     autocorrect='off'
     autocapitalize='none'
     value='{{query}}'
   />
   <input type='hidden' name='isReversed' value='false' />
-  <button type='submit' class='submit-button'><i
+  <button type='submit' class='submit-button' aria-label='Search'><i
       class='bi bi-search'
+      aria-hidden='true'
     ></i></button>
 </form>
