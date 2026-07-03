@@ -635,6 +635,20 @@ describe('unit of speech analyze', () => {
       }
       expect(result.value.pastTenses).toEqual('zwoer, heeft gezworen');
     }, 10_000_000);
+
+    it('proper gender nl', async () => {
+      const result = await geminiAnalyse({
+        source: 'schuitje',
+        partOfSpeech: 'noun',
+        sourceLanguage: 'nl',
+      });
+      expect(result.success).toBeTruthy();
+
+      if (!result.success) {
+        return;
+      }
+      expect(result.value.gender).toEqual('neuter');
+    }, 10_000_000);
   });
 
   describe('aiAnalyse', () => {

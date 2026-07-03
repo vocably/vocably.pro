@@ -435,7 +435,7 @@ const getGeminiGenerateContentParameters = ({
             ? ' The provided word can be in any case (e.g., uppercase, lowercase, or mixed case).'
             : ''
         }`,
-        `Take the fact that the provided word is ${partOfSpeech} very seriously`,
+        `Treat the input strictly as a ${partOfSpeech}`,
         `Only respond in JSON format with an object containing the following properties:`,
         isTranscriptionNeeded ? `transcript - ${transcriptionType}` : ``,
         `headword - ${partOfSpeech} provided by user.${
@@ -461,7 +461,9 @@ const getGeminiGenerateContentParameters = ({
         ...Object.entries(inflections).map(
           ([key, value]) => `${key} - ${value}`
         ),
-        genders.length > 0 ? `gender - ${genders.join(', ')}, or other` : ``,
+        genders.length > 0
+          ? `gender - of the provided word "${securedSource}". Could be ${genders.join(', ')}, or other`
+          : ``,
       ].filter((s) => s.length > 0),
       thinkingConfig: {
         thinkingBudget: 0, // Disables thinking
