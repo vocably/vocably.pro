@@ -24,5 +24,10 @@ export {
   getUnitOfSpeechTranslationFileName,
 } from './translateUnitOfSpeech';
 export { validateSource } from './validateSource';
+export {
+  getPartsOfSpeechGeminiParameters,
+  getPartsOfSpeechGeminiBatchItem,
+  handleGeminiPartsOfSpeechResponse,
+} from './getPartsOfSpeechGemini';
 export { fixGrammar } from './grammar/fixGrammar';
 export { chatWithCard } from './chatWithCard';
