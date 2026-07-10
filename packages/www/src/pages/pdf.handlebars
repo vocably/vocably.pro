@@ -3,13 +3,10 @@
   metaDescription='Upload a PDF and read it right in your browser. Your document and reading position are stored locally on your device.'
   url='/pdf.html'
   noCta=true
-  hidePricing=true
   navbarContainerClass="container-md"
+  nonStickyNavbar=true
 }}
   <style>
-    .pdf-landing {
-      max-width: 640px;
-    }
 
     .pdf-upload-btn {
       display: flex;
@@ -211,27 +208,85 @@
     }
   </style>
 
-  <div class="container-md py-5">
-    <!-- Landing -->
-    <div id="pdfLanding" class="pdf-landing mx-auto">
-      <h1 class="h3 mb-4 text-center">PDF Reader</h1>
+  <div id="pdfLanding">
+    <div class="container-md py-5">
+      <div class="pdf-landing mx-auto">
+        <h1 class="h3 mb-4">Online PDF Reader</h1>
 
-      <input type="file" id="pdfFileInput" accept="application/pdf,.pdf" class="d-none" />
+        <input type="file" id="pdfFileInput" accept="application/pdf,.pdf" class="d-none" />
 
-      <button type="button" id="pdfUploadButton" class="pdf-upload-btn mb-4">
-        <i class="bi bi-cloud-arrow-up"></i>
-        <span>Upload PDF</span>
-        <span class="text-muted" style="font-size: 0.9rem;">or drop a file here</span>
-      </button>
-
-      <div id="pdfLastDoc" class="pdf-last-doc d-none">
-        <button type="button" id="pdfOpenLast" class="btn btn-outline-primary rounded-pill pdf-last-doc__open">
-          <i class="bi bi-file-earmark-pdf-fill flex-shrink-0"></i>
-          <span id="pdfLastDocName" class="pdf-last-doc__name"></span>
+        <button type="button" id="pdfUploadButton" class="pdf-upload-btn mb-4">
+          <i class="bi bi-cloud-arrow-up"></i>
+          <span>Click to open a PDF file</span>
+          <span class="text-muted" style="font-size: 0.9rem;">or drop a file here</span>
         </button>
-        <button type="button" id="pdfDeleteLast" class="btn btn-outline-danger rounded-circle flex-shrink-0" aria-label="Delete document" title="Delete">
-          <i class="bi bi-trash"></i>
-        </button>
+
+        <div id="pdfLastDoc" class="pdf-last-doc d-none">
+          <button type="button" id="pdfOpenLast" class="btn btn-outline-primary rounded-pill pdf-last-doc__open">
+            <i class="bi bi-file-earmark-pdf-fill flex-shrink-0"></i>
+            <span id="pdfLastDocName" class="pdf-last-doc__name"></span>
+          </button>
+          <button type="button" id="pdfDeleteLast" class="btn btn-outline-danger rounded-circle flex-shrink-0" aria-label="Delete document" title="Delete">
+            <i class="bi bi-trash" style="position:relative; top: 0.1rem;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div style="background: #f9f9f9;">
+      <div class="container-md py-5" style="font-size: 80%">
+        <h2 class="h5" style="color: var(--bs-body-color); font-size: 140%">A secure, extension-friendly PDF reader.</h2>
+        <div class="mb-4">
+          Read PDF files, highlight text, translate sentences, and learn new words directly through Vocably. Your files are never uploaded to a server—they stay entirely in your browser and remain available for future reading sessions.
+        </div>
+        <div class="mb-4">
+          Don't have the Vocably extension yet? Install it here:
+        </div>
+        <style>
+          .extensions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+          }
+
+          .install-extension-button {
+            --bg-color: #2c2c2c;
+            --bg-hover-color: #000;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem 0.5rem 3rem;
+            border-radius: 2rem;
+            font-size: 1.2rem;
+            font-weight: 200;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.2s ease-in-out;
+
+            &.chrome {
+              background: var(--bg-color) url('assets/chrome.svg') 0.5rem center no-repeat;
+              background-size: 1.8rem;
+            }
+
+            &.safari {
+              background: var(--bg-color) url('assets/safari.svg') 0.5rem calc(50% + 0.05rem) no-repeat;
+              background-size: 1.9rem;
+            }
+
+            &:hover {
+              background-color: var(--bg-hover-color);
+            }
+          }
+        </style>
+        <div class="mb-4 extensions">
+          <a class="install-extension-button chrome" href="https://chrome.google.com/webstore/detail/vocably/baocigmmhhdemijfjnjdidbkfgpgogmb">
+            Desktop Chrome
+          </a>
+          <a class="install-extension-button safari" href="https://apps.apple.com/us/app/vocably-for-safari/id6464076425">
+            Desktop Safari
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -339,7 +394,8 @@
         });
       }
 
-      function savePage(page) {
+      // Merge a partial update into the stored document (page, scale, ...).
+      function updateDoc(patch) {
         return openDb().then(function (db) {
           return new Promise(function (resolve, reject) {
             var tx = db.transaction(STORE, 'readwrite');
@@ -348,7 +404,7 @@
             req.onsuccess = function () {
               var doc = req.result;
               if (doc) {
-                doc.page = page;
+                Object.assign(doc, patch);
                 store.put(doc);
               }
             };
@@ -360,6 +416,14 @@
             };
           });
         });
+      }
+
+      function savePage(page) {
+        return updateDoc({ page: page });
+      }
+
+      function saveScale(scale) {
+        return updateDoc({ scale: scale });
       }
 
       // ---- Elements ----
@@ -596,10 +660,15 @@
           pageCount.textContent = String(pdfDoc.numPages);
           pageInput.max = String(pdfDoc.numPages);
           return pdfDoc.getPage(1).then(function (firstPage) {
-            // Fit the page width to the reader, so canvas and text stay aligned.
-            var unscaled = firstPage.getViewport({ scale: 1 });
-            var available = pagesContainer.clientWidth - 24;
-            scale = Math.max(0.4, Math.min(3, available / unscaled.width));
+            if (doc.scale) {
+              // Restore the last zoom the user picked for this document.
+              scale = doc.scale;
+            } else {
+              // Fit the page width to the reader, so canvas and text stay aligned.
+              var unscaled = firstPage.getViewport({ scale: 1 });
+              var available = pagesContainer.clientWidth - 24;
+              scale = Math.max(0.4, Math.min(3, available / unscaled.width));
+            }
             buildPages();
             goToPage(doc.page || 1, false);
           });
@@ -709,10 +778,12 @@
       zoomInButton.addEventListener('click', function () {
         scale = Math.min(4, scale + 0.2);
         reRenderAll();
+        saveScale(scale);
       });
       zoomOutButton.addEventListener('click', function () {
         scale = Math.max(0.4, scale - 0.2);
         reRenderAll();
+        saveScale(scale);
       });
 
       document.addEventListener('keydown', function (e) {
