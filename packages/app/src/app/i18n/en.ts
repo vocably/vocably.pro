@@ -338,6 +338,7 @@ export const en = {
   'header.settings': 'System Settings',
   'header.import': 'Import',
   'header.feedback': 'Feedback',
+  'header.pdf_reader': 'PDF Reader',
   'header.sign_out': 'Sign Out',
 
   // Alert

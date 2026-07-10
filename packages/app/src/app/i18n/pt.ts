@@ -342,6 +342,7 @@ export const pt = {
   'header.settings': 'Configurações do sistema',
   'header.import': 'Importar',
   'header.feedback': 'Feedback',
+  'header.pdf_reader': 'Leitor de PDF',
   'header.sign_out': 'Sair',
 
   // Alert

@@ -345,6 +345,7 @@ export const ru = {
   'header.settings': 'Настройки системы',
   'header.import': 'Импорт',
   'header.feedback': 'Обратная связь',
+  'header.pdf_reader': 'PDF-читалка',
   'header.sign_out': 'Выйти',
 
   // Alert

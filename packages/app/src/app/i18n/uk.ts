@@ -344,6 +344,7 @@ export const uk = {
   'header.settings': 'Системні налаштування',
   'header.import': 'Імпорт',
   'header.feedback': "Зворотний зв'язок",
+  'header.pdf_reader': 'PDF-читалка',
   'header.sign_out': 'Вийти',
 
   // Alert
