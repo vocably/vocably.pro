@@ -1,0 +1,806 @@
+{{#> layout
+  title='PDF Reader'
+  metaDescription='Upload a PDF and read it right in your browser. Your document and reading position are stored locally on your device.'
+  url='/pdf.html'
+  noCta=true
+  navbarContainerClass="container-md"
+  nonStickyNavbar=true
+}}
+  <style>
+
+    .pdf-upload-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 3rem 1.5rem;
+      border: 1px dashed var(--bs-primary);
+      border-radius: 1rem;
+      background: rgba(var(--bs-primary-rgb), 0.04);
+      color: var(--bs-primary);
+      font-size: 1.4rem;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .pdf-upload-btn:hover,
+    .pdf-upload-btn.is-dragover {
+      background: rgba(var(--bs-primary-rgb), 0.1);
+    }
+
+    .pdf-upload-btn .bi {
+      font-size: 2.6rem;
+      height: 2.7rem;
+    }
+
+    .pdf-last-doc {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .pdf-last-doc__open {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-align: left;
+      overflow: hidden;
+    }
+
+    .pdf-last-doc__name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Reader */
+    .pdf-reader {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      background: #525659;
+    }
+
+    .pdf-reader__toolbar {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      background: #333639;
+      color: #fff;
+    }
+
+    .pdf-reader__toolbar .btn {
+      --bs-btn-color: #fff;
+      --bs-btn-border-color: rgba(255, 255, 255, 0.25);
+      --bs-btn-hover-color: #fff;
+      --bs-btn-hover-bg: rgba(255, 255, 255, 0.12);
+      --bs-btn-hover-border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .pdf-reader__title {
+      flex: 1 1 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 0.95rem;
+    }
+
+    .pdf-reader__page-input {
+      width: 3.5rem;
+      text-align: center;
+    }
+
+    .pdf-reader__pages {
+      flex: 1 1 auto;
+      overflow: auto;
+      padding: 1.5rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* A page = canvas (visual) + .textLayer (selectable text) stacked. */
+    .pdf-reader__page {
+      position: relative;
+      flex: 0 0 auto;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+      --scale-round-x: 1px;
+      --scale-round-y: 1px;
+    }
+
+    .pdf-reader__canvas {
+      display: block;
+    }
+
+    .pdf-reader__spinner {
+      color: #fff;
+      margin: 3rem auto;
+    }
+
+    /* --- Official PDF.js text-layer styles (v6) --- */
+    .textLayer {
+      color-scheme: only light;
+      position: absolute;
+      text-align: initial;
+      inset: 0;
+      overflow: clip;
+      opacity: 1;
+      line-height: 1;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-size-adjust: none;
+      forced-color-adjust: none;
+      transform-origin: 0 0;
+      caret-color: CanvasText;
+      z-index: 0;
+    }
+
+    .textLayer.highlighting {
+      touch-action: none;
+    }
+
+    .textLayer :is(span, br) {
+      color: transparent;
+      position: absolute;
+      white-space: pre;
+      cursor: text;
+      user-select: text;
+      transform-origin: 0% 0%;
+    }
+
+    .textLayer {
+      --min-font-size: 1;
+      --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+      --min-font-size-inv: calc(1 / var(--min-font-size));
+    }
+
+    .textLayer > :not(.markedContent),
+    .textLayer .markedContent span:not(.markedContent) {
+      z-index: 1;
+      --font-height: 0;
+      font-size: calc(var(--text-scale-factor) * var(--font-height));
+      --scale-x: 1;
+      --rotate: 0deg;
+      transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+    }
+
+    .textLayer .markedContent {
+      display: contents;
+    }
+
+    .textLayer span[role='img'] {
+      user-select: none;
+      cursor: default;
+    }
+
+    .textLayer ::selection {
+      background: rgba(0, 0, 255, 0.25);
+      background: color-mix(in srgb, AccentColor, transparent 50%);
+      color: transparent;
+    }
+
+    .textLayer br::selection {
+      background: transparent;
+    }
+
+    .textLayer .endOfContent {
+      display: block;
+      position: absolute;
+      inset: 100% 0 0;
+      z-index: 0;
+      cursor: default;
+      user-select: none;
+    }
+
+    .textLayer.selecting .endOfContent {
+      top: 0;
+    }
+  </style>
+
+  <div id="pdfLanding">
+    <div class="container-md py-5">
+      <div class="pdf-landing mx-auto">
+        <h1 class="h3 mb-4">Online PDF Reader</h1>
+
+        <input type="file" id="pdfFileInput" accept="application/pdf,.pdf" class="d-none" />
+
+        <button type="button" id="pdfUploadButton" class="pdf-upload-btn mb-4">
+          <i class="bi bi-cloud-arrow-up"></i>
+          <span>Click to open a PDF file</span>
+          <span class="text-muted" style="font-size: 0.9rem;">or drop a file here</span>
+        </button>
+
+        <div id="pdfLastDoc" class="pdf-last-doc d-none">
+          <button type="button" id="pdfOpenLast" class="btn btn-outline-primary rounded-pill pdf-last-doc__open">
+            <i class="bi bi-file-earmark-pdf-fill flex-shrink-0"></i>
+            <span id="pdfLastDocName" class="pdf-last-doc__name"></span>
+          </button>
+          <button type="button" id="pdfDeleteLast" class="btn btn-outline-danger rounded-circle flex-shrink-0" aria-label="Delete document" title="Delete">
+            <i class="bi bi-trash" style="position:relative; top: 0.1rem;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div style="background: #f9f9f9;">
+      <div class="container-md py-5" style="font-size: 80%">
+        <h2 class="h5" style="color: var(--bs-body-color); font-size: 140%">A secure, extension-friendly PDF reader.</h2>
+        <div class="mb-4">
+          Read PDF files, highlight text, translate sentences, and learn new words directly through Vocably. Your files are never uploaded to a server—they stay entirely in your browser and remain available for future reading sessions.
+        </div>
+        <div class="mb-4">
+          Don't have the Vocably extension yet? Install it here:
+        </div>
+        <style>
+          .extensions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+          }
+
+          .install-extension-button {
+            --bg-color: #2c2c2c;
+            --bg-hover-color: #000;
+
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem 0.5rem 3rem;
+            border-radius: 2rem;
+            font-size: 1.2rem;
+            font-weight: 200;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.2s ease-in-out;
+
+            &.chrome {
+              background: var(--bg-color) url('assets/chrome.svg') 0.5rem center no-repeat;
+              background-size: 1.8rem;
+            }
+
+            &.safari {
+              background: var(--bg-color) url('assets/safari.svg') 0.5rem calc(50% + 0.05rem) no-repeat;
+              background-size: 1.9rem;
+            }
+
+            &:hover {
+              background-color: var(--bg-hover-color);
+            }
+          }
+        </style>
+        <div class="mb-4 extensions">
+          <a class="install-extension-button chrome" href="https://chrome.google.com/webstore/detail/vocably/baocigmmhhdemijfjnjdidbkfgpgogmb">
+            Desktop Chrome
+          </a>
+          <a class="install-extension-button safari" href="https://apps.apple.com/us/app/vocably-for-safari/id6464076425">
+            Desktop Safari
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reader (hidden until a document is opened) -->
+  <div id="pdfReader" class="pdf-reader d-none">
+    <div class="pdf-reader__toolbar">
+      <button type="button" id="pdfBack" class="btn btn-sm" title="Back">
+        <i class="bi bi-arrow-left"></i>
+      </button>
+      <span id="pdfReaderTitle" class="pdf-reader__title"></span>
+      <button type="button" id="pdfZoomOut" class="btn btn-sm" title="Zoom out">
+        <i class="bi bi-zoom-out"></i>
+      </button>
+      <button type="button" id="pdfZoomIn" class="btn btn-sm" title="Zoom in">
+        <i class="bi bi-zoom-in"></i>
+      </button>
+      <button type="button" id="pdfPrev" class="btn btn-sm" title="Previous page">
+        <i class="bi bi-chevron-up"></i>
+      </button>
+      <input type="number" id="pdfPageInput" class="form-control form-control-sm pdf-reader__page-input" min="1" value="1" />
+      <span class="text-white-50" style="font-size: 0.9rem;">/&nbsp;<span id="pdfPageCount">?</span></span>
+      <button type="button" id="pdfNext" class="btn btn-sm" title="Next page">
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+    <div id="pdfPages" class="pdf-reader__pages"></div>
+  </div>
+
+  <!-- PDF.js v6 is ESM-only (no UMD global), so it is loaded as a module.
+       v6 has no SVG backend, so pages are drawn on a <canvas> with an HTML
+       .textLayer overlaid on top to keep the text selectable. -->
+  <script type="module">
+    import * as PDFJS from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/6.1.200/pdf.min.mjs';
+
+    (function () {
+      PDFJS.GlobalWorkerOptions.workerSrc =
+        'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/6.1.200/pdf.worker.min.mjs';
+
+      // ---- IndexedDB helpers (single stored document) ----
+      var DB_NAME = 'vocably-pdf-reader';
+      var STORE = 'documents';
+      var DOC_ID = 'current';
+
+      function openDb() {
+        return new Promise(function (resolve, reject) {
+          var request = indexedDB.open(DB_NAME, 1);
+          request.onupgradeneeded = function () {
+            var db = request.result;
+            if (!db.objectStoreNames.contains(STORE)) {
+              db.createObjectStore(STORE, { keyPath: 'id' });
+            }
+          };
+          request.onsuccess = function () {
+            resolve(request.result);
+          };
+          request.onerror = function () {
+            reject(request.error);
+          };
+        });
+      }
+
+      function dbGet() {
+        return openDb().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var tx = db.transaction(STORE, 'readonly');
+            var req = tx.objectStore(STORE).get(DOC_ID);
+            req.onsuccess = function () {
+              resolve(req.result || null);
+            };
+            req.onerror = function () {
+              reject(req.error);
+            };
+          });
+        });
+      }
+
+      function dbPut(doc) {
+        return openDb().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var tx = db.transaction(STORE, 'readwrite');
+            tx.objectStore(STORE).put(doc);
+            tx.oncomplete = function () {
+              resolve();
+            };
+            tx.onerror = function () {
+              reject(tx.error);
+            };
+          });
+        });
+      }
+
+      function dbDelete() {
+        return openDb().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var tx = db.transaction(STORE, 'readwrite');
+            tx.objectStore(STORE).delete(DOC_ID);
+            tx.oncomplete = function () {
+              resolve();
+            };
+            tx.onerror = function () {
+              reject(tx.error);
+            };
+          });
+        });
+      }
+
+      // Merge a partial update into the stored document (page, scale, ...).
+      function updateDoc(patch) {
+        return openDb().then(function (db) {
+          return new Promise(function (resolve, reject) {
+            var tx = db.transaction(STORE, 'readwrite');
+            var store = tx.objectStore(STORE);
+            var req = store.get(DOC_ID);
+            req.onsuccess = function () {
+              var doc = req.result;
+              if (doc) {
+                Object.assign(doc, patch);
+                store.put(doc);
+              }
+            };
+            tx.oncomplete = function () {
+              resolve();
+            };
+            tx.onerror = function () {
+              reject(tx.error);
+            };
+          });
+        });
+      }
+
+      function savePage(page) {
+        return updateDoc({ page: page });
+      }
+
+      function saveScale(scale) {
+        return updateDoc({ scale: scale });
+      }
+
+      // ---- Elements ----
+      var landing = document.getElementById('pdfLanding');
+      var fileInput = document.getElementById('pdfFileInput');
+      var uploadButton = document.getElementById('pdfUploadButton');
+      var lastDoc = document.getElementById('pdfLastDoc');
+      var openLast = document.getElementById('pdfOpenLast');
+      var deleteLast = document.getElementById('pdfDeleteLast');
+      var lastDocName = document.getElementById('pdfLastDocName');
+
+      var reader = document.getElementById('pdfReader');
+      var readerTitle = document.getElementById('pdfReaderTitle');
+      var pagesContainer = document.getElementById('pdfPages');
+      var backButton = document.getElementById('pdfBack');
+      var prevButton = document.getElementById('pdfPrev');
+      var nextButton = document.getElementById('pdfNext');
+      var pageInput = document.getElementById('pdfPageInput');
+      var pageCount = document.getElementById('pdfPageCount');
+      var zoomInButton = document.getElementById('pdfZoomIn');
+      var zoomOutButton = document.getElementById('pdfZoomOut');
+
+      // ---- Reader state ----
+      var pdfDoc = null;
+      var renderedPages = {}; // pageNumber -> rendered <svg> element
+      var pageRenders = {}; // pageNumber -> in-flight render promise (dedupe)
+      var currentPage = 1;
+      var scale = 1.2;
+      var scrollDebounce = null;
+      var suppressScrollTracking = false;
+
+      function showLastDoc(doc) {
+        if (doc) {
+          lastDocName.textContent = doc.name;
+          lastDoc.classList.remove('d-none');
+        } else {
+          lastDoc.classList.add('d-none');
+        }
+      }
+
+      function refreshLanding() {
+        return dbGet().then(showLastDoc);
+      }
+
+      // ---- Rendering (canvas image + HTML text layer for selection) ----
+      function renderPage(pageNumber) {
+        if (pageRenders[pageNumber]) {
+          return pageRenders[pageNumber];
+        }
+        var promise = pdfDoc.getPage(pageNumber).then(function (page) {
+          var viewport = page.getViewport({ scale: scale });
+          var cssWidth = Math.floor(viewport.width);
+          var cssHeight = Math.floor(viewport.height);
+
+          var wrapper = document.createElement('div');
+          wrapper.className = 'pdf-reader__page';
+          wrapper.dataset.page = String(pageNumber);
+          wrapper.style.width = cssWidth + 'px';
+          wrapper.style.height = cssHeight + 'px';
+          // Drives the text layer's font sizing / positioning math.
+          wrapper.style.setProperty('--total-scale-factor', String(scale));
+
+          // Visual layer: canvas rendered at device pixel ratio for crispness.
+          var canvas = document.createElement('canvas');
+          canvas.className = 'pdf-reader__canvas';
+          var ratio = window.devicePixelRatio || 1;
+          canvas.width = Math.floor(viewport.width * ratio);
+          canvas.height = Math.floor(viewport.height * ratio);
+          canvas.style.width = cssWidth + 'px';
+          canvas.style.height = cssHeight + 'px';
+          wrapper.appendChild(canvas);
+
+          // Text layer: transparent, selectable HTML on top of the canvas.
+          var textLayerDiv = document.createElement('div');
+          textLayerDiv.className = 'textLayer';
+          wrapper.appendChild(textLayerDiv);
+
+          var canvasTask = page.render({
+            canvasContext: canvas.getContext('2d'),
+            viewport: viewport,
+            transform: ratio !== 1 ? [ratio, 0, 0, ratio, 0, 0] : undefined,
+          }).promise;
+
+          var textTask = page.getTextContent().then(function (textContent) {
+            var textLayer = new PDFJS.TextLayer({
+              textContentSource: textContent,
+              container: textLayerDiv,
+              viewport: viewport,
+            });
+            return textLayer.render();
+          });
+
+          return Promise.all([canvasTask, textTask]).then(function () {
+            renderedPages[pageNumber] = wrapper;
+            return wrapper;
+          });
+        });
+        pageRenders[pageNumber] = promise;
+        return promise;
+      }
+
+      // Render all page placeholders in order, then fill visible ones lazily.
+      function buildPages() {
+        pagesContainer.innerHTML = '';
+        renderedPages = {};
+        pageRenders = {};
+        var frag = document.createDocumentFragment();
+        var estWidth = Math.max(200, pagesContainer.clientWidth - 24);
+        for (var i = 1; i <= pdfDoc.numPages; i++) {
+          var placeholder = document.createElement('div');
+          placeholder.className = 'pdf-reader__page';
+          placeholder.dataset.page = String(i);
+          placeholder.style.width = estWidth + 'px';
+          placeholder.style.aspectRatio = '1 / 1.414';
+          frag.appendChild(placeholder);
+        }
+        pagesContainer.appendChild(frag);
+        renderVisiblePages();
+      }
+
+      function renderVisiblePages() {
+        var containerRect = pagesContainer.getBoundingClientRect();
+        var nodes = pagesContainer.children;
+        var tasks = [];
+        for (var i = 0; i < nodes.length; i++) {
+          var node = nodes[i];
+          var pageNumber = parseInt(node.dataset.page, 10);
+          if (pageRenders[pageNumber]) {
+            continue;
+          }
+          var rect = node.getBoundingClientRect();
+          var visible =
+            rect.bottom >= containerRect.top - containerRect.height &&
+            rect.top <= containerRect.bottom + containerRect.height;
+          if (visible) {
+            tasks.push(replaceWithPage(node, pageNumber));
+          }
+        }
+        return Promise.all(tasks);
+      }
+
+      function replaceWithPage(node, pageNumber) {
+        return renderPage(pageNumber).then(function (svg) {
+          if (node.parentNode) {
+            node.parentNode.replaceChild(svg, node);
+          }
+        });
+      }
+
+      function goToPage(pageNumber, persist) {
+        pageNumber = Math.max(1, Math.min(pdfDoc.numPages, pageNumber));
+        currentPage = pageNumber;
+        pageInput.value = String(pageNumber);
+        var target = pagesContainer.querySelector('[data-page="' + pageNumber + '"]');
+
+        function scrollToTarget() {
+          var el = pagesContainer.querySelector('[data-page="' + pageNumber + '"]');
+          if (!el) {
+            return;
+          }
+          suppressScrollTracking = true;
+          var top =
+            el.offsetTop - pagesContainer.offsetTop - 16;
+          pagesContainer.scrollTop = top;
+          setTimeout(function () {
+            suppressScrollTracking = false;
+          }, 100);
+        }
+
+        if (target && !renderedPages[pageNumber]) {
+          replaceWithPage(target, pageNumber).then(scrollToTarget);
+        } else {
+          scrollToTarget();
+        }
+
+        if (persist !== false) {
+          savePage(pageNumber);
+        }
+      }
+
+      function updateCurrentPageFromScroll() {
+        var nodes = pagesContainer.children;
+        var containerMiddle =
+          pagesContainer.getBoundingClientRect().top +
+          pagesContainer.clientHeight / 2;
+        var closest = currentPage;
+        var closestDistance = Infinity;
+        for (var i = 0; i < nodes.length; i++) {
+          var node = nodes[i];
+          var rect = node.getBoundingClientRect();
+          var center = rect.top + rect.height / 2;
+          var distance = Math.abs(center - containerMiddle);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closest = parseInt(node.dataset.page, 10);
+          }
+        }
+        if (closest !== currentPage) {
+          currentPage = closest;
+          pageInput.value = String(closest);
+          savePage(closest);
+        }
+      }
+
+      pagesContainer.addEventListener('scroll', function () {
+        renderVisiblePages();
+        if (suppressScrollTracking) {
+          return;
+        }
+        if (scrollDebounce) {
+          clearTimeout(scrollDebounce);
+        }
+        scrollDebounce = setTimeout(updateCurrentPageFromScroll, 150);
+      });
+
+      function reRenderAll() {
+        var page = currentPage;
+        renderedPages = {};
+        buildPages();
+        goToPage(page, false);
+      }
+
+      // ---- Open / close reader ----
+      function openReader(doc) {
+        readerTitle.textContent = doc.name;
+        pageInput.value = String(doc.page || 1);
+        pageCount.textContent = '?';
+        reader.classList.remove('d-none');
+        document.body.style.overflow = 'hidden';
+
+        var data = doc.data.slice(0); // pdf.js transfers/detaches the buffer
+        PDFJS.getDocument({ data: data }).promise.then(function (loaded) {
+          pdfDoc = loaded;
+          pageCount.textContent = String(pdfDoc.numPages);
+          pageInput.max = String(pdfDoc.numPages);
+          return pdfDoc.getPage(1).then(function (firstPage) {
+            if (doc.scale) {
+              // Restore the last zoom the user picked for this document.
+              scale = doc.scale;
+            } else {
+              // Fit the page width to the reader, so canvas and text stay aligned.
+              var unscaled = firstPage.getViewport({ scale: 1 });
+              var available = pagesContainer.clientWidth - 24;
+              scale = Math.max(0.4, Math.min(3, available / unscaled.width));
+            }
+            buildPages();
+            goToPage(doc.page || 1, false);
+          });
+        });
+      }
+
+      function closeReader() {
+        reader.classList.add('d-none');
+        document.body.style.overflow = '';
+        pagesContainer.innerHTML = '';
+        renderedPages = {};
+        pageRenders = {};
+        if (pdfDoc) {
+          pdfDoc.destroy();
+          pdfDoc = null;
+        }
+        refreshLanding();
+      }
+
+      // ---- File handling ----
+      function handleFile(file) {
+        if (!file || file.type !== 'application/pdf') {
+          if (file && !/\.pdf$/i.test(file.name)) {
+            alert('Please choose a PDF file.');
+            return;
+          }
+        }
+        var fileReader = new FileReader();
+        fileReader.onload = function () {
+          var arrayBuffer = fileReader.result;
+          var doc = {
+            id: DOC_ID,
+            name: file.name,
+            data: arrayBuffer,
+            page: 1,
+            updatedAt: Date.now(),
+          };
+          dbPut(doc).then(function () {
+            refreshLanding();
+            openReader(doc);
+          });
+        };
+        fileReader.readAsArrayBuffer(file);
+      }
+
+      // ---- Wire up UI ----
+      uploadButton.addEventListener('click', function () {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener('change', function () {
+        if (fileInput.files && fileInput.files[0]) {
+          handleFile(fileInput.files[0]);
+          fileInput.value = '';
+        }
+      });
+
+      ['dragenter', 'dragover'].forEach(function (name) {
+        uploadButton.addEventListener(name, function (e) {
+          e.preventDefault();
+          uploadButton.classList.add('is-dragover');
+        });
+      });
+      ['dragleave', 'drop'].forEach(function (name) {
+        uploadButton.addEventListener(name, function (e) {
+          e.preventDefault();
+          uploadButton.classList.remove('is-dragover');
+        });
+      });
+      uploadButton.addEventListener('drop', function (e) {
+        if (e.dataTransfer && e.dataTransfer.files[0]) {
+          handleFile(e.dataTransfer.files[0]);
+        }
+      });
+
+      openLast.addEventListener('click', function () {
+        dbGet().then(function (doc) {
+          if (doc) {
+            openReader(doc);
+          }
+        });
+      });
+
+      deleteLast.addEventListener('click', function () {
+        if (!confirm('Delete the uploaded document?')) {
+          return;
+        }
+        dbDelete().then(function () {
+          showLastDoc(null);
+        });
+      });
+
+      backButton.addEventListener('click', closeReader);
+      prevButton.addEventListener('click', function () {
+        goToPage(currentPage - 1);
+      });
+      nextButton.addEventListener('click', function () {
+        goToPage(currentPage + 1);
+      });
+      pageInput.addEventListener('change', function () {
+        var value = parseInt(pageInput.value, 10);
+        if (!isNaN(value)) {
+          goToPage(value);
+        }
+      });
+
+      zoomInButton.addEventListener('click', function () {
+        scale = Math.min(4, scale + 0.2);
+        reRenderAll();
+        saveScale(scale);
+      });
+      zoomOutButton.addEventListener('click', function () {
+        scale = Math.max(0.4, scale - 0.2);
+        reRenderAll();
+        saveScale(scale);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (reader.classList.contains('d-none')) {
+          return;
+        }
+        if (e.key === 'Escape') {
+          closeReader();
+        } else if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+          goToPage(currentPage + 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+          goToPage(currentPage - 1);
+        }
+      });
+
+      // ---- Init ----
+      refreshLanding();
+    })();
+  </script>
+{{/layout}}

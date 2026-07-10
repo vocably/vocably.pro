@@ -346,6 +346,7 @@ export const es = {
   'header.settings': 'Configuración del sistema',
   'header.import': 'Importar',
   'header.feedback': 'Comentarios',
+  'header.pdf_reader': 'Lector de PDF',
   'header.sign_out': 'Cerrar sesión',
 
   // Alert

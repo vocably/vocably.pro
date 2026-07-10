@@ -347,6 +347,7 @@ export const tr = {
   'header.settings': 'Sistem Ayarları',
   'header.import': 'İçe Aktar',
   'header.feedback': 'Geri Bildirim',
+  'header.pdf_reader': 'PDF Okuyucu',
   'header.sign_out': 'Çıkış Yap',
 
   // Alert

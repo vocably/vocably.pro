@@ -336,6 +336,7 @@ export const vi = {
   'header.settings': 'Cài đặt hệ thống',
   'header.import': 'Nhập',
   'header.feedback': 'Phản hồi',
+  'header.pdf_reader': 'Trình đọc PDF',
   'header.sign_out': 'Đăng xuất',
 
   // Alert
