@@ -13,7 +13,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.3rem;
       width: 100%;
       padding: 3rem 1.5rem;
       border: 1px dashed var(--bs-primary);
@@ -24,6 +24,10 @@
       font-weight: 400;
       cursor: pointer;
       transition: background 0.15s ease, border-color 0.15s ease;
+
+      .big-text {
+        letter-spacing: -0.04rem;
+      }
     }
 
     .pdf-upload-btn:hover,
@@ -217,8 +221,8 @@
 
         <button type="button" id="pdfUploadButton" class="pdf-upload-btn mb-4">
           <i class="bi bi-cloud-arrow-up"></i>
-          <span>Click to open a PDF file</span>
-          <span class="text-muted" style="font-size: 0.9rem;">or drop a file here</span>
+          <span class="big-text">Click to open a PDF file.</span>
+          <span class="text-muted" style="font-size: 0.9rem;">Or drop a file here.</span>
         </button>
 
         <div id="pdfLastDoc" class="pdf-last-doc d-none">
@@ -255,9 +259,9 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.5rem 1rem 0.5rem 3rem;
+            padding: 0.65rem 1rem 0.65rem 3rem;
             border-radius: 2rem;
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             font-weight: 200;
             color: #fff;
             text-decoration: none;
@@ -281,10 +285,10 @@
         </style>
         <div class="mb-4 extensions">
           <a class="install-extension-button chrome" href="https://chrome.google.com/webstore/detail/vocably/baocigmmhhdemijfjnjdidbkfgpgogmb">
-            Desktop Chrome
+            Chrome Extension
           </a>
           <a class="install-extension-button safari" href="https://apps.apple.com/us/app/vocably-for-safari/id6464076425">
-            Desktop Safari
+            Safari Extension
           </a>
         </div>
       </div>
@@ -293,6 +297,11 @@
 
   <!-- Reader (hidden until a document is opened) -->
   <div id="pdfReader" class="pdf-reader d-none">
+    <style>
+      .btn-sm {
+        box-shadow: none;
+      }
+    </style>
     <div class="pdf-reader__toolbar">
       <button type="button" id="pdfBack" class="btn btn-sm" title="Back">
         <i class="bi bi-arrow-left"></i>
