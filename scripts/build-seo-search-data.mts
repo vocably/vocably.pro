@@ -435,7 +435,7 @@ for (const [word, translationCards] of Object.entries(wordResults)) {
 
     items.push(...analysisItemsResult.value);
   }
-  if (items.length >= translationCards.items.length) {
+  if (items.length >= translationCards.items.length || items.length >= 3) {
     translationCards.items = items;
   }
 }
