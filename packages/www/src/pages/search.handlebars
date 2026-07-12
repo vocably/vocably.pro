@@ -56,34 +56,56 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content p-3">
         <div class="modal-header border-0">
-          <h5 class="modal-title" id="myModalLabel">Learn this word in the mobile app</h5>
+          <h5 class="modal-title" style="line-height: 1.2em;" id="myModalLabel">Learn this word in the mobile app.</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="    align-self: flex-start;
-    margin-top: 0.25rem;"></button>
+           margin-top: 0.02rem;
+          "></button>
         </div>
         <div class="modal-body pt-0">
           <p class="fw-lighter fst-italic" style="font-size: 80%">
-            Currently, the Vocably experience is available only via the mobile app or browser extension. The web version will be available soon.<br /><a href="/about.html">I am working on it</a>.
+            Currently, the Vocably experience is available only via the mobile app or browser extension. The web version will be available soon. <a href="/about.html" class="link-secondary">I am working on it</a>.
           </p>
           <p class="mb-3">
-            Vocably saves your translations and helps you learn them. To start learning, set up the mobile app:
+            Vocably is a smart dictionary that saves your look-ups and translations and helps you learn them. To start learning, set up the mobile app:
           </p>
           <ol class="mb-4 ps-3">
             <li class="mb-2">Install the Vocably app on your phone.</li>
             <li class="mb-2">Translate any word or phrase using the app, then learn it with interactive tests and quizzes.</li>
           </ol>
+          <style>
+            .install-ways {
+              display: inline-grid;
+              grid-template-columns: max-content max-content;
+              gap: 10px;
+            }
+          </style>
           <div class="text-center">
-            <a href="https://apps.apple.com/app/vocably-pro-language-cards/id1641258757" target="_blank" class="d-inline-block" data-umami-event="Search Learn Modal Click" data-umami-event-label="iOS"><img src="assets/download-on-app-store.svg" alt="Download on App Store" height="40" /></a>
-            <a href="https://play.google.com/store/apps/details?id=com.vocablypro" target="_blank" class="d-inline-block ms-2" data-umami-event="Search Learn Modal Click" data-umami-event-label="Android"><img src="assets/get-it-on-google-play.svg" alt="Get it on Google Play" height="40" /></a>
-          </div>
-          <div class="mt-3 text-center hide-ios hide-android">
-            <div class="mb-2">
-              Scan this QR code to install.
+            <div class="install-ways">
+              <a href="https://apps.apple.com/app/vocably-pro-language-cards/id1641258757" target="_blank" class="d-inline-block" data-umami-event="Search Learn Modal Click" data-umami-event-label="iOS"><img src="assets/download-on-app-store.svg" alt="Download on App Store" height="40" /></a>
+              <a href="https://play.google.com/store/apps/details?id=com.vocablypro" target="_blank" class="d-inline-block ms-2" data-umami-event="Search Learn Modal Click" data-umami-event-label="Android"><img src="assets/get-it-on-google-play.svg" alt="Get it on Google Play" height="40" /></a>
+              <style>
+                .scan-to-install {
+                  /*--fill: #fff;*/
+                  width: 100%;
+                  padding: 16px;
+                  font-size: 16px;
+                  border-radius: 8px;
+                  display: inline-flex;
+                  gap: 16px;
+                  flex-direction: column;
+                }
+              </style>
+              <div class="scan-to-install hide-ios hide-android" style="grid-column: 1 / -1;">
+                <div>
+                  or scan the QR code to install
+                </div>
+                <vocably-qr-code aria-label="QR Code"></vocably-qr-code>
+              </div>
             </div>
-            <img src="assets/qr-code.png" alt="Vocably App QR Code" width="200" />
           </div>
 
           <div class="mt-3 text-center">
-            <a href="/">Learn more about Vocably.</a>
+            <a href="/" class="link-secondary">Learn more about Vocably.</a>
           </div>
         </div>
       </div>
