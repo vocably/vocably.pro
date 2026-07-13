@@ -671,7 +671,7 @@
               </div>
               <div class="col-xxl-6">
                 <iphone-16-max class="hide-android" style="height: 350px; display: block;">
-                  <img src="assets/hero/reverse-translation.webp" width="100%" />
+                  <img src="assets/hero/reverse-translation.webp" alt="Reverse translation screenshot" width="100%" />
                 </iphone-16-max>
                 <pixel-9-pro class="show-android" mode="light" style="margin-top: 24px; height: 350px; display: block;">
                   <img src="assets/hero/reverse-translation.webp" width="100%" alt="Study on your mobile" />
@@ -746,8 +746,8 @@
         </swiper-container>
 
         <div class="d-flex justify-content-end gap-2 mt-4 me-5">
-          <button id="swiper-prev" class="navigation-button" data-umami-event="Slider Previous Click"><i class="bi bi-arrow-left"></i></button>
-          <button id="swiper-next"  class="navigation-button" data-umami-event="Slider Next Click"><i class="bi bi-arrow-right"></i></button>
+          <button id="swiper-prev" aria-label="Previous slide" class="navigation-button" data-umami-event="Slider Previous Click"><i class="bi bi-arrow-left" aria-hidden="true"></i></button>
+          <button id="swiper-next" aria-label="Next slide" class="navigation-button" data-umami-event="Slider Next Click"><i class="bi bi-arrow-right" aria-hidden="true"></i></button>
         </div>
 
         <script>
@@ -933,7 +933,7 @@
 
   <script>
     const match = window.location.pathname.match(/\/de-en\/(.+)-in-german.html/);
-    if (match[1]) {
+    if (match && match[1]) {
       const params = new URLSearchParams({
         sourceLanguage: 'de',
         targetLanguage: 'en',
