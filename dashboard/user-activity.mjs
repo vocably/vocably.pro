@@ -19,6 +19,18 @@ if (userEmailOrSub.includes('@')) {
   console.log('Received users', inspect(users, { depth: null }));
 
   sub = users.Users[0].Attributes.find((attr) => attr.Name === 'sub').Value;
+} else {
+  const listUsers = `aws cognito-idp list-users --user-pool-id ${process.env.USER_POOL_ID} --filter "sub=\\"${sub}\\""`;
+
+  const users = JSON.parse((await execute(listUsers)).stdout);
+
+  console.log('Received users', inspect(users, { depth: null }));
+
+  const email = users.Users[0].Attributes.find(
+    (attr) => attr.Name === 'email'
+  ).Value;
+
+  console.log('User email', email);
 }
 
 let userCardCollections = [];
