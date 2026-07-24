@@ -22,6 +22,7 @@ export const ru = {
   'settings.autodetect_help':
     'Автоматическое определение языка работает не со 100% точностью и может вводить в заблуждение начинающих пользователей. Однако это удобная функция для тех, кто активно изучает несколько языков.',
   'settings.double_click': 'Показывать popup при двойном щелчке.',
+  'settings.selection': 'Показывать popup при выделении текста.',
   'settings.hot_key': 'Показывать popup при двойном нажатии клавиши Shift.',
   'settings.hide_button': 'Не показывать кнопку Vocably при выделении текста.',
   'settings.alternatively': 'Вы также можете открыть popup:',
@@ -29,6 +30,7 @@ export const ru = {
     'Через контекстное меню, выбрав «Перевести с помощью Vocably».',
   'settings.double_click_word': 'Двойным щелчком по слову.',
   'settings.double_shift': 'Двойным нажатием клавиши Shift.',
+  'settings.select_text': 'Выделением текста.',
   'settings.enable': 'Включить',
   'settings.disable': 'Отключить',
   'settings.auto_play': 'Автоматически воспроизводить аудиопроизношение.',

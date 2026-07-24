@@ -234,6 +234,10 @@ registerContentScript({
             document.getElementById('showOnDoubleClick') as HTMLInputElement
           ).checked,
 
+          showOnSelection: (
+            document.getElementById('showOnSelection') as HTMLInputElement
+          ).checked,
+
           autoPlay: (document.getElementById('playSound') as HTMLInputElement)
             .checked,
 

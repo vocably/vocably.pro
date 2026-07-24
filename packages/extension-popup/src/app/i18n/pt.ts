@@ -21,6 +21,7 @@ export const pt = {
   'settings.autodetect_help':
     'A detecção automática de idioma não é 100% precisa e pode confundir usuários iniciantes. No entanto, pode ser um recurso útil para quem estuda ativamente vários idiomas.',
   'settings.double_click': 'Exibir o popup ao dar duplo clique.',
+  'settings.selection': 'Exibir o popup ao selecionar texto.',
   'settings.hot_key': 'Exibir o popup ao pressionar Shift duas vezes.',
   'settings.hide_button':
     'Não mostrar o botão do Vocably quando o texto for selecionado.',
@@ -29,6 +30,7 @@ export const pt = {
     "Abrindo o menu de contexto e selecionando 'Traduzir com Vocably'.",
   'settings.double_click_word': 'Dando duplo clique na palavra.',
   'settings.double_shift': 'Pressionando o botão Shift duas vezes.',
+  'settings.select_text': 'Selecionando o texto.',
   'settings.enable': 'Ativar',
   'settings.disable': 'Desativar',
   'settings.auto_play': 'Reproduzir automaticamente a pronúncia em áudio.',

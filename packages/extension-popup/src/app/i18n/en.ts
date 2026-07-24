@@ -21,6 +21,7 @@ export const en = {
   'settings.autodetect_help':
     "Automatic language detection isn't 100% accurate and might confuse inexperienced users. However, it can be a handy feature for people actively studying multiple languages.",
   'settings.double_click': 'Display the popup on double-click.',
+  'settings.selection': 'Display the popup on text selection.',
   'settings.hot_key': 'Display the popup on double-press of the Shift key.',
   'settings.hide_button':
     "Don't show the Vocably button when text is selected.",
@@ -29,6 +30,7 @@ export const en = {
     "Opening context menu and selecting 'Translate with Vocably'.",
   'settings.double_click_word': 'Double-clicking the word.',
   'settings.double_shift': 'Double-pressing the Shift button.',
+  'settings.select_text': 'Selecting the text.',
   'settings.enable': 'Enable',
   'settings.disable': 'Disable',
   'settings.auto_play': 'Automatically play audio pronunciation.',

@@ -5,6 +5,7 @@ import { saveUserMetadata } from '@vocably/api';
 
 const defaultSettings: ExtensionSettings = {
   showOnDoubleClick: false,
+  showOnSelection: false,
   autoPlay: false,
   hideSelectionButton: false,
   autodetectLanguage: false,

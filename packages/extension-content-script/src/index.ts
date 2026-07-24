@@ -142,6 +142,15 @@ const onMouseUp = async (event: MouseEvent) => {
       }
 
       const settings = await api.getSettings();
+
+      if (settings.showOnSelection) {
+        await showPopup({
+          isTouchscreen: false,
+        });
+
+        return;
+      }
+
       // This is the attempt to make the "Double click" functionality
       // work in Lemur browser on Android.
       // The mouse event is not trusted in Lemur on Android.

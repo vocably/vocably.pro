@@ -59,6 +59,21 @@
     <label>
       <input
         type="checkbox"
+        [checked]="settings.showOnSelection"
+        (change)="
+          setSettings({
+            showOnSelection: !settings.showOnSelection,
+          })
+        "
+      />
+      {{ 'settings.selection' | translate }}
+    </label>
+  </p>
+
+  <p class="mb-1">
+    <label>
+      <input
+        type="checkbox"
         [checked]="settings.showOnHotKey"
         (change)="
           setSettings({
@@ -104,6 +119,21 @@
               ? 'settings.disable'
               : 'settings.enable'
             ) | translate
+          }}</button
+        >]
+      </li>
+      <li class="mb-0_5">
+        {{ 'settings.select_text' | translate }} [<button
+          class="link"
+          (click)="
+            setSettings({
+              showOnSelection: !settings.showOnSelection,
+            })
+          "
+        >
+          {{
+            (settings.showOnSelection ? 'settings.disable' : 'settings.enable')
+              | translate
           }}</button
         >]
       </li>

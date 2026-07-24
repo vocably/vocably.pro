@@ -21,7 +21,6 @@ import {
   Locale,
   CardsLimit,
   BatchUnitOfSpeechAnalyzePayload,
-  AnalysisItem,
   BatchUnitOfSpeechAnalysis,
 } from '@vocably/model';
 
@@ -39,6 +38,7 @@ export const [isLoggedIn, onIsLoggedInRequest] = createScopedMessage<
 
 export type ExtensionSettings = {
   showOnDoubleClick: boolean;
+  showOnSelection: boolean;
   autoPlay: boolean;
   hideSelectionButton: boolean;
   autodetectLanguage: boolean;

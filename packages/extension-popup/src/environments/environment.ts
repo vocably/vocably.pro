@@ -28,6 +28,7 @@ import { updateDetachedCard } from '@vocably/model-operations';
 
 let settings: ExtensionSettings = {
   showOnDoubleClick: true,
+  showOnSelection: false,
   autoPlay: true,
   hideSelectionButton: true,
   autodetectLanguage: false,
