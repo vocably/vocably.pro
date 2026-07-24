@@ -17,10 +17,10 @@ export const en = {
     'You study <strong class="text-emphasize">{{sourceLanguage}}</strong> and your mother tongue is <strong class="text-emphasize">{{targetLanguage}}</strong>.',
   'welcome.second.change': 'Change',
   'welcome.second.try_select':
-    'To understand how the extension works, try highlighting any word or phrase in the text below.',
+    'To understand how the extension works, try selecting any word or phrase in the text below.',
   'welcome.second.how_it_works': 'How it works —',
   'welcome.second.three_steps': 'just 3 steps',
-  'welcome.second.step1_heading': 'Highlight',
+  'welcome.second.step1_heading': 'Select',
   'welcome.second.step1_desc': 'Any word or phrase on any website.',
   'welcome.second.step2_heading': 'Discover its meaning',
   'welcome.second.step2_desc':
@@ -37,7 +37,7 @@ export const en = {
   'welcome.multilang.p4':
     "For now, let's focus on the language you'd like to study the most.",
   'welcome.multilang.close': 'Close',
-  'welcome.generic.select_highlight': 'Highlight',
+  'welcome.generic.select_highlight': 'Select',
   'welcome.generic.select_rest':
     'any word or phrase on any website to see its meaning.',
 
