@@ -35,6 +35,9 @@ import { getSelectedTagIds } from '../translation/getSelectedTagIds';
 import { toLocationHash } from '@vocably/sulna';
 import { cardToLocationHash } from '@vocably/model-operations';
 
+// Keep in sync with $sign-in-slide-duration in translation-cards.scss
+const signInSlideDuration = 300;
+
 @Component({
   tag: 'vocably-translation-cards',
   styleUrl: 'translation-cards.scss',
@@ -50,6 +53,7 @@ export class VocablyTranslationCards {
   @Prop() isUpdating: TranslationCard | null = null;
   @Prop({ mutable: true }) disabled = false;
   @Prop() isLightweight = false;
+  @Prop() isLoggedInUser = false;
   @Prop() playAudioPronunciation: (
     payload: AudioPronunciationPayload
   ) => Promise<Result<true>>;
@@ -78,6 +82,8 @@ export class VocablyTranslationCards {
   @State() addedItemIndex = -1;
   @State() congratulateItemIndex = -1;
   @State() addAttemptIndex = -1;
+  @State() signInItemIndex = -1;
+  @State() signInHiding = false;
   @State() removing: {
     card: CardItem;
     tag: TagItem;
@@ -86,6 +92,7 @@ export class VocablyTranslationCards {
   @Element() el: HTMLElement;
 
   private unsubLocale: (() => void) | undefined;
+  private signInHideTimeout: ReturnType<typeof setTimeout> | undefined;
 
   connectedCallback() {
     this.unsubLocale = subscribeToLocale(this.el, () => forceUpdate(this.el));
@@ -93,7 +100,23 @@ export class VocablyTranslationCards {
 
   disconnectedCallback() {
     this.unsubLocale?.();
+    clearTimeout(this.signInHideTimeout);
   }
+
+  private showSignIn = (itemIndex: number) => {
+    clearTimeout(this.signInHideTimeout);
+    this.signInHiding = false;
+    this.signInItemIndex = itemIndex;
+  };
+
+  private hideSignIn = () => {
+    clearTimeout(this.signInHideTimeout);
+    this.signInHiding = true;
+    this.signInHideTimeout = setTimeout(() => {
+      this.signInItemIndex = -1;
+      this.signInHiding = false;
+    }, signInSlideDuration);
+  };
 
   private overlay: HTMLElement | null = null;
   private tagsMenu: HTMLElement | null = null;
@@ -421,6 +444,11 @@ export class VocablyTranslationCards {
                           return false;
                         }
 
+                        if (!this.isLoggedInUser) {
+                          this.showSignIn(itemIndex);
+                          return;
+                        }
+
                         if (!this.canAdd) {
                           this.addAttemptIndex = itemIndex;
                           return;
@@ -520,6 +548,27 @@ export class VocablyTranslationCards {
                     </div>
                   )}
                 </div>
+                {this.signInItemIndex === itemIndex && !this.isLoggedInUser && (
+                  <div
+                    data-test="sign-in-cover"
+                    class={{
+                      'vocably-sign-in-cover': true,
+                      'vocably-sign-in-cover-hiding': this.signInHiding,
+                    }}
+                  >
+                    <div class="vocably-sign-in-cover-panel">
+                      <vocably-close-button
+                        class="vocably-sign-in-cover-close"
+                        onClose={(event) => {
+                          // Otherwise the whole popup is being closed
+                          event.stopPropagation();
+                          this.hideSignIn();
+                        }}
+                      />
+                      <vocably-sign-in></vocably-sign-in>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

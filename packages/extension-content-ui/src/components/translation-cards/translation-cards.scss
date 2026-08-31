@@ -35,9 +35,14 @@ $input-padding-x: 14px;
 .vocably-card {
   .vocably-card-container {
     position: relative;
+    // A single stacking cell, so the sign in cover can be placed on top of
+    // the card content and stretch the card if it needs more space.
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .vocably-safe-action-area {
+    grid-area: 1 / 1;
     padding-right: 34px;
   }
 
@@ -192,5 +197,55 @@ vocably-play-sound {
     min-width: 200px;
     padding-left: 16px;
     padding-right: 16px;
+  }
+}
+
+// Keep in sync with signInSlideDuration in translation-cards.tsx
+$sign-in-slide-duration: 300ms;
+
+.vocably-sign-in-cover {
+  grid-area: 1 / 1;
+  z-index: 2;
+  overflow: hidden;
+  // Zero width does not contribute to the intrinsic width of the card,
+  // so covering the card does not make the popup wider.
+  width: 0;
+  min-width: 100%;
+}
+
+.vocably-sign-in-cover-panel {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding-top: 48px;
+  background: $v-light-color-body-bg;
+  animation: vocably-sign-in-slide-in $sign-in-slide-duration ease-out;
+}
+
+.vocably-sign-in-cover-hiding .vocably-sign-in-cover-panel {
+  animation: vocably-sign-in-slide-out $sign-in-slide-duration ease-in forwards;
+}
+
+.vocably-sign-in-cover-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+@keyframes vocably-sign-in-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes vocably-sign-in-slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
   }
 }

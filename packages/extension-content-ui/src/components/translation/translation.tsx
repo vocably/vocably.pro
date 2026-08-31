@@ -107,6 +107,7 @@ export class VocablyTranslation {
   @Prop() isRetrying = false;
   @Prop() isLightweight = false;
   @Prop() isLoadingExtraWords = false;
+  @Prop() isLoggedInUser = false;
 
   @Event() ratingInteraction: EventEmitter<RateInteractionPayload>;
 
@@ -342,6 +343,7 @@ export class VocablyTranslation {
                 isUpdating={this.isUpdating}
                 disabled={this.disabled}
                 isLightweight={this.isLightweight}
+                isLoggedInUser={this.isLoggedInUser}
                 playAudioPronunciation={this.playAudioPronunciation}
                 updateCard={this.updateCard}
                 attachTag={this.attachTag}

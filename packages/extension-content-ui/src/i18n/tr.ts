@@ -1,6 +1,5 @@
 export const tr = {
   // sign-in
-  'sign_in.please': 'Devam etmek için lütfen giriş yapın.',
   'sign_in.button': 'Giriş yap veya hesap oluştur',
   'sign_in.agree': 'Giriş yaparak kabul etmiş olursunuz:',
   'sign_in.terms': 'Kullanım Koşulları',

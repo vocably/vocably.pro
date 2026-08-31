@@ -1,6 +1,5 @@
 export const pt = {
   // sign-in
-  'sign_in.please': 'Por favor, faça login para continuar.',
   'sign_in.button': 'Entrar ou criar uma conta',
   'sign_in.agree': 'Ao entrar, você concorda com nossos',
   'sign_in.terms': 'Termos de Serviço',

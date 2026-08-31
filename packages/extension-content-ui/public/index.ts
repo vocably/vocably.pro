@@ -430,6 +430,57 @@ simpletonTranslation.extensionPlatform = {
   paymentLink: 'web',
 };
 
+// --
+
+const nonLoggedInTranslationResult: Result<TranslationCards> = {
+  success: true,
+  value: {
+    explanation: '',
+    source: 'gemaakt',
+    sourceLanguage: 'nl',
+    targetLanguage: 'en',
+    detectedInputType: 'word',
+    aiThinksItIs: 'created',
+    deck: {
+      language: 'nl',
+      cards: [],
+      tags: [],
+    },
+    items: [
+      {
+        source: 'gemaakt',
+        ipa: "xə'mak",
+        translation: 'created, done',
+        definitions: [
+          '(iets dat nog niet bestond) laten ontstaan',
+          '(iets dat kapot is) zorgen dat het weer heel is',
+        ],
+        examples: ['Bij een gemaakte glimlach lachen onze ogen niet mee.'],
+        partOfSpeech: 'verb',
+        g: 'n',
+        tense: 'present',
+        presentTenses: 'maak, maakt',
+        pastTenses: 'makte, gemaakt',
+      },
+    ],
+  },
+};
+
+const nonLoggedIn = document.getElementById(
+  'nonLoggedIn'
+) as HTMLVocablyTranslationElement;
+nonLoggedIn.existingSourceLanguages = ['en', 'nl'];
+nonLoggedIn.result = nonLoggedInTranslationResult;
+nonLoggedIn.canCongratulate = true;
+nonLoggedIn.askForRating = true;
+nonLoggedIn.explanation = { state: 'loading' };
+nonLoggedIn.extensionPlatform = {
+  name: 'Chrome Web Store',
+  url: 'https://chrome.google.com/webstore/detail/vocably/baocigmmhhdemijfjnjdidbkfgpgogmb',
+  platform: 'chromeExtension',
+  paymentLink: 'web',
+};
+
 // ---
 
 const paywallTranslation = document.getElementById(

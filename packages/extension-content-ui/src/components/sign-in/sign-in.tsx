@@ -31,7 +31,6 @@ export class VocablySignIn {
   render() {
     return (
       <Host data-test="sign-in">
-        <div class="p">{t('sign_in.please')}</div>
         <div class="p">
           <button
             class="button"
@@ -41,7 +40,7 @@ export class VocablySignIn {
             {t('sign_in.button')}
           </button>
         </div>
-        <div>
+        <div style={{ textAlign: 'center' }}>
           {t('sign_in.agree')}{' '}
           <a
             class="link"

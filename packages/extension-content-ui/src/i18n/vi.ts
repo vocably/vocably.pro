@@ -1,6 +1,5 @@
 export const vi = {
   // sign-in
-  'sign_in.please': 'Vui lòng đăng nhập để tiếp tục.',
   'sign_in.button': 'Đăng nhập hoặc tạo tài khoản',
   'sign_in.agree': 'Khi đăng nhập, bạn đồng ý với',
   'sign_in.terms': 'Điều khoản dịch vụ',

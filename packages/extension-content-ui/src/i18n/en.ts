@@ -1,6 +1,5 @@
 export const en = {
   // sign-in
-  'sign_in.please': 'Please sign in to proceed.',
   'sign_in.button': 'Sign in or Create an account',
   'sign_in.agree': 'By signing in, you agree to our',
   'sign_in.terms': 'Terms of Service',
