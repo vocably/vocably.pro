@@ -123,11 +123,11 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - PurchasesHybridCommon (17.46.1):
-    - RevenueCat (= 5.61.0)
-  - PurchasesHybridCommonUI (17.46.1):
-    - PurchasesHybridCommon (= 17.46.1)
-    - RevenueCatUI (= 5.61.0)
+  - PurchasesHybridCommon (18.37.0):
+    - RevenueCat (= 5.88.0)
+  - PurchasesHybridCommonUI (18.37.0):
+    - PurchasesHybridCommon (= 18.37.0)
+    - RevenueCatUI (= 5.88.0)
   - RCTDeprecation (0.85.3)
   - RCTRequired (0.85.3)
   - RCTSwiftUI (0.85.3)
@@ -2077,9 +2077,9 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RevenueCat (5.61.0)
-  - RevenueCatUI (5.61.0):
-    - RevenueCat (= 5.61.0)
+  - RevenueCat (5.88.0)
+  - RevenueCatUI (5.88.0):
+    - RevenueCat (= 5.88.0)
   - RNCAsyncStorage (2.2.0):
     - hermes-engine
     - RCTRequired
@@ -2194,11 +2194,11 @@ PODS:
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
     - Yoga
-  - RNPaywalls (9.12.0):
-    - PurchasesHybridCommonUI (= 17.46.1)
+  - RNPaywalls (10.9.1):
+    - PurchasesHybridCommonUI (= 18.37.0)
     - React-Core
-  - RNPurchases (9.12.0):
-    - PurchasesHybridCommon (= 17.46.1)
+  - RNPurchases (10.9.1):
+    - PurchasesHybridCommon (= 18.37.0)
     - React-Core
   - RNReactNativeSharedGroupPreferences (1.1.24):
     - React
@@ -2856,8 +2856,8 @@ SPEC CHECKSUMS:
   MMKVCore: 3d16ce9f7d411e135020915fde98a056859a1efa
   NitroMmkv: 1ff46eceb958298b1d7c013a6314432438b77a62
   NitroModules: ecbafa6d6e6297ff1c240b40ee027aea48ec4bf4
-  PurchasesHybridCommon: afaf46e9650f9399984196a6966c6d697d6122a2
-  PurchasesHybridCommonUI: 19f4782374f25aa19c87d035a02fa845b4805157
+  PurchasesHybridCommon: 2e72564d3393d480ca126d4d057737435dd7ccba
+  PurchasesHybridCommonUI: b9e63653fa3abb753b702e0a9b074fbf452b0cbb
   RCTDeprecation: a4c521821fab57cbb125b36effe84d897d0dfa12
   RCTRequired: 9f3a7e5645d4bc3f551593de7550bb66ab6e42bc
   RCTSwiftUI: 239ed2eb9e73de5a6f518810630f0c95e01c8702
@@ -2936,8 +2936,8 @@ SPEC CHECKSUMS:
   ReactCommon: 3ec2a55999d296af90c24beb66c8a77dc660d3ef
   ReactNativeDependencies: 7d6c47032263ef7ca0f08839a34a39978e9b8203
   ReactNativeEnrichedMarkdown: aec0b8248da08abc8b3613aa6c588d160f64e761
-  RevenueCat: 9acbd29a62000b57d59efa16166290c4a119847b
-  RevenueCatUI: 67229fd8c301e0f3df3e0d6c86bd9112311ef1a5
+  RevenueCat: 96e12da1f3de201c65f337ff661506ac28ee1514
+  RevenueCatUI: 86e2209d13c41893a4e24da4e26370d4bd9f8b93
   RNCAsyncStorage: 0f84413588571e74ef9cff6e3b669346e3abf9cb
   RNCClipboard: c1cdf3cdd72df606520114f42e61c6898a488dd8
   RNCMaskedView: 090213d32d8b3bb83a4dcb7d12c18f0152591906
@@ -2945,8 +2945,8 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 29e01d5ae94bdb5a0f6c11a4c438132545b4df80
   RNGestureHandler: acf7db8499c11193d9b4b6b1cc1439ff4f01a693
   RNLocalize: bc8a86012dbce2a6fe4aab4a961f160869aaaeab
-  RNPaywalls: 423fdc866c6df1200116a6fc3956e3ac390fb47b
-  RNPurchases: f8b9f2f537736b7bd1f8be9c1d59a6ade2a79ba1
+  RNPaywalls: 726cb69bf2ebfd993862a2d37cfd2bf083a33c47
+  RNPurchases: 805dfde47a915186630cc43c63d75fda26cff445
   RNReactNativeSharedGroupPreferences: 29092869fc2e40d5baca5e15d82fa5c24a668977
   RNReanimated: 59bf185693b7294a0c515e19a6d1be54def61363
   RNScreens: 032083414633a4d94cbcf08f8ab5019d72d1ba36
@@ -2959,6 +2959,6 @@ SPEC CHECKSUMS:
   Sentry: d587a8fe91ca13503ecd69a1905f3e8a0fcf61be
   Yoga: 36fee8f1fca3f54a28c3d7f80e69f66d73d3af96
 
-PODFILE CHECKSUM: e61215ac2a98356c905aca3a5db22fb2cf2062a2
+PODFILE CHECKSUM: 75f2cd50f4b40f323c127e6886b64e54a4b1f33e
 
 COCOAPODS: 1.16.2
