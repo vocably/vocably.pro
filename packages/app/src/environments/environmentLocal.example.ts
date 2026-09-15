@@ -13,6 +13,7 @@ export const environmentLocal = {
     region: 'eu-central-1',
     userPoolId: 'eu-central-1_Tpn3gUQYg',
     userPoolWebClientId: '4j2gqrq3ne32jqee4ddu15p1g4',
+    emailPasswordAuthEnabled: true,
     oauth: {
       domain: 'auth.dev.env.vocably.pro',
       scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],

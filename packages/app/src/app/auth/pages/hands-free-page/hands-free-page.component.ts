@@ -50,7 +50,10 @@ export class HandsFreePageComponent implements OnInit, OnDestroy {
           await this.auth.refreshToken();
           this.router.navigate(['/signed-in'], { replaceUrl: true });
         } else {
-          this.auth.signIn();
+          // Router navigation keeps the redirect target Amplify was
+          // configured with on this page, so any sign-in method ends on
+          // `signed-in`.
+          this.router.navigate(['/sign-in'], { replaceUrl: true });
         }
       });
   }

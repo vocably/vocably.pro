@@ -30,6 +30,13 @@ export class AutoSignInSuccessPageComponent implements OnInit {
     from(this.auth.isLoggedIn$)
       .pipe(takeUntil(this.destroy$))
       .subscribe((isLoggedIn) => {
+        if (!isLoggedIn) {
+          // A failed Google/Apple redirect lands here too; the sign-in page
+          // shows why.
+          this.router.navigate(['/sign-in'], { replaceUrl: true });
+          return;
+        }
+
         this.isLoading = false;
         clearIntendedDestination();
       });

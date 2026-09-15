@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Platform, useWindowDimensions } from 'react-native';
 import { Appbar, Button, useTheme } from 'react-native-paper';
 import { LanguageSelectorModal } from '../LanguageSelectorModal';
+import { renderAuthScreens } from './authScreens';
 import { LanguageScreen } from './LanguageScreen';
 import { LoginScreen } from './LoginScreen';
 import { DiscoverySurveyScreen } from './DiscoverySurveyScreen';
@@ -12,14 +13,17 @@ import { i18n } from '../i18n';
 
 const Stack = createStackNavigator();
 
-type Props = {};
+type Props = {
+  initialRouteName?: string;
+};
 
-export const AuthNavigation: FC<Props> = () => {
+export const AuthNavigation: FC<Props> = ({ initialRouteName }) => {
   const theme = useTheme();
   const navigation = useNavigation();
 
   return (
     <Stack.Navigator
+      initialRouteName={initialRouteName}
       screenOptions={{
         headerTitleAllowFontScaling: false,
         headerStyle: {
@@ -75,6 +79,7 @@ export const AuthNavigation: FC<Props> = () => {
           headerRight: () => <></>,
         }}
       />
+      {renderAuthScreens(Stack)}
       <Stack.Group
         screenOptions={{
           presentation: 'modal',

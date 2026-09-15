@@ -5,13 +5,16 @@ import { ScrollView } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { mainPadding } from '../styles';
-import { signIn } from './logInFunctions';
 
 type Props = {
+  onSignInAgain: () => void;
   onSignOut?: () => void;
 };
 
-export const LoggedOutForm: FC<Props> = ({ onSignOut = () => {} }) => {
+export const LoggedOutForm: FC<Props> = ({
+  onSignInAgain,
+  onSignOut = () => {},
+}) => {
   const { t } = useTranslation();
   const insets = useSafeAreaInsets();
 
@@ -31,7 +34,7 @@ export const LoggedOutForm: FC<Props> = ({ onSignOut = () => {} }) => {
       </Text>
       <Button
         mode="contained"
-        onPress={signIn}
+        onPress={onSignInAgain}
         style={{ alignSelf: 'stretch' }}
       >
         {t('auth.signInAgain')}

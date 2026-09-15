@@ -149,6 +149,8 @@ export const LoginModal: FC<Props> = ({ route }) => {
 
   return (
     <ScrollView
+      keyboardShouldPersistTaps="handled"
+      automaticallyAdjustKeyboardInsets={true}
       contentContainerStyle={{
         flexGrow: 1,
         justifyContent: 'center',

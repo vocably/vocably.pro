@@ -16,3 +16,4 @@ export * from './timeout';
 export * from './singlePromise';
 export * from './toLocationHash';
 export * from './htmlSpecialChars';
+export * from './auth';

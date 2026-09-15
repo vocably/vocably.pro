@@ -54,11 +54,77 @@ export const ru = {
   'auth.carousel.slide5':
     'Не знаете нужное слово? Найдите его на родном языке.',
   'auth.carousel.need_account': 'Для использования Vocably нужен аккаунт.',
-  'auth.sign_in.button': 'Войти или создать аккаунт',
   'auth.sign_in.agree': 'Входя, вы соглашаетесь с нашими',
   'auth.sign_in.terms': 'условиями использования',
   'auth.sign_in.and': 'и',
   'auth.sign_in.privacy': 'политикой конфиденциальности',
+  'auth.or': 'или',
+  'auth.email': 'Эл. почта',
+  'auth.password': 'Пароль',
+  'auth.show_password': 'Показать',
+  'auth.hide_password': 'Скрыть',
+  'auth.social.google': 'Продолжить с Google',
+  'auth.social.apple': 'Продолжить с Apple',
+  'auth.sign_in.submit': 'Войти',
+  'auth.sign_in.forgot_password': 'Забыли пароль?',
+  'auth.sign_in.no_account': 'Нет аккаунта?',
+  'auth.sign_in.create_account': 'Создать аккаунт',
+  'auth.sign_in.email_confirmed':
+    'Адрес электронной почты подтверждён. Войдите в аккаунт.',
+  'auth.sign_up.title': 'Создание аккаунта',
+  'auth.sign_up.submit': 'Создать аккаунт',
+  'auth.sign_up.have_account': 'Уже есть аккаунт?',
+  'auth.sign_up.sign_in': 'Войти',
+  'auth.sign_up.agree': 'Создавая аккаунт, вы соглашаетесь с нашими',
+  'auth.verify.title': 'Подтвердите адрес электронной почты',
+  'auth.verify.intro':
+    'Код подтверждения отправлен на {{email}}. Введите его ниже, чтобы продолжить.',
+  'auth.verify.code': 'Код подтверждения',
+  'auth.verify.submit': 'Подтвердить',
+  'auth.verify.resend': 'Отправить новый код',
+  'auth.verify.resend_in': 'Отправить новый код через {{seconds}} с',
+  'auth.verify.resent': 'Новый код уже в пути.',
+  'auth.verify.change_email': 'Указать другой адрес',
+  'auth.forgot.title': 'Сброс пароля',
+  'auth.forgot.intro':
+    'Введите адрес электронной почты, который вы используете в Vocably, и на него придёт код для выбора нового пароля.',
+  'auth.forgot.submit': 'Отправить код',
+  'auth.forgot.back': 'Вернуться ко входу',
+  'auth.reset.title': 'Выберите новый пароль',
+  'auth.reset.intro':
+    'Если для {{email}} есть аккаунт, код для сброса пароля уже в пути.',
+  'auth.reset.code': 'Код для сброса пароля',
+  'auth.reset.new_password': 'Новый пароль',
+  'auth.reset.submit': 'Сохранить и войти',
+  'auth.password_rules.min_length': 'Не менее 8 символов',
+  'auth.password_rules.lowercase': 'Строчная буква',
+  'auth.password_rules.uppercase': 'Заглавная буква',
+  'auth.password_rules.digit': 'Цифра',
+  'auth.password_rules.symbol': 'Специальный символ, например ! или ?',
+  'auth.errors.invalid_credentials':
+    'Неверный адрес электронной почты или пароль.',
+  'auth.errors.user_not_confirmed':
+    'Сначала подтвердите адрес электронной почты.',
+  'auth.errors.username_exists': 'Аккаунт с этим адресом уже существует.',
+  'auth.errors.email_taken_google':
+    'Этот адрес уже используется аккаунтом, который входит через Google. Продолжите с Google.',
+  'auth.errors.email_taken_apple':
+    'Этот адрес уже используется аккаунтом, который входит через Apple. Продолжите с Apple.',
+  'auth.errors.email_taken_google_or_apple':
+    'Этот адрес уже используется аккаунтом, который входит через Google или Apple. Воспользуйтесь одним из этих способов.',
+  'auth.errors.email_taken_password':
+    'Этот адрес уже используется аккаунтом с паролем. Войдите с адресом электронной почты и паролем.',
+  'auth.errors.invalid_email': 'Введите корректный адрес электронной почты.',
+  'auth.errors.code_mismatch':
+    'Неверный код. Проверьте его и попробуйте ещё раз.',
+  'auth.errors.code_expired': 'Срок действия кода истёк. Запросите новый.',
+  'auth.errors.too_many_attempts':
+    'Слишком много попыток. Подождите несколько минут и попробуйте снова.',
+  'auth.errors.invalid_password': 'Пароль не соответствует требованиям.',
+  'auth.errors.network':
+    'Не удалось подключиться. Проверьте подключение к интернету.',
+  'auth.errors.cancelled': 'Вход отменён.',
+  'auth.errors.unknown': 'Что-то пошло не так. Попробуйте ещё раз.',
   'auth.hands_free.not_installed':
     'Похоже, расширение браузера не установлено или не включено.',
   'auth.hands_free.please_install':
@@ -357,6 +423,10 @@ export const ru = {
   // Page Titles
   'page.sign_in': 'Войти',
   'page.auto_sign_in': 'Автоматический вход',
+  'page.sign_up': 'Создание аккаунта',
+  'page.verify_email': 'Подтверждение почты',
+  'page.forgot_password': 'Восстановление пароля',
+  'page.reset_password': 'Сброс пароля',
   'page.preview_study_step': 'Предпросмотр шага обучения',
   'page.settings': 'Настройки',
   'page.feedback': 'Обратная связь',

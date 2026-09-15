@@ -30,6 +30,17 @@ const constructRedirectSignInUrl = (): string => {
   return appBaseUrl + `/${manualSignInConfirmationPath}`;
 };
 
+const redirectSignInUrl = constructRedirectSignInUrl();
+
+/**
+ * The route an email + password sign-in lands on. It matches the Google/Apple
+ * redirect target, so both kinds of sign-in finish on the same page: the
+ * hands-free flow started by the extension still ends on `signed-in`.
+ */
+export const signInConfirmationPath = redirectSignInUrl.substring(
+  appBaseUrl.length + 1
+);
+
 /**
  * The storage backing the Cognito tokens. Shared with the browser extension so
  * that signing in on either side signs in on both.
@@ -54,7 +65,7 @@ export const authConfig: ResourcesConfig['Auth'] = {
       oauth: {
         domain: environment.auth.oauth.domain,
         scopes: environment.auth.oauth.scope,
-        redirectSignIn: [constructRedirectSignInUrl()],
+        redirectSignIn: [redirectSignInUrl],
         redirectSignOut: [appBaseUrl],
         responseType: 'code',
       },

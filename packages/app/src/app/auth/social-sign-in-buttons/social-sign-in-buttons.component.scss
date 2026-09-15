@@ -1,0 +1,28 @@
+.social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.icon,
+ion-spinner {
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+}
+
+app-google-icon {
+  display: inline-flex;
+
+  ::ng-deep mat-icon {
+    width: 1.25em;
+    height: 1.25em;
+  }
+}

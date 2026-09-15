@@ -13,6 +13,7 @@ import posthog from 'posthog-js';
 import { maintainAppSize } from './app-size';
 import { AppModule } from './app/app.module';
 import { authConfig, authStorage } from './auth-config';
+import { listenForRedirectErrors } from './app/auth/redirectError';
 import { environment } from './environments/environment';
 import { setupFirefoxVariables } from './firefox';
 
@@ -69,6 +70,9 @@ if (environment.production) {
   enableProdMode();
 }
 
+// Must precede `Amplify.configure`, which completes a pending Google/Apple
+// redirect and may report its failure straight away.
+listenForRedirectErrors();
 Amplify.configure({ Auth: authConfig });
 // Must follow `Amplify.configure`, which installs the default token storage.
 cognitoUserPoolsTokenProvider.setKeyValueStorage(authStorage);

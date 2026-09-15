@@ -21,6 +21,7 @@ export const environmentLocal = {
     region: '${data.aws_region.current.region}',
     userPoolId: '${aws_cognito_user_pool.users.id}',
     userPoolWebClientId: '${aws_cognito_user_pool_client.client.id}',
+    emailPasswordAuthEnabled: ${var.email_password_auth_enabled},
     oauth: {
       domain: '${local.auth_domain}',
       scope: ['email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
