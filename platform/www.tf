@@ -239,10 +239,15 @@ resource "null_resource" "www_upload" {
   ]
 
   triggers = {
-    sha1 = sha1(join("", [for f in fileset(local.www_dist, "**/*.*") : filesha1("${local.www_dist}/${f}")]))
+    sha1 = sha1(join("", [for f in fileset(local.www_dist, "**") : filesha1("${local.www_dist}/${f}")]))
   }
 
   provisioner "local-exec" {
-    command = "aws s3 sync ${local.www_dist}  s3://${aws_s3_bucket.www.id} --delete"
+    # apple-app-site-association has no extension, so it has to be re-uploaded
+    # with an explicit content type for Apple to accept it.
+    command = <<EOT
+aws s3 sync ${local.www_dist}  s3://${aws_s3_bucket.www.id} --delete
+aws s3 cp ${local.www_dist}/.well-known/apple-app-site-association s3://${aws_s3_bucket.www.id}/.well-known/apple-app-site-association --content-type application/json
+EOT
   }
 }
