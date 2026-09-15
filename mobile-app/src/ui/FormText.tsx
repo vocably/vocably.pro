@@ -1,6 +1,13 @@
-import { FC, ReactNode, useCallback, useState } from 'react';
-import { TextInput, TextInputProps, View, ViewStyle } from 'react-native';
-import { Text, useTheme } from 'react-native-paper';
+import { FC, ReactNode, useCallback, useRef } from 'react';
+import {
+  Animated,
+  TextInput,
+  TextInputProps,
+  View,
+  ViewStyle,
+} from 'react-native';
+import { Text } from 'react-native-paper';
+import { useAppTheme } from '../ThemeProvider';
 
 type Props = TextInputProps & {
   style?: ViewStyle;
@@ -18,47 +25,53 @@ export const FormText: FC<Props> = ({
   right,
   ...textInputProps
 }) => {
-  const theme = useTheme();
-  const [isFocused, setIsFocused] = useState(false);
+  const theme = useAppTheme();
+  const focusAnimation = useRef(new Animated.Value(0)).current;
 
   const onFocusReloaded = useCallback(
     (e: any) => {
-      setIsFocused(true);
+      Animated.timing(focusAnimation, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
       onFocus && onFocus(e);
     },
-    [onFocus, setIsFocused]
+    [onFocus, focusAnimation]
   );
 
   const onBlurReloaded = useCallback(
     (e: any) => {
-      setIsFocused(false);
+      Animated.timing(focusAnimation, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: false,
+      }).start();
       onBlur && onBlur(e);
     },
-    [onBlur, setIsFocused]
+    [onBlur, focusAnimation]
   );
+
+  const backgroundColor = focusAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [theme.colors.inputBg, theme.colors.inputBgFocused],
+  });
 
   return (
     <View
       style={[
         {
           gap: 16,
-          padding: 16,
-          backgroundColor: theme.colors.elevation.level2,
-          borderRadius: 16,
         },
         style,
       ]}
     >
       {label && <Text>{label}</Text>}
-      <View
+      <Animated.View
         style={{
-          borderStyle: 'solid',
-          borderColor: isFocused
-            ? theme.colors.onSurface
-            : theme.colors.tertiary,
-          borderWidth: 1,
-          borderRadius: 8,
-          paddingHorizontal: 8,
+          backgroundColor,
+          borderRadius: 16,
+          paddingHorizontal: 12,
           flexDirection: 'row',
         }}
       >
@@ -74,13 +87,13 @@ export const FormText: FC<Props> = ({
             },
             inputStyle,
           ]}
-          placeholderTextColor={theme.colors.outlineVariant}
+          placeholderTextColor={theme.colors.tertiary}
           {...textInputProps}
           onFocus={onFocusReloaded}
           onBlur={onBlurReloaded}
         ></TextInput>
         {right}
-      </View>
+      </Animated.View>
     </View>
   );
 };

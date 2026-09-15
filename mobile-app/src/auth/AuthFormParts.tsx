@@ -55,7 +55,11 @@ export const PasswordInput: FC<ComponentProps<typeof FormText>> = (props) => {
           accessibilityLabel={t(
             isVisible ? 'loginForm.hidePassword' : 'loginForm.showPassword'
           )}
-          style={{ alignSelf: 'center', margin: 0 }}
+          style={{
+            alignSelf: 'center',
+            margin: 0,
+            backgroundColor: 'transparent',
+          }}
         />
       }
     />
