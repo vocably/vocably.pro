@@ -33,7 +33,10 @@ export const LoginForm: FC<Props> = ({ loading = false }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<AuthErrorCode | null>(null);
+  // Email/password errors are shown under the password field, while social
+  // sign-in errors and unrecognized ones are shown under the social buttons.
+  const [emailError, setEmailError] = useState<AuthErrorCode | null>(null);
+  const [socialError, setSocialError] = useState<AuthErrorCode | null>(null);
 
   const canSubmit = isValidEmail(email) && password.length > 0;
 
@@ -43,7 +46,8 @@ export const LoginForm: FC<Props> = ({ loading = false }) => {
     }
 
     setIsSubmitting(true);
-    setError(null);
+    setEmailError(null);
+    setSocialError(null);
 
     try {
       const step = await signInWithEmail(email, password);
@@ -53,7 +57,13 @@ export const LoginForm: FC<Props> = ({ loading = false }) => {
       }
       // On `done` AuthContainer takes over through the `signedIn` Hub event.
     } catch (e) {
-      setError(getAuthErrorCode(e));
+      const code = getAuthErrorCode(e);
+
+      if (code === 'unknown') {
+        setSocialError(code);
+      } else {
+        setEmailError(code);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -61,12 +71,14 @@ export const LoginForm: FC<Props> = ({ loading = false }) => {
 
   return (
     <View style={{ alignSelf: 'stretch', gap: 16 }}>
-      <AuthErrorText code={error} />
-
       <SocialSignInButtons
         disabled={loading || isSubmitting}
-        onError={setError}
+        onError={(code) => {
+          setEmailError(null);
+          setSocialError(code);
+        }}
       />
+      <AuthErrorText code={socialError} />
 
       {emailPasswordAuthEnabled && (
         <>
@@ -87,6 +99,7 @@ export const LoginForm: FC<Props> = ({ loading = false }) => {
             returnKeyType="go"
             onSubmitEditing={submit}
           />
+          <AuthErrorText code={emailError} />
           <Button
             mode="contained"
             onPress={submit}
