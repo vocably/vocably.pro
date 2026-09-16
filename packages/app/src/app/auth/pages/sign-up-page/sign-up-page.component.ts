@@ -17,6 +17,7 @@ import { AuthService } from '../../auth.service';
 import { authErrorKey } from '../../authErrorKey';
 import { PasswordRequirementsComponent } from '../../password-requirements/password-requirements.component';
 import { SocialSignInButtonsComponent } from '../../social-sign-in-buttons/social-sign-in-buttons.component';
+import { CarouselComponent } from '../../carousel/carousel.component';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -31,6 +32,7 @@ import { SocialSignInButtonsComponent } from '../../social-sign-in-buttons/socia
     HeaderComponent,
     SocialSignInButtonsComponent,
     PasswordRequirementsComponent,
+    CarouselComponent,
   ],
 })
 export class SignUpPageComponent implements OnInit {

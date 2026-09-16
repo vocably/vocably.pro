@@ -72,7 +72,6 @@ export const tr = {
   'auth.sign_in.create_account': 'Hesap oluştur',
   'auth.sign_in.email_confirmed':
     'E-posta adresiniz doğrulandı. Lütfen giriş yapın.',
-  'auth.sign_up.title': 'Hesap oluşturun',
   'auth.sign_up.submit': 'Hesap oluştur',
   'auth.sign_up.have_account': 'Zaten bir hesabınız var mı?',
   'auth.sign_up.sign_in': 'Giriş yap',

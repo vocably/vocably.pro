@@ -68,7 +68,6 @@ export const en = {
   'auth.sign_in.no_account': "Don't have an account?",
   'auth.sign_in.create_account': 'Create an account',
   'auth.sign_in.email_confirmed': 'Your email is confirmed. Please sign in.',
-  'auth.sign_up.title': 'Create an account',
   'auth.sign_up.submit': 'Create account',
   'auth.sign_up.have_account': 'Already have an account?',
   'auth.sign_up.sign_in': 'Sign in',

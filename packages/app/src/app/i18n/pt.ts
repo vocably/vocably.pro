@@ -70,7 +70,6 @@ export const pt = {
   'auth.sign_in.create_account': 'Criar uma conta',
   'auth.sign_in.email_confirmed':
     'Seu e-mail foi confirmado. Entre na sua conta.',
-  'auth.sign_up.title': 'Criar uma conta',
   'auth.sign_up.submit': 'Criar conta',
   'auth.sign_up.have_account': 'Já tem uma conta?',
   'auth.sign_up.sign_in': 'Entrar',

@@ -68,7 +68,6 @@ export const vi = {
   'auth.sign_in.create_account': 'Tạo tài khoản',
   'auth.sign_in.email_confirmed':
     'Email của bạn đã được xác nhận. Vui lòng đăng nhập.',
-  'auth.sign_up.title': 'Tạo tài khoản',
   'auth.sign_up.submit': 'Tạo tài khoản',
   'auth.sign_up.have_account': 'Đã có tài khoản?',
   'auth.sign_up.sign_in': 'Đăng nhập',

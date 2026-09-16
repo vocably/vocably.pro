@@ -71,7 +71,6 @@ export const es = {
   'auth.sign_in.no_account': '¿No tienes una cuenta?',
   'auth.sign_in.create_account': 'Crear una cuenta',
   'auth.sign_in.email_confirmed': 'Tu correo está confirmado. Inicia sesión.',
-  'auth.sign_up.title': 'Crear una cuenta',
   'auth.sign_up.submit': 'Crear cuenta',
   'auth.sign_up.have_account': '¿Ya tienes una cuenta?',
   'auth.sign_up.sign_in': 'Iniciar sesión',

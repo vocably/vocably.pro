@@ -70,7 +70,6 @@ export const uk = {
   'auth.sign_in.create_account': 'Створити акаунт',
   'auth.sign_in.email_confirmed':
     'Адресу електронної пошти підтверджено. Увійдіть в акаунт.',
-  'auth.sign_up.title': 'Створення акаунта',
   'auth.sign_up.submit': 'Створити акаунт',
   'auth.sign_up.have_account': 'Вже маєте акаунт?',
   'auth.sign_up.sign_in': 'Увійти',

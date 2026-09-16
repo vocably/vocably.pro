@@ -71,7 +71,6 @@ export const ru = {
   'auth.sign_in.create_account': 'Создать аккаунт',
   'auth.sign_in.email_confirmed':
     'Адрес электронной почты подтверждён. Войдите в аккаунт.',
-  'auth.sign_up.title': 'Создание аккаунта',
   'auth.sign_up.submit': 'Создать аккаунт',
   'auth.sign_up.have_account': 'Уже есть аккаунт?',
   'auth.sign_up.sign_in': 'Войти',

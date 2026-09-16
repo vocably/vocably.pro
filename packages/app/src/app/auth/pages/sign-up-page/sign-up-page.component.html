@@ -1,8 +1,12 @@
 <div class="container-xl top"><app-header></app-header></div>
-<div class="container bottom">
-  <div class="auth-form">
-    <h1 class="auth-title">{{ 'auth.sign_up.title' | transloco }}</h1>
+<div class="container-l bottom">
+  <app-carousel></app-carousel>
 
+  <div class="text-center lead-1" style="margin-top: 2rem; margin-bottom: 2rem">
+    {{ 'auth.carousel.need_account' | transloco }}
+  </div>
+
+  <div class="auth-form">
     <div class="auth-error text-danger" role="alert" *ngIf="error">
       {{ authErrorKey(error) | transloco }}
       <ng-container *ngIf="error === 'usernameExists'">
