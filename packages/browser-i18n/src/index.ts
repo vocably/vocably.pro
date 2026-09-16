@@ -16,7 +16,6 @@ export type LanguageTranslationOption =
 const SUPPORTED_LOCALES: Locale[] = ['en', 'ru', 'uk', 'vi', 'tr', 'es', 'pt'];
 
 export const detectLocale = (): Locale => {
-  console.log('detectLocale');
   const languages =
     typeof navigator !== 'undefined'
       ? navigator.languages?.length
