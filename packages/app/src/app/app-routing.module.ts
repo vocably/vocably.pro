@@ -71,6 +71,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./welcome/welcome.module').then((m) => m.WelcomeModule),
     canActivate: [CognitoAuthGuard],
+    data: { unauthenticatedRedirect: 'sign-up' },
   },
   {
     path: 'subscribe',

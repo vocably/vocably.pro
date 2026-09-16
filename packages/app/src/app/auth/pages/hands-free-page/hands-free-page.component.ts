@@ -53,7 +53,7 @@ export class HandsFreePageComponent implements OnInit, OnDestroy {
           // Router navigation keeps the redirect target Amplify was
           // configured with on this page, so any sign-in method ends on
           // `signed-in`.
-          this.router.navigate(['/sign-in'], { replaceUrl: true });
+          this.router.navigate(['/sign-up'], { replaceUrl: true });
         }
       });
   }
