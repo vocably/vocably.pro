@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { FC } from 'react';
 import { Platform, useWindowDimensions } from 'react-native';
 import { Appbar, Button, useTheme } from 'react-native-paper';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LanguageSelectorModal } from '../LanguageSelectorModal';
 import { renderAuthScreens } from './authScreens';
 import { LanguageScreen } from './LanguageScreen';
@@ -20,6 +21,12 @@ type Props = {
 export const AuthNavigation: FC<Props> = ({ initialRouteName }) => {
   const theme = useTheme();
   const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+
+  const headerStyle = {
+    backgroundColor: theme.colors.background,
+    borderWidth: 0,
+  };
 
   return (
     <Stack.Navigator
@@ -27,8 +34,10 @@ export const AuthNavigation: FC<Props> = ({ initialRouteName }) => {
       screenOptions={{
         headerTitleAllowFontScaling: false,
         headerStyle: {
-          backgroundColor: theme.colors.background,
-          borderWidth: 0,
+          ...headerStyle,
+          // The default iOS header (44pt) leaves almost no room around the
+          // "Sign in" button, so give it some breathing space.
+          ...(Platform.OS === 'ios' ? { height: insets.top + 60 } : {}),
         },
         headerTitleStyle: {
           color: theme.colors.secondary,
@@ -84,6 +93,9 @@ export const AuthNavigation: FC<Props> = ({ initialRouteName }) => {
         screenOptions={{
           presentation: 'modal',
           headerShown: false,
+          // Modals have their own default header height, so don't inherit the
+          // taller one from the navigator.
+          headerStyle,
           animation: Platform.OS === 'android' ? 'fade' : undefined,
           detachInactiveScreens: false,
           statusBarTranslucent: true,
