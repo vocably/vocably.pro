@@ -2,14 +2,13 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslocoModule } from '@jsverse/transloco';
-import { GoogleIconComponent } from '../../components/google-icon/google-icon.component';
 import { AuthService, SocialProvider } from '../auth.service';
 
 @Component({
   selector: 'app-social-sign-in-buttons',
   templateUrl: './social-sign-in-buttons.component.html',
   styleUrls: ['./social-sign-in-buttons.component.scss'],
-  imports: [NgIf, IonicModule, TranslocoModule, GoogleIconComponent],
+  imports: [NgIf, IonicModule, TranslocoModule],
 })
 export class SocialSignInButtonsComponent {
   public redirectingTo: SocialProvider | null = null;
