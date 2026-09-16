@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -11,10 +11,12 @@ import {
   isValidEmail,
   normalizeEmail,
 } from '@vocably/sulna';
+import { Subject, takeUntil } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { HeaderComponent } from '../../../header/header.component';
 import { AuthService } from '../../auth.service';
 import { authErrorKey } from '../../authErrorKey';
+import { redirectError$ } from '../../redirectError';
 import { PasswordRequirementsComponent } from '../../password-requirements/password-requirements.component';
 import { SocialSignInButtonsComponent } from '../../social-sign-in-buttons/social-sign-in-buttons.component';
 import { CarouselComponent } from '../../carousel/carousel.component';
@@ -35,7 +37,9 @@ import { CarouselComponent } from '../../carousel/carousel.component';
     CarouselComponent,
   ],
 })
-export class SignUpPageComponent implements OnInit {
+export class SignUpPageComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject();
+
   public wwwBaseUrl = environment.wwwBaseUrl;
   public emailPasswordEnabled = environment.auth.emailPasswordAuthEnabled;
 
@@ -63,6 +67,12 @@ export class SignUpPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.email = this.route.snapshot.queryParamMap.get('email') ?? '';
+
+    // A Google/Apple sign-in the pre sign-up trigger refused is redirected
+    // here, and the reason travels with it.
+    redirectError$.pipe(takeUntil(this.destroy$)).subscribe((code) => {
+      this.error = code;
+    });
   }
 
   async submit() {
@@ -72,6 +82,7 @@ export class SignUpPageComponent implements OnInit {
 
     this.isSubmitting = true;
     this.error = null;
+    redirectError$.next(null);
 
     try {
       const step = await this.auth.signUpWithEmail(this.email, this.password);
@@ -86,5 +97,10 @@ export class SignUpPageComponent implements OnInit {
     } finally {
       this.isSubmitting = false;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(null);
+    this.destroy$.complete();
   }
 }
