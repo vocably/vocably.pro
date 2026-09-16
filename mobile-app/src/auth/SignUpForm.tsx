@@ -2,6 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import {
   AuthErrorCode,
   getAuthErrorCode,
+  isPasswordValid,
   isValidEmail,
   normalizeEmail,
 } from '@vocably/sulna';
@@ -17,20 +18,22 @@ import {
   PasswordInput,
   TermsNotice,
 } from './AuthFormParts';
-import { signInWithEmail } from './emailAuth';
+import { signUpWithEmail } from './emailAuth';
 import { emailPasswordAuthEnabled } from './emailPasswordAuthEnabled';
+import { PasswordRequirements } from './PasswordRequirements';
+import { popToLoginScreen } from './popToLoginScreen';
 import { SocialSignInButtons } from './SocialSignInButtons';
 
 type Props = {
   initialEmail?: string;
   loading?: boolean;
-  onCreateAccount?: (email: string) => void;
+  onSignIn?: (email: string) => void;
 };
 
-export const LoginForm: FC<Props> = ({
+export const SignUpForm: FC<Props> = ({
   initialEmail = '',
   loading = false,
-  onCreateAccount,
+  onSignIn,
 }) => {
   const theme = useTheme();
   const { t } = useTranslation();
@@ -38,13 +41,11 @@ export const LoginForm: FC<Props> = ({
 
   const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState('');
+  const [isEmailTouched, setIsEmailTouched] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // Email/password errors are shown under the password field, while social
-  // sign-in errors and unrecognized ones are shown under the social buttons.
-  const [emailError, setEmailError] = useState<AuthErrorCode | null>(null);
-  const [socialError, setSocialError] = useState<AuthErrorCode | null>(null);
+  const [error, setError] = useState<AuthErrorCode | null>(null);
 
-  const canSubmit = isValidEmail(email) && password.length > 0;
+  const canSubmit = isValidEmail(email) && isPasswordValid(password);
 
   const submit = async () => {
     if (!canSubmit || isSubmitting) {
@@ -52,24 +53,20 @@ export const LoginForm: FC<Props> = ({
     }
 
     setIsSubmitting(true);
-    setEmailError(null);
-    setSocialError(null);
+    setError(null);
 
     try {
-      const step = await signInWithEmail(email, password);
+      const step = await signUpWithEmail(email, password);
 
       if (step === 'confirmSignUp') {
         navigation.navigate('verifyEmail', { email: normalizeEmail(email) });
       }
-      // On `done` AuthContainer takes over through the `signedIn` Hub event.
-    } catch (e) {
-      const code = getAuthErrorCode(e);
 
-      if (code === 'unknown') {
-        setSocialError(code);
-      } else {
-        setEmailError(code);
+      if (step === 'done') {
+        popToLoginScreen(navigation);
       }
+    } catch (e) {
+      setError(getAuthErrorCode(e));
     } finally {
       setIsSubmitting(false);
     }
@@ -77,14 +74,12 @@ export const LoginForm: FC<Props> = ({
 
   return (
     <View style={{ alignSelf: 'stretch', gap: 16 }}>
+      <AuthErrorText code={error} />
+
       <SocialSignInButtons
         disabled={loading || isSubmitting}
-        onError={(code) => {
-          setEmailError(null);
-          setSocialError(code);
-        }}
+        onError={setError}
       />
-      <AuthErrorText code={socialError} />
 
       {emailPasswordAuthEnabled && (
         <>
@@ -94,55 +89,50 @@ export const LoginForm: FC<Props> = ({
             label={t('loginForm.email')}
             value={email}
             onChangeText={setEmail}
+            onBlur={() => setIsEmailTouched(true)}
             returnKeyType="next"
           />
+          {isEmailTouched && !isValidEmail(email) && (
+            <Text style={{ color: theme.colors.error }}>
+              {t('authErrors.invalidEmail')}
+            </Text>
+          )}
           <PasswordInput
             label={t('loginForm.password')}
             value={password}
             onChangeText={setPassword}
-            textContentType="password"
-            autoComplete="current-password"
+            textContentType="newPassword"
+            autoComplete="new-password"
             returnKeyType="go"
             onSubmitEditing={submit}
           />
-          <AuthErrorText code={emailError} />
+          <PasswordRequirements password={password} />
           <Button
             mode="contained"
             onPress={submit}
             loading={isSubmitting || loading}
             disabled={!canSubmit || isSubmitting || loading}
           >
-            {t('loginForm.submit')}
+            {t('signUp.submit')}
           </Button>
-          <Button
-            mode="text"
-            onPress={() =>
-              navigation.navigate('forgotPassword', {
-                email: normalizeEmail(email),
-              })
-            }
-          >
-            {t('loginForm.forgotPassword')}
-          </Button>
-          <Text style={{ textAlign: 'center' }}>
-            {t('loginForm.noAccount')}{' '}
-            <Text
-              style={{ color: theme.colors.primary }}
-              onPress={() =>
-                onCreateAccount
-                  ? onCreateAccount(normalizeEmail(email))
-                  : navigation.navigate('signUp', {
-                      email: normalizeEmail(email),
-                    })
-              }
-            >
-              {t('loginForm.createAccount')}
-            </Text>
-          </Text>
         </>
       )}
 
-      <TermsNotice agreeKey="loginForm.bySigningInYouAgreeToOur" />
+      <Text style={{ textAlign: 'center' }}>
+        {t('signUp.haveAccount')}{' '}
+        <Text
+          style={{ color: theme.colors.primary }}
+          onPress={() =>
+            onSignIn
+              ? onSignIn(normalizeEmail(email))
+              : popToLoginScreen(navigation)
+          }
+        >
+          {t('signUp.signIn')}
+        </Text>
+      </Text>
+
+      <TermsNotice agreeKey="signUp.byCreatingAccountYouAgreeToOur" />
     </View>
   );
 };
