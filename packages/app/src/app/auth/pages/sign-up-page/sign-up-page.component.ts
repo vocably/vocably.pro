@@ -21,6 +21,7 @@ import {
 import { Subject, takeUntil } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { HeaderComponent } from '../../../header/header.component';
+import { isExtensionInstalled$ } from '../../../isExtensionInstalled';
 import { AuthService } from '../../auth.service';
 import { authErrorKey } from '../../authErrorKey';
 import { redirectError$ } from '../../redirectError';
@@ -61,6 +62,9 @@ export class SignUpPageComponent implements OnInit, AfterViewInit, OnDestroy {
   public socialError: AuthErrorCode | null = null;
   public formError: AuthErrorCode | null = null;
   public authErrorKey = authErrorKey;
+  // Undefined until the first ping answers, so the carousel doesn't flash on
+  // a page the extension isn't installed for.
+  public isExtensionInstalled: boolean | undefined = undefined;
 
   constructor(
     private auth: AuthService,
@@ -84,6 +88,12 @@ export class SignUpPageComponent implements OnInit, AfterViewInit, OnDestroy {
     redirectError$.pipe(takeUntil(this.destroy$)).subscribe((code) => {
       this.socialError = code;
     });
+
+    isExtensionInstalled$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isInstalled) => {
+        this.isExtensionInstalled = isInstalled;
+      });
   }
 
   ngAfterViewInit(): void {

@@ -178,7 +178,7 @@ if (!existingResultsContainer) {
   searchContainer.appendChild(resultsContainer);
 }
 
-const signInUrl = '/app/sign-in';
+const signInUrl = '/app/sign-up';
 
 /**
  * Turns a `vocably-translation` element into a real deck client: the tag
