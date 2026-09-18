@@ -33,12 +33,9 @@
             "styles": ["src/styles.scss"],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "crypto-js",
               "@aws-sdk/eventstream-marshaller",
               "buffer",
-              "js-cookie",
               "@aws-crypto",
-              "zen-observable",
               "@aws-sdk/util-utf8-node",
               "@aws-crypto/sha256-js",
               "@aws-sdk/util-buffer-from",
@@ -78,17 +75,8 @@
               "uuid",
               "@aws-sdk/credential-provider-cognito-identity",
               "@aws-sdk/eventstream-serde-config-resolver",
-              "ulid",
-              "zen-push",
               "lodash",
-              "@aws-amplify/core",
-              "url",
-              "@aws-crypto/crc32",
-              "isomorphic-unfetch",
-              "crypto-js/lib-typedarrays",
-              "crypto-js/hmac-sha256",
-              "crypto",
-              "camelcase-keys"
+              "@aws-crypto/crc32"
             ],
             "serviceWorker": false
           },

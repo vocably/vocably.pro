@@ -171,6 +171,7 @@ locals {
 USERNAME="${var.test_user_username}"
 AWS_REGION="${data.aws_region.current.region}"
 USER_POOL_ID="${aws_cognito_user_pool.users.id}"
+USER_POOL_CLIENT_ID="${aws_cognito_user_pool_client.client.id}"
 DECKS_BUCKET="${aws_s3_bucket.cards.bucket}"
 ENDTEST_APP_ID="${var.endtest_app_id}"
 ENDTEST_APP_CODE="${var.endtest_app_code}"

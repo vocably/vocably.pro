@@ -491,7 +491,7 @@ document
   const captionSegment = document.querySelector('.ytp-caption-segment');
 
   if (captionSegment) {
-    captionSegment.innerHTML = `These orbits, these arcs\n...something`;
+    captionSegment.innerHTML = `These orbits, these arcs\n...something.`;
   }
 };
 

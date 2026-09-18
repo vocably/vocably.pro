@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { inspect } from '@vocably/node-sulna';
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { predefinedOptions } from './index';

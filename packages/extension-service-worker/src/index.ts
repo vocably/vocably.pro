@@ -1,4 +1,7 @@
-import { Auth } from '@aws-amplify/auth';
+import { KeyValueStorageInterface } from '@aws-amplify/core';
+import { Amplify } from 'aws-amplify';
+import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
+import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
 import {
   analyze,
   configureApi,
@@ -66,7 +69,7 @@ import {
 } from '@vocably/model';
 import { buildTagMap, updateDetachedCard } from '@vocably/model-operations';
 import { createSrsItem } from '@vocably/srs';
-import { get, uniq } from 'lodash-es';
+import { uniq } from 'lodash-es';
 import posthog from 'posthog-js/dist/module.no-external';
 import { distinctUntilChanged, Observable, switchMap, timer } from 'rxjs';
 import {
@@ -75,7 +78,6 @@ import {
   storeAskForRatingCounter,
 } from './askForRatingCounter';
 import { browserEnv, hasOffscreen } from './browserEnv';
-import './fixAuth';
 import { getCardsLimit } from './getCardsLimit';
 import { getUserAttributes } from './getUserAttributes';
 import { addLanguage, getUserLanguages, removeLanguage } from './languageList';
@@ -93,6 +95,7 @@ import {
   getSourceLanguage,
   setSourceLanguage,
 } from './selectedLanguage/sourceLanguage';
+import { isInPaidGroup, isSignedIn } from './session';
 import { getSettings, setSettings } from './settings';
 import {
   getUserMetadata,
@@ -100,19 +103,27 @@ import {
   saveUserMetadata,
 } from './userMetadata';
 
+/**
+ * Keeps the flat shape the extension entry points build from their Terraform
+ * generated env vars; mapped onto Amplify v6's config below.
+ */
+export type ServiceWorkerAuthOptions = {
+  userPoolId: string;
+  userPoolWebClientId: string;
+  storage: KeyValueStorageInterface;
+};
+
 type RegisterServiceWorkerOptions = {
-  auth: Parameters<typeof Auth.configure>[0];
+  auth: ServiceWorkerAuthOptions;
   api: Parameters<typeof configureApi>[0];
   facility: 'chrome-or-safari' | 'ios-safari';
   unlimitedMaxCards?: boolean;
 };
 
+export { getIdToken, isInPaidGroup, isSignedIn } from './session';
+
 export const isLoggedIn$: Observable<boolean> = timer(0, 2000).pipe(
-  switchMap(async () => {
-    return await Auth.currentSession()
-      .then(() => true)
-      .catch(() => false);
-  }),
+  switchMap(() => isSignedIn()),
   distinctUntilChanged()
 );
 
@@ -153,7 +164,18 @@ export const registerServiceWorker = (
 
   posthog.identify();
 
-  Auth.configure(registerServiceWorkerOptions.auth);
+  Amplify.configure({
+    Auth: {
+      Cognito: {
+        userPoolId: registerServiceWorkerOptions.auth.userPoolId,
+        userPoolClientId: registerServiceWorkerOptions.auth.userPoolWebClientId,
+      },
+    },
+  });
+  // Must follow `Amplify.configure`, which installs the default token storage.
+  cognitoUserPoolsTokenProvider.setKeyValueStorage(
+    registerServiceWorkerOptions.auth.storage
+  );
 
   configureApi(registerServiceWorkerOptions.api);
 
@@ -178,9 +200,7 @@ export const registerServiceWorker = (
   });
 
   onIsLoggedInRequest(async (sendResponse) => {
-    const isLoggedIn = await Auth.currentSession()
-      .then(() => true)
-      .catch(() => false);
+    const isLoggedIn = await isSignedIn();
 
     if (!posthog._isIdentified()) {
       posthog.identify();
@@ -190,31 +210,22 @@ export const registerServiceWorker = (
   });
 
   onIsActiveRequest(async (sendResponse) => {
-    const user = await Auth.currentAuthenticatedUser().catch(() => false);
-
-    if (!user) {
-      return sendResponse(false);
-    }
-
-    return sendResponse(
-      get(
-        user,
-        'signInUserSession.accessToken.payload.cognito:groups',
-        []
-      ).includes('paid')
-    );
+    return sendResponse(await isInPaidGroup());
   });
 
   onIsEligibleForTrialRequest(async (sendResponse) => {
-    const user = await Auth.currentAuthenticatedUser().catch(() => false);
+    const user = await getCurrentUser().catch(() => null);
 
-    if (user === false) {
+    if (user === null) {
       return sendResponse(false);
     }
 
-    const attributes = await Auth.userAttributes(user);
+    const attributes = await fetchUserAttributes();
 
-    const userData = mapUserAttributes({ user, attributes });
+    const userData = mapUserAttributes({
+      username: user.username,
+      attributes,
+    });
     return sendResponse(isEligibleForTrial(userData));
   });
 

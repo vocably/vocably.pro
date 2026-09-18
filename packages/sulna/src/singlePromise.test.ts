@@ -1,8 +1,9 @@
+import { describe, expect, it, jest } from '@jest/globals';
 import { singlePromise } from './singlePromise';
 
 describe('singlePromise', () => {
   it('calls the underlying function once for concurrent calls', async () => {
-    const fn = jest.fn().mockResolvedValue('result');
+    const fn = jest.fn<() => Promise<string>>().mockResolvedValue('result');
     const wrapped = singlePromise(fn);
 
     const [a, b] = await Promise.all([wrapped(), wrapped()]);
@@ -13,7 +14,7 @@ describe('singlePromise', () => {
   });
 
   it('returns the same promise for concurrent calls', () => {
-    const fn = jest.fn().mockResolvedValue('result');
+    const fn = jest.fn<() => Promise<string>>().mockResolvedValue('result');
     const wrapped = singlePromise(fn);
 
     const p1 = wrapped();
@@ -23,7 +24,7 @@ describe('singlePromise', () => {
   });
 
   it('allows a new call after the promise resolves', async () => {
-    const fn = jest.fn().mockResolvedValue('result');
+    const fn = jest.fn<() => Promise<string>>().mockResolvedValue('result');
     const wrapped = singlePromise(fn);
 
     await wrapped();

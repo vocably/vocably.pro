@@ -28,7 +28,7 @@ const translations: BaseTranslations = {
   },
   nav: {
     myCards: 'Thẻ của tôi',
-    lookUp: 'Tra cứu',
+    lookUp: 'Từ điển',
     tips: 'Mẹo',
     settings: 'Cài đặt',
     studySettings: 'Cài đặt học tập',
@@ -212,11 +212,11 @@ const translations: BaseTranslations = {
     empty: {
       noCardsYet: 'Bạn chưa có thẻ ghi nhớ nào.',
       headOverToLookUp:
-        'Hãy chuyển sang tab Tra cứu để tìm và thêm từ mới. Vocably là từ điển tích hợp hệ thống học tập.',
+        'Hãy chuyển sang tab Từ điển để tìm và thêm từ mới. Từ điển trong Vocably được hỗ trợ bởi AI và khá thông minh.',
       headOverToGenerator:
-        'Hoặc dùng trình tạo thẻ học để tạo một vài thẻ học.',
-      goToLookUp: 'Đến Tra cứu',
-      goToGenerator: 'Sử dụng trình tạo thẻ học',
+        'Hoặc dùng trình tạo thẻ học bằng AI để tạo danh sách các từ cần học.',
+      goToLookUp: 'Đến Từ điển',
+      goToGenerator: 'Sử dụng trình tạo thẻ học bằng AI',
       noCardsForSearch:
         'Không tìm thấy thẻ nào cho <bold>{{searchText}}</bold>.',
       noCardsForTag:
@@ -426,11 +426,82 @@ const translations: BaseTranslations = {
   },
   loginForm: {
     screenTitle: 'Đăng nhập hoặc đăng ký',
-    signIn: 'Đăng nhập hoặc tạo tài khoản',
     bySigningInYouAgreeToOur: 'Khi đăng nhập, bạn đồng ý với',
     termsAndConditions: 'Điều khoản và Điều kiện',
     and: 'và',
     privacyPolicy: 'Chính sách Bảo mật',
+    or: 'hoặc',
+    email: 'Email',
+    password: 'Mật khẩu',
+    showPassword: 'Hiện',
+    hidePassword: 'Ẩn',
+    continueWithGoogle: 'Tiếp tục với Google',
+    continueWithApple: 'Tiếp tục với Apple',
+    submit: 'Đăng nhập',
+    forgotPassword: 'Quên mật khẩu?',
+    noAccount: 'Chưa có tài khoản?',
+    createAccount: 'Tạo tài khoản',
+    emailConfirmed: 'Email của bạn đã được xác nhận. Vui lòng đăng nhập.',
+  },
+  signUp: {
+    screenTitle: 'Tạo tài khoản',
+    submit: 'Tạo tài khoản',
+    haveAccount: 'Đã có tài khoản?',
+    signIn: 'Đăng nhập',
+    byCreatingAccountYouAgreeToOur: 'Bằng cách tạo tài khoản, bạn đồng ý với',
+  },
+  verifyEmail: {
+    screenTitle: 'Xác nhận email của bạn',
+    intro:
+      'Tôi đã gửi mã xác nhận đến {{email}}. Nhập mã bên dưới để tiếp tục.',
+    code: 'Mã xác nhận',
+    submit: 'Xác nhận',
+    resend: 'Gửi mã mới',
+    resendIn: 'Gửi mã mới sau {{seconds}} giây',
+    resent: 'Mã mới đang được gửi đến bạn.',
+    changeEmail: 'Dùng email khác',
+  },
+  forgotPassword: {
+    screenTitle: 'Đặt lại mật khẩu',
+    intro:
+      'Nhập email bạn dùng cho Vocably và tôi sẽ gửi cho bạn mã để chọn mật khẩu mới.',
+    submit: 'Gửi mã',
+    backToSignIn: 'Quay lại đăng nhập',
+  },
+  resetPassword: {
+    screenTitle: 'Chọn mật khẩu mới',
+    intro: 'Nếu có tài khoản cho {{email}}, mã đặt lại đang được gửi đến bạn.',
+    code: 'Mã đặt lại',
+    newPassword: 'Mật khẩu mới',
+    submit: 'Lưu và đăng nhập',
+  },
+  passwordRules: {
+    minLength: 'Ít nhất 8 ký tự',
+    lowercase: 'Một chữ cái viết thường',
+    uppercase: 'Một chữ cái viết hoa',
+    digit: 'Một chữ số',
+    symbol: 'Một ký hiệu, ví dụ ! hoặc ?',
+  },
+  authErrors: {
+    invalidCredentials: 'Email hoặc mật khẩu không đúng.',
+    userNotConfirmed: 'Vui lòng xác nhận email trước.',
+    usernameExists: 'Đã có tài khoản với email này.',
+    emailTakenGoogle:
+      'Email này đã được dùng cho tài khoản đăng nhập bằng Google. Vui lòng tiếp tục với Google.',
+    emailTakenApple:
+      'Email này đã được dùng cho tài khoản đăng nhập bằng Apple. Vui lòng tiếp tục với Apple.',
+    emailTakenGoogleOrApple:
+      'Email này đã được dùng cho tài khoản đăng nhập bằng Google hoặc Apple. Vui lòng tiếp tục với một trong hai cách đó.',
+    emailTakenPassword:
+      'Email này đã được dùng cho tài khoản có mật khẩu. Vui lòng đăng nhập bằng email và mật khẩu.',
+    invalidEmail: 'Vui lòng nhập địa chỉ email hợp lệ.',
+    codeMismatch: 'Mã không đúng. Vui lòng kiểm tra và thử lại.',
+    codeExpired: 'Mã đã hết hạn. Vui lòng yêu cầu mã mới.',
+    tooManyAttempts: 'Quá nhiều lần thử. Vui lòng đợi vài phút rồi thử lại.',
+    invalidPassword: 'Mật khẩu này không đáp ứng yêu cầu.',
+    network: 'Không thể kết nối. Vui lòng kiểm tra kết nối internet.',
+    cancelled: 'Đăng nhập đã bị hủy.',
+    unknown: 'Đã xảy ra lỗi. Vui lòng thử lại.',
   },
   languageScreen: {
     motherTongueQuestion: 'Tiếng mẹ đẻ của bạn là gì?',

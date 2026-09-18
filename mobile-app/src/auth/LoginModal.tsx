@@ -20,6 +20,7 @@ import { syncUserMetadata } from '../syncAnonymous/syncUserMetadata';
 import { UserMetadataContext } from '../UserMetadataContainer';
 import { AuthContext } from './AuthContainer';
 import { LoginForm } from './LoginForm';
+import { SignUpForm } from './SignUpForm';
 import { usePostHog } from 'posthog-react-native';
 
 type Props = {
@@ -27,6 +28,7 @@ type Props = {
     string,
     {
       onLogin: () => void;
+      form?: 'login' | 'signUp';
     }
   >;
 };
@@ -35,6 +37,10 @@ export const LoginModal: FC<Props> = ({ route }) => {
   const insets = useSafeAreaInsets();
   const theme = useTheme();
   const { onLogin } = route.params;
+  // Both forms are rendered here rather than in the `signUp` screen, because
+  // this screen migrates the anonymous user's data once they are logged in.
+  const [form, setForm] = useState(route.params.form ?? 'login');
+  const [formEmail, setFormEmail] = useState('');
   const posthog = usePostHog();
 
   const [synchronizing, setSynchronizing] = useState(false);
@@ -149,6 +155,8 @@ export const LoginModal: FC<Props> = ({ route }) => {
 
   return (
     <ScrollView
+      keyboardShouldPersistTaps="handled"
+      automaticallyAdjustKeyboardInsets={true}
       contentContainerStyle={{
         flexGrow: 1,
         justifyContent: 'center',
@@ -156,9 +164,10 @@ export const LoginModal: FC<Props> = ({ route }) => {
         gap: 16,
         paddingLeft: insets.left + mainPadding,
         paddingRight: insets.right + mainPadding,
+        paddingBottom: insets.bottom + mainPadding,
       }}
     >
-      <View style={{ width: '90%', gap: 8, marginBottom: 24 }}>
+      <View style={{ width: '90%', gap: 8, marginBottom: 32, marginTop: 32 }}>
         <View style={{ flexDirection: 'row', gap: 12, alignItems: 'center' }}>
           <Icon name="cloud-outline" size={24} color={listColor} />
           <Text style={textStyle}>{t('loginModal.syncAcrossDevices')}</Text>
@@ -174,7 +183,25 @@ export const LoginModal: FC<Props> = ({ route }) => {
           <Text style={textStyle}>{t('loginModal.importExportCsv')}</Text>
         </View>
       </View>
-      <LoginForm loading={synchronizing} />
+      {form === 'signUp' ? (
+        <SignUpForm
+          initialEmail={formEmail}
+          loading={synchronizing}
+          onSignIn={(email) => {
+            setFormEmail(email);
+            setForm('login');
+          }}
+        />
+      ) : (
+        <LoginForm
+          initialEmail={formEmail}
+          loading={synchronizing}
+          onCreateAccount={(email) => {
+            setFormEmail(email);
+            setForm('signUp');
+          }}
+        />
+      )}
     </ScrollView>
   );
 };

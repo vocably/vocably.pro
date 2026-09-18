@@ -1,15 +1,14 @@
 import { NavigationProp } from '@react-navigation/native';
-import { languageList } from '@vocably/model';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleProp, ViewStyle } from 'react-native';
 import { Button } from 'react-native-paper';
-import { getDeviceLanguage } from './getDeviceLanguage';
+import { getDeviceLanguages } from './getDeviceLanguages';
 import { Preset } from './TranslationPreset/TranslationPresetContainer';
 import { LanguagePairs } from './TranslationPreset/useLanguagePairs';
 import { upperFirst } from 'lodash-es';
 
-const deviceLanguage = getDeviceLanguage();
+const deviceLanguages = getDeviceLanguages();
 
 type Props = {
   navigation: NavigationProp<any>;
@@ -40,15 +39,12 @@ export const TargetLanguageButton: FC<Props> = ({
   const preferredLanguages = languagePairs[preset.sourceLanguage]
     ? // @ts-ignore
       languagePairs[preset.sourceLanguage].availableLanguages
-    : // @ts-ignore
-      languageList[deviceLanguage]
-      ? [deviceLanguage]
-      : [];
+    : deviceLanguages;
 
   // @ts-ignore
   const preferredLanguagesTitle =
     // @ts-ignore
-    !preset.translationLanguage && languageList[deviceLanguage]
+    !preset.translationLanguage && deviceLanguages.length > 0
       ? t('languageSelector.deviceLanguage')
       : t('languageSelector.preferredLanguages');
 

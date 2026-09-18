@@ -52,11 +52,75 @@ export const en = {
   'auth.carousel.slide5':
     "Don't know the right word? Search for it in your native language.",
   'auth.carousel.need_account': "You'll need an account to use Vocably.",
-  'auth.sign_in.button': 'Sign in or Create an account',
   'auth.sign_in.agree': 'By signing in, you agree to our',
   'auth.sign_in.terms': 'Terms and Conditions',
   'auth.sign_in.and': 'and',
   'auth.sign_in.privacy': 'Privacy Policy',
+  'auth.or': 'or',
+  'auth.email': 'Email',
+  'auth.password': 'Password',
+  'auth.show_password': 'Show',
+  'auth.hide_password': 'Hide',
+  'auth.social.google': 'Continue with Google',
+  'auth.social.apple': 'Continue with Apple',
+  'auth.sign_in.submit': 'Sign in',
+  'auth.sign_in.forgot_password': 'Forgot password?',
+  'auth.sign_in.no_account': "Don't have an account?",
+  'auth.sign_in.create_account': 'Create an account',
+  'auth.sign_in.email_confirmed': 'Your email is confirmed. Please sign in.',
+  'auth.sign_up.submit': 'Create account',
+  'auth.sign_up.have_account': 'Already have an account?',
+  'auth.sign_up.sign_in': 'Sign in',
+  'auth.sign_up.agree': 'By creating an account, you agree to our',
+  'auth.verify.title': 'Confirm your email',
+  'auth.verify.intro':
+    'I sent a confirmation code to {{email}}. Enter it below to continue.',
+  'auth.verify.code': 'Confirmation code',
+  'auth.verify.submit': 'Confirm',
+  'auth.verify.resend': 'Send a new code',
+  'auth.verify.resend_in': 'Send a new code in {{seconds}}s',
+  'auth.verify.resent': 'A new code is on its way.',
+  'auth.verify.change_email': 'Use a different email',
+  'auth.forgot.title': 'Reset your password',
+  'auth.forgot.intro':
+    "Enter the email you use for Vocably and I'll send you a code to choose a new password.",
+  'auth.forgot.submit': 'Send code',
+  'auth.forgot.back': 'Back to sign in',
+  'auth.reset.title': 'Choose a new password',
+  'auth.reset.intro':
+    'If there is an account for {{email}}, a reset code is on its way.',
+  'auth.reset.code': 'Reset code',
+  'auth.reset.new_password': 'New password',
+  'auth.reset.submit': 'Save and sign in',
+  'auth.password_rules.min_length': 'At least 8 characters',
+  'auth.password_rules.lowercase': 'A lowercase letter',
+  'auth.password_rules.uppercase': 'An uppercase letter',
+  'auth.password_rules.digit': 'A number',
+  'auth.password_rules.symbol': 'A symbol, such as ! or ?',
+  'auth.errors.invalid_credentials': 'The email or password is incorrect.',
+  'auth.errors.user_not_confirmed': 'Please confirm your email first.',
+  'auth.errors.username_exists': 'An account with this email already exists.',
+  'auth.errors.email_taken_google':
+    'This email is already used by an account that signs in with Google. Please continue with Google.',
+  'auth.errors.email_taken_apple':
+    'This email is already used by an account that signs in with Apple. Please continue with Apple.',
+  'auth.errors.email_taken_google_or_apple':
+    'This email is already used by an account that signs in with Google or Apple. Please continue with one of them.',
+  'auth.errors.email_taken_password':
+    'This email is already used by an account with a password. Please sign in with your email and password.',
+  'auth.errors.invalid_email': 'Please enter a valid email address.',
+  'auth.errors.code_mismatch':
+    "That code isn't right. Please check it and try again.",
+  'auth.errors.code_expired':
+    'That code has expired. Please request a new one.',
+  'auth.errors.too_many_attempts':
+    'Too many attempts. Please wait a few minutes and try again.',
+  'auth.errors.invalid_password':
+    "This password doesn't meet the requirements.",
+  'auth.errors.network':
+    'Unable to connect. Please check your internet connection.',
+  'auth.errors.cancelled': 'Sign-in was cancelled.',
+  'auth.errors.unknown': 'Something went wrong. Please try again.',
   'auth.hands_free.not_installed':
     "It seems like the browser extension isn't installed or enabled.",
   'auth.hands_free.please_install':
@@ -350,6 +414,10 @@ export const en = {
   // Page Titles
   'page.sign_in': 'Sign In',
   'page.auto_sign_in': 'Auto Sign In',
+  'page.sign_up': 'Create an Account',
+  'page.verify_email': 'Confirm Email',
+  'page.forgot_password': 'Forgot Password',
+  'page.reset_password': 'Reset Password',
   'page.preview_study_step': 'Preview Study Step',
   'page.settings': 'Settings',
   'page.feedback': 'Feedback',

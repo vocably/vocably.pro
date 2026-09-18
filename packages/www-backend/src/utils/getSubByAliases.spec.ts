@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { getSubByAliases } from './getSubByAliases';
 
 describe('getSubByAliases', () => {

@@ -16,7 +16,9 @@ button.unstyled {
   border-radius: 0.6rem;
   text-align: center;
   text-decoration: none;
-  transition: background-color 200ms, color 200ms;
+  transition:
+    background-color 200ms,
+    color 200ms;
   box-shadow: var(--button-shadow);
   padding: var(--button-padding);
   outline: none;
@@ -47,6 +49,12 @@ button.unstyled {
     background: none;
     border: 1px solid var(--button-bg);
     color: var(--button-bg);
+
+    &[disabled],
+    &.disabled {
+      color: var(--button-color);
+      border-color: var(--button-disabled-bg);
+    }
   }
 
   &:hover:not([disabled], .disabled),

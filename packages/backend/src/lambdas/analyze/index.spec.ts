@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Analysis, DirectAnalysis, ReverseAnalysis } from '@vocably/model';
 import { inspect } from '@vocably/node-sulna';
 import { APIGatewayProxyEvent } from 'aws-lambda';

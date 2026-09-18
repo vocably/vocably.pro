@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { inspect } from '@vocably/node-sulna';
 import { configureTestAnalyzer } from './test/configureTestAnalyzer';
 import { chatWithCard } from './chatWithCard';

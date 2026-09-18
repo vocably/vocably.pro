@@ -5,6 +5,11 @@ locals {
   api_domain                       = "api.${var.root_domain}"
   www_api_domain                   = "www-api.${var.root_domain}"
   public_api_domain                = "public-api.${var.root_domain}"
+  account_domain                   = "account.${var.root_domain}"
+  account_bounce_domain            = "bounce.account.${var.root_domain}"
+  auth_from_address                = "no-reply@account.${var.root_domain}"
+  auth_from_name                   = "Vocably"
+  auth_reply_to_address            = "d@${var.root_domain}"
   app_root                         = abspath("../packages/app")
   extension_root                   = abspath("../packages/extension")
   analyze_root                     = abspath("../packages/analyze")

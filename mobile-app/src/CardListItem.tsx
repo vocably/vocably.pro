@@ -209,7 +209,7 @@ export const CardListItem: FC<Props> = ({
 
             {presentAndPast && (
               <>
-                {' '}
+                {'\n'}
                 <View style={{ transform: textTransform }}>
                   <Text style={{ lineHeight }}>{presentAndPast}</Text>
                 </View>

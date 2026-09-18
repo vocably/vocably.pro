@@ -8,6 +8,7 @@ import {
 } from 'react';
 import Purchases, { CustomerInfo } from 'react-native-purchases';
 import { AuthContext } from './auth/AuthContainer';
+import { isAutomatedTestRun } from './isAutomatedTestRun';
 
 type Props = {};
 
@@ -60,10 +61,17 @@ export const CustomerInfoContainer: FC<PropsWithChildren<Props>> = ({
     };
 
     Purchases.addCustomerInfoUpdateListener(customerInfoRefreshed);
-    Purchases.logIn(customerId).then(({ customerInfo }) => {
+
+    // Logging in would alias the throwaway account of an automated test run to a RevenueCat
+    // subscriber. Those runs stay on the shared app user id set up in configurePurchases.
+    const customerInfoPromise = isAutomatedTestRun
+      ? Purchases.getCustomerInfo()
+      : Purchases.logIn(customerId).then(({ customerInfo }) => customerInfo);
+
+    customerInfoPromise.then((customerInformation) => {
       setCustomerInfoStatus({
         status: 'loaded',
-        customerInformation: customerInfo,
+        customerInformation,
       });
     });
 

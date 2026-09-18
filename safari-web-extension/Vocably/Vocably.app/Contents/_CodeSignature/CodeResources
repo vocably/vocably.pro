@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		dwKhYuRs1G0P9rq2w590qJfmvB0=
+		QOqwQjEEoq/2T3lMa6Y7Iw8YGAk=
 		</data>
 		<key>Resources/Base.lproj/Main.html</key>
 		<data>
@@ -18,15 +18,15 @@
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
-		XlaguL1Oh/WLvIPcSRVqItVuG0o=
+		//9uvIQ1yx8PNKIPOyHN3XWKODE=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<data>
-		kULvI0qcvDQxSkVxrf9NBriuSBU=
+		CFxrZqKvTpHgPXba5YkFYDAv0QE=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<data>
-		RAm6Q+kpLoheh7PSQpx3FNpt9NM=
+		0kejycQFP5/fMNG63BaPf6yBEC8=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<data>
@@ -204,7 +204,7 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			JlK66uqHrFLsmc2rTDcx9A6l6DY=
+			R17irYt96ZuyNfLX0ER/jdBTTE0=
 			</data>
 			<key>requirement</key>
 			<string>identifier "pro.vocably.Vocably.Extension" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Dmytro Snisarenko (X2D37S38M5)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
@@ -220,7 +220,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			IvQl8Xuq0iMsPzuVqYkFpqTOZXQg6qIW14BeGs1Q79I=
+			67DTxRIy+3CErgUpEJ+ep4/FZD5UfBeFyxw+fqgrrJo=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.html</key>
@@ -234,21 +234,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7hJjb7Aej/WFCZuKCQuDXferQNFdEkpeVWQGmf7l6ws=
+			Ov+T5/bR4B21bsoQvIqQMJ8KHhkwmL9PpKwpXloKr+E=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ci/MGtFEq5mZxaieB1ax/r6IFfw11g5BkVtWzPDYDpU=
+			SmmUR+Gbr62G+L47E1n6/0yMr82Nw57uwRSpekDUkCc=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7pJF7Xzxu+95T8sawSVuaueRgabOKjPhKOYLP7a5Zcw=
+			hBL9V1Uz3HBa+saxOuSEMaH74b2FCX7SFL8wzK548n0=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>

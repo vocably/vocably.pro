@@ -53,11 +53,76 @@ export const uk = {
   'auth.carousel.slide5':
     'Не знаєте потрібне слово? Знайдіть його рідною мовою.',
   'auth.carousel.need_account': 'Для використання Vocably потрібен акаунт.',
-  'auth.sign_in.button': 'Увійти або створити акаунт',
   'auth.sign_in.agree': 'Входячи, ви погоджуєтесь з нашими',
   'auth.sign_in.terms': 'Умовами використання',
   'auth.sign_in.and': 'та',
   'auth.sign_in.privacy': 'Політикою конфіденційності',
+  'auth.or': 'або',
+  'auth.email': 'Ел. пошта',
+  'auth.password': 'Пароль',
+  'auth.show_password': 'Показати',
+  'auth.hide_password': 'Приховати',
+  'auth.social.google': 'Продовжити з Google',
+  'auth.social.apple': 'Продовжити з Apple',
+  'auth.sign_in.submit': 'Увійти',
+  'auth.sign_in.forgot_password': 'Забули пароль?',
+  'auth.sign_in.no_account': 'Немає акаунта?',
+  'auth.sign_in.create_account': 'Створити акаунт',
+  'auth.sign_in.email_confirmed':
+    'Адресу електронної пошти підтверджено. Увійдіть в акаунт.',
+  'auth.sign_up.submit': 'Створити акаунт',
+  'auth.sign_up.have_account': 'Вже маєте акаунт?',
+  'auth.sign_up.sign_in': 'Увійти',
+  'auth.sign_up.agree': 'Створюючи акаунт, ви погоджуєтесь з нашими',
+  'auth.verify.title': 'Підтвердьте адресу електронної пошти',
+  'auth.verify.intro':
+    'Код підтвердження надіслано на {{email}}. Введіть його нижче, щоб продовжити.',
+  'auth.verify.code': 'Код підтвердження',
+  'auth.verify.submit': 'Підтвердити',
+  'auth.verify.resend': 'Надіслати новий код',
+  'auth.verify.resend_in': 'Надіслати новий код через {{seconds}} с',
+  'auth.verify.resent': 'Новий код уже в дорозі.',
+  'auth.verify.change_email': 'Вказати іншу адресу',
+  'auth.forgot.title': 'Скидання пароля',
+  'auth.forgot.intro':
+    'Введіть адресу електронної пошти, яку ви використовуєте у Vocably, і на неї надійде код для вибору нового пароля.',
+  'auth.forgot.submit': 'Надіслати код',
+  'auth.forgot.back': 'Повернутися до входу',
+  'auth.reset.title': 'Виберіть новий пароль',
+  'auth.reset.intro':
+    'Якщо для {{email}} існує акаунт, код для скидання пароля вже в дорозі.',
+  'auth.reset.code': 'Код для скидання пароля',
+  'auth.reset.new_password': 'Новий пароль',
+  'auth.reset.submit': 'Зберегти та увійти',
+  'auth.password_rules.min_length': 'Щонайменше 8 символів',
+  'auth.password_rules.lowercase': 'Мала літера',
+  'auth.password_rules.uppercase': 'Велика літера',
+  'auth.password_rules.digit': 'Цифра',
+  'auth.password_rules.symbol': 'Спеціальний символ, наприклад ! або ?',
+  'auth.errors.invalid_credentials':
+    'Неправильна адреса електронної пошти або пароль.',
+  'auth.errors.user_not_confirmed':
+    'Спочатку підтвердьте адресу електронної пошти.',
+  'auth.errors.username_exists': 'Акаунт із цією адресою вже існує.',
+  'auth.errors.email_taken_google':
+    'Ця адреса вже використовується акаунтом, який входить через Google. Продовжте з Google.',
+  'auth.errors.email_taken_apple':
+    'Ця адреса вже використовується акаунтом, який входить через Apple. Продовжте з Apple.',
+  'auth.errors.email_taken_google_or_apple':
+    'Ця адреса вже використовується акаунтом, який входить через Google або Apple. Скористайтеся одним із цих способів.',
+  'auth.errors.email_taken_password':
+    'Ця адреса вже використовується акаунтом із паролем. Увійдіть за допомогою адреси електронної пошти та пароля.',
+  'auth.errors.invalid_email': 'Введіть правильну адресу електронної пошти.',
+  'auth.errors.code_mismatch':
+    'Неправильний код. Перевірте його та спробуйте ще раз.',
+  'auth.errors.code_expired': 'Термін дії коду минув. Запросіть новий.',
+  'auth.errors.too_many_attempts':
+    'Забагато спроб. Зачекайте кілька хвилин і спробуйте знову.',
+  'auth.errors.invalid_password': 'Пароль не відповідає вимогам.',
+  'auth.errors.network':
+    'Не вдалося підключитися. Перевірте підключення до інтернету.',
+  'auth.errors.cancelled': 'Вхід скасовано.',
+  'auth.errors.unknown': 'Щось пішло не так. Спробуйте ще раз.',
   'auth.hands_free.not_installed':
     'Схоже, розширення браузера не встановлено або не увімкнено.',
   'auth.hands_free.please_install':
@@ -356,6 +421,10 @@ export const uk = {
   // Page Titles
   'page.sign_in': 'Увійти',
   'page.auto_sign_in': 'Автоматичний вхід',
+  'page.sign_up': 'Створення акаунта',
+  'page.verify_email': 'Підтвердження пошти',
+  'page.forgot_password': 'Відновлення пароля',
+  'page.reset_password': 'Скидання пароля',
   'page.preview_study_step': 'Попередній перегляд кроку навчання',
   'page.settings': 'Налаштування',
   'page.feedback': "Зворотний зв'язок",

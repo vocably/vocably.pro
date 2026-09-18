@@ -27,7 +27,7 @@ const translations = {
   },
   nav: {
     myCards: 'My cards',
-    lookUp: 'Look up',
+    lookUp: 'Dictionary',
     tips: 'Tips',
     settings: 'Settings',
     studySettings: 'Study settings',
@@ -217,11 +217,11 @@ const translations = {
     empty: {
       noCardsYet: 'You have no study cards yet.',
       headOverToLookUp:
-        'Head over to the Look Up tab to find and add some new words. Vocably is a dictionary with a built-in learning system.',
+        'Go to the Dictionary tab to find and add some new words. The dictionary in Vocably is powered by AI and is pretty smart.',
       headOverToGenerator:
-        'Or use the card generator to create some study cards.',
-      goToLookUp: 'Go to Look up',
-      goToGenerator: 'Use card generator',
+        'Or use the AI card generator to create a list of words to study.',
+      goToLookUp: 'Go to dictionary',
+      goToGenerator: 'Use AI card generator',
       noCardsForSearch: 'No cards found for <bold>{{searchText}}</bold>.',
       noCardsForTag:
         "You don't have any cards tagged with <bold>{{tagTitle}}</bold>.",
@@ -434,11 +434,83 @@ const translations = {
   },
   loginForm: {
     screenTitle: 'Sign in or Register',
-    signIn: 'Sign in or create an account',
     bySigningInYouAgreeToOur: 'By signing in, you agree to our',
     termsAndConditions: 'Terms and Conditions',
     and: 'and',
     privacyPolicy: 'Privacy Policy',
+    or: 'or',
+    email: 'Email',
+    password: 'Password',
+    showPassword: 'Show',
+    hidePassword: 'Hide',
+    continueWithGoogle: 'Continue with Google',
+    continueWithApple: 'Continue with Apple',
+    submit: 'Sign in',
+    forgotPassword: 'Forgot password?',
+    noAccount: "Don't have an account?",
+    createAccount: 'Create an account',
+    emailConfirmed: 'Your email is confirmed. Please sign in.',
+  },
+  signUp: {
+    screenTitle: 'Create an account',
+    submit: 'Create account',
+    haveAccount: 'Already have an account?',
+    signIn: 'Sign in',
+    byCreatingAccountYouAgreeToOur: 'By creating an account, you agree to our',
+  },
+  verifyEmail: {
+    screenTitle: 'Confirm your email',
+    intro:
+      'I sent a confirmation code to {{email}}. Enter it below to continue.',
+    code: 'Confirmation code',
+    submit: 'Confirm',
+    resend: 'Send a new code',
+    resendIn: 'Send a new code in {{seconds}}s',
+    resent: 'A new code is on its way.',
+    changeEmail: 'Use a different email',
+  },
+  forgotPassword: {
+    screenTitle: 'Reset your password',
+    intro:
+      "Enter the email you use for Vocably and I'll send you a code to choose a new password.",
+    submit: 'Send code',
+    backToSignIn: 'Back to sign in',
+  },
+  resetPassword: {
+    screenTitle: 'Choose a new password',
+    intro: 'If there is an account for {{email}}, a reset code is on its way.',
+    code: 'Reset code',
+    newPassword: 'New password',
+    submit: 'Save and sign in',
+  },
+  passwordRules: {
+    minLength: 'At least 8 characters',
+    lowercase: 'A lowercase letter',
+    uppercase: 'An uppercase letter',
+    digit: 'A number',
+    symbol: 'A symbol, such as ! or ?',
+  },
+  authErrors: {
+    invalidCredentials: 'The email or password is incorrect.',
+    userNotConfirmed: 'Please confirm your email first.',
+    usernameExists: 'An account with this email already exists.',
+    emailTakenGoogle:
+      'This email is already used by an account that signs in with Google. Please continue with Google.',
+    emailTakenApple:
+      'This email is already used by an account that signs in with Apple. Please continue with Apple.',
+    emailTakenGoogleOrApple:
+      'This email is already used by an account that signs in with Google or Apple. Please continue with one of them.',
+    emailTakenPassword:
+      'This email is already used by an account with a password. Please sign in with your email and password.',
+    invalidEmail: 'Please enter a valid email address.',
+    codeMismatch: "That code isn't right. Please check it and try again.",
+    codeExpired: 'That code has expired. Please request a new one.',
+    tooManyAttempts:
+      'Too many attempts. Please wait a few minutes and try again.',
+    invalidPassword: "This password doesn't meet the requirements.",
+    network: 'Unable to connect. Please check your internet connection.',
+    cancelled: 'Sign-in was cancelled.',
+    unknown: 'Something went wrong. Please try again.',
   },
   languageScreen: {
     motherTongueQuestion: 'What is your mother tongue?',

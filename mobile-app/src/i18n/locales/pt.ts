@@ -28,7 +28,7 @@ const translations: BaseTranslations = {
   },
   nav: {
     myCards: 'Meus cartões',
-    lookUp: 'Buscar',
+    lookUp: 'Dicionário',
     tips: 'Dicas',
     settings: 'Configurações',
     studySettings: 'Configurações de estudo',
@@ -218,11 +218,11 @@ const translations: BaseTranslations = {
     empty: {
       noCardsYet: 'Você ainda não tem cartões de estudo.',
       headOverToLookUp:
-        'Vá para a aba Buscar para encontrar e adicionar palavras novas. O Vocably é um dicionário com um sistema de aprendizado integrado.',
+        'Vá à aba Dicionário para encontrar e adicionar novas palavras. O dicionário do Vocably é movido a IA e é bem inteligente.',
       headOverToGenerator:
-        'Ou use o gerador de cartões para criar alguns cartões de estudo.',
-      goToLookUp: 'Ir para Buscar',
-      goToGenerator: 'Utilizar o gerador de cartões',
+        'Ou use o gerador de cartões com IA para criar uma lista de palavras para estudar.',
+      goToLookUp: 'Ir para o dicionário',
+      goToGenerator: 'Utilizar o gerador de cartões com IA',
       noCardsForSearch:
         'Nenhum cartão encontrado para <bold>{{searchText}}</bold>.',
       noCardsForTag:
@@ -437,11 +437,85 @@ const translations: BaseTranslations = {
   },
   loginForm: {
     screenTitle: 'Entrar ou se cadastrar',
-    signIn: 'Entrar ou criar conta',
     bySigningInYouAgreeToOur: 'Ao entrar, você concorda com nossos',
     termsAndConditions: 'Termos e condições',
     and: 'e',
     privacyPolicy: 'Política de privacidade',
+    or: 'ou',
+    email: 'E-mail',
+    password: 'Senha',
+    showPassword: 'Mostrar',
+    hidePassword: 'Ocultar',
+    continueWithGoogle: 'Continuar com o Google',
+    continueWithApple: 'Continuar com a Apple',
+    submit: 'Entrar',
+    forgotPassword: 'Esqueceu a senha?',
+    noAccount: 'Não tem uma conta?',
+    createAccount: 'Criar uma conta',
+    emailConfirmed: 'Seu e-mail foi confirmado. Entre na sua conta.',
+  },
+  signUp: {
+    screenTitle: 'Criar uma conta',
+    submit: 'Criar conta',
+    haveAccount: 'Já tem uma conta?',
+    signIn: 'Entrar',
+    byCreatingAccountYouAgreeToOur:
+      'Ao criar uma conta, você concorda com nossos',
+  },
+  verifyEmail: {
+    screenTitle: 'Confirme seu e-mail',
+    intro:
+      'Enviei um código de confirmação para {{email}}. Digite-o abaixo para continuar.',
+    code: 'Código de confirmação',
+    submit: 'Confirmar',
+    resend: 'Enviar um novo código',
+    resendIn: 'Enviar um novo código em {{seconds}} s',
+    resent: 'Um novo código está a caminho.',
+    changeEmail: 'Usar outro e-mail',
+  },
+  forgotPassword: {
+    screenTitle: 'Redefina sua senha',
+    intro:
+      'Digite o e-mail que você usa no Vocably e eu enviarei um código para você escolher uma nova senha.',
+    submit: 'Enviar código',
+    backToSignIn: 'Voltar para a entrada',
+  },
+  resetPassword: {
+    screenTitle: 'Escolha uma nova senha',
+    intro:
+      'Se existir uma conta para {{email}}, o código de redefinição está a caminho.',
+    code: 'Código de redefinição',
+    newPassword: 'Nova senha',
+    submit: 'Salvar e entrar',
+  },
+  passwordRules: {
+    minLength: 'Pelo menos 8 caracteres',
+    lowercase: 'Uma letra minúscula',
+    uppercase: 'Uma letra maiúscula',
+    digit: 'Um número',
+    symbol: 'Um símbolo, como ! ou ?',
+  },
+  authErrors: {
+    invalidCredentials: 'O e-mail ou a senha estão incorretos.',
+    userNotConfirmed: 'Confirme seu e-mail primeiro.',
+    usernameExists: 'Já existe uma conta com este e-mail.',
+    emailTakenGoogle:
+      'Este e-mail já pertence a uma conta que entra com o Google. Continue com o Google.',
+    emailTakenApple:
+      'Este e-mail já pertence a uma conta que entra com a Apple. Continue com a Apple.',
+    emailTakenGoogleOrApple:
+      'Este e-mail já pertence a uma conta que entra com o Google ou a Apple. Continue com uma dessas opções.',
+    emailTakenPassword:
+      'Este e-mail já pertence a uma conta com senha. Entre com seu e-mail e sua senha.',
+    invalidEmail: 'Digite um endereço de e-mail válido.',
+    codeMismatch: 'O código não está correto. Verifique e tente novamente.',
+    codeExpired: 'O código expirou. Peça um novo.',
+    tooManyAttempts:
+      'Muitas tentativas. Aguarde alguns minutos e tente novamente.',
+    invalidPassword: 'Esta senha não atende aos requisitos.',
+    network: 'Não foi possível conectar. Verifique sua conexão com a internet.',
+    cancelled: 'A entrada foi cancelada.',
+    unknown: 'Algo deu errado. Tente novamente.',
   },
   languageScreen: {
     motherTongueQuestion: 'Qual é a sua língua materna?',

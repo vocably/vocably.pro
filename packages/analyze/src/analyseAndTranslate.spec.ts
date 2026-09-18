@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { analyseAndTranslate } from './analyseAndTranslate';
 import { configureTestAnalyzer } from './test/configureTestAnalyzer';
 

@@ -28,7 +28,7 @@ const translations: BaseTranslations = {
   },
   nav: {
     myCards: 'Kartlarım',
-    lookUp: 'Ara',
+    lookUp: 'Sözlük',
     tips: 'İpuçları',
     settings: 'Ayarlar',
     studySettings: 'Çalışma ayarları',
@@ -218,11 +218,11 @@ const translations: BaseTranslations = {
     empty: {
       noCardsYet: 'Henüz çalışma kartın yok.',
       headOverToLookUp:
-        'Yeni kelimeler bulup eklemek için Ara sekmesine geç. Vocably, yerleşik bir öğrenme sistemine sahip bir sözlüktür.',
+        "Yeni kelimeler bulup eklemek için Sözlük sekmesine geç. Vocably'nin sözlüğü yapay zekâyla çalışır ve oldukça akıllıdır.",
       headOverToGenerator:
-        'Ya da kart oluşturucuyu kullanarak çalışma kartları oluştur.',
-      goToLookUp: "Ara'ya git",
-      goToGenerator: 'Kart oluşturucuyu kullan',
+        'Ya da AI kart oluşturucuyu kullanarak çalışılacak kelimelerin listesini oluştur.',
+      goToLookUp: 'Sözlüğe git',
+      goToGenerator: 'AI kart oluşturucuyu kullan',
       noCardsForSearch: '<bold>{{searchText}}</bold> için kart bulunamadı.',
       noCardsForTag: '<bold>{{tagTitle}}</bold> etiketli kartın yok.',
       noCardsForTags: 'Seçili etiketler için kart bulunamadı.',
@@ -433,11 +433,84 @@ const translations: BaseTranslations = {
   },
   loginForm: {
     screenTitle: 'Giriş yap veya kayıt ol',
-    signIn: 'Giriş yap veya hesap oluştur',
     bySigningInYouAgreeToOur: 'Giriş yaparak şunları kabul etmiş olursun:',
     termsAndConditions: 'Şartlar ve Koşullar',
     and: 've',
     privacyPolicy: 'Gizlilik Politikası',
+    or: 'veya',
+    email: 'E-posta',
+    password: 'Şifre',
+    showPassword: 'Göster',
+    hidePassword: 'Gizle',
+    continueWithGoogle: 'Google ile devam et',
+    continueWithApple: 'Apple ile devam et',
+    submit: 'Giriş yap',
+    forgotPassword: 'Şifrenizi mi unuttunuz?',
+    noAccount: 'Hesabınız yok mu?',
+    createAccount: 'Hesap oluştur',
+    emailConfirmed: 'E-posta adresiniz doğrulandı. Lütfen giriş yapın.',
+  },
+  signUp: {
+    screenTitle: 'Hesap oluşturun',
+    submit: 'Hesap oluştur',
+    haveAccount: 'Zaten bir hesabınız var mı?',
+    signIn: 'Giriş yap',
+    byCreatingAccountYouAgreeToOur:
+      'Hesap oluşturarak şunları kabul etmiş olursunuz:',
+  },
+  verifyEmail: {
+    screenTitle: 'E-posta adresinizi doğrulayın',
+    intro:
+      '{{email}} adresine bir doğrulama kodu gönderdim. Devam etmek için kodu aşağıya girin.',
+    code: 'Doğrulama kodu',
+    submit: 'Doğrula',
+    resend: 'Yeni kod gönder',
+    resendIn: '{{seconds}} sn sonra yeni kod gönder',
+    resent: 'Yeni kod yolda.',
+    changeEmail: 'Başka bir e-posta kullan',
+  },
+  forgotPassword: {
+    screenTitle: 'Şifrenizi sıfırlayın',
+    intro:
+      'Vocably için kullandığınız e-posta adresini girin, yeni bir şifre belirlemeniz için size bir kod göndereyim.',
+    submit: 'Kod gönder',
+    backToSignIn: 'Girişe dön',
+  },
+  resetPassword: {
+    screenTitle: 'Yeni bir şifre belirleyin',
+    intro: '{{email}} için bir hesap varsa sıfırlama kodu yolda.',
+    code: 'Sıfırlama kodu',
+    newPassword: 'Yeni şifre',
+    submit: 'Kaydet ve giriş yap',
+  },
+  passwordRules: {
+    minLength: 'En az 8 karakter',
+    lowercase: 'Bir küçük harf',
+    uppercase: 'Bir büyük harf',
+    digit: 'Bir rakam',
+    symbol: '! veya ? gibi bir sembol',
+  },
+  authErrors: {
+    invalidCredentials: 'E-posta veya şifre hatalı.',
+    userNotConfirmed: 'Lütfen önce e-posta adresinizi doğrulayın.',
+    usernameExists: 'Bu e-posta ile zaten bir hesap var.',
+    emailTakenGoogle:
+      'Bu e-posta, Google ile giriş yapan bir hesaba ait. Lütfen Google ile devam edin.',
+    emailTakenApple:
+      'Bu e-posta, Apple ile giriş yapan bir hesaba ait. Lütfen Apple ile devam edin.',
+    emailTakenGoogleOrApple:
+      'Bu e-posta, Google veya Apple ile giriş yapan bir hesaba ait. Lütfen bunlardan biriyle devam edin.',
+    emailTakenPassword:
+      'Bu e-posta, şifreli bir hesaba ait. Lütfen e-posta adresiniz ve şifrenizle giriş yapın.',
+    invalidEmail: 'Lütfen geçerli bir e-posta adresi girin.',
+    codeMismatch: 'Kod hatalı. Lütfen kontrol edip tekrar deneyin.',
+    codeExpired: 'Kodun süresi doldu. Lütfen yeni bir kod isteyin.',
+    tooManyAttempts:
+      'Çok fazla deneme. Lütfen birkaç dakika bekleyip tekrar deneyin.',
+    invalidPassword: 'Bu şifre gereksinimleri karşılamıyor.',
+    network: 'Bağlanılamadı. Lütfen internet bağlantınızı kontrol edin.',
+    cancelled: 'Giriş iptal edildi.',
+    unknown: 'Bir şeyler ters gitti. Lütfen tekrar deneyin.',
   },
   languageScreen: {
     motherTongueQuestion: 'Anadilin nedir?',

@@ -97,6 +97,7 @@ export const SettingsScreen: FC<Props> = ({ navigation }) => {
 
   const onCreateAccount = async () => {
     navigation.navigate('LoginModal', {
+      form: 'signUp',
       onLogin: () => {
         navigation.navigate('DeckScreen');
       },

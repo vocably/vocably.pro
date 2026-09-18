@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { inspect } from '@vocably/node-sulna';
 import { buildBulkAnalysisResult } from './buildBulkAnalysisResult';
 import { configureTestAnalyzer } from './test/configureTestAnalyzer';

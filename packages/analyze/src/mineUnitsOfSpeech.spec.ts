@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import '@vocably/jest';
 import { mineUnitsOfSpeech } from './mineUnitsOfSpeech';
 import { configureTestAnalyzer } from './test/configureTestAnalyzer';

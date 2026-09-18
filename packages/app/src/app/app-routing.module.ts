@@ -16,11 +16,16 @@ import {
 } from '../auth-config';
 
 import { CognitoAuthGuard } from './auth/cognito-auth.guard';
+import { guestGuard } from './auth/guest.guard';
+import { ForgotPasswordPageComponent } from './auth/pages/forgot-password-page/forgot-password-page.component';
 import { AutoSignInSuccessPageComponent } from './auth/pages/auto-sign-in-success-page/auto-sign-in-success-page.component';
 import { HandsFreePageComponent } from './auth/pages/hands-free-page/hands-free-page.component';
 import { ManualSignInSuccessPageComponent } from './auth/pages/manual-sign-in-success-page/manual-sign-in-success-page.component';
+import { ResetPasswordPageComponent } from './auth/pages/reset-password-page/reset-password-page.component';
 import { SignInPageComponent } from './auth/pages/sign-in-page/sign-in-page.component';
 import { SignOutPageComponent } from './auth/pages/sign-out-page/sign-out-page.component';
+import { SignUpPageComponent } from './auth/pages/sign-up-page/sign-up-page.component';
+import { VerifyEmailPageComponent } from './auth/pages/verify-email-page/verify-email-page.component';
 import { FeedbackPageComponent } from './pages/feedback-page/feedback-page.component';
 import { ImportPageComponent } from './pages/import-page/import-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -66,6 +71,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./welcome/welcome.module').then((m) => m.WelcomeModule),
     canActivate: [CognitoAuthGuard],
+    data: { unauthenticatedRedirect: 'sign-up' },
   },
   {
     path: 'subscribe',
@@ -92,6 +98,30 @@ const routes: Routes = [
     path: 'sign-in',
     title: 'page.sign_in',
     component: SignInPageComponent,
+  },
+  {
+    path: 'sign-up',
+    title: 'page.sign_up',
+    component: SignUpPageComponent,
+    canActivate: [guestGuard],
+  },
+  {
+    path: 'verify-email',
+    title: 'page.verify_email',
+    component: VerifyEmailPageComponent,
+    canActivate: [guestGuard],
+  },
+  {
+    path: 'forgot-password',
+    title: 'page.forgot_password',
+    component: ForgotPasswordPageComponent,
+    canActivate: [guestGuard],
+  },
+  {
+    path: 'reset-password',
+    title: 'page.reset_password',
+    component: ResetPasswordPageComponent,
+    canActivate: [guestGuard],
   },
   {
     path: autoSignInPath,

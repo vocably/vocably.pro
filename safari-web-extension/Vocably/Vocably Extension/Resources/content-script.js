@@ -72,23 +72,6 @@ f.push(d.textContent);return f.join("")},set:function(f){for(;this.firstChild;)u
 
 /***/ },
 
-/***/ 3502
-(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   t: () => (/* binding */ t)
-/* harmony export */ });
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6292);
-
-
-const t = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_0__.b)(_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_0__.t);
-
-
-
-
-/***/ },
-
 /***/ 7949
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
@@ -1985,6 +1968,23 @@ const flush = () => {
 };
 const nextTick = /*@__PURE__*/ (cb) => promiseResolve().then(cb);
 const writeTask = /*@__PURE__*/ queueTask(queueDomWrites, true);
+
+
+
+
+/***/ },
+
+/***/ 5063
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   t: () => (/* binding */ t)
+/* harmony export */ });
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(4830);
+
+
+const t = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_0__.b)(_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_0__.t);
 
 
 
@@ -8221,7 +8221,7 @@ const explode = (lines) => {
 
 /***/ },
 
-/***/ 6292
+/***/ 4830
 (__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8230,7 +8230,7 @@ const explode = (lines) => {
 /* harmony export */   s: () => (/* binding */ subscribeToLocale),
 /* harmony export */   t: () => (/* binding */ translations)
 /* harmony export */ });
-const en$1 = {
+const en$2 = {
   // sign-in
   'sign_in.please': 'Please sign in to proceed.',
   'sign_in.button': 'Sign in or Create an account',
@@ -8311,7 +8311,7 @@ const en$1 = {
   'tags_menu.error': 'Unable to complete the tag operation. Please try again.',
 };
 
-const ru$1 = {
+const ru$2 = {
   // sign-in
   'sign_in.please': 'Пожалуйста, войдите, чтобы продолжить.',
   'sign_in.button': 'Войти или создать аккаунт',
@@ -8392,7 +8392,7 @@ const ru$1 = {
   'tags_menu.error': 'Не удалось выполнить операцию с тегом. Пожалуйста, попробуйте снова.',
 };
 
-const tr$1 = {
+const tr$2 = {
   // sign-in
   'sign_in.please': 'Devam etmek için lütfen giriş yapın.',
   'sign_in.button': 'Giriş yap veya hesap oluştur',
@@ -8473,7 +8473,7 @@ const tr$1 = {
   'tags_menu.error': 'Etiket işlemi tamamlanamadı. Lütfen tekrar deneyin.',
 };
 
-const uk$1 = {
+const uk$2 = {
   // sign-in
   'sign_in.please': 'Будь ласка, увійдіть, щоб продовжити.',
   'sign_in.button': 'Увійти або створити акаунт',
@@ -8554,7 +8554,7 @@ const uk$1 = {
   'tags_menu.error': 'Не вдалося виконати операцію з тегом. Будь ласка, спробуйте ще раз.',
 };
 
-const vi$1 = {
+const vi$2 = {
   // sign-in
   'sign_in.please': 'Vui lòng đăng nhập để tiếp tục.',
   'sign_in.button': 'Đăng nhập hoặc tạo tài khoản',
@@ -8635,7 +8635,7 @@ const vi$1 = {
   'tags_menu.error': 'Không thể hoàn thành thao tác với thẻ tag. Vui lòng thử lại.',
 };
 
-const es$1 = {
+const es$2 = {
   // sign-in
   'sign_in.please': 'Por favor, inicia sesión para continuar.',
   'sign_in.button': 'Iniciar sesión o crear una cuenta',
@@ -8716,7 +8716,7 @@ const es$1 = {
   'tags_menu.error': 'No se pudo completar la operación de etiqueta. Por favor, inténtalo de nuevo.',
 };
 
-const pt$1 = {
+const pt$2 = {
   // sign-in
   'sign_in.please': 'Por favor, faça login para continuar.',
   'sign_in.button': 'Entrar ou criar uma conta',
@@ -8797,7 +8797,7 @@ const pt$1 = {
   'tags_menu.error': 'Não foi possível concluir a operação de tag. Por favor, tente novamente.',
 };
 
-const ru = {
+const ru$1 = {
     nominative_af: 'африкаанс',
     nominative_sq: 'албанский',
     nominative_am: 'амхарский',
@@ -9021,7 +9021,7 @@ const ru = {
     objective_zu: 'зулу',
 };
 
-const en = {
+const en$1 = {
     nominative_af: 'Afrikaans',
     nominative_sq: 'Albanian',
     nominative_am: 'Amharic',
@@ -9245,7 +9245,7 @@ const en = {
     objective_zu: 'Zulu',
 };
 
-const uk = {
+const uk$1 = {
     nominative_af: 'африкаанс',
     nominative_sq: 'албанська',
     nominative_am: 'амхарська',
@@ -9469,7 +9469,7 @@ const uk = {
     objective_zu: 'зулу',
 };
 
-const vi = {
+const vi$1 = {
     nominative_af: 'tiếng Afrikaans',
     nominative_sq: 'tiếng Albania',
     nominative_am: 'tiếng Amharic',
@@ -9693,7 +9693,7 @@ const vi = {
     objective_zu: 'tiếng Zulu',
 };
 
-const tr = {
+const tr$1 = {
     nominative_af: 'Afrikaanca',
     nominative_sq: 'Arnavutça',
     nominative_am: 'Amharca',
@@ -9917,7 +9917,7 @@ const tr = {
     objective_zu: 'Zuluca',
 };
 
-const es = {
+const es$1 = {
     nominative_af: 'afrikáans',
     nominative_sq: 'albanés',
     nominative_am: 'amhárico',
@@ -10141,7 +10141,7 @@ const es = {
     objective_zu: 'zulú',
 };
 
-const pt = {
+const pt$1 = {
     nominative_af: 'africâner',
     nominative_sq: 'albanês',
     nominative_am: 'amárico',
@@ -10365,6 +10365,58 @@ const pt = {
     objective_zu: 'zulu',
 };
 
+const en = {
+    // youtube
+    'youtube.press_alt_to_select': 'Press Alt to select text',
+    'youtube.press_option_to_select': 'Press Option ⌥ to select text',
+};
+
+const ru = {
+    // youtube
+    'youtube.press_alt_to_select': 'Нажмите Alt чтобы выделить текст',
+    'youtube.press_option_to_select': 'Нажмите Option ⌥ чтобы выделить текст',
+};
+
+const uk = {
+    // youtube
+    'youtube.press_alt_to_select': 'Натисніть Alt щоб виділити текст',
+    'youtube.press_option_to_select': 'Натисніть Option ⌥ щоб виділити текст',
+};
+
+const vi = {
+    // youtube
+    'youtube.press_alt_to_select': 'Nhấn giữ Alt để chọn văn bản',
+    'youtube.press_option_to_select': 'Nhấn giữ Option ⌥ để chọn văn bản',
+};
+
+const tr = {
+    // youtube
+    'youtube.press_alt_to_select': 'Metni seçmek için Alt tuşuna basın',
+    'youtube.press_option_to_select': 'Metni seçmek için Option ⌥ tuşuna basın',
+};
+
+const es = {
+    // youtube
+    'youtube.press_alt_to_select': 'Pulsa Alt para seleccionar el texto',
+    'youtube.press_option_to_select': 'Pulsa Option ⌥ para seleccionar el texto',
+};
+
+const pt = {
+    // youtube
+    'youtube.press_alt_to_select': 'Pressione Alt para selecionar o texto',
+    'youtube.press_option_to_select': 'Pressione Option ⌥ para selecionar o texto',
+};
+
+const messageTranslations = {
+    en,
+    ru,
+    uk,
+    vi,
+    tr,
+    es,
+    pt,
+};
+
 const LOCALE_KEY = '__vocably_locale__';
 const WATCHERS_KEY = '__vocably_locale_watchers__';
 const getWatchers = () => {
@@ -10396,23 +10448,23 @@ const buildT = (translations) => (key, params) => {
     return Object.entries(params).reduce((s, [k, v]) => s.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v)), str);
 };
 const languageTranslations = {
-    en,
-    ru,
-    uk,
-    vi,
-    tr,
-    es,
-    pt,
+    en: en$1,
+    ru: ru$1,
+    uk: uk$1,
+    vi: vi$1,
+    tr: tr$1,
+    es: es$1,
+    pt: pt$1,
 };
 
 const translations = {
-  en: Object.assign(Object.assign({}, en$1), languageTranslations['en']),
-  ru: Object.assign(Object.assign({}, ru$1), languageTranslations['ru']),
-  uk: Object.assign(Object.assign({}, uk$1), languageTranslations['uk']),
-  vi: Object.assign(Object.assign({}, vi$1), languageTranslations['vi']),
-  tr: Object.assign(Object.assign({}, tr$1), languageTranslations['tr']),
-  es: Object.assign(Object.assign({}, es$1), languageTranslations['es']),
-  pt: Object.assign(Object.assign({}, pt$1), languageTranslations['pt']),
+  en: Object.assign(Object.assign(Object.assign({}, en$2), languageTranslations['en']), messageTranslations['en']),
+  ru: Object.assign(Object.assign(Object.assign({}, ru$2), languageTranslations['ru']), messageTranslations['ru']),
+  uk: Object.assign(Object.assign(Object.assign({}, uk$2), languageTranslations['uk']), messageTranslations['uk']),
+  vi: Object.assign(Object.assign(Object.assign({}, vi$2), languageTranslations['vi']), messageTranslations['vi']),
+  tr: Object.assign(Object.assign(Object.assign({}, tr$2), languageTranslations['tr']), messageTranslations['tr']),
+  es: Object.assign(Object.assign(Object.assign({}, es$2), languageTranslations['es']), messageTranslations['es']),
+  pt: Object.assign(Object.assign(Object.assign({}, pt$2), languageTranslations['pt']), messageTranslations['pt']),
 };
 
 
@@ -10433,8 +10485,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   vocably_translation_cards: () => (/* binding */ VocablyTranslationCards)
 /* harmony export */ });
 /* harmony import */ var _index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7949);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3502);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6292);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5063);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4830);
 
 
 
@@ -10548,14 +10600,14 @@ const VocablyRate = class {
     this.platform = undefined;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
     (_a = this.unsubLocale) === null || _a === void 0 ? void 0 : _a.call(this);
   }
   render() {
-    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("strong", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.tagline'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.question', { platform: this.platform.name }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("br", null), (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.question2')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { href: this.platform.url, target: "_blank", class: "vocably-button", onClick: () => this.userSelected.emit('review') }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.ok')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { style: { marginLeft: '8px' }, class: "vocably-link-button", onClick: () => this.userSelected.emit('later') }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.later'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.dislike'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { href: "https://app.vocably.pro/feedback", target: "_blank", class: "vocably-link-button", onClick: () => this.userSelected.emit('feedback') }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.contact')), (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.feedback_note')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.show_again'), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-link-button vocably-text-link vocably-small", onClick: () => this.userSelected.emit('never') }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.never')))));
+    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("strong", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.tagline'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.question', { platform: this.platform.name }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("br", null), (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.question2')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { href: this.platform.url, target: "_blank", class: "vocably-button", onClick: () => this.userSelected.emit('review') }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.ok')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { style: { marginLeft: '8px' }, class: "vocably-link-button", onClick: () => this.userSelected.emit('later') }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.later'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.dislike'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { href: "https://app.vocably.pro/feedback", target: "_blank", class: "vocably-link-button", onClick: () => this.userSelected.emit('feedback') }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.contact')), (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.feedback_note')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.show_again'), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-link-button vocably-text-link vocably-small", onClick: () => this.userSelected.emit('never') }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('rate.never')))));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
 };
@@ -10640,7 +10692,7 @@ const VocablyTranslationCards = class {
     this.removing = null;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
@@ -10742,14 +10794,14 @@ const VocablyTranslationCards = class {
     return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, this.cards.map((card, itemIndex, cardsArray) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { key: itemIndex, id: cardToLocationHash(card.data) }, !this.canAdd && this.cardsLimit !== 'unlimited' && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: {
         'max-limit-1': true,
         'max-limit-visible': this.addAttemptIndex === itemIndex,
-      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "max-limit-2" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "panel max-limit-3" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.free_plan_limit', {
-      plan: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.free_plan'),
+      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "max-limit-2" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "panel max-limit-3" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.free_plan_limit', {
+      plan: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.free_plan'),
       count: this.cardsLimit.maxCards,
-    })), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.per_day', {
+    })), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.per_day', {
       count: this.cardsLimit.cardsPerDay,
     })), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { href: this.paymentLink, target: "_blank", class: "upgrade-button", onClick: () => {
         this.watchMePaying.emit();
-      } }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.upgrade')))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { "data-test": "card", class: {
+      } }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.upgrade')))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { "data-test": "card", class: {
         'vocably-card padding-left-12': true,
         'vocably-bottom-12-border': itemIndex < cardsArray.length - 1,
       } }, this.canCongratulate && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: 'vocably-added-congratulation' +
@@ -10767,7 +10819,7 @@ const VocablyTranslationCards = class {
         alignItems: 'center',
         gap: '4px',
         marginTop: '4px',
-      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-card-action-button", title: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.remove_card'), disabled: this.isUpdating !== null, onClick: () => {
+      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-card-action-button", title: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.remove_card'), disabled: this.isUpdating !== null, onClick: () => {
         if (this.disabled) {
           return false;
         }
@@ -10780,7 +10832,7 @@ const VocablyTranslationCards = class {
           translationCards: this.translationCards,
           card,
         });
-      } }, this.isUpdating === card && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-spin", null)), this.isUpdating !== card && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-bookmark-check", null)))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-card-action-button", title: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.edit_tags'), disabled: this.isUpdating !== null, onClick: (e) => {
+      } }, this.isUpdating === card && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-spin", null)), this.isUpdating !== card && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-bookmark-check", null)))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-card-action-button", title: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.edit_tags'), disabled: this.isUpdating !== null, onClick: (e) => {
         if (this.disabled) {
           return;
         }
@@ -10813,13 +10865,13 @@ const VocablyTranslationCards = class {
         marginLeft: '2px',
         display: 'inline-block',
         fontSize: '16px',
-      } }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.learn'))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-safe-action-area" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-card-source", { card: card, playAudioPronunciation: this.playAudioPronunciation, style: {
+      } }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.learn'))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-safe-action-area" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-card-source", { card: card, playAudioPronunciation: this.playAudioPronunciation, style: {
         marginBottom: '6px',
-      }, class: "vocably-card-source" }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-card-definitions", { class: "vocably-mb-6", card: card, updateCard: this.makeUpdateCard(card), isLightweight: this.isLightweight }), card.data.example && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-small vocably-mb-6" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.example')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-card-examples", { example: card.data.example }))), isItem(card) && card.data.tags.length > 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12", style: {
+      }, class: "vocably-card-source" }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-card-definitions", { class: "vocably-mb-6", card: card, updateCard: this.makeUpdateCard(card), isLightweight: this.isLightweight }), card.data.example && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-small vocably-mb-6" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.example')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-card-examples", { example: card.data.example }))), isItem(card) && card.data.tags.length > 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mt-12", style: {
         display: 'flex',
         gap: '6px',
         flexWrap: 'wrap',
-      } }, card.data.tags.map((tagItem) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-tag" }, tagItem.data.title, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { type: "button", class: "vocably-tag-remove-button", "aria-label": (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.remove_tag'), title: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.remove_tag'), onClick: this.detachTagClick(card, tagItem) }, this.removing &&
+      } }, card.data.tags.map((tagItem) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-tag" }, tagItem.data.title, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { type: "button", class: "vocably-tag-remove-button", "aria-label": (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.remove_tag'), title: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('translation.remove_tag'), onClick: this.detachTagClick(card, tagItem) }, this.removing &&
       this.removing.card === card &&
       this.removing.tag === tagItem && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-spin", null)), (!this.removing ||
       this.removing.card !== card ||
@@ -11010,8 +11062,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7949);
 /* harmony import */ var _stringArray_af4489c8_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(931);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3502);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6292);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5063);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4830);
 
 
 
@@ -11727,7 +11779,7 @@ const VocablyFirstTranslationCongratulation = class {
     this.card = undefined;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
@@ -11744,7 +11796,7 @@ const VocablyFirstTranslationCongratulation = class {
         justifyContent: 'flex-start',
         flexWrap: 'wrap',
         columnGap: '4px',
-      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "emphasize small" }, this.card.data.source), this.card.data.ipa && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, "[", this.card.data.ipa, "]")), this.card.data.g && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, "(", this.card.data.g, ")")), this.card.data.partOfSpeech && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, this.card.data.partOfSpeech))), examples.length === 1 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, examples[0])), examples.length > 1 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("ul", { class: "small vocably-list" }, examples.map((item) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", null, item))))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "card-side-wrapper back" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "card-side" }, definitions.length > 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("ul", { class: "small vocably-list" }, this.card.data.translation && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", { class: "emphasize" }, this.card.data.translation)), definitions.map((item) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", null, item))))), definitions.length === 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "emphasize small" }, this.card.data.translation)))))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "col" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", { class: "emphasize" }, this.card.data.source), ' ', (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.on_phone')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.scan_qr')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-qr-code", { style: { width: '180px', marginBottom: '8px' } }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.or_go_to'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { href: `https://app.vocably.pro/deck/${this.card.data.language}`, target: "_blank" }, "app.vocably.pro")), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.to_study_browser'))))));
+      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "emphasize small" }, this.card.data.source), this.card.data.ipa && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, "[", this.card.data.ipa, "]")), this.card.data.g && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, "(", this.card.data.g, ")")), this.card.data.partOfSpeech && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, this.card.data.partOfSpeech))), examples.length === 1 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "small" }, examples[0])), examples.length > 1 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("ul", { class: "small vocably-list" }, examples.map((item) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", null, item))))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "card-side-wrapper back" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "card-side" }, definitions.length > 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("ul", { class: "small vocably-list" }, this.card.data.translation && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", { class: "emphasize" }, this.card.data.translation)), definitions.map((item) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", null, item))))), definitions.length === 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "emphasize small" }, this.card.data.translation)))))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "col" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", { class: "emphasize" }, this.card.data.source), ' ', (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.on_phone')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.scan_qr')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-qr-code", { style: { width: '180px', marginBottom: '8px' } }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("p", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.or_go_to'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { href: `https://app.vocably.pro/deck/${this.card.data.language}`, target: "_blank" }, "app.vocably.pro")), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('congrats.to_study_browser'))))));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
 };
@@ -11933,7 +11985,7 @@ const VocablyTagsMenu$1 = class {
     this.saving = false;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
@@ -11962,7 +12014,7 @@ const VocablyTagsMenu$1 = class {
     this.saving = true;
     const result = await this.saveTag(Object.assign(Object.assign({}, this.tagItem), { data: Object.assign(Object.assign({}, (_a = this.tagItem) === null || _a === void 0 ? void 0 : _a.data), { title: this.title.trim() }) }));
     if (result.success === false) {
-      alert((0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.save_error'));
+      alert((0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.save_error'));
       this.saving = false;
       return;
     }
@@ -11979,7 +12031,7 @@ const VocablyTagsMenu$1 = class {
     this.saving = true;
     const result = await this.deleteTag(this.tagItem);
     if (result.success === false) {
-      alert((0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.delete_error'));
+      alert((0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.delete_error'));
       this.saving = false;
       return;
     }
@@ -11994,13 +12046,13 @@ const VocablyTagsMenu$1 = class {
         this.onSubmit();
         return false;
       } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("label", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("h1", null, this.tagItem
-      ? (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.new_name_for', { title: this.tagItem.data.title })
-      : (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.new_tag_name')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", { type: "text", placeholder: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.placeholder'), onKeyUp: this.onInputChange.bind(this), onChange: this.onInputChange.bind(this), ref: (el) => (this.textInput = el) })), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "buttons" }, this.tagItem && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "delete", disabled: this.isDisabled(), type: "button", onClick: () => {
-        const yesPlease = window.confirm((0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.delete_confirm'));
+      ? (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.new_name_for', { title: this.tagItem.data.title })
+      : (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.new_tag_name')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("input", { type: "text", placeholder: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.placeholder'), onKeyUp: this.onInputChange.bind(this), onChange: this.onInputChange.bind(this), ref: (el) => (this.textInput = el) })), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "buttons" }, this.tagItem && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "delete", disabled: this.isDisabled(), type: "button", onClick: () => {
+        const yesPlease = window.confirm((0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.delete_confirm'));
         if (yesPlease) {
           this.onDelete();
         }
-      } }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.delete'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { type: "button", class: "cancel", onClick: () => this.hide.emit() }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.cancel')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { type: "submit", class: "submit", disabled: this.isDisabled() }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.save'))), this.saving && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "loader" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-spinner", null))))));
+      } }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.delete'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { type: "button", class: "cancel", onClick: () => this.hide.emit() }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.cancel')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { type: "submit", class: "submit", disabled: this.isDisabled() }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tag_form.save'))), this.saving && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "loader" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-spinner", null))))));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
 };
@@ -12025,7 +12077,7 @@ const VocablyTagsMenu = class {
       this.disabled = false;
       this.savingTag = null;
       if (result.success === false) {
-        alert((0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.error'));
+        alert((0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.error'));
         return;
       }
     };
@@ -12039,7 +12091,7 @@ const VocablyTagsMenu = class {
     this.savingTag = null;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
@@ -12073,15 +12125,15 @@ const VocablyTagsMenu = class {
     this.tagForm = tagForm;
   }
   render() {
-    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("menu", null, this.existingItems.length === 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", { class: "info" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.info_line1'), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("br", null), (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.info_line2'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", { class: "clickable" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { onClick: () => {
+    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("menu", null, this.existingItems.length === 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", { class: "info" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.info_line1'), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("br", null), (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.info_line2'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", { class: "clickable" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { onClick: () => {
         if (this.disabled) {
           return false;
         }
         this.displayTagForm();
-      } }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.add'))), this.existingItems
+      } }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.add'))), this.existingItems
       .sort((a, b) => b.created - a.created)
       .map((tagItem) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("li", { class: "clickable" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { onClick: this.onTagClick(tagItem), style: { flex: '1' } }, tagItem.data.title, ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", { class: "icon" }, this.savingTag !== tagItem &&
-      this.selectedItems.includes(tagItem.id) && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-check", { class: "check" })), this.savingTag === tagItem && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-spin", { class: "spinner" })))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { title: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.edit'), class: "edit", style: { flex: '0', textAlign: 'center' }, onClick: () => {
+      this.selectedItems.includes(tagItem.id) && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-check", { class: "check" })), this.savingTag === tagItem && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-spin", { class: "spinner" })))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { title: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('tags_menu.edit'), class: "edit", style: { flex: '0', textAlign: 'center' }, onClick: () => {
         if (this.disabled) {
           return false;
         }
@@ -12151,7 +12203,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _language_60445225_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1868);
 /* harmony import */ var _language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(582);
 /* harmony import */ var _showdown_844c8b17_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(842);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6292);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4830);
 
 
 
@@ -12174,7 +12226,7 @@ const VocablyFixGrammar = class {
     this.result = null;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_4__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_4__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
@@ -12607,8 +12659,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7949);
 /* harmony import */ var _language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(582);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3502);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(6292);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5063);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(4830);
 
 
 
@@ -12625,23 +12677,23 @@ const VocablyLanguage = class {
     this.waiting = undefined;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_3__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
     (_a = this.unsubLocale) === null || _a === void 0 ? void 0 : _a.call(this);
   }
   render() {
-    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, { "data-test": "language" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "container" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "h1 p" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.i_study')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("select", { "data-test": "source-language-selector", ref: (el) => (this.sourceLanguageSelect = el) }, Object.keys(_language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_1__.l)
-      .map((code) => [code, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)(`nominative_${code}`)])
+    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, { "data-test": "language" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "container" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "h1 p" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.i_study')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("select", { "data-test": "source-language-selector", ref: (el) => (this.sourceLanguageSelect = el) }, Object.keys(_language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_1__.l)
+      .map((code) => [code, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)(`nominative_${code}`)])
       .sort((a, b) => a[1].localeCompare(b[1]))
-      .map(([code, label]) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("option", { selected: this.sourceLanguage === code, value: code }, label))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "h1 p" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.i_speak')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("select", { "data-test": "target-language-selector", ref: (el) => (this.targetLanguageSelect = el) }, Object.keys(_language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_1__.l)
-      .map((code) => [code, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)(`nominative_${code}`)])
+      .map(([code, label]) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("option", { selected: this.sourceLanguage === code, value: code }, label))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "h1 p" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.i_speak')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("select", { "data-test": "target-language-selector", ref: (el) => (this.targetLanguageSelect = el) }, Object.keys(_language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_1__.l)
+      .map((code) => [code, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)(`nominative_${code}`)])
       .sort((a, b) => a[1].localeCompare(b[1]))
       .map(([code, label]) => ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("option", { selected: this.targetLanguage === code, value: code }, label))))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "button-container" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "button", onClick: () => this.confirm.emit({
         sourceLanguage: this.sourceLanguageSelect.value,
         targetLanguage: this.targetLanguageSelect.value,
-      }), "data-test": "subscribe-button", disabled: this.waiting }, this.waiting ? (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.saving') : (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.save'))))));
+      }), "data-test": "subscribe-button", disabled: this.waiting }, this.waiting ? (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.saving') : (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_2__.t)('language.save'))))));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
 };
@@ -12661,8 +12713,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   vocably_mobile_button: () => (/* binding */ VocablyMobileButton)
 /* harmony export */ });
 /* harmony import */ var _index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7949);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3502);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6292);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5063);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4830);
 
 
 
@@ -12674,14 +12726,14 @@ const VocablyMobileButton = class {
     (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.r)(this, hostRef);
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
     (_a = this.unsubLocale) === null || _a === void 0 ? void 0 : _a.call(this);
   }
   render() {
-    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "button", onTouchStart: () => true }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("svg", { viewBox: "0 0 633 699", fill: "none", class: "svg" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("path", { d: "M585.428 130.443H46.6646C21.2112 130.443 0 150.809 0 177.116V482.609C0 508.067 20.3627 529.281 46.6646 529.281H82.2994V639.599C82.2994 662.511 95.026 682.877 114.54 693.06C122.176 697.303 130.661 699 139.145 699C151.872 699 163.75 694.757 174.78 687.12L352.954 530.13H585.428C610.882 530.13 632.093 509.764 632.093 483.457V177.964C632.093 151.658 610.882 130.443 585.428 130.443ZM150.175 654.874C142.539 660.814 135.752 658.268 133.206 656.57C130.661 654.873 123.873 650.63 123.873 639.599V340.045C123.873 320.527 137.448 291.676 152.72 278.947L320.713 132.989V504.672L150.175 654.874Z", fill: "#0050FF" }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("path", { d: "M524.34 36.2492C524.34 10.7914 497.19 -13.8184 464.949 9.09357L355.499 101.59H524.34V36.2492Z", fill: "#0050FF" })), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", { class: "caption" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('mobile_button.look_up')))));
+    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "button", onTouchStart: () => true }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("svg", { viewBox: "0 0 633 699", fill: "none", class: "svg" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("path", { d: "M585.428 130.443H46.6646C21.2112 130.443 0 150.809 0 177.116V482.609C0 508.067 20.3627 529.281 46.6646 529.281H82.2994V639.599C82.2994 662.511 95.026 682.877 114.54 693.06C122.176 697.303 130.661 699 139.145 699C151.872 699 163.75 694.757 174.78 687.12L352.954 530.13H585.428C610.882 530.13 632.093 509.764 632.093 483.457V177.964C632.093 151.658 610.882 130.443 585.428 130.443ZM150.175 654.874C142.539 660.814 135.752 658.268 133.206 656.57C130.661 654.873 123.873 650.63 123.873 639.599V340.045C123.873 320.527 137.448 291.676 152.72 278.947L320.713 132.989V504.672L150.175 654.874Z", fill: "#0050FF" }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("path", { d: "M524.34 36.2492C524.34 10.7914 497.19 -13.8184 464.949 9.09357L355.499 101.59H524.34V36.2492Z", fill: "#0050FF" })), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", { class: "caption" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('mobile_button.look_up')))));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
 };
@@ -12751,9 +12803,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7949);
 /* harmony import */ var _language_60445225_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1868);
 /* harmony import */ var _language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(582);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3502);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5063);
 /* harmony import */ var _isString_3e50dfcd_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(8457);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6292);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(4830);
 
 
 
@@ -13112,7 +13164,7 @@ const VocablySearchForm = class {
     }
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_5__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_5__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
@@ -13121,7 +13173,7 @@ const VocablySearchForm = class {
   languageName(languageCode) {
     var _a;
     // @ts-ignore
-    return (_a = (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)(`nominative_${languageCode}`)) !== null && _a !== void 0 ? _a : '';
+    return (_a = (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)(`nominative_${languageCode}`)) !== null && _a !== void 0 ? _a : '';
   }
   getPlaceholderText() {
     if (!this.values.sourceLanguage || !this.values.targetLanguage) {
@@ -13129,13 +13181,13 @@ const VocablySearchForm = class {
     }
     const targetLanguageName = this.languageName(this.values.targetLanguage);
     if (this.values.isReversed) {
-      return (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.placeholder_reversed', {
+      return (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.placeholder_reversed', {
         article: article(targetLanguageName),
         language: targetLanguageName,
-        source: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)(`objective_${this.values.sourceLanguage}`),
+        source: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)(`objective_${this.values.sourceLanguage}`),
       });
     }
-    return (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.placeholder_default');
+    return (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.placeholder_default');
   }
   getSourceLanguageGroups() {
     const { preferred, available } = Object.keys(_language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_2__.l).reduce((acc, language) => {
@@ -13150,7 +13202,7 @@ const VocablySearchForm = class {
       available: [],
     });
     const availableGroup = [
-      (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.available_languages'),
+      (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.available_languages'),
       available
         .map((lng) => [lng, this.languageName(lng)])
         .sort(([_, lngA], [__, lngB]) => {
@@ -13162,7 +13214,7 @@ const VocablySearchForm = class {
     }
     return [
       [
-        (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.preferred_languages'),
+        (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.preferred_languages'),
         preferred.map((lng) => [lng, this.languageName(lng)]),
       ],
       availableGroup,
@@ -13182,7 +13234,7 @@ const VocablySearchForm = class {
       available: [],
     });
     const availableGroup = [
-      (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.available_languages'),
+      (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.available_languages'),
       available
         .map((lng) => [lng, this.languageName(lng)])
         .sort(([_, lngA], [__, lngB]) => {
@@ -13194,7 +13246,7 @@ const VocablySearchForm = class {
     }
     return [
       [
-        (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.preferred_languages'),
+        (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.preferred_languages'),
         preferred.map((lng) => [lng, this.languageName(lng)]),
       ],
       availableGroup,
@@ -13213,7 +13265,7 @@ const VocablySearchForm = class {
     return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("form", { class: "form", onSubmit: (e) => {
         e.preventDefault();
         this.formSubmit.emit(this.values);
-      }, "aria-label": "Search form" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "preset" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { class: "language", hint: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.i_study'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => {
+      }, "aria-label": "Search form" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "preset" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { class: "language", hint: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.i_study'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => {
         const values = Object.assign(Object.assign({}, this.values), { sourceLanguage: event.detail, targetLanguage: this.getTargetLanguageCandidate(event.detail) });
         this.valuesChange.emit(values);
         if (canSubmit) {
@@ -13225,7 +13277,7 @@ const VocablySearchForm = class {
         if (canSubmit) {
           this.formSubmit.emit(values);
         }
-      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-arrow-right", { class: "icon" }))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { class: 'language', hint: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.i_speak'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => {
+      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-arrow-right", { class: "icon" }))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { class: 'language', hint: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.i_speak'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => {
         const values = Object.assign(Object.assign({}, this.values), { targetLanguage: event.detail });
         this.valuesChange.emit(values);
         if (canSubmit) {
@@ -13241,8 +13293,8 @@ const VocablySearchForm = class {
       } }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "submit", type: "submit", disabled: !canSubmit }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-magnify", { class: {
         magnify: true,
         animating: this.loading,
-      } }))), !this.hideHint && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { "data-nosnippet": true, class: "hint" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.hint', {
-      language: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_3__.t)(`objective_${this.values.sourceLanguage}`),
+      } }))), !this.hideHint && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { "data-nosnippet": true, class: "hint" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)('search.hint', {
+      language: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_3__.t)(`objective_${this.values.sourceLanguage}`),
     }))))));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
@@ -13263,8 +13315,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   vocably_sign_in: () => (/* binding */ VocablySignIn)
 /* harmony export */ });
 /* harmony import */ var _index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7949);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3502);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6292);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5063);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4830);
 
 
 
@@ -13277,14 +13329,14 @@ const VocablySignIn = class {
     this.confirm = (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.c)(this, "confirm", 7);
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
     (_a = this.unsubLocale) === null || _a === void 0 ? void 0 : _a.call(this);
   }
   render() {
-    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, { "data-test": "sign-in" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.please')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "button", "data-test": "sign-in-button", onClick: () => this.confirm.emit() }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.button'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.agree'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { class: "link", href: "https://vocably.pro/terms-and-conditions.html", target: "_blank" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.terms')), ' ', (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.and'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { class: "link", href: "https://vocably.pro/privacy-policy.html", target: "_blank" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.privacy')), ".")));
+    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, { "data-test": "sign-in" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.please')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "p" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "button", "data-test": "sign-in-button", onClick: () => this.confirm.emit() }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.button'))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.agree'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { class: "link", href: "https://vocably.pro/terms-and-conditions.html", target: "_blank" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.terms')), ' ', (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.and'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("a", { class: "link", href: "https://vocably.pro/privacy-policy.html", target: "_blank" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('sign_in.privacy')), ".")));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
 };
@@ -13386,8 +13438,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   vocably_subscribe: () => (/* binding */ VocablySubscribe)
 /* harmony export */ });
 /* harmony import */ var _index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7949);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(3502);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6292);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5063);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(4830);
 
 
 
@@ -13401,14 +13453,14 @@ const VocablySubscribe = class {
     this.trial = false;
   }
   connectedCallback() {
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_2__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
     (_a = this.unsubLocale) === null || _a === void 0 ? void 0 : _a.call(this);
   }
   render() {
-    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, { "data-test": "subscribe" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "container" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "message" }, this.trial ? (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.trial_message') : (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.message')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "button-container" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "button", onClick: () => this.confirm.emit(), "data-test": "subscribe-button" }, this.trial ? (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.trial_button') : (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.button'))))));
+    return ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.H, { "data-test": "subscribe" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "container" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "message" }, this.trial ? (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.trial_message') : (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.message')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "button-container" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "button", onClick: () => this.confirm.emit(), "data-test": "subscribe-button" }, this.trial ? (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.trial_button') : (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_1__.t)('subscribe.button'))))));
   }
   get el() { return (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.g)(this); }
 };
@@ -13431,10 +13483,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stringArray_af4489c8_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(931);
 /* harmony import */ var _language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(582);
 /* harmony import */ var _showdown_844c8b17_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(842);
-/* harmony import */ var _index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3502);
+/* harmony import */ var _index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(5063);
 /* harmony import */ var _language_60445225_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1868);
 /* harmony import */ var _isString_3e50dfcd_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(8457);
-/* harmony import */ var _translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6292);
+/* harmony import */ var _translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(4830);
 /* module decorator */ module = __webpack_require__.hmd(module);
 
 
@@ -15536,7 +15588,7 @@ const VocablyTranslation = class {
       this.showLanguages = JSON.parse(this.el.getAttribute('showLanguages'));
     }
     this.resultChanged(this.result);
-    this.unsubLocale = (0,_translations_faccdfa6_js__WEBPACK_IMPORTED_MODULE_7__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
+    this.unsubLocale = (0,_translations_a7e3745f_js__WEBPACK_IMPORTED_MODULE_7__.s)(this.el, () => (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.f)(this.el));
   }
   disconnectedCallback() {
     var _a;
@@ -15551,22 +15603,22 @@ const VocablyTranslation = class {
     playSoundElement.play();
   }
   render() {
-    const sourceLanguageSelector = this.result && this.result.success && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { hint: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.i_study'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => this.changeSourceLanguage.emit(event.detail), value: this.sourceLanguage, optionGroups: [
+    const sourceLanguageSelector = this.result && this.result.success && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { hint: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.i_study'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => this.changeSourceLanguage.emit(event.detail), value: this.sourceLanguage, optionGroups: [
         [
           '',
           Object.keys(_language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_2__.l)
             .map((code) => {
-            return [code, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)(`nominative_${code}`)];
+            return [code, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)(`nominative_${code}`)];
           })
             .sort(sortLanguages(this.existingSourceLanguages)),
         ],
       ] }));
-    const targetLanguageSelector = this.result && this.result.success && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { hint: (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.i_speak'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => this.changeTargetLanguage.emit(event.detail), value: this.targetLanguage, optionGroups: [
+    const targetLanguageSelector = this.result && this.result.success && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-hint-selector", { hint: (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.i_speak'), shrinkSmall: true, disabled: this.loading || this.disabled, onChoose: (event) => this.changeTargetLanguage.emit(event.detail), value: this.targetLanguage, optionGroups: [
         [
           '',
           Object.keys(_language_list_7bc9c83f_js__WEBPACK_IMPORTED_MODULE_2__.l)
             .map((code) => {
-            return [code, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)(`nominative_${code}`)];
+            return [code, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)(`nominative_${code}`)];
           })
             .sort(sortLanguages(this.existingTargetLanguages)),
         ],
@@ -15590,17 +15642,17 @@ const VocablyTranslation = class {
         justifyContent: 'center',
         flexDirection: 'column',
         gap: '12px',
-      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-spinner", null), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { style: { fontSize: '13px' } }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.generating')))), this.result && this.result.success === false && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "padding-left-12", style: {
+      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-spinner", null), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { style: { fontSize: '13px' } }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.generating')))), this.result && this.result.success === false && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "padding-left-12", style: {
         display: 'flex',
         flexDirection: 'column',
         gap: '12px',
-      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.error')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-link-button vocably-nondecorated", onClick: () => this.retry.emit(), style: {
+      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.error')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", null, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("button", { class: "vocably-link-button vocably-nondecorated", onClick: () => this.retry.emit(), style: {
         display: 'inline-flex',
         alignItems: 'center',
         gap: '4px',
-      }, disabled: this.isRetrying }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.retry'), this.isRetrying && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-inline-loader", null)), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-reload", { style: {
+      }, disabled: this.isRetrying }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.retry'), this.isRetrying && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-inline-loader", null)), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-reload", { style: {
         display: this.isRetrying ? 'none' : 'inline-block',
-      } }))))), this.result && this.result.success === true && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.F, null, this.showLanguages && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mb-18 vocably-language-selector" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-language-wrapper" }, sourceLanguageSelector), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-arrow-right", { class: "vocably-from-to" }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-language-wrapper" }, targetLanguageSelector))), showChatGpt && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "padding-left-12 vocably-bottom-12-border" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-small vocably-muted vocably-mb-4" }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.ai_thinks'), ' '), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", { class: "vocably-emphasized" }, (0,_stringArray_af4489c8_js__WEBPACK_IMPORTED_MODULE_1__.i)(this.result.value.sourceLanguage) && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-play-sound", { text: this.phrase, language: this.result.value.sourceLanguage, playAudioPronunciation: this.playAudioPronunciation })), this.phrase), ' ', (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.means'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("i", null, this.result.value.aiThinksItIs))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-translation-cards", { cards: this.translationCards, translationCards: this.result.value, canAdd: !!canAdd, cardsLimit: this.cardsLimit, paymentLink: this.paymentLink, canCongratulate: this.canCongratulate, isUpdating: this.isUpdating, disabled: this.disabled, isLightweight: this.isLightweight, playAudioPronunciation: this.playAudioPronunciation, updateCard: this.updateCard, attachTag: this.attachTag, detachTag: this.detachTag, updateTag: this.updateTag, deleteTag: this.deleteTag, onRemoveCard: (e) => this.removeCard.emit(e.detail), onAddCard: (e) => {
+      } }))))), this.result && this.result.success === true && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)(_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.F, null, this.showLanguages && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-mb-18 vocably-language-selector" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-language-wrapper" }, sourceLanguageSelector), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-icon-arrow-right", { class: "vocably-from-to" }), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-language-wrapper" }, targetLanguageSelector))), showChatGpt && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "padding-left-12 vocably-bottom-12-border" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-small vocably-muted vocably-mb-4" }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.ai_thinks'), ' '), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", { class: "vocably-emphasized" }, (0,_stringArray_af4489c8_js__WEBPACK_IMPORTED_MODULE_1__.i)(this.result.value.sourceLanguage) && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-play-sound", { text: this.phrase, language: this.result.value.sourceLanguage, playAudioPronunciation: this.playAudioPronunciation })), this.phrase), ' ', (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.means'), ' ', (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("i", null, this.result.value.aiThinksItIs))), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-translation-cards", { cards: this.translationCards, translationCards: this.result.value, canAdd: !!canAdd, cardsLimit: this.cardsLimit, paymentLink: this.paymentLink, canCongratulate: this.canCongratulate, isUpdating: this.isUpdating, disabled: this.disabled, isLightweight: this.isLightweight, playAudioPronunciation: this.playAudioPronunciation, updateCard: this.updateCard, attachTag: this.attachTag, detachTag: this.detachTag, updateTag: this.updateTag, deleteTag: this.deleteTag, onRemoveCard: (e) => this.removeCard.emit(e.detail), onAddCard: (e) => {
         e.stopPropagation();
         this.addCard.emit(e.detail);
       }, onWatchMePaying: () => this.watchMePaying.emit(), onResultUpdated: (e) => {
@@ -15609,7 +15661,7 @@ const VocablyTranslation = class {
         display: 'inline-block',
         verticalAlign: 'middle',
         fontSize: '13px',
-      } }, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.requesting_ai')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-inline-loader", { style: { marginLeft: '8px' } }))), this.explanation.state === 'error' &&
+      } }, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.requesting_ai')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-inline-loader", { style: { marginLeft: '8px' } }))), this.explanation.state === 'error' &&
       this.explanation.error, this.explanation.state === 'loaded' && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "explanation", innerHTML: mdConverter.makeHtml(this.explanation.value) }))))), this.extraCards.length > 0 && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-pt-12" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-translation-cards", { cards: this.extraCards, translationCards: this.result.value, canAdd: !!canAdd, cardsLimit: this.cardsLimit, paymentLink: this.paymentLink, canCongratulate: this.canCongratulate, isUpdating: this.isUpdating, disabled: this.disabled, isLightweight: this.isLightweight, playAudioPronunciation: this.playAudioPronunciation, updateCard: this.updateCard, attachTag: this.attachTag, detachTag: this.detachTag, updateTag: this.updateTag, deleteTag: this.deleteTag, onRemoveCard: (e) => this.removeCard.emit(e.detail), onAddCard: (e) => this.addCard.emit(e.detail), onWatchMePaying: () => this.watchMePaying.emit(), onResultUpdated: (e) => {
         this.result = e.detail;
       } }))), this.isLoadingExtraWords && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-pt-12", style: {
@@ -15618,7 +15670,7 @@ const VocablyTranslation = class {
         display: 'flex',
         alignItems: 'center',
         gap: '4px',
-      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, (0,_index_51ddf596_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.requests_extra_items')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-inline-loader", null)))), isOkayToAskForRating && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-rate-container", ref: (el) => (this.askForRatingContainer = el) }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { style: { paddingTop: '12px' } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "panel" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-rate", { platform: this.extensionPlatform, onUserSelected: (choiceEvent) => {
+      } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("span", null, (0,_index_e72c3d6e_js__WEBPACK_IMPORTED_MODULE_4__.t)('translation.requests_extra_items')), (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-inline-loader", null)))), isOkayToAskForRating && ((0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "vocably-rate-container", ref: (el) => (this.askForRatingContainer = el) }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { style: { paddingTop: '12px' } }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("div", { class: "panel" }, (0,_index_9e547a84_js__WEBPACK_IMPORTED_MODULE_0__.h)("vocably-rate", { platform: this.extensionPlatform, onUserSelected: (choiceEvent) => {
         switch (choiceEvent.detail) {
           case 'review':
           case 'feedback':
@@ -18702,13 +18754,15 @@ const tokenize = (text) => {
 };
 
 ;// ../sulna/dist/esm/trimArticle.js
+const frenchLeLa = /^(le|la)\s/i;
+const dropL = /^(l)['’‘‛′ʼʹꞌ＇]/i;
 const trimRegexes = {
     en: [/^(a)\s/i],
     nl: [/^(de|het|de.het|het.de)\s/i],
     de: [/^(der|die|das|ein|eine)\s/i],
     es: [/^(el|la|los|las|el.la|la.el)\s/i],
-    fr: [/^(le|la|les|un|une|des|du|de)\s/i],
-    it: [/^(il|lo|la|i|gli|le|un|uno|una)\s/i, /^(l)['’‘‛′ʼʹꞌ＇]/i],
+    fr: [/^(les|un|une|des|du|de)\s/i, frenchLeLa, dropL],
+    it: [/^(il|lo|la|i|gli|le|un|uno|una)\s/i, dropL],
     pt: [/^(o|a|os|as|um|uma|uns|umas)\s/i],
     no: [/^(en|ei|et)\s/i],
     da: [/^(en|et)\s/i],
@@ -18733,6 +18787,9 @@ const trimArticle = (language, source) => {
     };
 };
 const trimSenselessArticle = (language, source) => {
+    if (language === 'fr') {
+        return source.replace(dropL, '').trim().replace(frenchLeLa, '').trim();
+    }
     if (language !== 'en') {
         return source;
     }
@@ -18892,6 +18949,7 @@ const mapUserStaticMetadata = (metadata) => {
 };
 
 ;// ../model/dist/esm/index.js
+
 
 
 
@@ -21231,6 +21289,73 @@ const pt_pt = {
     objective_zu: 'zulu',
 };
 
+;// ../browser-i18n/dist/esm/messages/en.js
+const messages_en_en = {
+    // youtube
+    'youtube.press_alt_to_select': 'Press Alt to select text',
+    'youtube.press_option_to_select': 'Press Option ⌥ to select text',
+};
+
+;// ../browser-i18n/dist/esm/messages/ru.js
+const messages_ru_ru = {
+    // youtube
+    'youtube.press_alt_to_select': 'Нажмите Alt чтобы выделить текст',
+    'youtube.press_option_to_select': 'Нажмите Option ⌥ чтобы выделить текст',
+};
+
+;// ../browser-i18n/dist/esm/messages/uk.js
+const messages_uk_uk = {
+    // youtube
+    'youtube.press_alt_to_select': 'Натисніть Alt щоб виділити текст',
+    'youtube.press_option_to_select': 'Натисніть Option ⌥ щоб виділити текст',
+};
+
+;// ../browser-i18n/dist/esm/messages/vi.js
+const messages_vi_vi = {
+    // youtube
+    'youtube.press_alt_to_select': 'Nhấn giữ Alt để chọn văn bản',
+    'youtube.press_option_to_select': 'Nhấn giữ Option ⌥ để chọn văn bản',
+};
+
+;// ../browser-i18n/dist/esm/messages/tr.js
+const messages_tr_tr = {
+    // youtube
+    'youtube.press_alt_to_select': 'Metni seçmek için Alt tuşuna basın',
+    'youtube.press_option_to_select': 'Metni seçmek için Option ⌥ tuşuna basın',
+};
+
+;// ../browser-i18n/dist/esm/messages/es.js
+const messages_es_es = {
+    // youtube
+    'youtube.press_alt_to_select': 'Pulsa Alt para seleccionar el texto',
+    'youtube.press_option_to_select': 'Pulsa Option ⌥ para seleccionar el texto',
+};
+
+;// ../browser-i18n/dist/esm/messages/pt.js
+const messages_pt_pt = {
+    // youtube
+    'youtube.press_alt_to_select': 'Pressione Alt para selecionar o texto',
+    'youtube.press_option_to_select': 'Pressione Option ⌥ para selecionar o texto',
+};
+
+;// ../browser-i18n/dist/esm/messages/index.js
+
+
+
+
+
+
+
+const messageTranslations = {
+    en: messages_en_en,
+    ru: messages_ru_ru,
+    uk: messages_uk_uk,
+    vi: messages_vi_vi,
+    tr: messages_tr_tr,
+    es: messages_es_es,
+    pt: messages_pt_pt,
+};
+
 ;// ../browser-i18n/dist/esm/index.js
 
 
@@ -21298,6 +21423,7 @@ const buildT = (translations) => (key, params) => {
         return str;
     return Object.entries(params).reduce((s, [k, v]) => s.replace(new RegExp(`\\{${k}\\}`, 'g'), String(v)), str);
 };
+
 const languageTranslations = {
     en: en_en,
     ru: ru_ru,
@@ -21318,13 +21444,13 @@ const languageTranslations = {
 
 
 const translations = {
-    en: Object.assign(Object.assign({}, en), languageTranslations['en']),
-    ru: Object.assign(Object.assign({}, ru), languageTranslations['ru']),
-    uk: Object.assign(Object.assign({}, uk), languageTranslations['uk']),
-    vi: Object.assign(Object.assign({}, vi), languageTranslations['vi']),
-    tr: Object.assign(Object.assign({}, tr), languageTranslations['tr']),
-    es: Object.assign(Object.assign({}, es), languageTranslations['es']),
-    pt: Object.assign(Object.assign({}, pt), languageTranslations['pt']),
+    en: Object.assign(Object.assign(Object.assign({}, en), languageTranslations['en']), messageTranslations['en']),
+    ru: Object.assign(Object.assign(Object.assign({}, ru), languageTranslations['ru']), messageTranslations['ru']),
+    uk: Object.assign(Object.assign(Object.assign({}, uk), languageTranslations['uk']), messageTranslations['uk']),
+    vi: Object.assign(Object.assign(Object.assign({}, vi), languageTranslations['vi']), messageTranslations['vi']),
+    tr: Object.assign(Object.assign(Object.assign({}, tr), languageTranslations['tr']), messageTranslations['tr']),
+    es: Object.assign(Object.assign(Object.assign({}, es), languageTranslations['es']), messageTranslations['es']),
+    pt: Object.assign(Object.assign(Object.assign({}, pt), languageTranslations['pt']), messageTranslations['pt']),
 };
 
 ;// ../extension-content-ui/src/i18n/index.ts
@@ -22765,18 +22891,98 @@ const isValidSelection = (selection) => {
 };
 
 ;// ../extension-content-script/dist/styles.js
+const youtubeHighlightDuration = 50;
+const primary = `#0050ff`;
+const darkPrimary = `#28a5ff`;
 const setYouTubeStyles = () => {
     const style = document.createElement('style');
     style.innerHTML = `
   .vocably-word {
-    cursor: pointer;
+    position: relative;
+    z-index: 0;
+
+    &:not(.vocably-word-disabled) {
+      cursor: pointer;
+    }
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: ${primary};
+      box-shadow: -2px 0 0 ${primary}, 2px 0 0 ${primary};
+      content: '';
+      border-radius: 8px;
+      z-index: -1;
+      opacity: 0;
+      transform: scale(50%);
+      transition: all 100ms ease-in-out;
+    }
+
+    &:not(.vocably-word-disabled):hover {
+      color: white;
+
+      &::before {
+        opacity: 1;
+        transform: scale(100%);
+      }
+    }
   }
-  .vocably-word:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
+
+  .vocably-selectable-captions .ytp-caption-segment {
+    transition: text-shadow ${youtubeHighlightDuration}ms ease-in-out;
+  }
+  .vocably-selectable-captions-highlighted .ytp-caption-segment {
+    text-shadow: 0 0 5px ${darkPrimary}, 0 0 10px ${darkPrimary}, 0 0 20px ${darkPrimary},
+      0 0 40px ${darkPrimary} !important;
   }
 `;
     document.head.appendChild(style);
+};
+const snackbarTransitionDuration = 200;
+const snackbarClassName = 'vocably-snackbar';
+let snackbarStylesAreSet = false;
+const setSnackbarStyles = () => {
+    if (snackbarStylesAreSet) {
+        return;
+    }
+    snackbarStylesAreSet = true;
+    const style = document.createElement('style');
+    style.innerHTML = `
+  .${snackbarClassName} {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translate(-50%, 8px);
+    box-sizing: border-box;
+    max-width: min(90vw, 400px);
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: rgba(32, 33, 36, 0.95);
+    color: #ffffff;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity ${snackbarTransitionDuration}ms ease-in-out,
+      transform ${snackbarTransitionDuration}ms ease-in-out;
+  }
+
+  .${snackbarClassName}.${snackbarClassName}-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+`;
+    document.head.appendChild(style);
+};
+const snackbarClassNames = {
+    snackbar: snackbarClassName,
+    visible: `${snackbarClassName}-visible`,
 };
 
 ;// ../extension-content-script/dist/tokenizer/containsChinese.js
@@ -22907,6 +23113,67 @@ const extractTokens = (text, language = '') => {
     return tokens;
 };
 
+;// ../extension-content-script/dist/snackbar.js
+
+
+const defaultDuration = 4000;
+let snackbar = null;
+let hideTimeout = null;
+let removeTimeout = null;
+const cancelScheduledHide = () => {
+    if (hideTimeout === null) {
+        return;
+    }
+    clearTimeout(hideTimeout);
+    hideTimeout = null;
+};
+const cancelScheduledRemoval = () => {
+    if (removeTimeout === null) {
+        return;
+    }
+    clearTimeout(removeTimeout);
+    removeTimeout = null;
+};
+const hideSnackbar = () => {
+    cancelScheduledHide();
+    if (snackbar === null) {
+        return;
+    }
+    const element = snackbar;
+    element.classList.remove(snackbarClassNames.visible);
+    cancelScheduledRemoval();
+    removeTimeout = setTimeout(() => {
+        removeTimeout = null;
+        element.remove();
+    }, snackbarTransitionDuration);
+};
+const showSnackbar = (message, duration = defaultDuration) => {
+    var _a;
+    setSnackbarStyles();
+    if (snackbar === null) {
+        snackbar = document.createElement('div');
+        snackbar.classList.add(snackbarClassNames.snackbar);
+        applyMaxZIndex(snackbar);
+    }
+    snackbar.innerText = message;
+    cancelScheduledHide();
+    cancelScheduledRemoval();
+    // The captions can be watched in the fullscreen mode,
+    // where only the descendants of the fullscreen element are visible.
+    const container = (_a = document.fullscreenElement) !== null && _a !== void 0 ? _a : document.body;
+    if (snackbar.parentNode !== container) {
+        container.appendChild(snackbar);
+    }
+    // Forces a reflow, so the snackbar is transitioned in
+    // instead of being displayed right away.
+    void snackbar.offsetHeight;
+    snackbar.classList.add(snackbarClassNames.visible);
+    hideTimeout = setTimeout(() => {
+        hideTimeout = null;
+        hideSnackbar();
+    }, duration);
+};
+
 ;// ../extension-content-script/dist/youtube.js
 var youtube_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -22925,12 +23192,64 @@ var youtube_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _
 
 
 
+
+
+
+
+
+
 const ytPlayerTagName = 'ytd-player';
+// The distance the cursor has to travel with the button pressed
+// for the movement to be considered a drag attempt.
+const dragThreshold = 5;
+const selectableCaptionsClassName = 'vocably-selectable-captions';
+const highlightedCaptionsClassName = 'vocably-selectable-captions-highlighted';
 const getPlayerElements = () => {
     const players = document.querySelectorAll(ytPlayerTagName);
     return Array.from(players);
 };
+let textHintShowed = false;
+const showSelectTextHint = () => youtube_awaiter(void 0, void 0, void 0, function* () {
+    const { locale } = yield api.getSettings();
+    setLocale(locale !== null && locale !== void 0 ? locale : detectLocale());
+    showSnackbar(browser_browser.getOS().name === 'macOS'
+        ? t('youtube.press_option_to_select')
+        : t('youtube.press_alt_to_select'));
+    textHintShowed = true;
+    setTimeout(() => {
+        textHintShowed = false;
+    }, 1000);
+});
+// The captions are not selectable unless Alt (Option) is pressed,
+// so a drag attempt is a good moment to explain how to select them.
+const watchDragAttempt = (event) => {
+    if (event.altKey) {
+        return;
+    }
+    const { clientX: startX, clientY: startY } = event;
+    const stopWatching = () => {
+        document.removeEventListener('mousemove', onMouseMove, true);
+        document.removeEventListener('mouseup', stopWatching, true);
+    };
+    const onMouseMove = (moveEvent) => {
+        if (moveEvent.altKey) {
+            stopWatching();
+            return;
+        }
+        if (Math.abs(moveEvent.clientX - startX) < dragThreshold &&
+            Math.abs(moveEvent.clientY - startY) < dragThreshold) {
+            return;
+        }
+        stopWatching();
+        showSelectTextHint();
+    };
+    // The captions handle mouseup themselves and stop its propagation,
+    // so the listeners have to be attached on the capture phase.
+    document.addEventListener('mouseup', stopWatching, true);
+    document.addEventListener('mousemove', onMouseMove, true);
+};
 const handlePlayerElement = (player) => {
+    let videoElement = null;
     const observer = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.type !== 'childList')
@@ -22943,6 +23262,15 @@ const handlePlayerElement = (player) => {
                 return;
             if (!mutation.target.classList.contains('ytp-caption-segment'))
                 return;
+            if (!videoElement) {
+                videoElement = player.querySelector('video');
+                videoElement === null || videoElement === void 0 ? void 0 : videoElement.addEventListener('play', () => {
+                    var _a;
+                    (_a = window.getSelection()) === null || _a === void 0 ? void 0 : _a.removeAllRanges();
+                    destroyAllOverlays();
+                    destroyButton();
+                });
+            }
             mutation.addedNodes.forEach((node) => {
                 var _a;
                 if (isHtmlElement_isHtmlElement(node) && node.classList.contains('replaced'))
@@ -22955,9 +23283,7 @@ const handlePlayerElement = (player) => {
                 span.classList.add('replaced');
                 tokens.forEach((token, index) => {
                     if (token.type !== 'word') {
-                        const punctuationSpan = document.createElement('span');
-                        punctuationSpan.innerText = token.text;
-                        span.append(punctuationSpan);
+                        span.append(document.createTextNode(token.text));
                         return;
                     }
                     const anchor = document.createElement('span');
@@ -22966,6 +23292,7 @@ const handlePlayerElement = (player) => {
                     anchor.addEventListener('mousedown', (e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        watchDragAttempt(e);
                     });
                     anchor.addEventListener('mouseup', (e) => {
                         e.preventDefault();
@@ -22973,6 +23300,10 @@ const handlePlayerElement = (player) => {
                     });
                     anchor.addEventListener('click', () => youtube_awaiter(void 0, void 0, void 0, function* () {
                         var _a;
+                        if (textHintShowed) {
+                            return;
+                        }
+                        videoElement === null || videoElement === void 0 ? void 0 : videoElement.pause();
                         const detectedLanguage = yield detectLanguage(anchor);
                         yield createPopup({
                             detectedLanguage,
@@ -23005,6 +23336,67 @@ const handlePlayerElement = (player) => {
     return () => {
         observer.disconnect();
     };
+};
+const makeCaptionsSelectable = () => {
+    const captionContainerList = [];
+    const captionContainersCloneList = [];
+    getPlayerElements().forEach((player) => {
+        player.style.userSelect = 'auto';
+        player.style.webkitUserSelect = 'auto';
+        const container = player.querySelector('.ytd-player');
+        if (isHtmlElement_isHtmlElement(container)) {
+            container.style.userSelect = 'auto';
+            container.style.webkitUserSelect = 'auto';
+        }
+        const captionContainer = player.querySelector('#ytp-caption-window-container');
+        if (!isHtmlElement_isHtmlElement(captionContainer)) {
+            return;
+        }
+        captionContainer.style.userSelect = 'auto';
+        captionContainer.style.webkitUserSelect = 'auto';
+        const captionContainerClone = captionContainer.cloneNode(true);
+        captionContainerClone.classList.add(selectableCaptionsClassName);
+        captionContainerList.push(captionContainer);
+        captionContainersCloneList.push(captionContainerClone);
+        captionContainer.hidden = true;
+        captionContainer.before(captionContainerClone);
+        captionContainerClone
+            .querySelectorAll('.caption-window')
+            .forEach((captionWindow) => {
+            if (!isHtmlElement_isHtmlElement(captionWindow)) {
+                return;
+            }
+            captionWindow.draggable = false;
+            captionWindow.style.userSelect = 'auto';
+            captionWindow.style.webkitUserSelect = 'auto';
+            captionWindow.querySelectorAll('.captions-text').forEach((element) => {
+                if (!isHtmlElement_isHtmlElement(element)) {
+                    return;
+                }
+                element.style.userSelect = 'auto';
+                element.style.webkitUserSelect = 'auto';
+            });
+            captionWindow
+                .querySelectorAll('.ytp-caption-segment')
+                .forEach((segment) => {
+                if (!isHtmlElement_isHtmlElement(segment)) {
+                    return;
+                }
+                segment.style.cursor = 'text';
+            });
+            captionWindow
+                .querySelectorAll('.vocably-word')
+                .forEach((word) => word.classList.add('vocably-word-disabled'));
+        });
+    });
+    return { captionContainerList, captionContainersCloneList };
+};
+const hasTextSelection = () => {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) {
+        return false;
+    }
+    return selection.toString().trim() !== '';
 };
 const initYoutube = (options) => youtube_awaiter(void 0, void 0, void 0, function* () {
     if (!options.ytHosts.includes(window.location.host)) {
@@ -23039,114 +23431,112 @@ const initYoutube = (options) => youtube_awaiter(void 0, void 0, void 0, functio
         subtree: true,
     });
     let isAltDown = false;
+    let isMouseDown = false;
+    let selectableCaptions = null;
+    let fadingOutCaptions = null;
+    let tearDownTimeout = null;
+    let removeCaptionsTimeout = null;
+    const cancelScheduledTearDown = () => {
+        if (tearDownTimeout === null) {
+            return;
+        }
+        clearTimeout(tearDownTimeout);
+        tearDownTimeout = null;
+    };
+    const cancelScheduledRemoval = () => {
+        if (removeCaptionsTimeout !== null) {
+            clearTimeout(removeCaptionsTimeout);
+            removeCaptionsTimeout = null;
+        }
+        const captions = fadingOutCaptions;
+        fadingOutCaptions = null;
+        return captions;
+    };
+    const removeCaptions = (captions) => {
+        captions.captionContainersCloneList.forEach((element) => element.remove());
+        captions.captionContainerList.forEach((element) => (element.hidden = false));
+    };
+    const setUp = () => {
+        var _a;
+        cancelScheduledTearDown();
+        if (selectableCaptions === null) {
+            selectableCaptions = (_a = cancelScheduledRemoval()) !== null && _a !== void 0 ? _a : makeCaptionsSelectable();
+        }
+        selectableCaptions.captionContainersCloneList.forEach((element) => {
+            // Forces a reflow, so the highlight is transitioned in
+            // instead of being applied right away.
+            void element.offsetHeight;
+            element.classList.add(highlightedCaptionsClassName);
+        });
+    };
+    const tearDown = () => {
+        cancelScheduledTearDown();
+        isAltDown = false;
+        isMouseDown = false;
+        if (selectableCaptions === null) {
+            return;
+        }
+        const captions = selectableCaptions;
+        selectableCaptions = null;
+        fadingOutCaptions = captions;
+        captions.captionContainersCloneList.forEach((element) => element.classList.remove(highlightedCaptionsClassName));
+        removeCaptionsTimeout = setTimeout(() => {
+            removeCaptionsTimeout = null;
+            fadingOutCaptions = null;
+            removeCaptions(captions);
+        }, youtubeHighlightDuration);
+    };
+    const isInUse = () => isAltDown || isMouseDown || hasTextSelection();
+    const scheduleTearDown = () => {
+        cancelScheduledTearDown();
+        if (selectableCaptions === null || isInUse()) {
+            return;
+        }
+        tearDownTimeout = setTimeout(() => {
+            tearDownTimeout = null;
+            if (isInUse()) {
+                return;
+            }
+            tearDown();
+        }, 100);
+    };
     document.addEventListener('keydown', (e) => {
         if (e.key !== 'Alt' || isAltDown) {
             return;
         }
         isAltDown = true;
-        let isMouseDown = false;
-        const players = getPlayerElements();
-        let captionContainerList = [];
-        let captionContainersCloneList = [];
-        players.forEach((player) => {
-            player.style.userSelect = 'auto';
-            player.style.webkitUserSelect = 'auto';
-            const container = player.querySelector('.ytd-player');
-            if (isHtmlElement_isHtmlElement(container)) {
-                container.style.userSelect = 'auto';
-                container.style.webkitUserSelect = 'auto';
-            }
-            const captionContainer = player.querySelector('#ytp-caption-window-container');
-            if (!isHtmlElement_isHtmlElement(captionContainer)) {
-                return;
-            }
-            captionContainer.style.userSelect = 'auto';
-            captionContainer.style.webkitUserSelect = 'auto';
-            const captionContainerClone = captionContainer.cloneNode(true);
-            captionContainerList.push(captionContainer);
-            captionContainersCloneList.push(captionContainerClone);
-            captionContainer.hidden = true;
-            captionContainer.before(captionContainerClone);
-            captionContainerClone
-                .querySelectorAll('.caption-window')
-                .forEach((captionWindow) => {
-                if (!isHtmlElement_isHtmlElement(captionWindow)) {
-                    return;
-                }
-                captionWindow.draggable = false;
-                captionWindow.style.userSelect = 'auto';
-                captionWindow.style.webkitUserSelect = 'auto';
-                captionWindow
-                    .querySelectorAll('.captions-text')
-                    .forEach((element) => {
-                    if (!isHtmlElement_isHtmlElement(element)) {
-                        return;
-                    }
-                    element.style.userSelect = 'auto';
-                    element.style.webkitUserSelect = 'auto';
-                });
-                captionWindow
-                    .querySelectorAll('.ytp-caption-segment')
-                    .forEach((segment) => {
-                    if (!isHtmlElement_isHtmlElement(segment)) {
-                        return;
-                    }
-                    segment.style.cursor = 'text';
-                });
-                captionWindow
-                    .querySelectorAll('.vocably-word')
-                    .forEach((word) => word.classList.remove('vocably-word'));
-            });
-        });
-        const onBlur = () => {
+        setUp();
+    });
+    document.addEventListener('keyup', (e) => {
+        if (e.key !== 'Alt' || !isAltDown) {
+            return;
+        }
+        isAltDown = false;
+        scheduleTearDown();
+    });
+    document.addEventListener('mousedown', (e) => {
+        if (e.button !== 0) {
+            return;
+        }
+        isMouseDown = true;
+    });
+    document.addEventListener('mouseup', (e) => {
+        if (e.button !== 0) {
+            return;
+        }
+        isMouseDown = false;
+        scheduleTearDown();
+    });
+    document.addEventListener('selectionchange', () => {
+        scheduleTearDown();
+    });
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
             tearDown();
-        };
-        const onVisibilityChange = () => {
-            if (document.hidden) {
-                tearDown();
-            }
-        };
-        document.addEventListener('visibilitychange', onVisibilityChange);
-        window.addEventListener('blur', onBlur);
-        const tearDown = () => {
-            isAltDown = false;
-            captionContainersCloneList.forEach((element) => element.remove());
-            captionContainerList.forEach((element) => (element.hidden = false));
-            document.removeEventListener('keyup', onKeyUp);
-            document.removeEventListener('mouseup', onMouseUp);
-            document.removeEventListener('mousedown', onMouseDown);
-            document.removeEventListener('visibilitychange', onVisibilityChange);
-            window.removeEventListener('blur', onBlur);
-        };
-        const onMouseDown = (e) => {
-            if (e.button !== 0) {
-                return;
-            }
-            isMouseDown = true;
-        };
-        const onMouseUp = (e) => {
-            if (e.button !== 0) {
-                return;
-            }
-            isMouseDown = false;
-            if (isAltDown) {
-                return;
-            }
-            setTimeout(tearDown, 100);
-        };
-        const onKeyUp = (e) => {
-            if (e.key !== 'Alt') {
-                return;
-            }
-            isAltDown = false;
-            if (isMouseDown) {
-                return;
-            }
-            setTimeout(tearDown, 100);
-        };
-        document.addEventListener('keyup', onKeyUp);
-        document.addEventListener('mousedown', onMouseDown);
-        document.addEventListener('mouseup', onMouseUp);
+        }
+    });
+    window.addEventListener('blur', () => {
+        tearDown();
     });
 });
 
@@ -23263,6 +23653,12 @@ const onMouseUp = (event) => dist_awaiter(void 0, void 0, void 0, function* () {
             return;
         }
         const settings = yield api.getSettings();
+        if (settings.showOnSelection) {
+            yield showPopup({
+                isTouchscreen: false,
+            });
+            return;
+        }
         // This is the attempt to make the "Double click" functionality
         // work in Lemur browser on Android.
         // The mouse event is not trusted in Lemur on Android.
@@ -23364,18 +23760,20 @@ const registerContentScript = (...args_1) => dist_awaiter(void 0, [...args_1], v
 
 ;// ./src/content-script.ts
 
-registerContentScript({
-    api: {
-        appBaseUrl: "https://app.vocably.pro",
-    },
-    youTube: { ytHosts: ['www.youtube.com'] },
-    contentScript: {
-        askForRatingEnabled: true,
-        displayMobileLookupButton: false,
-        allowFirstTranslationCongratulation: true,
-        webPaymentLink: "https://app.vocably.pro" + '/subscribe',
-    },
-}).then();
+if (!document.body.classList.contains('vocably-extension-disabled')) {
+    registerContentScript({
+        api: {
+            appBaseUrl: "https://vocably.pro/app",
+        },
+        youTube: { ytHosts: ['www.youtube.com'] },
+        contentScript: {
+            askForRatingEnabled: true,
+            displayMobileLookupButton: false,
+            allowFirstTranslationCongratulation: true,
+            webPaymentLink: "https://vocably.pro/app" + '/subscribe',
+        },
+    }).then();
+}
 
 })();
 

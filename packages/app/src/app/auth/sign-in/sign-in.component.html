@@ -1,10 +1,90 @@
-<div class="text-center">
-  <div class="mb-1">
-    <button class="button" (click)="auth.signIn()">
-      {{ 'auth.sign_in.button' | transloco }}
-    </button>
+<div class="auth-form">
+  <div class="auth-notice" *ngIf="notice">{{ notice | transloco }}</div>
+  <div class="auth-error text-danger" role="alert" *ngIf="socialError">
+    {{ authErrorKey(socialError) | transloco }}
   </div>
-  <div class="small">
+
+  <app-social-sign-in-buttons></app-social-sign-in-buttons>
+
+  <div class="divider">{{ 'auth.or' | transloco }}</div>
+
+  <form (submit)="$event.preventDefault(); submit()" novalidate>
+    <div class="field">
+      <label class="label" for="sign-in-email">{{
+        'auth.email' | transloco
+      }}</label>
+      <input
+        id="sign-in-email"
+        class="form-control"
+        type="email"
+        name="email"
+        autocomplete="username"
+        inputmode="email"
+        autocapitalize="off"
+        spellcheck="false"
+        [(ngModel)]="email"
+      />
+    </div>
+
+    <div class="field">
+      <label class="label" for="sign-in-password">{{
+        'auth.password' | transloco
+      }}</label>
+      <div class="password-field">
+        <input
+          id="sign-in-password"
+          class="form-control"
+          [type]="showPassword ? 'text' : 'password'"
+          name="password"
+          autocomplete="current-password"
+          [(ngModel)]="password"
+        />
+        <button
+          type="button"
+          class="unstyled toggle"
+          (click)="showPassword = !showPassword"
+        >
+          {{
+            (showPassword ? 'auth.hide_password' : 'auth.show_password')
+              | transloco
+          }}
+        </button>
+      </div>
+    </div>
+
+    <div class="field-aside small">
+      <a
+        routerLink="/forgot-password"
+        [queryParams]="{ email: email || null }"
+        >{{ 'auth.sign_in.forgot_password' | transloco }}</a
+      >
+    </div>
+
+    <div class="auth-error text-danger" role="alert" *ngIf="formError">
+      {{ authErrorKey(formError) | transloco }}
+    </div>
+
+    <button
+      class="button block submit"
+      type="submit"
+      [disabled]="!canSubmit || isSubmitting"
+    >
+      <ion-spinner *ngIf="isSubmitting" name="dots"></ion-spinner
+      >{{ 'auth.sign_in.submit' | transloco }}
+    </button>
+  </form>
+
+  <div class="auth-links">
+    {{ 'auth.sign_in.no_account' | transloco }}
+    <a
+      routerLink="/sign-up"
+      [queryParams]="{ email: email || null }"
+      fragment="form"
+      >{{ 'auth.sign_in.create_account' | transloco }}</a
+    >
+  </div>
+
+  <div class="small text-center">
     {{ 'auth.sign_in.agree' | transloco }}
     <a [href]="wwwBaseUrl + '/terms-and-conditions.html'" target="_blank">{{
       'auth.sign_in.terms' | transloco

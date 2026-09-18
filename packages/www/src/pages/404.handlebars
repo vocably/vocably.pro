@@ -1,0 +1,45 @@
+{{#> layout
+  title='Page not found'
+  metaDescription='This page does not exist. Look up a word or head back to the Vocably homepage.'
+  url='/404.html'
+  navbarAlwaysMurky=true
+}}
+  <div class="container-md pb-5">
+    <h1 class="mb-4">This page does not exist</h1>
+
+    <p>The link you followed is broken, or the page has been moved.</p>
+
+    <p>Here is where you might want to go instead:</p>
+
+    <ul>
+      <li><a href="/">The Vocably homepage</a></li>
+      <li><a href="/search.html">Look up a word or a phrase</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/about.html">About Vocably</a></li>
+    </ul>
+
+    <p>If you think something is broken on my side, email me at <a href="mailto:d@vocably.pro">d@vocably.pro</a> and I'll fix it.</p>
+  </div>
+
+  <script>
+    // Stale /de-en/ dictionary links are common enough to be worth rescuing.
+    // This runs on a genuine 404 response (CloudFront serves this page at the
+    // originally requested URL), so crawlers still see a 404 and drop the dead
+    // URL, while a visitor following an old link lands on the search page.
+    const match = window.location.pathname.match(
+      /^\/de-en\/(.+)-in-german\.html$/
+    );
+
+    if (match && match[1]) {
+      const params = new URLSearchParams({
+        sourceLanguage: 'de',
+        targetLanguage: 'en',
+        text: match[1],
+      });
+
+      // replace() so the broken URL doesn't linger in history behind us.
+      window.location.replace(`/search.html?${params.toString()}`);
+    }
+  </script>
+
+{{/layout}}

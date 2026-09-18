@@ -1,7 +1,6 @@
 export * from './calculateDays';
 export * from './date';
 export * from './extractTranslation';
-export * from './getAttributeValue';
 export * from './isGoodPlural';
 export * from './isSafeObject';
 export * from './isToday';
@@ -17,3 +16,4 @@ export * from './timeout';
 export * from './singlePromise';
 export * from './toLocationHash';
 export * from './htmlSpecialChars';
+export * from './auth';

@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { Platform } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Appbar, useTheme } from 'react-native-paper';
+import { renderAuthScreens } from './auth/authScreens';
 import { LoginModal } from './auth/LoginModal';
 import { ChatWithCardModal } from './ChatWithCard/ChatWithCardModal';
 import { EditCardScreen } from './EditCardScreen';
@@ -121,6 +122,7 @@ export const RootModalStack = () => {
             title: t('nav.createAccount'),
           }}
         />
+        {renderAuthScreens(Stack)}
         <Stack.Screen
           name="PreviewStudyStepModal"
           component={PreviewStudyStepModal}

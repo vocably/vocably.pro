@@ -65,7 +65,12 @@ const getGitLastModifiedDate = memoize(
   (...args) => JSON.stringify(args)
 );
 
-const exclude = ['index.handlebars', 'app.handlebars', 'console.handlebars'];
+const exclude = [
+  'index.handlebars',
+  'app.handlebars',
+  'console.handlebars',
+  '404.handlebars',
+];
 
 export const buildMainSitemap = () => {
   const pages = readdirSync('./src/pages').filter(

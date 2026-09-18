@@ -1,8 +1,10 @@
-import SpyInstance = jest.SpyInstance;
+import { afterEach, beforeEach, jest } from '@jest/globals';
+
+type SpyInstance = jest.Spied<(...args: any[]) => any>;
 
 const spies: SpyInstance[] = [];
 
-global.beforeEach(() => {
+beforeEach(() => {
   if (spies.length > 0) {
     return;
   }
@@ -18,6 +20,6 @@ global.beforeEach(() => {
   });
 });
 
-global.afterEach(() => {
+afterEach(() => {
   spies.forEach((spy) => spy.mockReset());
 });

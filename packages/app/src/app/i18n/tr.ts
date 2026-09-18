@@ -55,11 +55,75 @@ export const tr = {
     'Doğru kelimeyi bilmiyor musunuz? Ana dilinizde arayın.',
   'auth.carousel.need_account':
     "Vocably'yi kullanmak için bir hesaba ihtiyacınız var.",
-  'auth.sign_in.button': 'Giriş yap veya Hesap oluştur',
   'auth.sign_in.agree': 'Giriş yaparak şunları kabul etmiş olursunuz:',
   'auth.sign_in.terms': 'Kullanım Koşulları',
   'auth.sign_in.and': 've',
   'auth.sign_in.privacy': 'Gizlilik Politikası',
+  'auth.or': 'veya',
+  'auth.email': 'E-posta',
+  'auth.password': 'Şifre',
+  'auth.show_password': 'Göster',
+  'auth.hide_password': 'Gizle',
+  'auth.social.google': 'Google ile devam et',
+  'auth.social.apple': 'Apple ile devam et',
+  'auth.sign_in.submit': 'Giriş yap',
+  'auth.sign_in.forgot_password': 'Şifrenizi mi unuttunuz?',
+  'auth.sign_in.no_account': 'Hesabınız yok mu?',
+  'auth.sign_in.create_account': 'Hesap oluştur',
+  'auth.sign_in.email_confirmed':
+    'E-posta adresiniz doğrulandı. Lütfen giriş yapın.',
+  'auth.sign_up.submit': 'Hesap oluştur',
+  'auth.sign_up.have_account': 'Zaten bir hesabınız var mı?',
+  'auth.sign_up.sign_in': 'Giriş yap',
+  'auth.sign_up.agree': 'Hesap oluşturarak şunları kabul etmiş olursunuz:',
+  'auth.verify.title': 'E-posta adresinizi doğrulayın',
+  'auth.verify.intro':
+    '{{email}} adresine bir doğrulama kodu gönderdim. Devam etmek için kodu aşağıya girin.',
+  'auth.verify.code': 'Doğrulama kodu',
+  'auth.verify.submit': 'Doğrula',
+  'auth.verify.resend': 'Yeni kod gönder',
+  'auth.verify.resend_in': '{{seconds}} sn sonra yeni kod gönder',
+  'auth.verify.resent': 'Yeni kod yolda.',
+  'auth.verify.change_email': 'Başka bir e-posta kullan',
+  'auth.forgot.title': 'Şifrenizi sıfırlayın',
+  'auth.forgot.intro':
+    'Vocably için kullandığınız e-posta adresini girin, yeni bir şifre belirlemeniz için size bir kod göndereyim.',
+  'auth.forgot.submit': 'Kod gönder',
+  'auth.forgot.back': 'Girişe dön',
+  'auth.reset.title': 'Yeni bir şifre belirleyin',
+  'auth.reset.intro': '{{email}} için bir hesap varsa sıfırlama kodu yolda.',
+  'auth.reset.code': 'Sıfırlama kodu',
+  'auth.reset.new_password': 'Yeni şifre',
+  'auth.reset.submit': 'Kaydet ve giriş yap',
+  'auth.password_rules.min_length': 'En az 8 karakter',
+  'auth.password_rules.lowercase': 'Bir küçük harf',
+  'auth.password_rules.uppercase': 'Bir büyük harf',
+  'auth.password_rules.digit': 'Bir rakam',
+  'auth.password_rules.symbol': '! veya ? gibi bir sembol',
+  'auth.errors.invalid_credentials': 'E-posta veya şifre hatalı.',
+  'auth.errors.user_not_confirmed':
+    'Lütfen önce e-posta adresinizi doğrulayın.',
+  'auth.errors.username_exists': 'Bu e-posta ile zaten bir hesap var.',
+  'auth.errors.email_taken_google':
+    'Bu e-posta, Google ile giriş yapan bir hesaba ait. Lütfen Google ile devam edin.',
+  'auth.errors.email_taken_apple':
+    'Bu e-posta, Apple ile giriş yapan bir hesaba ait. Lütfen Apple ile devam edin.',
+  'auth.errors.email_taken_google_or_apple':
+    'Bu e-posta, Google veya Apple ile giriş yapan bir hesaba ait. Lütfen bunlardan biriyle devam edin.',
+  'auth.errors.email_taken_password':
+    'Bu e-posta, şifreli bir hesaba ait. Lütfen e-posta adresiniz ve şifrenizle giriş yapın.',
+  'auth.errors.invalid_email': 'Lütfen geçerli bir e-posta adresi girin.',
+  'auth.errors.code_mismatch':
+    'Kod hatalı. Lütfen kontrol edip tekrar deneyin.',
+  'auth.errors.code_expired':
+    'Kodun süresi doldu. Lütfen yeni bir kod isteyin.',
+  'auth.errors.too_many_attempts':
+    'Çok fazla deneme. Lütfen birkaç dakika bekleyip tekrar deneyin.',
+  'auth.errors.invalid_password': 'Bu şifre gereksinimleri karşılamıyor.',
+  'auth.errors.network':
+    'Bağlanılamadı. Lütfen internet bağlantınızı kontrol edin.',
+  'auth.errors.cancelled': 'Giriş iptal edildi.',
+  'auth.errors.unknown': 'Bir şeyler ters gitti. Lütfen tekrar deneyin.',
   'auth.hands_free.not_installed':
     'Tarayıcı uzantısının yüklü veya etkin olmadığı görünüyor.',
   'auth.hands_free.please_install':
@@ -359,6 +423,10 @@ export const tr = {
   // Page Titles
   'page.sign_in': 'Giriş Yap',
   'page.auto_sign_in': 'Otomatik Giriş',
+  'page.sign_up': 'Hesap Oluştur',
+  'page.verify_email': 'E-postayı Doğrula',
+  'page.forgot_password': 'Şifremi Unuttum',
+  'page.reset_password': 'Şifreyi Sıfırla',
   'page.preview_study_step': 'Çalışma Adımını Önizle',
   'page.settings': 'Ayarlar',
   'page.feedback': 'Geri Bildirim',

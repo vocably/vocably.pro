@@ -9,7 +9,15 @@ export const authPostConfirmation = async (
   _context: Context,
   callback: Callback
 ): Promise<void> => {
-  const { userPoolId, userName } = event;
+  const { triggerSource, userPoolId, userName } = event;
+
+  // PostConfirmation also fires for PostConfirmation_ConfirmForgotPassword.
+  // Running the body then would re-add the Brevo contact and reset
+  // onboardingFlow on every password reset, re-triggering the onboarding
+  // emails the user has already had.
+  if (triggerSource !== 'PostConfirmation_ConfirmSignUp') {
+    return callback(null, event);
+  }
 
   try {
     // await adminAddUserToGroup({

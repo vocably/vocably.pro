@@ -142,7 +142,10 @@ export const SearchInput = forwardRef<SearchInputRef, Props>(
             icon={'close-circle'}
             mode="contained"
             iconColor={theme.colors.inputIconColor}
-            onPress={() => onChange('')}
+            onPress={() => {
+              onChange('');
+              inputRef.current?.focus();
+            }}
             style={{ backgroundColor: 'transparent' }}
             size={18}
           />

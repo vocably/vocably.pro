@@ -145,6 +145,220 @@ resource "aws_cloudwatch_metric_alarm" "auth_post_confirmation_error" {
   insufficient_data_actions = []
 }
 
+// Pre sign-up lambda
+//
+// Two jobs, both of which the user pool cannot do itself:
+//   1. Reject any sign-up that arrives without an email attribute. Managed
+//      login renders only *required* attributes on its sign-up form and email
+//      is not required on this pool (immutable after creation), so its form
+//      would otherwise create accounts with no email - unverifiable and
+//      unrecoverable.
+//   2. Reject an email that already belongs to a federated account, and vice
+//      versa. The pool has no username_attributes/alias_attributes (also
+//      immutable), so Cognito only enforces uniqueness on the username.
+
+resource "aws_iam_role" "auth_pre_sign_up_lambda_execution" {
+  name               = "vocably-${terraform.workspace}-auth_pre_sign_up-lambda-execution"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "auth_pre_sign_up_lambda_execution" {
+  name = "vocably-${terraform.workspace}-auth_pre_sign_up-lambda-execution-policy"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "DefaultLogging",
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource" : "*"
+      },
+      {
+        "Sid" : "Cognito",
+        "Effect" : "Allow",
+        "Action" : [
+          "cognito-idp:ListUsers"
+        ],
+        "Resource" : aws_cognito_user_pool.users.arn
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "auth_pre_sign_up_lambda_execution" {
+  role       = aws_iam_role.auth_pre_sign_up_lambda_execution.name
+  policy_arn = aws_iam_policy.auth_pre_sign_up_lambda_execution.arn
+}
+
+resource "aws_lambda_function" "auth_pre_sign_up" {
+  filename         = data.archive_file.auth_lambdas_build.output_path
+  function_name    = "vocably-${terraform.workspace}-auth-pre_sign_up"
+  role             = aws_iam_role.auth_pre_sign_up_lambda_execution.arn
+  handler          = "auth-pre-sign-up.authPreSignUp"
+  source_code_hash = data.archive_file.auth_lambdas_build.output_base64sha256
+  runtime          = "nodejs22.x"
+  timeout          = 10
+}
+
+resource "aws_lambda_permission" "auth_pre_sign_up" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.auth_pre_sign_up.function_name
+  principal     = "cognito-idp.amazonaws.com"
+
+  source_arn = aws_cognito_user_pool.users.arn
+}
+
+resource "aws_cloudwatch_log_group" "auth_pre_sign_up" {
+  name              = "/aws/lambda/${aws_lambda_function.auth_pre_sign_up.function_name}"
+  retention_in_days = 14
+}
+
+resource "aws_cloudwatch_log_metric_filter" "auth_pre_sign_up_error" {
+  name           = "error"
+  pattern        = "error"
+  log_group_name = aws_cloudwatch_log_group.auth_pre_sign_up.name
+
+  metric_transformation {
+    name      = "vocably-${terraform.workspace}-auth-pre-sign-up-error"
+    namespace = "vocably-metrics"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "auth_pre_sign_up_error" {
+  alarm_name                = "vocably-${terraform.workspace}-auth-pre-sign-up-error"
+  comparison_operator       = "GreaterThanThreshold"
+  evaluation_periods        = "1"
+  metric_name               = aws_cloudwatch_log_metric_filter.auth_pre_sign_up_error.metric_transformation[0].name
+  namespace                 = aws_cloudwatch_log_metric_filter.auth_pre_sign_up_error.metric_transformation[0].namespace
+  period                    = "3600"
+  statistic                 = "Average"
+  threshold                 = "0"
+  alarm_description         = "${terraform.workspace}: auth pre sign up lambda error"
+  alarm_actions             = [aws_sns_topic.alarm.arn]
+  insufficient_data_actions = []
+}
+
+// Custom message lambda
+//
+// Renders every Cognito auth email (verification code, password reset) as
+// branded HTML in the user's locale. The locale arrives as clientMetadata,
+// which SignUp/ForgotPassword/ResendConfirmationCode forward to this trigger.
+//
+// Requires the pool's email_configuration to be DEVELOPER: returning
+// emailMessage/emailSubject while the pool is on COGNITO_DEFAULT fails every
+// send with InvalidLambdaResponseException.
+
+resource "aws_iam_role" "auth_custom_message_lambda_execution" {
+  name               = "vocably-${terraform.workspace}-auth_custom_message-lambda-execution"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "auth_custom_message_lambda_execution" {
+  name = "vocably-${terraform.workspace}-auth_custom_message-lambda-execution-policy"
+  policy = jsonencode({
+    "Version" : "2012-10-17",
+    "Statement" : [
+      {
+        "Sid" : "DefaultLogging",
+        "Effect" : "Allow",
+        "Action" : [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ],
+        "Resource" : "*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "auth_custom_message_lambda_execution" {
+  role       = aws_iam_role.auth_custom_message_lambda_execution.name
+  policy_arn = aws_iam_policy.auth_custom_message_lambda_execution.arn
+}
+
+resource "aws_lambda_function" "auth_custom_message" {
+  filename         = data.archive_file.auth_lambdas_build.output_path
+  function_name    = "vocably-${terraform.workspace}-auth-custom_message"
+  role             = aws_iam_role.auth_custom_message_lambda_execution.arn
+  handler          = "auth-custom-message.authCustomMessage"
+  source_code_hash = data.archive_file.auth_lambdas_build.output_base64sha256
+  runtime          = "nodejs22.x"
+  timeout          = 10
+}
+
+resource "aws_lambda_permission" "auth_custom_message" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.auth_custom_message.function_name
+  principal     = "cognito-idp.amazonaws.com"
+
+  source_arn = aws_cognito_user_pool.users.arn
+}
+
+resource "aws_cloudwatch_log_group" "auth_custom_message" {
+  name              = "/aws/lambda/${aws_lambda_function.auth_custom_message.function_name}"
+  retention_in_days = 14
+}
+
+resource "aws_cloudwatch_log_metric_filter" "auth_custom_message_error" {
+  name           = "error"
+  pattern        = "error"
+  log_group_name = aws_cloudwatch_log_group.auth_custom_message.name
+
+  metric_transformation {
+    name      = "vocably-${terraform.workspace}-auth-custom-message-error"
+    namespace = "vocably-metrics"
+    value     = "1"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "auth_custom_message_error" {
+  alarm_name                = "vocably-${terraform.workspace}-auth-custom-message-error"
+  comparison_operator       = "GreaterThanThreshold"
+  evaluation_periods        = "1"
+  metric_name               = aws_cloudwatch_log_metric_filter.auth_custom_message_error.metric_transformation[0].name
+  namespace                 = aws_cloudwatch_log_metric_filter.auth_custom_message_error.metric_transformation[0].namespace
+  period                    = "3600"
+  statistic                 = "Average"
+  threshold                 = "0"
+  alarm_description         = "${terraform.workspace}: auth custom message lambda error"
+  alarm_actions             = [aws_sns_topic.alarm.arn]
+  insufficient_data_actions = []
+}
+
 // The rest of the auth
 
 resource "aws_cognito_user_pool" "users" {
@@ -158,17 +372,45 @@ resource "aws_cognito_user_pool" "users" {
   }
 
   admin_create_user_config {
-    allow_admin_create_user_only = true
+    allow_admin_create_user_only = false
   }
 
+  // Cognito only accepts emailMessage/emailSubject from the custom message
+  // trigger when it sends through SES, which is why this is DEVELOPER rather
+  // than COGNITO_DEFAULT.
+  email_configuration {
+    email_sending_account  = "DEVELOPER"
+    source_arn             = aws_sesv2_email_identity.account.arn
+    from_email_address     = "${local.auth_from_name} <${local.auth_from_address}>"
+    reply_to_email_address = local.auth_reply_to_address
+    configuration_set      = aws_sesv2_configuration_set.account.configuration_set_name
+  }
+
+  verification_message_template {
+    default_email_option = "CONFIRM_WITH_CODE"
+  }
+
+  // Replacing this pool would destroy every account. All user data is keyed by
+  // the Cognito sub (cards and user files are stored under `${sub}/...`) and
+  // RevenueCat's app_user_id is the sub, so a new pool means new subs and
+  // orphaned decks and subscriptions.
+  //
+  // prevent_destroy turns any change that forces replacement into a plan-time
+  // error. That includes adding username_attributes, alias_attributes or
+  // username_configuration, and setting required = true on any schema block
+  // below - all of which are immutable after pool creation and would otherwise
+  // silently become a destroy/create.
   lifecycle {
     ignore_changes = [
       schema
     ]
+    prevent_destroy = true
   }
 
   lambda_config {
     post_confirmation = aws_lambda_function.auth_post_confirmation.arn
+    pre_sign_up       = aws_lambda_function.auth_pre_sign_up.arn
+    custom_message    = aws_lambda_function.auth_custom_message.arn
   }
 
   schema {
@@ -350,8 +592,13 @@ resource "aws_cognito_user_pool_client" "client" {
   allowed_oauth_flows                  = ["code", "implicit"]
   allowed_oauth_scopes                 = ["profile", "email", "openid", "aws.cognito.signin.user.admin"]
   allowed_oauth_flows_user_pool_client = true
-  supported_identity_providers         = ["Google", "SignInWithApple"]
+  supported_identity_providers         = ["COGNITO", "Google", "SignInWithApple"]
   depends_on                           = [aws_cognito_identity_provider.google]
+
+  // Amplify v6 signIn uses SRP. Previously unset, which left the client on the
+  // AWS defaults.
+  explicit_auth_flows           = ["ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
+  prevent_user_existence_errors = "ENABLED"
 
   refresh_token_validity = 30
   access_token_validity  = 60

@@ -1,6 +1,3 @@
-import { CognitoUser } from '@aws-amplify/auth';
-import { getAttributeValue } from '@vocably/sulna';
-import { CognitoUserAttribute } from 'amazon-cognito-identity-js';
 import { SubscriptionStatus } from './subscription';
 
 export type UserData = {
@@ -17,44 +14,43 @@ export type UserData = {
   planName?: string;
 };
 
+/**
+ * Structurally compatible with Amplify's `FetchUserAttributesOutput`, but
+ * declared locally so the model stays free of an Amplify dependency.
+ */
+export type UserAttributes = Partial<Record<string, string>>;
+
 export const mapUserAttributes = ({
-  user,
+  username,
   attributes,
 }: {
-  user: CognitoUser;
-  attributes: CognitoUserAttribute[];
+  username: string;
+  attributes: UserAttributes;
 }): UserData => {
-  const email = attributes.find((a) => a.getName() === 'email');
-  const sub = attributes.find((a) => a.getName() === 'sub');
-  const status = attributes.find((a) => a.getName() === 'custom:status');
-  const cancellationDate = attributes.find(
-    (a) => a.getName() === 'custom:cancellation_date'
-  );
-  const nextBillDate = attributes.find(
-    (a) => a.getName() === 'custom:next_bill_date'
-  );
-  const unitPrice = attributes.find((a) => a.getName() === 'custom:unit_price');
-  const updateUrl = attributes.find((a) => a.getName() === 'custom:update_url');
-  const cancelUrl = attributes.find((a) => a.getName() === 'custom:cancel_url');
-  const productId = attributes.find((a) => a.getName() === 'custom:product_id');
-  const planName = attributes.find((a) => a.getName() === 'custom:plan_name');
+  const email = attributes['email'];
+  const sub = attributes['sub'];
 
   if (!email || !sub) {
     throw Error('Can find email and sub in user data.');
   }
 
+  const nextBillDate = attributes['custom:next_bill_date'];
+  const unitPrice = attributes['custom:unit_price'];
+  const cancellationDate = attributes['custom:cancellation_date'];
+  const productId = attributes['custom:product_id'];
+
   return {
-    username: user.getUsername(),
-    email: email.getValue(),
-    sub: sub.getValue(),
-    status: getAttributeValue(status),
-    updateUrl: getAttributeValue(updateUrl),
-    cancelUrl: getAttributeValue(cancelUrl),
-    nextBillDate: nextBillDate && new Date(nextBillDate.getValue()),
-    unitPrice: unitPrice && parseFloat(unitPrice.getValue()),
-    cancellationDate: cancellationDate && new Date(cancellationDate.getValue()),
-    productId: productId && parseInt(productId.getValue()),
-    planName: planName && planName.getValue(),
+    username,
+    email,
+    sub,
+    status: attributes['custom:status'] as SubscriptionStatus | undefined,
+    updateUrl: attributes['custom:update_url'],
+    cancelUrl: attributes['custom:cancel_url'],
+    nextBillDate: nextBillDate ? new Date(nextBillDate) : undefined,
+    unitPrice: unitPrice ? parseFloat(unitPrice) : undefined,
+    cancellationDate: cancellationDate ? new Date(cancellationDate) : undefined,
+    productId: productId ? parseInt(productId) : undefined,
+    planName: attributes['custom:plan_name'],
   };
 };
 

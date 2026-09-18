@@ -53,11 +53,74 @@ export const pt = {
     'Não sabe a palavra certa? Procure-a no seu idioma nativo.',
   'auth.carousel.need_account':
     'Você precisará de uma conta para usar o Vocably.',
-  'auth.sign_in.button': 'Entrar ou criar uma conta',
   'auth.sign_in.agree': 'Ao entrar, você concorda com nossos',
   'auth.sign_in.terms': 'Termos e Condições',
   'auth.sign_in.and': 'e',
   'auth.sign_in.privacy': 'Política de Privacidade',
+  'auth.or': 'ou',
+  'auth.email': 'E-mail',
+  'auth.password': 'Senha',
+  'auth.show_password': 'Mostrar',
+  'auth.hide_password': 'Ocultar',
+  'auth.social.google': 'Continuar com o Google',
+  'auth.social.apple': 'Continuar com a Apple',
+  'auth.sign_in.submit': 'Entrar',
+  'auth.sign_in.forgot_password': 'Esqueceu a senha?',
+  'auth.sign_in.no_account': 'Não tem uma conta?',
+  'auth.sign_in.create_account': 'Criar uma conta',
+  'auth.sign_in.email_confirmed':
+    'Seu e-mail foi confirmado. Entre na sua conta.',
+  'auth.sign_up.submit': 'Criar conta',
+  'auth.sign_up.have_account': 'Já tem uma conta?',
+  'auth.sign_up.sign_in': 'Entrar',
+  'auth.sign_up.agree': 'Ao criar uma conta, você concorda com nossos',
+  'auth.verify.title': 'Confirme seu e-mail',
+  'auth.verify.intro':
+    'Enviei um código de confirmação para {{email}}. Digite-o abaixo para continuar.',
+  'auth.verify.code': 'Código de confirmação',
+  'auth.verify.submit': 'Confirmar',
+  'auth.verify.resend': 'Enviar um novo código',
+  'auth.verify.resend_in': 'Enviar um novo código em {{seconds}} s',
+  'auth.verify.resent': 'Um novo código está a caminho.',
+  'auth.verify.change_email': 'Usar outro e-mail',
+  'auth.forgot.title': 'Redefina sua senha',
+  'auth.forgot.intro':
+    'Digite o e-mail que você usa no Vocably e eu enviarei um código para você escolher uma nova senha.',
+  'auth.forgot.submit': 'Enviar código',
+  'auth.forgot.back': 'Voltar para a entrada',
+  'auth.reset.title': 'Escolha uma nova senha',
+  'auth.reset.intro':
+    'Se existir uma conta para {{email}}, o código de redefinição está a caminho.',
+  'auth.reset.code': 'Código de redefinição',
+  'auth.reset.new_password': 'Nova senha',
+  'auth.reset.submit': 'Salvar e entrar',
+  'auth.password_rules.min_length': 'Pelo menos 8 caracteres',
+  'auth.password_rules.lowercase': 'Uma letra minúscula',
+  'auth.password_rules.uppercase': 'Uma letra maiúscula',
+  'auth.password_rules.digit': 'Um número',
+  'auth.password_rules.symbol': 'Um símbolo, como ! ou ?',
+  'auth.errors.invalid_credentials': 'O e-mail ou a senha estão incorretos.',
+  'auth.errors.user_not_confirmed': 'Confirme seu e-mail primeiro.',
+  'auth.errors.username_exists': 'Já existe uma conta com este e-mail.',
+  'auth.errors.email_taken_google':
+    'Este e-mail já pertence a uma conta que entra com o Google. Continue com o Google.',
+  'auth.errors.email_taken_apple':
+    'Este e-mail já pertence a uma conta que entra com a Apple. Continue com a Apple.',
+  'auth.errors.email_taken_google_or_apple':
+    'Este e-mail já pertence a uma conta que entra com o Google ou a Apple. Continue com uma dessas opções.',
+  'auth.errors.email_taken_password':
+    'Este e-mail já pertence a uma conta com senha. Entre com seu e-mail e sua senha.',
+  'auth.errors.invalid_email': 'Digite um endereço de e-mail válido.',
+  'auth.errors.code_mismatch':
+    'O código não está correto. Verifique e tente novamente.',
+  'auth.errors.code_expired': 'O código expirou. Peça um novo.',
+  'auth.errors.too_many_attempts':
+    'Muitas tentativas. Aguarde alguns minutos e tente novamente.',
+  'auth.errors.invalid_password': 'Esta senha não atende aos requisitos.',
+  'auth.errors.network':
+    'Não foi possível conectar. Verifique sua conexão com a internet.',
+  'auth.errors.cancelled': 'A entrada foi cancelada.',
+  'auth.errors.unknown': 'Algo deu errado. Tente novamente.',
   'auth.hands_free.not_installed':
     'Parece que a extensão do navegador não está instalada ou ativada.',
   'auth.hands_free.please_install':
@@ -354,6 +417,10 @@ export const pt = {
   // Page Titles
   'page.sign_in': 'Entrar',
   'page.auto_sign_in': 'Entrada automática',
+  'page.sign_up': 'Criar uma conta',
+  'page.verify_email': 'Confirmar e-mail',
+  'page.forgot_password': 'Esqueci a senha',
+  'page.reset_password': 'Redefinir senha',
   'page.preview_study_step': 'Pré-visualização da etapa de estudo',
   'page.settings': 'Configurações',
   'page.feedback': 'Feedback',

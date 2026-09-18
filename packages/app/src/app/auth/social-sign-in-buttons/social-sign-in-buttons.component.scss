@@ -1,0 +1,139 @@
+// Google and Apple both require their sign-in buttons to keep a specific
+// surface, stroke, logo and label treatment, so these buttons deliberately opt
+// out of the generic `.button` styling and are themed on their own.
+
+$height: 2.75rem; // 44px — Apple's minimum target, above Google's 40px.
+$radius: 8px;
+$icon-size: 1.25rem; // 20px slot, holds an 18px logo or the spinner.
+$gap: 0.75rem; // 12px between the logo and the label, per Google.
+
+.social {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
+  width: 100%;
+  min-height: $height;
+  padding: 0 $gap;
+  border: 1px solid;
+  border-radius: $radius;
+  font-size: 0.875rem; // 14px, the size both guidelines specify.
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    background-color 200ms,
+    border-color 200ms,
+    opacity 200ms;
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+  }
+
+  &[disabled] {
+    cursor: default;
+
+    // The button that triggered the redirect keeps full contrast while its
+    // spinner is running; only the other one dims.
+    &:not(.loading) {
+      opacity: 0.5;
+    }
+  }
+
+  border-color: #8e918f;
+
+  @media (prefers-color-scheme: dark) {
+    border-color: #747775;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: $icon-size;
+    height: $icon-size;
+  }
+
+  &__label {
+    white-space: nowrap;
+  }
+
+  ion-spinner {
+    width: 100%;
+    height: 100%;
+    color: currentColor;
+  }
+}
+
+// Google — full-colour logo, which never changes, on Google's dark surface for
+// light backgrounds and its light surface for dark ones, matching Apple below.
+.google {
+  font-family:
+    Roboto,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  background: #131314;
+  color: #e3e3e3;
+
+  svg {
+    width: 1.125rem; // 18px
+    height: 1.125rem;
+  }
+
+  &:hover:not([disabled]),
+  &:active:not([disabled]) {
+    background: #1e1f20;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #ffffff;
+    color: #1f1f1f;
+
+    &:hover:not([disabled]),
+    &:active:not([disabled]) {
+      background: #f2f2f2;
+    }
+  }
+}
+
+// Apple — the black button on light backgrounds, the white one on dark.
+.apple {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+  background: #000000;
+  color: #ffffff;
+
+  svg {
+    width: auto;
+    height: 1.1875rem; // 19px, ~43% of the button height, as Apple specifies.
+    // The glyph's leaf makes it sit low; nudge it back to optical centre.
+    transform: translateY(-1px);
+  }
+
+  &:hover:not([disabled]),
+  &:active:not([disabled]) {
+    background: #1a1a1a;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #ffffff;
+    color: #000000;
+
+    &:hover:not([disabled]),
+    &:active:not([disabled]) {
+      background: #ebebeb;
+    }
+  }
+}

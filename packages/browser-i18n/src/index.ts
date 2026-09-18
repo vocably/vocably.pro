@@ -16,7 +16,6 @@ export type LanguageTranslationOption =
 const SUPPORTED_LOCALES: Locale[] = ['en', 'ru', 'uk', 'vi', 'tr', 'es', 'pt'];
 
 export const detectLocale = (): Locale => {
-  console.log('detectLocale');
   const languages =
     typeof navigator !== 'undefined'
       ? navigator.languages?.length
@@ -89,6 +88,8 @@ export const buildT =
       str
     );
   };
+
+export { messageTranslations } from './messages';
 
 export const languageTranslations: Translations = {
   en,

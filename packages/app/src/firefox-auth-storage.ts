@@ -10,9 +10,13 @@
  * 2. This class sends postMessage to the content script (external-bridge.ts)
  * 3. Content script forwards to service worker via runtime.sendMessage
  * 4. Service worker stores in browser.storage.local
+ *
+ * Mirrors `AppAuthStorage` from `@vocably/pontis`: it implements Amplify v6's
+ * async `KeyValueStorageInterface` and pulls the extension's items in once,
+ * before the first operation, so the two are interchangeable.
  */
 
-import { StorageHelper } from '@aws-amplify/core';
+import { defaultStorage, KeyValueStorageInterface } from '@aws-amplify/core';
 
 interface ExtensionMessage {
   target: 'vocably-extension';
@@ -28,15 +32,12 @@ interface ExtensionResponse {
   error?: string;
 }
 
-export class FirefoxAppAuthStorage {
-  private localStorage: Storage;
+export class FirefoxAppAuthStorage implements KeyValueStorageInterface {
   private syncPromise: Promise<void> | null = null;
   private bridgeReady = false;
   private pendingMessages: Array<() => void> = [];
 
-  constructor() {
-    this.localStorage = new StorageHelper().getStorage();
-
+  constructor(private localStorage: KeyValueStorageInterface = defaultStorage) {
     // Listen for bridge ready signal
     window.addEventListener('message', (event) => {
       if (event.data?.target === 'vocably-extension-ready') {
@@ -102,39 +103,46 @@ export class FirefoxAppAuthStorage {
     }
   }
 
-  setItem(key: string, value: string): string {
-    this.localStorage.setItem(key, value);
+  async setItem(key: string, value: string): Promise<void> {
+    await this.sync();
+    await this.localStorage.setItem(key, value);
     this.sendWhenReady('authStorage.setItem', { key, value });
-    return value;
   }
 
-  getItem(key: string): string | null {
+  async getItem(key: string): Promise<string | null> {
+    await this.sync();
     return this.localStorage.getItem(key);
   }
 
-  removeItem(key: string): void {
-    this.localStorage.removeItem(key);
+  async removeItem(key: string): Promise<void> {
+    await this.sync();
+    await this.localStorage.removeItem(key);
     this.sendWhenReady('authStorage.removeItem', key);
   }
 
-  clear(): void {
-    this.localStorage.clear();
+  async clear(): Promise<void> {
+    await this.sync();
+    await this.localStorage.clear();
     this.sendWhenReady('authStorage.clear', undefined);
   }
 
+  /**
+   * Copies the extension's items into the local storage. Performed once per
+   * instance, before the first storage operation.
+   */
   sync(): Promise<void> {
     if (this.syncPromise) {
       return this.syncPromise;
     }
 
     this.syncPromise = this.sendToExtension('authStorage.getAll', undefined)
-      .then((data) => {
+      .then(async (data) => {
         if (data && typeof data === 'object') {
-          Object.entries(data as Record<string, string>).forEach(
-            ([key, value]) => {
-              this.localStorage.setItem(key, value);
-            }
-          );
+          for (const [key, value] of Object.entries(
+            data as Record<string, string>
+          )) {
+            await this.localStorage.setItem(key, value);
+          }
         }
       })
       .catch((err) => {

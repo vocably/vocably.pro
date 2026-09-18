@@ -1,26 +1,28 @@
 import { expect } from '@jest/globals';
 import { difference } from 'lodash-es';
 
+type MatcherResult = {
+  pass: boolean;
+  message: () => string;
+};
+
 // @ts-ignore
 declare global {
   namespace jest {
     interface Matchers<R> {
-      toHaveSomeOf(expected: string | string[]): CustomMatcherResult;
+      toHaveSomeOf(expected: string | string[]): MatcherResult;
     }
   }
 
   namespace jasmine {
     interface Matchers<T> {
-      toHaveSomeOf(expected: string | string[]): CustomMatcherResult;
+      toHaveSomeOf(expected: string | string[]): MatcherResult;
     }
   }
 }
 
 expect.extend({
-  toHaveSomeOf(
-    received: string,
-    expected: string | string[]
-  ): jest.CustomMatcherResult {
+  toHaveSomeOf(received: string, expected: string | string[]): MatcherResult {
     const receivedArray = received.split(',').map((s) => s.trim());
     const expectedArray = Array.isArray(expected)
       ? expected

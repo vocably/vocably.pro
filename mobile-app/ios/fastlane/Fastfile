@@ -20,15 +20,48 @@ platform :ios do
     setup_circle_ci
   end
 
+  APP_IDENTIFIERS = [
+    "pro.vocably.app",
+    "pro.vocably.app.Vocably-for-Safari",
+    "pro.vocably.app.VocablyProShare"
+  ]
+
   desc 'Fetch certificates and provisioning profiles'
   lane :certificates do
     match(
       readonly: true,
-      app_identifier: [
-        "pro.vocably.app",
-        "pro.vocably.app.Vocably-for-Safari",
-        "pro.vocably.app.VocablyProShare"
-      ]
+      app_identifier: APP_IDENTIFIERS
+    )
+  end
+
+  desc 'Regenerate the iOS provisioning profiles. Run this when the build fails ' \
+       'with "Provisioning profile ... expired" or "doesn\'t include signing certificate".'
+  lane :renew_profiles do
+    # Also authenticates Spaceship, which the cleanup below relies on.
+    app_store_connect_api_key(
+      is_key_content_base64: true,
+    )
+
+    # match names its profiles "match AppStore <app identifier>", but it can't reuse
+    # a name that is still taken on the portal - it falls back to appending a
+    # timestamp, and the resulting profile no longer matches the
+    # PROVISIONING_PROFILE_SPECIFIER pinned in VocablyPro.xcodeproj. So delete the
+    # match-managed profiles up front and let the match call below recreate them
+    # under their canonical names.
+    APP_IDENTIFIERS.each do |app_identifier|
+      name = "match AppStore #{app_identifier}"
+      Spaceship::ConnectAPI::Profile.all(filter: { name: name }).each do |profile|
+        next unless profile.name == name || profile.name.match?(/^#{Regexp.escape(name)} \d+$/)
+
+        UI.important("Deleting profile '#{profile.name}' (#{profile.profile_state})")
+        profile.delete!
+      end
+    end
+
+    match(
+      readonly: false,
+      force: true,
+      app_identifier: APP_IDENTIFIERS
     )
   end
 

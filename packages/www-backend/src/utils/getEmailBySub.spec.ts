@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { getEmailBySub } from './getEmailBySub';
 
 describe('getEmailBySub', () => {

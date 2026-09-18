@@ -1,22 +1,13 @@
-import { Auth } from '@aws-amplify/auth';
 import { getUserStaticMetadata } from '@vocably/api';
-import { get } from 'lodash-es';
 import { CardsLimit } from '@vocably/model';
+import { isInPaidGroup, isSignedIn } from './session';
 
 export const getCardsLimit = async (): Promise<CardsLimit> => {
-  const user = await Auth.currentAuthenticatedUser().catch(() => false);
-
-  if (!user) {
+  if (!(await isSignedIn())) {
     return 'unlimited';
   }
 
-  const isPaid = get(
-    user,
-    'signInUserSession.accessToken.payload.cognito:groups',
-    []
-  ).includes('paid');
-
-  if (isPaid) {
+  if (await isInPaidGroup()) {
     return 'unlimited';
   }
 

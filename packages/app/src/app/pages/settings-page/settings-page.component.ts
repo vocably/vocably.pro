@@ -7,7 +7,7 @@ import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { RouterLink } from '@angular/router';
-import { Auth } from '@aws-amplify/auth';
+import { deleteUser } from 'aws-amplify/auth';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { saveUserMetadata } from '@vocably/api';
@@ -88,7 +88,7 @@ export class SettingsPageComponent implements OnInit {
         message: 'Deleting account...',
       });
       localStorage.removeItem('onboardedLanguages');
-      await Auth.deleteUser();
+      await deleteUser();
       loaderRef.close();
     });
   }

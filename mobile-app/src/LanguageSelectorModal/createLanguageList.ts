@@ -1,6 +1,7 @@
 import { GoogleLanguage, languageList } from '@vocably/model';
 import { i18n } from '../i18n';
 import { upperFirst } from 'lodash-es';
+import { localLanguages } from './localLanguages';
 
 export type LanguageListItem = {
   selected: boolean;
@@ -30,7 +31,7 @@ export const createLanguageList = ({
   const allLanguages = Object.keys(languageList)
     .map((key) => ({
       key,
-      alias: languageList[key as GoogleLanguage],
+      alias: `${languageList[key as GoogleLanguage]} ${localLanguages[key as GoogleLanguage]}`,
       label: i18n.t(`language.nominative_${key}`),
     }))
     .sort((a, b) => a.label.localeCompare(b.label));

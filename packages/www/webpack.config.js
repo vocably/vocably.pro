@@ -115,6 +115,10 @@ module.exports = (env) => {
       new CopyPlugin({
         patterns: [{ from: 'src/robots.txt', to: 'robots.txt' }],
       }),
+      // Lets iOS offer passwords saved for vocably.pro in the mobile app.
+      new CopyPlugin({
+        patterns: [{ from: 'src/.well-known', to: '.well-known' }],
+      }),
       new WebpackWatchPlugin({
         files: [`${pagesDir}/${pagesPattern}`, './environment.js'],
       }),

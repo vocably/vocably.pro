@@ -1,8 +1,8 @@
-import { Auth } from '@aws-amplify/auth';
 import { mapUserAttributes, Result, UserData } from '@vocably/model';
+import { fetchUserAttributes, getCurrentUser } from 'aws-amplify/auth';
 
 export const getUserAttributes = async (): Promise<Result<UserData>> => {
-  const user = await Auth.currentAuthenticatedUser().catch(() => false);
+  const user = await getCurrentUser().catch(() => null);
 
   if (!user) {
     return {
@@ -13,10 +13,10 @@ export const getUserAttributes = async (): Promise<Result<UserData>> => {
   }
 
   try {
-    const attributes = await Auth.userAttributes(user);
+    const attributes = await fetchUserAttributes();
     return {
       success: true,
-      value: mapUserAttributes({ user, attributes }),
+      value: mapUserAttributes({ username: user.username, attributes }),
     };
   } catch (e) {
     return {

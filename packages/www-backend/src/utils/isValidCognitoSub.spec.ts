@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { isValidCognitoSub } from './isValidCognitoSub';
 
 describe('isValidCognitoSub', () => {
