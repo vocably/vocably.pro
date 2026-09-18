@@ -26,7 +26,6 @@ import { AuthService } from '../../auth.service';
 export class HandsFreePageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
-  public isInstalled: boolean | undefined = undefined;
   public browserType = browserType;
 
   constructor(
@@ -35,16 +34,8 @@ export class HandsFreePageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    isExtensionInstalled$
-      .pipe(
-        takeUntil(this.destroy$),
-        tap((isInstalled) => {
-          this.isInstalled = isInstalled;
-        }),
-        filter((isInstalled) => isInstalled === true),
-        take(1),
-        switchMap(() => this.auth.isLoggedIn$)
-      )
+    this.auth.isLoggedIn$
+      .pipe(takeUntil(this.destroy$))
       .subscribe(async (isLoggedIn) => {
         if (isLoggedIn) {
           await this.auth.refreshToken();

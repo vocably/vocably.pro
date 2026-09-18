@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../../header/header.component';
-import { CarouselComponent } from '../../carousel/carousel.component';
 import { SignInComponent } from '../../sign-in/sign-in.component';
 import { TranslocoPipe } from '@jsverse/transloco';
 
@@ -8,7 +7,7 @@ import { TranslocoPipe } from '@jsverse/transloco';
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
   styleUrls: ['./sign-in-page.component.scss'],
-  imports: [HeaderComponent, CarouselComponent, SignInComponent, TranslocoPipe],
+  imports: [HeaderComponent, SignInComponent, TranslocoPipe],
 })
 export class SignInPageComponent implements OnInit {
   constructor() {}

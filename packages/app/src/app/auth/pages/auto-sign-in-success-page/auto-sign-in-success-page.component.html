@@ -26,7 +26,7 @@
               {{ 'auth.sign_in_success.close_tab' | transloco }}
             </button>
           </div>
-          <div>
+          <div *ngIf="isExtensionInstalled">
             <a href="welcome" class="button outline block">{{
               'auth.sign_in_success.show_how' | transloco
             }}</a>

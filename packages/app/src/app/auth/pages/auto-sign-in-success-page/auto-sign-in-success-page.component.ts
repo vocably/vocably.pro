@@ -5,6 +5,7 @@ import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { from, Subject, takeUntil } from 'rxjs';
 import { HeaderComponent } from '../../../header/header.component';
+import { isExtensionInstalled$ } from '../../../isExtensionInstalled';
 import { AuthService } from '../../auth.service';
 import { clearIntendedDestination } from '../../intendedDestination';
 import {
@@ -25,6 +26,10 @@ export class AutoSignInSuccessPageComponent implements OnInit {
   public isLoading = true;
 
   public canBeAutomaticallyClosed = !!window.opener;
+
+  // Undefined until the first ping answers, so the walkthrough link doesn't
+  // flash for a visitor who has no extension to walk through.
+  public isExtensionInstalled: boolean | undefined = undefined;
 
   constructor(
     private auth: AuthService,
@@ -59,6 +64,12 @@ export class AutoSignInSuccessPageComponent implements OnInit {
     if (this.redirectFailedSignIn()) {
       return;
     }
+
+    isExtensionInstalled$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((isInstalled) => {
+        this.isExtensionInstalled = isInstalled;
+      });
 
     from(this.auth.isLoggedIn$)
       .pipe(takeUntil(this.destroy$))

@@ -4,51 +4,7 @@
 <div class="container bottom">
   <div class="hero">
     <div class="hero-body text-center">
-      <ng-container *ngIf="isInstalled === false">
-        <div>
-          <p>{{ 'auth.hands_free.not_installed' | transloco }}</p>
-          {{ 'auth.hands_free.please_install' | transloco }}
-        </div>
-        <div *ngIf="browserType !== 'normal'" style="margin-top: 1rem">
-          <app-expansion [label]="'auth.hands_free.but_installed' | transloco">
-            <ng-container *ngIf="browserType === 'ios-safari'">
-              <div class="text-left">
-                <p>
-                  {{ 'auth.hands_free.safari_bug' | transloco }}
-                </p>
-                <p>{{ 'auth.hands_free.ios_steps_title' | transloco }}</p>
-
-                <ol class="mb-1">
-                  <li>
-                    {{ 'auth.hands_free.ios_step1' | transloco }}
-                  </li>
-                  <li>{{ 'auth.hands_free.ios_step2' | transloco }}</li>
-                  <li>{{ 'auth.hands_free.ios_step3' | transloco }}</li>
-                  <li>
-                    {{ 'auth.hands_free.ios_step4' | transloco }}
-                  </li>
-                </ol>
-
-                <div>
-                  {{ 'auth.hands_free.sorry' | transloco }}
-                </div>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="browserType === 'desktop-safari'">
-              <div class="text-left">
-                <p>
-                  {{ 'auth.hands_free.safari_bug' | transloco }}
-                </p>
-                <p>{{ 'auth.hands_free.restart_safari' | transloco }}</p>
-                <div>
-                  {{ 'auth.hands_free.sorry' | transloco }}
-                </div>
-              </div>
-            </ng-container>
-          </app-expansion>
-        </div>
-      </ng-container>
-      <ng-container *ngIf="isInstalled">
+      <ng-container>
         <ion-spinner name="dots" class="mr-1"></ion-spinner
         >{{ 'auth.hands_free.signing_in' | transloco }}
       </ng-container>
