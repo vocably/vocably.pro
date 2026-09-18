@@ -3,6 +3,11 @@
 
 $input-padding-x: 14px;
 
+// How far the card action sticks out above the card container, to visually
+// align the buttons with the card text. The sign in cover compensates for it,
+// so keep both usages in sync.
+$card-action-offset: 0.3em;
+
 .vocably-mb-6 {
   margin-bottom: 6px;
 }
@@ -57,7 +62,7 @@ $input-padding-x: 14px;
   .vocably-card-action {
     $size: 24px;
     position: absolute;
-    top: -0.3em;
+    top: -$card-action-offset;
     right: 0;
     min-width: $size;
     height: $size;
@@ -206,6 +211,9 @@ $sign-in-slide-duration: 300ms;
 .vocably-sign-in-cover {
   grid-area: 1 / 1;
   z-index: 2;
+  // The card action sticks out above the grid area, so the cover has to start
+  // that much higher to fully cover the action buttons.
+  margin-top: -$card-action-offset;
   overflow: hidden;
   // Zero width does not contribute to the intrinsic width of the card,
   // so covering the card does not make the popup wider.
