@@ -54,6 +54,10 @@ export class VocablyTranslationCards {
   @Prop({ mutable: true }) disabled = false;
   @Prop() isLightweight = false;
   @Prop() isLoggedInUser = false;
+  // Hides the add and remove buttons while the deck they depend on is still
+  // unknown. The space they occupy is reserved by `.vocably-safe-action-area`,
+  // so revealing them later doesn't reflow the card.
+  @Prop() hideActions = false;
   @Prop() playAudioPronunciation: (
     payload: AudioPronunciationPayload
   ) => Promise<Result<true>>;
@@ -364,7 +368,7 @@ export class VocablyTranslationCards {
               )}
               <div class="vocably-card-container">
                 <div class="vocably-card-action">
-                  {isCardItem(card) && (
+                  {!this.hideActions && isCardItem(card) && (
                     <div
                       style={{
                         display: 'flex',
@@ -431,7 +435,7 @@ export class VocablyTranslationCards {
                       </button>
                     </div>
                   )}
-                  {isDetachedCardItem(card) && (
+                  {!this.hideActions && isDetachedCardItem(card) && (
                     <button
                       class={{
                         'vocably-card-action-button': true,

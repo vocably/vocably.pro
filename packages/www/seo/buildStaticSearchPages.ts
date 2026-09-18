@@ -194,7 +194,7 @@ export const buildStaticSearchPages = async ({
                 success: true,
                 value: translationCards,
               })
-            )}" isLightweight="true" showLanguages="false"></vocably-translation></div></div>`
+            )}" isLightweight="true" showLanguages="false" hideActions="true"></vocably-translation></div></div>`
           )
           .replace(
             replaceExpressions.canonical,

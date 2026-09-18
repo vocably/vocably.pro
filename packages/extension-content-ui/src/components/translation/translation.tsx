@@ -108,6 +108,10 @@ export class VocablyTranslation {
   @Prop() isLightweight = false;
   @Prop() isLoadingExtraWords = false;
   @Prop() isLoggedInUser = false;
+  // Keeps the add and remove buttons out of the first render while the deck is
+  // still unknown, so a card that is already in the collection doesn't flash a
+  // Learn button before it turns into the remove button.
+  @Prop({ mutable: true }) hideActions = false;
 
   @Event() ratingInteraction: EventEmitter<RateInteractionPayload>;
 
@@ -164,6 +168,10 @@ export class VocablyTranslation {
 
     if (isString(this.el.getAttribute('showLanguages'))) {
       this.showLanguages = JSON.parse(this.el.getAttribute('showLanguages')!);
+    }
+
+    if (isString(this.el.getAttribute('hideActions'))) {
+      this.hideActions = JSON.parse(this.el.getAttribute('hideActions')!);
     }
 
     this.resultChanged(this.result);
@@ -344,6 +352,7 @@ export class VocablyTranslation {
                 disabled={this.disabled}
                 isLightweight={this.isLightweight}
                 isLoggedInUser={this.isLoggedInUser}
+                hideActions={this.hideActions}
                 playAudioPronunciation={this.playAudioPronunciation}
                 updateCard={this.updateCard}
                 attachTag={this.attachTag}
@@ -408,6 +417,7 @@ export class VocablyTranslation {
                       isUpdating={this.isUpdating}
                       disabled={this.disabled}
                       isLightweight={this.isLightweight}
+                      hideActions={this.hideActions}
                       playAudioPronunciation={this.playAudioPronunciation}
                       updateCard={this.updateCard}
                       attachTag={this.attachTag}

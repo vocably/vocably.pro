@@ -198,6 +198,11 @@ const wireTranslation = (translation: HTMLVocablyTranslationElement) => {
 
   translation.paymentLink = '/app/subscribe';
 
+  // Which cards are already in the collection is only known once the deck has
+  // been loaded, so the add and remove buttons stay hidden until then. Without
+  // it a card the visitor already has flashes a Learn button first.
+  translation.hideActions = true;
+
   // Adding and removing are events rather than callbacks, so the result has to
   // be put back onto the element here.
   // @ts-ignore
@@ -275,14 +280,21 @@ const wireTranslation = (translation: HTMLVocablyTranslationElement) => {
     };
   };
 
-  isLoggedIn().then((result) => {
+  isLoggedIn().then(async (result) => {
     const loggedIn = result.success && result.value;
     translation.isLoggedInUser = loggedIn;
 
     if (loggedIn) {
-      loadDeck();
+      // `loadDeck` gives up quietly on a failed deck request, so the buttons
+      // are revealed either way - the visitor still gets to add a card.
+      await loadDeck();
+      translation.hideActions = false;
       return;
     }
+
+    // A signed out visitor has no deck to wait for. The Learn button offers to
+    // sign in instead of adding.
+    translation.hideActions = false;
 
     onSignedIn(() => {
       translation.isLoggedInUser = true;
