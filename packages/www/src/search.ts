@@ -15,6 +15,7 @@ import { playAudioPronunciation } from './search/playAudioPronunciation';
 import { searchConfig } from './constants';
 
 import posthog from 'posthog-js';
+import { isLoggedIn } from './user';
 
 posthog.init('phc_zSkRhQ7tE4RDFRdxIVXzWwJ66ACL9QAHnyrRpRknyHj', {
   api_host: 'https://api-e.vocably.pro',
@@ -180,6 +181,11 @@ if (existingTranslation) {
   posthog.capture('search-seo-page-opened');
   existingTranslation.playAudioPronunciation = playAudioPronunciation;
   existingTranslation.addEventListener('addCard', onLearn);
+
+  isLoggedIn().then(
+    (result) =>
+      (existingTranslation.isLoggedInUser = result.success && result.value)
+  );
 }
 
 searchForm.addEventListener('valuesChange', (e: CustomEvent<SearchValues>) => {
@@ -247,6 +253,10 @@ const analyze = async (searchValues: SearchValues) => {
   translation.loading = false;
   translation.playAudioPronunciation = playAudioPronunciation;
   translation.addEventListener('addCard', onLearn);
+
+  isLoggedIn().then(
+    (result) => (translation.isLoggedInUser = result.success && result.value)
+  );
 
   resultsContainer.innerHTML = '';
   resultsContainer.appendChild(translation);

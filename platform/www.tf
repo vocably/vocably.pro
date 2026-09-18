@@ -6,6 +6,8 @@ module.exports = {
     apiBaseUrl: 'https://${local.api_domain}',
     umamiWebsiteId: '${var.umami_website_id}',
     publicApiBaseUrl: 'https://${local.public_api_domain}',
+    authUserPoolId: '${aws_cognito_user_pool.users.id}',
+    authUserPoolWebClientId: '${aws_cognito_user_pool_client.client.id}',
     paddleClientSideToken: '${var.paddle_client_side_token}',
     paddleMonthlyPriceId: '${var.paddle_monthly_premium_id}',
     paddleYearlyPriceId: '${var.paddle_yearly_premium_id}',
