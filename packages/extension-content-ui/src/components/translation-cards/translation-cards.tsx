@@ -473,12 +473,14 @@ export class VocablyTranslationCards {
                         });
                       }}
                     >
-                      {this.isUpdating === card && (
-                        <vocably-icon-spin></vocably-icon-spin>
-                      )}
-                      {this.isUpdating !== card && (
-                        <vocably-icon-plus></vocably-icon-plus>
-                      )}
+                      <span class="vocably-card-action-icon">
+                        {this.isUpdating === card && (
+                          <vocably-icon-spin></vocably-icon-spin>
+                        )}
+                        {this.isUpdating !== card && (
+                          <vocably-icon-plus></vocably-icon-plus>
+                        )}
+                      </span>
                       <span
                         style={{
                           marginLeft: '2px',

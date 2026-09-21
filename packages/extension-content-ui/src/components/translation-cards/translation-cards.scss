@@ -68,6 +68,20 @@ $card-action-offset: 0.3em;
     height: $size;
     line-height: $size;
     text-align: center;
+
+    // The icons are lazily loaded components, so a freshly inserted one has no
+    // size of its own until it renders a frame later. The slot holds the space
+    // for it, otherwise swapping an icon for the spinner makes the button
+    // collapse and snap back.
+    .vocably-card-action-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+      width: $size;
+      height: $size;
+      overflow: hidden;
+    }
   }
 
   .vocably-card-action-button {
