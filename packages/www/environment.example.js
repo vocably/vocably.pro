@@ -5,7 +5,7 @@ module.exports = {
     umamiWebsiteId: '00593c34-002d-42f9-b128-445bdd1df6f6',
     publicApiBaseUrl: 'https://public-api.dev.env.vocably.pro',
     authUserPoolId: 'eu-central-1_Tpn3gUQYg',
-    authUserPoolWebClientId: '4j2gqrq3ne32jqee4ddu15p1g4',
+    authUserPoolWebClientId: '4qft2dl6g3okrjofjjfng1mqfo',
     paddleClientSideToken: 'test_36e6911acf8912e58cde7765548',
     paddleMonthlyPriceId: 'pri_01jyzzammkt25f6mmf8tjsxr9p',
     paddleYearlyPriceId: 'pri_01jz0ps01b1kcz9brm2877cbhg',

@@ -236,16 +236,33 @@ const wireTranslation = (translation: HTMLVocablyTranslationElement) => {
     window.open(signInUrl, '_blank')?.focus();
   });
 
+  // On a prerendered page this element is wired long before its implementation
+  // chunk has loaded. Stencil replays the properties set on it while it was
+  // still a plain element, but the component's own `connectedCallback` then
+  // re-reads `result`, `isLightweight`, `showLanguages` and `hideActions` from
+  // the attributes the page was rendered with and overwrites them. So anything
+  // that has to survive is applied only once the component is up - waiting for
+  // the tag to be defined is not enough, the definition lands before the chunk.
+  const componentReady = customElements
+    .whenDefined('vocably-translation')
+    .then(() => translation.componentOnReady());
+
+  // Reveals the add and remove buttons the wiring above hid. Deferred for the
+  // same reason: the prerendered element carries `hideActions="true"`, which
+  // `connectedCallback` would otherwise apply on top of this.
+  const showActions = async () => {
+    await componentReady;
+    translation.hideActions = false;
+  };
+
   const loadDeck = async () => {
     configureDeckApi();
 
     // On a prerendered page the analysis arrives in the element's `result`
-    // attribute, which the component parses in its own `connectedCallback`.
-    // Waiting for the tag to be defined is not enough: the implementation is
-    // loaded in a separate chunk, so at that point `result` is still empty,
-    // no deck would be fetched, and every card would look addable.
-    await customElements.whenDefined('vocably-translation');
-    await translation.componentOnReady();
+    // attribute, which the component parses in its own `connectedCallback`, so
+    // reading it any earlier would find nothing: no deck would be fetched and
+    // every card would look addable.
+    await componentReady;
 
     const result = translation.result;
 
@@ -288,13 +305,13 @@ const wireTranslation = (translation: HTMLVocablyTranslationElement) => {
       // `loadDeck` gives up quietly on a failed deck request, so the buttons
       // are revealed either way - the visitor still gets to add a card.
       await loadDeck();
-      translation.hideActions = false;
+      await showActions();
       return;
     }
 
     // A signed out visitor has no deck to wait for. The Learn button offers to
     // sign in instead of adding.
-    translation.hideActions = false;
+    await showActions();
 
     onSignedIn(() => {
       translation.isLoggedInUser = true;
