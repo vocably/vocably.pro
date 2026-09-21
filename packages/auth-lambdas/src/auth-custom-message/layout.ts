@@ -1,4 +1,5 @@
-const BRAND = '#0050ff';
+const LOGO_URL = `${process.env.WWW_BASE_URL}/assets/email-logo.png?v=1`;
+
 const TEXT = '#1b1b1f';
 const MUTED = '#5f6368';
 const BORDER = '#e3e3e8';
@@ -70,12 +71,19 @@ export const renderEmail = ({
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;background-color:#ffffff;border:1px solid ${BORDER};border-radius:12px;">
             <tr>
               <td style="padding:32px 32px 0;">
-                <div style="font-size:20px;line-height:28px;font-weight:700;color:${BRAND};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">Vocably</div>
+                <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                  <tr>
+                    <td valign="middle" style="padding-right:8px;font-size:0;line-height:0;">
+                      <img src="${LOGO_URL}" width="25" height="28" alt="" style="display:block;border:0;" />
+                    </td>
+                    <td valign="middle" style="font-size:20px;line-height:28px;font-weight:500;color:${TEXT};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">Vocably</td>
+                  </tr>
+                </table>
               </td>
             </tr>
             <tr>
               <td style="padding:24px 32px 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;">
-                <h1 style="margin:0 0 16px;font-size:22px;line-height:30px;font-weight:700;color:${TEXT};">${escapeHtml(
+                <h1 style="margin:0 0 16px;font-size:22px;line-height:30px;font-weight:500;color:${TEXT};">${escapeHtml(
                   heading
                 )}</h1>
                 ${body}

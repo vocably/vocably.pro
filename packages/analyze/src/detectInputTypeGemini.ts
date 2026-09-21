@@ -60,7 +60,8 @@ export const detectInputTypeGemini = async ({
       3000
     ),
     {
-      reason: 'Unable to perform Gemini translation.',
+      reason: 'detectInputTypeGemini: Unable to perform Gemini translation.',
+      extra: { source, language },
     }
   );
 

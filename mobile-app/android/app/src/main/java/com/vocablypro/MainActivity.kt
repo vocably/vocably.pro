@@ -1,5 +1,6 @@
 package com.vocablypro
 
+import android.os.Bundle
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
@@ -12,6 +13,15 @@ class MainActivity : ReactActivity() {
    * rendering of the component.
    */
   override fun getMainComponentName(): String = "VocablyPro"
+
+  /**
+   * Passing null prevents Android from restoring the fragment state, which react-native-screens
+   * cannot handle (ScreenFragment throws on restore). React Native rebuilds the tree from JS
+   * anyway. See https://github.com/software-mansion/react-native-screens/issues/17#issuecomment-424704067
+   */
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(null)
+  }
 
   /**
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]

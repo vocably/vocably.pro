@@ -247,7 +247,9 @@ export const translateUnitOfSpeechGemini = async (
   const result = await resultify(
     timeout(genAI.models.generateContent(params), abortController, 4000),
     {
-      reason: 'Unable to perform Gemini translation.',
+      reason:
+        'translateUnitOfSpeechGemini: Unable to perform Gemini translation.',
+      extra: payload,
     }
   );
 

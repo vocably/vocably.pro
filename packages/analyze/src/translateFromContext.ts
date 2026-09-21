@@ -101,7 +101,9 @@ export const translateFromContextGemini = async (
       },
     }),
     {
-      reason: 'Unable to perform Gemini translation.',
+      reason:
+        'translateFromContextGemini: Unable to perform Gemini translation.',
+      extra: payload,
     }
   );
 

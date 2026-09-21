@@ -41,7 +41,8 @@ export const explainGemini = async ({
       },
     }),
     {
-      reason: 'Unable to perform Gemini translation.',
+      reason: 'explainGemini: Unable to perform Gemini translation.',
+      extra: { targetLanguage, sourceLanguage, source },
     }
   );
 

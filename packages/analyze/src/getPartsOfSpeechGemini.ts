@@ -119,7 +119,8 @@ export const getPartsOfSpeechGemini = async (
   const result = await resultify(
     genAI.models.generateContent(getPartsOfSpeechGeminiParameters(payload)),
     {
-      reason: 'Unable to perform Gemini translation.',
+      reason: 'getPartsOfSpeechGemini: Unable to perform Gemini translation.',
+      extra: payload,
     }
   );
 

@@ -121,6 +121,21 @@ type InflectionKey =
   | 'isIrregular'
   | 'presentTenses';
 
+type JsonSchemaProperty = {
+  type: 'string' | 'boolean' | 'array' | 'object';
+  description?: string;
+  enum?: string[];
+  items?: JsonSchemaProperty;
+};
+
+const inflectionSchemas: Record<InflectionKey, JsonSchemaProperty> = {
+  tense: { type: 'string', enum: ['present', 'past', 'future'] },
+  pastTenses: { type: 'string' },
+  presentTenses: { type: 'string' },
+  isIrregular: { type: 'boolean' },
+  pluralForm: { type: 'string' },
+};
+
 const pastTensePrompts: Partial<Record<GoogleLanguage, string>> = {
   'pt-PT': 'past simple and past perfect tense with necessary auxiliary verbs',
   pt: 'past simple and past perfect tense with necessary auxiliary verbs',
@@ -406,6 +421,15 @@ const getGeminiGenerateContentParameters = ({
     sourceLanguage,
   });
 
+  const inflectionProperties: Partial<
+    Record<InflectionKey, JsonSchemaProperty>
+  > = Object.fromEntries(
+    Object.entries(inflections).map(([key, description]) => [
+      key,
+      { ...inflectionSchemas[key as InflectionKey], description },
+    ])
+  );
+
   return {
     model: 'gemini-2.5-flash',
     contents: createUserContent([source]),
@@ -436,40 +460,98 @@ const getGeminiGenerateContentParameters = ({
             : ''
         }`,
         `Treat the input strictly as a ${partOfSpeech}`,
-        `Only respond in JSON format with an object containing the following properties:`,
-        isTranscriptionNeeded ? `transcript - ${transcriptionType}` : ``,
-        `headword - ${partOfSpeech} provided by user.${
-          isCaseSensitive
-            ? ' Convert to lowercase, unless it is a word that strictly requires capitalization, then capitalize it.'
-            : ''
-        }`,
-        `exists - does the ${partOfSpeech} "${securedSource}" exist in ${languageName}? true or false`,
-        `definitions - list of concise definitions of the ${partOfSpeech} "${securedSource}". Should be in ${languageName}.${
-          isVerb(partOfSpeech)
-            ? ` Consider tense of the provided ${partOfSpeech}.`
-            : ''
-        }`,
-        `examples - list of extremely concise examples with "${securedSource}" used as ${partOfSpeech}. Omit translations.${
-          isCaseSensitive && partOfSpeech.includes('noun')
-            ? ' Uppercase when appropriate.'
-            : ''
-        }`,
-        `lemma - lemma or infinitive of the provided ${partOfSpeech}`,
-        `lemmaPos - part of speech of the lemma in English`,
-        `synonyms - short list of ${partOfSpeech}s`,
-        `number - plural or singular English only`,
-        ...Object.entries(inflections).map(
-          ([key, value]) => `${key} - ${value}`
-        ),
-        genders.length > 0
-          ? `gender - of the provided word "${securedSource}". Could be ${genders.join(', ')}, or other`
-          : ``,
       ].filter((s) => s.length > 0),
       thinkingConfig: {
         thinkingBudget: 0, // Disables thinking
       },
       temperature: 0,
       responseMimeType: 'application/json',
+      responseJsonSchema: {
+        type: 'object',
+        properties: {
+          ...(isTranscriptionNeeded
+            ? {
+                transcript: {
+                  type: 'string',
+                  description: transcriptionType,
+                },
+              }
+            : {}),
+          headword: {
+            type: 'string',
+            description: `${partOfSpeech} provided by user.${
+              isCaseSensitive
+                ? ' Convert to lowercase, unless it is a word that strictly requires capitalization, then capitalize it.'
+                : ''
+            }`,
+          },
+          exists: {
+            type: 'boolean',
+            description: `does the ${partOfSpeech} "${securedSource}" exist in ${languageName}?`,
+          },
+          definitions: {
+            type: 'array',
+            description: `list of concise definitions of the ${partOfSpeech} "${securedSource}". Should be in ${languageName}.${
+              isVerb(partOfSpeech)
+                ? ` Consider tense of the provided ${partOfSpeech}.`
+                : ''
+            }`,
+            items: { type: 'string' },
+          },
+          examples: {
+            type: 'array',
+            description: `list of extremely concise examples with "${securedSource}" used as ${partOfSpeech}. Omit translations.${
+              isCaseSensitive && partOfSpeech.includes('noun')
+                ? ' Uppercase when appropriate.'
+                : ''
+            }`,
+            items: { type: 'string' },
+          },
+          lemma: {
+            type: 'string',
+            description: `lemma or infinitive of the provided ${partOfSpeech}`,
+          },
+          lemmaPos: {
+            type: 'string',
+            description: `part of speech of the lemma in English`,
+          },
+          synonyms: {
+            type: 'array',
+            description: `short list of ${partOfSpeech}s`,
+            items: { type: 'string' },
+          },
+          number: {
+            type: 'string',
+            description: `plural or singular English only`,
+            enum: ['singular', 'plural'],
+          },
+          ...inflectionProperties,
+          ...(genders.length > 0
+            ? {
+                gender: {
+                  type: 'string',
+                  description: `gender of the provided word "${securedSource}"`,
+                  enum: [...genders, 'other'],
+                },
+              }
+            : {}),
+        },
+        required: [
+          ...(isTranscriptionNeeded ? ['transcript'] : []),
+          'headword',
+          'exists',
+          'definitions',
+          'examples',
+          'lemma',
+          'lemmaPos',
+          'synonyms',
+          'number',
+          // pluralForm stays optional so that the model can omit it for the
+          // words which have no plural form.
+          ...Object.keys(inflections).filter((key) => key !== 'pluralForm'),
+          ...(genders.length > 0 ? ['gender'] : []),
+        ],
+      },
     },
   };
 };

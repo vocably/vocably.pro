@@ -70,7 +70,8 @@ export const fixGrammar = async ({
       3000
     ),
     {
-      reason: 'Unable to perform Gemini translation.',
+      reason: 'fixGrammar: Unable to perform Gemini translation.',
+      extra: { text, language, context, explanationLanguage },
     }
   );
 

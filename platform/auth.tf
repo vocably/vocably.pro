@@ -2,6 +2,7 @@ locals {
   auth_lambdas_content = <<EOT
 BREVO_API_KEY="${var.brevo_api_key}"
 USER_FILES_BUCKET="${aws_s3_bucket.user_files.bucket}"
+WWW_BASE_URL="${local.www_base_url}"
   EOT
 }
 

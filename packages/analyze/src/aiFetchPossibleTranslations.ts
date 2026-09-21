@@ -118,7 +118,8 @@ export const translateWithGemini = async (
       },
     }),
     {
-      reason: 'Unable to perform Gemini translation.',
+      reason: 'translateWithGemini: Unable to perform Gemini translation.',
+      extra: payload,
     }
   );
 
