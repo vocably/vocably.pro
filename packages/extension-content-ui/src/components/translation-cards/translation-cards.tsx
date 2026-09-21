@@ -307,9 +307,10 @@ export class VocablyTranslationCards {
     return (
       <Host>
         {this.cards.map((card, itemIndex, cardsArray) => (
-          <div key={itemIndex} id={cardToLocationHash(card.data)}>
+          <div key={`card-${itemIndex}`} id={cardToLocationHash(card.data)}>
             {!this.canAdd && this.cardsLimit !== 'unlimited' && (
               <div
+                key="limit"
                 class={{
                   'max-limit-1': true,
                   'max-limit-visible': this.addAttemptIndex === itemIndex,
@@ -344,6 +345,7 @@ export class VocablyTranslationCards {
             )}
 
             <div
+              key="card"
               data-test="card"
               class={{
                 'vocably-card padding-left-12': true,
@@ -352,6 +354,7 @@ export class VocablyTranslationCards {
             >
               {this.canCongratulate && (
                 <div
+                  key="congratulation"
                   class={
                     'vocably-added-congratulation' +
                     (this.congratulateItemIndex === itemIndex
@@ -366,7 +369,7 @@ export class VocablyTranslationCards {
                   </div>
                 </div>
               )}
-              <div class="vocably-card-container">
+              <div key="container" class="vocably-card-container">
                 <div class="vocably-card-action">
                   {!this.hideActions && isCardItem(card) && (
                     <div

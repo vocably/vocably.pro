@@ -181,6 +181,18 @@ if (!existingResultsContainer) {
 const signInUrl = '/app/hands-free';
 
 /**
+ * The congratulation shown after the very first added card is a one time thing,
+ * so a flag in the local storage remembers that the visitor has already been
+ * through it.
+ */
+const knowsHowToAdd = (): boolean =>
+  localStorage.getItem(searchConfig.knowsHowToAddLocalStorageKey) !== null;
+
+const rememberKnowsHowToAdd = () => {
+  localStorage.setItem(searchConfig.knowsHowToAddLocalStorageKey, 'true');
+};
+
+/**
  * Turns a `vocably-translation` element into a real deck client: the tag
  * callbacks, the add and remove handlers, and the signed in state the component
  * uses to decide between adding a card and offering to sign in.
@@ -198,6 +210,8 @@ const wireTranslation = (translation: HTMLVocablyTranslationElement) => {
 
   translation.paymentLink = '/app/subscribe';
 
+  translation.canCongratulate = !knowsHowToAdd();
+
   // Which cards are already in the collection is only known once the deck has
   // been loaded, so the add and remove buttons stay hidden until then. Without
   // it a card the visitor already has flashes a Learn button first.
@@ -214,8 +228,15 @@ const wireTranslation = (translation: HTMLVocablyTranslationElement) => {
       });
 
       translation.isUpdating = payload.card;
-      translation.result = await addCard(payload);
+      const result = await addCard(payload);
+      translation.result = result;
       translation.isUpdating = null;
+
+      // The congratulation is rendered by this very element, so the flag only
+      // keeps the next lookup from congratulating again.
+      if (result.success === true) {
+        rememberKnowsHowToAdd();
+      }
     }
   );
 
