@@ -21,7 +21,8 @@ export const Placeholder = ({ format, children }: Props) => {
         gap: minSide * 0.08,
         background: '#fff',
         color: 'rgb(106, 106, 106)',
-        fontFamily: "'Ruda', sans-serif",
+        fontFamily: "'Roboto', sans-serif",
+        fontWeight: '400',
       }}
     >
       {children}

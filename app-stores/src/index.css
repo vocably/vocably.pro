@@ -116,15 +116,15 @@ body {
 }
 
 .title {
+  font-family: 'Merriweather', serif;
   font-size: 10cqmin;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
   letter-spacing: -0.02em;
 }
 
 .subtitle {
   font-size: 6cqmin;
-  font-weight: 600;
   text-align: center;
 }
 

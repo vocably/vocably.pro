@@ -10,8 +10,8 @@
     "app-stores": "vite"
   },
   "dependencies": {
+    "@fontsource/merriweather": "^5.3.0",
     "@fontsource/roboto": "^5.3.0",
-    "@fontsource/ruda": "^5.3.0",
     "circle-flags": "^2.8.3",
     "fflate": "^0.8.3",
     "html-to-image": "^1.11.13",

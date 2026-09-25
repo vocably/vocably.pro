@@ -1,5 +1,3 @@
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/700.css';
 import type { CSSProperties, ReactNode } from 'react';
 import type { AnalysisItem as AnalysisItemType } from '@vocably/model';
 import { languageTranslations } from '@vocably/i18n';
