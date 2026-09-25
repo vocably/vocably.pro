@@ -1,6 +1,7 @@
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Languages } from '../components/Languages';
+import { Search } from '../components/Search';
 import { flags } from '../flags';
 import { localization } from '../localization';
 import logo from '../logo.svg?url';
@@ -29,7 +30,9 @@ export const IPad13 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} label={`${language} · 2`} />
+          <Placeholder format={format} label={`${language} · 2`}>
+            <Search query={localization[language].search} />
+          </Placeholder>
         </Screenshot>
         <Screenshot>
           <Placeholder format={format} label={`${language} · 3`} />
