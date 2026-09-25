@@ -53,8 +53,8 @@ export const tr = {
     'Video görüşmeleri sırasında kelimeleri çevirin ve kaydedin.',
   'auth.carousel.slide5':
     'Doğru kelimeyi bilmiyor musunuz? Ana dilinizde arayın.',
-  'auth.carousel.need_account':
-    "Vocably'yi kullanmak için bir hesaba ihtiyacınız var.",
+  'auth.carousel.welcome': "Vocably'ye hoş geldiniz.",
+  'auth.carousel.welcome_cta': 'Devam etmek için bir hesap oluşturun.',
   'auth.sign_in.agree': 'Giriş yaparak şunları kabul etmiş olursunuz:',
   'auth.sign_in.terms': 'Kullanım Koşulları',
   'auth.sign_in.and': 've',

@@ -52,7 +52,8 @@ export const uk = {
     'Перекладайте і зберігайте слова під час відеозвонків.',
   'auth.carousel.slide5':
     'Не знаєте потрібне слово? Знайдіть його рідною мовою.',
-  'auth.carousel.need_account': 'Для використання Vocably потрібен акаунт.',
+  'auth.carousel.welcome': 'Вас вітає Vocably.',
+  'auth.carousel.welcome_cta': 'Створіть акаунт, щоб продовжити.',
   'auth.sign_in.agree': 'Входячи, ви погоджуєтесь з нашими',
   'auth.sign_in.terms': 'Умовами використання',
   'auth.sign_in.and': 'та',

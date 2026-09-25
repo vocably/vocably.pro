@@ -51,8 +51,8 @@ export const pt = {
     'Traduza e salve palavras durante suas videochamadas.',
   'auth.carousel.slide5':
     'Não sabe a palavra certa? Procure-a no seu idioma nativo.',
-  'auth.carousel.need_account':
-    'Você precisará de uma conta para usar o Vocably.',
+  'auth.carousel.welcome': 'Boas-vindas ao Vocably.',
+  'auth.carousel.welcome_cta': 'Crie uma conta para continuar.',
   'auth.sign_in.agree': 'Ao entrar, você concorda com nossos',
   'auth.sign_in.terms': 'Termos e Condições',
   'auth.sign_in.and': 'e',

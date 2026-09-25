@@ -1,12 +1,15 @@
 <div class="container-xl top"><app-header></app-header></div>
 <div class="container-l bottom">
-  <app-carousel class="mb-2 block" *ngIf="isExtensionInstalled"></app-carousel>
-
   <!-- The scroll target is this line rather than the form itself, so that the
        "need an account?" heading stays visible above it. -->
   <h1 class="text-center mb-2" #formAnchor>
-    {{ 'auth.carousel.need_account' | transloco }}
+    {{ 'auth.carousel.welcome' | transloco }}
   </h1>
+
+  <app-carousel class="mb-2 block" *ngIf="isExtensionInstalled"></app-carousel>
+  <p class="text-center mb-2">
+    {{ 'auth.carousel.welcome_cta' | transloco }}
+  </p>
 
   <app-sign-up></app-sign-up>
 </div>

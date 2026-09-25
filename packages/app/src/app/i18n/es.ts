@@ -54,7 +54,8 @@ export const es = {
     'Traduce y guarda palabras durante tus videollamadas.',
   'auth.carousel.slide5':
     '¿No sabes la palabra correcta? Búscala en tu idioma nativo.',
-  'auth.carousel.need_account': 'Necesitarás una cuenta para usar Vocably.',
+  'auth.carousel.welcome': 'Vocably te da la bienvenida.',
+  'auth.carousel.welcome_cta': 'Crea una cuenta para continuar.',
   'auth.sign_in.agree': 'Al iniciar sesión, aceptas nuestros',
   'auth.sign_in.terms': 'Términos y Condiciones',
   'auth.sign_in.and': 'y',

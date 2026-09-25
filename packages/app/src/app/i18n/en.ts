@@ -51,7 +51,8 @@ export const en = {
   'auth.carousel.slide4': 'Translate and save words during your video calls.',
   'auth.carousel.slide5':
     "Don't know the right word? Search for it in your native language.",
-  'auth.carousel.need_account': "You'll need an account to use Vocably.",
+  'auth.carousel.welcome': 'Welcome to Vocably.',
+  'auth.carousel.welcome_cta': 'Create an account to continue.',
   'auth.sign_in.agree': 'By signing in, you agree to our',
   'auth.sign_in.terms': 'Terms and Conditions',
   'auth.sign_in.and': 'and',

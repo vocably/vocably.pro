@@ -53,7 +53,8 @@ export const ru = {
     'Переводите и сохраняйте слова прямо во время видеозвонков.',
   'auth.carousel.slide5':
     'Не знаете нужное слово? Найдите его на родном языке.',
-  'auth.carousel.need_account': 'Для использования Vocably нужен аккаунт.',
+  'auth.carousel.welcome': 'Вас приветствует Vocably.',
+  'auth.carousel.welcome_cta': 'Создайте аккаунт, чтобы продолжить.',
   'auth.sign_in.agree': 'Входя, вы соглашаетесь с нашими',
   'auth.sign_in.terms': 'условиями использования',
   'auth.sign_in.and': 'и',
