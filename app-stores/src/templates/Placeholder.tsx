@@ -13,12 +13,12 @@ export const Placeholder = ({ format, label, children }: Props) => {
   return (
     <div
       style={{
-        width: '100%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: minSide * 0.06,
         gap: minSide * 0.08,
         background: '#fff',
         color: '#000',

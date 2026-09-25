@@ -29,6 +29,12 @@ export const PlayTablet10 = () => (
         </Screenshot>
         <Screenshot>
           <Placeholder format={format} label={`${language} · 2`}>
+            <div style={{ textAlign: 'center' }}>
+              <div className="title">{localization[language].translate}</div>
+              <div className="subtitle">
+                {localization[language].translateSub}
+              </div>
+            </div>
             <Search query={localization[language].search} />
             <AnalysisItem
               item={localization[language].searchItem}

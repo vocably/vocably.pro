@@ -83,7 +83,7 @@ export const AnalysisItem = ({ item, language, learn, example }: Props) => {
     <div
       style={{
         position: 'relative',
-        width: '80%',
+        width: '90%',
         fontFamily: "'Roboto', sans-serif",
         fontSize: '4.5cqmin',
         lineHeight: 1.25,

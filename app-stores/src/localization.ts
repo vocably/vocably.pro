@@ -15,6 +15,9 @@ type Translations = {
   // extension words them.
   learn: string;
   example: string;
+  // The headline of the second screenshot and the line under it.
+  translate: string;
+  translateSub: string;
 };
 
 // The copy shown on the assets, per interface language.
@@ -44,6 +47,8 @@ export const localization: Record<Language, Translations> = {
     },
     learn: 'Learn',
     example: 'Example:',
+    translate: 'Translate',
+    translateSub: 'any words or phrases',
   },
   es: {
     title:
@@ -65,6 +70,8 @@ export const localization: Record<Language, Translations> = {
     },
     learn: 'Aprender',
     example: 'Ejemplo:',
+    translate: 'Traduce',
+    translateSub: 'cualquier palabra o frase',
   },
   pt: {
     title:
@@ -86,6 +93,8 @@ export const localization: Record<Language, Translations> = {
     },
     learn: 'Aprender',
     example: 'Exemplo:',
+    translate: 'Traduza',
+    translateSub: 'quaisquer palavras ou frases',
   },
   ru: {
     title: 'Сочетание умного словаря и системы обучения.',
@@ -106,6 +115,8 @@ export const localization: Record<Language, Translations> = {
     },
     learn: 'Учить',
     example: 'Пример:',
+    translate: 'Переводите',
+    translateSub: 'любые слова и фразы',
   },
   uk: {
     title: 'Поєднання розумного словника та системи навчання.',
@@ -126,6 +137,8 @@ export const localization: Record<Language, Translations> = {
     },
     learn: 'Вчити',
     example: 'Приклад:',
+    translate: 'Перекладайте',
+    translateSub: 'будь-які слова та фрази',
   },
   tr: {
     title: 'Akıllı sözlük ve öğrenme sisteminin birleşimi.',
@@ -146,6 +159,8 @@ export const localization: Record<Language, Translations> = {
     },
     learn: 'Öğren',
     example: 'Örnek:',
+    translate: 'Çevirin',
+    translateSub: 'her türlü kelime ve ifadeyi',
   },
   vi: {
     title: 'Sự kết hợp giữa từ điển thông minh và hệ thống học tập.',
@@ -166,5 +181,7 @@ export const localization: Record<Language, Translations> = {
     },
     learn: 'Học',
     example: 'Ví dụ:',
+    translate: 'Dịch',
+    translateSub: 'bất kỳ từ hoặc cụm từ nào',
   },
 };

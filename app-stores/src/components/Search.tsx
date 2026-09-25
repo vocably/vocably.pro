@@ -11,7 +11,7 @@ export const Search = ({ query }: Props) => (
       display: 'flex',
       alignItems: 'center',
       gap: '3cqmin',
-      width: '90%',
+      width: '100%',
       padding: '3.5cqmin 5cqmin',
       borderRadius: '4cqmin',
       background: 'rgba(0, 0, 0, 0.04)',
