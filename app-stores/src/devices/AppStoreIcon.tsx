@@ -3,7 +3,6 @@ import { getFormat } from '../formats';
 import { Languages } from '../components/Languages';
 import { flags } from '../flags';
 import { localization } from '../localization';
-import logo from '../logo.svg?url';
 import { Placeholder } from '../templates/Placeholder';
 
 const format = getFormat('ios-icon');
@@ -13,8 +12,7 @@ export const AppStoreIcon = () => (
     {(language) => (
       <>
         <Screenshot>
-          <Placeholder format={format} label={`${language} · 1`}>
-            <img className="logo" src={logo} alt="Vocably" />
+          <Placeholder format={format}>
             <div className="title">{localization[language].title}</div>
             <Languages
               {...flags[language]}

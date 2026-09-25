@@ -130,5 +130,6 @@ body {
 
 .logo {
   display: block;
-  width: 25cqmin;
+  width: 35cqmin;
+  opacity: 0.6;
 }

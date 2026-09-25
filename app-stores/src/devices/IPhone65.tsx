@@ -5,8 +5,8 @@ import { AnalysisItem } from '../components/AnalysisItem';
 import { Search } from '../components/Search';
 import { flags } from '../flags';
 import { localization } from '../localization';
-import logo from '../logo.svg?url';
 import { Placeholder } from '../templates/Placeholder';
+import { Logo } from '../components/Logo';
 
 const format = getFormat('ios-iphone-6.5');
 
@@ -16,12 +16,7 @@ export const IPhone65 = () => (
       <>
         <Screenshot>
           <Placeholder format={format} label={`${language} · 1`}>
-            <img
-              className="logo"
-              style={{ width: '35cqmin' }}
-              src={logo}
-              alt="Vocably"
-            />
+            <Logo className="logo" />
             <div className="title">{localization[language].title}</div>
             <Languages
               {...flags[language]}
