@@ -15,11 +15,14 @@ type Translations = {
   incorrectTranslations: [string, string, string];
   // The add button and the examples label of the analysis item, as the
   // extension words them.
-  learn: string;
+  learnButton: string;
   example: string;
   // The headline of the second screenshot and the line under it.
   translate: string;
   translateSub: string;
+  // The headline of the third screenshot and the line under it.
+  learn: string;
+  learnSub: string;
 };
 
 // The copy shown on the assets, per interface language.
@@ -52,10 +55,12 @@ export const localization: Record<Language, Translations> = {
       'mystery, secret',
       'dream, fantasy',
     ],
-    learn: 'Learn',
+    learnButton: 'Learn',
     example: 'Example:',
     translate: 'Translate',
     translateSub: 'any words or phrases.',
+    learn: 'Learn',
+    learnSub: 'with quizzes and\nother question types.',
   },
   es: {
     title: 'Una herramienta para aprender idiomas.',
@@ -75,10 +80,12 @@ export const localization: Record<Language, Translations> = {
       number: 'singular',
     },
     incorrectTranslations: ['rápido, veloz', 'caro, costoso', 'frágil, débil'],
-    learn: 'Aprender',
+    learnButton: 'Aprender',
     example: 'Ejemplo:',
     translate: 'Traduce',
     translateSub: 'cualquier palabra o frase.',
+    learn: 'Aprende',
+    learnSub: 'con cuestionarios y otros tipos de preguntas.',
   },
   pt: {
     title: 'Uma ferramenta para aprender idiomas.',
@@ -98,10 +105,12 @@ export const localization: Record<Language, Translations> = {
       number: 'singular',
     },
     incorrectTranslations: ['rápido, veloz', 'caro, custoso', 'frágil, fraco'],
-    learn: 'Aprender',
+    learnButton: 'Aprender',
     example: 'Exemplo:',
     translate: 'Traduza',
     translateSub: 'quaisquer palavras ou frases.',
+    learn: 'Aprenda',
+    learnSub: 'com testes e outros tipos de perguntas.',
   },
   ru: {
     title: 'Инструмент для изучения языков.',
@@ -125,10 +134,12 @@ export const localization: Record<Language, Translations> = {
       'дорогой, ценный',
       'хрупкий, слабый',
     ],
-    learn: 'Учить',
+    learnButton: 'Учить',
     example: 'Пример:',
     translate: 'Переводите',
     translateSub: 'любые слова и фразы.',
+    learn: 'Учите',
+    learnSub: 'при помощи тестов и других типов вопросов.',
   },
   uk: {
     title: 'Інструмент для вивчення мов.',
@@ -152,10 +163,12 @@ export const localization: Record<Language, Translations> = {
       'дорогий, цінний',
       'крихкий, слабкий',
     ],
-    learn: 'Вчити',
+    learnButton: 'Вчити',
     example: 'Приклад:',
     translate: 'Перекладайте',
     translateSub: 'будь-які слова та фрази.',
+    learn: 'Вчіть',
+    learnSub: 'за допомогою тестів та інших типів запитань.',
   },
   tr: {
     title: 'Bir dil öğrenme aracı.',
@@ -179,10 +192,12 @@ export const localization: Record<Language, Translations> = {
       'pahalı, değerli',
       'kırılgan, zayıf',
     ],
-    learn: 'Öğren',
+    learnButton: 'Öğren',
     example: 'Örnek:',
     translate: 'Çevirin',
     translateSub: 'her türlü kelime ve ifadeyi.',
+    learn: 'Öğrenin',
+    learnSub: 'testler ve diğer soru türleriyle.',
   },
   vi: {
     title: 'Công cụ học ngoại ngữ.',
@@ -206,9 +221,11 @@ export const localization: Record<Language, Translations> = {
       'đắt, đắt tiền',
       'mong manh, yếu ớt',
     ],
-    learn: 'Học',
+    learnButton: 'Học',
     example: 'Ví dụ:',
     translate: 'Dịch',
     translateSub: 'bất kỳ từ hoặc cụm từ nào.',
+    learn: 'Học',
+    learnSub: 'qua các bài kiểm tra và nhiều dạng câu hỏi khác.',
   },
 };

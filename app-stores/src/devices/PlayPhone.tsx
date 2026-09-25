@@ -40,13 +40,23 @@ export const PlayPhone = () => (
             <AnalysisItem
               item={localization[language].searchItem}
               language={language}
-              learn={localization[language].learn}
+              learn={localization[language].learnButton}
               example={localization[language].example}
             />
           </Placeholder>
         </Screenshot>
         <Screenshot>
           <Placeholder format={format} label={`${language} · 3`}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">{localization[language].learn}</div>
+              <div className="subtitle">{localization[language].learnSub}</div>
+            </div>
             <MultiChoiceQuestion
               item={localization[language].searchItem}
               incorrect={localization[language].incorrectTranslations}

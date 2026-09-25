@@ -128,6 +128,7 @@ body {
 .subtitle {
   font-size: 6cqmin;
   text-align: center;
+  white-space: pre-line;
 }
 
 .logo {
