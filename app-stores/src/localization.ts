@@ -6,10 +6,15 @@ type Translations = {
   title: string;
   // Shown under the flags of the first screenshot.
   languageCount: string;
+  // The search field text of the second screenshot.
   search: string;
   sourceLanguage: GoogleLanguage;
   // The first item /analyze returns for `search`.
   searchItem: AnalysisItem;
+  // The add button and the examples label of the analysis item, as the
+  // extension words them.
+  learn: string;
+  example: string;
 };
 
 // The copy shown on the assets, per interface language.
@@ -37,6 +42,8 @@ export const localization: Record<Language, Translations> = {
       number: 'singular',
       pluralForm: 'die Magien',
     },
+    learn: 'Learn',
+    example: 'Example:',
   },
   es: {
     title:
@@ -56,6 +63,8 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    learn: 'Aprender',
+    example: 'Ejemplo:',
   },
   pt: {
     title:
@@ -75,6 +84,8 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    learn: 'Aprender',
+    example: 'Exemplo:',
   },
   ru: {
     title: 'Сочетание умного словаря и системы обучения.',
@@ -93,6 +104,8 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    learn: 'Учить',
+    example: 'Пример:',
   },
   uk: {
     title: 'Поєднання розумного словника та системи навчання.',
@@ -111,6 +124,8 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    learn: 'Вчити',
+    example: 'Приклад:',
   },
   tr: {
     title: 'Akıllı sözlük ve öğrenme sisteminin birleşimi.',
@@ -129,6 +144,8 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    learn: 'Öğren',
+    example: 'Örnek:',
   },
   vi: {
     title: 'Sự kết hợp giữa từ điển thông minh và hệ thống học tập.',
@@ -147,5 +164,7 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    learn: 'Học',
+    example: 'Ví dụ:',
   },
 };

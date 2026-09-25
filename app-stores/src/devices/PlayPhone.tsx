@@ -1,6 +1,7 @@
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Languages } from '../components/Languages';
+import { AnalysisItem } from '../components/AnalysisItem';
 import { Search } from '../components/Search';
 import { flags } from '../flags';
 import { localization } from '../localization';
@@ -35,6 +36,12 @@ export const PlayPhone = () => (
         <Screenshot>
           <Placeholder format={format} label={`${language} · 2`}>
             <Search query={localization[language].search} />
+            <AnalysisItem
+              item={localization[language].searchItem}
+              language={language}
+              learn={localization[language].learn}
+              example={localization[language].example}
+            />
           </Placeholder>
         </Screenshot>
         <Screenshot>
