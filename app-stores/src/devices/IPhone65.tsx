@@ -29,7 +29,7 @@ export const IPhone65 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format}>
+          <Placeholder format={format} title="anchor">
             <div
               style={{
                 display: 'flex',
@@ -52,7 +52,7 @@ export const IPhone65 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format}>
+          <Placeholder format={format} title="align">
             <div
               style={{
                 display: 'flex',

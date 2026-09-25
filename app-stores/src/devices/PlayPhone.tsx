@@ -16,7 +16,7 @@ export const PlayPhone = () => (
     {(language) => (
       <>
         <Screenshot>
-          <Placeholder format={format} label={`${language} · 1`}>
+          <Placeholder format={format}>
             <Logo className="logo" />
             <div className="title">{localization[language].title}</div>
             <Languages
@@ -29,7 +29,7 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} label={`${language} · 2`}>
+          <Placeholder format={format} title="anchor">
             <div style={{ textAlign: 'center' }}>
               <div className="title">{localization[language].translate}</div>
               <div className="subtitle">
@@ -46,7 +46,7 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} label={`${language} · 3`}>
+          <Placeholder format={format} title="align">
             <div
               style={{
                 display: 'flex',
