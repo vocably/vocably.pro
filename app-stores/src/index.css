@@ -122,3 +122,9 @@ body {
   text-align: center;
   letter-spacing: -0.02em;
 }
+
+.subtitle {
+  font-size: 8cqmin;
+  font-weight: 600;
+  text-align: center;
+}

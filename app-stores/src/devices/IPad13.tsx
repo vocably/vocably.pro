@@ -19,6 +19,9 @@ export const IPad13 = () => (
               size={Math.min(format.width, format.height) * 0.14}
               locale={language}
             />
+            <div className="subtitle">
+              {localization[language].languageCount}
+            </div>
           </Placeholder>
         </Screenshot>
         <Screenshot>
