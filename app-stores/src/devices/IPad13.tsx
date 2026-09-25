@@ -43,6 +43,7 @@ export const IPad13 = () => (
               language={language}
               learn={localization[language].learn}
               example={localization[language].example}
+              hideExamples
             />
           </Placeholder>
         </Screenshot>

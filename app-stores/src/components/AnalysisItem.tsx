@@ -19,6 +19,8 @@ type Props = {
   learn: string;
   // The examples label, `translation.example` in the extension.
   example: string;
+  // Leaves the examples out, for formats with little room.
+  hideExamples?: boolean;
 };
 
 // Every size is in em, relative to the root font size, which stands for the
@@ -65,15 +67,21 @@ const List = ({ items }: { items: ListItem[] }) => (
 
 // A static copy of a card of the extension's `vocably-translation-cards`, for
 // an item /analyze returns. Only the parts a not yet added card shows.
-export const AnalysisItem = ({ item, language, learn, example }: Props) => {
+export const AnalysisItem = ({
+  item,
+  language,
+  learn,
+  example,
+  hideExamples = false,
+}: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
   const partOfSpeech =
     item.partOfSpeech &&
     (languageTranslations[language][item.partOfSpeech] ?? item.partOfSpeech);
   const past = item.tense !== 'past' && item.pastTenses;
-  const examples: ListItem[] = (item.examples ?? []).map((label) => ({
-    label,
-  }));
+  const examples: ListItem[] = hideExamples
+    ? []
+    : (item.examples ?? []).map((label) => ({ label }));
   const definitions: ListItem[] = [
     { label: item.translation, style: { fontStyle: 'italic' } },
     ...item.definitions.map((label) => ({ label })),
