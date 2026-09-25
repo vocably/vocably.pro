@@ -7,7 +7,7 @@ type Props = {
   style?: CSSProperties;
 };
 
-export const Logo = ({ color = 'black', className, style }: Props) => {
+export const Logo = ({ color = '#333', className, style }: Props) => {
   // Unique gradient ids, so several logos on one page don't clash.
   const id = useId().replace(/[^a-zA-Z0-9_-]/g, '');
   const paint0 = `${id}-paint0`;

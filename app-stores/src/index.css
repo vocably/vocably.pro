@@ -117,10 +117,13 @@ body {
 
 .title {
   font-family: 'Merriweather', serif;
-  font-size: 10cqmin;
+  font-size: 8cqmin;
   font-weight: 700;
   text-align: center;
   letter-spacing: -0.02em;
+  margin-bottom: 0.4em;
+  white-space: pre-line;
+  color: #333;
 }
 
 .subtitle {
@@ -131,5 +134,4 @@ body {
 .logo {
   display: block;
   width: 35cqmin;
-  opacity: 0.6;
 }

@@ -23,7 +23,7 @@ type Translations = {
 // The copy shown on the assets, per interface language.
 export const localization: Record<Language, Translations> = {
   en: {
-    title: 'A combination of smart dictionary and learning system.',
+    title: 'A language-\nlearning tool',
     languageCount: '100+ languages.',
     search: 'magic',
     sourceLanguage: 'de',
@@ -51,8 +51,7 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'any words or phrases',
   },
   es: {
-    title:
-      'Una combinación de diccionario inteligente y sistema de aprendizaje.',
+    title: 'Una herramienta para aprender idiomas',
     languageCount: 'Más de 100 idiomas.',
     search: 'confiable',
     sourceLanguage: 'en',
@@ -74,8 +73,7 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'cualquier palabra o frase',
   },
   pt: {
-    title:
-      'Uma combinação de dicionário inteligente e sistema de aprendizagem.',
+    title: 'Uma ferramenta para aprender idiomas',
     languageCount: 'Mais de 100 idiomas.',
     search: 'confiável',
     sourceLanguage: 'en',
@@ -97,7 +95,7 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'quaisquer palavras ou frases',
   },
   ru: {
-    title: 'Сочетание умного словаря и системы обучения.',
+    title: 'Инструмент для изучения языков',
     languageCount: 'Более 100 языков.',
     search: 'надёжный',
     sourceLanguage: 'en',
@@ -119,7 +117,7 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'любые слова и фразы',
   },
   uk: {
-    title: 'Поєднання розумного словника та системи навчання.',
+    title: 'Інструмент для вивчення мов',
     languageCount: 'Понад 100 мов.',
     search: 'надійний',
     sourceLanguage: 'en',
@@ -141,7 +139,7 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'будь-які слова та фрази',
   },
   tr: {
-    title: 'Akıllı sözlük ve öğrenme sisteminin birleşimi.',
+    title: 'Bir dil öğrenme aracı',
     languageCount: '100+ dil.',
     search: 'güvenilir',
     sourceLanguage: 'en',
@@ -163,7 +161,7 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'her türlü kelime ve ifadeyi',
   },
   vi: {
-    title: 'Sự kết hợp giữa từ điển thông minh và hệ thống học tập.',
+    title: 'Công cụ học ngoại ngữ',
     languageCount: 'Hơn 100 ngôn ngữ.',
     search: 'đáng tin cậy',
     sourceLanguage: 'en',
