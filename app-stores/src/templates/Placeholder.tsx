@@ -22,7 +22,7 @@ export const Placeholder = ({ format, label, children }: Props) => {
         gap: minSide * 0.08,
         background: '#fff',
         color: '#000',
-        fontFamily: "'Cormorant Garamond', serif",
+        fontFamily: "'Ruda', sans-serif",
       }}
     >
       {children}
