@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import type { AnalysisItem } from '@vocably/model';
 import { languageTranslations } from '@vocably/i18n';
 import type { Language } from '../languages';
@@ -17,6 +18,8 @@ type Props = {
   language: Language;
   // Leaves the examples out, for formats with little room.
   hideExamples?: boolean;
+  // Merged over the root styles, so it can override them.
+  style?: CSSProperties;
 };
 
 // Where the correct answer goes among the four. The app shuffles them; a
@@ -31,6 +34,7 @@ export const MultiChoiceQuestion = ({
   incorrect,
   language,
   hideExamples = false,
+  style,
 }: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
   const partOfSpeech =
@@ -43,11 +47,12 @@ export const MultiChoiceQuestion = ({
   return (
     <div
       style={{
-        width: '90%',
+        width: '100%',
         fontFamily: "'Roboto', sans-serif",
         fontSize: '4.5cqmin',
         lineHeight: 1.25,
         color: onBackground,
+        ...style,
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>

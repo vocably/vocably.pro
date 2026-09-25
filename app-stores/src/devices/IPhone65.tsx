@@ -8,6 +8,7 @@ import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo';
+import { IPhone16Max } from '../components/IPhone16Max';
 
 const format = getFormat('ios-iphone-6.5');
 
@@ -63,11 +64,14 @@ export const IPhone65 = () => (
               <div className="title">{localization[language].learn}</div>
               <div className="subtitle">{localization[language].learnSub}</div>
             </div>
-            <MultiChoiceQuestion
-              item={localization[language].searchItem}
-              incorrect={localization[language].incorrectTranslations}
-              language={language}
-            />
+            <IPhone16Max width="100%">
+              <MultiChoiceQuestion
+                style={{ marginTop: '2em' }}
+                item={localization[language].searchItem}
+                incorrect={localization[language].incorrectTranslations}
+                language={language}
+              />
+            </IPhone16Max>
           </Placeholder>
         </Screenshot>
       </>

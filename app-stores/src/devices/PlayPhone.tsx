@@ -8,6 +8,7 @@ import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo.tsx';
+import { Pixel9Pro } from '../components/Pixel9Pro';
 
 const format = getFormat('play-phone');
 
@@ -57,11 +58,14 @@ export const PlayPhone = () => (
               <div className="title">{localization[language].learn}</div>
               <div className="subtitle">{localization[language].learnSub}</div>
             </div>
-            <MultiChoiceQuestion
-              item={localization[language].searchItem}
-              incorrect={localization[language].incorrectTranslations}
-              language={language}
-            />
+            <Pixel9Pro width="100%">
+              <MultiChoiceQuestion
+                style={{ marginTop: '2em' }}
+                item={localization[language].searchItem}
+                incorrect={localization[language].incorrectTranslations}
+                language={language}
+              />
+            </Pixel9Pro>
           </Placeholder>
         </Screenshot>
       </>
