@@ -19,16 +19,12 @@ export const Placeholder = ({ format, label, children }: Props) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: minSide * 0.02,
+        gap: minSide * 0.08,
         background: '#fff',
         color: '#000',
         fontFamily: "'Cormorant Garamond', serif",
       }}
     >
-      <div style={{ fontSize: minSide * 0.1, fontWeight: 700 }}>Vocably</div>
-      {label && (
-        <div style={{ fontSize: minSide * 0.05, fontWeight: 600 }}>{label}</div>
-      )}
       {children}
     </div>
   );

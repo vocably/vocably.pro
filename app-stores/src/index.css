@@ -109,3 +109,16 @@ body {
   overflow-x: auto;
   padding-bottom: 24px;
 }
+
+/* Lets asset styles size themselves with cqmin, relative to the format. */
+[data-canvas] {
+  container-type: size;
+}
+
+.title {
+  max-width: 80%;
+  font-size: 10cqmin;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
