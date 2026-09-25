@@ -11,6 +11,8 @@ type Translations = {
   sourceLanguage: GoogleLanguage;
   // The first item /analyze returns for `search`.
   searchItem: AnalysisItem;
+  // Wrong answers for `searchItem` in the multi-choice study screenshot.
+  incorrectTranslations: [string, string, string];
   // The add button and the examples label of the analysis item, as the
   // extension words them.
   learn: string;
@@ -45,6 +47,11 @@ export const localization: Record<Language, Translations> = {
       number: 'singular',
       pluralForm: 'die Magien',
     },
+    incorrectTranslations: [
+      'luck, fortune',
+      'mystery, secret',
+      'dream, fantasy',
+    ],
     learn: 'Learn',
     example: 'Example:',
     translate: 'Translate',
@@ -67,6 +74,7 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    incorrectTranslations: ['rápido, veloz', 'caro, costoso', 'frágil, débil'],
     learn: 'Aprender',
     example: 'Ejemplo:',
     translate: 'Traduce',
@@ -89,6 +97,7 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    incorrectTranslations: ['rápido, veloz', 'caro, custoso', 'frágil, fraco'],
     learn: 'Aprender',
     example: 'Exemplo:',
     translate: 'Traduza',
@@ -111,6 +120,11 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    incorrectTranslations: [
+      'быстрый, скорый',
+      'дорогой, ценный',
+      'хрупкий, слабый',
+    ],
     learn: 'Учить',
     example: 'Пример:',
     translate: 'Переводите',
@@ -133,6 +147,11 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    incorrectTranslations: [
+      'швидкий, скорий',
+      'дорогий, цінний',
+      'крихкий, слабкий',
+    ],
     learn: 'Вчити',
     example: 'Приклад:',
     translate: 'Перекладайте',
@@ -155,6 +174,11 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    incorrectTranslations: [
+      'hızlı, çabuk',
+      'pahalı, değerli',
+      'kırılgan, zayıf',
+    ],
     learn: 'Öğren',
     example: 'Örnek:',
     translate: 'Çevirin',
@@ -177,6 +201,11 @@ export const localization: Record<Language, Translations> = {
       ipa: 'rɪˈlaɪəbl',
       number: 'singular',
     },
+    incorrectTranslations: [
+      'nhanh, nhanh chóng',
+      'đắt, đắt tiền',
+      'mong manh, yếu ớt',
+    ],
     learn: 'Học',
     example: 'Ví dụ:',
     translate: 'Dịch',

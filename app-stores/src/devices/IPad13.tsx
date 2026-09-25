@@ -3,6 +3,7 @@ import { getFormat } from '../formats';
 import { Languages } from '../components/Languages';
 import { AnalysisItem } from '../components/AnalysisItem';
 import { Search } from '../components/Search';
+import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
 import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
@@ -46,7 +47,14 @@ export const IPad13 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} label={`${language} · 3`} />
+          <Placeholder format={format} label={`${language} · 3`}>
+            <MultiChoiceQuestion
+              item={localization[language].searchItem}
+              incorrect={localization[language].incorrectTranslations}
+              language={language}
+              hideExamples
+            />
+          </Placeholder>
         </Screenshot>
       </>
     )}
