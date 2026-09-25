@@ -25,8 +25,7 @@ export const IPhone65 = () => (
             <div className="title">{localization[language].title}</div>
             <Languages
               {...flags[language]}
-              size={Math.min(format.width, format.height) * 0.14}
-              locale={language}
+              size={Math.min(format.width, format.height) * 0.16}
             />
             <div className="subtitle">
               {localization[language].languageCount}

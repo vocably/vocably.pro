@@ -19,7 +19,6 @@ export const PlayFeatureGraphic = () => (
             <Languages
               {...flags[language]}
               size={Math.min(format.width, format.height) * 0.14}
-              locale={language}
             />
             <div className="subtitle">
               {localization[language].languageCount}
