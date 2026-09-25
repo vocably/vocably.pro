@@ -1,7 +1,7 @@
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Languages } from '../components/Languages';
-import { showcaseLanguages } from '../showcaseLanguages';
+import { flags } from '../flags';
 import { Placeholder } from '../templates/Placeholder';
 
 const format = getFormat('play-icon');
@@ -13,7 +13,7 @@ export const PlayIcon = () => (
         <Screenshot>
           <Placeholder format={format} label={`${language} · 1`}>
             <Languages
-              languages={showcaseLanguages}
+              {...flags[language]}
               size={Math.min(format.width, format.height) * 0.14}
               locale={language}
             />

@@ -30,6 +30,7 @@ There is no `dev` script; the dev server script is named `app-stores`. There are
 
 - `src/formats/index.ts`: `AssetFormat` list (id, store, name, width, height, optional `gap`), `getFormat(id)` and `panoramaSize(format, count)`. `gap` is the space the store shows between two screenshots, in the format's pixels. Neither store publishes it, so the values are estimates. The pixel sizes follow Apple's and Google's specs, which are linked in the file. `id` becomes the exported ZIP name (`<id>.zip`).
 - `src/languages.ts`: the interface languages. The code becomes the folder name in the ZIP.
+- `src/flags.ts`: per interface language, the study-language flags the first screenshot shows (`languages`). Device components spread `flags[language]` into `<Languages>`.
 - `src/devices/`: one component per format (`IPhone65`, `IPad13`, `PlayPhone`, …), mapped by format id in `devices/index.ts`. Each renders `<Device format={format}>{(language) => <Screenshot>…</Screenshot>}</Device>`.
 - `src/Device.tsx`: `Device` renders one `data-language` group per language (all of them by default, or pass `languages`). `Screenshot` is one exported PNG; screenshots are numbered in render order within their group. `Panorama count={n}` spreads one design over `n` consecutive `Screenshot`s and leaves out the store `gap` at each seam. The preview spaces screenshots by the scaled `gap`, so it looks the way the store will show them.
 - `src/templates/`: the asset designs. Right now there is only `Placeholder.tsx`. A template receives `format` and fills 100% of the canvas.
