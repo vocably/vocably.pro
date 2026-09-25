@@ -3,6 +3,7 @@ import { getFormat } from '../formats';
 import { Languages } from '../components/Languages';
 import { flags } from '../flags';
 import { localization } from '../localization';
+import logo from '../logo.svg?url';
 import { Placeholder } from '../templates/Placeholder';
 
 const format = getFormat('ios-ipad-13');
@@ -13,7 +14,10 @@ export const IPad13 = () => (
       <>
         <Screenshot>
           <Placeholder format={format} label={`${language} · 1`}>
-            <div className="title">{localization[language].title}</div>
+            <img className="logo" src={logo} alt="Vocably" />
+            <div className="title" style={{ fontSize: '8cqmin' }}>
+              {localization[language].title}
+            </div>
             <Languages
               {...flags[language]}
               size={Math.min(format.width, format.height) * 0.14}

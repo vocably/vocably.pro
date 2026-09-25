@@ -128,3 +128,8 @@ body {
   font-weight: 600;
   text-align: center;
 }
+
+.logo {
+  display: block;
+  width: 25cqmin;
+}
