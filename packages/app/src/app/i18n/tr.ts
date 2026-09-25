@@ -46,6 +46,7 @@ export const tr = {
   'auth.carousel.slide1_text1':
     'Her web sitesinde anlık bağlama duyarlı çeviriler.',
   'auth.carousel.slide1_text2': 'Çevirilerinizi flash kart olarak kaydedin.',
+  'auth.carousel.with_extension': '{{browser}} uzantısıyla',
   'auth.carousel.slide2':
     'Kaydedilen kelimeleri interaktif testler ve sorularla öğrenin.',
   'auth.carousel.slide3': 'Doğrudan YouTube altyazılarından çevirin.',

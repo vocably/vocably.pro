@@ -12,8 +12,18 @@
           <div class="mb-1">
             {{ 'auth.carousel.slide1_text1' | transloco }}
           </div>
-          <div class="save-your-cards">
+          <div class="save-your-cards" *ngIf="isExtensionInstalled() === true">
             {{ 'auth.carousel.slide1_text2' | transloco }}
+          </div>
+          <div
+            class="with-extension"
+            *ngIf="isExtensionInstalled() === false && extensionBrowser"
+          >
+            <img [src]="extensionBrowser.icon" alt="" width="24" />
+            {{
+              'auth.carousel.with_extension'
+                | transloco: { browser: extensionBrowser.name }
+            }}
           </div>
         </div>
       </div>

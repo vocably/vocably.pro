@@ -46,6 +46,7 @@ export const es = {
   'auth.carousel.slide1_text1':
     'Traducciones instantáneas y contextuales en cualquier sitio web.',
   'auth.carousel.slide1_text2': 'Guarda tus traducciones como tarjetas.',
+  'auth.carousel.with_extension': 'Con la extensión para {{browser}}',
   'auth.carousel.slide2':
     'Aprende las palabras guardadas con cuestionarios y preguntas interactivas.',
   'auth.carousel.slide3':

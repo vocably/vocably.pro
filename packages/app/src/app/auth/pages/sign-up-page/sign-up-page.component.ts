@@ -1,17 +1,9 @@
 import { NgIf } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
-import { Subject, takeUntil } from 'rxjs';
+import { isAndroid, isFirefoxBrowser } from '../../../../browser';
 import { HeaderComponent } from '../../../header/header.component';
-import { isExtensionInstalled$ } from '../../../isExtensionInstalled';
 import { CarouselComponent } from '../../carousel/carousel.component';
 import { SignUpComponent } from '../../sign-up/sign-up.component';
 
@@ -26,24 +18,12 @@ import { SignUpComponent } from '../../sign-up/sign-up.component';
     SignUpComponent,
   ],
 })
-export class SignUpPageComponent implements OnInit, AfterViewInit, OnDestroy {
-  private destroy$ = new Subject();
+export class SignUpPageComponent implements AfterViewInit {
+  showCarousel = !isFirefoxBrowser && !isAndroid;
 
   @ViewChild('formAnchor') formAnchor?: ElementRef<HTMLElement>;
 
-  // Undefined until the first ping answers, so the carousel doesn't flash on
-  // a page the extension isn't installed for.
-  public isExtensionInstalled: boolean | undefined = undefined;
-
   constructor(private route: ActivatedRoute) {}
-
-  ngOnInit(): void {
-    isExtensionInstalled$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((isInstalled) => {
-        this.isExtensionInstalled = isInstalled;
-      });
-  }
 
   ngAfterViewInit(): void {
     // The sign in page links here with #form when the visitor asked for the
@@ -58,10 +38,5 @@ export class SignUpPageComponent implements OnInit, AfterViewInit, OnDestroy {
         block: 'start',
       })
     );
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next(null);
-    this.destroy$.complete();
   }
 }

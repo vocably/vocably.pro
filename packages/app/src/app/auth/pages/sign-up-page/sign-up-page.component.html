@@ -6,7 +6,7 @@
     {{ 'auth.carousel.welcome' | transloco }}
   </h1>
 
-  <app-carousel class="mb-2 block" *ngIf="isExtensionInstalled"></app-carousel>
+  <app-carousel class="mb-2 block" *ngIf="showCarousel"></app-carousel>
   <p class="text-center mb-2">
     {{ 'auth.carousel.welcome_cta' | transloco }}
   </p>

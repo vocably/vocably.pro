@@ -45,6 +45,7 @@ export const en = {
   'auth.carousel.slide1_text1':
     'Instant context-aware translations on any website.',
   'auth.carousel.slide1_text2': 'Save your translations as flashcards.',
+  'auth.carousel.with_extension': 'With {{browser}} extension',
   'auth.carousel.slide2':
     'Master your saved words with interactive quizzes and questions.',
   'auth.carousel.slide3': 'Translate directly from YouTube subtitles.',

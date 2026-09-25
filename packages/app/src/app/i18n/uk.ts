@@ -45,6 +45,7 @@ export const uk = {
   'auth.carousel.slide1_text1':
     'Миттєві контекстні переклади на будь-якому сайті.',
   'auth.carousel.slide1_text2': 'Зберігайте переклади як картки.',
+  'auth.carousel.with_extension': 'З розширенням для {{browser}}',
   'auth.carousel.slide2':
     'Опановуйте збережені слова за допомогою інтерактивних тестів і завдань.',
   'auth.carousel.slide3': 'Перекладайте прямо із субтитрів YouTube.',

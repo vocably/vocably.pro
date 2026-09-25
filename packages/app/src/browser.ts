@@ -54,3 +54,11 @@ export const browserType: 'desktop-safari' | 'ios-safari' | 'normal' =
     : browser.satisfies({ macos: { safari: '>0' } })
       ? 'desktop-safari'
       : 'normal';
+
+export const isAndroid = browser.getOSName(true) === 'android';
+
+/**
+ * Any Firefox, unlike `isFirefox` from `./firefox`, which is only set for
+ * visitors who opted into the Firefox extension.
+ */
+export const isFirefoxBrowser = browser.getBrowserName(true) === 'firefox';

@@ -44,6 +44,7 @@ export const pt = {
   'auth.carousel.slide1_text1':
     'Traduções instantâneas e contextuais em qualquer site.',
   'auth.carousel.slide1_text2': 'Salve suas traduções como cartões.',
+  'auth.carousel.with_extension': 'Com a extensão para {{browser}}',
   'auth.carousel.slide2':
     'Aprenda as palavras salvas com questionários e perguntas interativas.',
   'auth.carousel.slide3': 'Traduza diretamente das legendas do YouTube.',

@@ -45,6 +45,7 @@ export const vi = {
   'auth.carousel.slide1_text1':
     'Bản dịch theo ngữ cảnh tức thì trên mọi trang web.',
   'auth.carousel.slide1_text2': 'Lưu bản dịch làm thẻ học.',
+  'auth.carousel.with_extension': 'Với tiện ích mở rộng {{browser}}',
   'auth.carousel.slide2':
     'Ghi nhớ các từ đã lưu với các bài kiểm tra và câu hỏi tương tác.',
   'auth.carousel.slide3': 'Dịch trực tiếp từ phụ đề YouTube.',

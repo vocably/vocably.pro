@@ -46,6 +46,7 @@ export const ru = {
   'auth.carousel.slide1_text1':
     'Мгновенные контекстные переводы на любом сайте.',
   'auth.carousel.slide1_text2': 'Сохраняйте переводы как карточки.',
+  'auth.carousel.with_extension': 'С расширением для {{browser}}',
   'auth.carousel.slide2':
     'Учите сохранённые слова с помощью интерактивных тестов и вопросов.',
   'auth.carousel.slide3': 'Переводите прямо из субтитров YouTube.',
