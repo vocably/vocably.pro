@@ -17,6 +17,7 @@ export const IPad13 = () => (
         <Screenshot>
           <Placeholder format={format} label={`${language} · 1`}>
             <Logo className="logo" />
+            <div className="title">{localization[language].title}</div>
             <Languages
               {...flags[language]}
               size={Math.min(format.width, format.height) * 0.14}
