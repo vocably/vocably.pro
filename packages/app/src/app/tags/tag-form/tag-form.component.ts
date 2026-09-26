@@ -123,7 +123,7 @@ export class TagFormComponent implements OnInit, OnDestroy {
 
     this.dialogRef.close({
       name: 'save',
-      title: this.title,
+      title: this.title.trim(),
     });
   }
 }

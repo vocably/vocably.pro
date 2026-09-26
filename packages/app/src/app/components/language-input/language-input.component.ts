@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnDestroy,
   OnInit,
   Output,
   SimpleChanges,
@@ -20,7 +19,7 @@ import { MatInput } from '@angular/material/input';
 import { TranslocoService } from '@jsverse/transloco';
 import { languageTranslations } from '@vocably/i18n';
 import { GoogleLanguage, Locale, languageList } from '@vocably/model';
-import { map, Observable, startWith, Subject } from 'rxjs';
+import { map, Observable, startWith } from 'rxjs';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -39,9 +38,7 @@ import { MatIcon } from '@angular/material/icon';
     MatIcon,
   ],
 })
-export class LanguageInputComponent implements OnInit, OnDestroy, OnChanges {
-  private destroy$ = new Subject();
-
+export class LanguageInputComponent implements OnInit, OnChanges {
   constructor(private transloco: TranslocoService) {}
 
   @Input() value: GoogleLanguage | '' = 'en';
@@ -70,11 +67,6 @@ export class LanguageInputComponent implements OnInit, OnDestroy, OnChanges {
         );
       }
     );
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next(null);
-    this.destroy$.complete();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

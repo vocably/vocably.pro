@@ -39,7 +39,6 @@ export class SettingsPageComponent implements OnInit {
   setLocale(locale: string) {
     const localeValue = locale as Locale;
     setLocale(localeValue);
-    console.log('setLocale', localeValue);
     this.ts.setLocale(localeValue);
     environment
       .setSettings({ locale: localeValue })
