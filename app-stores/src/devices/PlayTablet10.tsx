@@ -8,6 +8,7 @@ import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo.tsx';
+import { AndroidTablet } from '../components/AndroidTablet';
 
 const format = getFormat('play-tablet-10');
 
@@ -57,11 +58,14 @@ export const PlayTablet10 = () => (
               <div className="title">{localization[language].learn}</div>
               <div className="subtitle">{localization[language].learnSub}</div>
             </div>
-            <MultiChoiceQuestion
-              item={localization[language].searchItem}
-              incorrect={localization[language].incorrectTranslations}
-              language={language}
-            />
+            <AndroidTablet width="100%">
+              <MultiChoiceQuestion
+                style={{ marginTop: '1.6em' }}
+                item={localization[language].searchItem}
+                incorrect={localization[language].incorrectTranslations}
+                language={language}
+              />
+            </AndroidTablet>
           </Placeholder>
         </Screenshot>
       </>

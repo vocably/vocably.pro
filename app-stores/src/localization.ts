@@ -34,7 +34,7 @@ export const localization: Record<Language, Translations> = {
     sourceLanguage: 'de',
     searchItem: {
       source: 'die Magie',
-      translation: 'magic, charm',
+      translation: 'magic',
       definitions: [
         'Die Kunst, übernatürliche Kräfte zu beeinflussen oder zu nutzen.',
         'Eine geheimnisvolle, faszinierende Wirkung oder Ausstrahlung.',
@@ -50,11 +50,7 @@ export const localization: Record<Language, Translations> = {
       number: 'singular',
       pluralForm: 'die Magien',
     },
-    incorrectTranslations: [
-      'luck, fortune',
-      'mystery, secret',
-      'dream, fantasy',
-    ],
+    incorrectTranslations: ['luck', 'mystery', 'dream'],
     learnButton: 'Learn',
     example: 'Example:',
     translate: 'Translate',
