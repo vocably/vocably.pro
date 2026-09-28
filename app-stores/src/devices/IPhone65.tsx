@@ -90,7 +90,10 @@ export const IPhone65 = () => (
                 {localization[language].extensionSub}
               </div>
             </div>
-            <SafariExtension text={localization[language].pageText}>
+            <SafariExtension
+              style={{ marginTop: language === 'en' ? '10cqmin' : '14cqmin' }}
+              text={localization[language].pageText}
+            >
               <AnalysisItem
                 item={localization[language].searchItem}
                 language={language}

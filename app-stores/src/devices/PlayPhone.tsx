@@ -92,6 +92,7 @@ export const PlayPhone = () => (
               </div>
             </div>
             <AndroidSelection
+              style={{ marginTop: '12cqmin' }}
               text={localization[language].pageText}
               webSearch={localization[language].webSearch}
             />
