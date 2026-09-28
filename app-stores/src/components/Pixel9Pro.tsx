@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { deviceShadow } from './deviceShadow';
 import '@sneas/telephone/pixel-9-pro.js';
 
 declare module 'react' {
@@ -23,7 +24,10 @@ type Props = {
 
 // Renders children on the screen of a Pixel 9 Pro frame.
 export const Pixel9Pro = ({ width, children, style }: Props) => (
-  <pixel-9-pro mode="light" style={{ width, flexShrink: 0, ...style }}>
+  <pixel-9-pro
+    mode="light"
+    style={{ width, flexShrink: 0, filter: deviceShadow, ...style }}
+  >
     <div
       style={{
         height: '100%',

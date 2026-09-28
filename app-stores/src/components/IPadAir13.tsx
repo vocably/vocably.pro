@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { deviceShadow } from './deviceShadow';
 import '@sneas/telephone/ipad-air-13.js';
 
 declare module 'react' {
@@ -23,7 +24,10 @@ type Props = {
 
 // Renders children on the screen of an iPad Air 13" frame.
 export const IPadAir13 = ({ width, children, style }: Props) => (
-  <ipad-air-13 mode="light" style={{ width, flexShrink: 0, ...style }}>
+  <ipad-air-13
+    mode="light"
+    style={{ width, flexShrink: 0, filter: deviceShadow, ...style }}
+  >
     <div
       style={{
         height: '100%',

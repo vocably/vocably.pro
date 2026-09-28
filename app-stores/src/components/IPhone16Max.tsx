@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { deviceShadow } from './deviceShadow';
 import '@sneas/telephone/iphone-16-max.js';
 
 declare module 'react' {
@@ -23,7 +24,10 @@ type Props = {
 
 // Renders children on the screen of an iPhone 16 Pro Max frame.
 export const IPhone16Max = ({ width, children, style }: Props) => (
-  <iphone-16-max mode="light" style={{ width, flexShrink: 0, ...style }}>
+  <iphone-16-max
+    mode="light"
+    style={{ width, flexShrink: 0, filter: deviceShadow, ...style }}
+  >
     <div
       style={{
         height: '100%',

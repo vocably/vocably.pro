@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { deviceShadow } from './deviceShadow';
 import '@sneas/telephone/android-tablet.js';
 
 declare module 'react' {
@@ -23,7 +24,10 @@ type Props = {
 
 // Renders children on the screen of an Android tablet frame.
 export const AndroidTablet = ({ width, children, style }: Props) => (
-  <android-tablet mode="light" style={{ width, flexShrink: 0, ...style }}>
+  <android-tablet
+    mode="light"
+    style={{ width, flexShrink: 0, filter: deviceShadow, ...style }}
+  >
     <div
       style={{
         height: '100%',
