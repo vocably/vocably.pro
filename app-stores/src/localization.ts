@@ -35,6 +35,10 @@ type Translations = {
   androidExtensionSub: string;
   // The Android text selection menu item that searches the selected text.
   webSearch: string;
+  // The headline of the desktop browser extension screenshot and the line
+  // under it.
+  desktopExtension: string;
+  desktopExtensionSub: string;
   // The headline of the custom card lists screenshot, the line under it, the
   // chat message that asks for the list, and the generated cards: a verb in
   // `sourceLanguage` and its translation.
@@ -106,6 +110,9 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Select, translate,\nand save',
     androidExtensionSub: 'words while surfing the web\nin any mobile browser.',
     webSearch: 'Web search',
+    desktopExtension: 'Browse the web\nand watch YouTube',
+    desktopExtensionSub:
+      'with the Vocably extension\nfor Chrome, Safari, and Edge\ndesktop browsers.',
     customLists: 'Generate custom\ncard lists',
     customListsSub: 'by prompting the AI.',
     customListsPrompt: 'popular verbs',
@@ -153,6 +160,9 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'palabras mientras navegas por la web en cualquier navegador móvil.',
     webSearch: 'Búsqueda web',
+    desktopExtension: 'Navega por la web y mira YouTube',
+    desktopExtensionSub:
+      'con la extensión de Vocably para los navegadores de escritorio Chrome, Safari y Edge.',
     customLists: 'Genera listas de tarjetas personalizadas',
     customListsSub: 'pidiéndoselo a la IA.',
     customListsPrompt: 'verbos populares',
@@ -200,6 +210,9 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'palavras enquanto navega na web em qualquer navegador móvel.',
     webSearch: 'Pesquisa na web',
+    desktopExtension: 'Navegue na web e assista ao YouTube',
+    desktopExtensionSub:
+      'com a extensão do Vocably para os navegadores de desktop Chrome, Safari e Edge.',
     customLists: 'Gere listas de cartões personalizadas',
     customListsSub: 'pedindo à IA.',
     customListsPrompt: 'verbos populares',
@@ -251,6 +264,9 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'слова, просматривая сайты в любом мобильном браузере.',
     webSearch: 'Веб-поиск',
+    desktopExtension: 'Читайте сайты и смотрите YouTube',
+    desktopExtensionSub:
+      'с расширением Vocably для десктопных браузеров Chrome, Safari и Edge.',
     customLists: 'Создавайте свои списки карточек',
     customListsSub: 'запросом к ИИ.',
     customListsPrompt: 'популярные глаголы',
@@ -302,6 +318,9 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'слова, переглядаючи сайти в будь-якому мобільному браузері.',
     webSearch: 'Пошук в Інтернеті',
+    desktopExtension: 'Читайте сайти та дивіться YouTube',
+    desktopExtensionSub:
+      'з розширенням Vocably для десктопних браузерів Chrome, Safari та Edge.',
     customLists: 'Створюйте власні списки карток',
     customListsSub: 'запитом до ШІ.',
     customListsPrompt: 'популярні дієслова',
@@ -352,6 +371,9 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Kelimeleri seçin, çevirin ve kaydedin',
     androidExtensionSub: "herhangi bir mobil tarayıcıda web'de gezinirken.",
     webSearch: "Web'de ara",
+    desktopExtension: "Web'de gezinin ve YouTube izleyin",
+    desktopExtensionSub:
+      'Chrome, Safari ve Edge masaüstü tarayıcıları için Vocably uzantısıyla.',
     customLists: 'Özel kart listeleri oluşturun',
     customListsSub: 'yapay zekâya istem yazarak.',
     customListsPrompt: 'popüler fiiller',
@@ -402,6 +424,9 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Chọn, dịch và lưu',
     androidExtensionSub: 'từ khi lướt web trên bất kỳ trình duyệt di động nào.',
     webSearch: 'Tìm kiếm trên web',
+    desktopExtension: 'Duyệt web và xem YouTube',
+    desktopExtensionSub:
+      'với tiện ích mở rộng Vocably cho trình duyệt máy tính Chrome, Safari và Edge.',
     customLists: 'Tạo danh sách thẻ tùy chỉnh',
     customListsSub: 'bằng cách gửi yêu cầu cho AI.',
     customListsPrompt: 'động từ phổ biến',

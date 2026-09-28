@@ -8,6 +8,7 @@ import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { CardList } from '../components/CardList';
+import { DesktopBrowsers } from '../components/DesktopBrowsers';
 import { Logo } from '../components/Logo';
 import { SafariExtension } from '../components/SafariExtension';
 import { SafariCorner } from '../components/SafariIcon';
@@ -123,6 +124,25 @@ export const IPhone65 = () => (
               prompt={localization[language].customListsPrompt}
               cards={localization[language].customListsCards}
             />
+          </Placeholder>
+        </Screenshot>
+        <Screenshot>
+          <Placeholder format={format} fixedTitle>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">
+                {localization[language].desktopExtension}
+              </div>
+              <div className="subtitle">
+                {localization[language].desktopExtensionSub}
+              </div>
+            </div>
+            <DesktopBrowsers style={{ marginBottom: '50cqmin' }} />
           </Placeholder>
         </Screenshot>
       </>
