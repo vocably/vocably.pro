@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { Logo } from './Logo';
+import { PageText } from './PageText';
 
 type Props = {
   // The page text around the selected word: before, selection, after.
@@ -44,11 +45,6 @@ const Handle = ({ side }: { side: 'start' | 'end' }) => (
     />
   </span>
 );
-
-// Fades the page text in on the left and out on the right, so the excerpt
-// reads as part of a longer sentence.
-const fade =
-  'linear-gradient(to right, transparent, #000 25%, #000 75%, transparent)';
 
 // A web page in iOS Safari with a word selected and the extension's popup
 // (extension-content-ui/src/components/popup) under it. Sized in cqmin,
@@ -103,34 +99,16 @@ export const SafariExtension = ({
       </svg>
       {children}
     </div>
-    <div
-      style={{
-        fontFamily: "'Merriweather', serif",
-        fontSize: '5cqmin',
-        lineHeight: 1.7,
-        color: '#333',
-        textAlign: 'center',
-      }}
+    <PageText
+      before={before}
+      after={after}
+      overflow={{ top: '2cqmin', bottom: '2cqmin' }}
     >
-      <span
-        style={{
-          display: 'inline-block',
-          // The mask clips to the border box, so leave room for the handle
-          // knobs above and below the line without changing the layout.
-          padding: '2cqmin 0',
-          margin: '-2cqmin 0',
-          maskImage: fade,
-          WebkitMaskImage: fade,
-        }}
-      >
-        {before}
-        <span style={{ position: 'relative', background: selection }}>
-          <Handle side="start" />
-          {word}
-          <Handle side="end" />
-        </span>
-        {after}
+      <span style={{ position: 'relative', background: selection }}>
+        <Handle side="start" />
+        {word}
+        <Handle side="end" />
       </span>
-    </div>
+    </PageText>
   </div>
 );

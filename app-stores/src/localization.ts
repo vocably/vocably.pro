@@ -29,6 +29,12 @@ type Translations = {
   // The web page text of the Safari extension screenshot, in
   // `sourceLanguage`: before, the selected `searchItem.source`, after.
   pageText: [string, string, string];
+  // The headline of the Android text selection screenshot and the line
+  // under it. It shows `pageText` too.
+  androidExtension: string;
+  androidExtensionSub: string;
+  // The Android text selection menu item that searches the selected text.
+  webSearch: string;
 };
 
 // The page the Safari extension screenshot shows for English sources.
@@ -73,6 +79,9 @@ export const localization: Record<Language, Translations> = {
     extension: 'Translate and save',
     extensionSub: 'with a single click using\nthe iOS Safari Extension.',
     pageText: ['mit seiner ', 'Magie', ' und ließ'],
+    androidExtension: 'Select, translate,\nand save',
+    androidExtensionSub: 'words while surfing the web\nin any mobile browser.',
+    webSearch: 'Web search',
   },
   es: {
     title: 'Una herramienta para aprender idiomas.',
@@ -101,6 +110,10 @@ export const localization: Record<Language, Translations> = {
     extension: 'Traduce y guarda',
     extensionSub: 'con un solo clic usando la extensión de Safari para iOS.',
     pageText: reliablePage,
+    androidExtension: 'Selecciona, traduce y guarda',
+    androidExtensionSub:
+      'palabras mientras navegas por la web en cualquier navegador móvil.',
+    webSearch: 'Búsqueda web',
   },
   pt: {
     title: 'Uma ferramenta para aprender idiomas.',
@@ -129,6 +142,10 @@ export const localization: Record<Language, Translations> = {
     extension: 'Traduza e salve',
     extensionSub: 'com um único clique usando a extensão do Safari para iOS.',
     pageText: reliablePage,
+    androidExtension: 'Selecione, traduza e salve',
+    androidExtensionSub:
+      'palavras enquanto navega na web em qualquer navegador móvel.',
+    webSearch: 'Pesquisa na web',
   },
   ru: {
     title: 'Инструмент для изучения языков.',
@@ -161,6 +178,10 @@ export const localization: Record<Language, Translations> = {
     extension: 'Переводите и сохраняйте',
     extensionSub: 'в один клик с помощью расширения Safari для iOS.',
     pageText: reliablePage,
+    androidExtension: 'Выделяйте, переводите и сохраняйте',
+    androidExtensionSub:
+      'слова, просматривая сайты в любом мобильном браузере.',
+    webSearch: 'Веб-поиск',
   },
   uk: {
     title: 'Інструмент для вивчення мов.',
@@ -193,6 +214,10 @@ export const localization: Record<Language, Translations> = {
     extension: 'Перекладайте та зберігайте',
     extensionSub: 'в один клік за допомогою розширення Safari для iOS.',
     pageText: reliablePage,
+    androidExtension: 'Виділяйте, перекладайте та зберігайте',
+    androidExtensionSub:
+      'слова, переглядаючи сайти в будь-якому мобільному браузері.',
+    webSearch: 'Пошук в Інтернеті',
   },
   tr: {
     title: 'Bir dil öğrenme aracı.',
@@ -225,6 +250,9 @@ export const localization: Record<Language, Translations> = {
     extension: 'Çevirin ve kaydedin',
     extensionSub: 'iOS Safari Uzantısı ile tek tıkla.',
     pageText: reliablePage,
+    androidExtension: 'Kelimeleri seçin, çevirin ve kaydedin',
+    androidExtensionSub: "herhangi bir mobil tarayıcıda web'de gezinirken.",
+    webSearch: "Web'de ara",
   },
   vi: {
     title: 'Công cụ học ngoại ngữ.',
@@ -257,5 +285,8 @@ export const localization: Record<Language, Translations> = {
     extension: 'Dịch và lưu',
     extensionSub: 'chỉ với một cú nhấp bằng Tiện ích mở rộng Safari trên iOS.',
     pageText: reliablePage,
+    androidExtension: 'Chọn, dịch và lưu',
+    androidExtensionSub: 'từ khi lướt web trên bất kỳ trình duyệt di động nào.',
+    webSearch: 'Tìm kiếm trên web',
   },
 };

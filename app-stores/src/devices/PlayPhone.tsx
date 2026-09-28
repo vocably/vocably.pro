@@ -9,6 +9,7 @@ import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo.tsx';
 import { Pixel9Pro } from '../components/Pixel9Pro';
+import { AndroidSelection } from '../components/AndroidSelection';
 
 const format = getFormat('play-phone');
 
@@ -72,6 +73,28 @@ export const PlayPhone = () => (
                 language={language}
               />
             </Pixel9Pro>
+          </Placeholder>
+        </Screenshot>
+        <Screenshot>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">
+                {localization[language].androidExtension}
+              </div>
+              <div className="subtitle">
+                {localization[language].androidExtensionSub}
+              </div>
+            </div>
+            <AndroidSelection
+              text={localization[language].pageText}
+              webSearch={localization[language].webSearch}
+            />
           </Placeholder>
         </Screenshot>
       </>
