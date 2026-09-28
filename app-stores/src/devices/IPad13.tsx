@@ -30,7 +30,7 @@ export const IPad13 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
             <div style={{ textAlign: 'center' }}>
               <div className="title">{localization[language].translate}</div>
               <div className="subtitle">
@@ -48,7 +48,7 @@ export const IPad13 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
             <div
               style={{
                 display: 'flex',
