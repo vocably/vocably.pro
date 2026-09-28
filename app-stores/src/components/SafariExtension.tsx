@@ -10,6 +10,39 @@ type Props = {
 
 // iOS text selection blue.
 const selection = 'rgba(0, 122, 255, 0.25)';
+const handleColor = '#007aff';
+const handleWidth = 0.6;
+const knobSize = 2.4;
+
+// An iOS selection handle: a vertical bar on the edge of the selection with a
+// knob on top of the start handle and under the end handle.
+const Handle = ({ side }: { side: 'start' | 'end' }) => (
+  <span
+    style={{
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      [side === 'start' ? 'left' : 'right']: `-${handleWidth / 2}cqmin`,
+      width: `${handleWidth}cqmin`,
+      background: handleColor,
+    }}
+  >
+    <span
+      style={{
+        position: 'absolute',
+        left: '50%',
+        [side === 'start' ? 'bottom' : 'top']: '100%',
+        width: `${knobSize}cqmin`,
+        height: `${knobSize}cqmin`,
+        marginLeft: `-${knobSize / 2}cqmin`,
+        [side === 'start' ? 'marginBottom' : 'marginTop']:
+          `-${knobSize / 4}cqmin`,
+        borderRadius: '50%',
+        background: handleColor,
+      }}
+    />
+  </span>
+);
 
 // Fades the page text in on the left and out on the right, so the excerpt
 // reads as part of a longer sentence.
@@ -73,24 +106,25 @@ export const SafariExtension = ({
         fontSize: '5cqmin',
         lineHeight: 1.7,
         color: '#333',
+        textAlign: 'center',
       }}
     >
       <span
         style={{
           display: 'inline-block',
+          // The mask clips to the border box, so leave room for the handle
+          // knobs above and below the line without changing the layout.
+          padding: '2cqmin 0',
+          margin: '-2cqmin 0',
           maskImage: fade,
           WebkitMaskImage: fade,
         }}
       >
         {before}
-        <span
-          style={{
-            background: selection,
-            borderLeft: '0.3cqmin solid #007aff',
-            borderRight: '0.3cqmin solid #007aff',
-          }}
-        >
+        <span style={{ position: 'relative', background: selection }}>
+          <Handle side="start" />
           {word}
+          <Handle side="end" />
         </span>
         {after}
       </span>
