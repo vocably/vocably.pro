@@ -12,6 +12,9 @@ type Props = {
   // Where the top of the title sits with fixedTitle, as a share of the
   // canvas height.
   titleTop?: number;
+  // Drawn behind the content, e.g. a decoration positioned absolutely
+  // against the canvas.
+  backdrop?: ReactNode;
   children?: ReactNode;
 };
 
@@ -19,6 +22,7 @@ export const Placeholder = ({
   format,
   fixedTitle,
   titleTop = TITLE_TOP,
+  backdrop,
   children,
 }: Props) => {
   const minSide = Math.min(format.width, format.height);
@@ -27,6 +31,11 @@ export const Placeholder = ({
     <div
       style={{
         height: '100%',
+        // A stacking context, so a zIndex -1 backdrop sits above the
+        // background but under the content.
+        position: 'relative',
+        zIndex: 0,
+        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -40,6 +49,11 @@ export const Placeholder = ({
         fontWeight: '400',
       }}
     >
+      {backdrop && (
+        <div style={{ position: 'absolute', inset: 0, zIndex: -1 }}>
+          {backdrop}
+        </div>
+      )}
       {children}
     </div>
   );

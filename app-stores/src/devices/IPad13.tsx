@@ -9,6 +9,7 @@ import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo';
 import { SafariExtension } from '../components/SafariExtension';
+import { SafariCorner } from '../components/SafariIcon';
 import { IPadAir13 } from '../components/IPadAir13';
 
 const format = getFormat('ios-ipad-13');
@@ -72,7 +73,12 @@ export const IPad13 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle titleTop={0.1}>
+          <Placeholder
+            format={format}
+            fixedTitle
+            titleTop={0.1}
+            backdrop={<SafariCorner offset={[15, 13]} />}
+          >
             <div
               style={{
                 display: 'flex',

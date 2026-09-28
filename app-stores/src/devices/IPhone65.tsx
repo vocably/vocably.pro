@@ -9,6 +9,7 @@ import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo';
 import { SafariExtension } from '../components/SafariExtension';
+import { SafariCorner } from '../components/SafariIcon';
 import { IPhone16Max } from '../components/IPhone16Max';
 
 const format = getFormat('ios-iphone-6.5');
@@ -76,7 +77,7 @@ export const IPhone65 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle backdrop={<SafariCorner />}>
             <div
               style={{
                 display: 'flex',
