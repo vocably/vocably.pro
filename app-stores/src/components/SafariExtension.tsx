@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { Logo } from './Logo';
 
 type Props = {
@@ -6,6 +6,7 @@ type Props = {
   text: [string, string, string];
   // The extension popup content, usually an <AnalysisItem>.
   children: ReactNode;
+  style?: CSSProperties;
 };
 
 // iOS text selection blue.
@@ -55,11 +56,13 @@ const fade =
 export const SafariExtension = ({
   text: [before, word, after],
   children,
+  style,
 }: Props) => (
   <div
     style={{
       width: '90%',
       fontFamily: "'Roboto', sans-serif",
+      ...style,
     }}
   >
     <div

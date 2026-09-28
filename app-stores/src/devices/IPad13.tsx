@@ -91,7 +91,14 @@ export const IPad13 = () => (
                 {localization[language].extensionSub}
               </div>
             </div>
-            <SafariExtension text={localization[language].pageText}>
+            <SafariExtension
+              text={localization[language].pageText}
+              style={
+                language === 'en'
+                  ? { transform: 'scale(0.85)', transformOrigin: 'top center' }
+                  : undefined
+              }
+            >
               <AnalysisItem
                 item={localization[language].searchItem}
                 language={language}
