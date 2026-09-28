@@ -8,6 +8,7 @@ import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo';
+import { SafariExtension } from '../components/SafariExtension';
 import { IPhone16Max } from '../components/IPhone16Max';
 
 const format = getFormat('ios-iphone-6.5');
@@ -72,6 +73,30 @@ export const IPhone65 = () => (
                 language={language}
               />
             </IPhone16Max>
+          </Placeholder>
+        </Screenshot>
+        <Screenshot>
+          <Placeholder format={format} fixedTitle>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">{localization[language].extension}</div>
+              <div className="subtitle">
+                {localization[language].extensionSub}
+              </div>
+            </div>
+            <SafariExtension text={localization[language].pageText}>
+              <AnalysisItem
+                item={localization[language].searchItem}
+                language={language}
+                learn={localization[language].learnButton}
+                example={localization[language].example}
+              />
+            </SafariExtension>
           </Placeholder>
         </Screenshot>
       </>

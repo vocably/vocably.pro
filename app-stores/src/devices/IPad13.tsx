@@ -8,6 +8,7 @@ import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo';
+import { SafariExtension } from '../components/SafariExtension';
 import { IPadAir13 } from '../components/IPadAir13';
 
 const format = getFormat('ios-ipad-13');
@@ -68,6 +69,19 @@ export const IPad13 = () => (
                 hideExamples
               />
             </IPadAir13>
+          </Placeholder>
+        </Screenshot>
+        <Screenshot>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
+            <SafariExtension text={localization[language].pageText}>
+              <AnalysisItem
+                item={localization[language].searchItem}
+                language={language}
+                learn={localization[language].learnButton}
+                example={localization[language].example}
+                hideExamples
+              />
+            </SafariExtension>
           </Placeholder>
         </Screenshot>
       </>

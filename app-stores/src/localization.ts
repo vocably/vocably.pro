@@ -23,7 +23,20 @@ type Translations = {
   // The headline of the third screenshot and the line under it.
   learn: string;
   learnSub: string;
+  // The headline of the Safari extension screenshot and the line under it.
+  extension: string;
+  extensionSub: string;
+  // The web page text of the Safari extension screenshot, in
+  // `sourceLanguage`: before, the selected `searchItem.source`, after.
+  pageText: [string, string, string];
 };
+
+// The page the Safari extension screenshot shows for English sources.
+const reliablePage: [string, string, string] = [
+  'After years of testing, the team finally built a ',
+  'reliable',
+  ' engine that could run for weeks without a single failure.',
+];
 
 // The copy shown on the assets, per interface language.
 export const localization: Record<Language, Translations> = {
@@ -57,6 +70,13 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'any words or phrases.',
     learn: 'Learn',
     learnSub: 'with quizzes and\nother question types.',
+    extension: 'Translate and save',
+    extensionSub: 'with a single click using\nthe iOS Safari Extension.',
+    pageText: [
+      'Der Zauberer verzauberte das Publikum mit seiner ',
+      'Magie',
+      ' und ließ eine weiße Taube erscheinen.',
+    ],
   },
   es: {
     title: 'Una herramienta para aprender idiomas.',
@@ -82,6 +102,9 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'cualquier palabra o frase.',
     learn: 'Aprende',
     learnSub: 'con cuestionarios y otros tipos de preguntas.',
+    extension: 'Traduce y guarda',
+    extensionSub: 'con un solo clic usando la extensión de Safari para iOS.',
+    pageText: reliablePage,
   },
   pt: {
     title: 'Uma ferramenta para aprender idiomas.',
@@ -107,6 +130,9 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'quaisquer palavras ou frases.',
     learn: 'Aprenda',
     learnSub: 'com testes e outros tipos de perguntas.',
+    extension: 'Traduza e salve',
+    extensionSub: 'com um único clique usando a extensão do Safari para iOS.',
+    pageText: reliablePage,
   },
   ru: {
     title: 'Инструмент для изучения языков.',
@@ -136,6 +162,9 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'любые слова и фразы.',
     learn: 'Учите',
     learnSub: 'при помощи тестов и других типов вопросов.',
+    extension: 'Переводите и сохраняйте',
+    extensionSub: 'в один клик с помощью расширения Safari для iOS.',
+    pageText: reliablePage,
   },
   uk: {
     title: 'Інструмент для вивчення мов.',
@@ -165,6 +194,9 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'будь-які слова та фрази.',
     learn: 'Вчіть',
     learnSub: 'за допомогою тестів та інших типів запитань.',
+    extension: 'Перекладайте та зберігайте',
+    extensionSub: 'в один клік за допомогою розширення Safari для iOS.',
+    pageText: reliablePage,
   },
   tr: {
     title: 'Bir dil öğrenme aracı.',
@@ -194,6 +226,9 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'her türlü kelime ve ifadeyi.',
     learn: 'Öğrenin',
     learnSub: 'testler ve diğer soru türleriyle.',
+    extension: 'Çevirin ve kaydedin',
+    extensionSub: 'iOS Safari Uzantısı ile tek tıkla.',
+    pageText: reliablePage,
   },
   vi: {
     title: 'Công cụ học ngoại ngữ.',
@@ -223,5 +258,8 @@ export const localization: Record<Language, Translations> = {
     translateSub: 'bất kỳ từ hoặc cụm từ nào.',
     learn: 'Học',
     learnSub: 'qua các bài kiểm tra và nhiều dạng câu hỏi khác.',
+    extension: 'Dịch và lưu',
+    extensionSub: 'chỉ với một cú nhấp bằng Tiện ích mở rộng Safari trên iOS.',
+    pageText: reliablePage,
   },
 };
