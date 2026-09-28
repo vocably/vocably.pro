@@ -35,7 +35,13 @@ export const PlayTablet10 = () => (
         </Screenshot>
         <Screenshot>
           <Placeholder format={format} fixedTitle titleTop={0.1}>
-            <div style={{ textAlign: 'center' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
               <div className="title">{localization[language].translate}</div>
               <div className="subtitle">
                 {localization[language].translateSub}
