@@ -24,6 +24,7 @@ type Props = {
 // The mobile app's light theme (mobile-app/src/ThemeProvider.tsx).
 const primary = 'rgb(0, 80, 255)';
 const onSurface = 'rgb(106, 106, 106)';
+const outline = 'rgb(0, 80, 255)';
 const inputBg = 'rgba(106, 106, 106, 0.05)';
 const inputIconColor = 'rgba(106, 106, 106, 0.6)';
 const elevationLevel1 = 'rgb(252, 252, 252)';
@@ -65,18 +66,27 @@ const closeCircle =
 const magnify =
   'M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z';
 
-// A contained react-native-paper button of the translation preset form.
-const LanguageButton = ({ children }: { children: ReactNode }) => (
+// A react-native-paper button of the translation preset form, contained or
+// outlined.
+const LanguageButton = ({
+  children,
+  outlined,
+}: {
+  children: ReactNode;
+  outlined?: boolean;
+}) => (
   <div
     style={{
       flex: 1,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      boxSizing: 'border-box',
       height: dp(40),
       borderRadius: dp(20),
-      background: primary,
-      color: '#fff',
+      background: outlined ? 'transparent' : primary,
+      border: outlined ? `${dp(1)} solid ${outline}` : 'none',
+      color: outlined ? primary : '#fff',
       fontSize: dp(14),
       fontWeight: 500,
       letterSpacing: dp(0.1),
@@ -201,7 +211,9 @@ export const AndroidEbookLookUp = ({
           >
             <MdiIcon path={swapHorizontal} size={24} color={onSurface} />
           </div>
-          <LanguageButton>{languageName(language, language)}</LanguageButton>
+          <LanguageButton outlined>
+            {languageName(language, language)}
+          </LanguageButton>
         </div>
 
         {/* SearchInput, with the shared text in it. */}
