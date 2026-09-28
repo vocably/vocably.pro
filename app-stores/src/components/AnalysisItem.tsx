@@ -112,7 +112,6 @@ export const AnalysisItem = ({
           paddingRight: '0.5em',
           border: `0.094em solid ${primary}`,
           borderRadius: '1em',
-          background: '#ffffff',
           boxShadow: highlightLearn
             ? '0 0 0.75em rgba(0, 80, 255, 0.35)'
             : 'none',

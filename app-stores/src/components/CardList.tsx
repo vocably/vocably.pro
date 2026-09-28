@@ -1,10 +1,14 @@
 import type { CSSProperties } from 'react';
+import { ScreenshotBackground } from '../Device';
 
 // Colors of the mobile app's light theme (mobile-app/src/ThemeProvider.tsx).
 const primary = 'rgb(0, 80, 255)';
 const secondary = 'rgb(0, 0, 0)';
 const onBackground = 'rgb(106, 106, 106)';
 const outline = 'rgb(230, 230, 230)';
+
+// Covers the bottom 35% of the canvas, fully opaque from 85% of that down.
+const fade = 'linear-gradient(transparent 65%, black 94.75%)';
 
 type Props = {
   // What the user asked for, shown as their chat message.
@@ -80,17 +84,19 @@ export const CardList = ({ prompt, cards, style }: Props) => (
       </div>
     </div>
     {/* Positioned against the canvas (the template), not the list, so the
-        fade always ends at the canvas's bottom edge. */}
+        fade always ends at the canvas's bottom edge. The list fades into the
+        screenshot's background, redrawn on top through a mask. */}
     <div
       style={{
         position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: '35%',
-        background: 'linear-gradient(rgba(255, 255, 255, 0), #fff 85%)',
+        inset: 0,
+        overflow: 'hidden',
+        maskImage: fade,
+        WebkitMaskImage: fade,
         pointerEvents: 'none',
       }}
-    />
+    >
+      <ScreenshotBackground />
+    </div>
   </>
 );
