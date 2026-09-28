@@ -12,6 +12,7 @@ import { DesktopBrowsers } from '../components/DesktopBrowsers';
 import { Logo } from '../components/Logo.tsx';
 import { Pixel9Pro } from '../components/Pixel9Pro';
 import { AndroidSelection } from '../components/AndroidSelection';
+import { AndroidEbookLookUp } from '../components/AndroidEbookLookUp';
 
 const format = getFormat('play-phone');
 
@@ -129,6 +130,29 @@ export const PlayPhone = () => (
               style={{ marginTop: '12cqmin' }}
               text={localization[language].pageText}
               webSearch={localization[language].webSearch}
+            />
+          </Placeholder>
+        </Screenshot>
+        <Screenshot>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">{localization[language].ebook}</div>
+              <div className="subtitle">{localization[language].ebookSub}</div>
+            </div>
+            <AndroidEbookLookUp
+              text={localization[language].pageText}
+              language={language}
+              sourceLanguage={localization[language].sourceLanguage}
+              done={localization[language].done}
+              item={localization[language].searchItem}
+              learn={localization[language].learnButton}
+              example={localization[language].example}
             />
           </Placeholder>
         </Screenshot>

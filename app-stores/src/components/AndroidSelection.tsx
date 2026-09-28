@@ -11,12 +11,12 @@ type Props = {
 
 // Android text selection colors.
 const handleColor = '#1a73e8';
-const selection = 'rgba(26, 115, 232, 0.3)';
-const handleSize = 6;
+export const selection = 'rgba(26, 115, 232, 0.3)';
+export const handleSize = 6;
 
 // An Android selection handle: a drop hanging under the selection, with its
 // square corner pointing at the start or the end of the selected text.
-const Handle = ({ side }: { side: 'start' | 'end' }) => (
+export const Handle = ({ side }: { side: 'start' | 'end' }) => (
   <span
     style={{
       position: 'absolute',

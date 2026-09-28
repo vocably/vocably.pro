@@ -21,6 +21,9 @@ type Props = {
   hideExamples?: boolean;
   // Glows the "Learn" button, for a card that stands on its own.
   highlightLearn?: boolean;
+  // Shows the add button as the mobile app's plus-circle-outline icon
+  // instead of the extension's "Learn" button.
+  learnIcon?: boolean;
 };
 
 // Every size is in em, relative to the root font size, which stands for the
@@ -74,6 +77,7 @@ export const AnalysisItem = ({
   example,
   hideExamples = false,
   highlightLearn = true,
+  learnIcon = false,
 }: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
   const partOfSpeech =
@@ -99,37 +103,61 @@ export const AnalysisItem = ({
         color: body,
       }}
     >
-      {/* The "Learn" button of a card that is not in the deck yet. */}
-      <div
-        style={{
-          position: 'absolute',
-          top: '-0.3em',
-          right: 0,
-          display: 'inline-flex',
-          alignItems: 'center',
-          height: '2em',
-          paddingLeft: '0.125em',
-          paddingRight: '0.5em',
-          border: `0.094em solid ${primary}`,
-          borderRadius: '1em',
-          boxShadow: highlightLearn
-            ? '0 0 0.75em rgba(0, 80, 255, 0.35)'
-            : 'none',
-          color: primary,
-        }}
-      >
+      {/* The add button of a card that is not in the deck yet. */}
+      {learnIcon ? (
+        // Material Design Icons "plus-circle-outline".
         <svg
           viewBox="0 0 24 24"
-          fill="currentColor"
-          style={{ display: 'block', width: '1.5em', height: '1.5em' }}
+          fill={primary}
+          style={{
+            position: 'absolute',
+            top: '-0.125em',
+            right: 0,
+            display: 'block',
+            width: '1.5em',
+            height: '1.5em',
+          }}
         >
-          <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+          <path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" />
         </svg>
-        <span style={{ marginLeft: '0.125em' }}>{learn}</span>
-      </div>
+      ) : (
+        <div
+          style={{
+            position: 'absolute',
+            top: '-0.3em',
+            right: 0,
+            display: 'inline-flex',
+            alignItems: 'center',
+            height: '2em',
+            paddingLeft: '0.125em',
+            paddingRight: '0.5em',
+            border: `0.094em solid ${primary}`,
+            borderRadius: '1em',
+            boxShadow: highlightLearn
+              ? '0 0 0.75em rgba(0, 80, 255, 0.35)'
+              : 'none',
+            color: primary,
+          }}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style={{ display: 'block', width: '1.5em', height: '1.5em' }}
+          >
+            <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+          </svg>
+          <span style={{ marginLeft: '0.125em' }}>{learn}</span>
+        </div>
+      )}
 
       <div style={{ paddingRight: '2.125em' }}>
-        <div style={{ paddingRight: '3.125em', marginBottom: '0.375em' }}>
+        <div
+          style={{
+            // Room for the "Learn" button; the icon fits in the padding above.
+            paddingRight: learnIcon ? 0 : '3.125em',
+            marginBottom: '0.375em',
+          }}
+        >
           {/* vocably-icon-play-circle */}
           <svg
             viewBox="0 0 24 24"
