@@ -47,13 +47,25 @@ export const IPhone65 = () => (
                 {localization[language].translateSub}
               </div>
             </div>
-            <Search query={localization[language].search} />
-            <AnalysisItem
-              item={localization[language].searchItem}
-              language={language}
-              learn={localization[language].learnButton}
-              example={localization[language].example}
-            />
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '8cqmin',
+                width: '100%',
+                marginTop: 'auto',
+                marginBottom: '60cqmin',
+              }}
+            >
+              <Search query={localization[language].search} />
+              <AnalysisItem
+                item={localization[language].searchItem}
+                language={language}
+                learn={localization[language].learnButton}
+                example={localization[language].example}
+              />
+            </div>
           </Placeholder>
         </Screenshot>
         <Screenshot>
