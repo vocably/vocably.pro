@@ -75,12 +75,17 @@ export const IPad13 = () => (
               <div className="title">{localization[language].learn}</div>
               <div className="subtitle">{localization[language].learnSub}</div>
             </div>
-            <IPadAir13 width="100%">
+            <IPadAir13
+              width="100%"
+              // Scaled down so the whole frame fits above the canvas bottom.
+              style={{ transform: 'scale(0.7)', transformOrigin: 'top center' }}
+            >
               <MultiChoiceQuestion
                 style={{ marginTop: '1.6em' }}
                 item={localization[language].searchItem}
                 incorrect={localization[language].incorrectTranslations}
                 language={language}
+                hideLastAnswer={language === 'en'}
                 hideExamples
               />
             </IPadAir13>

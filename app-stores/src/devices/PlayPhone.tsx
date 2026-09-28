@@ -98,17 +98,14 @@ export const PlayPhone = () => (
                 gap: '2.4em',
               }}
             >
-              <div className="title">
-                {localization[language].androidExtension}
-              </div>
+              <div className="title">{localization[language].customLists}</div>
               <div className="subtitle">
-                {localization[language].androidExtensionSub}
+                {localization[language].customListsSub}
               </div>
             </div>
-            <AndroidSelection
-              style={{ marginTop: '12cqmin' }}
-              text={localization[language].pageText}
-              webSearch={localization[language].webSearch}
+            <CardList
+              prompt={localization[language].customListsPrompt}
+              cards={localization[language].customListsCards}
             />
           </Placeholder>
         </Screenshot>
@@ -121,14 +118,17 @@ export const PlayPhone = () => (
                 gap: '2.4em',
               }}
             >
-              <div className="title">{localization[language].customLists}</div>
+              <div className="title">
+                {localization[language].androidExtension}
+              </div>
               <div className="subtitle">
-                {localization[language].customListsSub}
+                {localization[language].androidExtensionSub}
               </div>
             </div>
-            <CardList
-              prompt={localization[language].customListsPrompt}
-              cards={localization[language].customListsCards}
+            <AndroidSelection
+              style={{ marginTop: '12cqmin' }}
+              text={localization[language].pageText}
+              webSearch={localization[language].webSearch}
             />
           </Placeholder>
         </Screenshot>

@@ -18,6 +18,8 @@ type Props = {
   language: Language;
   // Leaves the examples out, for formats with little room.
   hideExamples?: boolean;
+  // Leaves the last answer out, for when the four don't fit.
+  hideLastAnswer?: boolean;
   // Merged over the root styles, so it can override them.
   style?: CSSProperties;
 };
@@ -34,6 +36,7 @@ export const MultiChoiceQuestion = ({
   incorrect,
   language,
   hideExamples = false,
+  hideLastAnswer = false,
   style,
 }: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
@@ -42,6 +45,7 @@ export const MultiChoiceQuestion = ({
     (languageTranslations[language][item.partOfSpeech] ?? item.partOfSpeech);
   const answers = [...incorrect];
   answers.splice(correctIndex, 0, item.translation);
+  if (hideLastAnswer) answers.pop();
   const examples = hideExamples ? [] : (item.examples ?? []);
 
   return (
