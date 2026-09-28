@@ -95,6 +95,7 @@ export const IPhone65 = () => (
                 language={language}
                 learn={localization[language].learnButton}
                 example={localization[language].example}
+                highlightLearn={false}
               />
             </SafariExtension>
           </Placeholder>

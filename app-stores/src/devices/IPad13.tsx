@@ -92,6 +92,7 @@ export const IPad13 = () => (
                 learn={localization[language].learnButton}
                 example={localization[language].example}
                 hideExamples
+                highlightLearn={false}
               />
             </SafariExtension>
           </Placeholder>

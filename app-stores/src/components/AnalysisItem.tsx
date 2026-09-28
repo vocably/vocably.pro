@@ -19,6 +19,8 @@ type Props = {
   example: string;
   // Leaves the examples out, for formats with little room.
   hideExamples?: boolean;
+  // Glows the "Learn" button, for a card that stands on its own.
+  highlightLearn?: boolean;
 };
 
 // Every size is in em, relative to the root font size, which stands for the
@@ -71,6 +73,7 @@ export const AnalysisItem = ({
   learn,
   example,
   hideExamples = false,
+  highlightLearn = true,
 }: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
   const partOfSpeech =
@@ -110,7 +113,9 @@ export const AnalysisItem = ({
           border: `0.094em solid ${primary}`,
           borderRadius: '1em',
           background: '#ffffff',
-          boxShadow: '0 0 0.75em rgba(0, 80, 255, 0.35)',
+          boxShadow: highlightLearn
+            ? '0 0 0.75em rgba(0, 80, 255, 0.35)'
+            : 'none',
           color: primary,
         }}
       >
