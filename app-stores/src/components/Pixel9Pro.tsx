@@ -17,11 +17,13 @@ type Props = {
   // The frame width; the height follows the frame's 353×745 aspect ratio.
   width: CSSProperties['width'];
   children: ReactNode;
+  // Merged into the frame's default styles.
+  style?: CSSProperties;
 };
 
 // Renders children on the screen of a Pixel 9 Pro frame.
-export const Pixel9Pro = ({ width, children }: Props) => (
-  <pixel-9-pro mode="light" style={{ width, flexShrink: 0 }}>
+export const Pixel9Pro = ({ width, children, style }: Props) => (
+  <pixel-9-pro mode="light" style={{ width, flexShrink: 0, ...style }}>
     <div
       style={{
         height: '100%',

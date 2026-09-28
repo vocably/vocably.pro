@@ -17,11 +17,13 @@ type Props = {
   // The frame width; the height follows the frame's 864×1342 aspect ratio.
   width: CSSProperties['width'];
   children: ReactNode;
+  // Merged into the frame's default styles.
+  style?: CSSProperties;
 };
 
 // Renders children on the screen of an Android tablet frame.
-export const AndroidTablet = ({ width, children }: Props) => (
-  <android-tablet mode="light" style={{ width, flexShrink: 0 }}>
+export const AndroidTablet = ({ width, children, style }: Props) => (
+  <android-tablet mode="light" style={{ width, flexShrink: 0, ...style }}>
     <div
       style={{
         height: '100%',

@@ -30,7 +30,7 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
             <div style={{ textAlign: 'center' }}>
               <div className="title">{localization[language].translate}</div>
               <div className="subtitle">
@@ -47,7 +47,7 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
             <div
               style={{
                 display: 'flex',
@@ -58,7 +58,13 @@ export const PlayPhone = () => (
               <div className="title">{localization[language].learn}</div>
               <div className="subtitle">{localization[language].learnSub}</div>
             </div>
-            <Pixel9Pro width="100%">
+            <Pixel9Pro
+              width="100%"
+              style={{
+                transform: 'scale(0.85)',
+                transformOrigin: 'top center',
+              }}
+            >
               <MultiChoiceQuestion
                 style={{ marginTop: '2em' }}
                 item={localization[language].searchItem}

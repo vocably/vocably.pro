@@ -17,11 +17,13 @@ type Props = {
   // The frame width; the height follows the frame's 866×1128 aspect ratio.
   width: CSSProperties['width'];
   children: ReactNode;
+  // Merged into the frame's default styles.
+  style?: CSSProperties;
 };
 
 // Renders children on the screen of an iPad Air 13" frame.
-export const IPadAir13 = ({ width, children }: Props) => (
-  <ipad-air-13 mode="light" style={{ width, flexShrink: 0 }}>
+export const IPadAir13 = ({ width, children, style }: Props) => (
+  <ipad-air-13 mode="light" style={{ width, flexShrink: 0, ...style }}>
     <div
       style={{
         height: '100%',
