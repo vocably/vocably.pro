@@ -8,6 +8,7 @@ import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { Logo } from '../components/Logo';
+import { IPadAir13 } from '../components/IPadAir13';
 
 const format = getFormat('ios-ipad-13');
 
@@ -58,12 +59,15 @@ export const IPad13 = () => (
               <div className="title">{localization[language].learn}</div>
               <div className="subtitle">{localization[language].learnSub}</div>
             </div>
-            <MultiChoiceQuestion
-              item={localization[language].searchItem}
-              incorrect={localization[language].incorrectTranslations}
-              language={language}
-              hideExamples
-            />
+            <IPadAir13 width="100%">
+              <MultiChoiceQuestion
+                style={{ marginTop: '1.6em' }}
+                item={localization[language].searchItem}
+                incorrect={localization[language].incorrectTranslations}
+                language={language}
+                hideExamples
+              />
+            </IPadAir13>
           </Placeholder>
         </Screenshot>
       </>
