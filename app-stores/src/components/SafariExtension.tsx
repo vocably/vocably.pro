@@ -11,6 +11,11 @@ type Props = {
 // iOS text selection blue.
 const selection = 'rgba(0, 122, 255, 0.25)';
 
+// Fades the page text in on the left and out on the right, so the excerpt
+// reads as part of a longer sentence.
+const fade =
+  'linear-gradient(to right, transparent, #000 25%, #000 75%, transparent)';
+
 // A web page in iOS Safari with a word selected and the extension's popup
 // (extension-content-ui/src/components/popup) under it. Sized in cqmin,
 // relative to the format, like the other mocks.
@@ -70,17 +75,25 @@ export const SafariExtension = ({
         color: '#333',
       }}
     >
-      {before}
       <span
         style={{
-          background: selection,
-          borderLeft: '0.3cqmin solid #007aff',
-          borderRight: '0.3cqmin solid #007aff',
+          display: 'inline-block',
+          maskImage: fade,
+          WebkitMaskImage: fade,
         }}
       >
-        {word}
+        {before}
+        <span
+          style={{
+            background: selection,
+            borderLeft: '0.3cqmin solid #007aff',
+            borderRight: '0.3cqmin solid #007aff',
+          }}
+        >
+          {word}
+        </span>
+        {after}
       </span>
-      {after}
     </div>
   </div>
 );
