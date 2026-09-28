@@ -33,9 +33,9 @@ type Translations = {
 
 // The page the Safari extension screenshot shows for English sources.
 const reliablePage: [string, string, string] = [
-  'After years of testing, the team finally built a ',
+  'they built a ',
   'reliable',
-  ' engine that could run for weeks without a single failure.',
+  ' engine that',
 ];
 
 // The copy shown on the assets, per interface language.
@@ -72,11 +72,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'with quizzes and\nother question types.',
     extension: 'Translate and save',
     extensionSub: 'with a single click using\nthe iOS Safari Extension.',
-    pageText: [
-      'Der Zauberer verzauberte das Publikum mit seiner ',
-      'Magie',
-      ' und ließ eine weiße Taube erscheinen.',
-    ],
+    pageText: ['mit seiner ', 'Magie', ' und ließ'],
   },
   es: {
     title: 'Una herramienta para aprender idiomas.',

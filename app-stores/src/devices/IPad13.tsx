@@ -73,6 +73,18 @@ export const IPad13 = () => (
         </Screenshot>
         <Screenshot>
           <Placeholder format={format} fixedTitle titleTop={0.1}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">{localization[language].extension}</div>
+              <div className="subtitle">
+                {localization[language].extensionSub}
+              </div>
+            </div>
             <SafariExtension text={localization[language].pageText}>
               <AnalysisItem
                 item={localization[language].searchItem}
