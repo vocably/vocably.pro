@@ -1,7 +1,7 @@
 import type { AssetFormat } from '../formats';
 
 // Light base the blobs are drawn over.
-const base = '#fdfdff';
+const base = '#ffffff';
 
 // Vibrant blob colors, cycled along the panorama.
 const palette = [
@@ -45,7 +45,7 @@ const blobs = (count: number): Blob[] => {
       y,
       r,
       color: palette[n % palette.length],
-      alpha: 0.16 + random(n + 100) * 0.08,
+      alpha: 0.1 + random(n + 100) * 0.05,
     });
     n++;
   };

@@ -29,7 +29,7 @@ export const PageText = ({
       fontFamily: "'Merriweather', serif",
       fontSize: '5cqmin',
       lineHeight: 1.7,
-      color: '#333',
+      color: '#1a1a1a',
       textAlign: 'center',
       ...style,
     }}

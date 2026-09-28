@@ -4,7 +4,7 @@ import { ScreenshotBackground } from '../Device';
 // Colors of the mobile app's light theme (mobile-app/src/ThemeProvider.tsx).
 const primary = 'rgb(0, 80, 255)';
 const secondary = 'rgb(0, 0, 0)';
-const onBackground = 'rgb(106, 106, 106)';
+const onBackground = 'rgb(64, 64, 64)';
 const outline = 'rgb(230, 230, 230)';
 
 // Covers the bottom 35% of the canvas, fully opaque from 85% of that down.
