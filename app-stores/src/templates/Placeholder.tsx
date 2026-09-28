@@ -12,6 +12,8 @@ type Props = {
   // Where the top of the title sits with fixedTitle, as a share of the
   // canvas height.
   titleTop?: number;
+  // Left and right padding, in the format's pixels.
+  paddingInline?: number;
   // Drawn behind the content, e.g. a decoration positioned absolutely
   // against the canvas.
   backdrop?: ReactNode;
@@ -22,6 +24,7 @@ export const Placeholder = ({
   format,
   fixedTitle,
   titleTop = TITLE_TOP,
+  paddingInline,
   backdrop,
   children,
 }: Props) => {
@@ -42,6 +45,7 @@ export const Placeholder = ({
         justifyContent: fixedTitle ? 'flex-start' : 'center',
         padding: minSide * 0.06,
         paddingTop: fixedTitle ? format.height * titleTop : minSide * 0.06,
+        paddingInline: paddingInline ?? minSide * 0.06,
         gap: minSide * 0.08,
         color: 'rgb(64, 64, 64)',
         fontFamily: "'Roboto', sans-serif",
