@@ -7,6 +7,7 @@ import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
 import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
+import { CardList } from '../components/CardList';
 import { Logo } from '../components/Logo';
 import { SafariExtension } from '../components/SafariExtension';
 import { SafariCorner } from '../components/SafariIcon';
@@ -108,6 +109,27 @@ export const IPad13 = () => (
                 highlightLearn={false}
               />
             </SafariExtension>
+          </Placeholder>
+        </Screenshot>
+        <Screenshot>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">{localization[language].customLists}</div>
+              <div className="subtitle">
+                {localization[language].customListsSub}
+              </div>
+            </div>
+            <CardList
+              prompt={localization[language].customListsPrompt}
+              cards={localization[language].customListsCards}
+              style={{ width: '75%', fontSize: '4cqmin' }}
+            />
           </Placeholder>
         </Screenshot>
       </>

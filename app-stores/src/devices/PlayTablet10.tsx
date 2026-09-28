@@ -7,6 +7,7 @@ import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
 import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
+import { CardList } from '../components/CardList';
 import { Logo } from '../components/Logo.tsx';
 import { AndroidTablet } from '../components/AndroidTablet';
 import { AndroidSelection } from '../components/AndroidSelection';
@@ -88,6 +89,26 @@ export const PlayTablet10 = () => (
             <AndroidSelection
               text={localization[language].pageText}
               webSearch={localization[language].webSearch}
+            />
+          </Placeholder>
+        </Screenshot>
+        <Screenshot>
+          <Placeholder format={format} fixedTitle titleTop={0.1}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2.4em',
+              }}
+            >
+              <div className="title">{localization[language].customLists}</div>
+              <div className="subtitle">
+                {localization[language].customListsSub}
+              </div>
+            </div>
+            <CardList
+              prompt={localization[language].customListsPrompt}
+              cards={localization[language].customListsCards}
             />
           </Placeholder>
         </Screenshot>

@@ -35,7 +35,31 @@ type Translations = {
   androidExtensionSub: string;
   // The Android text selection menu item that searches the selected text.
   webSearch: string;
+  // The headline of the custom card lists screenshot, the line under it, the
+  // chat message that asks for the list, and the generated cards: a verb in
+  // `sourceLanguage` and its translation.
+  customLists: string;
+  customListsSub: string;
+  customListsPrompt: string;
+  customListsCards: [string, string][];
 };
+
+// The verbs the custom card lists screenshot generates for English sources.
+const englishVerbs = [
+  'achieve',
+  'decide',
+  'improve',
+  'explain',
+  'notice',
+  'avoid',
+  'convince',
+  'borrow',
+  'forgive',
+  'suggest',
+];
+
+const withTranslations = (translations: string[]): [string, string][] =>
+  englishVerbs.map((verb, index) => [verb, translations[index]]);
 
 // The page the Safari extension screenshot shows for English sources.
 const reliablePage: [string, string, string] = [
@@ -82,6 +106,21 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Select, translate,\nand save',
     androidExtensionSub: 'words while surfing the web\nin any mobile browser.',
     webSearch: 'Web search',
+    customLists: 'Generate custom\ncard lists',
+    customListsSub: 'by prompting the AI.',
+    customListsPrompt: 'popular verbs',
+    customListsCards: [
+      ['entscheiden', 'to decide'],
+      ['erreichen', 'to achieve, to reach'],
+      ['verbessern', 'to improve'],
+      ['erklären', 'to explain'],
+      ['bemerken', 'to notice'],
+      ['vermeiden', 'to avoid'],
+      ['überzeugen', 'to convince'],
+      ['ausleihen', 'to borrow'],
+      ['verzeihen', 'to forgive'],
+      ['vorschlagen', 'to suggest'],
+    ],
   },
   es: {
     title: 'Una herramienta para aprender idiomas.',
@@ -114,6 +153,21 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'palabras mientras navegas por la web en cualquier navegador móvil.',
     webSearch: 'Búsqueda web',
+    customLists: 'Genera listas de tarjetas personalizadas',
+    customListsSub: 'pidiéndoselo a la IA.',
+    customListsPrompt: 'verbos populares',
+    customListsCards: withTranslations([
+      'lograr',
+      'decidir',
+      'mejorar',
+      'explicar',
+      'notar',
+      'evitar',
+      'convencer',
+      'pedir prestado',
+      'perdonar',
+      'sugerir',
+    ]),
   },
   pt: {
     title: 'Uma ferramenta para aprender idiomas.',
@@ -146,6 +200,21 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'palavras enquanto navega na web em qualquer navegador móvel.',
     webSearch: 'Pesquisa na web',
+    customLists: 'Gere listas de cartões personalizadas',
+    customListsSub: 'pedindo à IA.',
+    customListsPrompt: 'verbos populares',
+    customListsCards: withTranslations([
+      'alcançar',
+      'decidir',
+      'melhorar',
+      'explicar',
+      'notar',
+      'evitar',
+      'convencer',
+      'pedir emprestado',
+      'perdoar',
+      'sugerir',
+    ]),
   },
   ru: {
     title: 'Инструмент для изучения языков.',
@@ -182,6 +251,21 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'слова, просматривая сайты в любом мобильном браузере.',
     webSearch: 'Веб-поиск',
+    customLists: 'Создавайте свои списки карточек',
+    customListsSub: 'запросом к ИИ.',
+    customListsPrompt: 'популярные глаголы',
+    customListsCards: withTranslations([
+      'достигать',
+      'решать',
+      'улучшать',
+      'объяснять',
+      'замечать',
+      'избегать',
+      'убеждать',
+      'одалживать',
+      'прощать',
+      'предлагать',
+    ]),
   },
   uk: {
     title: 'Інструмент для вивчення мов.',
@@ -218,6 +302,21 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'слова, переглядаючи сайти в будь-якому мобільному браузері.',
     webSearch: 'Пошук в Інтернеті',
+    customLists: 'Створюйте власні списки карток',
+    customListsSub: 'запитом до ШІ.',
+    customListsPrompt: 'популярні дієслова',
+    customListsCards: withTranslations([
+      'досягати',
+      'вирішувати',
+      'покращувати',
+      'пояснювати',
+      'помічати',
+      'уникати',
+      'переконувати',
+      'позичати',
+      'прощати',
+      'пропонувати',
+    ]),
   },
   tr: {
     title: 'Bir dil öğrenme aracı.',
@@ -253,6 +352,21 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Kelimeleri seçin, çevirin ve kaydedin',
     androidExtensionSub: "herhangi bir mobil tarayıcıda web'de gezinirken.",
     webSearch: "Web'de ara",
+    customLists: 'Özel kart listeleri oluşturun',
+    customListsSub: 'yapay zekâya istem yazarak.',
+    customListsPrompt: 'popüler fiiller',
+    customListsCards: withTranslations([
+      'başarmak',
+      'karar vermek',
+      'geliştirmek',
+      'açıklamak',
+      'fark etmek',
+      'kaçınmak',
+      'ikna etmek',
+      'ödünç almak',
+      'affetmek',
+      'önermek',
+    ]),
   },
   vi: {
     title: 'Công cụ học ngoại ngữ.',
@@ -288,5 +402,20 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Chọn, dịch và lưu',
     androidExtensionSub: 'từ khi lướt web trên bất kỳ trình duyệt di động nào.',
     webSearch: 'Tìm kiếm trên web',
+    customLists: 'Tạo danh sách thẻ tùy chỉnh',
+    customListsSub: 'bằng cách gửi yêu cầu cho AI.',
+    customListsPrompt: 'động từ phổ biến',
+    customListsCards: withTranslations([
+      'đạt được',
+      'quyết định',
+      'cải thiện',
+      'giải thích',
+      'nhận thấy',
+      'tránh',
+      'thuyết phục',
+      'mượn',
+      'tha thứ',
+      'gợi ý',
+    ]),
   },
 };
