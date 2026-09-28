@@ -2,7 +2,6 @@ import { createContext, useContext, type ReactNode } from 'react';
 import { Canvas } from './Canvas';
 import { type AssetFormat } from './formats';
 import { languageNames, languages, type Language } from './languages';
-import { TitleTopProvider } from './TitleTop';
 
 const PREVIEW_HEIGHT = 480;
 
@@ -45,7 +44,7 @@ export const Device = ({
               : { gap: format.gap * previewScale(format) }
           }
         >
-          <TitleTopProvider>{children(language)}</TitleTopProvider>
+          {children(language)}
         </div>
       </section>
     ))}

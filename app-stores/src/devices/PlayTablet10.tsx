@@ -29,7 +29,7 @@ export const PlayTablet10 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} title="anchor">
+          <Placeholder format={format} fixedTitle>
             <div style={{ textAlign: 'center' }}>
               <div className="title">{localization[language].translate}</div>
               <div className="subtitle">
@@ -46,7 +46,7 @@ export const PlayTablet10 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} title="align">
+          <Placeholder format={format} fixedTitle>
             <div
               style={{
                 display: 'flex',
