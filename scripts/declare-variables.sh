@@ -12,6 +12,7 @@ declare -a variables=(
   "TF_VAR_brevo_api_key"
   "TF_VAR_openai_api_key"
   "TF_VAR_gemini_api_key"
+  "TF_VAR_jev_api_key"
   "TF_VAR_revenue_cat_auth_header"
   "TF_VAR_revenue_cat_web_link"
   "TF_VAR_paddle_api_key"
