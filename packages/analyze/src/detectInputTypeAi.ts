@@ -6,8 +6,8 @@ import {
 } from '@vocably/model';
 import { detectInputTypeChatGpt } from './detectInputTypeChatGpt';
 import { detectInputTypeGemini } from './detectInputTypeGemini';
+import { detectInputTypeJev } from './detectInputTypeJev';
 import { fallback } from './fallback';
-import { detectInputTypeS3 } from './detectInputTypeS3';
 
 export type DetectInputTypeAiPayload = {
   source: string;
@@ -39,7 +39,17 @@ export const detectInputTypeAi = async (
   //   return fastDetectionResult;
   // }
 
-  return fallback(detectInputTypeGemini(payload), () =>
-    detectInputTypeChatGpt(payload)
-  );
+  const detectWithGemini = () =>
+    fallback(detectInputTypeGemini(payload), () =>
+      detectInputTypeChatGpt(payload)
+    );
+
+  if (payload.language === 'en') {
+    return fallback(
+      detectInputTypeJev({ ...payload, language: payload.language }),
+      detectWithGemini
+    );
+  }
+
+  return detectWithGemini();
 };

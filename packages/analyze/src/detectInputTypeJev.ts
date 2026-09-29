@@ -33,6 +33,10 @@ const candidateLanguages: GoogleLanguage[] = [
 // while valid inputs usually score above 0.5.
 const isDirectThreshold = 0.3;
 
+export type DetectInputTypeJevPayload = DetectInputTypeAiPayload & {
+  language: 'en';
+};
+
 type JevResponse = {
   answers?: {
     type?: { choice?: string };
@@ -43,7 +47,7 @@ type JevResponse = {
 export const detectInputTypeJev = async ({
   source,
   language,
-}: DetectInputTypeAiPayload): Promise<Result<InputAnalysis>> => {
+}: DetectInputTypeJevPayload): Promise<Result<InputAnalysis>> => {
   const abortController = new AbortController();
   const abortSignal = abortController.signal;
 
