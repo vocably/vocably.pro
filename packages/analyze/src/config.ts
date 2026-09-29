@@ -4,6 +4,7 @@ export const config = {
   googleProjectId: 'vocably-332109',
   openaiApiKey: 'must be provided',
   geminiApiKey: 'must be provided',
+  jevApiKey: 'must be provided',
   awsRegion: 'us-east-1',
   unitsOfSpeechBucket: 'vocably-prod-units-of-speech',
 };

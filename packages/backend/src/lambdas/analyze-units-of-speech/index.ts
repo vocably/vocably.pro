@@ -13,6 +13,7 @@ configureAnalyzer({
   awsRegion: process.env.AWS_REGION as string,
   unitsOfSpeechBucket: process.env.UNITS_OF_SPEECH_BUCKET as string,
   geminiApiKey: process.env.GEMINI_API_KEY as string,
+  jevApiKey: process.env.JEV_API_KEY as string,
 });
 
 export const analyzeUnitsOfSpeech = async (
