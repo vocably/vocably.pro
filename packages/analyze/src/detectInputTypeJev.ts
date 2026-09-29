@@ -1,4 +1,9 @@
-import { inputTypes, languageList, Result, resultify } from '@vocably/model';
+import {
+  GoogleLanguage,
+  languageList,
+  Result,
+  resultify,
+} from '@vocably/model';
 import { timeout } from '@vocably/sulna';
 import { config } from './config';
 import {
@@ -6,12 +11,32 @@ import {
   InputAnalysis,
   isInputAnalysis,
 } from './detectInputTypeAi';
-import { isQuiteLikelyAWord } from './isQuiteLikelyAWord';
+
+// Languages the input is most commonly confused with.
+// The requested language is always added to the list.
+const candidateLanguages: GoogleLanguage[] = [
+  'en',
+  'de',
+  'nl',
+  'fr',
+  'es',
+  'it',
+  'pt',
+  'ru',
+  'uk',
+  'pl',
+  'zh',
+  'ja',
+];
+
+// Jev's "not direct" probabilities rarely exceed 0.15,
+// while valid inputs usually score above 0.5.
+const isDirectThreshold = 0.3;
 
 type JevResponse = {
   answers?: {
     type?: { choice?: string };
-    isDirect?: { noul?: number };
+    language?: { probabilities?: Record<string, number> };
   };
 };
 
@@ -22,7 +47,7 @@ export const detectInputTypeJev = async ({
   const abortController = new AbortController();
   const abortSignal = abortController.signal;
 
-  const quiteLikelyAWord = isQuiteLikelyAWord({ source, language });
+  const languages = Array.from(new Set([language, ...candidateLanguages]));
 
   const result = await resultify(
     timeout(
@@ -35,18 +60,49 @@ export const detectInputTypeJev = async ({
         },
         body: JSON.stringify({
           model: 'jev-latest',
-          state: source,
+          state: { text: source },
           questions: {
             type: {
               type: 'choice',
-              instructions: 'Linguistic classification of the text input',
-              criteria: Object.fromEntries(
-                inputTypes.map((inputType) => [inputType, inputType])
-              ),
+              instructions: 'Linguistic classification of `text`',
+              criteria: {
+                word: {
+                  what: 'A single word, including inflected forms and rare or archaic words',
+                  not_for: 'Multi-word units',
+                  examples: ['house', 'melancholisch', '猫'],
+                },
+                'compound word': {
+                  what: 'Several words that together name a single concept (a lexicalised noun group or open compound)',
+                  not_for: 'Free phrases or idioms',
+                  examples: ['ice cream', 'train station', 'железная дорога'],
+                },
+                'phrasal verb': {
+                  what: 'A verb plus particle(s) with a combined meaning',
+                  examples: ['give up', 'look after'],
+                },
+                phrase: {
+                  what: 'A group of words that is not a full sentence and not a fixed expression',
+                  examples: ['in the morning', 'a big red car'],
+                },
+                sentence: {
+                  what: 'A complete clause with a subject and predicate',
+                  examples: ['I like tea', 'She went home yesterday'],
+                },
+                idiom: {
+                  what: 'A fixed expression whose meaning is figurative',
+                  examples: ['kick the bucket', 'break the ice'],
+                },
+              },
             },
-            isDirect: {
-              type: 'noul',
-              instructions: `The input ${quiteLikelyAWord ? 'is valid in' : 'can be'} ${languageList[language]}`,
+            language: {
+              type: 'choice',
+              instructions: `Which language could \`text\` belong to? Prefer ${languageList[language]} if \`text\` is a valid ${languageList[language]} word or expression`,
+              criteria: Object.fromEntries(
+                languages.map((code) => [
+                  code,
+                  `${languageList[code]} word or expression`,
+                ])
+              ),
             },
           },
         }),
@@ -73,12 +129,13 @@ export const detectInputTypeJev = async ({
   }
 
   const answers = result.value.answers;
+  const languageProbability = answers?.language?.probabilities?.[language];
 
   const value = {
     type: answers?.type?.choice,
     isDirect:
-      typeof answers?.isDirect?.noul === 'number'
-        ? answers.isDirect.noul >= 0.5
+      typeof languageProbability === 'number'
+        ? languageProbability >= isDirectThreshold
         : undefined,
   };
 
