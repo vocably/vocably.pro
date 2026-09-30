@@ -2,10 +2,8 @@ export const es = {
   // app
   'app.checking_auth': 'Verificando el estado de autenticación',
   // home
-  'home.almost_ready': '¡casi listo!',
   'home.settings': 'Configuración',
   'home.loading_presets': 'Cargando ajustes predeterminados',
-  'home.setup': 'Configurar',
   'home.requesting_chatgpt': 'Consultando la IA',
   // settings
   'settings.title': 'Configuración',

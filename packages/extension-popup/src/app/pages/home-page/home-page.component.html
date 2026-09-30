@@ -11,15 +11,8 @@
 </div>
 
 <ng-container *ngIf="languagePairsLoaded">
-  <div class="onboarding" *ngIf="needsOnboarding && isLoggedIn === true">
-    <p class="onboarding-title">{{ 'home.almost_ready' | translate }}</p>
-    <a [href]="welcomeUrl" target="_blank" class="button block">{{
-      'home.setup' | translate
-    }}</a>
-  </div>
-
   <vocably-language
-    *ngIf="needsOnboarding && isLoggedIn === false"
+    *ngIf="needsOnboarding"
     class="block"
     sourceLanguage="en"
     [targetLanguage]="defaultTargetLanguage"

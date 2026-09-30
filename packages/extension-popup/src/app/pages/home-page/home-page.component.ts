@@ -45,7 +45,6 @@ const lastUsedSearchValuesKey = 'lastUsedSearchValues_01';
   imports: [NgIf, IonicModule, RouterLink, MatIcon, TranslatePipe],
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  welcomeUrl = `${environment.appBaseUrl}/welcome`;
   signInUrl = `${environment.appBaseUrl}/hands-free`;
   isLoggedIn: boolean | null = null;
   isSavingLanguages = false;
@@ -136,10 +135,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * The welcome page in the app sets the languages up for a signed in user.
-   * A signed out one picks them right here instead.
-   */
   async onLanguagesConfirm({ detail }: any) {
     const { sourceLanguage, targetLanguage } = detail;
 

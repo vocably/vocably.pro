@@ -2,10 +2,8 @@ export const ru = {
   // app
   'app.checking_auth': 'Проверка авторизации',
   // home
-  'home.almost_ready': 'почти готово!',
   'home.settings': 'Настройки',
   'home.loading_presets': 'Загрузка предустановок',
-  'home.setup': 'Настройка',
   'home.requesting_chatgpt': 'Запрос к ИИ',
   // settings
   'settings.title': 'Настройки',

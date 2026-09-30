@@ -62,28 +62,6 @@ $divider: $v-light-color-border-muted;
   color: $v-gray-450;
 }
 
-.onboarding {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  padding: 1.5rem;
-  border: 1px solid $divider;
-  border-radius: 12px;
-  text-align: center;
-
-  .onboarding-title {
-    margin: 0;
-    font-size: 1rem;
-    color: $v-light-color-emphasize;
-  }
-
-  .button {
-    white-space: nowrap;
-  }
-}
-
 .skeleton {
   display: block;
   margin-top: 1rem;

@@ -2,10 +2,8 @@ export const uk = {
   // app
   'app.checking_auth': 'Перевірка авторизації',
   // home
-  'home.almost_ready': 'майже готовий!',
   'home.settings': 'Налаштування',
   'home.loading_presets': 'Завантаження налаштувань',
-  'home.setup': 'Налаштувати',
   'home.requesting_chatgpt': 'Запит до ШI',
   // settings
   'settings.title': 'Налаштування',

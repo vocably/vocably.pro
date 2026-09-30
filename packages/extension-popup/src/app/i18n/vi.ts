@@ -2,10 +2,8 @@ export const vi = {
   // app
   'app.checking_auth': 'Đang kiểm tra đăng nhập',
   // home
-  'home.almost_ready': 'gần xong rồi!',
   'home.settings': 'Cài đặt',
   'home.loading_presets': 'Đang tải cài đặt sẵn',
-  'home.setup': 'Thiết lập',
   'home.requesting_chatgpt': 'Đang yêu cầu ChatGPT',
   // settings
   'settings.title': 'Cài đặt',

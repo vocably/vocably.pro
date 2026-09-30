@@ -2,10 +2,8 @@ export const en = {
   // app
   'app.checking_auth': 'Checking auth status',
   // home
-  'home.almost_ready': 'is almost ready!',
   'home.settings': 'Settings',
   'home.loading_presets': 'Loading search presets',
-  'home.setup': 'Setup',
   'home.requesting_chatgpt': 'Requesting AI',
   // settings
   'settings.title': 'Settings',
