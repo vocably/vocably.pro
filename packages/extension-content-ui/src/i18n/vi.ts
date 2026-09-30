@@ -56,6 +56,8 @@ export const vi = {
   'rate.contact': 'Gửi phản hồi',
   'rate.never': 'Không hiển thị lại',
   // language
+  'language.title': 'Chọn ngôn ngữ của bạn',
+  'language.hint': 'Vocably dịch từ ngôn ngữ bạn học sang ngôn ngữ bạn nói.',
   'language.i_study': 'Tôi học',
   'language.i_speak': 'Tôi nói',
   'language.save': 'Lưu',

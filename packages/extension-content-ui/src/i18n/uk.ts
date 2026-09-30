@@ -57,6 +57,9 @@ export const uk = {
   'rate.contact': 'Написати автору',
   'rate.never': 'Більше не показувати',
   // language
+  'language.title': 'Оберіть мови',
+  'language.hint':
+    'Vocably перекладає слова з мови, яку ви вивчаєте, мовою, яку ви знаєте.',
   'language.i_study': 'Я вивчаю:',
   'language.i_speak': 'Переклад:',
   'language.save': 'Зберегти',

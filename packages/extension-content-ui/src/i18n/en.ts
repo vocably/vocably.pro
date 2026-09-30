@@ -56,6 +56,9 @@ export const en = {
   'rate.contact': 'Share feedback',
   'rate.never': "Don't show again",
   // language
+  'language.title': 'Choose your languages',
+  'language.hint':
+    'Vocably translates words from the language you study into the language you speak.',
   'language.i_study': 'I study',
   'language.i_speak': 'I speak',
   'language.save': 'Save',

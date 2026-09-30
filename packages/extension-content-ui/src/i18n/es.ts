@@ -59,6 +59,9 @@ export const es = {
   'rate.contact': 'Enviar comentarios',
   'rate.never': 'No volver a mostrar',
   // language
+  'language.title': 'Elige tus idiomas',
+  'language.hint':
+    'Vocably traduce las palabras del idioma que estudias al idioma que hablas.',
   'language.i_study': 'Estudio',
   'language.i_speak': 'Hablo',
   'language.save': 'Guardar',

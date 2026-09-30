@@ -57,6 +57,9 @@ export const ru = {
   'rate.contact': 'Написать автору',
   'rate.never': 'Больше не показывать',
   // language
+  'language.title': 'Выберите языки',
+  'language.hint':
+    'Vocably переводит слова с изучаемого языка на язык, который вы знаете.',
   'language.i_study': 'Я изучаю',
   'language.i_speak': 'Я знаю',
   'language.save': 'Сохранить',

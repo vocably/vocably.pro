@@ -25,6 +25,10 @@ $scrollbar-track: 6px;
   --shadow-v-offset: 4px;
   --scrollbar-track: #{$scrollbar-track};
   --scrollbar-gutter: 4px;
+  // Room around the content for focus rings and other effects that
+  // extend beyond the element box. Taken from the body padding so the
+  // popup keeps its size.
+  --content-bleed: 4px;
 
   // iOS > 14 does not show scrollbar
   @supports (-webkit-touch-callout: none) {
@@ -121,10 +125,10 @@ $scrollbar-track: 6px;
     max-width: calc(var(--max-width) - var(--padding-right) - var(--padding-x));
     scrollbar-gutter: stable;
     scrollbar-color: auto;
-    padding-top: var(--header-padding-bottom);
-    padding-left: var(--padding-x);
-    padding-right: var(--padding-right);
-    padding-bottom: var(--padding-bottom);
+    padding-top: calc(var(--header-padding-bottom) - var(--content-bleed));
+    padding-left: calc(var(--padding-x) - var(--content-bleed));
+    padding-right: calc(var(--padding-right) - var(--content-bleed));
+    padding-bottom: calc(var(--padding-bottom) - var(--content-bleed));
 
     &::-webkit-scrollbar {
       -webkit-appearance: none;
@@ -148,6 +152,7 @@ $scrollbar-track: 6px;
 
   .content-unlimited {
     width: 80vw;
+    padding: var(--content-bleed);
   }
 
   .content {

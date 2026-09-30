@@ -58,6 +58,9 @@ export const pt = {
   'rate.contact': 'Enviar feedback',
   'rate.never': 'Não mostrar novamente',
   // language
+  'language.title': 'Escolha seus idiomas',
+  'language.hint':
+    'O Vocably traduz as palavras do idioma que você estuda para o idioma que você fala.',
   'language.i_study': 'Estudo',
   'language.i_speak': 'Falo',
   'language.save': 'Salvar',

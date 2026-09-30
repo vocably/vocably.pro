@@ -31,8 +31,8 @@ export class VocablyPopup {
     const resizeObserver = new ResizeObserver(() => {
       requestAnimationFrame(() => {
         const rect = content.getBoundingClientRect();
-        contentWrapper.style.width = `${rect.width}px`;
-        contentWrapper.style.height = `${rect.height}px`;
+        contentWrapper.style.width = `calc(${rect.width}px + 2 * var(--content-bleed))`;
+        contentWrapper.style.height = `calc(${rect.height}px + 2 * var(--content-bleed))`;
       });
     });
 

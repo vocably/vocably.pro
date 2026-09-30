@@ -1,4 +1,8 @@
+@use 'sass:math';
 @import '../../styles/component';
+
+$gap: 10px;
+$field-min-width: 200px;
 
 :host {
   @include base-font();
@@ -8,22 +12,83 @@
 }
 
 .container {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0;
+  // Keeps the form readable when the parent shrink-wraps its content.
+  min-width: min(#{$field-min-width + 40px}, 100%);
 }
 
-.p {
-  margin-bottom: $p-margin;
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.h1 {
-  font-size: $base-font-size + 10px;
-  margin-bottom: $p-margin;
+.title {
+  font-size: $base-font-size + 1px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: $v-light-color-emphasize;
+}
+
+.hint {
+  font-size: 13px;
+  line-height: 1.4;
+  color: $v-light-color-body;
+  // Prevents the hint from widening a shrink-wrapped parent.
+  width: 0;
+  min-width: 100%;
+}
+
+// Fields sit side by side when there is room and stack otherwise.
+.fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+}
+
+.field {
+  flex: 1 1 $field-min-width;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+}
+
+.label {
+  font-size: 13px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: $v-light-color-body;
+}
+
+select {
+  @include select(12px, 9px);
+  font-family: inherit !important;
+  color: $v-light-color-emphasize !important;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  padding-right: 34px !important;
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px rgba($v-light-color-primary, 0.35) !important;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 }
 
 .button {
   @include button();
-}
+  padding: 9px math.div($base-font-size, 2);
 
-select {
-  @include select(14px, 10px);
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($v-light-color-primary, 0.35);
+  }
 }

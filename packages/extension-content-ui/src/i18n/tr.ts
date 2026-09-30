@@ -58,6 +58,9 @@ export const tr = {
   'rate.contact': 'Geri bildirim gönderin',
   'rate.never': 'Bir daha gösterme',
   // language
+  'language.title': 'Dillerinizi seçin',
+  'language.hint':
+    'Vocably, çalıştığınız dildeki kelimeleri bildiğiniz dile çevirir.',
   'language.i_study': 'Çalışılan Dil:',
   'language.i_speak': 'Çeviri Dili:',
   'language.save': 'Kaydet',
