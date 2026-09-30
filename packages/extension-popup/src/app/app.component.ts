@@ -12,8 +12,6 @@ import { detectLocale, setLocale } from '@vocably/browser-i18n';
   standalone: false,
 })
 export class AppComponent implements OnInit {
-  loginUrl = `${environment.appBaseUrl}/page/welcome`;
-
   isLoggedIn: 'yes' | 'no' | 'undefined' = 'undefined';
 
   constructor(

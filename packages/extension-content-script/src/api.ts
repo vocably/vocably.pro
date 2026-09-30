@@ -31,6 +31,7 @@ import {
   updateCard,
   updateTag,
   analyzeUnitsOfSpeech,
+  loadLanguageDeck,
 } from '@vocably/extension-messages';
 
 export const api = {
@@ -67,6 +68,7 @@ export const api = {
   deleteTag,
   explain,
   analyzeUnitsOfSpeech,
+  loadLanguageDeck,
 };
 
 export type ApiConfigOptions = Partial<typeof api>;

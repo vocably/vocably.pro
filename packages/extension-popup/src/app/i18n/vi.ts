@@ -1,11 +1,6 @@
 export const vi = {
   // app
   'app.checking_auth': 'Đang kiểm tra đăng nhập',
-  'app.translates_text':
-    'Tiện ích này dịch văn bản được chọn và tạo thẻ ghi nhớ.',
-  'app.flashcards_mobile': 'Thẻ ghi nhớ sẽ có trên thiết bị di động của bạn.',
-  'app.need_signed_in': 'Bạn cần đăng nhập để sử dụng Vocably.',
-  'app.sign_in': 'Đăng nhập hoặc tạo tài khoản',
   // home
   'home.almost_ready': 'gần xong rồi!',
   'home.settings': 'Cài đặt',

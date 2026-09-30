@@ -10,6 +10,7 @@ import {
   ExplainPayload,
   Explanation,
   GoogleLanguage,
+  LanguageDeck,
   LanguagePairs,
   RateInteractionPayload,
   RemoveCardPayload,
@@ -245,3 +246,8 @@ export const [analyzeUnitsOfSpeech, onAnalyzeUnitsOfSpeech] =
     BatchUnitOfSpeechAnalyzePayload,
     Result<BatchUnitOfSpeechAnalysis>
   >('analyzeUnitsOfSpeech');
+
+export const [loadLanguageDeck, onLoadLanguageDeck] = createScopedMessage<
+  GoogleLanguage,
+  Result<LanguageDeck>
+>('loadLanguageDeck');

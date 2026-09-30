@@ -8,7 +8,9 @@ import {
   explain,
   loadLanguageDeck,
   postOnboardingAction,
+  publicAnalyze,
   publicAnalyzeUnitsOfSpeech,
+  publicExplain,
   saveLanguageDeck,
   tts,
 } from '@vocably/api';
@@ -54,6 +56,7 @@ import {
   onUpdateTag,
   playAudioPronunciationOffscreen,
   onAnalyzeUnitsOfSpeech,
+  onLoadLanguageDeck,
 } from '@vocably/extension-messages';
 import {
   Analysis,
@@ -65,9 +68,12 @@ import {
   mapUserAttributes,
   Platform,
   Result,
-  TranslationCards,
 } from '@vocably/model';
-import { buildTagMap, updateDetachedCard } from '@vocably/model-operations';
+import {
+  analysisToTranslationCards,
+  buildTagMap,
+  updateDetachedCard,
+} from '@vocably/model-operations';
 import { createSrsItem } from '@vocably/srs';
 import { uniq } from 'lodash-es';
 import posthog from 'posthog-js/dist/module.no-external';
@@ -280,7 +286,10 @@ export const registerServiceWorker = (
   };
 
   onExplainRequest(async (sendResponse, payload) => {
-    const explainResult = await explain(payload);
+    // Signed out users get the very same explanation from the public API.
+    const explainResult = (await isSignedIn())
+      ? await explain(payload)
+      : await publicExplain(payload);
     return sendResponse(explainResult);
   });
 
@@ -303,6 +312,21 @@ export const registerServiceWorker = (
 
     posthog.capture('analyze_requested', analyzePayload);
 
+    // A signed out user can translate as well. They have no collection yet, so
+    // every card comes out as addable, and adding one asks them to sign in.
+    if (!(await isSignedIn())) {
+      const analysisResult = await publicAnalyze(analyzePayload);
+
+      if (analysisResult.success === false) {
+        return sendResponse(analysisResult);
+      }
+
+      return sendResponse({
+        success: true,
+        value: analysisToTranslationCards(analysisResult.value),
+      });
+    }
+
     try {
       const [analysisResult, loadLanguageDeckResult] =
         await getAnalysisAndCards(analyzePayload);
@@ -323,17 +347,10 @@ export const registerServiceWorker = (
 
       const languageDeck = loadLanguageDeckResult.value;
 
-      const value: TranslationCards = {
-        deck: languageDeck,
-        explanation: analysisResult.value.explanation ?? '',
-        source: analysisResult.value.source,
-        sourceLanguage: analysisResult.value.sourceLanguage,
-        targetLanguage: analysisResult.value.targetLanguage,
-        isDirect: analysisResult.value.isDirect,
-        detectedInputType: analysisResult.value.detectedInputType,
-        aiThinksItIs: analysisResult.value.aiThinksItIs,
-        items: analysisResult.value.items,
-      };
+      const value = analysisToTranslationCards(
+        analysisResult.value,
+        languageDeck
+      );
 
       addLanguage(value.sourceLanguage);
 
@@ -426,8 +443,18 @@ export const registerServiceWorker = (
     });
   });
 
-  onListLanguagesRequest(async (sendResponse) =>
-    sendResponse(await getUserLanguages())
+  onListLanguagesRequest(async (sendResponse) => {
+    // Nothing to list without a collection. The cache is left alone, so the
+    // real list is fetched once the user signs in.
+    if (!(await isSignedIn())) {
+      return sendResponse({ success: true, value: [] });
+    }
+
+    return sendResponse(await getUserLanguages());
+  });
+
+  onLoadLanguageDeck(async (sendResponse, language) =>
+    sendResponse(await loadLanguageDeck(language))
   );
 
   onListTargetLanguagesRequest(async (sendResponse) => {
@@ -520,6 +547,10 @@ export const registerServiceWorker = (
   });
 
   onAskForRating(async (sendResponse, payload) => {
+    if (!(await isSignedIn())) {
+      return sendResponse(false);
+    }
+
     if (payload.translationResult.success === false) {
       return sendResponse(false);
     }

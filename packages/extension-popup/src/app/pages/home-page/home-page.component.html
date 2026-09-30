@@ -11,12 +11,21 @@
 </div>
 
 <ng-container *ngIf="languagePairsLoaded">
-  <div class="onboarding" *ngIf="needsOnboarding">
+  <div class="onboarding" *ngIf="needsOnboarding && isLoggedIn === true">
     <p class="onboarding-title">{{ 'home.almost_ready' | translate }}</p>
     <a [href]="welcomeUrl" target="_blank" class="button block">{{
       'home.setup' | translate
     }}</a>
   </div>
+
+  <vocably-language
+    *ngIf="needsOnboarding && isLoggedIn === false"
+    class="block"
+    sourceLanguage="en"
+    [targetLanguage]="defaultTargetLanguage"
+    [waiting]="isSavingLanguages"
+    (confirm)="onLanguagesConfirm($event)"
+  ></vocably-language>
 
   <ng-container *ngIf="!needsOnboarding">
     <vocably-search-form
@@ -64,6 +73,8 @@
       [cardsLimit]="cardsLimit"
       [paymentLink]="paymentLink"
       [isLoadingExtraWords]="isLoadingExtraWords"
+      [isLoggedInUser]="isLoggedIn === true"
+      (confirm)="onSignIn()"
     ></vocably-translation>
   </ng-container>
 </ng-container>

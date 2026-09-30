@@ -1,11 +1,6 @@
 export const tr = {
   // app
   'app.checking_auth': 'Kimlik doğrulama kontrol ediliyor',
-  'app.translates_text':
-    'Bu eklenti seçili metni çevirir ve kartlar oluşturur.',
-  'app.flashcards_mobile': 'Kartlar mobil cihazınızda kullanılabilir olacak.',
-  'app.need_signed_in': "Vocably'yi kullanmak için giriş yapmanız gerekiyor.",
-  'app.sign_in': 'Giriş yap veya hesap oluştur',
   // home
   'home.almost_ready': 'neredeyse hazır!',
   'home.settings': 'Ayarlar',

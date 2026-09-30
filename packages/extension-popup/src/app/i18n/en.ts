@@ -1,12 +1,6 @@
 export const en = {
   // app
   'app.checking_auth': 'Checking auth status',
-  'app.translates_text':
-    'This extension translates the selected text and creates flashcards.',
-  'app.flashcards_mobile':
-    'The flashcards will be available on your mobile device.',
-  'app.need_signed_in': 'You need to be signed in to use Vocably.',
-  'app.sign_in': 'Sign in or create account',
   // home
   'home.almost_ready': 'is almost ready!',
   'home.settings': 'Settings',

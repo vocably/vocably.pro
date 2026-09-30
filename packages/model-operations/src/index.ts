@@ -13,3 +13,4 @@ export * from './updateDetachedCard';
 export * from './cardsToCsv';
 export * from './createExplainPayload';
 export * from './cardToLocationHash';
+export * from './analysisToTranslationCards';

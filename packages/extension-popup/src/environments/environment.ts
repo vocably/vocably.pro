@@ -16,6 +16,8 @@ import {
   isLoggedIn,
   removeCard,
   saveAskForRatingResponse,
+  setInternalProxyLanguage,
+  setInternalSourceLanguage,
   setSettings,
   updateCard,
   updateTag,
@@ -61,6 +63,16 @@ const mockGetInternalSourceLanguage: typeof getInternalSourceLanguage =
     await timeout(500);
     const params = new URLSearchParams(window.location.search);
     return params.has('noInternalSourceLanguage') ? null : 'en';
+  };
+
+const mockSetInternalSourceLanguage: typeof setInternalSourceLanguage =
+  async () => {
+    await timeout(200);
+  };
+
+const mockSetInternalProxyLanguage: typeof setInternalProxyLanguage =
+  async () => {
+    await timeout(200);
   };
 
 const mockAnalyze: typeof analyze = async () => {
@@ -359,6 +371,8 @@ export const environment = merge(environmentLocal, {
   setSettings: mockSetSettings,
   isLoggedIn: mockIsLoggedIn,
   getInternalSourceLanguage: mockGetInternalSourceLanguage,
+  setInternalSourceLanguage: mockSetInternalSourceLanguage,
+  setInternalProxyLanguage: mockSetInternalProxyLanguage,
   getAudioPronunciation: mockGetAudioPronunciation,
   getLanguagePairs: mockGetLanguagePairs,
   updateCard: mockUpdateCard,

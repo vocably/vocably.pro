@@ -1,12 +1,6 @@
 export const es = {
   // app
   'app.checking_auth': 'Verificando el estado de autenticación',
-  'app.translates_text':
-    'Esta extensión traduce el texto seleccionado y crea tarjetas.',
-  'app.flashcards_mobile':
-    'Las tarjetas estarán disponibles en tu dispositivo móvil.',
-  'app.need_signed_in': 'Necesitas iniciar sesión para usar Vocably.',
-  'app.sign_in': 'Iniciar sesión o crear cuenta',
   // home
   'home.almost_ready': '¡casi listo!',
   'home.settings': 'Configuración',

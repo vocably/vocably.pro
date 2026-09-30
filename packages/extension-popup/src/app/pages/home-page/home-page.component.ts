@@ -1,5 +1,10 @@
 import { NgIf } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -21,9 +26,13 @@ import {
   UpdateCardPayload,
   UpdateTagPayload,
   CardsLimit,
+  GoogleLanguage,
 } from '@vocably/model';
 import { chunk, first, isString } from 'lodash-es';
+import { Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { detectTargetLanguage } from '../../../detectTargetLanguage';
+import { isUserLoggedIn$ } from '../../../isUserLoggedIn';
 import { playDataUrl } from './playDataUrl';
 
 const lastUsedSearchValuesKey = 'lastUsedSearchValues_01';
@@ -35,8 +44,12 @@ const lastUsedSearchValuesKey = 'lastUsedSearchValues_01';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [NgIf, IonicModule, RouterLink, MatIcon, TranslatePipe],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
   welcomeUrl = `${environment.appBaseUrl}/welcome`;
+  signInUrl = `${environment.appBaseUrl}/hands-free`;
+  isLoggedIn: boolean | null = null;
+  isSavingLanguages = false;
+  defaultTargetLanguage: GoogleLanguage = detectTargetLanguage();
   isSearching: boolean = false;
   isTranslationLoading: boolean = false;
   searchResult: Result<TranslationCards> | null = null;
@@ -61,6 +74,8 @@ export class HomePageComponent implements OnInit {
   explanationAnimationDelay = 0;
   isLoadingExtraWords = false;
 
+  private isLoggedInSubscription: Subscription | undefined;
+
   constructor() {}
 
   ngOnInit(): void {
@@ -72,7 +87,29 @@ export class HomePageComponent implements OnInit {
       this.searchValues.text = '';
     }
 
-    environment.getLanguagePairs().then((languagePairs) => {
+    // Translating works signed out too. Adding a card asks to sign in, and a
+    // session that shows up later only changes what the Learn button does.
+    this.isLoggedInSubscription = isUserLoggedIn$.subscribe((isLoggedIn) => {
+      this.isLoggedIn = isLoggedIn;
+    });
+
+    this.loadLanguagePairs();
+
+    if (this.extensionPlatform.paymentLink === 'web') {
+      this.paymentLink = environment.appBaseUrl + '/subscribe';
+    } else if (isString(this.extensionPlatform.paymentLink)) {
+      this.paymentLink = this.extensionPlatform.paymentLink;
+    } else {
+      this.paymentLink = '';
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.isLoggedInSubscription?.unsubscribe();
+  }
+
+  private loadLanguagePairs() {
+    return environment.getLanguagePairs().then((languagePairs) => {
       this.languagePairs = languagePairs;
       this.languagePairsLoaded = true;
       this.needsOnboarding = Object.keys(languagePairs).length === 0;
@@ -97,14 +134,36 @@ export class HomePageComponent implements OnInit {
         targetLanguage: pair[1].currentTargetLanguage,
       };
     });
+  }
 
-    if (this.extensionPlatform.paymentLink === 'web') {
-      this.paymentLink = environment.appBaseUrl + '/subscribe';
-    } else if (isString(this.extensionPlatform.paymentLink)) {
-      this.paymentLink = this.extensionPlatform.paymentLink;
-    } else {
-      this.paymentLink = '';
+  /**
+   * The welcome page in the app sets the languages up for a signed in user.
+   * A signed out one picks them right here instead.
+   */
+  async onLanguagesConfirm({ detail }: any) {
+    const { sourceLanguage, targetLanguage } = detail;
+
+    if (
+      !isGoogleLanguage(sourceLanguage) ||
+      !isGoogleLanguage(targetLanguage)
+    ) {
+      return;
     }
+
+    this.isSavingLanguages = true;
+    // The source language goes first: the proxy language is stored as a pair
+    // with whatever the source language is at that moment.
+    await environment.setInternalSourceLanguage(sourceLanguage);
+    await environment.setInternalProxyLanguage(targetLanguage);
+    await this.loadLanguagePairs();
+    this.isSavingLanguages = false;
+  }
+
+  // Emitted by `vocably-sign-in` in the cover shown when a signed out user
+  // tries to add a card. Opening the tab closes this popup, so the card is not
+  // added afterwards: the user searches again once signed in.
+  onSignIn() {
+    window.open(this.signInUrl, '_blank');
   }
 
   onSearchValuesChanged(values: any) {

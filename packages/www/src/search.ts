@@ -18,6 +18,7 @@ import { searchConfig } from './constants';
 
 import posthog from 'posthog-js';
 import { loadLanguageDeck } from '@vocably/api';
+import { analysisToTranslationCards } from '@vocably/model-operations';
 import {
   addCard,
   attachTag,
@@ -390,20 +391,7 @@ const createTranslationCards = (
 
   return {
     success: true,
-    value: {
-      source: analyzeResult.value.source,
-      sourceLanguage: analyzeResult.value.sourceLanguage,
-      targetLanguage: analyzeResult.value.targetLanguage,
-      detectedInputType: analyzeResult.value.detectedInputType,
-      aiThinksItIs: analyzeResult.value.aiThinksItIs,
-      items: analyzeResult.value.items,
-      deck: {
-        language: analyzeResult.value.sourceLanguage,
-        cards: [],
-        tags: [],
-      },
-      explanation: '',
-    },
+    value: analysisToTranslationCards(analyzeResult.value),
   };
 };
 

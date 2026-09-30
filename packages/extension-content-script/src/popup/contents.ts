@@ -41,8 +41,18 @@ export const setContents = async ({
   let intervalId: ReturnType<typeof setInterval> | undefined = undefined;
   let waitForPaymentIntervalId: ReturnType<typeof setInterval> | undefined =
     undefined;
+  let waitForSignInIntervalId: ReturnType<typeof setInterval> | undefined =
+    undefined;
   let explicitlySetLanguage: GoogleLanguage | null = null;
   let tornDown = false;
+  let windowProxy: WindowProxy | null = null;
+
+  const closeWindow = () => {
+    if (windowProxy !== null) {
+      windowProxy.close();
+      windowProxy = null;
+    }
+  };
 
   const tearDown = () => {
     tornDown = true;
@@ -50,6 +60,8 @@ export const setContents = async ({
     intervalId = undefined;
     clearInterval(waitForPaymentIntervalId);
     waitForPaymentIntervalId = undefined;
+    clearInterval(waitForSignInIntervalId);
+    waitForSignInIntervalId = undefined;
   };
 
   const setTranslation = async () => {
@@ -62,7 +74,7 @@ export const setContents = async ({
     translation.canCongratulate =
       contentScriptConfiguration.allowFirstTranslationCongratulation &&
       !userKnowsHowToAdd;
-    translation.isLoggedInUser = true;
+    translation.isLoggedInUser = await api.isLoggedIn();
 
     type AnalyzePayload = {
       sourceLanguage?: GoogleLanguage;
@@ -276,6 +288,91 @@ export const setContents = async ({
       }
     );
 
+    /**
+     * Once the user has signed in, their collection replaces the empty one the
+     * signed out translation was shown against, and the card they picked
+     * before signing in is added if it still has to be.
+     */
+    const onSignedIn = async () => {
+      translation.isLoggedInUser = true;
+
+      try {
+        translation.cardsLimit = await api.getCardsLimit();
+
+        const result = translation.result;
+
+        if (!result || result.success === false) {
+          return;
+        }
+
+        const deckResult = await api.loadLanguageDeck(
+          result.value.sourceLanguage
+        );
+
+        // The language may have been changed while the deck was loading.
+        const currentResult = translation.result;
+
+        if (
+          tornDown ||
+          deckResult.success === false ||
+          !currentResult ||
+          currentResult.success === false ||
+          currentResult.value.sourceLanguage !== deckResult.value.language
+        ) {
+          return;
+        }
+
+        translation.result = {
+          success: true,
+          value: {
+            ...currentResult.value,
+            deck: deckResult.value,
+          },
+        };
+      } finally {
+        // Asked on every way out: a deck that failed to arrive is not going to
+        // arrive later, and the add reloads the deck in the service worker
+        // anyway. The component itself skips a card that is already in the
+        // collection or one that is over the free plan limit.
+        if (!tornDown) {
+          await translation.addRememberedCard();
+        }
+      }
+
+      const existingLanguagesResult = await api.listLanguages();
+      translation.existingSourceLanguages = existingLanguagesResult.success
+        ? existingLanguagesResult.value
+        : [];
+
+      setTimeout(closeWindow, 3000);
+    };
+
+    // Emitted by `vocably-sign-in` in the cover a signed out user gets when
+    // they try to add a card. Signing in happens in the app, in a new tab, so
+    // the session is polled for until it shows up.
+    translation.addEventListener('confirm', () => {
+      closeWindow();
+      windowProxy = window.open(`${api.appBaseUrl}/hands-free`, '_blank');
+      windowProxy && windowProxy.focus();
+
+      if (waitForSignInIntervalId !== undefined) {
+        return;
+      }
+
+      waitForSignInIntervalId = setInterval(async () => {
+        if (
+          !(await api.isLoggedIn()) ||
+          waitForSignInIntervalId === undefined
+        ) {
+          return;
+        }
+
+        clearInterval(waitForSignInIntervalId);
+        waitForSignInIntervalId = undefined;
+        await onSignedIn();
+      }, 1000);
+    });
+
     // @ts-ignore
     translation.addEventListener(
       'ratingInteraction',
@@ -297,20 +394,21 @@ export const setContents = async ({
 
   let timerElapsed = false;
 
-  const isAlright = (): Promise<
-    [boolean, GoogleLanguage | null, GoogleLanguage | null]
+  // Signing in is not required to translate: it is asked for only once the
+  // user tries to add a card. The languages are, as the service worker has
+  // nothing to translate from and into without them.
+  const getLanguages = (): Promise<
+    [GoogleLanguage | null, GoogleLanguage | null]
   > => {
     return Promise.all([
-      api.isLoggedIn(),
       api.getInternalSourceLanguage(),
       api.getInternalProxyLanguage(),
     ]);
   };
 
-  const [isLoggedIn, internalSourceLanguage, internalTargetLanguage] =
-    await isAlright();
+  const [internalSourceLanguage, internalTargetLanguage] = await getLanguages();
 
-  if (isLoggedIn && internalSourceLanguage && internalTargetLanguage) {
+  if (internalSourceLanguage && internalTargetLanguage) {
     await setTranslation();
     return tearDown;
   }
@@ -318,27 +416,9 @@ export const setContents = async ({
   const alert = document.createElement('div');
 
   const updateAlertMessage = async (
-    isLoggedIn: boolean,
     internalSourceLanguage: GoogleLanguage | null,
     internalTargetLanguage: GoogleLanguage | null
   ) => {
-    if (!isLoggedIn) {
-      if (alert.dataset.message !== 'sign-in') {
-        alert.dataset.message = 'sign-in';
-        alert.innerHTML = '';
-        const signInElement = document.createElement('vocably-sign-in');
-
-        signInElement.addEventListener('confirm', () => {
-          closeWindow();
-          windowProxy = window.open(`${api.appBaseUrl}/hands-free`, '_blank');
-          windowProxy && windowProxy.focus();
-        });
-
-        alert.appendChild(signInElement);
-      }
-      return;
-    }
-
     if (!internalSourceLanguage || !internalTargetLanguage) {
       if (alert.dataset.message !== 'proxy-language') {
         alert.dataset.message = 'proxy-language';
@@ -365,35 +445,17 @@ export const setContents = async ({
     }
   };
 
-  await updateAlertMessage(
-    isLoggedIn,
-    internalSourceLanguage,
-    internalTargetLanguage
-  );
-
-  let windowProxy: WindowProxy | null = null;
-
-  const closeWindow = () => {
-    if (windowProxy !== null) {
-      windowProxy.close();
-      windowProxy = null;
-    }
-  };
+  await updateAlertMessage(internalSourceLanguage, internalTargetLanguage);
 
   intervalId = setInterval(async () => {
-    const [isLoggedIn, internalSourceLanguage, internalTargetLanguage] =
-      await isAlright();
-    if (isLoggedIn && internalSourceLanguage && internalTargetLanguage) {
+    const [internalSourceLanguage, internalTargetLanguage] =
+      await getLanguages();
+    if (internalSourceLanguage && internalTargetLanguage) {
       clearInterval(intervalId);
       intervalId = undefined;
       await setTranslation();
-      setTimeout(closeWindow, 3000);
     } else {
-      await updateAlertMessage(
-        isLoggedIn,
-        internalSourceLanguage,
-        internalTargetLanguage
-      );
+      await updateAlertMessage(internalSourceLanguage, internalTargetLanguage);
     }
   }, 1000);
 
