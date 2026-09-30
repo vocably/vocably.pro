@@ -250,8 +250,8 @@ $sign-in-slide-duration: 300ms;
 
 .vocably-sign-in-cover-close {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 4px;
+  right: 4px;
 }
 
 @keyframes vocably-sign-in-slide-in {
