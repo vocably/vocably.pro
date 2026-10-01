@@ -18,9 +18,6 @@ type Props = {
   deckSettings: DeckSettings;
 };
 
-// Explicit line height lets PlaySound be centered against the first line.
-const sourceLineHeight = 40;
-
 export const CardFront: FC<Props> = ({
   card,
   autoPlay,
@@ -56,8 +53,10 @@ export const CardFront: FC<Props> = ({
     setIsAutoPlayed(true);
   }, [isAutoPlayed, autoPlay]);
 
+  const fontScale = PixelRatio.getFontScale();
+
   const present = card.data.presentTenses
-    ? t('common.presentTenses', { value: isolate(card.data.presentTenses) })
+    ? t('common.presentTenses', { value: card.data.presentTenses })
     : false;
   const past =
     card.data.tense === 'present' && card.data.pastTenses
@@ -66,53 +65,52 @@ export const CardFront: FC<Props> = ({
 
   const presentAndPast = [present, past].filter(Boolean).join(`\n`);
 
-  const fontScale = PixelRatio.getFontScale();
-
   return (
     <View>
       <View
         style={{
-          // No wrapping: the source wraps inside its own Text so that
-          // PlaySound and the first word always stay on the same line.
+          display: 'flex',
           flexDirection: 'row',
-          alignItems: 'flex-start',
-          columnGap: 8,
+          alignItems: 'baseline',
+          flexWrap: 'wrap',
           width: '100%',
-          // Keep LTR order even when the card is in an RTL language.
           direction: 'ltr',
         }}
       >
-        {isGoogleTTSLanguage(card.data.language) && (
-          <PlaySound
-            text={card.data.source}
-            language={card.data.language}
-            size={24}
-            ref={playRef}
-            // Center the icon against the first line of the source.
-            style={{
-              height: sourceLineHeight * fontScale,
-              justifyContent: 'center',
-              transform: [
-                {
-                  translateX: 2,
-                },
-                {
-                  translateY:
-                    Platform.OS === 'ios' ? 3 * fontScale : 2 * 1.2 * fontScale,
-                },
-              ],
-            }}
-          />
-        )}
         <Text
           style={{
-            fontSize: 32,
-            lineHeight: sourceLineHeight,
-            color: theme.colors.secondary,
-            flexShrink: 1,
+            fontSize: 18,
+            textAlignVertical: 'top',
           }}
         >
-          {card.data.source}
+          {isGoogleTTSLanguage(card.data.language) && (
+            <>
+              <PlaySound
+                text={card.data.source}
+                language={card.data.language}
+                size={24}
+                ref={playRef}
+                style={{
+                  transform: [
+                    {
+                      translateY:
+                        Platform.OS === 'ios'
+                          ? -1 * fontScale
+                          : 5 * 1.2 * fontScale,
+                    },
+                  ],
+                }}
+              />{' '}
+            </>
+          )}
+          <Text
+            style={{
+              fontSize: 32,
+              color: theme.colors.secondary,
+            }}
+          >
+            {isolate(card.data.source)}
+          </Text>
         </Text>
       </View>
       {(card.data.ipa ||
@@ -126,10 +124,11 @@ export const CardFront: FC<Props> = ({
             marginLeft: 8,
             marginTop: 6,
             gap: 8,
-            direction: 'ltr',
           }}
         >
-          {card.data.ipa && <Text>/{sanitizeTranscript(card.data.ipa)}/</Text>}
+          {card.data.ipa && (
+            <Text>/{isolate(sanitizeTranscript(card.data.ipa))}/</Text>
+          )}
           {card.data.g && <Text>({isolate(card.data.g)})</Text>}
           {card.data.partOfSpeech && (
             <Text>
