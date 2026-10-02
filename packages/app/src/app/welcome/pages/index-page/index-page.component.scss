@@ -17,6 +17,14 @@
   }
 }
 
+// Inset like the "I study" card content, so the text lines up with it.
+.welcome {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0 $welcome-card-padding;
+}
+
 .intro-title {
   margin: 0 0 0.5rem;
   font-size: clamp(1.75rem, 5vw, 2.25rem);
@@ -39,7 +47,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem 0.75rem;
-  margin-top: -0.5rem;
 }
 
 .mother-tongue-label {

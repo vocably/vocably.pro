@@ -1,20 +1,22 @@
 <div class="onboarding">
   <div class="layout">
-    <header class="intro">
-      <h1 class="intro-title">{{ 'welcome.index.title' | transloco }}</h1>
-      <p class="intro-lead">{{ 'welcome.index.lead' | transloco }}</p>
-    </header>
+    <div class="welcome">
+      <header class="intro">
+        <h1 class="intro-title">{{ 'welcome.index.title' | transloco }}</h1>
+        <p class="intro-lead">{{ 'welcome.index.lead' | transloco }}</p>
+      </header>
 
-    <section class="mother-tongue" *ngIf="targetLanguage">
-      <h2 class="mother-tongue-label">
-        {{ 'welcome.index.mother_tongue' | transloco }}
-      </h2>
-      <app-language-input
-        class="mother-tongue-input"
-        [value]="targetLanguage"
-        (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
-      ></app-language-input>
-    </section>
+      <section class="mother-tongue" *ngIf="targetLanguage">
+        <h2 class="mother-tongue-label">
+          {{ 'welcome.index.mother_tongue' | transloco }}
+        </h2>
+        <app-language-input
+          class="mother-tongue-input"
+          [value]="targetLanguage"
+          (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
+        ></app-language-input>
+      </section>
+    </div>
 
     <section class="languages">
       <h2 class="languages-toolbar">
