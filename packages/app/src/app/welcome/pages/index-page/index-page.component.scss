@@ -1,10 +1,35 @@
 @import '../../../../styles/variables';
+@import '../../surface';
 
 .onboarding {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
   padding-top: 1rem;
+  padding-bottom: 3rem;
+}
+
+// Same grid as the second page: the language list takes the wide column and
+// the mother tongue sits beside it, just like the language summary there.
+// The intro spans both columns so the two cards start on the same line.
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15.5rem;
+  grid-template-areas:
+    'intro intro'
+    'languages aside';
+  align-items: start;
+  gap: 2rem 2.5rem;
+
+  @media (width < $lg) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'intro'
+      'aside'
+      'languages';
+    gap: 1.5rem;
+  }
+}
+
+.intro {
+  grid-area: intro;
 }
 
 .intro-title {
@@ -23,22 +48,84 @@
   color: var(--text-muted);
 }
 
-.section-title {
-  margin: 0 0 0.75rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--text-muted);
+.aside {
+  grid-area: aside;
+  position: sticky;
+  top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  @media (width < $lg) {
+    position: static;
+  }
 }
 
+.mother-tongue {
+  @include welcome-card;
+}
+
+.mother-tongue-toolbar {
+  margin: 0;
+  @include welcome-card-toolbar;
+}
+
+.mother-tongue-body {
+  padding: 1rem;
+}
+
+// The icon flows inline with the text, so both stay centered as it wraps.
+.multilang {
+  display: block;
+  padding: 0 0.25rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-align: center;
+
+  mat-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.35rem;
+    font-size: 1.25rem;
+    vertical-align: -0.3em;
+  }
+}
+
+.languages {
+  grid-area: languages;
+  min-width: 0;
+  @include welcome-card;
+}
+
+.languages-toolbar {
+  margin: 0;
+  @include welcome-card-toolbar;
+}
+
+.languages-body {
+  padding: 1rem;
+
+  @media (width >= $sm) {
+    padding: 1.5rem;
+  }
+}
+
+// Flags plus names need the full width on phones; the rest of the list
+// carries no flags and still fits in two columns.
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.75rem;
 
-  @media (min-width: $lg) {
-    .collapsable & {
+  @media (width >= $sm) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  &.more {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-top: 0.75rem;
+
+    @media (width >= $md) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
@@ -58,18 +145,13 @@
   white-space: nowrap;
 }
 
-.actions {
+.expand {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
-  margin-top: 1.25rem;
-}
-
-.action {
-  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.15rem;
+  width: 100%;
+  margin-top: 1.25rem;
   font-size: 0.95rem;
 }
 

@@ -53,8 +53,8 @@ export class IndexPageComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    this.containerSize.size.next('large');
     this.targetLanguage = await this.getInitialLanguageInputValue();
-    this.containerSize.size.next('normal');
   }
 
   private async getInitialLanguageInputValue(): Promise<GoogleLanguage> {

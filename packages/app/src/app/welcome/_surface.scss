@@ -1,0 +1,46 @@
+// Shared look of the welcome pages: soft cards with a tinted header bar.
+
+$welcome-border: var(--border-color-muted, rgba(128, 128, 128, 0.25));
+
+@mixin welcome-shadow {
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 12px 32px -12px rgba(var(--primary-rgb), 0.18);
+}
+
+@mixin welcome-card {
+  overflow: hidden;
+  border: 1px solid $welcome-border;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  @include welcome-shadow;
+}
+
+@mixin welcome-card-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid $welcome-border;
+  background: rgba(var(--primary-rgb), 0.05);
+  color: var(--emphasize-color);
+  font-size: 0.9rem;
+  line-height: 1.4;
+
+  mat-icon {
+    flex-shrink: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 1.75rem;
+  }
+}
+
+@mixin welcome-side-card {
+  padding: 1rem 1.125rem;
+  border: 1px solid $welcome-border;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

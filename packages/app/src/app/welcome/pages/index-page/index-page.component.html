@@ -1,81 +1,92 @@
 <div class="onboarding">
-  <header class="intro">
-    <h1 class="intro-title">{{ 'welcome.index.title' | transloco }}</h1>
-    <p class="intro-lead">{{ 'welcome.index.lead' | transloco }}</p>
-  </header>
+  <div class="layout">
+    <header class="intro">
+      <h1 class="intro-title">{{ 'welcome.index.title' | transloco }}</h1>
+      <p class="intro-lead">{{ 'welcome.index.lead' | transloco }}</p>
+    </header>
 
-  <section class="section" *ngIf="targetLanguage">
-    <h2 class="section-title">
-      {{ 'welcome.index.mother_tongue' | transloco }}
-    </h2>
-    <app-language-input
-      [value]="targetLanguage"
-      (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
-    ></app-language-input>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title">
-      {{ 'welcome.index.i_study' | transloco }}
-    </h2>
-    <div class="grid-container">
-      <div
-        class="grid-item two-columns"
-        *ngFor="let language of languages.slice(0, this.showTop)"
-      >
-        <app-language-button
-          (click)="onClick(language)"
-          [selected]="language === selected"
-        >
-          <app-language-icon
-            [language]="language"
-            class="language-flag"
-          ></app-language-icon>
-          <span class="language-name">{{ language | language }}</span>
-        </app-language-button>
-      </div>
-    </div>
-
-    <div class="collapsable" [class]="{ expanded: expanded }">
-      <div class="grid-container pt-1">
-        <div
-          class="grid-item"
-          *ngFor="let language of languages.slice(this.showTop)"
-        >
-          <app-language-button
-            (click)="onClick(language)"
-            [selected]="language === selected"
-          >
-            <span class="language-name">{{ language | language }}</span>
-          </app-language-button>
+    <aside class="aside">
+      <section class="mother-tongue" *ngIf="targetLanguage">
+        <h2 class="mother-tongue-toolbar">
+          <mat-icon aria-hidden="true">home</mat-icon>
+          <span>{{ 'welcome.index.mother_tongue' | transloco }}</span>
+        </h2>
+        <div class="mother-tongue-body">
+          <app-language-input
+            [value]="targetLanguage"
+            (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
+          ></app-language-input>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <div class="actions">
       <button
-        class="unstyled link action"
-        type="button"
-        [attr.aria-expanded]="expanded"
-        (click)="expanded = !expanded"
-      >
-        {{
-          (expanded ? 'welcome.index.show_less' : 'welcome.index.show_more')
-            | transloco
-        }}<mat-icon
-          aria-hidden="true"
-          class="expand-icon"
-          [class]="{ down: expanded }"
-          >expand_more</mat-icon
-        >
-      </button>
-      <button
-        class="unstyled link action"
+        class="unstyled link multilang"
         type="button"
         (click)="showHowToMultilang()"
       >
-        {{ 'welcome.index.multilang' | transloco }}
+        <mat-icon aria-hidden="true">language</mat-icon>
+        <span>{{ 'welcome.index.multilang' | transloco }}</span>
       </button>
-    </div>
-  </section>
+    </aside>
+
+    <section class="languages">
+      <h2 class="languages-toolbar">
+        <mat-icon aria-hidden="true">school</mat-icon>
+        <span>{{ 'welcome.index.i_study' | transloco }}</span>
+      </h2>
+
+      <div class="languages-body">
+        <div class="grid-container">
+          <div
+            class="grid-item"
+            *ngFor="let language of languages.slice(0, this.showTop)"
+          >
+            <app-language-button
+              (click)="onClick(language)"
+              [selected]="language === selected"
+            >
+              <app-language-icon
+                [language]="language"
+                class="language-flag"
+              ></app-language-icon>
+              <span class="language-name">{{ language | language }}</span>
+            </app-language-button>
+          </div>
+        </div>
+
+        <div class="collapsable" [class]="{ expanded: expanded }">
+          <div class="grid-container more">
+            <div
+              class="grid-item"
+              *ngFor="let language of languages.slice(this.showTop)"
+            >
+              <app-language-button
+                (click)="onClick(language)"
+                [selected]="language === selected"
+              >
+                <span class="language-name">{{ language | language }}</span>
+              </app-language-button>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="unstyled link expand"
+          type="button"
+          [attr.aria-expanded]="expanded"
+          (click)="expanded = !expanded"
+        >
+          {{
+            (expanded ? 'welcome.index.show_less' : 'welcome.index.show_more')
+              | transloco
+          }}<mat-icon
+            aria-hidden="true"
+            class="expand-icon"
+            [class]="{ down: expanded }"
+            >expand_more</mat-icon
+          >
+        </button>
+      </div>
+    </section>
+  </div>
 </div>
