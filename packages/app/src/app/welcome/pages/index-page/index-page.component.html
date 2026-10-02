@@ -6,16 +6,14 @@
     </header>
 
     <section class="mother-tongue" *ngIf="targetLanguage">
-      <h2 class="mother-tongue-toolbar">
-        <mat-icon aria-hidden="true">home</mat-icon>
-        <span>{{ 'welcome.index.mother_tongue' | transloco }}</span>
+      <h2 class="mother-tongue-label">
+        {{ 'welcome.index.mother_tongue' | transloco }}
       </h2>
-      <div class="mother-tongue-body">
-        <app-language-input
-          [value]="targetLanguage"
-          (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
-        ></app-language-input>
-      </div>
+      <app-language-input
+        class="mother-tongue-input"
+        [value]="targetLanguage"
+        (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
+      ></app-language-input>
     </section>
 
     <section class="languages">

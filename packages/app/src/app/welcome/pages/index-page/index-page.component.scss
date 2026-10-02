@@ -33,31 +33,37 @@
   color: var(--text-muted);
 }
 
+// Reads as a plain sentence under the intro: "My mother tongue is [language]".
 .mother-tongue {
-  @include welcome-card;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: -0.5rem;
 }
 
-.mother-tongue-toolbar {
+.mother-tongue-label {
   margin: 0;
-  @include welcome-card-toolbar;
-}
-
-// The field spans one column of the language grid below, so they line up.
-.mother-tongue-body {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.75rem;
-  padding: $welcome-card-padding;
-
-  @media (width >= $sm) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  font-family: inherit;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--emphasize-color);
 }
 
 // Matches the language buttons: white field, thin border, blue on hover and
 // focus. Scoped here because the input is shared with the import page.
-.mother-tongue-body app-language-input {
+.mother-tongue-input {
+  // A compact field that sits on the text line.
+  --mat-form-field-container-height: 2.75rem;
+  --mat-form-field-container-vertical-padding: 0.6rem;
+
   display: block;
+  flex: 0 1 15rem;
+
+  @media (width < $sm) {
+    flex-basis: 100%;
+  }
 
   ::ng-deep {
     .mat-mdc-text-field-wrapper {
@@ -95,7 +101,6 @@
   }
 }
 
-// The icon flows inline with the text, so both stay centered as it wraps.
 .multilang {
   font-size: 0.95rem;
   line-height: 1.5;
