@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { postOnboardingAction } from '@vocably/api';
 import {
@@ -88,6 +88,7 @@ const onboardTargetLanguage = async (targetLanguage: string) => {
     MatIcon,
     GenericInstructionComponent,
     TranslocoModule,
+    RouterLink,
   ],
 })
 export class SecondPageComponent implements OnInit, OnDestroy {
@@ -320,6 +321,10 @@ export class SecondPageComponent implements OnInit, OnDestroy {
       .subscribe(([targetLanguage]) => {
         onboardTargetLanguage(targetLanguage).then();
       });
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0 });
   }
 
   ngOnDestroy() {

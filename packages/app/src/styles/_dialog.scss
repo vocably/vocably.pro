@@ -1,0 +1,8 @@
+// Roomier, rounder Material dialogs across the app.
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-shape: 16px;
+  --mat-dialog-headline-padding: 2rem 2rem 0.75rem;
+  --mat-dialog-content-padding: 2rem;
+  --mat-dialog-with-actions-content-padding: 2rem 2rem 0;
+  --mat-dialog-actions-padding: 1.25rem 2rem 1.75rem;
+}

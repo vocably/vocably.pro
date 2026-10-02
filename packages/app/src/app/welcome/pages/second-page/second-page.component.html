@@ -2,7 +2,7 @@
   <div class="layout">
     <div *ngIf="sourceLanguage && targetLanguage" class="context">
       <span class="context-text" [innerHTML]="studySentenceHtml"></span>
-      <a href="welcome" class="context-change">
+      <a routerLink="../.." class="context-change" (click)="scrollToTop()">
         <mat-icon aria-hidden="true">edit</mat-icon>
         {{ 'welcome.second.change' | transloco }}
       </a>
