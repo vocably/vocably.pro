@@ -86,14 +86,118 @@
   margin-top: 0.6rem;
 }
 
-// Annotated screenshots: the phone sits on the left, callouts on the right.
-.wmu-shot {
-  display: block;
-  width: 22rem;
-  max-width: 100%;
-  height: auto;
-}
-
 .wmu-icon {
   color: $v-light-color-primary;
+}
+
+// Highlights an area of a screenshot. Set per instance:
+// --x/--y: center of the highlighted area, as a share of the image's width/height;
+// --rw/--rh: ring size; --ax: the arrow's horizontal position.
+// Sizes use cqw so they scale with the image.
+.wmu-pointer {
+  --ax: var(--x);
+  --rw: 24cqw;
+  --rh: 15cqw;
+  --gap: 8.5cqw;
+  --bounce: 2cqw;
+
+  position: relative;
+  width: 15rem;
+  max-width: 100%;
+  container-type: inline-size;
+
+  & .ise-phone {
+    width: 100%;
+  }
+}
+
+.wmu-pointer-ring {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--rw);
+  height: var(--rh);
+  border: 2px solid $v-light-color-primary;
+  border-radius: 5cqw;
+  transform: translate(-50%, -50%);
+  animation: wmu-pointer-pulse 1.8s ease-out infinite;
+}
+
+// Points down at the ring from above.
+.wmu-pointer-arrow {
+  position: absolute;
+  left: var(--ax);
+  bottom: calc(100% - var(--y) + var(--rh) / 2 + var(--gap));
+  width: 2cqw;
+  height: 22cqw;
+  border-radius: 1cqw;
+  background: linear-gradient(
+    to bottom,
+    rgba($v-light-color-primary, 0),
+    $v-light-color-primary 60%
+  );
+  transform: translateX(-50%);
+  animation: wmu-pointer-bounce 1.8s ease-in-out infinite;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    margin-top: -1cqw;
+    border-left: 4.5cqw solid transparent;
+    border-right: 4.5cqw solid transparent;
+    border-top: 6cqw solid $v-light-color-primary;
+    transform: translateX(-50%);
+  }
+}
+
+// Points up at the ring from below.
+.wmu-pointer-up {
+  --bounce: -2cqw;
+
+  & .wmu-pointer-arrow {
+    bottom: auto;
+    top: calc(var(--y) + var(--rh) / 2 + var(--gap));
+    background: linear-gradient(
+      to top,
+      rgba($v-light-color-primary, 0),
+      $v-light-color-primary 60%
+    );
+
+    &::after {
+      top: auto;
+      bottom: 100%;
+      margin-top: 0;
+      margin-bottom: -1cqw;
+      border-top: 0;
+      border-bottom: 6cqw solid $v-light-color-primary;
+    }
+  }
+}
+
+@keyframes wmu-pointer-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba($v-light-color-primary, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 4cqw rgba($v-light-color-primary, 0);
+  }
+}
+
+@keyframes wmu-pointer-bounce {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, var(--bounce));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wmu-pointer-ring,
+  .wmu-pointer-arrow {
+    animation: none;
+  }
 }

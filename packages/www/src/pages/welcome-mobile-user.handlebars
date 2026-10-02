@@ -7,14 +7,14 @@
     <h1 class="ise-title">Welcome to Vocably</h1>
     <p class="ise-lead">
       Vocably is a dictionary and flashcards in one app. Look up the words you
-      come across, save the ones you want to remember, and practice them for a
+      come across, save the ones you want to remember, and study them for a
       few minutes a day.
     </p>
 
     <ul class="wmu-overview">
       <li>
         <i class="bi bi-translate" aria-hidden="true"></i>
-        <h2>Look up</h2>
+        <h2>Dictionary</h2>
         <p>See translations, pronunciation, and examples for any word or phrase.</p>
       </li>
       <li>
@@ -24,7 +24,7 @@
       </li>
       <li>
         <i class="bi bi-arrow-repeat" aria-hidden="true"></i>
-        <h2>Practice</h2>
+        <h2>Study</h2>
         <p>Spaced repetition brings each word back right before you’d forget it.</p>
       </li>
     </ul>
@@ -45,15 +45,20 @@
       <li class="ise-step">
         <div class="ise-step-body">
           <span class="ise-step-number" aria-hidden="true">1</span>
-          <h2>Open the Look up tab</h2>
+          <h2>Open the Dictionary tab</h2>
           <p>
-            The first time you open Vocably, your card list is empty. Tap
-            <strong>Look up</strong> at the bottom of the screen to find your
-            first word.
+            The first time you open Vocably, <strong>My cards</strong> is
+            empty. Tap
+            <strong class="text-nowrap"><i class="bi bi-translate" aria-hidden="true"></i> Dictionary</strong>
+            at the bottom of the screen to find your first word.
           </p>
         </div>
         <figure class="ise-step-media">
-          <img src="assets/welcome/look-up-tab.png" class="wmu-shot" width="1300" height="1540" alt="The Look up tab at the bottom of the Vocably app." loading="lazy" />
+          <div class="wmu-pointer" style="--x: 37.4%; --y: 93.9%">
+            <img src="assets/welcome/my-cards-empty.png" class="ise-phone" width="600" height="1304" alt="The empty My cards screen with the Dictionary tab at the bottom." loading="lazy" />
+            <span class="wmu-pointer-ring" aria-hidden="true"></span>
+            <span class="wmu-pointer-arrow" aria-hidden="true"></span>
+          </div>
         </figure>
       </li>
 
@@ -72,21 +77,25 @@
           </p>
         </div>
         <figure class="ise-step-media">
-          <img src="assets/welcome/language-selected.png" class="wmu-shot" width="1300" height="1540" alt="The language buttons: Dutch on the left, English on the right." loading="lazy" />
+          <div class="wmu-pointer wmu-pointer-up" style="--x: 50%; --y: 10.7%; --ax: 74%; --rw: 96cqw; --rh: 14cqw">
+            <img src="assets/welcome/dictionary.png" class="ise-phone" width="600" height="1304" alt="The Dictionary tab with Dutch on the left and English (US) on the right." loading="lazy" />
+            <span class="wmu-pointer-ring" aria-hidden="true"></span>
+            <span class="wmu-pointer-arrow" aria-hidden="true"></span>
+          </div>
         </figure>
       </li>
 
       <li class="ise-step">
         <div class="ise-step-body">
           <span class="ise-step-number" aria-hidden="true">3</span>
-          <h2>Translate a word you came across</h2>
+          <h2>Look up a word you came across</h2>
           <p>
             Type the word in the search field and tap
             <i class="bi bi-search" aria-label="search"></i>. Vocably shows its
             translations, pronunciation, and examples.
           </p>
           <p>
-            Tap <i class="bi bi-plus-circle-fill wmu-icon" aria-label="plus"></i>
+            Tap <i class="bi bi-plus-circle wmu-icon" aria-label="plus"></i>
             to add the word to your cards.
           </p>
           <div class="ise-note">
@@ -105,7 +114,7 @@
           </div>
         </div>
         <figure class="ise-step-media">
-          <img src="assets/welcome/translate-new-word.png" class="wmu-shot" width="1300" height="1540" alt="A Dutch word typed in the search field, with its translation and the add button." loading="lazy" />
+          <img src="assets/welcome/look-up-word.png" class="ise-phone" width="600" height="1304" alt="The Dutch word behoefte looked up, with its translation, examples, and the add button." loading="lazy" />
         </figure>
       </li>
 
@@ -115,17 +124,23 @@
           <h2>Find the word you want to say</h2>
           <p>
             Don’t know how to say something in the language you’re learning?
-            Tap the arrow between the two languages to switch the direction,
-            then type the word in the language you know.
+            Type it in the language you know. Vocably detects the language
+            automatically and shows the words you’re looking for.
           </p>
           <p>
-            Pick the best match and tap
-            <i class="bi bi-plus-circle-fill wmu-icon" aria-label="plus"></i>
-            to save it.
+            Pick the best matches and tap
+            <i class="bi bi-plus-circle wmu-icon" aria-label="plus"></i>
+            to save them.
+          </p>
+          <p class="ise-hint">
+            Some words are spelled the same in both languages. To make Vocably
+            search in the language you know, tap
+            <i class="bi bi-arrow-left-right wmu-icon" aria-label="switch languages"></i>
+            between the two languages.
           </p>
         </div>
         <figure class="ise-step-media">
-          <img src="assets/welcome/reverse-translation.png" class="wmu-shot" width="1300" height="1738" alt="Reverse translation: an English phrase typed in, with Dutch words in the results." loading="lazy" />
+          <img src="assets/welcome/autodetect.png" class="ise-phone" width="600" height="1304" alt="The English phrase to use typed in, with the Dutch words gebruiken and hanteren in the results." loading="lazy" />
         </figure>
       </li>
     </ol>
@@ -136,49 +151,29 @@
       <li class="ise-step">
         <div class="ise-step-body">
           <span class="ise-step-number" aria-hidden="true">5</span>
-          <h2>Start a practice session</h2>
+          <h2>Study every day</h2>
           <p>
-            Once you’ve saved a few words, open the <strong>Cards</strong> tab
-            and tap <strong>Practice</strong>.
+            Open <strong>My cards</strong> and tap <strong>Study</strong>.
+            Vocably shows the cards planned for today.
           </p>
-        </div>
-        <figure class="ise-step-media">
-          <img src="assets/welcome/cards-tab.png" class="wmu-shot" width="1300" height="1540" alt="The Cards tab with saved words and the Practice button." loading="lazy" />
-        </figure>
-      </li>
-
-      <li class="ise-step">
-        <div class="ise-step-body">
-          <span class="ise-step-number" aria-hidden="true">6</span>
-          <h2>Swipe to answer</h2>
           <p>
-            Each card shows a word. Try to recall what it means. If you can’t,
-            tap the card to see the translation.
+            Vocably uses spaced repetition (SRS). Each word comes back right
+            before you’re likely to forget it. Words you know well show up
+            less often, and the ones you struggle with come back sooner.
           </p>
           <ul class="ise-checklist">
-            <li><i class="bi bi-arrow-right-circle-fill" aria-hidden="true"></i> <span><strong>Swipe right</strong> if you remembered it. You’ll see it less often.</span></li>
-            <li><i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i> <span><strong>Swipe left</strong> if you didn’t. Vocably will show it again sooner.</span></li>
+            <li><i class="bi bi-calendar-check" aria-hidden="true"></i> <span><strong>A few minutes a day</strong> is enough. Short daily sessions work better than long ones once a week.</span></li>
+            <li><i class="bi bi-graph-up-arrow" aria-hidden="true"></i> <span><strong>Words move to long-term memory</strong>, so you remember them for months, not days.</span></li>
+            <li><i class="bi bi-bullseye" aria-hidden="true"></i> <span><strong>No time wasted</strong> on words you already know.</span></li>
           </ul>
-          <p class="ise-hint">
-            This is spaced repetition: each word comes back just before you’re
-            likely to forget it, so your practice time goes to the words that
-            need it most.
-          </p>
         </div>
-        <div class="ise-step-media ise-step-media-pair">
-          <figure>
-            <video loop autoplay muted playsinline controls class="ise-phone" width="886" height="1798">
-              <source src="assets/welcome/swipe-right.mp4" type="video/mp4" />
-            </video>
-            <figcaption>I remember</figcaption>
-          </figure>
-          <figure>
-            <video loop autoplay muted playsinline controls class="ise-phone" width="886" height="1794">
-              <source src="assets/welcome/swipe-left.mp4" type="video/mp4" />
-            </video>
-            <figcaption>Not yet</figcaption>
-          </figure>
-        </div>
+        <figure class="ise-step-media">
+          <div class="wmu-pointer wmu-pointer-up" style="--x: 50%; --y: 16.4%; --ax: 89%; --rw: 94cqw; --rh: 14cqw">
+            <img src="assets/welcome/study.png" class="ise-phone" width="600" height="1304" alt="My cards with the Study button and the cards planned for today." loading="lazy" />
+            <span class="wmu-pointer-ring" aria-hidden="true"></span>
+            <span class="wmu-pointer-arrow" aria-hidden="true"></span>
+          </div>
+        </figure>
       </li>
     </ol>
   </section>
