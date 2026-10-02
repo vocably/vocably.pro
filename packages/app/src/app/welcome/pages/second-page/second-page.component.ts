@@ -13,9 +13,11 @@ import { languageTranslations } from '@vocably/i18n';
 import posthog from 'posthog-js';
 import {
   catchError,
+  combineLatest,
+  distinctUntilChanged,
   filter,
-  firstValueFrom,
   from,
+  map,
   Observable,
   of,
   Subject,
@@ -42,12 +44,18 @@ const isTargetLanguageOnboarded = (targetLanguage: string): boolean => {
   return onboardedLanguages.includes(targetLanguage);
 };
 
-const onboardTargetLanguage = async (targetLanguage: string) => {
-  const onboardedLanguages = getOnboardedTargetLanguages();
+// Prevents a second request while the first one is still in flight.
+const onboardingInProgress = new Set<string>();
 
-  if (onboardedLanguages.includes(targetLanguage)) {
+const onboardTargetLanguage = async (targetLanguage: string) => {
+  if (
+    isTargetLanguageOnboarded(targetLanguage) ||
+    onboardingInProgress.has(targetLanguage)
+  ) {
     return;
   }
+
+  onboardingInProgress.add(targetLanguage);
 
   const onboardingResult = await postOnboardingAction({
     name: 'facilityOnboarded',
@@ -55,11 +63,13 @@ const onboardTargetLanguage = async (targetLanguage: string) => {
       targetLanguage,
       facility: await getFacility(),
     },
-  });
+  }).finally(() => onboardingInProgress.delete(targetLanguage));
 
   if (!onboardingResult.success) {
     return;
   }
+
+  const onboardedLanguages = getOnboardedTargetLanguages();
 
   localStorage.setItem(
     'onboardedLanguages',
@@ -111,6 +121,8 @@ export class SecondPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.onboardWhenLoggedIn();
+
     this.activatedRoute.params
       .pipe(
         takeUntil(this.destroy$),
@@ -142,15 +154,6 @@ export class SecondPageComponent implements OnInit, OnDestroy {
               nativeLanguage: this.targetLanguage,
             },
           });
-        }),
-        tap(async (params) => {
-          if (
-            params['targetLanguage'] &&
-            !isTargetLanguageOnboarded(params['targetLanguage']) &&
-            (await firstValueFrom(this.auth.isLoggedIn$))
-          ) {
-            onboardTargetLanguage(params['targetLanguage']).then();
-          }
         }),
         switchMap((params): Observable<string> => {
           const exampleExists = [
@@ -293,6 +296,30 @@ export class SecondPageComponent implements OnInit, OnDestroy {
       });
 
     this.containerSize.size.next('large');
+  }
+
+  /**
+   * Onboarding sends the welcome emails, so it needs an account. An anonymous
+   * user usually signs in from another tab while this page stays open; the
+   * request goes out as soon as `isLoggedIn$` flips.
+   */
+  private onboardWhenLoggedIn() {
+    const targetLanguage$ = this.activatedRoute.params.pipe(
+      map((params) => params['targetLanguage']),
+      filter(isGoogleLanguage),
+      distinctUntilChanged()
+    );
+
+    const isLoggedIn$ = this.auth.isLoggedIn$.pipe(distinctUntilChanged());
+
+    combineLatest([targetLanguage$, isLoggedIn$])
+      .pipe(
+        filter(([, isLoggedIn]) => isLoggedIn),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(([targetLanguage]) => {
+        onboardTargetLanguage(targetLanguage).then();
+      });
   }
 
   ngOnDestroy() {
