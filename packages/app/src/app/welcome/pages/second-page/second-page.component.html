@@ -1,90 +1,98 @@
 <div class="try-out">
-  <div *ngIf="sourceLanguage && targetLanguage" class="context-bar">
-    <mat-icon class="context-icon" aria-hidden="true">translate</mat-icon>
-    <span class="context-text" [innerHTML]="studySentenceHtml"></span>
-    <a href="welcome" class="context-change">
-      <mat-icon aria-hidden="true">edit</mat-icon>
-      {{ 'welcome.second.change' | transloco }}
-    </a>
-  </div>
+  <div class="layout">
+    <div *ngIf="sourceLanguage && targetLanguage" class="context">
+      <span class="context-text" [innerHTML]="studySentenceHtml"></span>
+      <a href="welcome" class="context-change">
+        <mat-icon aria-hidden="true">edit</mat-icon>
+        {{ 'welcome.second.change' | transloco }}
+      </a>
+    </div>
 
-  <section class="section">
-    <h1 class="intro-title">
-      {{ 'welcome.second.how_it_works' | transloco }}
-      <span class="intro-title-accent">{{
-        'welcome.second.three_steps' | transloco
-      }}</span>
-    </h1>
+    <div class="main">
+      <div *ngIf="isLoading" class="loading">
+        <ion-spinner name="dots"></ion-spinner>
+        {{ 'welcome.second.loading' | transloco }}
+      </div>
 
-    <ol class="steps">
-      <li class="step">
-        <div class="step-head">
+      <div class="example" *ngIf="!isLoading && exampleHtml">
+        <div class="example-toolbar">
+          <span class="example-hint">
+            <mat-icon class="example-hint-icon" aria-hidden="true"
+              >text_select_move_forward_character</mat-icon
+            >
+            <span>{{ 'welcome.second.try_select' | transloco }}</span>
+          </span>
+        </div>
+        <article
+          class="text-example"
+          translate="no"
+          [lang]="sourceLanguage"
+          [innerHTML]="exampleHtml"
+        ></article>
+      </div>
+
+      <app-generic-instruction
+        [sourceLanguage]="sourceLanguage"
+        [targetLanguage]="targetLanguage"
+        *ngIf="sourceLanguage && targetLanguage && !isLoading && !exampleHtml"
+      ></app-generic-instruction>
+    </div>
+
+    <aside class="aside">
+      <h2 class="steps-title">
+        {{ 'welcome.second.how_it_works' | transloco }}
+        <span class="steps-title-accent">{{
+          'welcome.second.three_steps' | transloco
+        }}</span>
+      </h2>
+
+      <ol class="steps">
+        <li class="step">
           <span class="step-icon" aria-hidden="true">
             <mat-icon>text_select_move_forward_character</mat-icon>
           </span>
-          <span class="step-number">1</span>
-        </div>
-        <div class="step-title">
-          {{ 'welcome.second.step1_heading' | transloco }}
-        </div>
-        <p class="step-desc">{{ 'welcome.second.step1_desc' | transloco }}</p>
-      </li>
+          <div class="step-body">
+            <div class="step-title">
+              {{ 'welcome.second.step1_heading' | transloco }}
+            </div>
+            <p class="step-desc">
+              {{ 'welcome.second.step1_desc' | transloco }}
+            </p>
+          </div>
+        </li>
 
-      <li class="step">
-        <div class="step-head">
+        <li class="step">
           <span class="step-icon" aria-hidden="true">
             <mat-icon>translate</mat-icon>
           </span>
-          <span class="step-number">2</span>
-        </div>
-        <div class="step-title">
-          {{ 'welcome.second.step2_heading' | transloco }}
-        </div>
-        <p class="step-desc">{{ 'welcome.second.step2_desc' | transloco }}</p>
-      </li>
+          <div class="step-body">
+            <div class="step-title">
+              {{ 'welcome.second.step2_heading' | transloco }}
+            </div>
+            <p class="step-desc">
+              {{ 'welcome.second.step2_desc' | transloco }}
+            </p>
+          </div>
+        </li>
 
-      <li class="step">
-        <div class="step-head">
+        <li class="step">
           <span class="step-icon" aria-hidden="true">
             <mat-icon>bookmark_check</mat-icon>
           </span>
-          <span class="step-number">3</span>
-        </div>
-        <div class="step-title">
-          {{ 'welcome.second.step3_heading' | transloco }}
-        </div>
-        <p class="step-desc">{{ 'welcome.second.step3_desc' | transloco }}</p>
-      </li>
-    </ol>
-  </section>
+          <div class="step-body">
+            <div class="step-title">
+              {{ 'welcome.second.step3_heading' | transloco }}
+            </div>
+            <p class="step-desc">
+              {{ 'welcome.second.step3_desc' | transloco }}
+            </p>
+          </div>
+        </li>
+      </ol>
+    </aside>
 
-  <div *ngIf="isLoading" class="loading">
-    <ion-spinner name="dots"></ion-spinner>
-    {{ 'welcome.second.loading' | transloco }}
+    <section class="video" *ngIf="targetLanguage">
+      <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
+    </section>
   </div>
-
-  <section class="section" *ngIf="!isLoading && exampleHtml">
-    <div class="callout">
-      <mat-icon class="callout-icon" aria-hidden="true"
-        >text_select_move_forward_character</mat-icon
-      >
-      <span>{{ 'welcome.second.try_select' | transloco }}</span>
-    </div>
-    <article
-      class="text-example"
-      translate="no"
-      [lang]="sourceLanguage"
-      [innerHTML]="exampleHtml"
-    ></article>
-  </section>
-
-  <app-generic-instruction
-    [sourceLanguage]="sourceLanguage"
-    [targetLanguage]="targetLanguage"
-    *ngIf="sourceLanguage && targetLanguage && !isLoading && !exampleHtml"
-  ></app-generic-instruction>
-
-  <section class="section" *ngIf="targetLanguage">
-    <app-how-to-video [targetLanguage]="targetLanguage"></app-how-to-video>
-  </section>
 </div>

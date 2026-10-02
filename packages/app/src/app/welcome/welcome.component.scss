@@ -1,3 +1,9 @@
+// The global hero is a scroll container (`overflow: auto`), which breaks
+// `position: sticky` in the pages below. `clip` keeps the clipping without it.
+.hero {
+  overflow: clip;
+}
+
 .install {
   display: flex;
   flex-direction: column;
