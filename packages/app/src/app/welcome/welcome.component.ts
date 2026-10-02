@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterOutlet } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import {
   isChrome,
   isDesktop,
@@ -22,6 +22,7 @@ import { isExtensionInstalled$ } from '../isExtensionInstalled';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ContainerService } from './container-service';
 import { setStats } from '../stats';
+import { AuthService } from '../auth/auth.service';
 
 type InstallOption = {
   browser: string;
@@ -93,13 +94,17 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   public isDesktop = isDesktop;
   public size: 'normal' | 'large' = 'normal';
 
-  constructor(private containerService: ContainerService) {}
+  constructor(
+    private containerService: ContainerService,
+    private auth: AuthService
+  ) {}
 
   ngOnInit(): void {
-    setStats({
-      installedDateIso: new Date().toISOString(),
-      isLoggedIn: true,
-    });
+    setStats({ installedDateIso: new Date().toISOString() });
+
+    this.auth.isLoggedIn$
+      .pipe(take(1), takeUntil(this.destroy$))
+      .subscribe((isLoggedIn) => setStats({ isLoggedIn }));
 
     isExtensionInstalled$
       .pipe(takeUntil(this.destroy$))

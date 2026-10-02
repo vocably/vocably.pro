@@ -5,12 +5,34 @@
   <section class="section">
     <h2 class="section-title">{{ 'settings.account' | transloco }}</h2>
     <div class="card">
-      @if (email$ | async; as email) {
+      @if (isLoggedIn$ | async) {
+        @if (email$ | async; as email) {
+          <div class="row">
+            <div class="row-text">
+              <div class="row-label">{{ 'settings.email' | transloco }}</div>
+            </div>
+            <div class="row-value">{{ email }}</div>
+          </div>
+        }
+      } @else {
         <div class="row">
           <div class="row-text">
-            <div class="row-label">{{ 'settings.email' | transloco }}</div>
+            <div class="row-label">
+              {{ 'settings.create_account_title' | transloco }}
+            </div>
+            <div class="row-description">
+              {{ 'settings.create_account_desc' | transloco }}
+            </div>
+            <div class="row-description">
+              {{ 'settings.have_account' | transloco }}
+              <a [routerLink]="['/sign-in']">{{
+                'settings.sign_in' | transloco
+              }}</a>
+            </div>
           </div>
-          <div class="row-value">{{ email }}</div>
+          <a class="button small-button" [routerLink]="['/sign-up']">{{
+            'settings.create_account' | transloco
+          }}</a>
         </div>
       }
       <div class="row">
@@ -37,58 +59,62 @@
     </div>
   </section>
 
-  <section class="section">
-    <h2 class="section-title">{{ 'settings.study_settings' | transloco }}</h2>
-    <div class="card">
-      <div class="row row-stacked">
-        <div class="row-label">{{ 'settings.max_cards' | transloco }}</div>
-        <div class="slider">
-          <mat-slider min="5" max="40" step="1" color="accent">
-            <input
-              matSliderThumb
-              [(ngModel)]="studySettings.cardsPerSession"
+  @if (isLoggedIn$ | async) {
+    <section class="section">
+      <h2 class="section-title">{{ 'settings.study_settings' | transloco }}</h2>
+      <div class="card">
+        <div class="row row-stacked">
+          <div class="row-label">{{ 'settings.max_cards' | transloco }}</div>
+          <div class="slider">
+            <mat-slider min="5" max="40" step="1" color="accent">
+              <input
+                matSliderThumb
+                [(ngModel)]="studySettings.cardsPerSession"
+                (ngModelChange)="onStudySettingsChange()"
+              />
+            </mat-slider>
+            <span class="slider-value">{{
+              studySettings.cardsPerSession
+            }}</span>
+          </div>
+        </div>
+        <div class="row row-stacked">
+          <div class="row-inline">
+            <div class="row-label">
+              {{ 'settings.random_select' | transloco }}
+            </div>
+            <mat-slide-toggle
+              [(ngModel)]="studySettings.random"
               (ngModelChange)="onStudySettingsChange()"
-            />
-          </mat-slider>
-          <span class="slider-value">{{ studySettings.cardsPerSession }}</span>
-        </div>
-      </div>
-      <div class="row row-stacked">
-        <div class="row-inline">
-          <div class="row-label">
-            {{ 'settings.random_select' | transloco }}
+              color="accent"
+            ></mat-slide-toggle>
           </div>
-          <mat-slide-toggle
-            [(ngModel)]="studySettings.random"
-            (ngModelChange)="onStudySettingsChange()"
-            color="accent"
-          ></mat-slide-toggle>
-        </div>
-        <div class="notice" [class.notice-active]="studySettings.random">
-          <mat-icon class="notice-icon">error_outline</mat-icon>
-          <div>
-            <span [innerHTML]="'settings.random_warning' | transloco"></span>
-            <a href="https://vocably.pro/srs.html" target="_blank">
-              {{ 'settings.read_how' | transloco }}
-              <mat-icon class="inline-icon">open_in_new</mat-icon></a
-            >
+          <div class="notice" [class.notice-active]="studySettings.random">
+            <mat-icon class="notice-icon">error_outline</mat-icon>
+            <div>
+              <span [innerHTML]="'settings.random_warning' | transloco"></span>
+              <a href="https://vocably.pro/srs.html" target="_blank">
+                {{ 'settings.read_how' | transloco }}
+                <mat-icon class="inline-icon">open_in_new</mat-icon></a
+              >
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <h2 class="section-title">
-      {{ 'settings.study_steps.title' | transloco }}
-    </h2>
-    <p class="section-description">
-      {{ 'settings.study_steps.drag_to_reorder' | transloco }}
-    </p>
-    <div class="card">
-      <app-study-steps></app-study-steps>
-    </div>
-  </section>
+    <section class="section">
+      <h2 class="section-title">
+        {{ 'settings.study_steps.title' | transloco }}
+      </h2>
+      <p class="section-description">
+        {{ 'settings.study_steps.drag_to_reorder' | transloco }}
+      </p>
+      <div class="card">
+        <app-study-steps></app-study-steps>
+      </div>
+    </section>
+  }
 
   <section class="section">
     <h2 class="section-title">{{ 'settings.mobile_app' | transloco }}</h2>
@@ -119,57 +145,59 @@
     </div>
   </section>
 
-  <section class="section">
-    <h2 class="section-title">{{ 'settings.help' | transloco }}</h2>
-    <div class="card">
-      <div class="row">
-        <div class="row-text">
-          <div class="row-label">
-            {{ 'settings.getting_started' | transloco }}
+  @if (isLoggedIn$ | async) {
+    <section class="section">
+      <h2 class="section-title">{{ 'settings.help' | transloco }}</h2>
+      <div class="card">
+        <div class="row">
+          <div class="row-text">
+            <div class="row-label">
+              {{ 'settings.getting_started' | transloco }}
+            </div>
+            <div class="row-description">
+              {{ 'settings.getting_started_desc' | transloco }}
+            </div>
           </div>
-          <div class="row-description">
-            {{ 'settings.getting_started_desc' | transloco }}
-          </div>
+          <a class="button outline small-button" [routerLink]="['/welcome']">{{
+            'settings.open_guide' | transloco
+          }}</a>
         </div>
-        <a class="button outline small-button" [routerLink]="['/welcome']">{{
-          'settings.open_guide' | transloco
-        }}</a>
-      </div>
-      <div class="row">
-        <div class="row-text">
-          <div class="row-label">{{ 'settings.need_help' | transloco }}</div>
-          <div class="row-description">
-            {{ 'settings.respond_everyone' | transloco }}
+        <div class="row">
+          <div class="row-text">
+            <div class="row-label">{{ 'settings.need_help' | transloco }}</div>
+            <div class="row-description">
+              {{ 'settings.respond_everyone' | transloco }}
+            </div>
           </div>
+          <a class="button outline small-button" [routerLink]="['/feedback']">{{
+            'settings.contact' | transloco
+          }}</a>
         </div>
-        <a class="button outline small-button" [routerLink]="['/feedback']">{{
-          'settings.contact' | transloco
-        }}</a>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section">
-    <h2 class="section-title danger">
-      {{ 'settings.danger_zone' | transloco }}
-    </h2>
-    <div class="card card-danger">
-      <div class="row">
-        <div class="row-text">
-          <div class="row-label">
-            {{ 'settings.delete_account' | transloco }}
+    <section class="section">
+      <h2 class="section-title danger">
+        {{ 'settings.danger_zone' | transloco }}
+      </h2>
+      <div class="card card-danger">
+        <div class="row">
+          <div class="row-text">
+            <div class="row-label">
+              {{ 'settings.delete_account' | transloco }}
+            </div>
+            <div class="row-description">
+              {{ 'settings.delete_account_desc' | transloco }}
+            </div>
           </div>
-          <div class="row-description">
-            {{ 'settings.delete_account_desc' | transloco }}
-          </div>
+          <button
+            class="button outline small-button danger-button"
+            (click)="deleteAccount()"
+          >
+            {{ 'settings.delete' | transloco }}
+          </button>
         </div>
-        <button
-          class="button outline small-button danger-button"
-          (click)="deleteAccount()"
-        >
-          {{ 'settings.delete' | transloco }}
-        </button>
       </div>
-    </div>
-  </section>
+    </section>
+  }
 </div>

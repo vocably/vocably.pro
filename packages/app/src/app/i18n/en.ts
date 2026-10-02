@@ -310,6 +310,12 @@ export const en = {
   'settings.title': 'Settings',
   'settings.account': 'Account',
   'settings.email': 'Email',
+  'settings.create_account_title': 'Create a free account',
+  'settings.create_account_desc':
+    'Save words as flashcards, study them with spaced repetition and sync them between the browser extension and the mobile app.',
+  'settings.create_account': 'Create an account',
+  'settings.have_account': 'Already have an account?',
+  'settings.sign_in': 'Sign in',
   'settings.help': 'Help & support',
   'settings.getting_started': 'Getting started',
   'settings.getting_started_desc': 'A quick walkthrough to set up Vocably.',
@@ -463,6 +469,7 @@ export const en = {
   'header.feedback': 'Feedback',
   'header.pdf_reader': 'PDF Reader',
   'header.sign_out': 'Sign Out',
+  'header.sign_in': 'Sign in',
 
   // Alert
   'alert.error': 'Error',

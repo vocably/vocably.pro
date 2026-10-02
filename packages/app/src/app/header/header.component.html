@@ -16,9 +16,8 @@
       </div>
       <div
         class="flex-1 display-inline-flex justify-content-end align-items-center"
-        *ngIf="isLoggedIn"
       >
-        <ng-content></ng-content>
+        <ng-content *ngIf="isLoggedIn"></ng-content>
         <button
           class="unstyled ml-1 text-emphasize"
           [matMenuTriggerFor]="menu"
@@ -32,16 +31,21 @@
           >
         </button>
         <mat-menu #menu="matMenu">
-          <a
-            mat-menu-item
-            [routerLink]="['/welcome']"
-            *ngIf="extensionCanBeInstalled"
-            ><mat-icon>extension</mat-icon>{{ 'header.setup' | transloco }}</a
+          <a mat-menu-item [routerLink]="['/sign-in']" *ngIf="!isLoggedIn"
+            ><mat-icon>login</mat-icon>{{ 'header.sign_in' | transloco }}</a
           >
-          <a mat-menu-item [routerLink]="['/membership']"
-            ><mat-icon>workspace_premium</mat-icon
-            >{{ 'header.premium' | transloco }}</a
-          >
+          <ng-container *ngIf="isLoggedIn">
+            <a
+              mat-menu-item
+              [routerLink]="['/welcome']"
+              *ngIf="extensionCanBeInstalled"
+              ><mat-icon>extension</mat-icon>{{ 'header.setup' | transloco }}</a
+            >
+            <a mat-menu-item [routerLink]="['/membership']"
+              ><mat-icon>workspace_premium</mat-icon
+              >{{ 'header.premium' | transloco }}</a
+            >
+          </ng-container>
           <a mat-menu-item [routerLink]="['/settings']"
             ><mat-icon>settings</mat-icon>{{ 'header.settings' | transloco }}</a
           >
@@ -53,16 +57,18 @@
             ><mat-icon>picture_as_pdf</mat-icon
             >{{ 'header.pdf_reader' | transloco }}</a
           >
-          <a mat-menu-item [routerLink]="['/import']"
-            ><mat-icon>csv</mat-icon>{{ 'header.import' | transloco }}</a
-          >
-          <a mat-menu-item [routerLink]="['/feedback']"
-            ><mat-icon>chat</mat-icon>{{ 'header.feedback' | transloco }}</a
-          >
-          <mat-divider></mat-divider>
-          <button mat-menu-item (click)="signOut()">
-            <mat-icon>logout</mat-icon>{{ 'header.sign_out' | transloco }}
-          </button>
+          <ng-container *ngIf="isLoggedIn">
+            <a mat-menu-item [routerLink]="['/import']"
+              ><mat-icon>csv</mat-icon>{{ 'header.import' | transloco }}</a
+            >
+            <a mat-menu-item [routerLink]="['/feedback']"
+              ><mat-icon>chat</mat-icon>{{ 'header.feedback' | transloco }}</a
+            >
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="signOut()">
+              <mat-icon>logout</mat-icon>{{ 'header.sign_out' | transloco }}
+            </button>
+          </ng-container>
         </mat-menu>
       </div>
     </ng-container>

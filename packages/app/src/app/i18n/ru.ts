@@ -315,6 +315,12 @@ export const ru = {
   'settings.title': 'Настройки',
   'settings.account': 'Аккаунт',
   'settings.email': 'Эл. почта',
+  'settings.create_account_title': 'Создайте бесплатный аккаунт',
+  'settings.create_account_desc':
+    'Сохраняйте слова в карточки, учите их с интервальными повторениями и синхронизируйте между расширением для браузера и мобильным приложением.',
+  'settings.create_account': 'Создать аккаунт',
+  'settings.have_account': 'Уже есть аккаунт?',
+  'settings.sign_in': 'Войти',
   'settings.help': 'Помощь и поддержка',
   'settings.getting_started': 'С чего начать',
   'settings.getting_started_desc': 'Краткое руководство по настройке Vocably.',
@@ -470,6 +476,7 @@ export const ru = {
   'header.feedback': 'Обратная связь',
   'header.pdf_reader': 'PDF-читалка',
   'header.sign_out': 'Выйти',
+  'header.sign_in': 'Войти',
 
   // Alert
   'alert.error': 'Ошибка',

@@ -74,6 +74,9 @@ export class AuthService {
 
   private refreshUserData$ = new Subject();
 
+  /** The last value pushed to `isLoggedIn$`. */
+  private isLoggedIn: boolean | null = null;
+
   /**
    * Kept in memory only, so that confirming the email right after signing up
    * (or after signing in to an unconfirmed account) does not ask for the
@@ -88,6 +91,7 @@ export class AuthService {
   ) {
     this.refreshUser();
     this.listenForSignOut();
+    this.listenToStorageChanges();
 
     const refreshUserData$ = this.fetchUserData$.pipe(
       tap((userData) => {
@@ -118,6 +122,7 @@ export class AuthService {
 
       // Otherwise the guest guard would still see a signed-in user and bounce
       // the navigation below back to the decks.
+      this.isLoggedIn = false;
       this.isLoggedIn$.next(false);
 
       if (this.router.url.startsWith('/sign-out')) {
@@ -128,9 +133,40 @@ export class AuthService {
     });
   }
 
+  /**
+   * Signing in usually happens in another tab (the extension opens one, or the
+   * user follows a link), and Amplify never tells this tab about it. The tokens
+   * end up in `localStorage` either way, so its `storage` event is the signal.
+   */
+  private listenToStorageChanges() {
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+
+    window.addEventListener('storage', (event) => {
+      // `key` is null when the other tab clears the whole storage.
+      if (
+        event.key !== null &&
+        !event.key.startsWith('CognitoIdentityServiceProvider.')
+      ) {
+        return;
+      }
+
+      // A sign-in writes several keys in a row; check once they are all there.
+      clearTimeout(timeout);
+      timeout = setTimeout(async () => {
+        const user = await getCurrentUser().catch(() => false as const);
+
+        // Token refreshes in the other tab change nothing here.
+        if ((user !== false) !== this.isLoggedIn) {
+          await this.refreshUser();
+        }
+      }, 300);
+    });
+  }
+
   private async refreshUser(): Promise<void> {
     const user = await getCurrentUser().catch(() => false as const);
 
+    this.isLoggedIn = user !== false;
     this.isLoggedIn$.next(user !== false);
 
     if (user !== false) {

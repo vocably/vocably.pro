@@ -14,6 +14,7 @@ import posthog from 'posthog-js';
 import {
   catchError,
   filter,
+  firstValueFrom,
   from,
   Observable,
   of,
@@ -30,6 +31,7 @@ import { HowToVideoComponent } from '../../how-to-video/how-to-video.component';
 import { TranslocoModule, TranslocoService } from '@jsverse/transloco';
 import { ContainerService } from '../../container-service';
 import { setStats } from '../../../stats';
+import { AuthService } from '../../../auth/auth.service';
 
 const getOnboardedTargetLanguages = (): string[] => {
   return JSON.parse(localStorage.getItem('onboardedLanguages') ?? '[]');
@@ -92,7 +94,8 @@ export class SecondPageComponent implements OnInit, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private transloco: TranslocoService,
-    private containerSize: ContainerService
+    private containerSize: ContainerService,
+    private auth: AuthService
   ) {}
 
   get studySentenceHtml(): string {
@@ -140,10 +143,11 @@ export class SecondPageComponent implements OnInit, OnDestroy {
             },
           });
         }),
-        tap((params) => {
+        tap(async (params) => {
           if (
             params['targetLanguage'] &&
-            !isTargetLanguageOnboarded(params['targetLanguage'])
+            !isTargetLanguageOnboarded(params['targetLanguage']) &&
+            (await firstValueFrom(this.auth.isLoggedIn$))
           ) {
             onboardTargetLanguage(params['targetLanguage']).then();
           }

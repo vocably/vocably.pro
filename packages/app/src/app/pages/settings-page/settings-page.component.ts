@@ -27,6 +27,7 @@ import {
 } from '../../../study-settings';
 import { AppQrCodeComponent } from '../../components/app-qr-code/app-qr-code.component';
 import { StudyStepsComponent } from './study-steps/study-steps.component';
+import { storeLocale } from '../../i18n/resolve-locale';
 
 @Component({
   selector: 'app-settings-page',
@@ -50,6 +51,7 @@ import { StudyStepsComponent } from './study-steps/study-steps.component';
 export class SettingsPageComponent implements OnInit {
   studySettings: StudySettings = { cardsPerSession: 10, random: false };
   interfaceLanguage: Locale = 'en';
+  isLoggedIn$ = this.auth.isLoggedIn$;
   email$ = this.auth.userData$.pipe(map((userData) => userData.email));
 
   readonly languages: { value: Locale; label: string }[] = [
@@ -76,7 +78,11 @@ export class SettingsPageComponent implements OnInit {
 
   async onInterfaceLanguageChange(locale: Locale): Promise<void> {
     this.transloco.setActiveLang(locale);
-    await saveUserMetadata({ interfaceLanguage: locale });
+    storeLocale(locale);
+
+    if (await firstValueFrom(this.isLoggedIn$)) {
+      await saveUserMetadata({ interfaceLanguage: locale });
+    }
   }
 
   onStudySettingsChange() {

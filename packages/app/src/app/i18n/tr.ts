@@ -316,6 +316,12 @@ export const tr = {
   'settings.title': 'Ayarlar',
   'settings.account': 'Hesap',
   'settings.email': 'E-posta',
+  'settings.create_account_title': 'Ücretsiz bir hesap oluşturun',
+  'settings.create_account_desc':
+    'Kelimeleri kart olarak kaydedin, aralıklı tekrar ile çalışın ve tarayıcı uzantısı ile mobil uygulama arasında senkronize edin.',
+  'settings.create_account': 'Hesap oluştur',
+  'settings.have_account': 'Zaten bir hesabınız var mı?',
+  'settings.sign_in': 'Giriş yap',
   'settings.help': 'Yardım ve destek',
   'settings.getting_started': 'Başlarken',
   'settings.getting_started_desc': 'Vocably’yi kurmak için kısa bir rehber.',
@@ -472,6 +478,7 @@ export const tr = {
   'header.feedback': 'Geri Bildirim',
   'header.pdf_reader': 'PDF Okuyucu',
   'header.sign_out': 'Çıkış Yap',
+  'header.sign_in': 'Giriş yap',
 
   // Alert
   'alert.error': 'Hata',

@@ -314,6 +314,12 @@ export const uk = {
   'settings.title': 'Налаштування',
   'settings.account': 'Обліковий запис',
   'settings.email': 'Ел. пошта',
+  'settings.create_account_title': 'Створіть безкоштовний обліковий запис',
+  'settings.create_account_desc':
+    'Зберігайте слова як картки, вивчайте їх з інтервальними повтореннями та синхронізуйте між розширенням для браузера й мобільним застосунком.',
+  'settings.create_account': 'Створити обліковий запис',
+  'settings.have_account': 'Вже маєте обліковий запис?',
+  'settings.sign_in': 'Увійти',
   'settings.help': 'Допомога та підтримка',
   'settings.getting_started': 'З чого почати',
   'settings.getting_started_desc': 'Короткий посібник із налаштування Vocably.',
@@ -469,6 +475,7 @@ export const uk = {
   'header.feedback': "Зворотний зв'язок",
   'header.pdf_reader': 'PDF-читалка',
   'header.sign_out': 'Вийти',
+  'header.sign_in': 'Увійти',
 
   // Alert
   'alert.error': 'Помилка',

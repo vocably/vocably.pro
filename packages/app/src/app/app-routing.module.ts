@@ -70,8 +70,6 @@ const routes: Routes = [
     path: 'welcome',
     loadChildren: () =>
       import('./welcome/welcome.module').then((m) => m.WelcomeModule),
-    canActivate: [CognitoAuthGuard],
-    data: { unauthenticatedRedirect: 'sign-up' },
   },
   {
     path: 'subscribe',
@@ -150,7 +148,6 @@ const routes: Routes = [
     path: 'settings',
     title: 'page.settings',
     component: SettingsPageComponent,
-    canActivate: [CognitoAuthGuard],
   },
   {
     path: 'feedback',

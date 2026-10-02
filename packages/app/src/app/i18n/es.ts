@@ -318,6 +318,12 @@ export const es = {
   'settings.title': 'Configuración',
   'settings.account': 'Cuenta',
   'settings.email': 'Correo electrónico',
+  'settings.create_account_title': 'Crea una cuenta gratuita',
+  'settings.create_account_desc':
+    'Guarda palabras como tarjetas, estúdialas con repetición espaciada y sincronízalas entre la extensión del navegador y la aplicación móvil.',
+  'settings.create_account': 'Crear una cuenta',
+  'settings.have_account': '¿Ya tienes una cuenta?',
+  'settings.sign_in': 'Iniciar sesión',
   'settings.help': 'Ayuda y soporte',
   'settings.getting_started': 'Primeros pasos',
   'settings.getting_started_desc': 'Una guía rápida para configurar Vocably.',
@@ -471,6 +477,7 @@ export const es = {
   'header.feedback': 'Comentarios',
   'header.pdf_reader': 'Lector de PDF',
   'header.sign_out': 'Cerrar sesión',
+  'header.sign_in': 'Iniciar sesión',
 
   // Alert
   'alert.error': 'Error',

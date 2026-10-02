@@ -305,6 +305,12 @@ export const vi = {
   'settings.title': 'Cài đặt',
   'settings.account': 'Tài khoản',
   'settings.email': 'Email',
+  'settings.create_account_title': 'Tạo tài khoản miễn phí',
+  'settings.create_account_desc':
+    'Lưu từ thành thẻ ghi nhớ, học bằng phương pháp lặp lại ngắt quãng và đồng bộ giữa tiện ích trình duyệt và ứng dụng di động.',
+  'settings.create_account': 'Tạo tài khoản',
+  'settings.have_account': 'Đã có tài khoản?',
+  'settings.sign_in': 'Đăng nhập',
   'settings.help': 'Trợ giúp và hỗ trợ',
   'settings.getting_started': 'Bắt đầu',
   'settings.getting_started_desc': 'Hướng dẫn nhanh để thiết lập Vocably.',
@@ -458,6 +464,7 @@ export const vi = {
   'header.feedback': 'Phản hồi',
   'header.pdf_reader': 'Trình đọc PDF',
   'header.sign_out': 'Đăng xuất',
+  'header.sign_in': 'Đăng nhập',
 
   // Alert
   'alert.error': 'Lỗi',

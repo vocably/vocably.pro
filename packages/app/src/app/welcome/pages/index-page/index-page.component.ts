@@ -19,6 +19,8 @@ import { detectTargetLanguage } from './detectTargetLanguage';
 import { publicPredefinedOptions, saveUserMetadata } from '@vocably/api';
 import { TranslocoModule } from '@jsverse/transloco';
 import { ContainerService } from '../../container-service';
+import { firstValueFrom } from 'rxjs';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-index-page',
@@ -46,7 +48,8 @@ export class IndexPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
-    private containerSize: ContainerService
+    private containerSize: ContainerService,
+    private auth: AuthService
   ) {}
 
   async ngOnInit() {
@@ -70,9 +73,12 @@ export class IndexPageComponent implements OnInit {
     this.selected = value;
 
     if (this.targetLanguage) {
-      saveUserMetadata({
-        defaultTranslationLanguage: this.targetLanguage,
-      }).then();
+      const defaultTranslationLanguage = this.targetLanguage;
+      firstValueFrom(this.auth.isLoggedIn$).then((isLoggedIn) => {
+        if (isLoggedIn) {
+          saveUserMetadata({ defaultTranslationLanguage }).then();
+        }
+      });
 
       // Trigger predefined multichoice options generation
       publicPredefinedOptions(value, this.targetLanguage).then();
