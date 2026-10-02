@@ -5,29 +5,18 @@
       <p class="intro-lead">{{ 'welcome.index.lead' | transloco }}</p>
     </header>
 
-    <aside class="aside">
-      <section class="mother-tongue" *ngIf="targetLanguage">
-        <h2 class="mother-tongue-toolbar">
-          <mat-icon aria-hidden="true">home</mat-icon>
-          <span>{{ 'welcome.index.mother_tongue' | transloco }}</span>
-        </h2>
-        <div class="mother-tongue-body">
-          <app-language-input
-            [value]="targetLanguage"
-            (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
-          ></app-language-input>
-        </div>
-      </section>
-
-      <button
-        class="unstyled link multilang"
-        type="button"
-        (click)="showHowToMultilang()"
-      >
-        <mat-icon aria-hidden="true">language</mat-icon>
-        <span>{{ 'welcome.index.multilang' | transloco }}</span>
-      </button>
-    </aside>
+    <section class="mother-tongue" *ngIf="targetLanguage">
+      <h2 class="mother-tongue-toolbar">
+        <mat-icon aria-hidden="true">home</mat-icon>
+        <span>{{ 'welcome.index.mother_tongue' | transloco }}</span>
+      </h2>
+      <div class="mother-tongue-body">
+        <app-language-input
+          [value]="targetLanguage"
+          (onChange)="targetLanguage = $event; saveProxyLanguage($event)"
+        ></app-language-input>
+      </div>
+    </section>
 
     <section class="languages">
       <h2 class="languages-toolbar">
@@ -70,22 +59,33 @@
           </div>
         </div>
 
-        <button
-          class="unstyled link expand"
-          type="button"
-          [attr.aria-expanded]="expanded"
-          (click)="expanded = !expanded"
-        >
-          {{
-            (expanded ? 'welcome.index.show_less' : 'welcome.index.show_more')
-              | transloco
-          }}<mat-icon
-            aria-hidden="true"
-            class="expand-icon"
-            [class]="{ down: expanded }"
-            >expand_more</mat-icon
+        <div class="actions">
+          <button
+            class="unstyled link expand"
+            type="button"
+            [attr.aria-expanded]="expanded"
+            (click)="expanded = !expanded"
           >
-        </button>
+            {{
+              (expanded ? 'welcome.index.show_less' : 'welcome.index.show_more')
+                | transloco
+            }}<mat-icon
+              aria-hidden="true"
+              class="expand-icon"
+              [class]="{ down: expanded }"
+              >expand_more</mat-icon
+            >
+          </button>
+
+          <button
+            class="unstyled link multilang"
+            type="button"
+            (click)="showHowToMultilang()"
+          >
+            <mat-icon aria-hidden="true">language</mat-icon>
+            <span>{{ 'welcome.index.multilang' | transloco }}</span>
+          </button>
+        </div>
       </div>
     </section>
   </div>
