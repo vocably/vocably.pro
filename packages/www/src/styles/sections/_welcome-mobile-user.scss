@@ -1,0 +1,79 @@
+// Builds on the step layout from _ios-safari-extension.scss (ise-* classes).
+
+.wmu-overview {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 56rem;
+  margin: 3rem auto 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  & li {
+    padding: 1.5rem;
+    border: 1px solid $v-light-color-border-muted;
+    border-radius: 1.25rem;
+    background: $v-light-color-body-bg;
+    box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.04);
+  }
+
+  & i {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    background: rgba($v-light-color-primary, 0.1);
+    color: $v-light-color-primary;
+    font-size: 1.3rem;
+  }
+
+  & h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.4rem;
+  }
+
+  & p {
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.wmu-safari-note {
+  max-width: 56rem;
+  margin: 1rem auto 0;
+  text-align: left;
+}
+
+.wmu-section-title {
+  max-width: 56rem;
+  margin: 2.5rem auto 1.5rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.ise-note p + p {
+  margin-top: 0.6rem;
+}
+
+// Annotated screenshots: the phone sits on the left, callouts on the right.
+.wmu-shot {
+  display: block;
+  width: 22rem;
+  max-width: 100%;
+  height: auto;
+}
+
+.wmu-icon {
+  color: $v-light-color-primary;
+}
