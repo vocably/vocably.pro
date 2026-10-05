@@ -4,7 +4,14 @@ import { Card, isGoogleTTSLanguage, TagItem } from '@vocably/model';
 import { isGoodPlural, sanitizeTranscript } from '@vocably/sulna';
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PixelRatio, Platform, StyleProp, View, ViewStyle } from 'react-native';
+import {
+  PixelRatio,
+  Platform,
+  Pressable,
+  StyleProp,
+  View,
+  ViewStyle,
+} from 'react-native';
 import {
   ActivityIndicator,
   Chip,
@@ -18,7 +25,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CardDefinition } from './CardDefinition';
 import { CardExample } from './CardExample';
 import { PlaySound } from './PlaySound';
-import { isolate } from './isolate';
 
 type Props = {
   card: Card;
@@ -32,6 +38,9 @@ type Props = {
   disabledModalLookup?: boolean;
   hideDefinitions?: boolean;
 };
+
+const textTransform = [{ translateY: 6 }];
+const lineHeight = Platform.OS === 'ios' ? 26 : 20;
 
 export const CardListItem: FC<Props> = ({
   card,
@@ -54,18 +63,15 @@ export const CardListItem: FC<Props> = ({
   };
 
   const [copied, setCopied] = useState(false);
-  // Icons are nested Text (not Pressable) so they flow inline with the source
-  // text: RN mispositions inline views after wrapped RTL text on iOS.
-  const [pressedIcon, setPressedIcon] = useState<'copy' | 'ai' | null>(null);
 
   const fontScale = PixelRatio.getFontScale();
 
   const present = card.presentTenses
-    ? t('common.presentTenses', { value: isolate(card.presentTenses) })
+    ? t('common.presentTenses', { value: card.presentTenses })
     : false;
   const past =
     card.tense === 'present' && card.pastTenses
-      ? t('common.pastTenses', { value: isolate(card.pastTenses) })
+      ? t('common.pastTenses', { value: card.pastTenses })
       : false;
 
   const presentAndPast = [present, past].filter(Boolean).join(`\n`);
@@ -79,7 +85,6 @@ export const CardListItem: FC<Props> = ({
           alignItems: 'baseline',
           flexWrap: 'wrap',
           width: '100%',
-          direction: 'ltr',
         }}
       >
         <View style={{ width: '100%' }}>
@@ -97,7 +102,7 @@ export const CardListItem: FC<Props> = ({
                   size={22}
                   style={{
                     transform: [
-                      { translateY: Platform.OS === 'android' ? 5 : 2 },
+                      { translateY: Platform.OS === 'android' ? 6 : 2 },
                     ],
                     justifyContent: 'center',
                   }}
@@ -110,87 +115,115 @@ export const CardListItem: FC<Props> = ({
                 color: theme.colors.secondary,
               }}
             >
-              {isolate(card.source)}
+              {card.source}
             </Text>
             {allowCopy && (
               <>
-                {isolate('\u00A0')}
-                <Icon
-                  name="content-copy"
-                  size={17 * fontScale}
-                  color={theme.colors.onSurface}
-                  suppressHighlighting
-                  onPressIn={() => setPressedIcon('copy')}
-                  onPressOut={() => setPressedIcon(null)}
+                {'\u00A0'}
+                <Pressable
+                  hitSlop={10}
                   onPress={() => {
                     Clipboard.setString(card.source);
                     !copied && setCopied(true);
                   }}
-                  style={{ opacity: pressedIcon === 'copy' ? 0.4 : 1 }}
-                />
+                  style={({ pressed }) => ({
+                    opacity: pressed ? 0.4 : 1,
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 6 : 0 },
+                    ],
+                  })}
+                >
+                  <Icon
+                    name="content-copy"
+                    size={17 * fontScale}
+                    color={theme.colors.onSurface}
+                  />
+                </Pressable>
               </>
             )}
             {aiButton !== 'none' && (
               <>
-                {isolate('\u00A0\u00A0\u00A0')}
-                <Icon
-                  name="creation"
-                  size={17 * fontScale}
-                  color={
-                    aiButton === 'bright'
-                      ? theme.colors.primary
-                      : theme.colors.onSurface
-                  }
-                  suppressHighlighting
-                  onPressIn={() => setPressedIcon('ai')}
-                  onPressOut={() => setPressedIcon(null)}
+                {'\u00A0'}
+                {'\u00A0'}
+                {'\u00A0'}
+                <Pressable
+                  hitSlop={10}
                   onPress={() => {
                     // @ts-ignore
                     navigation.navigate('ChatWithCardModal', {
                       card,
                     });
                   }}
-                  style={{ opacity: pressedIcon === 'ai' ? 0.4 : 1 }}
-                />
-                {isolate('\u00A0\u00A0\u00A0')}
+                  style={({ pressed }) => ({
+                    opacity: pressed ? 0.4 : 1,
+                    transform: [
+                      { translateY: Platform.OS === 'android' ? 6 : 0 },
+                    ],
+                  })}
+                >
+                  <Icon
+                    name="creation"
+                    size={17 * fontScale}
+                    color={
+                      aiButton === 'bright'
+                        ? theme.colors.primary
+                        : theme.colors.onSurface
+                    }
+                  />
+                </Pressable>
+                {'\u00A0'}
+                {'\u00A0'}
+                {'\u00A0'}
               </>
             )}
             {card.ipa && (
               <>
                 {' '}
-                <Text>/{isolate(sanitizeTranscript(card.ipa))}/</Text>
+                <View style={{ transform: textTransform }}>
+                  <Text style={{ lineHeight }}>
+                    /{sanitizeTranscript(card.ipa)}/
+                  </Text>
+                </View>
               </>
             )}
 
             {card.g && (
               <>
                 {' '}
-                <Text>({isolate(card.g)})</Text>
+                <View style={{ transform: textTransform }}>
+                  <Text style={{ lineHeight }}>({card.g})</Text>
+                </View>
               </>
             )}
 
             {card.partOfSpeech && (
               <>
                 {' '}
-                <Text>
-                  {t(`language.${card.partOfSpeech}`, card.partOfSpeech)}
-                </Text>
+                <View style={{ transform: textTransform }}>
+                  <Text style={{ lineHeight }}>
+                    {t(`language.${card.partOfSpeech}`, card.partOfSpeech)}
+                  </Text>
+                </View>
               </>
             )}
 
             {presentAndPast && (
               <>
                 {'\n'}
-                <Text>{isolate(presentAndPast)}</Text>
+                <View style={{ transform: textTransform }}>
+                  <Text style={{ lineHeight }}>{presentAndPast}</Text>
+                </View>
               </>
             )}
 
             {card.number === 'singular' && isGoodPlural(card.pluralForm) && (
               <>
                 {' '}
-                <Text>
-                  {t('common.plural', { value: isolate(card.pluralForm) })}
-                </Text>
+                <View style={{ transform: textTransform }}>
+                  <Text style={{ lineHeight }}>
+                    {t('common.plural', { value: card.pluralForm })}
+                  </Text>
+                </View>
               </>
             )}
           </Text>
