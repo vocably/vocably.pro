@@ -137,7 +137,6 @@ export const CardListItemHeader: FC<Props> = ({
               </Pressable>
               {'\u00A0'}
               {'\u00A0'}
-              {'\u00A0'}
             </>
           )}
           {card.ipa && (
