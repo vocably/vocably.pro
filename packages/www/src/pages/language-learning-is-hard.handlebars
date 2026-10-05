@@ -2,6 +2,217 @@
   title="Language Learning Is Hard and Will Always Be Hard"
   url='/language-learning-is-hard.html'
 }}
+  <style>
+    /* Long-form essay layout for language-learning-is-hard.html. */
+
+    .ise-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2rem;
+      background: rgba(var(--v-color-primary-rgb), 0.08);
+      color: var(--v-color-primary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .llh {
+      max-width: 42rem;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      font-size: 1.25rem;
+      line-height: 1.7;
+
+      & p {
+        margin-bottom: 1.25rem;
+      }
+    }
+
+    .llh-header {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--v-color-border-muted);
+    }
+
+    .llh-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    .llh-intro {
+      font-size: 1.4rem;
+      line-height: 1.6;
+      color: var(--v-color-emphasize);
+    }
+
+    .llh-section {
+      margin-top: 3.5rem;
+    }
+
+    .llh-callout {
+      position: relative;
+      margin: 0 0 2rem;
+      padding: 1.75rem 2rem 1.75rem 5.25rem;
+      border-radius: 1.25rem;
+      background: rgba(var(--v-color-primary-rgb), 0.05);
+
+      & p {
+        margin: 0;
+        font-family: var(--v-headings-font-family);
+        font-size: clamp(1.3rem, 3vw, 1.6rem);
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: -0.5px;
+        color: var(--v-color-emphasize);
+      }
+    }
+
+    .llh-callout-number {
+      position: absolute;
+      top: 1.75rem;
+      left: 1.75rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      background: var(--v-color-primary);
+      color: #fff;
+      font-family: var(--v-headings-font-family);
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .llh-stats,
+    .llh-habits {
+      display: grid;
+      gap: 0.75rem;
+      margin: 0 0 1.75rem;
+      padding: 0;
+      list-style: none;
+
+      & li {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+        border: 1px solid var(--v-color-border-muted);
+        background: var(--v-color-body-bg);
+        color: var(--v-color-emphasize);
+      }
+
+      & i {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.75rem;
+        background: rgba(var(--v-color-primary-rgb), 0.1);
+        color: var(--v-color-primary);
+      }
+    }
+
+    .llh-stats {
+      grid-template-columns: 1fr;
+
+      @media (width >= 576px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      & li {
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+        box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.04);
+        font-size: 1.1rem;
+        font-weight: 400;
+        line-height: 1.4;
+      }
+
+      & i {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1.3rem;
+      }
+    }
+
+    .llh-habits {
+      grid-template-columns: 1fr;
+
+      @media (width >= 576px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      & li {
+        padding: 0.75rem 1rem;
+        border-radius: 1rem;
+        font-size: 1.05rem;
+        line-height: 1.35;
+      }
+
+      & i {
+        width: 2.25rem;
+        height: 2.25rem;
+        font-size: 1.05rem;
+      }
+    }
+
+    .llh-closing {
+      margin-top: 4rem;
+      padding: 2.5rem 2rem;
+      border-radius: 1.5rem;
+      background: rgba(var(--v-color-primary-rgb), 0.05);
+      text-align: center;
+
+      & > p {
+        max-width: 30rem;
+        margin: 0 auto 2rem;
+        font-family: var(--v-headings-font-family);
+        font-size: clamp(1.3rem, 3vw, 1.6rem);
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: -0.5px;
+        color: var(--v-color-emphasize);
+      }
+    }
+
+    .llh-cta {
+      max-width: 22rem;
+      margin: 0 auto;
+    }
+
+    @media (width < 576px) {
+      .llh {
+        font-size: 1.1rem;
+      }
+
+      .llh-intro {
+        font-size: 1.2rem;
+      }
+
+      .llh-callout {
+        padding: 1.25rem 1.25rem 1.25rem 4.25rem;
+      }
+
+      .llh-callout-number {
+        top: 1.25rem;
+        left: 1.25rem;
+        width: 2.25rem;
+        height: 2.25rem;
+      }
+
+      .llh-closing {
+        padding: 2rem 1.25rem;
+      }
+    }
+  </style>
+
   {{#> text-container }}
     <article class="llh">
       <header class="llh-header">

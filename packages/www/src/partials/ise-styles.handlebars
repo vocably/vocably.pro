@@ -1,0 +1,226 @@
+{{!-- Step-guide layout (ise-* classes) shared by ios-safari-extension and welcome-mobile-user. --}}
+  <style>
+    .ise-hero {
+      padding-top: 2rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .ise-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2rem;
+      background: rgba(var(--v-color-primary-rgb), 0.08);
+      color: var(--v-color-primary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .ise-title {
+      font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+      font-weight: 600;
+      max-width: 40rem;
+      margin: 0 auto 1.25rem;
+    }
+
+    .ise-lead {
+      max-width: 36rem;
+      margin: 0 auto;
+      font-size: 1.25rem;
+    }
+
+    .ise-steps {
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 0;
+      list-style: none;
+    }
+
+    .ise-step {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 2.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--v-color-border-muted);
+      border-radius: 1.25rem;
+      background: var(--v-color-body-bg);
+      font-size: 1.1rem;
+      box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.04);
+
+      @media (width >= 768px) {
+        &:has(.ise-step-media) {
+          grid-template-columns: 1fr auto;
+          gap: 3rem;
+        }
+      }
+
+      & h2 {
+        font-size: 1.6rem;
+        font-weight: 600;
+        letter-spacing: -1px;
+        margin-bottom: 1rem;
+      }
+
+      & p {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+    }
+
+    .ise-step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-bottom: 1rem;
+      border-radius: 50%;
+      background: var(--v-color-primary);
+      color: #fff;
+      font-family: var(--v-headings-font-family);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .ise-hint {
+      font-size: 0.95rem;
+      color: var(--v-color-body);
+      padding-left: 0.9rem;
+      border-left: 3px solid var(--v-color-border-muted);
+    }
+
+    .ise-checklist {
+      margin: 0 0 1.25rem;
+      padding: 0;
+      list-style: none;
+
+      & li {
+        display: flex;
+        gap: 0.6rem;
+        margin-bottom: 0.6rem;
+        line-height: 1.5;
+      }
+
+      & i {
+        color: var(--v-color-primary);
+        flex-shrink: 0;
+      }
+    }
+
+    .ise-note {
+      display: flex;
+      gap: 0.9rem;
+      padding: 1rem 1.25rem;
+      border-radius: 0.9rem;
+      background: rgba(var(--v-color-primary-rgb), 0.04);
+      font-size: 0.95rem;
+
+      & i {
+        color: var(--v-color-primary);
+        font-size: 1.2rem;
+        line-height: 1.4;
+      }
+
+      & p {
+        margin: 0;
+      }
+    }
+
+    .ise-step-media {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+
+      & figure {
+        margin: 0;
+        text-align: center;
+      }
+
+      & figcaption {
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    .ise-step-media-pair {
+      gap: 1rem;
+
+      & .ise-phone {
+        width: 11rem;
+      }
+    }
+
+    .ise-phone {
+      display: block;
+      width: 15rem;
+      max-width: 100%;
+      height: auto;
+      border-radius: 1.75rem;
+      border: 1px solid var(--v-color-border-muted);
+      box-shadow: 0 1rem 2.5rem rgba(var(--v-color-primary-rgb), 0.12);
+      background: var(--v-color-border-muted);
+    }
+
+    video.ise-phone {
+      background: #000;
+    }
+
+    .ise-help-section {
+      padding-top: 1.5rem;
+      padding-bottom: 4rem;
+    }
+
+    .ise-help {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      max-width: 56rem;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+      border-radius: 1.25rem;
+      background: rgba(var(--v-color-primary-rgb), 0.04);
+      font-size: 1.1rem;
+
+      & > i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.75rem;
+        background: rgba(var(--v-color-primary-rgb), 0.1);
+        color: var(--v-color-primary);
+        font-size: 1.4rem;
+      }
+
+      & h2 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        letter-spacing: -1px;
+        margin-bottom: 0.4rem;
+      }
+    }
+
+    @media (width < 576px) {
+      .ise-step {
+        padding: 1.75rem 1.5rem;
+        font-size: 1rem;
+      }
+
+      .ise-step-media-pair .ise-phone {
+        width: 100%;
+      }
+
+      .ise-help {
+        padding: 1.5rem;
+        font-size: 1rem;
+      }
+    }
+  </style>

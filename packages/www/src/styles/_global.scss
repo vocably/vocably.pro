@@ -1,3 +1,35 @@
+// Design tokens from @vocably/styles, exposed as CSS variables so page
+// <style> blocks in handlebars templates can use them.
+:root {
+  --v-border-radius: #{$v-border-radius};
+  --v-small-font: #{$v-small-font};
+  --v-headings-font-family: #{$headings-font-family};
+
+  --v-color-elevation-0: #{$v-light-color-elevation-0};
+  --v-color-elevation-1: #{$v-light-color-elevation-1};
+  --v-color-elevation-2: #{$v-light-color-elevation-2};
+  --v-color-elevation-3: #{$v-light-color-elevation-3};
+  --v-color-elevation-4: #{$v-light-color-elevation-4};
+
+  --v-color-body-bg: #{$v-light-color-body-bg};
+  --v-color-body-bg-rgb: #{$v-light-color-body-bg-rgb};
+  --v-color-hover-bg: #{$v-light-color-hover-bg};
+  --v-color-active-bg: #{$v-light-color-active-bg};
+  --v-color-primary: #{$v-light-color-primary};
+  --v-color-primary-rgb: #{$v-light-color-primary-rgb};
+  --v-color-active: #{$v-light-color-active};
+  --v-color-danger: #{$v-light-color-danger};
+  --v-color-danger-active: #{$v-light-color-danger-active};
+  --v-color-body: #{$v-light-color-body};
+  --v-color-body-rgb: #{$v-light-color-body-rgb};
+  --v-color-muted: #{$v-light-color-muted};
+  --v-color-emphasize: #{$v-light-color-emphasize};
+  --v-color-contrast: #{$v-light-color-contrast};
+  --v-color-contrast-2: #{$v-light-color-contrast-2};
+  --v-color-border: #{$v-light-color-border};
+  --v-color-border-muted: #{$v-light-color-border-muted};
+}
+
 html {
   scroll-padding-top: 4.5rem;
 }

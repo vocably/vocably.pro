@@ -2,6 +2,153 @@
   title='About'
   url='/about.html'
 }}
+  <style>
+    .about-hero {
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+    }
+
+    .about-photo {
+      display: block;
+      width: 9rem;
+      height: 9rem;
+      margin: 0 auto 1.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--v-color-body-bg);
+      box-shadow:
+        0 0 0 1px var(--v-color-border-muted),
+        0 1rem 2.5rem rgba(var(--v-color-primary-rgb), 0.15);
+    }
+
+    .about-eyebrow {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      color: var(--v-color-primary);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .about-title {
+      font-size: clamp(2.25rem, 5.5vw, 3.5rem);
+      font-weight: 600;
+      color: var(--v-color-emphasize);
+      max-width: 40rem;
+      margin: 0 auto 1.25rem;
+    }
+
+    .about-lead {
+      max-width: 36rem;
+      margin: 0 auto;
+      font-size: 1.25rem;
+    }
+
+    .about-letter {
+      position: relative;
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 2.5rem 3rem;
+      border: 1px solid var(--v-color-border-muted);
+      border-radius: 1rem;
+      background: var(--v-color-body-bg);
+      font-size: 1.1rem;
+      box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.04);
+
+      & p {
+        margin-bottom: 1.25rem;
+      }
+    }
+
+    .about-letter-intro {
+      font-family: var(--v-headings-font-family);
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--v-color-emphasize);
+    }
+
+    .about-signature {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--v-color-border-muted);
+      line-height: 1.5;
+    }
+
+    .about-signature-name {
+      font-family: var(--v-headings-font-family);
+      font-weight: 600;
+      color: var(--v-color-emphasize);
+    }
+
+    .about-signature-role {
+      font-size: 0.95rem;
+    }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      max-width: 52rem;
+      margin: 4rem auto 0;
+
+      @media (width >= 768px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .about-fact {
+      padding: 1.75rem;
+      border-radius: 1rem;
+      background: rgba(var(--v-color-primary-rgb), 0.04);
+      font-size: 1rem;
+
+      & i {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        margin-bottom: 1rem;
+        border-radius: 0.75rem;
+        background: rgba(var(--v-color-primary-rgb), 0.1);
+        color: var(--v-color-primary);
+        font-size: 1.25rem;
+      }
+
+      & h2 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--v-color-emphasize);
+        margin-bottom: 0.5rem;
+        letter-spacing: -1px;
+      }
+
+      & p {
+        margin: 0;
+        line-height: 1.6;
+      }
+    }
+
+    .about-facts-section {
+      padding-bottom: 4rem;
+    }
+
+    @media (width < 576px) {
+      .about-letter {
+        padding: 1.75rem 1.5rem;
+        font-size: 1rem;
+      }
+
+      .about-letter-intro {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+
   <section class="about-hero container-md text-center">
     <img
       src="assets/about.webp"
