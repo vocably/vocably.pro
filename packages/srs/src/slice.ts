@@ -44,16 +44,13 @@ export const slice = (
   if (planSection && plan[planSection]) {
     const candidates = shuffle(plan[planSection].filter(hasStudied(now)));
     if (candidates.length > 0) {
-      if (planSection === 'tomorrow') {
-        return candidates;
-      }
       return candidates.slice(0, maxCards);
     }
 
     return shuffle(plan[planSection]).slice(0, maxCards);
   }
 
-  const result = shuffle(plan.today);
+  const result = shuffle(plan.today).slice(0, maxCards);
 
   if (result.length >= maxCards) {
     return result;
