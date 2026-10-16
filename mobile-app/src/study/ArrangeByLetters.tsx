@@ -328,10 +328,19 @@ export const ArrangeByLetters: FC<Props> = ({
           style={{
             alignSelf: 'center',
             minHeight: 40,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
             alignItems: 'center',
             justifyContent: 'center',
+            gap: 8,
           }}
         >
+          <Button
+            disabled={isCorrect || answer.every((index) => index === false)}
+            onPress={() => setAnswer(answer.map(() => false))}
+          >
+            {t('study.arrangeByLetters.clearAll')}
+          </Button>
           {!isAnswerVisible && (
             <Button
               onPress={() => {

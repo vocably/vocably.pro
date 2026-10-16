@@ -365,6 +365,7 @@ const translations: BaseTranslations = {
       gotIt: 'Đã nhớ!',
     },
     arrangeByLetters: {
+      clearAll: 'Xóa tất cả',
       showMeTheAnswer: 'Hiển thị câu trả lời',
     },
     cardBack: {

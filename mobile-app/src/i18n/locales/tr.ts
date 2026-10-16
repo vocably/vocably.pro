@@ -372,6 +372,7 @@ const translations: BaseTranslations = {
       gotIt: 'Biliyorum!',
     },
     arrangeByLetters: {
+      clearAll: 'Tümünü temizle',
       showMeTheAnswer: 'Cevabı göster',
     },
     cardBack: {
