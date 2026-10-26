@@ -70,6 +70,15 @@ describe('authCustomMessage', () => {
     expect(response.emailSubject).toEqual('Confirme seu endereço de e-mail');
   });
 
+  it('uses Traditional Chinese for a zh-TW locale', async () => {
+    const event = buildEvent({ triggerSource: 'CustomMessage_SignUp' });
+    event.request.clientMetadata = { locale: 'zh-TW' };
+
+    const { response } = await invoke(event);
+
+    expect(response.emailSubject).toEqual('確認你的電子郵件地址');
+  });
+
   it('ignores an unknown locale', async () => {
     const event = buildEvent({ triggerSource: 'CustomMessage_SignUp' });
     event.request.clientMetadata = { locale: 'kl' };

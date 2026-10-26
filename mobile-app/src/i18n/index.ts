@@ -15,6 +15,7 @@ import ru from './locales/ru';
 import tr from './locales/tr';
 import uk from './locales/uk';
 import vi from './locales/vi';
+import zhTW from './locales/zh-TW';
 
 void i18n.use(initReactI18next).init({
   resources: {
@@ -25,6 +26,7 @@ void i18n.use(initReactI18next).init({
     tr: { translation: tr },
     uk: { translation: uk },
     vi: { translation: vi },
+    'zh-TW': { translation: zhTW },
   },
   lng: detectInitialLocale(),
   fallbackLng: DEFAULT_LOCALE,

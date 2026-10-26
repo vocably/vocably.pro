@@ -1,9 +1,8 @@
 import { getUserMetadata } from '@vocably/api';
 import { detectLocale } from '@vocably/browser-i18n';
-import { isSuccess, Locale } from '@vocably/model';
+import { isSuccess, Locale, locales } from '@vocably/model';
 
 const STORED_LOCALE_KEY = 'interfaceLanguage';
-const locales: Locale[] = ['en', 'es', 'pt', 'ru', 'uk', 'tr', 'vi'];
 
 /**
  * Anonymous users have no user metadata, so their choice lives in the browser.

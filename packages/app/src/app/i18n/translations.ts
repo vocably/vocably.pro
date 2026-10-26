@@ -5,5 +5,15 @@ import { ru } from './ru';
 import { uk } from './uk';
 import { vi } from './vi';
 import { tr } from './tr';
+import { zhTW } from './zh-TW';
 
-export const translations = { en, es, pt, ru, uk, vi, tr };
+export const translations = {
+  en,
+  es,
+  pt,
+  ru,
+  uk,
+  vi,
+  tr,
+  'zh-TW': zhTW,
+};

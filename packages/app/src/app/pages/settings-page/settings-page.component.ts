@@ -62,6 +62,7 @@ export class SettingsPageComponent implements OnInit {
     { value: 'uk', label: 'Українська' },
     { value: 'tr', label: 'Türkçe' },
     { value: 'vi', label: 'Tiếng Việt' },
+    { value: 'zh-TW', label: '中文' },
   ];
 
   constructor(

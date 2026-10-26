@@ -19,7 +19,37 @@ export type OnboardingFlow = {
   language: string | null;
 };
 
-export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr' | 'es' | 'pt';
+export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr' | 'es' | 'pt' | 'zh-TW';
+
+export const locales: Locale[] = [
+  'en',
+  'ru',
+  'uk',
+  'vi',
+  'tr',
+  'es',
+  'pt',
+  'zh-TW',
+];
+
+/**
+ * Maps a BCP 47 tag ("ru-RU", "PT", "zh-Hant-HK") to a supported interface
+ * locale. Only Traditional Chinese is supported, so Simplified tags
+ * ("zh", "zh-CN", "zh-Hans") resolve to nothing.
+ */
+export const parseLocale = (
+  tag: string | null | undefined
+): Locale | undefined => {
+  const parts = (tag ?? '').toLowerCase().split(/[-_]/);
+
+  if (parts[0] === 'zh') {
+    return parts.some((part) => ['hant', 'tw', 'hk', 'mo'].includes(part))
+      ? 'zh-TW'
+      : undefined;
+  }
+
+  return locales.find((locale) => locale === parts[0]);
+};
 
 export type UserMetadata = {
   onboardingFlow: OnboardingFlow;
