@@ -10,9 +10,9 @@
 // Connect or in the Play Console payouts. The currency defaults to EUR.
 //
 // The invoice number is YEAR-SERIES-MONTH, where the series is 1 for Apple
-// and 2 for Google (e.g. 2026-1-09, 2026-2-09), and the PDF is written to
-// ~/Downloads/<number>.pdf. The invoice date defaults to the first
-// day of the following month.
+// and 2 for Google (e.g. 2026-1-09, 2026-2-09). The PDF is written to
+// ~/Downloads/YEAR-<store>-MONTH.pdf (e.g. 2026-google-09.pdf). The invoice
+// date defaults to the first day of the following month.
 //
 // Reads INVOICE_SELLER_NAME, INVOICE_SELLER_ADDRESS and optionally
 // INVOICE_SELLER_TAX_ID (the VAT number), INVOICE_SELLER_BANK,
@@ -220,7 +220,7 @@ const html = `<!doctype html>
 `;
 
 const outputDir = join(homedir(), 'Downloads');
-const pdfPath = join(outputDir, `${invoiceNumber}.pdf`);
+const pdfPath = join(outputDir, `${year}-${storeName}-${month}.pdf`);
 const workDir = mkdtempSync(join(tmpdir(), 'store-invoice-'));
 const htmlPath = join(workDir, `${invoiceNumber}.html`);
 
