@@ -5,8 +5,8 @@ import type { Language } from '../languages';
 
 // Colors of the extension's light theme (packages/styles/_variables.scss).
 const primary = '#0050ff';
-const body = '#404040';
-const muted = '#8a8a8a';
+const body = '#1f1f1f';
+const muted = '#5c5c5c';
 const emphasize = '#000000';
 
 type Props = {

@@ -47,7 +47,7 @@ export const Placeholder = ({
         paddingTop: fixedTitle ? format.height * titleTop : minSide * 0.06,
         paddingInline: paddingInline ?? minSide * 0.06,
         gap: minSide * 0.08,
-        color: 'rgb(64, 64, 64)',
+        color: 'rgb(26, 26, 26)',
         fontFamily: "'Roboto', sans-serif",
         fontWeight: '400',
       }}

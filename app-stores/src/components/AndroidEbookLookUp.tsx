@@ -23,7 +23,7 @@ type Props = {
 
 // The mobile app's light theme (mobile-app/src/ThemeProvider.tsx).
 const primary = 'rgb(0, 80, 255)';
-const onSurface = 'rgb(106, 106, 106)';
+const onSurface = 'rgb(60, 60, 60)';
 const outline = 'rgb(0, 80, 255)';
 const inputBg = 'rgba(106, 106, 106, 0.05)';
 const inputIconColor = 'rgba(106, 106, 106, 0.6)';
