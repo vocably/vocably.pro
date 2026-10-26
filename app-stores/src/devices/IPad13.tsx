@@ -1,12 +1,15 @@
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
+import { Languages } from '../components/Languages';
 import { AnalysisItem } from '../components/AnalysisItem';
 import { Search } from '../components/Search';
 import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
+import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
 import { CardList } from '../components/CardList';
 import { DesktopBrowsers } from '../components/DesktopBrowsers';
+import { Logo } from '../components/Logo';
 import { SafariExtension } from '../components/SafariExtension';
 import { SafariCorner } from '../components/SafariIcon';
 import { IPadAir13 } from '../components/IPadAir13';
@@ -17,6 +20,19 @@ export const IPad13 = () => (
   <Device format={format}>
     {(language) => (
       <>
+        <Screenshot>
+          <Placeholder format={format}>
+            <Logo className="logo" />
+            <div className="title">{localization[language].title}</div>
+            <Languages
+              {...flags[language]}
+              size={Math.min(format.width, format.height) * 0.14}
+            />
+            <div className="subtitle">
+              {localization[language].languageCount}
+            </div>
+          </Placeholder>
+        </Screenshot>
         <Screenshot>
           <Placeholder format={format} fixedTitle titleTop={0.1}>
             <div
