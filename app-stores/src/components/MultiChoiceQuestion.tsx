@@ -82,7 +82,9 @@ export const MultiChoiceQuestion = ({
       >
         {item.ipa && <span>/{item.ipa.replace(/[/[\]]/g, '')}/</span>}
         {item.g && <span>({item.g})</span>}
-        {partOfSpeech && <span>{partOfSpeech}</span>}
+        {partOfSpeech && (
+          <span style={{ whiteSpace: 'nowrap' }}>{partOfSpeech}</span>
+        )}
         {item.number === 'singular' &&
           item.pluralForm &&
           item.pluralForm !== 'n/a' && <span>(plural: {item.pluralForm})</span>}

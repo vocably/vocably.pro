@@ -155,7 +155,7 @@ export const AnalysisItem = ({
           style={{
             // Room for the "Learn" button; the icon fits in the padding above.
             paddingRight: learnIcon ? 0 : '3.125em',
-            marginBottom: '0.375em',
+            marginBottom: '0.575em',
           }}
         >
           {/* vocably-icon-play-circle */}
@@ -191,7 +191,11 @@ export const AnalysisItem = ({
             </>
           )}
           {item.g && <Muted>({item.g})</Muted>}
-          {partOfSpeech && <Muted>{partOfSpeech}</Muted>}
+          {partOfSpeech && (
+            <Muted>
+              <span style={{ whiteSpace: 'nowrap' }}>{partOfSpeech}</span>
+            </Muted>
+          )}
           {item.presentTenses && (
             <>
               {past && <br />}

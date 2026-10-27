@@ -49,7 +49,7 @@ const blobs = (count: number): Blob[] => {
       y,
       r,
       color: palette[n % palette.length],
-      alpha: 0.08 + random(n + 100) * 0.05,
+      alpha: 0.05 + random(n + 100) * 0.03,
     });
     n++;
   };
@@ -89,7 +89,7 @@ const ribbons: Ribbon[] = [
     frequency: 0.55,
     phase: 0.4,
     thickness: 0.3,
-    opacity: 0.12,
+    opacity: 0.07,
     colors: [0, 4, 1, 3],
   },
   {
@@ -98,7 +98,7 @@ const ribbons: Ribbon[] = [
     frequency: 0.45,
     phase: 2.2,
     thickness: 0.38,
-    opacity: 0.11,
+    opacity: 0.065,
     colors: [2, 7, 5, 6],
   },
   {
@@ -107,7 +107,7 @@ const ribbons: Ribbon[] = [
     frequency: 0.7,
     phase: 4.1,
     thickness: 0.14,
-    opacity: 0.1,
+    opacity: 0.06,
     colors: [1, 3, 0, 2],
   },
 ];
@@ -289,7 +289,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
               stroke={`url(#${id}-ribbon-${r})`}
               strokeWidth={minSide * 0.004}
               strokeLinecap="round"
-              opacity={0.28}
+              opacity={0.18}
             />
           ))
         )}
@@ -299,7 +299,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           width={width}
           height={height}
           filter={`url(#${id}-fibres)`}
-          opacity={0.06}
+          opacity={0.04}
           style={{ mixBlendMode: 'multiply' }}
         />
         <rect
@@ -308,7 +308,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           width={width}
           height={height}
           filter={`url(#${id}-grain)`}
-          opacity={0.18}
+          opacity={0.11}
         />
       </svg>
     </div>
