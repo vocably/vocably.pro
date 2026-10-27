@@ -1,19 +1,20 @@
 import { useId } from 'react';
 import type { AssetFormat } from '../formats';
 
-// Light pastel wash the rest is drawn over, cycled along the panorama.
-const baseStops = ['#faf9ff', '#f6f9ff', '#fef8fb', '#f5feff', '#fffbf6'];
+// White paper the rest is drawn over.
+const base = '#fff';
 
-// Vibrant colors for the blobs and ribbons, cycled along the panorama.
+// Muted watercolor tones for the blobs and ribbons, cycled along the
+// panorama, so they read as washes soaked into the paper.
 const palette = [
-  '99, 102, 241', // indigo
-  '236, 72, 153', // pink
-  '34, 211, 238', // cyan
-  '251, 191, 36', // amber
-  '168, 85, 247', // violet
-  '52, 211, 153', // emerald
-  '251, 113, 133', // rose
-  '59, 130, 246', // blue
+  '86, 104, 150', // slate blue
+  '196, 110, 92', // terracotta
+  '102, 150, 140', // sage teal
+  '214, 162, 72', // ochre
+  '134, 106, 150', // dusty plum
+  '122, 154, 98', // olive green
+  '204, 128, 120', // faded rose
+  '92, 130, 170', // denim
 ];
 
 const rgb = (color: string, alpha = 1) => `rgba(${color}, ${alpha})`;
@@ -48,7 +49,7 @@ const blobs = (count: number): Blob[] => {
       y,
       r,
       color: palette[n % palette.length],
-      alpha: 0.14 + random(n + 100) * 0.06,
+      alpha: 0.08 + random(n + 100) * 0.05,
     });
     n++;
   };
@@ -177,14 +178,12 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
   const id = useId();
   const { width, height } = format;
   const minSide = Math.min(width, height);
+  // Paper grain and fibres. The noise is defined in panorama coordinates, so
+  // it only has to be drawn over this screenshot's slice and still lines up
+  // with its neighbours.
+  const grainFrequency = 420 / minSide;
+  const fibreFrequency = 28 / minSide;
   const fullWidth = count * width;
-
-  const base = `linear-gradient(115deg, ${baseStops
-    .map(
-      (color, i) =>
-        `${color} ${((i * 100) / (baseStops.length - 1)).toFixed(1)}%`
-    )
-    .join(', ')})`;
 
   const layers = blobs(count).map(
     ({ x, y, r, color, alpha }) =>
@@ -235,6 +234,43 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
               ))}
             </linearGradient>
           ))}
+          <filter
+            id={`${id}-fibres`}
+            filterUnits="userSpaceOnUse"
+            x={index * width}
+            y={0}
+            width={width}
+            height={height}
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency={`${fibreFrequency} ${fibreFrequency * 2.5}`}
+              numOctaves={4}
+              seed={7}
+            />
+            <feDiffuseLighting
+              surfaceScale={minSide * 0.0012}
+              lightingColor="#fff"
+            >
+              <feDistantLight azimuth={45} elevation={58} />
+            </feDiffuseLighting>
+          </filter>
+          <filter
+            id={`${id}-grain`}
+            filterUnits="userSpaceOnUse"
+            x={index * width}
+            y={0}
+            width={width}
+            height={height}
+          >
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency={grainFrequency}
+              numOctaves={2}
+              seed={3}
+            />
+            <feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.28  0 0 0 0 0.18  0 0 0 -1.6 1.05" />
+          </filter>
         </defs>
         {ribbons.map((ribbon, r) => (
           <path
@@ -257,6 +293,23 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
             />
           ))
         )}
+        <rect
+          x={index * width}
+          y={0}
+          width={width}
+          height={height}
+          filter={`url(#${id}-fibres)`}
+          opacity={0.06}
+          style={{ mixBlendMode: 'multiply' }}
+        />
+        <rect
+          x={index * width}
+          y={0}
+          width={width}
+          height={height}
+          filter={`url(#${id}-grain)`}
+          opacity={0.18}
+        />
       </svg>
     </div>
   );
