@@ -4,7 +4,6 @@ import { getAppLocaleOverride } from './storage';
 import {
   DEFAULT_LOCALE,
   isSupportedLocale,
-  SUPPORTED_LOCALE_CODES,
   SupportedLocale,
 } from './supportedLocales';
 
@@ -20,14 +19,6 @@ import {
 export const detectInitialLocale = (): SupportedLocale => {
   const override = getAppLocaleOverride();
   if (override) return override;
-
-  const best = RNLocalize.findBestLanguageTag(
-    SUPPORTED_LOCALE_CODES as unknown as string[]
-  );
-  if (best) {
-    const locale = parseLocale(best.languageTag);
-    if (isSupportedLocale(locale)) return locale;
-  }
 
   for (const loc of RNLocalize.getLocales()) {
     const locale = parseLocale(loc.languageTag);
