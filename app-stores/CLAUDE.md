@@ -4,7 +4,7 @@ Guidance for Claude Code when working in `app-stores/`.
 
 ## What this is
 
-An internal, local-only tool for making Vocably's store assets: App Store and Google Play screenshots, the Play feature graphic, and app icons. You pick a format in the sidebar, its device component renders every screenshot at the format's exact pixel size, grouped by language, and **Download ZIP** downloads `<id>.zip` with one folder per language (`en/01.png`, `en/02.png`, …).
+An internal, local-only tool for making Vocably's store assets: App Store, Google Play and Chrome Web Store screenshots, the Play feature graphic, the Chrome Web Store promo tiles, and app icons. You pick a format in the sidebar, its device component renders every screenshot at the format's exact pixel size, grouped by language, and **Download ZIP** downloads `<id>.zip` with one folder per language (`en/01.png`, `en/02.png`, …).
 
 It is a standalone Vite + React 19 + TypeScript app. It is **not** an npm workspace of the monorepo (the root `workspaces` only covers `packages/*`), so:
 

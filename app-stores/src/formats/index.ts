@@ -1,4 +1,4 @@
-export type Store = 'app-store' | 'google-play';
+export type Store = 'app-store' | 'google-play' | 'chrome-web-store';
 
 export type AssetFormat = {
   id: string;
@@ -11,6 +11,7 @@ export type AssetFormat = {
 
 // https://developer.apple.com/help/app-store-connect/reference/screenshot-specifications
 // https://support.google.com/googleplay/android-developer/answer/9866151
+// https://developer.chrome.com/docs/webstore/images
 export const formats: AssetFormat[] = [
   {
     id: 'ios-iphone-6.5',
@@ -65,6 +66,27 @@ export const formats: AssetFormat[] = [
     name: 'Feature graphic',
     width: 1024,
     height: 500,
+  },
+  {
+    id: 'cws-screenshot',
+    store: 'chrome-web-store',
+    name: 'Screenshot',
+    width: 1280,
+    height: 800,
+  },
+  {
+    id: 'cws-small-promo-tile',
+    store: 'chrome-web-store',
+    name: 'Small promo tile',
+    width: 440,
+    height: 280,
+  },
+  {
+    id: 'cws-marquee-promo-tile',
+    store: 'chrome-web-store',
+    name: 'Marquee promo tile',
+    width: 1400,
+    height: 560,
   },
 ];
 

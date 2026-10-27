@@ -30,6 +30,8 @@ type Translations = {
   // The headline of the Safari extension screenshot and the line under it.
   extension: string;
   extensionSub: string;
+  // The line under `extension` on the Chrome Web Store screenshot.
+  chromeExtensionSub: string;
   // The web page text of the Safari extension screenshot, in
   // `sourceLanguage`: before, the selected `searchItem.source`, after.
   pageText: [string, string, string];
@@ -119,6 +121,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'with quizzes and\ninteractive questions.',
     extension: 'Translate and save',
     extensionSub: 'with a single click using\nthe iOS Safari Extension.',
+    chromeExtensionSub: 'with a single click\nwhile browsing the web.',
     pageText: ['mit seiner ', 'Magie', ' und ließ'],
     androidExtension: 'Select, translate,\nand save',
     androidExtensionSub: 'words while surfing the web\nin any mobile browser.',
@@ -174,6 +177,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'con cuestionarios y preguntas interactivas.',
     extension: 'Traduce y guarda',
     extensionSub: 'con un solo clic usando la extensión de Safari para iOS.',
+    chromeExtensionSub: 'con un solo clic mientras navegas por la web.',
     pageText: reliablePage,
     androidExtension: 'Selecciona, traduce y guarda',
     androidExtensionSub:
@@ -231,6 +235,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'com testes e perguntas interativas.',
     extension: 'Traduza e salve',
     extensionSub: 'com um único clique usando a extensão do Safari para iOS.',
+    chromeExtensionSub: 'com um único clique enquanto navega na web.',
     pageText: reliablePage,
     androidExtension: 'Selecione, traduza e salve',
     androidExtensionSub:
@@ -292,6 +297,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'при помощи тестов и интерактивных вопросов.',
     extension: 'Переводите и сохраняйте',
     extensionSub: 'в один клик с помощью расширения Safari для iOS.',
+    chromeExtensionSub: 'в один клик прямо во время чтения сайтов.',
     pageText: reliablePage,
     androidExtension: 'Выделяйте, переводите и сохраняйте',
     androidExtensionSub:
@@ -352,6 +358,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'за допомогою тестів та інтерактивних запитань.',
     extension: 'Перекладайте та зберігайте',
     extensionSub: 'в один клік за допомогою розширення Safari для iOS.',
+    chromeExtensionSub: 'в один клік прямо під час читання сайтів.',
     pageText: reliablePage,
     androidExtension: 'Виділяйте, перекладайте та зберігайте',
     androidExtensionSub:
@@ -412,6 +419,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'testler ve etkileşimli sorularla.',
     extension: 'Çevirin ve kaydedin',
     extensionSub: 'iOS Safari Uzantısı ile tek tıkla.',
+    chromeExtensionSub: "web'de gezinirken tek tıkla.",
     pageText: reliablePage,
     androidExtension: 'Kelimeleri seçin, çevirin ve kaydedin',
     androidExtensionSub: "herhangi bir mobil tarayıcıda web'de gezinirken.",
@@ -471,6 +479,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'qua các bài kiểm tra và câu hỏi tương tác.',
     extension: 'Dịch và lưu',
     extensionSub: 'chỉ với một cú nhấp bằng Tiện ích mở rộng Safari trên iOS.',
+    chromeExtensionSub: 'chỉ với một cú nhấp khi duyệt web.',
     pageText: reliablePage,
     androidExtension: 'Chọn, dịch và lưu',
     androidExtensionSub: 'từ khi lướt web trên bất kỳ trình duyệt di động nào.',
@@ -530,6 +539,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: '通过测验和互动问题。',
     extension: '翻译并保存',
     extensionSub: '只需一键，借助\niOS Safari 扩展程序即可完成。',
+    chromeExtensionSub: '浏览网页时\n只需一键即可完成。',
     pageText: reliablePage,
     androidExtension: '选择、翻译并保存单词',
     androidExtensionSub: '在任意移动浏览器中\n浏览网页时即可使用。',
@@ -588,6 +598,7 @@ export const localization: Record<Language, Translations> = {
     learnSub: '透過測驗和互動式問題。',
     extension: '翻譯並儲存',
     extensionSub: '只要一鍵，透過\niOS Safari 擴充功能即可完成。',
+    chromeExtensionSub: '瀏覽網頁時\n只要一鍵即可完成。',
     pageText: reliablePage,
     androidExtension: '選取、翻譯並儲存單字',
     androidExtensionSub: '在任何行動瀏覽器中\n瀏覽網頁時即可使用。',

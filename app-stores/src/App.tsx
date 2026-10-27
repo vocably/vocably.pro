@@ -6,6 +6,7 @@ import { formats, type Store } from './formats';
 const storeNames: Record<Store, string> = {
   'app-store': 'App Store',
   'google-play': 'Google Play',
+  'chrome-web-store': 'Chrome Web Store',
 };
 
 const formatIdFromUrl = () =>
