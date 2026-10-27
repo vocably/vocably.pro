@@ -9,6 +9,17 @@ export type OfferingId =
   | 'mobile-premium-1-free'
   | 'mobile-premium-add-card';
 
+const localeToBcb47 = (locale: string): string => {
+  switch (locale) {
+    case 'zh':
+      return 'zh_Hans';
+    case 'zh-TW':
+      return 'zh_Hant';
+    default:
+      return locale;
+  }
+};
+
 export const presentPaywall = async (
   offeringId: OfferingId = 'mobile-premium',
   locale: string,
@@ -19,7 +30,7 @@ export const presentPaywall = async (
 ): Promise<boolean> => {
   const offerings = await Purchases.getOfferings();
   const offering = offerings.all[offeringId];
-  await Purchases.overridePreferredLocale(locale);
+  await Purchases.overridePreferredLocale(localeToBcb47(locale));
 
   // Present paywall for current offering:
   const paywallResult: PAYWALL_RESULT = await RevenueCatUI.presentPaywall({
