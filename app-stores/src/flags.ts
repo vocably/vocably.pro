@@ -30,4 +30,6 @@ export const flags: Record<Language, FlagSet> = {
   uk: { languages: defaultLanguages },
   tr: { languages: defaultLanguages },
   vi: { languages: defaultLanguages },
+  zh: { languages: defaultLanguages },
+  'zh-TW': { languages: defaultLanguages },
 };
