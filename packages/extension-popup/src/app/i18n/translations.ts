@@ -5,6 +5,18 @@ import { uk } from './uk';
 import { vi } from './vi';
 import { es } from './es';
 import { pt } from './pt';
+import { zh } from './zh';
+import { zhTW } from './zh-TW';
 import { Translations } from '@vocably/browser-i18n';
 
-export const translations: Translations = { en, ru, uk, vi, tr, es, pt };
+export const translations: Translations = {
+  en,
+  ru,
+  uk,
+  vi,
+  tr,
+  es,
+  pt,
+  zh,
+  'zh-TW': zhTW,
+};

@@ -1,4 +1,4 @@
-import { GoogleLanguage, Locale } from '@vocably/model';
+import { GoogleLanguage, Locale, parseLocale } from '@vocably/model';
 import { ru } from './ru';
 import { en } from './en';
 import { uk } from './uk';
@@ -6,14 +6,14 @@ import { vi } from './vi';
 import { tr } from './tr';
 import { es } from './es';
 import { pt } from './pt';
+import { zh } from './zh';
+import { zhTW } from './zh-TW';
 
 export type Translations = Record<Locale, Record<string, string>>;
 
 export type LanguageTranslationOption =
   | `nominative_${GoogleLanguage}`
   | `objective_${GoogleLanguage}`;
-
-const SUPPORTED_LOCALES: Locale[] = ['en', 'ru', 'uk', 'vi', 'tr', 'es', 'pt'];
 
 export const detectLocale = (): Locale => {
   const languages =
@@ -23,9 +23,9 @@ export const detectLocale = (): Locale => {
         : [navigator.language]
       : ['en'];
   for (const lang of languages) {
-    const code = lang.split('-')[0].toLowerCase();
-    if (SUPPORTED_LOCALES.includes(code as Locale)) {
-      return code as Locale;
+    const locale = parseLocale(lang);
+    if (locale) {
+      return locale;
     }
   }
   return 'en';
@@ -99,4 +99,6 @@ export const languageTranslations: Translations = {
   tr,
   es,
   pt,
+  zh,
+  'zh-TW': zhTW,
 };

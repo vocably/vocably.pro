@@ -1,4 +1,4 @@
-import { Locale } from '@vocably/model';
+import { Locale, parseLocale } from '@vocably/model';
 import { AuthEmailTranslation, en } from './en';
 import { es } from './es';
 import { pt } from './pt';
@@ -6,6 +6,8 @@ import { ru } from './ru';
 import { tr } from './tr';
 import { uk } from './uk';
 import { vi } from './vi';
+import { zh } from './zh';
+import { zhTW } from './zh-TW';
 
 export { AuthEmailTranslation } from './en';
 
@@ -17,10 +19,9 @@ const translations: Record<Locale, AuthEmailTranslation> = {
   tr,
   es,
   pt,
+  zh,
+  'zh-TW': zhTW,
 };
-
-const isLocale = (value: unknown): value is Locale =>
-  typeof value === 'string' && value in translations;
 
 /**
  * Managed login never forwards clientMetadata, and a brand new user has no
@@ -34,11 +35,11 @@ export const resolveTranslation = (
   const candidates = [clientMetadata?.locale, userAttributes?.locale];
 
   for (const candidate of candidates) {
-    // Tolerate "ru-RU" and "PT" alike.
-    const normalized = (candidate ?? '').toLowerCase().split(/[-_]/)[0];
+    // Tolerate "ru-RU", "PT" and "zh-Hant-TW" alike.
+    const locale = parseLocale(candidate);
 
-    if (isLocale(normalized)) {
-      return { locale: normalized, translation: translations[normalized] };
+    if (locale) {
+      return { locale, translation: translations[locale] };
     }
   }
 

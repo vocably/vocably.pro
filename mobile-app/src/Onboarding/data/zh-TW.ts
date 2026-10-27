@@ -21,7 +21,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 火車到達站台',
           definition: '* 抵達\n* 達到',
           translation: 'arrive, reach',
@@ -39,7 +39,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '詢問',
-          ipa: 'syùn wǎn',
+          ipa: 'xún wèn',
           example: '* 提出詢問\n* 進行詢問\n* 接受詢問',
           definition: '* 提問\n* 查詢\n* 打聽',
           translation: 'inquiry, question, query',
@@ -104,7 +104,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 火車到達站台',
           definition: '* 抵達\n* 達到',
           translation: 'llegar, alcanzar',
@@ -187,7 +187,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 火車到達站台',
           definition: '* 抵達\n* 達到',
           translation: 'arriver, atteindre',
@@ -205,7 +205,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '詢問',
-          ipa: 'syùn wǎn',
+          ipa: 'xún wèn',
           example: '* 提出詢問\n* 進行詢問\n* 回答詢問',
           definition: '* 提問\n* 查詢\n* 打聽',
           translation: 'demande, enquête',
@@ -271,7 +271,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 飛機到達\n* 終於到達',
           definition: '* 抵達\n* 達到\n* 到來',
           translation: 'ankommen, erreichen',
@@ -355,7 +355,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: '抵达, 达到',
@@ -428,7 +428,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: '抵達, 達到',
@@ -501,7 +501,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example:
             '* 飛機的到達時間是下午三點。\n* 到達目的地後，我們開始探索。',
           definition: '* 抵達\n* 達到',
@@ -585,7 +585,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 飛機的到達時間\n* 到達目的地',
           definition: '* 抵達\n* 達到',
           translation: 'приход, достижение',
@@ -603,7 +603,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '詢問',
-          ipa: 'syùn wǎn',
+          ipa: 'xún wèn',
           example: '* 他對老師的詢問感到困惑。\n* 顧客的詢問需要及時回應。',
           definition: '* 提問\n* 查詢',
           translation: 'вопрос, запрос',
@@ -668,7 +668,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'arrivare, raggiungere',
@@ -751,7 +751,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 到達高峰',
           definition: '* 抵達\n* 達到',
           translation: 'chegada, alcance',
@@ -769,7 +769,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '詢問',
-          ipa: 'syùn wǎn',
+          ipa: 'xún wèn',
           example: '* 提出詢問\n* 進行詢問\n* 接受詢問',
           definition: '* 提問\n* 查詢\n* 打聽',
           translation: 'pergunta, consulta, inquérito',
@@ -835,7 +835,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 飛機的到達時間\n* 到達目的地',
           definition: '* 抵達\n* 達到',
           translation: 'الوصول, البلوغ',
@@ -918,7 +918,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 到達終點',
           definition: '* 抵達\n* 達到',
           translation: 'aankomst, bereiken',
@@ -946,7 +946,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '請求',
-          ipa: 't͡sʰiŋ˧˥ t͡ɕʰjoʊ˧˥',
+          ipa: 't͡ɕʰiŋ˨˩˦ t͡ɕʰjoʊ˧˥',
           example: '* 提出請求\n* 書面請求',
           definition: '* 要求\n* 申請',
           translation: 'verzoek, aanvraag',
@@ -1001,7 +1001,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 飛機到達',
           definition: '* 抵達\n* 達到',
           translation: '도착하다, 抵達',
@@ -1019,7 +1019,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '詢問',
-          ipa: 'syùn wǎn',
+          ipa: 'xún wèn',
           example: '* 提出詢問\n* 進行詢問',
           definition: '* 提問\n* 查詢',
           translation: '질문, 조회',
@@ -1085,7 +1085,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'पहुंचना, प्राप्त करना',
@@ -1103,7 +1103,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '詢問',
-          ipa: 'syùn wǎn',
+          ipa: 'xún wèn',
           example: '* 他對老師提出了詢問。\n* 我們需要進一步的詢問。',
           definition: '* 提問\n* 查詢',
           translation: 'पूछताछ, सवाल',
@@ -1168,7 +1168,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'ulaşmak, varmak',
@@ -1251,7 +1251,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'anlända, nå',
@@ -1335,7 +1335,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 到達高峰',
           definition: '* 抵達\n* 達到',
           translation: 'ankomst, nå',
@@ -1418,7 +1418,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 到達高峰',
           definition: '* 抵達\n* 達到',
           translation: 'ankomst, nå',
@@ -1502,7 +1502,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example:
             '* 飛機的到達時間是下午三點。\n* 到達目的地後，我們開始探索。',
           definition: '* 抵達\n* 達到',
@@ -1586,7 +1586,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'رسیدن, دست یافتن',
@@ -1669,7 +1669,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 到達目的地\n* 到達終點',
           definition: '* 抵達\n* 達到',
           translation: 'dotarcie, osiągnięcie',
@@ -1742,7 +1742,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 飛機的到達時間\n* 到達目的地',
           definition: '* 抵達\n* 達到',
           translation: 'άφιξη, φθάσιμο',
@@ -1825,7 +1825,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example:
             '* 飛機的到達時間是下午三點。\n* 到達目的地後，我們開始探索。',
           definition: '* 抵達\n* 達到',
@@ -1854,7 +1854,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '請求',
-          ipa: 't͡ɕʰʰiŋ˧˥ t͡ɕʰiŋ˧˥',
+          ipa: 't͡ɕʰiŋ˨˩˦ t͡ɕʰjoʊ˧˥',
           example: '* 他提出了請求。\n* 請求被批准了。',
           definition: '* 要求\n* 申請',
           translation: 'דרישה, בקשה',
@@ -1909,7 +1909,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'ถึง, ไปถึง',
@@ -1982,7 +1982,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'đến, đạt',
@@ -2000,7 +2000,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '詢問',
-          ipa: 'syùn wǎn',
+          ipa: 'xún wèn',
           example: '* 他對老師提出詢問。\n* 詢問價格',
           definition: '* 提問\n* 打聽',
           translation: 'hỏi, thăm dò',
@@ -2065,7 +2065,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 火車準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'mencapai, sampai',
@@ -2148,7 +2148,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 他已經到達目的地。\n* 飛機準時到達。',
           definition: '* 抵達\n* 達到',
           translation: 'tiba, mencapai',
@@ -2231,7 +2231,7 @@ export const onboardingCollection: MobileOnboardingDataCollection = {
         {
           language: 'zh-TW',
           source: '到達',
-          ipa: 'tào dá',
+          ipa: 'dào dá',
           example: '* 飛機的到達時間\n* 到達目的地',
           definition: '* 抵達\n* 達到',
           translation: 'досягнення, прибуття',

@@ -327,6 +327,14 @@ The system interface expected to be translated into following languages:
 - Ukrainian (uk)
 - Turkish (tr)
 - Vietnamese (vi)
+- Chinese (zh) - Simplified Chinese (Mainland China)
+- Chinese (zh-TW) - Traditional Chinese (Taiwan)
+
+The `Locale` type, the `locales` list and `parseLocale()` live in `packages/model/src/user-metadata.ts`. `zh-TW` is the only hyphenated locale code, so never derive a locale by truncating a language tag to two letters: use `parseLocale()`, which resolves Chinese by script. Traditional tags (`zh-TW`, `zh-HK`, `zh-MO`, `zh-Hant*`) map to `zh-TW`; every other Chinese tag (`zh`, `zh-CN`, `zh-SG`, `zh-Hans*`) maps to `zh`, and an explicit `Hans` script wins over a region (`zh-Hans-TW` is `zh`). In TypeScript records the `zh-TW` key must be quoted (`zh, 'zh-TW': zhTW`) and the files are `zh.ts` / `zh-TW.ts`. Browser extension folders use the underscore form (`_locales/zh_CN`, `_locales/zh_TW`, `cws/zh_CN.txt`, `cws/zh_TW.txt`), Android uses `values-zh` (Simplified) and `values-zh-rTW`, and iOS uses `zh-Hans` and `zh-Hant` in `knownRegions`.
+
+In language pickers each language is labelled with its own name: Simplified Chinese is `简体中文`, Traditional Chinese is `繁體中文`. The `nominative_zh`/`nominative_zh-TW`-style keys are the names of the _learning_ language and keep their "(Simplified)"/"(Traditional)" qualifiers.
+
+Simplified Chinese translations use Mainland terminology and full-width punctuation with “” quotes (e.g. 视频, 网站, 设置, 账号, 单词卡, 扩展程序, 移动应用, 二维码; card collection/deck is 卡组; language names end in 语: 英语, 法语). Traditional Chinese translations use Taiwan terminology (e.g. 影片, 網站, 設定, 帳號, 單字卡, 擴充功能; card collection/deck is 卡片集) and 「」 quotes. Never produce one variant by character conversion of the other alone: the vocabulary differs. Chinese has a single plural form, so mobile translations provide only the `_other` plural keys.
 
 ### No emoji
 

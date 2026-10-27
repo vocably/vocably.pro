@@ -1,9 +1,9 @@
+import { parseLocale } from '@vocably/model';
 import * as RNLocalize from 'react-native-localize';
 import { getAppLocaleOverride } from './storage';
 import {
   DEFAULT_LOCALE,
   isSupportedLocale,
-  SUPPORTED_LOCALE_CODES,
   SupportedLocale,
 } from './supportedLocales';
 
@@ -20,17 +20,9 @@ export const detectInitialLocale = (): SupportedLocale => {
   const override = getAppLocaleOverride();
   if (override) return override;
 
-  const best = RNLocalize.findBestLanguageTag(
-    SUPPORTED_LOCALE_CODES as unknown as string[]
-  );
-  if (best) {
-    const two = best.languageTag.substring(0, 2);
-    if (isSupportedLocale(two)) return two;
-  }
-
   for (const loc of RNLocalize.getLocales()) {
-    const two = loc.languageTag.substring(0, 2);
-    if (isSupportedLocale(two)) return two;
+    const locale = parseLocale(loc.languageTag);
+    if (isSupportedLocale(locale)) return locale;
   }
 
   return DEFAULT_LOCALE;

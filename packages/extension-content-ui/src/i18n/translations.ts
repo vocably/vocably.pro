@@ -5,6 +5,8 @@ import { uk } from './uk';
 import { vi } from './vi';
 import { es } from './es';
 import { pt } from './pt';
+import { zh } from './zh';
+import { zhTW } from './zh-TW';
 import {
   languageTranslations,
   messageTranslations,
@@ -46,5 +48,15 @@ export const translations: Translations = {
     ...pt,
     ...languageTranslations['pt'],
     ...messageTranslations['pt'],
+  },
+  zh: {
+    ...zh,
+    ...languageTranslations['zh'],
+    ...messageTranslations['zh'],
+  },
+  'zh-TW': {
+    ...zhTW,
+    ...languageTranslations['zh-TW'],
+    ...messageTranslations['zh-TW'],
   },
 };
