@@ -6,6 +6,7 @@ export type SupportedLocale =
   | 'uk'
   | 'vi'
   | 'tr'
+  | 'zh'
   | 'zh-TW';
 
 export const SUPPORTED_LOCALES: ReadonlyArray<{
@@ -13,6 +14,7 @@ export const SUPPORTED_LOCALES: ReadonlyArray<{
   label: string;
 }> = [
   { code: 'en', label: 'English' },
+  { code: 'zh', label: '简体中文' },
   { code: 'zh-TW', label: '繁體中文' },
   { code: 'es', label: 'Español' },
   { code: 'pt', label: 'Português (Brasil)' },

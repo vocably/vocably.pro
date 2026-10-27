@@ -16,10 +16,14 @@ describe('parseLocale', () => {
     expect(parseLocale('zh_TW')).toEqual('zh-TW');
   });
 
-  it('ignores Simplified Chinese tags', () => {
-    expect(parseLocale('zh')).toBeUndefined();
-    expect(parseLocale('zh-CN')).toBeUndefined();
-    expect(parseLocale('zh-Hans-CN')).toBeUndefined();
+  it('resolves Simplified Chinese tags', () => {
+    expect(parseLocale('zh')).toEqual('zh');
+    expect(parseLocale('zh-CN')).toEqual('zh');
+    expect(parseLocale('zh_CN')).toEqual('zh');
+    expect(parseLocale('zh-SG')).toEqual('zh');
+    expect(parseLocale('zh-Hans')).toEqual('zh');
+    expect(parseLocale('zh-Hans-CN')).toEqual('zh');
+    expect(parseLocale('zh-Hans-TW')).toEqual('zh');
   });
 
   it('ignores unknown and empty values', () => {

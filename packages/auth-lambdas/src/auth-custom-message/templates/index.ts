@@ -6,6 +6,7 @@ import { ru } from './ru';
 import { tr } from './tr';
 import { uk } from './uk';
 import { vi } from './vi';
+import { zh } from './zh';
 import { zhTW } from './zh-TW';
 
 export { AuthEmailTranslation } from './en';
@@ -18,6 +19,7 @@ const translations: Record<Locale, AuthEmailTranslation> = {
   tr,
   es,
   pt,
+  zh,
   'zh-TW': zhTW,
 };
 

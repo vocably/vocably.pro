@@ -68,13 +68,14 @@ The system interface is expected to be translated into the following languages:
 - Spanish (es)
 - Turkish (tr)
 - Vietnamese (vi)
+- Chinese (zh) - Simplified Chinese, labelled `简体中文` in the app language picker
 - Chinese (zh-TW) - Traditional Chinese, labelled `繁體中文` in the app language picker
 
 The translation files are located in `src/i18n/locales`.
 
 `src/i18n/lolcales/en.ts` is used ased as baseline that provides types for other translation typescript files.
 
-Device locale detection (`src/i18n/detectLocale.ts`) goes through `parseLocale()` from `@vocably/model`, because `zh-TW` cannot be derived from the first two letters of a language tag. Chinese has only the `_other` plural form.
+Device locale detection (`src/i18n/detectLocale.ts`) goes through `parseLocale()` from `@vocably/model`, because `zh` and `zh-TW` cannot be told apart by the first two letters of a language tag (`zh-Hans-CN` is `zh`, `zh-Hant-HK` is `zh-TW`). Chinese has only the `_other` plural form.
 
 Avoid plurals app states (e.g. "Загружаю" instead of "Загружаем"). There is only one person behind the app. Using plurals as "We" or "Us" is not appropriate.
 

@@ -6,6 +6,7 @@ import { vi } from './vi';
 import { tr } from './tr';
 import { es } from './es';
 import { pt } from './pt';
+import { zh } from './zh';
 import { zhTW } from './zh-TW';
 
 export const messageTranslations: Translations = {
@@ -16,5 +17,6 @@ export const messageTranslations: Translations = {
   tr,
   es,
   pt,
+  zh,
   'zh-TW': zhTW,
 };

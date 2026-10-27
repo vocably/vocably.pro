@@ -19,7 +19,16 @@ export type OnboardingFlow = {
   language: string | null;
 };
 
-export type Locale = 'en' | 'ru' | 'uk' | 'vi' | 'tr' | 'es' | 'pt' | 'zh-TW';
+export type Locale =
+  | 'en'
+  | 'ru'
+  | 'uk'
+  | 'vi'
+  | 'tr'
+  | 'es'
+  | 'pt'
+  | 'zh'
+  | 'zh-TW';
 
 export const locales: Locale[] = [
   'en',
@@ -29,13 +38,15 @@ export const locales: Locale[] = [
   'tr',
   'es',
   'pt',
+  'zh',
   'zh-TW',
 ];
 
 /**
  * Maps a BCP 47 tag ("ru-RU", "PT", "zh-Hant-HK") to a supported interface
- * locale. Only Traditional Chinese is supported, so Simplified tags
- * ("zh", "zh-CN", "zh-Hans") resolve to nothing.
+ * locale. Chinese resolves by script: Traditional tags ("zh-Hant", "zh-TW",
+ * "zh-HK", "zh-MO") become "zh-TW", everything else ("zh", "zh-CN",
+ * "zh-Hans-TW", "zh-SG") becomes Simplified "zh".
  */
 export const parseLocale = (
   tag: string | null | undefined
@@ -43,9 +54,13 @@ export const parseLocale = (
   const parts = (tag ?? '').toLowerCase().split(/[-_]/);
 
   if (parts[0] === 'zh') {
+    if (parts.includes('hans')) {
+      return 'zh';
+    }
+
     return parts.some((part) => ['hant', 'tw', 'hk', 'mo'].includes(part))
       ? 'zh-TW'
-      : undefined;
+      : 'zh';
   }
 
   return locales.find((locale) => locale === parts[0]);
