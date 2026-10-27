@@ -3,6 +3,7 @@ import React, { FC, PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import * as RNLocalize from 'react-native-localize';
 import { Button, Text } from 'react-native-paper';
 import Animated, {
   FadeIn,
@@ -34,13 +35,30 @@ type Greeting = {
   accent: boolean;
 };
 
+// Russian speakers who don't also use Ukrainian are greeted in Russian.
+const getEastSlavicGreeting = (): string => {
+  const languageCodes = RNLocalize.getLocales().map(
+    (locale) => locale.languageCode
+  );
+  return languageCodes.includes('ru') && !languageCodes.includes('uk')
+    ? 'Привет'
+    : 'Привіт';
+};
+
 const greetings: Greeting[] = [
   { text: 'Hello', top: '4%', left: '6%', size: 17, accent: true },
   { text: 'Hola', top: '0%', left: '60%', size: 15, accent: false },
+  { text: 'こんにちは', top: '2%', left: '29%', size: 15, accent: false },
   { text: 'Bonjour', top: '30%', left: '34%', size: 20, accent: true },
-  { text: 'Привіт', top: '34%', left: '2%', size: 14, accent: false },
+  {
+    text: getEastSlavicGreeting(),
+    top: '34%',
+    left: '2%',
+    size: 14,
+    accent: false,
+  },
   { text: 'Ciao', top: '22%', left: '78%', size: 14, accent: false },
-  { text: 'こんにちは', top: '64%', left: '58%', size: 15, accent: true },
+  { text: '你好', top: '64%', left: '58%', size: 15, accent: true },
   { text: 'Merhaba', top: '66%', left: '12%', size: 16, accent: false },
   { text: 'Olá', top: '58%', left: '42%', size: 13, accent: false },
   { text: 'Xin chào', top: '86%', left: '30%', size: 13, accent: false },
