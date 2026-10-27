@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { devices } from './devices';
 import { exportZip } from './exportZip';
 import { formats, type Store } from './formats';
@@ -8,13 +8,29 @@ const storeNames: Record<Store, string> = {
   'google-play': 'Google Play',
 };
 
+const formatIdFromUrl = () =>
+  new URLSearchParams(window.location.search).get('format') ?? formats[0].id;
+
 export const App = () => {
-  const [formatId, setFormatId] = useState(formats[0].id);
+  const [formatId, setFormatId] = useState(formatIdFromUrl);
   const [progress, setProgress] = useState<string | null>(null);
   const screenshotsRef = useRef<HTMLDivElement>(null);
 
   const format = formats.find((f) => f.id === formatId) ?? formats[0];
   const DeviceScreenshots = devices[format.id];
+
+  useEffect(() => {
+    const onPopState = () => setFormatId(formatIdFromUrl());
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
+
+  const selectFormat = (id: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('format', id);
+    window.history.pushState(null, '', url);
+    setFormatId(id);
+  };
 
   const onExport = async () => {
     if (!screenshotsRef.current) return;
@@ -39,8 +55,8 @@ export const App = () => {
               .map((f) => (
                 <button
                   key={f.id}
-                  className={f.id === formatId ? 'active' : ''}
-                  onClick={() => setFormatId(f.id)}
+                  className={f.id === format.id ? 'active' : ''}
+                  onClick={() => selectFormat(f.id)}
                 >
                   <span>{f.name}</span>
                   <small>
