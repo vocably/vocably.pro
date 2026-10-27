@@ -163,7 +163,7 @@ const translations: BaseTranslations = {
     rearrangeHintAfter: ' 重新排列步驟。',
   },
   cardsLimit: {
-    openVocablySettings: '開啟 Vocably → 設定 以升級。',
+    openVocablySettings: '開啟 Vocably →「設定」以升級。',
     upgradeToPremium: '升級至 Premium',
     collectionHas_other:
       '你的卡片集已有 <bold>{{maxCards}}</bold> 張卡片。現在你<bold>每天只能儲存 {{count}} 張卡片。</bold>Premium 使用者沒有此限制。',
@@ -171,7 +171,7 @@ const translations: BaseTranslations = {
       '你的卡片集已超過 <bold>{{maxCards}}</bold> 張卡片。現在你<bold>每天只能儲存 {{count}} 張卡片。</bold>Premium 使用者沒有此限制。',
   },
   chat: {
-    thinking: '思考中...',
+    thinking: '思考中…',
     errorOccurred: '發生錯誤，請再試一次。',
     explain: '解釋',
     examples: '例句',
@@ -180,21 +180,21 @@ const translations: BaseTranslations = {
     examplesMessage: '請提供幾個例句',
     rememberMessage: '幫我記住這張卡片',
     inputDisabled: '目前無法輸入。',
-    inputPlaceholder: '在此輸入你的訊息...',
+    inputPlaceholder: '在此輸入你的訊息…',
     initialMessage:
       '你可以詢問任何關於 <bold>{{source}}</bold> 的問題，或使用以下現成的選項：',
     initialMessageWithPartOfSpeech:
       '你可以詢問任何關於{{partOfSpeech}} <bold>{{source}}</bold> 的問題，或使用以下現成的選項：',
   },
   dashboard: {
-    loadingCards: '正在載入卡片...',
+    loadingCards: '正在載入卡片…',
     study: '學習',
     studySelectedTags: '學習所選標籤',
     tagsLabel: '標籤：',
     cardsWithNoTags: '沒有標籤的卡片',
     deleteCardFailedTitle: '錯誤：刪除卡片失敗',
     deleteCardFailedMessage: '糟糕！刪除卡片時發生錯誤，請稍後再試。',
-    searchPlaceholder: '在你的卡片集中搜尋...',
+    searchPlaceholder: '在你的卡片集中搜尋…',
     section: {
       today: '今日計畫',
       expired: '待補進度',
@@ -236,7 +236,7 @@ const translations: BaseTranslations = {
       message: '此操作無法復原。',
     },
     unableToDelete: '無法刪除卡片，請再試一次。',
-    deletingCard: '正在刪除卡片...',
+    deletingCard: '正在刪除卡片…',
     resetPrompt: {
       title: '要重設學習進度嗎？',
       message: '此操作無法復原。',
@@ -267,7 +267,7 @@ const translations: BaseTranslations = {
     },
   },
   generateCards: {
-    loadingPreset: '正在載入翻譯預設...',
+    loadingPreset: '正在載入翻譯預設…',
     errorUnable: '無法產生卡片，請再試一次。',
     intro:
       '說出一個主題，Vocably 幾秒內就能把它變成單字卡——從廚房用語到不守規則的動詞都可以。',
@@ -277,8 +277,8 @@ const translations: BaseTranslations = {
     exampleIrregularVerbs: '不規則動詞',
     exampleAnimals: '動物',
     examplePopularIdioms: '常用慣用語',
-    placeholder: '任何主題都可以...',
-    generating: '正在產生卡片...',
+    placeholder: '任何主題都可以…',
+    generating: '正在產生卡片…',
     followingWillBeGenerated: '將產生以下卡片：',
   },
   languageSelector: {
@@ -293,10 +293,10 @@ const translations: BaseTranslations = {
     preferredLanguages: '偏好語言',
     motherTongue: '母語',
     preferred: '熱門語言',
-    search: '搜尋...',
+    search: '搜尋…',
   },
   lookUp: {
-    loadingPreset: '正在載入翻譯預設...',
+    loadingPreset: '正在載入翻譯預設…',
     lookUpFailedTitle: '錯誤：查詢失敗',
     lookUpFailedMessage: '糟糕！查詢時發生錯誤，請稍後再試。',
     searchPlaceholder: '任何語言的任何單字',
@@ -306,7 +306,7 @@ const translations: BaseTranslations = {
     connectOnTelegram: '在 Telegram 上聯絡',
     joinDiscord: '加入 Discord',
     sendMessage: '傳送訊息',
-    conductingAnalysis: '正在進一步分析...',
+    conductingAnalysis: '正在進一步分析…',
     selectLanguageLearning: '選擇你正在學習的語言。',
     selectMotherTongue: '選擇你的母語',
     searchHintForExample: '例如：',
@@ -315,8 +315,8 @@ const translations: BaseTranslations = {
     removeHistoryItem: '從紀錄中移除',
   },
   notifications: {
-    checking: '檢查中...',
-    loadingPreset: '正在載入預設...',
+    checking: '檢查中…',
+    loadingPreset: '正在載入預設…',
     loadFailed: {
       sorry: '非常抱歉。',
       cannotLoad: '系統無法載入學習提醒狀態。',
@@ -336,7 +336,7 @@ const translations: BaseTranslations = {
     receiveAt: '時間',
   },
   study: {
-    loading: '載入中...',
+    loading: '載入中…',
     finish: '完成',
     takeOneMoreRound: '再來一輪',
     cardUpdateFailedTitle: '錯誤：更新卡片失敗',
@@ -401,7 +401,7 @@ const translations: BaseTranslations = {
   },
   exportDeck: {
     title: '匯出{{languageName}}',
-    loadingCards: '正在載入卡片...',
+    loadingCards: '正在載入卡片…',
     advancedExportInfo:
       '更進階的匯出功能僅在網頁瀏覽器中提供給已註冊的使用者。',
     loginWithAccount: '使用你的帳號登入',
@@ -538,10 +538,10 @@ const translations: BaseTranslations = {
     },
   },
   languages: {
-    loading: '正在載入語言...',
+    loading: '正在載入語言…',
   },
   auth: {
-    authenticating: '正在驗證...',
+    authenticating: '正在驗證…',
     sessionExpired: '你的驗證工作階段已過期。',
     signInAgain: '重新登入',
     anonymousUserError: {
@@ -644,7 +644,7 @@ const translations: BaseTranslations = {
       openVocablyToSignIn: '開啟 Vocably 以登入。',
       openVocably: '開啟 Vocably',
     },
-    receivingText: '正在接收文字...',
+    receivingText: '正在接收文字…',
   },
   paymentSuccess: {
     thankYou: '感謝你給 Vocably 一個機會。你的支持對我意義重大。',

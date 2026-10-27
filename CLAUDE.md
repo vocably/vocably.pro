@@ -331,7 +331,7 @@ The system interface expected to be translated into following languages:
 
 The `Locale` type, the `locales` list and `parseLocale()` live in `packages/model/src/user-metadata.ts`. `zh-TW` is the only hyphenated locale code, so never derive a locale by truncating a language tag to two letters: use `parseLocale()`, which maps Traditional Chinese tags (`zh-TW`, `zh-HK`, `zh-MO`, `zh-Hant*`) to `zh-TW` and ignores Simplified ones (`zh`, `zh-CN`, `zh-Hans*`). In TypeScript records the key must be quoted (`'zh-TW': zhTW`). Browser extension folders use the underscore form (`_locales/zh_TW`, `cws/zh_TW.txt`), Android uses `values-zh-rTW`, and iOS uses `zh-Hant` in `knownRegions`.
 
-In language pickers each language is labelled with its own name; Chinese is labelled just `中文` (not "Traditional Chinese"). The `nominative_zh-TW`-style keys are the names of the _learning_ language and keep their "(Traditional)" qualifier.
+In language pickers each language is labelled with its own name; Traditional Chinese is labelled `繁體中文`. The `nominative_zh-TW`-style keys are the names of the _learning_ language and keep their "(Traditional)" qualifier.
 
 Chinese translations use Taiwan terminology and full-width punctuation (e.g. 影片, 網站, 設定, 帳號, 單字卡; card collection/deck is 卡片集). Chinese has a single plural form, so mobile translations provide only the `_other` plural keys.
 

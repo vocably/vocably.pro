@@ -13,7 +13,7 @@ export const SUPPORTED_LOCALES: ReadonlyArray<{
   label: string;
 }> = [
   { code: 'en', label: 'English' },
-  { code: 'zh-TW', label: '中文' },
+  { code: 'zh-TW', label: '繁體中文' },
   { code: 'es', label: 'Español' },
   { code: 'pt', label: 'Português (Brasil)' },
   { code: 'ru', label: 'Русский' },

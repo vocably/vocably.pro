@@ -4,7 +4,7 @@ export const zhTW = {
   // home
   'home.settings': '設定',
   'home.loading_presets': '正在載入搜尋預設',
-  'home.requesting_chatgpt': '正在請求 AI',
+  'home.requesting_chatgpt': '正在向 AI 取得資訊',
   // settings
   'settings.title': '設定',
   'settings.back': '返回',

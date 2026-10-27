@@ -1,7 +1,7 @@
 import { languageTranslations } from '@vocably/i18n';
 
 export const zhTW = {
-  'common.redirecting': '正在重新導向...',
+  'common.redirecting': '正在重新導向…',
   'welcome.install_extension': '安裝或啟用擴充功能',
   'welcome.install_title': '就快完成了',
   'welcome.install_lead':
@@ -21,7 +21,7 @@ export const zhTW = {
   'welcome.index.show_more': '顯示更多語言',
   'welcome.index.show_less': '顯示較少語言',
   'welcome.index.multilang': '我想學習多種語言。',
-  'welcome.second.loading': '正在載入範例文字...',
+  'welcome.second.loading': '正在載入範例文字…',
   'welcome.second.study_sentence':
     '你正在學習<strong class="text-emphasize">{{sourceLanguage}}</strong>，你的母語是<strong class="text-emphasize">{{targetLanguage}}</strong>。',
   'welcome.second.change': '變更',
@@ -125,15 +125,15 @@ export const zhTW = {
     '你可能遇到了 Safari 的錯誤，導致無法偵測到擴充功能。',
   'auth.hands_free.ios_steps_title': '請依照以下步驟操作：',
   'auth.hands_free.ios_step1':
-    '前往 iOS「設定」-> Safari -> 延伸功能 -> Vocably for Safari',
+    '前往 iOS「設定」→ Safari → 延伸功能 → Vocably for Safari',
   'auth.hands_free.ios_step2': '取消勾選「允許延伸功能」',
   'auth.hands_free.ios_step3': '結束 Safari',
   'auth.hands_free.ios_step4':
     '再次前往 iOS「設定」，為 Vocably for Safari 勾選「允許延伸功能」',
   'auth.hands_free.sorry': '造成不便，敬請見諒——我正在努力修正。',
   'auth.hands_free.restart_safari': '請嘗試重新啟動 Safari。',
-  'auth.hands_free.signing_in': '正在登入...',
-  'auth.sign_in_success.loading': '正在載入個人資料...',
+  'auth.hands_free.signing_in': '正在登入…',
+  'auth.sign_in_success.loading': '正在載入個人資料…',
   'auth.sign_in_success.signed_in': '你已成功登入。',
   'auth.sign_in_success.tab_can_close': '現在可以關閉此分頁。',
   'auth.sign_in_success.close_tab': '關閉此分頁',
@@ -142,8 +142,8 @@ export const zhTW = {
   'auth.sign_out.go_to_sign_in': '前往登入頁面',
 
   // Decks
-  'decks.loading': '正在載入卡片集...',
-  'decks.loading_cards': '正在載入卡片...',
+  'decks.loading': '正在載入卡片集…',
+  'decks.loading_cards': '正在載入卡片…',
   'decks.dashboard.study': '學習',
   'decks.dashboard.edit_deck': '編輯卡片集',
   'decks.dashboard.cards_without_tags': '沒有標籤的卡片',
@@ -193,7 +193,7 @@ export const zhTW = {
     '由於法律限制，2025 年 10 月 27 日之前建立的卡片無法匯出。',
   'decks.lexicala_dialog.close': '關閉',
   'decks.no_decks.no_cards': '此卡片集中還沒有卡片。',
-  'decks.study.loading': '學習階段...',
+  'decks.study.loading': '正在載入學習階段…',
   'decks.study.reload': '請重新載入頁面再試一次。',
 
   // Membership
@@ -209,7 +209,7 @@ export const zhTW = {
   'membership.included': '包含內容',
   'membership.unlimited_cards': '每天不限數量的新卡片',
   'membership.retry': '再試一次',
-  'membership.loading': '正在檢查會員狀態...',
+  'membership.loading': '正在檢查會員狀態…',
   'membership.why': '為什麼？',
   'membership.manage': '管理你的訂閱',
   'membership.error': '無法載入你的會員狀態',
@@ -345,14 +345,14 @@ export const zhTW = {
   'feedback.p3': '我會回覆到你的電子郵件地址',
   'feedback.apple_email':
     '這似乎是你註冊時提供的 Apple 隱藏電子郵件，不過別擔心，它應該可以正常運作。',
-  'feedback.placeholder': '請在此輸入你的訊息...',
+  'feedback.placeholder': '請在此輸入你的訊息…',
   'feedback.submit': '送出',
   'feedback.success': '你的訊息已成功送出。以下是你送出的內容：',
   'feedback.error': '很抱歉，送出意見回饋時發生錯誤。可以請你稍後再試一次嗎？',
 
   // Import
   'import.title': '從 CSV 匯入卡片',
-  'import.loading_decks': '正在載入卡片集...',
+  'import.loading_decks': '正在載入卡片集…',
   'import.what_language': '你想匯入哪種語言？',
   'import.import_cards_for': '要匯入的卡片語言：',
   'import.csv_two_columns': 'CSV 檔案必須包含兩個以 Tab 分隔的欄位',
@@ -384,14 +384,14 @@ export const zhTW = {
   'not_found.message': '找不到你要求的頁面。',
 
   // Preview Study Step
-  'preview_step.loading': '學習階段...',
+  'preview_step.loading': '正在載入學習階段…',
   'preview_step.completed': '步驟已完成',
   'preview_step.completed_hint': '這就是此步驟在學習階段中顯示的樣子。',
   'preview_step.try_again': '再試一次',
   'preview_step.back_to_settings': '返回設定',
 
   // Android Translate
-  'android_translate.loading': '正在載入範例文字...',
+  'android_translate.loading': '正在載入範例文字…',
   'android_translate.how_to': '在任何網站或應用程式中翻譯任何單字：',
   'android_translate.step1': '選取單字',
   'android_translate.step2': '點按',

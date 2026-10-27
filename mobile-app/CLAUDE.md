@@ -68,7 +68,7 @@ The system interface is expected to be translated into the following languages:
 - Spanish (es)
 - Turkish (tr)
 - Vietnamese (vi)
-- Chinese (zh-TW) - Traditional Chinese, labelled `中文` in the app language picker
+- Chinese (zh-TW) - Traditional Chinese, labelled `繁體中文` in the app language picker
 
 The translation files are located in `src/i18n/locales`.
 
