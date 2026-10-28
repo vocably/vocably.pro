@@ -180,6 +180,65 @@ export const ChromeScreenshot = () => (
             </At>
           </Screenshot>
 
+          {/* Studying in the mobile app. */}
+          <Screenshot>
+            <At
+              style={{
+                left: '22cqmin',
+                top: '10cqmin',
+                transform: 'rotate(-8deg)',
+              }}
+            >
+              <IPhone16Max width="42cqmin">
+                <PhoneScreen>
+                  <MultiChoiceQuestion
+                    item={copy.searchItem}
+                    incorrect={copy.incorrectTranslations}
+                    language={language}
+                    style={{ marginTop: '6cqmin', fontSize: '6cqmin' }}
+                  />
+                </PhoneScreen>
+              </IPhone16Max>
+            </At>
+            <Text side="right" heading={copy.cws.phone}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-end',
+                  gap: '1.6cqmin',
+                }}
+              >
+                {copy.cws.phoneFeatures.map((feature) => (
+                  <div
+                    key={feature}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1.2cqmin',
+                      padding: '1cqmin 1.2cqmin 1cqmin 2.4cqmin',
+                      borderRadius: '3cqmin',
+                      background: primary,
+                      boxShadow: '0 1cqmin 3cqmin rgba(0, 80, 255, 0.25)',
+                      color: '#fff',
+                      fontSize: '2.8cqmin',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {feature}
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="rgba(255, 255, 255, 0.85)"
+                      style={{ display: 'block', width: '1.3em' }}
+                    >
+                      <path d={checkCircle} />
+                    </svg>
+                  </div>
+                ))}
+              </div>
+            </Text>
+          </Screenshot>
+
           {/* Clicking a word in YouTube subtitles. */}
           <Screenshot>
             <At style={{ left: '6cqmin', top: '44cqmin', width: '80cqmin' }}>
@@ -253,65 +312,6 @@ export const ChromeScreenshot = () => (
               </ChromeWindow>
             </At>
             <Text side="right" heading={copy.cws.browser} />
-          </Screenshot>
-
-          {/* Studying in the mobile app. */}
-          <Screenshot>
-            <At
-              style={{
-                left: '22cqmin',
-                top: '10cqmin',
-                transform: 'rotate(-8deg)',
-              }}
-            >
-              <IPhone16Max width="42cqmin">
-                <PhoneScreen>
-                  <MultiChoiceQuestion
-                    item={copy.searchItem}
-                    incorrect={copy.incorrectTranslations}
-                    language={language}
-                    style={{ marginTop: '6cqmin', fontSize: '6cqmin' }}
-                  />
-                </PhoneScreen>
-              </IPhone16Max>
-            </At>
-            <Text side="right" heading={copy.cws.phone}>
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
-                  gap: '1.6cqmin',
-                }}
-              >
-                {copy.cws.phoneFeatures.map((feature) => (
-                  <div
-                    key={feature}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '1.2cqmin',
-                      padding: '1cqmin 1.2cqmin 1cqmin 2.4cqmin',
-                      borderRadius: '3cqmin',
-                      background: primary,
-                      boxShadow: '0 1cqmin 3cqmin rgba(0, 80, 255, 0.25)',
-                      color: '#fff',
-                      fontSize: '2.8cqmin',
-                      whiteSpace: 'nowrap',
-                    }}
-                  >
-                    {feature}
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="rgba(255, 255, 255, 0.85)"
-                      style={{ display: 'block', width: '1.3em' }}
-                    >
-                      <path d={checkCircle} />
-                    </svg>
-                  </div>
-                ))}
-              </div>
-            </Text>
           </Screenshot>
 
           {/* The whole ecosystem: the mobile apps. */}
