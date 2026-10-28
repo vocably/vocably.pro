@@ -8,14 +8,39 @@ type Props = {
   title: string;
   // The page content.
   children: ReactNode;
+  // Chrome's light or dark theme. Defaults to light.
+  theme?: Theme;
   style?: CSSProperties;
 };
 
-// Colors of Chrome's light theme on macOS.
-const frame = '#dee1e6';
-const toolbar = '#ffffff';
-const omnibox = '#f1f3f4';
-const icon = '#5f6368';
+type Theme = 'light' | 'dark';
+
+// Colors of Chrome's themes on macOS.
+const themes: Record<
+  Theme,
+  {
+    frame: string;
+    toolbar: string;
+    omnibox: string;
+    icon: string;
+    text: string;
+  }
+> = {
+  light: {
+    frame: '#dee1e6',
+    toolbar: '#ffffff',
+    omnibox: '#f1f3f4',
+    icon: '#5f6368',
+    text: '#1f1f1f',
+  },
+  dark: {
+    frame: '#202124',
+    toolbar: '#35363a',
+    omnibox: '#202124',
+    icon: '#9aa0a6',
+    text: '#e8eaed',
+  },
+};
 
 const Dot = ({ color }: { color: string }) => (
   <span
@@ -38,108 +63,118 @@ const navigation = [
 // A desktop Chrome window: the tab strip, the toolbar with the address bar
 // and the Vocably extension icon, and the page under them. Every size is in
 // em, so the window scales with its `fontSize`, which defaults to 2cqmin.
-export const ChromeWindow = ({ url, title, children, style }: Props) => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      overflow: 'hidden',
-      fontFamily: "'Roboto', sans-serif",
-      fontSize: '2cqmin',
-      borderRadius: '0.75em',
-      background: toolbar,
-      boxShadow:
-        '0 1.5em 4em rgba(15, 23, 42, 0.25), 0 0 0 0.06em rgba(15, 23, 42, 0.12)',
-      ...style,
-    }}
-  >
+export const ChromeWindow = ({
+  url,
+  title,
+  children,
+  theme = 'light',
+  style,
+}: Props) => {
+  const { frame, toolbar, omnibox, icon, text } = themes[theme];
+
+  return (
     <div
       style={{
         display: 'flex',
-        alignItems: 'flex-end',
-        gap: '1.5em',
-        padding: '0.6em 0.9em 0',
-        background: frame,
+        flexDirection: 'column',
+        overflow: 'hidden',
+        fontFamily: "'Roboto', sans-serif",
+        fontSize: '2cqmin',
+        borderRadius: '0.75em',
+        background: toolbar,
+        boxShadow:
+          '0 1.5em 4em rgba(15, 23, 42, 0.25), 0 0 0 0.06em rgba(15, 23, 42, 0.12)',
+        ...style,
       }}
     >
       <div
         style={{
           display: 'flex',
-          gap: '0.5em',
-          alignSelf: 'center',
-          paddingBottom: '0.3em',
+          alignItems: 'flex-end',
+          gap: '1.5em',
+          padding: '0.6em 0.9em 0',
+          background: frame,
         }}
       >
-        <Dot color="#ff5f57" />
-        <Dot color="#febc2e" />
-        <Dot color="#28c840" />
+        <div
+          style={{
+            display: 'flex',
+            gap: '0.5em',
+            alignSelf: 'center',
+            paddingBottom: '0.3em',
+          }}
+        >
+          <Dot color="#ff5f57" />
+          <Dot color="#febc2e" />
+          <Dot color="#28c840" />
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.6em',
+            width: '15em',
+            padding: '0.55em 0.9em',
+            borderRadius: '0.6em 0.6em 0 0',
+            background: toolbar,
+            color: text,
+            fontSize: '0.9em',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          <span
+            style={{
+              width: '1em',
+              height: '1em',
+              flexShrink: 0,
+              borderRadius: '50%',
+              background: '#9aa0a6',
+            }}
+          />
+          <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {title}
+          </span>
+        </div>
       </div>
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '0.6em',
-          width: '15em',
-          padding: '0.55em 0.9em',
-          borderRadius: '0.6em 0.6em 0 0',
-          background: toolbar,
-          color: '#1f1f1f',
-          fontSize: '0.9em',
-          whiteSpace: 'nowrap',
+          gap: '1em',
+          padding: '0.5em 0.9em',
+          borderBottom: `0.06em solid ${frame}`,
         }}
       >
-        <span
+        {navigation.map((path) => (
+          <svg
+            key={path}
+            viewBox="0 0 24 24"
+            fill={icon}
+            style={{ display: 'block', width: '1.3em', height: '1.3em' }}
+          >
+            <path d={path} />
+          </svg>
+        ))}
+        <div
           style={{
-            width: '1em',
-            height: '1em',
-            flexShrink: 0,
-            borderRadius: '50%',
-            background: '#9aa0a6',
+            flex: 1,
+            padding: '0.45em 1em',
+            borderRadius: '1em',
+            background: omnibox,
+            color: text,
+            fontSize: '0.9em',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
           }}
-        />
-        <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
-          {title}
-        </span>
-      </div>
-    </div>
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '1em',
-        padding: '0.5em 0.9em',
-        borderBottom: `0.06em solid ${frame}`,
-      }}
-    >
-      {navigation.map((path) => (
-        <svg
-          key={path}
-          viewBox="0 0 24 24"
-          fill={icon}
-          style={{ display: 'block', width: '1.3em', height: '1.3em' }}
         >
-          <path d={path} />
-        </svg>
-      ))}
-      <div
-        style={{
-          flex: 1,
-          padding: '0.45em 1em',
-          borderRadius: '1em',
-          background: omnibox,
-          color: '#1f1f1f',
-          fontSize: '0.9em',
-          whiteSpace: 'nowrap',
-          overflow: 'hidden',
-        }}
-      >
-        {url}
+          {url}
+        </div>
+        {/* The extension's toolbar icon: the logo cropped to its mark. */}
+        <div style={{ width: '1.3em', height: '1.3em', overflow: 'hidden' }}>
+          <Logo style={{ display: 'block', height: '100%', width: 'auto' }} />
+        </div>
       </div>
-      {/* The extension's toolbar icon: the logo cropped to its mark. */}
-      <div style={{ width: '1.3em', height: '1.3em', overflow: 'hidden' }}>
-        <Logo style={{ display: 'block', height: '100%', width: 'auto' }} />
-      </div>
+      <div style={{ position: 'relative', flex: 1 }}>{children}</div>
     </div>
-    <div style={{ position: 'relative', flex: 1 }}>{children}</div>
-  </div>
-);
+  );
+};
