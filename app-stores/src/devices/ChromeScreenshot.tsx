@@ -140,9 +140,9 @@ export const ChromeScreenshot = () => (
             </Text>
             <At style={{ left: '84cqmin', top: '8cqmin', width: '90cqmin' }}>
               <ChromeWindow
-                url="www.example.com"
-                title="Example"
-                style={{ height: '100cqmin', fontSize: '1.8cqmin' }}
+                url="www.news.com"
+                title="Good News"
+                style={{ height: '50cqmin', fontSize: '1.8cqmin' }}
               >
                 <div
                   style={{
@@ -166,7 +166,7 @@ export const ChromeScreenshot = () => (
                 </div>
               </ChromeWindow>
             </At>
-            <At style={{ left: '72cqmin', top: '36cqmin', width: '74cqmin' }}>
+            <At style={{ left: '75cqmin', top: '36cqmin', width: '74cqmin' }}>
               <ExtensionPopup
                 language={language}
                 sourceLanguage={copy.sourceLanguage}
