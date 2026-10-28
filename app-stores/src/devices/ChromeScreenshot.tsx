@@ -96,17 +96,6 @@ const Item = ({
   />
 );
 
-// A four-pointed sparkle, for the corners of the mocks.
-const Sparkle = ({ style }: { style: CSSProperties }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill={primary}
-    style={{ position: 'absolute', opacity: 0.3, ...style }}
-  >
-    <path d="M12,0C12.6,6.5 17.5,11.4 24,12C17.5,12.6 12.6,17.5 12,24C11.4,17.5 6.5,12.6 0,12C6.5,11.4 11.4,6.5 12,0Z" />
-  </svg>
-);
-
 // What a phone screen shows, sized in cqmin of the screen's width rather
 // than of the canvas.
 const PhoneScreen = ({ children }: { children: ReactNode }) => (
@@ -244,9 +233,6 @@ export const ChromeScreenshot = () => (
             <At style={{ left: '6cqmin', top: '44cqmin', width: '80cqmin' }}>
               <YouTubePlayer subtitle={copy.subtitle} />
             </At>
-            <Sparkle
-              style={{ left: '3cqmin', top: '88cqmin', width: '7cqmin' }}
-            />
             <At
               style={{ left: '11cqmin', bottom: '31cqmin', width: '70cqmin' }}
             >
@@ -274,12 +260,6 @@ export const ChromeScreenshot = () => (
                 <VideoCall />
               </ChromeWindow>
             </At>
-            <Sparkle
-              style={{ left: '70cqmin', top: '22cqmin', width: '6cqmin' }}
-            />
-            <Sparkle
-              style={{ left: '76cqmin', top: '19cqmin', width: '2.5cqmin' }}
-            />
             <At style={{ left: '73cqmin', top: '42cqmin', width: '76cqmin' }}>
               <ExtensionPopup
                 language={language}
