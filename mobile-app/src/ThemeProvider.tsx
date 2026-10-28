@@ -13,6 +13,7 @@ type ThemeProvider = FC<PropsWithChildren<{}>>;
 export type AppTheme = MD3Theme & {
   colors: MD3Theme['colors'] & {
     backgroundRgb: string;
+    primaryRgb: string;
     inputBg: string;
     inputBgFocused: string;
     inputIconColor: string;
@@ -40,6 +41,7 @@ export const lightTheme: AppTheme = {
     inputIconColor: 'rgba(106, 106, 106, 0.6)',
     inputPlaceholderColor: 'rgb(170, 170, 170)',
     primary: 'rgb(0, 80, 255)',
+    primaryRgb: '0, 80, 255',
     primaryVariant: 'rgb(0, 61, 204)',
     onPrimary: 'rgb(255, 255, 255)',
     error: 'rgb(221, 34, 34)',
@@ -82,6 +84,7 @@ const darkTheme: AppTheme = {
     inputIconColor: 'rgba(255, 255, 255, 0.5)',
     inputPlaceholderColor: 'rgb(111, 108, 108)',
     primary: 'rgb(40, 165, 255)',
+    primaryRgb: '40, 165, 255',
     primaryVariant: 'rgb(1,95,165)',
     onPrimary: 'rgb(255, 255, 255)',
     error: 'rgb(255, 94, 94)',
@@ -119,3 +122,7 @@ export const ThemeProvider: ThemeProvider = ({ children }) => {
 };
 
 export const useAppTheme = () => useTheme() as AppTheme;
+
+// A soft glow in the primary color that makes call-to-action buttons stand out.
+export const primaryShadow = (theme: AppTheme) =>
+  `0px 4px 12px rgba(${theme.colors.primaryRgb}, ${theme.dark ? 0.35 : 0.4})`;

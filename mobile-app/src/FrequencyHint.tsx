@@ -13,13 +13,14 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import { Button, Text, useTheme } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
 import {
   SafeAreaProvider,
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { mainPadding } from './styles';
+import { primaryShadow, useAppTheme } from './ThemeProvider';
 import { usePremium } from './usePremium';
 import { usePresentPaywall } from './usePresentPaywall';
 
@@ -57,7 +58,7 @@ export const FrequencyHint: FC<Props> = ({
   onUpgradePress,
 }) => {
   const { t } = useTranslation();
-  const theme = useTheme();
+  const theme = useAppTheme();
   const isPremium = usePremium();
   const presentPaywall = usePresentPaywall();
   const { height: screenHeight } = useWindowDimensions();
@@ -315,7 +316,7 @@ export const FrequencyHint: FC<Props> = ({
                         color={color}
                       />
                     )}
-                    style={styles.action}
+                    style={[styles.action, { boxShadow: primaryShadow(theme) }]}
                   >
                     {t('cardsLimit.upgradeToPremium')}
                   </Button>
@@ -341,7 +342,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    paddingBottom: 16,
     borderTopLeftRadius: 28,
     borderTopRightRadius: 28,
     shadowColor: '#000000',
@@ -369,6 +369,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: mainPadding,
     paddingTop: 8,
+    // Lives inside the scroll view, so the upgrade button's shadow isn't
+    // clipped.
+    paddingBottom: 16,
   },
   header: {
     flexDirection: 'row',

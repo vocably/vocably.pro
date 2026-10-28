@@ -2,9 +2,10 @@ import { CardItem, CardsLimit } from '@vocably/model';
 import { FC, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Linking, View } from 'react-native';
-import { Button, Dialog, Portal, Text, useTheme } from 'react-native-paper';
+import { Button, Dialog, Portal, Text } from 'react-native-paper';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { mainPadding } from '../styles';
+import { primaryShadow, useAppTheme } from '../ThemeProvider';
 import { usePresentPaywall } from '../usePresentPaywall';
 
 type Props = {
@@ -25,7 +26,7 @@ export const AddLimitationMessage: FC<Props> = ({
   const [upgradeDialogVisible, setUpgradeDialogVisibility] = useState(false);
 
   const presentPaywall = usePresentPaywall();
-  const theme = useTheme();
+  const theme = useAppTheme();
   const { t } = useTranslation();
 
   if (maxCards === 'unlimited') {
@@ -102,6 +103,7 @@ export const AddLimitationMessage: FC<Props> = ({
           testID="add-limitation-upgrade"
           mode="contained"
           onPress={upgradeClick}
+          style={{ boxShadow: primaryShadow(theme) }}
           icon={({ size, color }) => (
             <MaterialIcon name="workspace-premium" size={size} color={color} />
           )}

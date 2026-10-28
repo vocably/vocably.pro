@@ -30,7 +30,6 @@ import {
   Surface,
   Text,
   TouchableRipple,
-  useTheme,
 } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -50,6 +49,7 @@ import { getRandomizerEnabled } from './Settings/StudySettingsScreen';
 import { swipeListButtonPressOpacity } from './stupidConstants';
 import { mainPadding } from './styles';
 import { TagsSelector } from './TagsSelector';
+import { primaryShadow, useAppTheme } from './ThemeProvider';
 import { CustomSurface } from './ui/CustomSurface';
 import { ScreenLayout } from './ui/ScreenLayout';
 import { Tag } from './ui/Tag';
@@ -144,7 +144,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   } = selectedDeck;
 
   const { refreshLanguages } = useContext(LanguagesContext);
-  const theme = useTheme();
+  const theme = useAppTheme();
   const { t } = useTranslation();
 
   const [refreshing, setRefreshing] = useState(false);
@@ -437,6 +437,8 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                       ? STUDY_BUTTON_SMALL_RADIUS
                       : STUDY_BUTTON_RADIUS,
                     flex: 1,
+                    boxShadow:
+                      cards.length === 0 ? undefined : primaryShadow(theme),
                   }}
                   labelStyle={{
                     fontSize: 18,
@@ -493,6 +495,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                               height: 40 * fontScale,
                               justifyContent: 'center',
                               alignItems: 'center',
+                              boxShadow: primaryShadow(theme),
                             },
                           ]}
                           hitSlop={20}
