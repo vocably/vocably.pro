@@ -97,8 +97,14 @@ const Item = ({
 );
 
 // What a phone screen shows, sized in cqmin of the screen's width rather
-// than of the canvas.
-const PhoneScreen = ({ children }: { children: ReactNode }) => (
+// than of the canvas. `style` is merged over the defaults.
+const PhoneScreen = ({
+  children,
+  style,
+}: {
+  children: ReactNode;
+  style?: CSSProperties;
+}) => (
   <div
     style={{
       containerType: 'inline-size',
@@ -107,6 +113,7 @@ const PhoneScreen = ({ children }: { children: ReactNode }) => (
       flexDirection: 'column',
       alignItems: 'center',
       gap: '8cqmin',
+      ...style,
     }}
   >
     {children}
@@ -179,12 +186,13 @@ export const ChromeScreenshot = () => (
               }}
             >
               <IPhone16Max width="42cqmin">
-                <PhoneScreen>
+                {/* Auto margins center it vertically on the screen. */}
+                <PhoneScreen style={{ margin: 'auto 0' }}>
                   <MultiChoiceQuestion
                     item={copy.searchItem}
                     incorrect={copy.incorrectTranslations}
                     language={language}
-                    style={{ marginTop: '6cqmin', fontSize: '6cqmin' }}
+                    style={{ fontSize: '6cqmin' }}
                   />
                 </PhoneScreen>
               </IPhone16Max>
