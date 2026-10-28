@@ -11,7 +11,6 @@ const background = 'rgb(255, 255, 255)';
 // React Native Paper's MD3 light onSurfaceVariant, for muted text.
 const muted = 'rgb(73, 69, 79)';
 const inputBg = 'rgba(106, 106, 106, 0.1)';
-const divider = 'rgb(170, 170, 170)';
 
 // Material "play-circle", as PlaySound draws it.
 const PlayIcon = ({ size, opacity }: { size: string; opacity: number }) => (
@@ -89,11 +88,6 @@ export const MultiChoiceQuestion = ({
   const examples = hideExamples ? [] : (item.examples ?? []);
 
   const tags = [partOfSpeech, item.g].filter(Boolean) as string[];
-  const plural =
-    item.number === 'singular' &&
-    item.pluralForm &&
-    item.pluralForm !== 'n/a' &&
-    item.pluralForm;
 
   return (
     <div
@@ -141,14 +135,6 @@ export const MultiChoiceQuestion = ({
         </div>
       )}
 
-      {plural && (
-        <div
-          style={{ marginTop: '0.625em', fontSize: '0.9375em', color: muted }}
-        >
-          (plural: {plural})
-        </div>
-      )}
-
       {examples.length > 0 && (
         <div
           style={{
@@ -156,9 +142,6 @@ export const MultiChoiceQuestion = ({
             flexDirection: 'column',
             gap: '0.375em',
             marginTop: '1.25em',
-            paddingLeft: '0.75em',
-            borderLeft: `0.1875em solid ${divider}`,
-            borderRadius: '0.125em',
             fontSize: '1.125em',
           }}
         >

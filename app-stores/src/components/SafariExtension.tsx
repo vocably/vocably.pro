@@ -65,11 +65,18 @@ export const SafariExtension = ({
       style={{
         position: 'relative',
         marginBottom: '4cqmin',
-        paddingTop: '14cqmin',
-        paddingBottom: '4cqmin',
-        borderRadius: '3cqmin',
+        paddingTop: '16cqmin',
+        paddingBottom: '6cqmin',
+        borderRadius: '5cqmin',
         background: '#fff',
-        boxShadow: '0 1cqmin 4cqmin rgba(0, 0, 0, 0.45)',
+        // Layered like the device frames' shadow: a hairline edge, a tight
+        // contact shadow, a key shadow and a wide ambient one.
+        boxShadow: [
+          '0 0 0 0.1cqmin rgba(15, 20, 30, 0.06)',
+          '0 0.3cqmin 0.6cqmin rgba(15, 20, 30, 0.12)',
+          '0 1.6cqmin 3cqmin rgba(15, 20, 30, 0.12)',
+          '0 6cqmin 9cqmin rgba(15, 20, 30, 0.12)',
+        ].join(', '),
         display: 'flex',
         justifyContent: 'center',
       }}
@@ -77,7 +84,7 @@ export const SafariExtension = ({
       <Logo
         style={{
           position: 'absolute',
-          top: '3cqmin',
+          top: '4cqmin',
           left: '4cqmin',
           height: '4cqmin',
           width: 'auto',
@@ -89,7 +96,7 @@ export const SafariExtension = ({
         fill="#bababa"
         style={{
           position: 'absolute',
-          top: '2.5cqmin',
+          top: '3.5cqmin',
           right: '3cqmin',
           width: '5cqmin',
           height: '5cqmin',

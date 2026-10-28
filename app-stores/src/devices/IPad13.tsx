@@ -91,7 +91,6 @@ export const IPad13 = () => (
                 item={localization[language].searchItem}
                 incorrect={localization[language].incorrectTranslations}
                 language={language}
-                hideLastAnswer={language === 'en'}
                 hideExamples
               />
             </IPadAir13>
