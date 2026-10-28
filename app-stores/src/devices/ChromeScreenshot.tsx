@@ -166,7 +166,7 @@ export const ChromeScreenshot = () => (
                 </div>
               </ChromeWindow>
             </At>
-            <At style={{ left: '72cqmin', top: '50cqmin', width: '74cqmin' }}>
+            <At style={{ left: '72cqmin', top: '36cqmin', width: '74cqmin' }}>
               <ExtensionPopup
                 language={language}
                 sourceLanguage={copy.sourceLanguage}

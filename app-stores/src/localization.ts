@@ -113,9 +113,9 @@ const reliablePage: [string, string, string] = [
 // The Chrome Web Store screenshots' web page and YouTube subtitle for German
 // and for English sources.
 const magicArticle: [string, string, string] = [
-  'Der alte Zauberer lebte am Rande des Dorfes. Jeden Abend verzauberte er die Kinder mit seiner ',
+  'Der alte Zauberer lebte am Rande des Dorfes. Mit seiner ',
   'Magie',
-  ' und ließ kleine Lichter über dem Marktplatz tanzen. Niemand wusste, woher seine Kunst kam, doch alle kamen, um ihn zu sehen.',
+  ' ließ er jeden Abend kleine Lichter über dem Marktplatz tanzen. Niemand wusste, woher seine Kunst kam, doch alle kamen, um ihn zu sehen.',
 ];
 const magicSubtitle: [string, string, string] = [
   'Das ist die ',
@@ -123,7 +123,7 @@ const magicSubtitle: [string, string, string] = [
   ' des Augenblicks.',
 ];
 const reliableArticle: [string, string, string] = [
-  'After years of testing in the harshest conditions, they built a ',
+  'After years of testing in the harshest conditions, it was a ',
   'reliable',
   ' engine that could run for weeks without a single failure. Engineers from all over the world came to see it work.',
 ];
