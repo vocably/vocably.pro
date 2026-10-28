@@ -167,7 +167,7 @@ export const localization: Record<Language, Translations> = {
     translate: 'Translate',
     translateSub: 'any words or phrases.',
     learn: 'Learn',
-    learnSub: 'with quizzes and\ninteractive questions.',
+    learnSub: 'with interactive practice.',
     extension: 'Translate and save',
     extensionSub: 'with a single click using\nthe iOS Safari Extension.',
     cws: {
