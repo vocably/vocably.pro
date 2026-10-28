@@ -5,7 +5,7 @@ import { Accent } from '../components/Accent';
 import { AnalysisItem } from '../components/AnalysisItem';
 import { ChromeWindow } from '../components/ChromeWindow';
 import { ExtensionPopup } from '../components/ExtensionPopup';
-import { IPhone16Max } from '../components/IPhone16Max';
+import { IPhone3D } from '../components/IPhone3D';
 import { Languages } from '../components/Languages';
 import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
 import { Search } from '../components/Search';
@@ -47,7 +47,7 @@ const Text = ({
       top: 0,
       bottom: 0,
       [side]: '7cqmin',
-      width: '64cqmin',
+      width: '55cqmin',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -178,24 +178,18 @@ export const ChromeScreenshot = () => (
 
           {/* Studying in the mobile app. */}
           <Screenshot>
-            <At
-              style={{
-                left: '22cqmin',
-                top: '10cqmin',
-                transform: 'rotate(-8deg)',
-              }}
-            >
-              <IPhone16Max width="42cqmin">
+            <At style={{ left: '12cqmin', top: '2cqmin' }}>
+              <IPhone3D width={Math.min(format.width, format.height) * 0.615}>
                 {/* Auto margins center it vertically on the screen. */}
                 <PhoneScreen style={{ margin: 'auto 0' }}>
                   <MultiChoiceQuestion
                     item={copy.searchItem}
                     incorrect={copy.incorrectTranslations}
                     language={language}
-                    style={{ fontSize: '6cqmin' }}
+                    style={{ fontSize: '7cqmin' }}
                   />
                 </PhoneScreen>
-              </IPhone16Max>
+              </IPhone3D>
             </At>
             <Text side="right" heading={copy.cws.phone}>
               <div
@@ -310,14 +304,11 @@ export const ChromeScreenshot = () => (
                 googlePlay={copy.cws.googlePlayBadge}
               />
             </Text>
-            <At
-              style={{
-                left: '100cqmin',
-                top: '8cqmin',
-                transform: 'rotate(6deg)',
-              }}
-            >
-              <IPhone16Max width="42cqmin">
+            <At style={{ left: '97cqmin', top: '2cqmin' }}>
+              <IPhone3D
+                phone="02"
+                width={Math.min(format.width, format.height) * 0.615}
+              >
                 <PhoneScreen>
                   <Search query={copy.search} />
                   <AnalysisItem
@@ -325,11 +316,11 @@ export const ChromeScreenshot = () => (
                     language={language}
                     learn={copy.learnButton}
                     example={copy.example}
-                    style={{ width: '100%', fontSize: '5.5cqmin' }}
+                    style={{ width: '100%', fontSize: '7cqmin' }}
                     learnIcon
                   />
                 </PhoneScreen>
-              </IPhone16Max>
+              </IPhone3D>
             </At>
           </Screenshot>
         </>

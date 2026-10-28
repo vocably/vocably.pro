@@ -1,17 +1,36 @@
 import type { ReactNode } from 'react';
 
-// public/iphone-01.png is a 1281×2001 iPhone turned in 3D, with its shadow,
-// on a transparent background. Its screen is opaque white.
+// public/iphone-01.png and iphone-02.png are 1281×2001 iPhones turned in 3D,
+// with their shadows, on transparent backgrounds: 01 turns its right side
+// away, 02 its left side. Their screens are opaque white.
 const image = { width: 1281, height: 2001 };
 
-// The screen's corners in the image, in its pixels, where its straight edges
+type Corner = readonly [number, number];
+type Corners = {
+  topLeft: Corner;
+  topRight: Corner;
+  bottomRight: Corner;
+  bottomLeft: Corner;
+};
+
+// The screen's corners in each image, in its pixels, where its straight edges
 // would meet without the rounded corners.
-const corners = {
-  topLeft: [300.5, 98.5],
-  topRight: [988.7, 146.7],
-  bottomRight: [984.5, 1683.2],
-  bottomLeft: [303.4, 1742.8],
-} as const;
+const phones = {
+  '01': {
+    topLeft: [300.5, 98.5],
+    topRight: [988.7, 146.7],
+    bottomRight: [984.5, 1683.2],
+    bottomLeft: [303.4, 1742.8],
+  },
+  '02': {
+    topLeft: [66, 120],
+    topRight: [770, 77.8],
+    bottomRight: [770, 1710.5],
+    bottomLeft: [66, 1670.6],
+  },
+} satisfies Record<string, Corners>;
+
+export type Phone = keyof typeof phones;
 
 // The flat screen the content is laid out on before it is projected onto the
 // corners: the iPhone 16 Pro Max's 440×956 points.
@@ -19,7 +38,7 @@ const screen = { width: 440, height: 956 };
 
 // The CSS matrix3d that maps the screen rectangle onto the corners (a
 // rectangle-to-quadrilateral projective transform).
-const projection = () => {
+const projection = (corners: Corners) => {
   const [x0, y0] = corners.topLeft;
   const [x1, y1] = corners.topRight;
   const [x2, y2] = corners.bottomRight;
@@ -126,11 +145,13 @@ type Props = {
   // The image width in pixels of the canvas; the height follows the image's
   // aspect ratio. The projection is in pixels, so this can't be in cqmin.
   width: number;
+  // Which image to use.
+  phone?: Phone;
   children: ReactNode;
 };
 
 // Renders children on the screen of an iPhone turned in 3D.
-export const IPhone3D = ({ width, children }: Props) => (
+export const IPhone3D = ({ width, phone = '01', children }: Props) => (
   <div
     style={{
       position: 'relative',
@@ -150,7 +171,7 @@ export const IPhone3D = ({ width, children }: Props) => (
       }}
     >
       <img
-        src={`${import.meta.env.BASE_URL}iphone-01.png`}
+        src={`${import.meta.env.BASE_URL}iphone-${phone}.png`}
         style={{ position: 'absolute', width: '100%', height: '100%' }}
       />
       <div
@@ -160,7 +181,7 @@ export const IPhone3D = ({ width, children }: Props) => (
           top: 0,
           width: screen.width,
           height: screen.height,
-          transform: projection(),
+          transform: projection(phones[phone]),
           transformOrigin: '0 0',
           display: 'flex',
           flexDirection: 'column',
