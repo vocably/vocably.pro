@@ -498,7 +498,7 @@ const preview = (value: string) => {
 };
 
 // Creates the localization when it is missing, otherwise patches the changed
-// attributes.
+// attributes. Returns true when it created one.
 const save = async (
   label: string,
   type: string,
@@ -510,14 +510,14 @@ const save = async (
   const changed = changes(existing?.attributes, wanted);
   if (Object.keys(changed).length === 0) {
     console.log(`  ${label}: up to date`);
-    return;
+    return false;
   }
 
   console.log(`  ${label}: ${existing ? 'updating' : 'creating'}`);
   for (const [key, value] of Object.entries(changed)) {
     console.log(`    ${key}: ${preview(value)}`);
   }
-  if (dryRun) return;
+  if (dryRun) return false;
 
   if (existing) {
     await api('PATCH', `/v1/${type}/${existing.id}`, {
@@ -536,6 +536,7 @@ const save = async (
       },
     });
   }
+  return !existing;
 };
 
 const { data: apps } = await api<{ data: Resource[] }>(
@@ -578,16 +579,20 @@ const { data: appInfoLocalizations } = await api<{ data: Resource[] }>(
   'GET',
   `/v1/appInfos/${appInfo.id}/appInfoLocalizations`
 );
-const { data: versionLocalizations } = await api<{ data: Resource[] }>(
-  'GET',
-  `/v1/appStoreVersions/${version.id}/appStoreVersionLocalizations?limit=200`
-);
+const getVersionLocalizations = async () =>
+  (
+    await api<{ data: Resource[] }>(
+      'GET',
+      `/v1/appStoreVersions/${version.id}/appStoreVersionLocalizations?limit=200`
+    )
+  ).data;
+let versionLocalizations = await getVersionLocalizations();
 
 for (const [language, fields] of Object.entries(details)) {
   for (const locale of localeMap[language]) {
     console.log(`${locale}:`);
 
-    await save(
+    const appInfoCreated = await save(
       'name & subtitle',
       'appInfoLocalizations',
       appInfoLocalizations.find((l) => l.attributes.locale === locale),
@@ -595,6 +600,13 @@ for (const [language, fields] of Object.entries(details)) {
       { name: 'appInfo', type: 'appInfos', id: appInfo.id },
       locale
     );
+
+    // Creating an app info localization makes App Store Connect create an
+    // empty version localization for the same locale, so it has to be
+    // patched rather than created.
+    if (appInfoCreated) {
+      versionLocalizations = await getVersionLocalizations();
+    }
 
     await save(
       'description, keywords & promo',

@@ -30,17 +30,17 @@ export const AppStoreHeader = () => (
               }}
             >
               <Logo className="logo" style={{ width: '19cqmin' }} />
-              <div className="title" style={{ fontSize: '3.6cqmin' }}>
-                {localization[language].iosHeaderTitle}
-              </div>
-              <Languages
-                {...flags[language]}
-                columns={flags[language].languages.length}
-                size={Math.min(format.width, format.height) * 0.025}
-              />
-              <div className="subtitle" style={{ fontSize: '2.7cqmin' }}>
-                {localization[language].languageCount}
-              </div>
+              {/*<div className="title" style={{ fontSize: '3.6cqmin' }}>*/}
+              {/*  {localization[language].iosHeaderTitle}*/}
+              {/*</div>*/}
+              {/*<Languages*/}
+              {/*  {...flags[language]}*/}
+              {/*  columns={flags[language].languages.length}*/}
+              {/*  size={Math.min(format.width, format.height) * 0.025}*/}
+              {/*/>*/}
+              {/*<div className="subtitle" style={{ fontSize: '2.7cqmin' }}>*/}
+              {/*  {localization[language].languageCount}*/}
+              {/*</div>*/}
             </div>
           </Placeholder>
         </Screenshot>
