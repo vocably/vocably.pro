@@ -60,6 +60,8 @@ const localeMap: Record<string, string[]> = {
   pt: ['pt-BR'],
   tr: ['tr'],
   vi: ['vi'],
+  zh: ['zh-Hans'],
+  'zh-TW': ['zh-Hant'],
 };
 
 // Versions whose screenshots can still be edited.

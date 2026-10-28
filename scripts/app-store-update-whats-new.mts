@@ -29,32 +29,40 @@ dotenv.config({ path: `${scriptsDir}/.env`, quiet: true });
 // version.
 const whatsNew: Record<string, string> = {
   en: [
-    '- Search history.',
-    '- Visual tweaks for your aesthetic pleasure.',
+    '- The app interface is translated to Simplified and Traditional Chinese.',
+    '- Little visual tweaks for your aesthetic pleasure.',
   ].join('\n'),
   ru: [
-    '- История поиска.',
-    '- Визуальные улучшения для вашего эстетического удовольствия.',
+    '- Интерфейс приложения переведён на упрощённый и традиционный китайский.',
+    '- Небольшие визуальные улучшения для вашего эстетического удовольствия.',
   ].join('\n'),
   uk: [
-    '- Історія пошуку.',
-    '- Візуальні покращення для вашої естетичної насолоди.',
+    '- Інтерфейс застосунку перекладено спрощеною та традиційною китайською.',
+    '- Невеликі візуальні покращення для вашої естетичної насолоди.',
   ].join('\n'),
   es: [
-    '- Historial de búsqueda.',
-    '- Retoques visuales para tu placer estético.',
+    '- La interfaz de la app está traducida al chino simplificado y al chino tradicional.',
+    '- Pequeños retoques visuales para tu placer estético.',
   ].join('\n'),
   pt: [
-    '- Histórico de pesquisa.',
-    '- Ajustes visuais para o seu prazer estético.',
+    '- A interface do app foi traduzida para o chinês simplificado e o chinês tradicional.',
+    '- Pequenos ajustes visuais para o seu prazer estético.',
   ].join('\n'),
   tr: [
-    '- Arama geçmişi.',
-    '- Estetik zevkiniz için görsel iyileştirmeler.',
+    '- Uygulama arayüzü Basitleştirilmiş ve Geleneksel Çinceye çevrildi.',
+    '- Estetik zevkiniz için küçük görsel iyileştirmeler.',
   ].join('\n'),
   vi: [
-    '- Lịch sử tìm kiếm.',
-    '- Tinh chỉnh giao diện để bạn thêm phần thích mắt.',
+    '- Giao diện ứng dụng đã được dịch sang tiếng Trung giản thể và phồn thể.',
+    '- Vài tinh chỉnh giao diện nhỏ để bạn thêm phần thích mắt.',
+  ].join('\n'),
+  zh: [
+    '- 应用界面现已支持简体中文和繁体中文。',
+    '- 一些视觉细节优化，看起来更赏心悦目。',
+  ].join('\n'),
+  'zh-TW': [
+    '- 應用程式介面現已支援簡體中文和繁體中文。',
+    '- 一些視覺細節調整，看起來更賞心悅目。',
   ].join('\n'),
 };
 
@@ -67,6 +75,8 @@ const whatsNewOutro: Record<string, string> = {
   pt: 'O Vocably está melhorando, pessoal!',
   tr: 'Vocably gelişiyor, arkadaşlar!',
   vi: 'Vocably đang ngày càng tốt hơn, các bạn ơi!',
+  zh: 'Vocably 越来越好啦，朋友们！',
+  'zh-TW': 'Vocably 越來越好囉，朋友們！',
 };
 
 for (const language of Object.keys(whatsNew)) {
@@ -84,6 +94,8 @@ const localeMap: Record<string, string[]> = {
   pt: ['pt-BR'],
   tr: ['tr'],
   vi: ['vi'],
+  zh: ['zh-Hans'],
+  'zh-TW': ['zh-Hant'],
 };
 
 const limit = 4000;

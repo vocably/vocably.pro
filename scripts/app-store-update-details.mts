@@ -274,6 +274,72 @@ Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ
       'tiếng anh,tiếng hàn,tiếng nhật,tiếng trung,tiếng pháp,tiếng đức,ngoại ngữ,từ mới,phát âm',
     promo: '',
   },
+  zh: {
+    name: 'Vocably：词典与单词卡',
+    subtitle: '翻译并积累词汇',
+    description: `一款专为语言学习者打造的词典。
+
+翻译任意单词或短语。将翻译保存为高质量的单词卡。通过测验和问题牢记它们。
+
+用 Vocably 可以做什么：
+
+- 在生活中听到或看到一个单词：用移动应用翻译 → 保存 → 学习
+- 想表达什么却不知道怎么说？用母语搜索 → 保存 → 学习
+- 在 iOS Safari 的任意网站上发现新单词：选中 → 翻译 → 保存 → 学习
+- Vocably 还提供适用于电脑的浏览器扩展程序
+
+用 Vocably 创建的大多数单词卡会自动包含：
+
+- 词性
+- 性别（如适用）
+- IPA 音标
+- 语音发音
+- 翻译
+- 释义
+- 例句
+
+使用间隔重复系统（SRS）学习单词卡，这是一种经过验证的方法，能高效学习并记住大量信息。
+
+掌握一门语言，意味着使用它并记住每一个单词。Vocably 正是为此而生。
+
+使用条款（EULA）：${eula}`,
+    keywords:
+      '翻译,英语,日语,韩语,法语,德语,西班牙语,意大利语,俄语,背单词,外语,学习,发音,记忆卡',
+    promo: '',
+  },
+  'zh-TW': {
+    name: 'Vocably：字典與單字卡',
+    subtitle: '翻譯並累積字彙',
+    description: `一款專為語言學習者打造的字典。
+
+翻譯任何單字或片語。將翻譯儲存為高品質的單字卡。透過測驗和問題牢記它們。
+
+用 Vocably 可以做什麼：
+
+- 在生活中聽到或看到一個單字：用行動應用程式翻譯 → 儲存 → 學習
+- 想表達什麼卻不知道怎麼說？用母語搜尋 → 儲存 → 學習
+- 在 iOS Safari 的任何網站上發現新單字：選取 → 翻譯 → 儲存 → 學習
+- Vocably 也提供適用於電腦的瀏覽器擴充功能
+
+用 Vocably 建立的大多數單字卡會自動包含：
+
+- 詞性
+- 性別（如適用）
+- IPA 音標
+- 語音發音
+- 翻譯
+- 釋義
+- 例句
+
+使用間隔重複系統（SRS）學習單字卡，這是一種經過驗證的方法，能有效學習並記住大量資訊。
+
+掌握一門語言，代表使用它並記住每一個單字。Vocably 正是為此而生。
+
+使用條款（EULA）：${eula}`,
+    keywords:
+      '翻譯,英文,日文,韓文,法文,德文,西班牙文,義大利文,俄文,背單字,外語,學習,發音,記憶卡',
+    promo: '',
+  },
 };
 
 // Interface language → App Store localizations it is written to.
@@ -285,6 +351,8 @@ const localeMap: Record<string, string[]> = {
   pt: ['pt-BR'],
   tr: ['tr'],
   vi: ['vi'],
+  zh: ['zh-Hans'],
+  'zh-TW': ['zh-Hant'],
 };
 
 const limits: Record<keyof Details, number> = {
