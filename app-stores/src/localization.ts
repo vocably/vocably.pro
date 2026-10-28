@@ -1,6 +1,26 @@
 import type { Language } from './languages';
 import type { AnalysisItem, GoogleLanguage } from '@vocably/model';
 
+// A headline and the line under it. *Words between asterisks* are shown in
+// the primary color.
+type Heading = [string, string];
+
+type ChromeWebStore = {
+  // The headings of the screenshots, in store order.
+  save: Heading;
+  youtube: Heading;
+  calls: Heading;
+  browser: Heading;
+  phone: Heading;
+  // The highlights listed on the phone screenshot.
+  phoneFeatures: [string, string, string];
+  everywhere: Heading;
+  // The small line above the store name on the App Store and Google Play
+  // badges.
+  appStoreBadge: string;
+  googlePlayBadge: string;
+};
+
 type Translations = {
   // The headline of the first screenshot.
   title: string;
@@ -30,6 +50,14 @@ type Translations = {
   // The headline of the Safari extension screenshot and the line under it.
   extension: string;
   extensionSub: string;
+  // The Chrome Web Store screenshots.
+  cws: ChromeWebStore;
+  // The web page text of the first Chrome Web Store screenshot, in
+  // `sourceLanguage`: before, the selected `searchItem.source`, after.
+  article: [string, string, string];
+  // The YouTube subtitle of the Chrome Web Store screenshot, split the same
+  // way.
+  subtitle: [string, string, string];
   // The web page text of the Safari extension screenshot, in
   // `sourceLanguage`: before, the selected `searchItem.source`, after.
   pageText: [string, string, string];
@@ -82,6 +110,29 @@ const reliablePage: [string, string, string] = [
   ' engine that',
 ];
 
+// The Chrome Web Store screenshots' web page and YouTube subtitle for German
+// and for English sources.
+const magicArticle: [string, string, string] = [
+  'Der alte Zauberer lebte am Rande des Dorfes. Mit seiner ',
+  'Magie',
+  ' ließ er jeden Abend kleine Lichter über dem Marktplatz tanzen. Niemand wusste, woher seine Kunst kam, doch alle kamen, um ihn zu sehen.',
+];
+const magicSubtitle: [string, string, string] = [
+  'Das ist die ',
+  'Magie',
+  ' des Augenblicks.',
+];
+const reliableArticle: [string, string, string] = [
+  'After years of testing in the harshest conditions, it was a ',
+  'reliable',
+  ' engine that could run for weeks without a single failure. Engineers from all over the world came to see it work.',
+];
+const reliableSubtitle: [string, string, string] = [
+  'It is the most ',
+  'reliable',
+  ' way to get there.',
+];
+
 // The copy shown on the assets, per interface language.
 export const localization: Record<Language, Translations> = {
   en: {
@@ -119,6 +170,41 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'with quizzes and\ninteractive questions.',
     extension: 'Translate and save',
     extensionSub: 'with a single click using\nthe iOS Safari Extension.',
+    cws: {
+      save: [
+        'Save *translated* words',
+        'An AI dictionary that lets you save new words and phrases.',
+      ],
+      youtube: [
+        'Click any word in *YouTube* subtitles',
+        'Vocably translates the word and helps you learn it.',
+      ],
+      calls: [
+        '*Translate* and *save* during video calls',
+        'Perfect for anyone taking lessons with an online tutor.',
+      ],
+      browser: [
+        '*Study* right in your browser',
+        'Quizzes and interactive questions help the saved words stick.',
+      ],
+      phone: [
+        '*Learn* your words on your *phone*',
+        'Review saved words using spaced repetition.',
+      ],
+      phoneFeatures: [
+        'Synced across devices',
+        'AI flashcard generation from a prompt',
+        'A dictionary that is always at hand',
+      ],
+      everywhere: [
+        '*Translate* no matter what you are doing',
+        'Vocably is an ecosystem built for people who actively use a foreign language.',
+      ],
+      appStoreBadge: 'Download on the',
+      googlePlayBadge: 'GET IT ON',
+    },
+    article: magicArticle,
+    subtitle: magicSubtitle,
     pageText: ['mit seiner ', 'Magie', ' und ließ'],
     androidExtension: 'Select, translate,\nand save',
     androidExtensionSub: 'words while surfing the web\nin any mobile browser.',
@@ -174,6 +260,41 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'con cuestionarios y preguntas interactivas.',
     extension: 'Traduce y guarda',
     extensionSub: 'con un solo clic usando la extensión de Safari para iOS.',
+    cws: {
+      save: [
+        'Guarda las palabras *traducidas*',
+        'Un diccionario con IA para guardar palabras y frases nuevas.',
+      ],
+      youtube: [
+        'Haz clic en cualquier palabra de los subtítulos de *YouTube*',
+        'Vocably la traduce y te ayuda a aprenderla.',
+      ],
+      calls: [
+        '*Traduce* y *guarda* durante videollamadas',
+        'Ideal para quienes toman clases con un profesor en línea.',
+      ],
+      browser: [
+        '*Estudia* en tu navegador',
+        'Los cuestionarios y las preguntas interactivas te ayudan a fijar las palabras guardadas.',
+      ],
+      phone: [
+        '*Aprende* tus palabras en el *móvil*',
+        'Repasa las palabras guardadas con repetición espaciada.',
+      ],
+      phoneFeatures: [
+        'Sincronizado entre dispositivos',
+        'Tarjetas generadas por IA a partir de una petición',
+        'Un diccionario siempre a mano',
+      ],
+      everywhere: [
+        '*Traduce* hagas lo que hagas',
+        'Vocably es un ecosistema creado para quienes usan activamente un idioma extranjero.',
+      ],
+      appStoreBadge: 'Descárgalo en el',
+      googlePlayBadge: 'DISPONIBLE EN',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: 'Selecciona, traduce y guarda',
     androidExtensionSub:
@@ -231,6 +352,41 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'com testes e perguntas interativas.',
     extension: 'Traduza e salve',
     extensionSub: 'com um único clique usando a extensão do Safari para iOS.',
+    cws: {
+      save: [
+        'Salve as palavras *traduzidas*',
+        'Um dicionário com IA para salvar novas palavras e frases.',
+      ],
+      youtube: [
+        'Clique em qualquer palavra das legendas do *YouTube*',
+        'O Vocably traduz a palavra e ajuda você a aprendê-la.',
+      ],
+      calls: [
+        '*Traduza* e *salve* durante videochamadas',
+        'Perfeito para quem tem aulas com um professor on-line.',
+      ],
+      browser: [
+        '*Estude* no seu navegador',
+        'Testes e perguntas interativas ajudam a fixar as palavras salvas.',
+      ],
+      phone: [
+        '*Aprenda* suas palavras no *celular*',
+        'Revise as palavras salvas com repetição espaçada.',
+      ],
+      phoneFeatures: [
+        'Sincronizado entre dispositivos',
+        'Cartões gerados por IA a partir de um pedido',
+        'Um dicionário sempre à mão',
+      ],
+      everywhere: [
+        '*Traduza* não importa o que esteja fazendo',
+        'O Vocably é um ecossistema criado para quem usa ativamente um idioma estrangeiro.',
+      ],
+      appStoreBadge: 'Baixar na',
+      googlePlayBadge: 'DISPONÍVEL NO',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: 'Selecione, traduza e salve',
     androidExtensionSub:
@@ -292,6 +448,41 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'при помощи тестов и интерактивных вопросов.',
     extension: 'Переводите и сохраняйте',
     extensionSub: 'в один клик с помощью расширения Safari для iOS.',
+    cws: {
+      save: [
+        'Сохраняйте *переведенные* слова',
+        'ИИ-словарь, в котором можно сохранять новые слова и фразы.',
+      ],
+      youtube: [
+        'Нажмите на любое слово в субтитрах *YouTube*',
+        'Vocably переведет слово и поможет его выучить.',
+      ],
+      calls: [
+        '*Переводите* и *сохраняйте* во время видеозвонков',
+        'Идеально для тех, кто занимается с онлайн-репетитором.',
+      ],
+      browser: [
+        '*Учите* слова прямо в браузере',
+        'Тесты и интерактивные вопросы помогут запомнить сохраненные слова.',
+      ],
+      phone: [
+        '*Учите* слова на *телефоне*',
+        'Повторяйте сохраненные слова по методу интервальных повторений.',
+      ],
+      phoneFeatures: [
+        'Синхронизация между устройствами',
+        'Генерация карточек ИИ по запросу',
+        'Словарь всегда под рукой',
+      ],
+      everywhere: [
+        '*Переводите*, чем бы вы ни занимались',
+        'Vocably — это экосистема для тех, кто активно пользуется иностранным языком.',
+      ],
+      appStoreBadge: 'Загрузите в',
+      googlePlayBadge: 'ДОСТУПНО В',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: 'Выделяйте, переводите и сохраняйте',
     androidExtensionSub:
@@ -352,6 +543,41 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'за допомогою тестів та інтерактивних запитань.',
     extension: 'Перекладайте та зберігайте',
     extensionSub: 'в один клік за допомогою розширення Safari для iOS.',
+    cws: {
+      save: [
+        'Зберігайте *перекладені* слова',
+        'ШІ-словник, у якому можна зберігати нові слова та фрази.',
+      ],
+      youtube: [
+        'Натисніть на будь-яке слово в субтитрах *YouTube*',
+        'Vocably перекладе слово й допоможе його вивчити.',
+      ],
+      calls: [
+        '*Перекладайте* та *зберігайте* під час відеодзвінків',
+        'Ідеально для тих, хто займається з онлайн-репетитором.',
+      ],
+      browser: [
+        '*Вчіть* слова просто в браузері',
+        'Тести та інтерактивні запитання допоможуть запам’ятати збережені слова.',
+      ],
+      phone: [
+        '*Вчіть* слова на *телефоні*',
+        'Повторюйте збережені слова за методом інтервальних повторень.',
+      ],
+      phoneFeatures: [
+        'Синхронізація між пристроями',
+        'Генерація карток ШІ за запитом',
+        'Словник завжди під рукою',
+      ],
+      everywhere: [
+        '*Перекладайте*, хоч би чим ви займалися',
+        'Vocably — це екосистема для тих, хто активно користується іноземною мовою.',
+      ],
+      appStoreBadge: 'Завантажте в',
+      googlePlayBadge: 'ДОСТУПНО В',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: 'Виділяйте, перекладайте та зберігайте',
     androidExtensionSub:
@@ -412,6 +638,41 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'testler ve etkileşimli sorularla.',
     extension: 'Çevirin ve kaydedin',
     extensionSub: 'iOS Safari Uzantısı ile tek tıkla.',
+    cws: {
+      save: [
+        '*Çevrilen* kelimeleri kaydedin',
+        'Yeni kelime ve ifadeleri kaydetmenizi sağlayan yapay zekâ destekli bir sözlük.',
+      ],
+      youtube: [
+        '*YouTube* altyazılarındaki herhangi bir kelimeye tıklayın',
+        'Vocably kelimeyi çevirir ve öğrenmenize yardımcı olur.',
+      ],
+      calls: [
+        'Görüntülü görüşmelerde *çevirin* ve *kaydedin*',
+        'Çevrim içi bir öğretmenle ders alan herkes için ideal.',
+      ],
+      browser: [
+        'Doğrudan tarayıcınızda *çalışın*',
+        'Testler ve etkileşimli sorular kaydettiğiniz kelimeleri pekiştirir.',
+      ],
+      phone: [
+        'Kelimelerinizi *telefonunuzda* *öğrenin*',
+        'Kaydettiğiniz kelimeleri aralıklı tekrarla gözden geçirin.',
+      ],
+      phoneFeatures: [
+        'Cihazlar arasında senkronize',
+        'İstemle yapay zekâ kart oluşturma',
+        'Her zaman elinizin altında bir sözlük',
+      ],
+      everywhere: [
+        'Ne yaparsanız yapın *çevirin*',
+        'Vocably, yabancı bir dili aktif olarak kullananlar için tasarlanmış bir ekosistemdir.',
+      ],
+      appStoreBadge: 'Şimdi indirin',
+      googlePlayBadge: 'ŞİMDİ EDİNİN',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: 'Kelimeleri seçin, çevirin ve kaydedin',
     androidExtensionSub: "herhangi bir mobil tarayıcıda web'de gezinirken.",
@@ -471,6 +732,41 @@ export const localization: Record<Language, Translations> = {
     learnSub: 'qua các bài kiểm tra và câu hỏi tương tác.',
     extension: 'Dịch và lưu',
     extensionSub: 'chỉ với một cú nhấp bằng Tiện ích mở rộng Safari trên iOS.',
+    cws: {
+      save: [
+        'Lưu các từ *đã dịch*',
+        'Từ điển AI giúp bạn lưu từ và cụm từ mới.',
+      ],
+      youtube: [
+        'Nhấp vào bất kỳ từ nào trong phụ đề *YouTube*',
+        'Vocably sẽ dịch từ đó và giúp bạn ghi nhớ.',
+      ],
+      calls: [
+        '*Dịch* và *lưu* trong khi gọi video',
+        'Lý tưởng cho những ai học cùng gia sư trực tuyến.',
+      ],
+      browser: [
+        '*Học* ngay trong trình duyệt',
+        'Các bài kiểm tra và câu hỏi tương tác giúp bạn ghi nhớ các từ đã lưu.',
+      ],
+      phone: [
+        '*Học* từ vựng trên *điện thoại*',
+        'Ôn lại các từ đã lưu bằng phương pháp lặp lại ngắt quãng.',
+      ],
+      phoneFeatures: [
+        'Đồng bộ giữa các thiết bị',
+        'AI tạo thẻ ghi nhớ theo yêu cầu',
+        'Từ điển luôn trong tầm tay',
+      ],
+      everywhere: [
+        '*Dịch* dù bạn đang làm gì',
+        'Vocably là hệ sinh thái dành cho những ai thường xuyên sử dụng ngoại ngữ.',
+      ],
+      appStoreBadge: 'Tải về trên',
+      googlePlayBadge: 'TẢI NỘI DUNG TRÊN',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: 'Chọn, dịch và lưu',
     androidExtensionSub: 'từ khi lướt web trên bất kỳ trình duyệt di động nào.',
@@ -530,6 +826,25 @@ export const localization: Record<Language, Translations> = {
     learnSub: '通过测验和互动问题。',
     extension: '翻译并保存',
     extensionSub: '只需一键，借助\niOS Safari 扩展程序即可完成。',
+    cws: {
+      save: ['保存*翻译过*的单词', '一款 AI 词典，帮你保存新单词和短语。'],
+      youtube: [
+        '点击 *YouTube* 字幕中的任意单词',
+        'Vocably 会翻译这个单词，并帮你记住它。',
+      ],
+      calls: ['视频通话时也能*翻译*和*保存*', '非常适合跟着在线老师上课的人。'],
+      browser: ['直接在浏览器中*学习*', '通过测验和互动问题，牢记保存的单词。'],
+      phone: ['在*手机*上*学习*你的单词', '用间隔重复复习保存的单词。'],
+      phoneFeatures: ['多设备同步', 'AI 根据提示生成单词卡', '随时可用的词典'],
+      everywhere: [
+        '无论做什么，都能随时*翻译*',
+        'Vocably 是专为积极使用外语的人打造的生态系统。',
+      ],
+      appStoreBadge: '下载于',
+      googlePlayBadge: '立即获取',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: '选择、翻译并保存单词',
     androidExtensionSub: '在任意移动浏览器中\n浏览网页时即可使用。',
@@ -588,6 +903,28 @@ export const localization: Record<Language, Translations> = {
     learnSub: '透過測驗和互動式問題。',
     extension: '翻譯並儲存',
     extensionSub: '只要一鍵，透過\niOS Safari 擴充功能即可完成。',
+    cws: {
+      save: ['儲存*翻譯過*的單字', '一款 AI 字典，幫你儲存新單字和片語。'],
+      youtube: [
+        '點擊 *YouTube* 字幕中的任何單字',
+        'Vocably 會翻譯這個單字，並幫你記住它。',
+      ],
+      calls: ['視訊通話時也能*翻譯*和*儲存*', '非常適合跟著線上老師上課的人。'],
+      browser: [
+        '直接在瀏覽器中*學習*',
+        '透過測驗和互動式問題，牢記儲存的單字。',
+      ],
+      phone: ['在*手機*上*學習*你的單字', '用間隔重複複習儲存的單字。'],
+      phoneFeatures: ['跨裝置同步', 'AI 依提示產生單字卡', '隨時可用的字典'],
+      everywhere: [
+        '無論做什麼，都能隨時*翻譯*',
+        'Vocably 是專為積極使用外語的人打造的生態系統。',
+      ],
+      appStoreBadge: '下載於',
+      googlePlayBadge: '立即取得',
+    },
+    article: reliableArticle,
+    subtitle: reliableSubtitle,
     pageText: reliablePage,
     androidExtension: '選取、翻譯並儲存單字',
     androidExtensionSub: '在任何行動瀏覽器中\n瀏覽網頁時即可使用。',

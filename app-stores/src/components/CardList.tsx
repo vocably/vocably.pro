@@ -5,7 +5,6 @@ import { ScreenshotBackground } from '../Device';
 const primary = 'rgb(0, 80, 255)';
 const secondary = 'rgb(0, 0, 0)';
 const onBackground = 'rgb(26, 26, 26)';
-const outline = 'rgb(230, 230, 230)';
 
 // Covers the bottom 35% of the canvas, fully opaque from 85% of that down.
 const fade = 'linear-gradient(transparent 65%, black 94.75%)';
@@ -51,7 +50,7 @@ export const CardList = ({ prompt, cards, style }: Props) => (
         {prompt}
       </div>
       <div>
-        {cards.map(([word, translation], index) => (
+        {cards.map(([word, translation]) => (
           <div
             key={word}
             style={{
@@ -59,7 +58,6 @@ export const CardList = ({ prompt, cards, style }: Props) => (
               alignItems: 'center',
               gap: '1em',
               padding: '0.6em 0',
-              borderTop: index === 0 ? 'none' : `0.06em solid ${outline}`,
             }}
           >
             <div style={{ flex: 1, minWidth: 0 }}>

@@ -1,11 +1,14 @@
 import { useId } from 'react';
 import type { AssetFormat } from '../formats';
 
-// White paper the rest is drawn over.
+// White copybook paper, ruled in lines.
 const base = '#fff';
+const ruleColor = 'rgba(96, 140, 210, 0.14)';
+// Shade on both sides of a seam, where two pages meet.
+const gutterColor = '42, 64, 112';
 
-// Muted watercolor tones for the blobs and ribbons, cycled along the
-// panorama, so they read as washes soaked into the paper.
+// Muted watercolor tones for the ribbons, cycled along the panorama, so
+// they read as washes soaked into the paper.
 const palette = [
   '86, 104, 150', // slate blue
   '196, 110, 92', // terracotta
@@ -18,52 +21,6 @@ const palette = [
 ];
 
 const rgb = (color: string, alpha = 1) => `rgba(${color}, ${alpha})`;
-
-type Blob = {
-  // Center, in screenshot widths from the panorama's left edge and in
-  // screenshot heights from the top.
-  x: number;
-  y: number;
-  // Radius, in the format's shorter side.
-  r: number;
-  color: string;
-  alpha: number;
-};
-
-// Deterministic pseudo-random numbers, so every language and every export
-// gets the same background.
-const random = (seed: number) => {
-  const x = Math.sin(seed * 12.9898 + 78.233) * 43758.5453;
-  return x - Math.floor(x);
-};
-
-// Blobs for a panorama of `count` screenshots. One blob sits on every seam,
-// so it spills over into both neighbours and ties them together, and two
-// more fill each screenshot, one high and one low.
-const blobs = (count: number): Blob[] => {
-  const result: Blob[] = [];
-  let n = 0;
-  const add = (x: number, y: number, r: number) => {
-    result.push({
-      x,
-      y,
-      r,
-      color: palette[n % palette.length],
-      alpha: 0.05 + random(n + 100) * 0.03,
-    });
-    n++;
-  };
-
-  for (let i = 0; i < count; i++) {
-    add(i + 0.15 + random(n) * 0.5, 0.02 + random(n + 50) * 0.12, 0.7);
-    add(i + 0.25 + random(n) * 0.5, 0.86 + random(n + 50) * 0.12, 0.75);
-    if (i < count - 1) {
-      // Seams alternate between the middle and the lower half.
-      add(i + 1, i % 2 === 0 ? 0.42 : 0.62, 0.65 + random(n) * 0.15);
-    }
-  }
-  return result;
-};
 
 type Ribbon = {
   // Centerline, in screenshot heights.
@@ -185,15 +142,12 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
   const fibreFrequency = 28 / minSide;
   const fullWidth = count * width;
 
-  const layers = blobs(count).map(
-    ({ x, y, r, color, alpha }) =>
-      `radial-gradient(circle ${r * minSide}px at ${x * width}px ${
-        y * height
-      }px, ${rgb(color, alpha)}, ${rgb(color, alpha * 0.45)} 45%, ${rgb(
-        color,
-        0
-      )})`
-  );
+  // Rows of about 1/16 of the shorter side.
+  const row = minSide / 16;
+  const line = Math.max(1, minSide * 0.0014);
+  // The margin rule runs down every page, near its right edge.
+  const margin = width - minSide * 0.08;
+  const gutter = width * 0.06;
 
   return (
     <div
@@ -203,7 +157,9 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
         left: -index * width,
         width: fullWidth,
         height,
-        background: [...layers, base].join(', '),
+        backgroundColor: base,
+        backgroundImage: `linear-gradient(to top, ${ruleColor} ${line}px, transparent ${line}px)`,
+        backgroundSize: `100% ${row}px`,
       }}
     >
       <svg
@@ -234,6 +190,11 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
               ))}
             </linearGradient>
           ))}
+          <linearGradient id={`${id}-gutter`} x1={0} y1={0} x2={1} y2={0}>
+            <stop offset={0} stopColor={rgb(gutterColor, 0)} />
+            <stop offset={0.5} stopColor={rgb(gutterColor, 0.07)} />
+            <stop offset={1} stopColor={rgb(gutterColor, 0)} />
+          </linearGradient>
           <filter
             id={`${id}-fibres`}
             filterUnits="userSpaceOnUse"
@@ -269,9 +230,30 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
               numOctaves={2}
               seed={3}
             />
-            <feColorMatrix values="0 0 0 0 0.35  0 0 0 0 0.28  0 0 0 0 0.18  0 0 0 -1.6 1.05" />
+            <feColorMatrix values="0 0 0 0 0.2  0 0 0 0 0.26  0 0 0 0 0.4  0 0 0 -1.6 1.05" />
           </filter>
         </defs>
+        {Array.from({ length: count }, (_, page) => (
+          <line
+            key={page}
+            x1={page * width + margin}
+            y1={0}
+            x2={page * width + margin}
+            y2={height}
+            stroke={ruleColor}
+            strokeWidth={line * 1.6}
+          />
+        ))}
+        {Array.from({ length: count - 1 }, (_, seam) => (
+          <rect
+            key={seam}
+            x={(seam + 1) * width - gutter}
+            y={0}
+            width={gutter * 2}
+            height={height}
+            fill={`url(#${id}-gutter)`}
+          />
+        ))}
         {ribbons.map((ribbon, r) => (
           <path
             key={r}
@@ -308,7 +290,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           width={width}
           height={height}
           filter={`url(#${id}-grain)`}
-          opacity={0.11}
+          opacity={0.06}
         />
       </svg>
     </div>

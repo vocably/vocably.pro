@@ -24,6 +24,8 @@ type Props = {
   // Shows the add button as the mobile app's plus-circle-outline icon
   // instead of the extension's "Learn" button.
   learnIcon?: boolean;
+  // Merged over the root styles, so it can override them.
+  style?: CSSProperties;
 };
 
 // Every size is in em, relative to the root font size, which stands for the
@@ -78,6 +80,7 @@ export const AnalysisItem = ({
   hideExamples = false,
   highlightLearn = true,
   learnIcon = false,
+  style,
 }: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
   const partOfSpeech =
@@ -101,6 +104,7 @@ export const AnalysisItem = ({
         fontSize: '4.5cqmin',
         lineHeight: 1.25,
         color: body,
+        ...style,
       }}
     >
       {/* The add button of a card that is not in the deck yet. */}
