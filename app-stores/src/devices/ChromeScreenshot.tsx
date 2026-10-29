@@ -366,7 +366,7 @@ export const ChromeScreenshot = () => (
                 <VideoCall />
               </ChromeWindow>
             </At>
-            <At style={{ left: '75cqmin', top: '34cqmin', width: '76cqmin' }}>
+            <At style={{ left: '75cqmin', top: '26cqmin', width: '76cqmin' }}>
               <ExtensionPopup
                 language={language}
                 sourceLanguage={copy.sourceLanguage}

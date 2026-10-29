@@ -31,6 +31,7 @@ const popupTranslations: Record<Language, Record<string, string>> = {
 const body = '#1f1f1f';
 const muted = '#5c5c5c';
 const field = '#f2f2f2';
+const primary = '#0050ff';
 
 const Icon = ({ path, style }: { path: string; style?: CSSProperties }) => (
   <svg
@@ -162,24 +163,46 @@ export const ExtensionPopup = ({
         />
       </div>
       {search !== undefined && (
+        // Drawn focused, with a primary border, a focus ring and a text
+        // caret after the query, so it reads as a field being typed in.
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             borderRadius: '0.5em',
-            background: field,
+            background: '#fff',
+            border: `0.12em solid ${primary}`,
+            boxShadow: `0 0 0 0.25em rgba(0, 80, 255, 0.15)`,
             overflow: 'hidden',
           }}
         >
-          <span style={{ flex: 1, padding: '0.75em 1em' }}>{search}</span>
+          <span
+            style={{
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0.75em 1em',
+            }}
+          >
+            {search}
+            <span
+              style={{
+                display: 'inline-block',
+                width: '0.1em',
+                height: '1.25em',
+                marginLeft: '0.08em',
+                background: primary,
+              }}
+            />
+          </span>
           <span
             style={{
               alignSelf: 'stretch',
               display: 'flex',
               alignItems: 'center',
-              padding: '0 0.7em',
-              background: '#e3e3e3',
-              color: muted,
+              padding: '0 0.8em',
+              background: primary,
+              color: '#fff',
             }}
           >
             <Icon path={magnify} style={{ width: '1.5em', height: '1.5em' }} />
