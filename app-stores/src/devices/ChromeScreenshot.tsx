@@ -181,7 +181,7 @@ export const ChromeScreenshot = () => (
 
           {/* Studying in the mobile app. */}
           <Screenshot>
-            <At style={{ left: '12cqmin', top: '2cqmin' }}>
+            <At style={{ left: '12cqmin', top: '6cqmin' }}>
               <IPhone3D width={Math.min(format.width, format.height) * 0.615}>
                 {/* Auto margins center it vertically on the screen. */}
                 <PhoneScreen style={{ margin: 'auto 0' }}>
