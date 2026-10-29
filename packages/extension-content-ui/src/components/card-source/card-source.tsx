@@ -136,9 +136,6 @@ export class VocablyCardSource {
           onFocus={() => this.holdFrequencyHint('anchorFocus', true)}
           onBlur={() => this.holdFrequencyHint('anchorFocus', false)}
         >
-          {/* Real text rather than aria-label, so crawlers index the level
-              along with the word and screen readers read it in place. */}
-          <span class="vocably-frequency-label">{label}</span>
           {Array.from({ length: FREQUENCY_BARS }, (_, index) => (
             <span
               class={{
@@ -148,6 +145,10 @@ export class VocablyCardSource {
               aria-hidden="true"
             />
           ))}
+          {/* Real text rather than aria-label, so crawlers index the level
+              along with the word and screen readers read it in place. Goes
+              after the bars, which are sized by :nth-child. */}
+          <span class="vocably-frequency-label">{label}</span>
         </span>
         {/* Rendered only on the client to keep the hint out of SSR output. */}
         {Build.isBrowser && (
