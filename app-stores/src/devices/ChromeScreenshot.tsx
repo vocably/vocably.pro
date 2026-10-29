@@ -8,8 +8,8 @@ import { ChromeWindow } from '../components/ChromeWindow';
 import { ExtensionPopup } from '../components/ExtensionPopup';
 import { IPhone3D } from '../components/IPhone3D';
 import { Languages } from '../components/Languages';
+import { MobileTranslation } from '../components/MobileTranslation';
 import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
-import { Search } from '../components/Search';
 import { StoreBadges } from '../components/StoreBadges';
 import { VideoCall } from '../components/VideoCall';
 import { YouTubePlayer } from '../components/YouTubePlayer';
@@ -408,17 +408,13 @@ export const ChromeScreenshot = () => (
                 phone="02"
                 width={Math.min(format.width, format.height) * 0.615}
               >
-                <PhoneScreen>
-                  <Search query={copy.search} />
-                  <AnalysisItem
-                    item={copy.searchItem}
-                    language={language}
-                    learn={copy.learnButton}
-                    example={copy.example}
-                    style={{ width: '100%', fontSize: '7cqmin' }}
-                    learnIcon
-                  />
-                </PhoneScreen>
+                <MobileTranslation
+                  language={language}
+                  sourceLanguage={copy.sourceLanguage}
+                  targetLanguage={language}
+                  query={copy.search}
+                  items={[copy.searchItem]}
+                />
               </IPhone3D>
             </At>
           </Screenshot>
