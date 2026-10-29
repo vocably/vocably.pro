@@ -270,15 +270,25 @@ export const ChromeScreenshot = () => (
 
           {/* Studying in the mobile app. */}
           <Screenshot>
-            <At style={{ left: '12cqmin', top: '6cqmin' }}>
-              <IPhone3D width={Math.min(format.width, format.height) * 0.615}>
-                {/* Auto margins center it vertically on the screen. */}
-                <PhoneScreen style={{ margin: 'auto 0' }}>
+            <At style={{ left: '1cqmin', top: '4.5cqmin' }}>
+              <IPhone3D width={Math.min(format.width, format.height) * 0.82}>
+                {/* Centered between the 62pt status bar and the bottom of
+                    the screen: the negative margins undo the screen's
+                    154pt padding, and widen it so the longest answer
+                    (Russian) fits on one line. */}
+                <PhoneScreen
+                  style={{
+                    flexGrow: 1,
+                    justifyContent: 'center',
+                    width: 'calc(100% + 24px)',
+                    margin: '-92px 0 -154px',
+                  }}
+                >
                   <MultiChoiceQuestion
                     item={copy.searchItem}
                     incorrect={copy.incorrectTranslations}
                     language={language}
-                    style={{ fontSize: '7cqmin' }}
+                    style={{ fontSize: '6.6cqmin' }}
                   />
                 </PhoneScreen>
               </IPhone3D>
