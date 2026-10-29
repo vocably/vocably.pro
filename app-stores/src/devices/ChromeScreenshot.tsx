@@ -4,7 +4,6 @@ import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Accent } from '../components/Accent';
 import { AnalysisItem } from '../components/AnalysisItem';
-import { Arrow } from '../components/Arrow';
 import { ChromeWindow } from '../components/ChromeWindow';
 import { ExtensionPopup } from '../components/ExtensionPopup';
 import { IPhone3D } from '../components/IPhone3D';
@@ -95,9 +94,11 @@ const At = ({
 const Item = ({
   language,
   hideExamples,
+  pointAtLearn,
 }: {
   language: Language;
   hideExamples?: boolean;
+  pointAtLearn?: boolean;
 }) => (
   <AnalysisItem
     item={localization[language].searchItem}
@@ -106,6 +107,7 @@ const Item = ({
     example={localization[language].example}
     style={{ width: '100%', fontSize: '1em' }}
     hideExamples={hideExamples}
+    pointAtLearn={pointAtLearn}
   />
 );
 
@@ -249,24 +251,12 @@ export const ChromeScreenshot = () => (
                   {before}
                   <span
                     style={{
-                      position: 'relative',
                       background: selection,
                       borderRadius: '0.4cqmin',
                       color: '#1a1a1a',
                     }}
                   >
                     {word}
-                    {/* Anchored to the word, so it follows it wherever the
-                        word wraps in every language. */}
-                    <Arrow
-                      direction="down-right"
-                      style={{
-                        position: 'absolute',
-                        right: 'calc(100% - 0.4em)',
-                        bottom: 'calc(100% - 0.35em)',
-                        width: '1.75em',
-                      }}
-                    />
                   </span>
                   {after}
                 </div>
@@ -277,7 +267,7 @@ export const ChromeScreenshot = () => (
                 language={language}
                 sourceLanguage={copy.sourceLanguage}
               >
-                <Item language={language} />
+                <Item language={language} pointAtLearn />
               </ExtensionPopup>
             </At>
           </Screenshot>
