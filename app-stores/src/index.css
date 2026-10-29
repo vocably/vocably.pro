@@ -140,3 +140,21 @@ body {
   display: block;
   width: 35cqmin;
 }
+
+/* The clicked word in YouTubePlayer's subtitle. The highlight is a pseudo
+   element, so it can be larger than the word without moving the text
+   around it. `isolation` keeps it above the subtitle's dark background and
+   below the word. */
+.subtitle-word {
+  position: relative;
+  isolation: isolate;
+}
+
+.subtitle-word::after {
+  content: '';
+  position: absolute;
+  inset: -0.12em -0.25em;
+  z-index: -1;
+  border-radius: 0.3em;
+  background: #0050ff;
+}

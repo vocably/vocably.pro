@@ -40,8 +40,10 @@ const lights: [number, number, number, string][] = [
 ];
 
 // A YouTube video with subtitles on, paused on a speaker in a studio. The
-// clicked word in the subtitle is underlined. Every size is in em, so the
-// player scales with its `fontSize`, which defaults to 1.6cqmin.
+// clicked word in the subtitle is highlighted the way the extension marks
+// it (`.subtitle-word` in index.css) and is tagged `data-word`. Every size
+// is in em, so the player scales with its `fontSize`, which defaults to
+// 1.6cqmin.
 export const YouTubePlayer = ({
   subtitle: [before, word, after],
   style,
@@ -133,12 +135,7 @@ export const YouTubePlayer = ({
         }}
       >
         {before}
-        <span
-          style={{
-            textDecoration: 'underline',
-            textUnderlineOffset: '0.15em',
-          }}
-        >
+        <span data-word className="subtitle-word">
           {word}
         </span>
         {after}

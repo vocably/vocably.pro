@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from 'react';
 import type { CSSProperties, ReactNode } from 'react';
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
@@ -123,6 +124,86 @@ const PhoneScreen = ({
   </div>
 );
 
+// A YouTube player with the extension popup above it, its tail pointing at
+// the middle of the clicked subtitle word. The word sits at a different spot
+// in every language, so it is measured after every render and again once
+// the fonts have loaded.
+const SubtitleLookup = ({ language }: { language: Language }) => {
+  const copy = localization[language];
+  const player = useRef<HTMLDivElement>(null);
+  const popup = useRef<HTMLDivElement>(null);
+  const [tailOffset, setTailOffset] = useState('0px');
+
+  useLayoutEffect(() => {
+    let active = true;
+    const measure = () => {
+      const word = player.current?.querySelector('[data-word]');
+      if (!active || !word || !popup.current) {
+        return;
+      }
+      const w = word.getBoundingClientRect();
+      const p = popup.current.getBoundingClientRect();
+      // The preview scales the canvas down; offsetWidth is unscaled.
+      const scale = p.width / popup.current.offsetWidth;
+      const offset = (w.left + w.width / 2 - (p.left + p.width / 2)) / scale;
+      setTailOffset(`${offset}px`);
+    };
+    measure();
+    document.fonts.ready.then(measure);
+    return () => {
+      active = false;
+    };
+    // No dependencies: it re-measures after every render, so moving or
+    // resizing either element keeps the tail on the word. Once the offset
+    // settles, setting the same string again does not re-render.
+  });
+
+  return (
+    <>
+      <div
+        ref={player}
+        style={{
+          position: 'absolute',
+          left: '14cqmin',
+          top: '43cqmin',
+          width: '72cqmin',
+        }}
+      >
+        <YouTubePlayer
+          subtitle={copy.subtitle}
+          style={{ fontSize: '1.44cqmin' }}
+        />
+      </div>
+      <div
+        ref={popup}
+        style={{
+          position: 'absolute',
+          left: '8cqmin',
+          bottom: '35cqmin',
+          width: '84cqmin',
+        }}
+      >
+        <ExtensionPopup
+          language={language}
+          sourceLanguage={copy.sourceLanguage}
+          tail
+          tailOffset={tailOffset}
+          // Larger than the player, with a blue glow instead of the default
+          // gray shadow, so the popup stands out against the dark player. A
+          // filter, so the tail casts the glow too.
+          style={{
+            fontSize: '2.4cqmin',
+            filter:
+              'drop-shadow(0 1.2em 2.4em rgba(0, 80, 255, 0.35)) drop-shadow(0 0 0.06em rgba(0, 80, 255, 0.4))',
+          }}
+        >
+          <Item language={language} />
+        </ExtensionPopup>
+      </div>
+    </>
+  );
+};
+
 export const ChromeScreenshot = () => (
   <Device format={format}>
     {(language) => {
@@ -235,21 +316,8 @@ export const ChromeScreenshot = () => (
 
           {/* Clicking a word in YouTube subtitles. */}
           <Screenshot>
-            <At style={{ left: '6cqmin', top: '44cqmin', width: '80cqmin' }}>
-              <YouTubePlayer subtitle={copy.subtitle} />
-            </At>
-            <At
-              style={{ left: '11cqmin', bottom: '31cqmin', width: '70cqmin' }}
-            >
-              <ExtensionPopup
-                language={language}
-                sourceLanguage={copy.sourceLanguage}
-                tail
-              >
-                <Item language={language} />
-              </ExtensionPopup>
-            </At>
-            <Text side="right" heading={copy.cws.youtube} />
+            <SubtitleLookup language={language} />
+            <Text side="right" inset="10cqmin" heading={copy.cws.youtube} />
           </Screenshot>
 
           {/* Looking up a word during a video call. */}

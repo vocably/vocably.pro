@@ -89,6 +89,9 @@ type Props = {
   search?: string;
   // Points a tail from the bottom center of the popup to what was clicked.
   tail?: boolean;
+  // Moves the tail sideways from the center by this CSS length, e.g.
+  // '-10em' or '20%'; negative values move it left.
+  tailOffset?: string;
   // The popup content, usually an <AnalysisItem>.
   children: ReactNode;
   style?: CSSProperties;
@@ -103,6 +106,7 @@ export const ExtensionPopup = ({
   sourceLanguage,
   search,
   tail = false,
+  tailOffset = '0em',
   children,
   style,
 }: Props) => {
@@ -197,7 +201,7 @@ export const ExtensionPopup = ({
           style={{
             position: 'absolute',
             top: '100%',
-            left: '50%',
+            left: `calc(50% + ${tailOffset})`,
             width: '2.4em',
             height: '1.2em',
             marginLeft: '-1.2em',
