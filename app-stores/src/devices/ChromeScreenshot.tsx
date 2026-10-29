@@ -4,6 +4,7 @@ import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Accent } from '../components/Accent';
 import { AnalysisItem } from '../components/AnalysisItem';
+import { Arrow } from '../components/Arrow';
 import { ChromeWindow } from '../components/ChromeWindow';
 import { ExtensionPopup } from '../components/ExtensionPopup';
 import { IPhone3D } from '../components/IPhone3D';
@@ -179,6 +180,7 @@ const SubtitleLookup = ({ language }: { language: Language }) => {
       >
         <YouTubePlayer
           subtitle={copy.subtitle}
+          pointer
           style={{ fontSize: '1.44cqmin' }}
         />
       </div>
@@ -247,12 +249,24 @@ export const ChromeScreenshot = () => (
                   {before}
                   <span
                     style={{
+                      position: 'relative',
                       background: selection,
                       borderRadius: '0.4cqmin',
                       color: '#1a1a1a',
                     }}
                   >
                     {word}
+                    {/* Anchored to the word, so it follows it wherever the
+                        word wraps in every language. */}
+                    <Arrow
+                      direction="down-right"
+                      style={{
+                        position: 'absolute',
+                        right: 'calc(100% - 0.4em)',
+                        bottom: 'calc(100% - 0.35em)',
+                        width: '1.75em',
+                      }}
+                    />
                   </span>
                   {after}
                 </div>
@@ -346,6 +360,7 @@ export const ChromeScreenshot = () => (
                 url="meet.google.com/abc-defg-hij"
                 title="Google Meet"
                 theme="dark"
+                pointer
                 style={{ height: '56cqmin', fontSize: '1.6cqmin' }}
               >
                 <VideoCall />
@@ -374,6 +389,7 @@ export const ChromeScreenshot = () => (
                   item={copy.searchItem}
                   incorrect={copy.incorrectTranslations}
                   language={language}
+                  answered
                   style={{
                     width: '42cqmin',
                     margin: '5cqmin auto 0',

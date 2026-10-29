@@ -1,13 +1,82 @@
 import { useId, type CSSProperties } from 'react';
 
+type Variant = 'light' | 'dark';
+
 type Props = {
   // Color of the "vocably" wordmark. The icon keeps its brand gradients.
   color?: string;
+  // The icon's colors: the brand blues, or lighter ones for dark
+  // backgrounds.
+  variant?: Variant;
   className?: string;
   style?: CSSProperties;
 };
 
-export const Logo = ({ color = '#1a1a1a', className, style }: Props) => {
+// The icon's colors per variant: the flat fill of the left part and the
+// stops of its three gradients, as [offset, color].
+const palettes: Record<
+  Variant,
+  {
+    fill: string;
+    paint0: [number, string][];
+    paint1: [number, string][];
+    paint2: [number, string][];
+  }
+> = {
+  light: {
+    fill: '#0050FF',
+    paint0: [
+      [0, '#0050FF'],
+      [0.9789, '#00009E'],
+    ],
+    paint1: [
+      [0, '#00C3FF'],
+      [0.0211318, '#00BEFF'],
+      [0.2005, '#0097FF'],
+      [0.3777, '#0078FF'],
+      [0.5499, '#0062FF'],
+      [0.7148, '#0054FF'],
+      [0.8644, '#0050FF'],
+    ],
+    paint2: [
+      [0, '#0050FF'],
+      [0.8476, '#00009E'],
+    ],
+  },
+  dark: {
+    fill: '#29A4FE',
+    paint0: [
+      [0, '#29A4FE'],
+      [0.9789, '#0060A6'],
+    ],
+    paint1: [
+      [0, '#AEDDFF'],
+      [0.0211318, '#91D1FF'],
+      [0.2005, '#70C2FD'],
+      [0.3777, '#50B5FF'],
+      [0.5499, '#45B0FF'],
+      [0.7148, '#39ABFF'],
+      [0.8644, '#29A4FE'],
+    ],
+    paint2: [
+      [0, '#29A4FE'],
+      [0.65, '#003E6C'],
+    ],
+  },
+};
+
+const stops = (list: [number, string][]) =>
+  list.map(([offset, color]) => (
+    <stop key={offset} offset={offset} stopColor={color} />
+  ));
+
+export const Logo = ({
+  color = '#1a1a1a',
+  variant = 'light',
+  className,
+  style,
+}: Props) => {
+  const palette = palettes[variant];
   // Unique gradient ids, so several logos on one page don't clash.
   const id = useId().replace(/[^a-zA-Z0-9_-]/g, '');
   const paint0 = `${id}-paint0`;
@@ -43,7 +112,7 @@ export const Logo = ({ color = '#1a1a1a', className, style }: Props) => {
       />
       <path
         d="M71.013 132.701L145.3 71.509H25.4337C11.3319 71.509 0 82.8409 0 96.9428V264.403C0 278.504 11.3319 289.836 25.4337 289.836H44.8238V187.598C45.0756 166.193 54.6448 146.048 71.013 132.701Z"
-        fill="#0050FF"
+        fill={palette.fill}
       />
       <path
         d="M71.013 132.701L145.3 71.509H25.4337C11.3319 71.509 0 82.8409 0 96.9428V264.403C0 278.504 11.3319 289.836 25.4337 289.836H44.8238V187.598C45.0756 166.193 54.6448 146.048 71.013 132.701Z"
@@ -58,8 +127,7 @@ export const Logo = ({ color = '#1a1a1a', className, style }: Props) => {
           y2="165.772"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#0050FF" />
-          <stop offset="0.9789" stopColor="#00009E" />
+          {stops(palette.paint0)}
         </linearGradient>
         <radialGradient
           id={paint1}
@@ -69,13 +137,7 @@ export const Logo = ({ color = '#1a1a1a', className, style }: Props) => {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(364.529 80.7211) scale(260.632 260.632)"
         >
-          <stop stopColor="#00C3FF" />
-          <stop offset="0.0211318" stopColor="#00BEFF" />
-          <stop offset="0.2005" stopColor="#0097FF" />
-          <stop offset="0.3777" stopColor="#0078FF" />
-          <stop offset="0.5499" stopColor="#0062FF" />
-          <stop offset="0.7148" stopColor="#0054FF" />
-          <stop offset="0.8644" stopColor="#0050FF" />
+          {stops(palette.paint1)}
         </radialGradient>
         <linearGradient
           id={paint2}
@@ -85,8 +147,7 @@ export const Logo = ({ color = '#1a1a1a', className, style }: Props) => {
           y2="234.025"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#0050FF" />
-          <stop offset="0.8476" stopColor="#00009E" />
+          {stops(palette.paint2)}
         </linearGradient>
       </defs>
     </svg>

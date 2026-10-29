@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 import type { AnalysisItem } from '@vocably/model';
 import { languageTranslations } from '@vocably/i18n';
 import type { Language } from '../languages';
+import { Arrow } from './Arrow';
 
 // Colors of the mobile app's light theme (mobile-app/src/ThemeProvider.tsx).
 const primary = 'rgb(0, 80, 255)';
@@ -59,6 +60,9 @@ type Props = {
   hideExamples?: boolean;
   // Leaves the last answer out, for when the four don't fit.
   hideLastAnswer?: boolean;
+  // Fills the correct answer and points a mouse cursor at it, as if it had
+  // just been clicked.
+  answered?: boolean;
   // Merged over the root styles, so it can override them.
   style?: CSSProperties;
 };
@@ -76,6 +80,7 @@ export const MultiChoiceQuestion = ({
   language,
   hideExamples = false,
   hideLastAnswer = false,
+  answered = false,
   style,
 }: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
@@ -177,28 +182,47 @@ export const MultiChoiceQuestion = ({
           marginTop: '2em',
         }}
       >
-        {answers.map((answer, index) => (
-          <div
-            key={index}
-            style={{
-              // The 2px ring the app shows around the answer it reveals.
-              padding: '0.125em',
-            }}
-          >
+        {answers.map((answer, index) => {
+          const chosen = answered && index === correctIndex;
+          return (
             <div
+              key={index}
               style={{
-                padding: '0.75em 0.5em',
-                border: `0.0625em solid ${primary}`,
-                borderRadius: '1em',
-                background,
-                color: primary,
-                textAlign: 'center',
+                // The 2px ring the app shows around the answer it reveals.
+                padding: '0.125em',
               }}
             >
-              <span style={{ fontSize: '1.125em' }}>{answer}</span>
+              <div
+                style={{
+                  padding: '0.75em 0.5em',
+                  border: `0.0625em solid ${primary}`,
+                  borderRadius: '1em',
+                  background: chosen ? primary : background,
+                  color: chosen ? background : primary,
+                  textAlign: 'center',
+                }}
+              >
+                <span style={{ position: 'relative', fontSize: '1.125em' }}>
+                  {answer}
+                  {chosen && (
+                    // A mouse pointer just past the end of the text, so it
+                    // stays clear of answers of any length. Its tip is
+                    // 0.33em into its box.
+                    <Arrow
+                      direction="up-left"
+                      style={{
+                        position: 'absolute',
+                        left: 'calc(100% + 2em)',
+                        top: '60%',
+                        width: '2.6em',
+                      }}
+                    />
+                  )}
+                </span>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
