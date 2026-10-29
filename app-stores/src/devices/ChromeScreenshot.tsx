@@ -32,13 +32,16 @@ type Side = 'left' | 'right';
 
 // The heading of a screenshot and what follows it, in a column on one side
 // of the canvas, centered vertically. The mock fills the other side.
+// `inset` is the distance from that side of the canvas.
 const Text = ({
   side,
   heading: [title, sub],
+  inset = '7cqmin',
   children,
 }: {
   side: Side;
   heading: [string, string];
+  inset?: string;
   children?: ReactNode;
 }) => (
   <div
@@ -46,7 +49,7 @@ const Text = ({
       position: 'absolute',
       top: 0,
       bottom: 0,
-      [side]: '7cqmin',
+      [side]: inset,
       width: '55cqmin',
       display: 'flex',
       flexDirection: 'column',
@@ -130,7 +133,7 @@ export const ChromeScreenshot = () => (
         <>
           {/* Selecting a word on a web page. */}
           <Screenshot>
-            <Text side="left" heading={copy.cws.save}>
+            <Text side="left" inset="14cqmin" heading={copy.cws.save}>
               <Languages
                 {...flags[language]}
                 columns={flags[language].languages.length}
@@ -138,7 +141,7 @@ export const ChromeScreenshot = () => (
               />
               <div style={{ fontSize: '3.6cqmin' }}>{copy.languageCount}</div>
             </Text>
-            <At style={{ left: '84cqmin', top: '8cqmin', width: '90cqmin' }}>
+            <At style={{ left: '94cqmin', top: '12cqmin', width: '90cqmin' }}>
               <ChromeWindow
                 url="www.news.com"
                 title="Good News"
@@ -166,7 +169,7 @@ export const ChromeScreenshot = () => (
                 </div>
               </ChromeWindow>
             </At>
-            <At style={{ left: '75cqmin', top: '36cqmin', width: '74cqmin' }}>
+            <At style={{ left: '80cqmin', top: '40cqmin', width: '74cqmin' }}>
               <ExtensionPopup
                 language={language}
                 sourceLanguage={copy.sourceLanguage}
@@ -191,7 +194,7 @@ export const ChromeScreenshot = () => (
                 </PhoneScreen>
               </IPhone3D>
             </At>
-            <Text side="right" heading={copy.cws.phone}>
+            <Text side="right" inset="21cqmin" heading={copy.cws.phone}>
               <div
                 style={{
                   display: 'flex',
