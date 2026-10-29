@@ -413,7 +413,7 @@ export const ChromeScreenshot = () => (
                   sourceLanguage={copy.sourceLanguage}
                   targetLanguage={language}
                   query={copy.search}
-                  items={[copy.searchItem]}
+                  items={copy.phoneSearchItems}
                 />
               </IPhone3D>
             </At>

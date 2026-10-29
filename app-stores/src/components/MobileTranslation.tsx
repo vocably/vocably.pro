@@ -260,7 +260,8 @@ export const MobileTranslation = ({
             key={index}
             style={{
               padding: '24px 28px 22px',
-              borderBottom: `1px solid ${divider}`,
+              borderBottom:
+                index < items.length - 1 ? `1px solid ${divider}` : undefined,
             }}
           >
             <AnalysisItem
@@ -282,6 +283,7 @@ export const MobileTranslation = ({
           padding: '10px 0 34px',
           borderTop: `1px solid ${divider}`,
           background: chrome,
+          zIndex: 1,
         }}
       >
         {(Object.keys(tabIcons) as Tab[]).map((tab) => {
