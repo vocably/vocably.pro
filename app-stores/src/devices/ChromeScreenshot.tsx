@@ -322,8 +322,8 @@ export const ChromeScreenshot = () => (
 
           {/* Looking up a word during a video call. */}
           <Screenshot>
-            <Text side="left" heading={copy.cws.calls} />
-            <At style={{ left: '82cqmin', top: '6cqmin', width: '72cqmin' }}>
+            <Text side="left" inset="14cqmin" heading={copy.cws.calls} />
+            <At style={{ left: '92cqmin', top: '10cqmin', width: '62cqmin' }}>
               <ChromeWindow
                 url="meet.google.com/abc-defg-hij"
                 title="Google Meet"
@@ -333,7 +333,7 @@ export const ChromeScreenshot = () => (
                 <VideoCall />
               </ChromeWindow>
             </At>
-            <At style={{ left: '73cqmin', top: '42cqmin', width: '76cqmin' }}>
+            <At style={{ left: '75cqmin', top: '34cqmin', width: '76cqmin' }}>
               <ExtensionPopup
                 language={language}
                 sourceLanguage={copy.sourceLanguage}
