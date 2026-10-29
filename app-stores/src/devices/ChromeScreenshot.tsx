@@ -31,30 +31,38 @@ const checkCircle =
 
 type Side = 'left' | 'right';
 
+// Where the text starts on the last two screenshots, which the store shows
+// side by side.
+const textTop = '30cqmin';
+
 // The heading of a screenshot and what follows it, in a column on one side
 // of the canvas, centered vertically. The mock fills the other side.
-// `inset` is the distance from that side of the canvas.
+// `inset` is the distance from that side of the canvas. `top` starts the
+// column at that distance from the top instead of centering it, so that
+// neighbouring screenshots whose columns differ in height line their titles up.
 const Text = ({
   side,
   heading: [title, sub],
   inset = '7cqmin',
+  top,
   children,
 }: {
   side: Side;
   heading: [string, string];
   inset?: string;
+  top?: string;
   children?: ReactNode;
 }) => (
   <div
     style={{
       position: 'absolute',
-      top: 0,
+      top: top ?? 0,
       bottom: 0,
       [side]: inset,
       width: '55cqmin',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
+      justifyContent: top ? 'flex-start' : 'center',
       alignItems: side === 'left' ? 'flex-start' : 'flex-end',
       gap: '3.5cqmin',
       textAlign: side,
@@ -364,18 +372,28 @@ export const ChromeScreenshot = () => (
                 />
               </ChromeWindow>
             </At>
-            <Text side="right" inset="14cqmin" heading={copy.cws.browser} />
+            <Text
+              side="right"
+              inset="14cqmin"
+              top={textTop}
+              heading={copy.cws.browser}
+            />
           </Screenshot>
 
           {/* The whole ecosystem: the mobile apps. */}
           <Screenshot>
-            <Text side="left" heading={copy.cws.everywhere}>
+            <Text
+              side="left"
+              inset="14cqmin"
+              top={textTop}
+              heading={copy.cws.everywhere}
+            >
               <StoreBadges
                 appStore={copy.cws.appStoreBadge}
                 googlePlay={copy.cws.googlePlayBadge}
               />
             </Text>
-            <At style={{ left: '97cqmin', top: '2cqmin' }}>
+            <At style={{ left: '94cqmin', top: '8cqmin' }}>
               <IPhone3D
                 phone="02"
                 width={Math.min(format.width, format.height) * 0.615}
