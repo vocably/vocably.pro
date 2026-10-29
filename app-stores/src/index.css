@@ -7,7 +7,7 @@ body {
   font-family: system-ui, sans-serif;
   font-size: 14px;
   color: #1f2937;
-  background: #f3f4f6;
+  background: #fff;
 }
 
 .layout {
@@ -18,6 +18,11 @@ body {
 .sidebar {
   width: 240px;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  overflow-y: auto;
   padding: 16px;
   background: #fff;
   border-right: 1px solid #e5e7eb;
