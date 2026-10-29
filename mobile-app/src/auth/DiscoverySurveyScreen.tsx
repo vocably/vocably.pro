@@ -184,7 +184,10 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
     },
   ];
 
-  const startUsingTheApp = async (source?: string) => {
+  const startUsingTheApp = async (
+    source?: string,
+    { skipAnalytics = false }: { skipAnalytics?: boolean } = {}
+  ) => {
     if (isSubmitting) {
       return;
     }
@@ -204,6 +207,10 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
       await saveDecksToStorage({
         [sourceLanguage]: createDefaultLanguageContainerDeck(sourceLanguage),
       });
+
+      if (skipAnalytics) {
+        return;
+      }
 
       posthog.capture('anonymous-registration-form-subbmitted', {
         nativeLanguage: targetLanguage,
@@ -237,6 +244,23 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
 
   const onNext = async () => {
     await startUsingTheApp();
+  };
+
+  // Hidden shortcut for testing on prod: tapping the compass icon three times
+  // skips the survey without sending analytics events.
+  const compassTaps = useRef({ count: 0, lastTapAt: 0 });
+  const onCompassPress = async () => {
+    const now = Date.now();
+    const taps = compassTaps.current;
+    taps.count = now - taps.lastTapAt < 1000 ? taps.count + 1 : 1;
+    taps.lastTapAt = now;
+
+    if (taps.count < 3) {
+      return;
+    }
+
+    taps.count = 0;
+    await startUsingTheApp(undefined, { skipAnalytics: true });
   };
 
   // Keeps the "Other" input and the next button visible when they appear
@@ -275,24 +299,26 @@ export const DiscoverySurveyScreen: FC<Props> = ({ route }) => {
           entering={FadeIn.duration(500)}
           style={{ alignItems: 'center', gap: 12 }}
         >
-          <LinearGradient
-            colors={[theme.colors.primary, theme.colors.primaryVariant]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: 32,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Icon
-              name="compass-outline"
-              size={34}
-              color={theme.colors.onPrimary}
-            />
-          </LinearGradient>
+          <Pressable testID="discovery-skip" onPress={onCompassPress}>
+            <LinearGradient
+              colors={[theme.colors.primary, theme.colors.primaryVariant]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={{
+                width: 64,
+                height: 64,
+                borderRadius: 32,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Icon
+                name="compass-outline"
+                size={34}
+                color={theme.colors.onPrimary}
+              />
+            </LinearGradient>
+          </Pressable>
           <Text
             style={{
               textAlign: 'center',
