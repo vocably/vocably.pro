@@ -106,7 +106,7 @@ Terms of Use (EULA): ${eula}`,
 
 Условия использования (EULA): ${eula}`,
     keywords:
-      'словарь,переводчик,обучение,английский,немецкий,французский,испанский,итальянский,голландский,слова',
+      'переводчик,английский,немецкий,французский,испанский,итальянский,польский,слова,языки,учить,японский',
     promo: '',
   },
   uk: {
@@ -139,7 +139,7 @@ Terms of Use (EULA): ${eula}`,
 
 Умови використання (EULA): ${eula}`,
     keywords:
-      'перекладач,англійська,німецька,іспанська,французька,італійська,польська,слова,мови,навчання',
+      'перекладач,англійська,німецька,іспанська,французька,італійська,польська,лексика,мови,навчання,вимова',
     promo: '',
   },
   es: {
@@ -172,7 +172,7 @@ Dominar un idioma significa usarlo y recordar cada palabra. Para eso existe Voca
 
 Condiciones de uso (EULA): ${eula}`,
     keywords:
-      'traductor,inglés,alemán,francés,italiano,portugués,idiomas,palabras,aprender,tarjetas',
+      'traductor,inglés,alemán,francés,italiano,portugués,idiomas,palabras,aprender,flashcards,coreano,ruso',
     promo: '',
   },
   pt: {
@@ -205,7 +205,7 @@ Dominar um idioma significa usá-lo e lembrar de cada palavra. É para isso que 
 
 Termos de Uso (EULA): ${eula}`,
     keywords:
-      'tradutor,inglês,espanhol,alemão,francês,italiano,idiomas,palavras,aprender,flashcards',
+      'tradutor,inglês,espanhol,alemão,francês,italiano,idiomas,palavras,aprender,flashcards,chinês,coreano',
     promo: '',
   },
   tr: {
@@ -238,7 +238,7 @@ Bir dili öğrenmek, onu kullanmak ve her kelimeyi hatırlamak demektir. Vocably
 
 Kullanım Koşulları (EULA): ${eula}`,
     keywords:
-      'çevirmen,ingilizce,almanca,ispanyolca,fransızca,italyanca,rusça,dil,öğrenme,flashcard',
+      'çevirmen,ingilizce,almanca,ispanyolca,fransızca,italyanca,rusça,dil,öğrenme,flashcard,japonca,korece',
     promo: '',
   },
   vi: {
@@ -271,7 +271,7 @@ Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ
 
 Điều khoản sử dụng (EULA): ${eula}`,
     keywords:
-      'tiếng anh,tiếng hàn,tiếng nhật,tiếng trung,tiếng pháp,tiếng đức,ngoại ngữ,từ mới,phát âm',
+      'tiếng anh,tiếng hàn,tiếng nhật,tiếng trung,tiếng pháp,tiếng đức,ngoại ngữ,từ mới,phát âm,ghi nhớ,ipa',
     promo: '',
   },
   zh: {
@@ -304,7 +304,7 @@ Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ
 
 使用条款（EULA）：${eula}`,
     keywords:
-      '翻译,英语,日语,韩语,法语,德语,西班牙语,意大利语,俄语,背单词,外语,学习,发音,记忆卡',
+      '英语,日语,韩语,法语,德语,西班牙语,意大利语,俄语,葡萄牙语,阿拉伯语,背单词,记单词,外语,学习,发音,音标,例句,记忆卡,生词本,复习,测验,释义,荷兰语,口语,听力,字典,在线翻译,间隔重复',
     promo: '',
   },
   'zh-TW': {
@@ -337,7 +337,7 @@ Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ
 
 使用條款（EULA）：${eula}`,
     keywords:
-      '翻譯,英文,日文,韓文,法文,德文,西班牙文,義大利文,俄文,背單字,外語,學習,發音,記憶卡',
+      '英文,日文,韓文,法文,德文,西班牙文,義大利文,俄文,葡萄牙文,阿拉伯文,背單字,記單字,外語,學習,發音,音標,例句,記憶卡,單字本,複習,測驗,荷蘭文,越南文,口說,聽力,查單字,辭典,間隔重複',
     promo: '',
   },
 };
