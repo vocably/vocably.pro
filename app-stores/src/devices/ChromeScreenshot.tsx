@@ -346,25 +346,25 @@ export const ChromeScreenshot = () => (
 
           {/* Studying in the web app. */}
           <Screenshot>
-            <At style={{ left: '6cqmin', top: '10cqmin', width: '86cqmin' }}>
+            <At style={{ left: '14cqmin', top: '10cqmin', width: '70cqmin' }}>
               <ChromeWindow
                 url="app.vocably.pro"
                 title="Vocably"
-                style={{ height: '100cqmin', fontSize: '1.8cqmin' }}
+                style={{ height: '80cqmin', fontSize: '1.5cqmin' }}
               >
                 <MultiChoiceQuestion
                   item={copy.searchItem}
                   incorrect={copy.incorrectTranslations}
                   language={language}
                   style={{
-                    width: '52cqmin',
-                    margin: '6cqmin auto 0',
-                    fontSize: '2.6cqmin',
+                    width: '42cqmin',
+                    margin: '5cqmin auto 0',
+                    fontSize: '2.1cqmin',
                   }}
                 />
               </ChromeWindow>
             </At>
-            <Text side="right" heading={copy.cws.browser} />
+            <Text side="right" inset="14cqmin" heading={copy.cws.browser} />
           </Screenshot>
 
           {/* The whole ecosystem: the mobile apps. */}
