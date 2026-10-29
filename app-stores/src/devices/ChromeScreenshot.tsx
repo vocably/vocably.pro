@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import type { CSSProperties, ReactNode } from 'react';
+import type { CSSProperties, ReactNode, RefObject } from 'react';
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Accent } from '../components/Accent';
@@ -135,20 +135,20 @@ const PhoneScreen = ({
   </div>
 );
 
-// A YouTube player with the extension popup above it, its tail pointing at
-// the middle of the clicked subtitle word. The word sits at a different spot
+// How far the popup's tail has to move from the popup's center to point at
+// the middle of the word inside `target`. The word sits at a different spot
 // in every language, so it is measured after every render and again once
 // the fonts have loaded.
-const SubtitleLookup = ({ language }: { language: Language }) => {
-  const copy = localization[language];
-  const player = useRef<HTMLDivElement>(null);
-  const popup = useRef<HTMLDivElement>(null);
+const useTailOffset = (
+  target: RefObject<HTMLElement | null>,
+  popup: RefObject<HTMLElement | null>
+) => {
   const [tailOffset, setTailOffset] = useState('0px');
 
   useLayoutEffect(() => {
     let active = true;
     const measure = () => {
-      const word = player.current?.querySelector('[data-word]');
+      const word = target.current?.querySelector('[data-word]');
       if (!active || !word || !popup.current) {
         return;
       }
@@ -168,6 +168,81 @@ const SubtitleLookup = ({ language }: { language: Language }) => {
     // resizing either element keeps the tail on the word. Once the offset
     // settles, setting the same string again does not re-render.
   });
+
+  return tailOffset;
+};
+
+// A web page with a word selected and the extension popup below it, its
+// tail pointing at the middle of the word.
+const SelectionLookup = ({ language }: { language: Language }) => {
+  const copy = localization[language];
+  const [before, word, after] = copy.article;
+  const page = useRef<HTMLDivElement>(null);
+  const popup = useRef<HTMLDivElement>(null);
+  const tailOffset = useTailOffset(page, popup);
+
+  return (
+    <>
+      <At style={{ left: '94cqmin', top: '12cqmin', width: '90cqmin' }}>
+        <ChromeWindow
+          url="www.news.com"
+          title="Good News"
+          style={{ height: '50cqmin', fontSize: '1.8cqmin' }}
+        >
+          <div
+            ref={page}
+            style={{
+              padding: '5cqmin 6cqmin',
+              fontSize: '4cqmin',
+              lineHeight: 1.5,
+              color: '#a0a0a0',
+            }}
+          >
+            {before}
+            <span
+              data-word
+              style={{
+                background: selection,
+                borderRadius: '0.4cqmin',
+                color: '#1a1a1a',
+              }}
+            >
+              {word}
+            </span>
+            {after}
+          </div>
+        </ChromeWindow>
+      </At>
+      <div
+        ref={popup}
+        style={{
+          position: 'absolute',
+          left: '80cqmin',
+          top: '40cqmin',
+          width: '74cqmin',
+        }}
+      >
+        <ExtensionPopup
+          language={language}
+          sourceLanguage={copy.sourceLanguage}
+          tail
+          tailSide="top"
+          tailOffset={tailOffset}
+        >
+          <Item language={language} pointAtLearn />
+        </ExtensionPopup>
+      </div>
+    </>
+  );
+};
+
+// A YouTube player with the extension popup above it, its tail pointing at
+// the middle of the clicked subtitle word.
+const SubtitleLookup = ({ language }: { language: Language }) => {
+  const copy = localization[language];
+  const player = useRef<HTMLDivElement>(null);
+  const popup = useRef<HTMLDivElement>(null);
+  const tailOffset = useTailOffset(player, popup);
 
   return (
     <>
@@ -191,7 +266,7 @@ const SubtitleLookup = ({ language }: { language: Language }) => {
         style={{
           position: 'absolute',
           left: '8cqmin',
-          bottom: '35cqmin',
+          bottom: '33cqmin',
           width: '84cqmin',
         }}
       >
@@ -200,6 +275,7 @@ const SubtitleLookup = ({ language }: { language: Language }) => {
           sourceLanguage={copy.sourceLanguage}
           tail
           tailOffset={tailOffset}
+          tailSize="1.8em"
           // Larger than the player, with a blue glow instead of the default
           // gray shadow, so the popup stands out against the dark player. A
           // filter, so the tail casts the glow too.
@@ -220,7 +296,6 @@ export const ChromeScreenshot = () => (
   <Device format={format}>
     {(language) => {
       const copy = localization[language];
-      const [before, word, after] = copy.article;
 
       return (
         <>
@@ -234,42 +309,7 @@ export const ChromeScreenshot = () => (
               />
               <div style={{ fontSize: '3.6cqmin' }}>{copy.languageCount}</div>
             </Text>
-            <At style={{ left: '94cqmin', top: '12cqmin', width: '90cqmin' }}>
-              <ChromeWindow
-                url="www.news.com"
-                title="Good News"
-                style={{ height: '50cqmin', fontSize: '1.8cqmin' }}
-              >
-                <div
-                  style={{
-                    padding: '5cqmin 6cqmin',
-                    fontSize: '4cqmin',
-                    lineHeight: 1.5,
-                    color: '#a0a0a0',
-                  }}
-                >
-                  {before}
-                  <span
-                    style={{
-                      background: selection,
-                      borderRadius: '0.4cqmin',
-                      color: '#1a1a1a',
-                    }}
-                  >
-                    {word}
-                  </span>
-                  {after}
-                </div>
-              </ChromeWindow>
-            </At>
-            <At style={{ left: '80cqmin', top: '40cqmin', width: '74cqmin' }}>
-              <ExtensionPopup
-                language={language}
-                sourceLanguage={copy.sourceLanguage}
-              >
-                <Item language={language} pointAtLearn />
-              </ExtensionPopup>
-            </At>
+            <SelectionLookup language={language} />
           </Screenshot>
 
           {/* Studying in the mobile app. */}

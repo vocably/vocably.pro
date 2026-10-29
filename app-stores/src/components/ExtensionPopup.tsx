@@ -90,9 +90,13 @@ type Props = {
   search?: string;
   // Points a tail from the bottom center of the popup to what was clicked.
   tail?: boolean;
+  // The edge the tail sticks out of, the bottom by default.
+  tailSide?: 'top' | 'bottom';
   // Moves the tail sideways from the center by this CSS length, e.g.
   // '-10em' or '20%'; negative values move it left.
   tailOffset?: string;
+  // The width of the tail's base, a CSS length; its height is half of it.
+  tailSize?: string;
   // The popup content, usually an <AnalysisItem>.
   children: ReactNode;
   style?: CSSProperties;
@@ -107,7 +111,9 @@ export const ExtensionPopup = ({
   sourceLanguage,
   search,
   tail = false,
+  tailSide = 'bottom',
   tailOffset = '0em',
+  tailSize = '2.4em',
   children,
   style,
 }: Props) => {
@@ -223,15 +229,16 @@ export const ExtensionPopup = ({
           fill="#fff"
           style={{
             position: 'absolute',
-            top: '100%',
+            [tailSide === 'top' ? 'bottom' : 'top']: '100%',
             left: `calc(50% + ${tailOffset})`,
-            width: '2.4em',
-            height: '1.2em',
-            marginLeft: '-1.2em',
-            marginTop: '-0.05em',
+            width: tailSize,
+            height: `calc(${tailSize} / 2)`,
+            marginLeft: `calc(${tailSize} / -2)`,
+            // Overlaps the popup a little, so no seam shows between them.
+            [tailSide === 'top' ? 'marginBottom' : 'marginTop']: '-0.05em',
           }}
         >
-          <path d="M0,0H24L12,12Z" />
+          <path d={tailSide === 'top' ? 'M0,12H24L12,0Z' : 'M0,0H24L12,12Z'} />
         </svg>
       )}
     </div>
