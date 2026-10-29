@@ -57,6 +57,8 @@ const localeMap: Record<string, string[]> = {
   pt: ['pt-BR'],
   tr: ['tr-TR'],
   vi: ['vi'],
+  zh: ['zh-CN'],
+  'zh-TW': ['zh-TW'],
 };
 
 const args = process.argv.slice(2);

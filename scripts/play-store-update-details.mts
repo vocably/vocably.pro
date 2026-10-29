@@ -256,6 +256,64 @@ Học flashcard với Hệ thống Lặp lại Ngắt quãng (SRS) - phương ph
 
 Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ. Vocably ra đời vì điều đó.`,
   },
+  zh: {
+    title: 'Vocably：词典与单词卡',
+    shortDescription: '翻译任意单词或短语，保存为单词卡，扩充你的词汇量',
+    fullDescription: `一款 AI 词典，能把每一次翻译都变成高质量的单词卡。
+
+支持英语、西班牙语、德语、法语、意大利语等 113 种语言。
+
+用 Vocably 可以做什么：
+
+- 通过一句提示词生成单词卡列表
+- 在生活中听到或看到一个单词：用移动应用翻译 → 保存 → 学习
+- 想表达什么却不知道怎么说？用母语搜索 → 保存 → 学习
+- 在网站或邮件中发现新单词：选中 → 点击 ⠇ → “${menuItem}” → 保存 → 学习
+- Vocably 还提供适用于电脑的浏览器扩展程序
+
+用 Vocably 创建的每张单词卡都包含：
+
+- 词性
+- 性别（如适用）
+- IPA 音标
+- 语音发音
+- 翻译
+- 释义
+- 例句
+
+使用间隔重复系统（SRS）学习单词卡，这是一种经过验证的方法，能高效学习并记住大量信息。
+
+掌握一门语言，意味着使用它并记住每一个单词。Vocably 正是为此而生。`,
+  },
+  'zh-TW': {
+    title: 'Vocably：字典與單字卡',
+    shortDescription: '翻譯任何單字或片語，儲存為單字卡，累積你的字彙量',
+    fullDescription: `一款 AI 字典，能把每一次翻譯都變成高品質的單字卡。
+
+支援英文、西班牙文、德文、法文、義大利文等 113 種語言。
+
+用 Vocably 可以做什麼：
+
+- 透過一句提示詞產生單字卡清單
+- 在生活中聽到或看到一個單字：用行動應用程式翻譯 → 儲存 → 學習
+- 想表達什麼卻不知道怎麼說？用母語搜尋 → 儲存 → 學習
+- 在網站或電子郵件中發現新單字：選取 → 點選 ⠇ → 「${menuItem}」 → 儲存 → 學習
+- Vocably 也提供適用於電腦的瀏覽器擴充功能
+
+用 Vocably 建立的每張單字卡都包含：
+
+- 詞性
+- 性別（如適用）
+- IPA 音標
+- 語音發音
+- 翻譯
+- 釋義
+- 例句
+
+使用間隔重複系統（SRS）學習單字卡，這是一種經過驗證的方法，能有效學習並記住大量資訊。
+
+掌握一門語言，代表使用它並記住每一個單字。Vocably 正是為此而生。`,
+  },
 };
 
 // Interface language → Google Play listing languages it is written to.
@@ -267,6 +325,8 @@ const localeMap: Record<string, string[]> = {
   pt: ['pt-BR'],
   tr: ['tr-TR'],
   vi: ['vi'],
+  zh: ['zh-CN'],
+  'zh-TW': ['zh-TW'],
 };
 
 const limits: Record<keyof Details, number> = {
