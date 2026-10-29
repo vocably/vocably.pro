@@ -44,6 +44,22 @@ vocably-card-source {
     }
   }
 
+  // Visually hidden, but read by screen readers and crawlers. Not selectable,
+  // so copying the word doesn't copy the label too.
+  .vocably-frequency-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+    user-select: none;
+  }
+
   .vocably-frequency-bar {
     display: block;
     width: 3px;

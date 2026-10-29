@@ -117,9 +117,7 @@ export class VocablyCardSource {
             'vocably-frequency': true,
             'vocably-frequency-active': this.isFrequencyHintVisible,
           }}
-          aria-label={label}
           aria-describedby={Build.isBrowser ? this.frequencyHintId : undefined}
-          role="img"
           tabIndex={0}
           ref={(el) => (this.frequencyEl = el)}
           onMouseEnter={() => {
@@ -138,12 +136,16 @@ export class VocablyCardSource {
           onFocus={() => this.holdFrequencyHint('anchorFocus', true)}
           onBlur={() => this.holdFrequencyHint('anchorFocus', false)}
         >
+          {/* Real text rather than aria-label, so crawlers index the level
+              along with the word and screen readers read it in place. */}
+          <span class="vocably-frequency-label">{label}</span>
           {Array.from({ length: FREQUENCY_BARS }, (_, index) => (
             <span
               class={{
                 'vocably-frequency-bar': true,
                 'vocably-frequency-bar-filled': index < level,
               }}
+              aria-hidden="true"
             />
           ))}
         </span>
