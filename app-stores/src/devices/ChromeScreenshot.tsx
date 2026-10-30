@@ -431,7 +431,7 @@ export const ChromeScreenshot = () => (
           <Screenshot>
             <Text
               side="left"
-              inset="14cqmin"
+              inset="22cqmin"
               top={textTop}
               heading={copy.cws.everywhere}
             >
