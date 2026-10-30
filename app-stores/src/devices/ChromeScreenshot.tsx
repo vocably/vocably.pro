@@ -35,16 +35,19 @@ type Side = 'left' | 'right';
 
 // The heading of a screenshot and what follows it, in a column on one side
 // of the canvas, centered vertically. The mock fills the other side.
-// `inset` is the distance from that side of the canvas.
+// `inset` is the distance from that side of the canvas. `noWrap` keeps the
+// title on one line, even if it runs past the column.
 const Text = ({
   side,
   heading: [title, sub],
   inset = '7cqmin',
+  noWrap,
   children,
 }: {
   side: Side;
   heading: [string, string];
   inset?: string;
+  noWrap?: boolean;
   children?: ReactNode;
 }) => (
   <div
@@ -66,11 +69,20 @@ const Text = ({
   >
     <div
       className="title"
-      style={{ fontSize: '7.5cqmin', lineHeight: 1.2, textAlign: side }}
+      style={{
+        fontSize: '7.5cqmin',
+        lineHeight: 1.2,
+        textAlign: side,
+        whiteSpace: noWrap ? 'nowrap' : undefined,
+      }}
     >
       <Accent text={title} />
     </div>
-    <div style={{ fontSize: '3.6cqmin', lineHeight: 1.35 }}>{sub}</div>
+    <div
+      style={{ fontSize: '3.6cqmin', lineHeight: 1.35, whiteSpace: 'pre-line' }}
+    >
+      {sub}
+    </div>
     {children}
   </div>
 );
@@ -252,7 +264,15 @@ export const ChromeScreenshot = () => (
         <>
           {/* Selecting a word on a web page. */}
           <Screenshot>
-            <Text side="left" inset="14cqmin" heading={copy.cws.save}>
+            {/* The Chinese title is a bit wider than the column, and
+                wrapping it leaves one character on the second line. It
+                still ends well before the popup. */}
+            <Text
+              side="left"
+              inset="14cqmin"
+              heading={copy.cws.save}
+              noWrap={language === 'zh' || language === 'zh-TW'}
+            >
               <Languages
                 {...flags[language]}
                 columns={flags[language].languages.length}

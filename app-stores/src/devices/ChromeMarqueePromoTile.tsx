@@ -192,7 +192,13 @@ export const ChromeMarqueePromoTile = () => (
                 )
               )}
             </div>
-            <div style={{ fontSize: '5.6cqmin', lineHeight: 1.35 }}>
+            <div
+              style={{
+                fontSize: '5.6cqmin',
+                lineHeight: 1.35,
+                whiteSpace: 'pre-line',
+              }}
+            >
               {copy.cws.marqueeSub}
             </div>
             <Languages
