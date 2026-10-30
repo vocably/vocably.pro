@@ -32,37 +32,30 @@ const checkCircle =
 
 type Side = 'left' | 'right';
 
-// Where the text starts on the last screenshot.
-const textTop = '30cqmin';
-
 // The heading of a screenshot and what follows it, in a column on one side
 // of the canvas, centered vertically. The mock fills the other side.
-// `inset` is the distance from that side of the canvas. `top` starts the
-// column at that distance from the top instead of centering it, so that
-// neighbouring screenshots whose columns differ in height line their titles up.
+// `inset` is the distance from that side of the canvas.
 const Text = ({
   side,
   heading: [title, sub],
   inset = '7cqmin',
-  top,
   children,
 }: {
   side: Side;
   heading: [string, string];
   inset?: string;
-  top?: string;
   children?: ReactNode;
 }) => (
   <div
     style={{
       position: 'absolute',
-      top: top ?? 0,
+      top: 0,
       bottom: 0,
       [side]: inset,
       width: '55cqmin',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: top ? 'flex-start' : 'center',
+      justifyContent: 'center',
       alignItems: side === 'left' ? 'flex-start' : 'flex-end',
       gap: '3.5cqmin',
       textAlign: side,
@@ -276,14 +269,8 @@ const SubtitleLookup = ({ language }: { language: Language }) => {
           tail
           tailOffset={tailOffset}
           tailSize="1.8em"
-          // Larger than the player, with a blue glow instead of the default
-          // gray shadow, so the popup stands out against the dark player. A
-          // filter, so the tail casts the glow too.
-          style={{
-            fontSize: '2.4cqmin',
-            filter:
-              'drop-shadow(0 1.2em 2.4em rgba(0, 80, 255, 0.35)) drop-shadow(0 0 0.06em rgba(0, 80, 255, 0.4))',
-          }}
+          // Larger than the player, so the popup stands out against it.
+          style={{ fontSize: '2.4cqmin' }}
         >
           <Item language={language} />
         </ExtensionPopup>
@@ -429,12 +416,7 @@ export const ChromeScreenshot = () => (
 
           {/* The whole ecosystem: the mobile apps. */}
           <Screenshot>
-            <Text
-              side="left"
-              inset="22cqmin"
-              top={textTop}
-              heading={copy.cws.everywhere}
-            >
+            <Text side="left" inset="22cqmin" heading={copy.cws.everywhere}>
               <StoreBadges
                 appStore={copy.cws.appStoreBadge}
                 googlePlay={copy.cws.googlePlayBadge}
