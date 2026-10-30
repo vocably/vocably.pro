@@ -73,6 +73,7 @@ export const formats: AssetFormat[] = [
     name: 'Screenshot',
     width: 1280,
     height: 800,
+    gap: 54,
   },
   {
     id: 'cws-small-promo-tile',

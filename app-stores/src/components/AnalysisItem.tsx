@@ -2,6 +2,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import type { AnalysisItem as AnalysisItemType } from '@vocably/model';
 import { languageTranslations } from '@vocably/i18n';
 import type { Language } from '../languages';
+import { Arrow } from './Arrow';
 
 // Colors of the extension's light theme (packages/styles/_variables.scss).
 const primary = '#0050ff';
@@ -21,6 +22,8 @@ type Props = {
   hideExamples?: boolean;
   // Glows the "Learn" button, for a card that stands on its own.
   highlightLearn?: boolean;
+  // Points an arrow at the "Learn" button from below right.
+  pointAtLearn?: boolean;
   // Shows the add button as the mobile app's plus-circle-outline icon
   // instead of the extension's "Learn" button.
   learnIcon?: boolean;
@@ -79,6 +82,7 @@ export const AnalysisItem = ({
   example,
   hideExamples = false,
   highlightLearn = true,
+  pointAtLearn = false,
   learnIcon = false,
   style,
 }: Props) => {
@@ -151,6 +155,19 @@ export const AnalysisItem = ({
             <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
           </svg>
           <span style={{ marginLeft: '0.125em' }}>{learn}</span>
+          {/* Anchored to the button, so it follows it whatever the width
+              of its text in every language. */}
+          {pointAtLearn && (
+            <Arrow
+              direction="up-left"
+              style={{
+                position: 'absolute',
+                left: 'calc(100% - 0.7em)',
+                top: 'calc(100% - 0.6em)',
+                width: '1.75em',
+              }}
+            />
+          )}
         </div>
       )}
 

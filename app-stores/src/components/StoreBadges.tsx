@@ -7,17 +7,45 @@ type Props = {
   style?: CSSProperties;
 };
 
-// Material Design Icons "apple".
-const apple =
-  'M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z';
+// The proportions follow the official badges, in units of the badge height:
+// Apple's "Download on the App Store" (119.66 × 40) and Google's
+// "Get it on Google Play" (180 × 53.33), as in packages/www/src/assets.
 
-// The Google Play triangle, split into its four colors.
+// The Apple logo from the App Store badge, in its 40-high coordinates.
+const AppleIcon = () => (
+  <svg
+    viewBox="9.97 8.72 17.72 21.78"
+    fill="#fff"
+    style={{ display: 'block', height: '0.545em' }}
+  >
+    <path d="M24.76888,20.30068a4.94881,4.94881,0,0,1,2.35656-4.15206,5.06566,5.06566,0,0,0-3.99116-2.15768c-1.67924-.17626-3.30719,1.00483-4.1629,1.00483-.87227,0-2.18977-.98733-3.6085-.95814a5.31529,5.31529,0,0,0-4.47292,2.72787c-1.934,3.34842-.49141,8.26947,1.3612,10.97608.9269,1.32535,2.01018,2.8058,3.42763,2.7533,1.38706-.05753,1.9051-.88448,3.5794-.88448,1.65876,0,2.14479.88448,3.591.8511,1.48838-.02416,2.42613-1.33124,3.32051-2.66914a10.962,10.962,0,0,0,1.51842-3.09251A4.78205,4.78205,0,0,1,24.76888,20.30068Z" />
+    <path d="M22.037 12.211a4.872 4.872 0 0 0 1.115-3.491 4.957 4.957 0 0 0-3.208 1.66 4.636 4.636 0 0 0-1.144 3.361 4.099 4.099 0 0 0 3.237-1.53Z" />
+  </svg>
+);
+
+// The Google Play logo from the Google Play badge, in its 53.33-high
+// coordinates, in the current Google brand colors.
 const PlayIcon = () => (
-  <svg viewBox="0 0 24 24" style={{ display: 'block', width: '2em' }}>
-    <path d="M3,2L13.2,12L3,22Z" fill="#4285f4" />
-    <path d="M3,2L16.6,9.6L13.2,12Z" fill="#34a853" />
-    <path d="M16.6,9.6L21,12L16.6,14.4L13.2,12Z" fill="#fbbc04" />
-    <path d="M13.2,12L16.6,14.4L3,22Z" fill="#ea4335" />
+  <svg
+    viewBox="13.29 9.52 30.69 34.29"
+    style={{ display: 'block', height: '0.643em' }}
+  >
+    <path
+      d="m27.622 25.899-14.194 15.066c.001.003.002.006.002.009.435 1.636 1.93 2.841 3.703 2.841.709 0 1.375-.192 1.945-.528l.045-.027 15.978-9.22-7.479-8.141Z"
+      fill="#ea4335"
+    />
+    <path
+      d="m41.983 23.334-.014-.009-6.898-3.999-7.772 6.916 7.799 7.798 6.862-3.959c1.203-.649 2.02-1.918 2.02-3.38 0-1.452-.806-2.714-1.997-3.367Z"
+      fill="#fbbc04"
+    />
+    <path
+      d="M13.426 12.37c-.085.315-.13.644-.13.987v26.623c0 .342.044.672.131.986l14.684-14.681-14.685-13.915Z"
+      fill="#4285f4"
+    />
+    <path
+      d="m27.727 26.668 7.347-7.345-15.96-9.253a3.853 3.853 0 0 0-1.982-.548c-1.773 0-3.27 1.207-3.705 2.845v.004l14.3 14.297Z"
+      fill="#34a853"
+    />
   </svg>
 );
 
@@ -25,56 +53,99 @@ const Badge = ({
   icon,
   line,
   name,
+  radius,
+  padding,
+  gap,
+  lineStyle,
+  nameStyle,
 }: {
   icon: ReactNode;
   line: string;
   name: string;
+  radius: string;
+  padding: string;
+  gap: string;
+  lineStyle: CSSProperties;
+  nameStyle: CSSProperties;
 }) => (
   <div
     style={{
+      boxSizing: 'border-box',
       display: 'flex',
       alignItems: 'center',
-      gap: '0.6em',
-      padding: '0.55em 1.1em 0.6em 0.8em',
-      borderRadius: '0.6em',
-      border: '0.06em solid #a6a6a6',
+      gap,
+      height: '1em',
+      padding,
+      borderRadius: radius,
+      border: '0.025em solid #a6a6a6',
       background: '#000',
       color: '#fff',
       whiteSpace: 'nowrap',
     }}
   >
     {icon}
-    <div style={{ lineHeight: 1.05 }}>
-      <div style={{ fontSize: '0.75em' }}>{line}</div>
-      <div style={{ fontSize: '1.55em', fontWeight: 500 }}>{name}</div>
+    <div style={{ lineHeight: 1 }}>
+      <div style={lineStyle}>{line}</div>
+      <div style={nameStyle}>{name}</div>
     </div>
   </div>
 );
 
-// The App Store and Google Play download badges, side by side. Sized in em.
+// The App Store and Google Play download badges, side by side, both as tall
+// as the font size.
 export const StoreBadges = ({ appStore, googlePlay, style }: Props) => (
   <div
     style={{
       display: 'flex',
-      gap: '0.8em',
-      fontFamily: "'Roboto', sans-serif",
-      fontSize: '2cqmin',
+      gap: '0.22em',
+      fontSize: '7.2cqmin',
       ...style,
     }}
   >
     <Badge
-      icon={
-        <svg
-          viewBox="0 0 24 24"
-          fill="#fff"
-          style={{ display: 'block', width: '2.2em' }}
-        >
-          <path d={apple} />
-        </svg>
-      }
+      icon={<AppleIcon />}
       line={appStore}
       name="App Store"
+      radius="0.18em"
+      padding="0 0.3em 0 0.25em"
+      gap="0.14em"
+      lineStyle={{
+        fontFamily:
+          "-apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif",
+        fontSize: '0.2em',
+        fontWeight: 500,
+        letterSpacing: '0.01em',
+      }}
+      nameStyle={{
+        fontFamily:
+          "-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif",
+        fontSize: '0.45em',
+        fontWeight: 500,
+        letterSpacing: '-0.02em',
+        marginTop: '0.02em',
+      }}
     />
-    <Badge icon={<PlayIcon />} line={googlePlay} name="Google Play" />
+    <Badge
+      icon={<PlayIcon />}
+      line={googlePlay}
+      name="Google Play"
+      radius="0.125em"
+      padding="0 0.3em 0 0.24em"
+      gap="0.21em"
+      lineStyle={{
+        fontFamily: "'Roboto', sans-serif",
+        fontSize: '0.17em',
+        fontWeight: 500,
+        letterSpacing: '0.04em',
+        textTransform: 'uppercase',
+      }}
+      nameStyle={{
+        fontFamily: "'Google Sans', 'Product Sans', 'Roboto', sans-serif",
+        fontSize: '0.42em',
+        fontWeight: 500,
+        letterSpacing: '-0.01em',
+        marginTop: '0.03em',
+      }}
+    />
   </div>
 );

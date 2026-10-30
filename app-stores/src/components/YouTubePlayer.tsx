@@ -1,8 +1,11 @@
 import type { CSSProperties } from 'react';
+import { Arrow } from './Arrow';
 
 type Props = {
   // The subtitle line: before, the clicked word, after.
   subtitle: [string, string, string];
+  // Points a cursor at the clicked word.
+  pointer?: boolean;
   style?: CSSProperties;
 };
 
@@ -40,10 +43,13 @@ const lights: [number, number, number, string][] = [
 ];
 
 // A YouTube video with subtitles on, paused on a speaker in a studio. The
-// clicked word in the subtitle is underlined. Every size is in em, so the
-// player scales with its `fontSize`, which defaults to 1.6cqmin.
+// clicked word in the subtitle is highlighted the way the extension marks
+// it (`.subtitle-word` in index.css) and is tagged `data-word`. Every size
+// is in em, so the player scales with its `fontSize`, which defaults to
+// 1.6cqmin.
 export const YouTubePlayer = ({
   subtitle: [before, word, after],
+  pointer,
   style,
 }: Props) => (
   <div
@@ -133,13 +139,23 @@ export const YouTubePlayer = ({
         }}
       >
         {before}
-        <span
-          style={{
-            textDecoration: 'underline',
-            textUnderlineOffset: '0.15em',
-          }}
-        >
+        <span data-word className="subtitle-word">
           {word}
+          {pointer && (
+            // A mouse pointer coming from below, as the extension popup
+            // sits above the subtitle, its tip on the bottom right corner
+            // of the highlight, which reaches 0.25em right of and 0.12em
+            // below the word.
+            <Arrow
+              direction="up-left"
+              style={{
+                position: 'absolute',
+                left: 'calc(100% - 0.16em)',
+                top: 'calc(100% - 0.24em)',
+                width: '2.5em',
+              }}
+            />
+          )}
         </span>
         {after}
       </span>

@@ -7,7 +7,7 @@ body {
   font-family: system-ui, sans-serif;
   font-size: 14px;
   color: #1f2937;
-  background: #f3f4f6;
+  background: #fff;
 }
 
 .layout {
@@ -18,6 +18,11 @@ body {
 .sidebar {
   width: 240px;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  overflow-y: auto;
   padding: 16px;
   background: #fff;
   border-right: 1px solid #e5e7eb;
@@ -134,4 +139,22 @@ body {
 .logo {
   display: block;
   width: 35cqmin;
+}
+
+/* The clicked word in YouTubePlayer's subtitle. The highlight is a pseudo
+   element, so it can be larger than the word without moving the text
+   around it. `isolation` keeps it above the subtitle's dark background and
+   below the word. */
+.subtitle-word {
+  position: relative;
+  isolation: isolate;
+}
+
+.subtitle-word::after {
+  content: '';
+  position: absolute;
+  inset: -0.12em -0.25em;
+  z-index: -1;
+  border-radius: 0.3em;
+  background: #0050ff;
 }

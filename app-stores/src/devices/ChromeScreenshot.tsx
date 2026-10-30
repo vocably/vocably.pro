@@ -1,14 +1,16 @@
-import type { CSSProperties, ReactNode } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
+import type { CSSProperties, ReactNode, RefObject } from 'react';
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Accent } from '../components/Accent';
 import { AnalysisItem } from '../components/AnalysisItem';
 import { ChromeWindow } from '../components/ChromeWindow';
 import { ExtensionPopup } from '../components/ExtensionPopup';
+import { Flashcard } from '../components/Flashcard';
 import { IPhone3D } from '../components/IPhone3D';
 import { Languages } from '../components/Languages';
+import { MobileTranslation } from '../components/MobileTranslation';
 import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
-import { Search } from '../components/Search';
 import { StoreBadges } from '../components/StoreBadges';
 import { VideoCall } from '../components/VideoCall';
 import { YouTubePlayer } from '../components/YouTubePlayer';
@@ -32,13 +34,16 @@ type Side = 'left' | 'right';
 
 // The heading of a screenshot and what follows it, in a column on one side
 // of the canvas, centered vertically. The mock fills the other side.
+// `inset` is the distance from that side of the canvas.
 const Text = ({
   side,
   heading: [title, sub],
+  inset = '7cqmin',
   children,
 }: {
   side: Side;
   heading: [string, string];
+  inset?: string;
   children?: ReactNode;
 }) => (
   <div
@@ -46,7 +51,7 @@ const Text = ({
       position: 'absolute',
       top: 0,
       bottom: 0,
-      [side]: '7cqmin',
+      [side]: inset,
       width: '55cqmin',
       display: 'flex',
       flexDirection: 'column',
@@ -82,9 +87,11 @@ const At = ({
 const Item = ({
   language,
   hideExamples,
+  pointAtLearn,
 }: {
   language: Language;
   hideExamples?: boolean;
+  pointAtLearn?: boolean;
 }) => (
   <AnalysisItem
     item={localization[language].searchItem}
@@ -93,6 +100,7 @@ const Item = ({
     example={localization[language].example}
     style={{ width: '100%', fontSize: '1em' }}
     hideExamples={hideExamples}
+    pointAtLearn={pointAtLearn}
   />
 );
 
@@ -120,17 +128,167 @@ const PhoneScreen = ({
   </div>
 );
 
+// How far the popup's tail has to move from the popup's center to point at
+// the middle of the word inside `target`. The word sits at a different spot
+// in every language, so it is measured after every render and again once
+// the fonts have loaded.
+const useTailOffset = (
+  target: RefObject<HTMLElement | null>,
+  popup: RefObject<HTMLElement | null>
+) => {
+  const [tailOffset, setTailOffset] = useState('0px');
+
+  useLayoutEffect(() => {
+    let active = true;
+    const measure = () => {
+      const word = target.current?.querySelector('[data-word]');
+      if (!active || !word || !popup.current) {
+        return;
+      }
+      const w = word.getBoundingClientRect();
+      const p = popup.current.getBoundingClientRect();
+      // The preview scales the canvas down; offsetWidth is unscaled.
+      const scale = p.width / popup.current.offsetWidth;
+      const offset = (w.left + w.width / 2 - (p.left + p.width / 2)) / scale;
+      setTailOffset(`${offset}px`);
+    };
+    measure();
+    document.fonts.ready.then(measure);
+    return () => {
+      active = false;
+    };
+    // No dependencies: it re-measures after every render, so moving or
+    // resizing either element keeps the tail on the word. Once the offset
+    // settles, setting the same string again does not re-render.
+  });
+
+  return tailOffset;
+};
+
+// A web page with a word selected and the extension popup below it, its
+// tail pointing at the middle of the word.
+const SelectionLookup = ({ language }: { language: Language }) => {
+  const copy = localization[language];
+  const [before, word, after] = copy.article;
+  const page = useRef<HTMLDivElement>(null);
+  const popup = useRef<HTMLDivElement>(null);
+  const tailOffset = useTailOffset(page, popup);
+
+  return (
+    <>
+      <At style={{ left: '94cqmin', top: '12cqmin', width: '82cqmin' }}>
+        <ChromeWindow
+          url="www.news.com"
+          title="Good News"
+          style={{ height: '50cqmin', fontSize: '1.8cqmin' }}
+        >
+          <div
+            ref={page}
+            style={{
+              padding: '5cqmin 6cqmin',
+              fontSize: '4cqmin',
+              lineHeight: 1.5,
+              color: '#a0a0a0',
+            }}
+          >
+            {before}
+            <span
+              data-word
+              style={{
+                background: selection,
+                borderRadius: '0.4cqmin',
+                color: '#1a1a1a',
+              }}
+            >
+              {word}
+            </span>
+            {after}
+          </div>
+        </ChromeWindow>
+      </At>
+      <div
+        ref={popup}
+        style={{
+          position: 'absolute',
+          left: '80cqmin',
+          top: '40cqmin',
+          width: '74cqmin',
+        }}
+      >
+        <ExtensionPopup
+          language={language}
+          sourceLanguage={copy.sourceLanguage}
+          tail
+          tailSide="top"
+          tailOffset={tailOffset}
+        >
+          <Item language={language} pointAtLearn />
+        </ExtensionPopup>
+      </div>
+    </>
+  );
+};
+
+// A YouTube player with the extension popup above it, its tail pointing at
+// the middle of the clicked subtitle word.
+const SubtitleLookup = ({ language }: { language: Language }) => {
+  const copy = localization[language];
+  const player = useRef<HTMLDivElement>(null);
+  const popup = useRef<HTMLDivElement>(null);
+  const tailOffset = useTailOffset(player, popup);
+
+  return (
+    <>
+      <div
+        ref={player}
+        style={{
+          position: 'absolute',
+          left: '14cqmin',
+          top: '43cqmin',
+          width: '72cqmin',
+        }}
+      >
+        <YouTubePlayer
+          subtitle={copy.subtitle}
+          pointer
+          style={{ fontSize: '1.44cqmin' }}
+        />
+      </div>
+      <div
+        ref={popup}
+        style={{
+          position: 'absolute',
+          left: '8cqmin',
+          bottom: '33cqmin',
+          width: '84cqmin',
+        }}
+      >
+        <ExtensionPopup
+          language={language}
+          sourceLanguage={copy.sourceLanguage}
+          tail
+          tailOffset={tailOffset}
+          tailSize="1.8em"
+          // Larger than the player, so the popup stands out against it.
+          style={{ fontSize: '2.4cqmin' }}
+        >
+          <Item language={language} />
+        </ExtensionPopup>
+      </div>
+    </>
+  );
+};
+
 export const ChromeScreenshot = () => (
   <Device format={format}>
     {(language) => {
       const copy = localization[language];
-      const [before, word, after] = copy.article;
 
       return (
         <>
           {/* Selecting a word on a web page. */}
           <Screenshot>
-            <Text side="left" heading={copy.cws.save}>
+            <Text side="left" inset="14cqmin" heading={copy.cws.save}>
               <Languages
                 {...flags[language]}
                 columns={flags[language].languages.length}
@@ -138,60 +296,55 @@ export const ChromeScreenshot = () => (
               />
               <div style={{ fontSize: '3.6cqmin' }}>{copy.languageCount}</div>
             </Text>
-            <At style={{ left: '84cqmin', top: '8cqmin', width: '90cqmin' }}>
-              <ChromeWindow
-                url="www.news.com"
-                title="Good News"
-                style={{ height: '50cqmin', fontSize: '1.8cqmin' }}
-              >
-                <div
-                  style={{
-                    padding: '5cqmin 6cqmin',
-                    fontSize: '4cqmin',
-                    lineHeight: 1.5,
-                    color: '#a0a0a0',
-                  }}
-                >
-                  {before}
-                  <span
-                    style={{
-                      background: selection,
-                      borderRadius: '0.4cqmin',
-                      color: '#1a1a1a',
-                    }}
-                  >
-                    {word}
-                  </span>
-                  {after}
-                </div>
-              </ChromeWindow>
-            </At>
-            <At style={{ left: '75cqmin', top: '36cqmin', width: '74cqmin' }}>
-              <ExtensionPopup
-                language={language}
-                sourceLanguage={copy.sourceLanguage}
-              >
-                <Item language={language} />
-              </ExtensionPopup>
-            </At>
+            <SelectionLookup language={language} />
           </Screenshot>
 
-          {/* Studying in the mobile app. */}
+          {/* Studying in the web app and in the mobile app. */}
           <Screenshot>
-            <At style={{ left: '12cqmin', top: '2cqmin' }}>
-              <IPhone3D width={Math.min(format.width, format.height) * 0.615}>
-                {/* Auto margins center it vertically on the screen. */}
-                <PhoneScreen style={{ margin: 'auto 0' }}>
-                  <MultiChoiceQuestion
+            {/* Beneath the phone, which covers its right part, so the
+                question sits on the left. */}
+            <At style={{ left: '8cqmin', top: '22cqmin', width: '50cqmin' }}>
+              <ChromeWindow
+                url="vocably.pro/app"
+                title="Vocably"
+                style={{ height: '58cqmin', fontSize: '1.2cqmin' }}
+              >
+                <MultiChoiceQuestion
+                  item={copy.searchItem}
+                  incorrect={copy.incorrectTranslations}
+                  language={language}
+                  answered
+                  style={{
+                    width: '27cqmin',
+                    margin: '4cqmin 0 0 4cqmin',
+                    fontSize: '1.7cqmin',
+                  }}
+                />
+              </ChromeWindow>
+            </At>
+            <At style={{ left: '27cqmin', top: '12cqmin' }}>
+              <IPhone3D width={Math.min(format.width, format.height) * 0.7}>
+                {/* From the 62pt status bar down to the home indicator:
+                    the negative margins undo most of the screen's 154pt
+                    padding, and widen it so the longest grade fits. */}
+                <PhoneScreen
+                  style={{
+                    flexGrow: 1,
+                    width: 'calc(100% + 24px)',
+                    margin: '-92px 0 -120px',
+                  }}
+                >
+                  <Flashcard
                     item={copy.searchItem}
-                    incorrect={copy.incorrectTranslations}
                     language={language}
-                    style={{ fontSize: '7cqmin' }}
+                    grades={copy.grades}
+                    hint={copy.revealHint}
+                    style={{ fontSize: '6.6cqmin' }}
                   />
                 </PhoneScreen>
               </IPhone3D>
             </At>
-            <Text side="right" heading={copy.cws.phone}>
+            <Text side="right" inset="14cqmin" heading={copy.cws.study}>
               <div
                 style={{
                   display: 'flex',
@@ -232,37 +385,25 @@ export const ChromeScreenshot = () => (
 
           {/* Clicking a word in YouTube subtitles. */}
           <Screenshot>
-            <At style={{ left: '6cqmin', top: '44cqmin', width: '80cqmin' }}>
-              <YouTubePlayer subtitle={copy.subtitle} />
-            </At>
-            <At
-              style={{ left: '11cqmin', bottom: '31cqmin', width: '70cqmin' }}
-            >
-              <ExtensionPopup
-                language={language}
-                sourceLanguage={copy.sourceLanguage}
-                tail
-              >
-                <Item language={language} />
-              </ExtensionPopup>
-            </At>
-            <Text side="right" heading={copy.cws.youtube} />
+            <SubtitleLookup language={language} />
+            <Text side="right" inset="10cqmin" heading={copy.cws.youtube} />
           </Screenshot>
 
           {/* Looking up a word during a video call. */}
           <Screenshot>
-            <Text side="left" heading={copy.cws.calls} />
-            <At style={{ left: '82cqmin', top: '6cqmin', width: '72cqmin' }}>
+            <Text side="left" inset="14cqmin" heading={copy.cws.calls} />
+            <At style={{ left: '92cqmin', top: '10cqmin', width: '62cqmin' }}>
               <ChromeWindow
                 url="meet.google.com/abc-defg-hij"
                 title="Google Meet"
                 theme="dark"
+                pointer
                 style={{ height: '56cqmin', fontSize: '1.6cqmin' }}
               >
                 <VideoCall />
               </ChromeWindow>
             </At>
-            <At style={{ left: '73cqmin', top: '42cqmin', width: '76cqmin' }}>
+            <At style={{ left: '75cqmin', top: '26cqmin', width: '76cqmin' }}>
               <ExtensionPopup
                 language={language}
                 sourceLanguage={copy.sourceLanguage}
@@ -273,53 +414,26 @@ export const ChromeScreenshot = () => (
             </At>
           </Screenshot>
 
-          {/* Studying in the web app. */}
-          <Screenshot>
-            <At style={{ left: '6cqmin', top: '10cqmin', width: '86cqmin' }}>
-              <ChromeWindow
-                url="app.vocably.pro"
-                title="Vocably"
-                style={{ height: '100cqmin', fontSize: '1.8cqmin' }}
-              >
-                <MultiChoiceQuestion
-                  item={copy.searchItem}
-                  incorrect={copy.incorrectTranslations}
-                  language={language}
-                  style={{
-                    width: '52cqmin',
-                    margin: '6cqmin auto 0',
-                    fontSize: '2.6cqmin',
-                  }}
-                />
-              </ChromeWindow>
-            </At>
-            <Text side="right" heading={copy.cws.browser} />
-          </Screenshot>
-
           {/* The whole ecosystem: the mobile apps. */}
           <Screenshot>
-            <Text side="left" heading={copy.cws.everywhere}>
+            <Text side="left" inset="22cqmin" heading={copy.cws.everywhere}>
               <StoreBadges
                 appStore={copy.cws.appStoreBadge}
                 googlePlay={copy.cws.googlePlayBadge}
               />
             </Text>
-            <At style={{ left: '97cqmin', top: '2cqmin' }}>
+            <At style={{ left: '94cqmin', top: '8cqmin' }}>
               <IPhone3D
                 phone="02"
                 width={Math.min(format.width, format.height) * 0.615}
               >
-                <PhoneScreen>
-                  <Search query={copy.search} />
-                  <AnalysisItem
-                    item={copy.searchItem}
-                    language={language}
-                    learn={copy.learnButton}
-                    example={copy.example}
-                    style={{ width: '100%', fontSize: '7cqmin' }}
-                    learnIcon
-                  />
-                </PhoneScreen>
+                <MobileTranslation
+                  language={language}
+                  sourceLanguage={copy.sourceLanguage}
+                  targetLanguage={language}
+                  query={copy.search}
+                  items={copy.phoneSearchItems}
+                />
               </IPhone3D>
             </At>
           </Screenshot>

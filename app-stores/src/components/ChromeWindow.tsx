@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
+import { Arrow } from './Arrow';
 import { Logo } from './Logo';
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
   children: ReactNode;
   // Chrome's light or dark theme. Defaults to light.
   theme?: Theme;
+  // Points a cursor up at the Vocably extension icon.
+  pointer?: boolean;
   style?: CSSProperties;
 };
 
@@ -68,6 +71,7 @@ export const ChromeWindow = ({
   title,
   children,
   theme = 'light',
+  pointer,
   style,
 }: Props) => {
   const { frame, toolbar, omnibox, icon, text } = themes[theme];
@@ -77,7 +81,6 @@ export const ChromeWindow = ({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden',
         fontFamily: "'Roboto', sans-serif",
         fontSize: '2cqmin',
         borderRadius: '0.75em',
@@ -93,6 +96,9 @@ export const ChromeWindow = ({
           alignItems: 'flex-end',
           gap: '1.5em',
           padding: '0.6em 0.9em 0',
+          // The window doesn't clip, so that a pointer can reach past its
+          // edge: the tab strip and the page round their own corners.
+          borderRadius: '0.75em 0.75em 0 0',
           background: frame,
         }}
       >
@@ -170,11 +176,40 @@ export const ChromeWindow = ({
           {url}
         </div>
         {/* The extension's toolbar icon: the logo cropped to its mark. */}
-        <div style={{ width: '1.3em', height: '1.3em', overflow: 'hidden' }}>
-          <Logo style={{ display: 'block', height: '100%', width: 'auto' }} />
+        <div style={{ position: 'relative' }}>
+          <div style={{ width: '1.3em', height: '1.3em', overflow: 'hidden' }}>
+            <Logo
+              variant={theme}
+              style={{ display: 'block', height: '100%', width: 'auto' }}
+            />
+          </div>
+          {pointer && (
+            // A mouse pointer from the bottom right, its tip (0.4em into
+            // its box) on the icon. The page is painted after the toolbar,
+            // hence the z-index.
+            <Arrow
+              direction="up-left"
+              style={{
+                position: 'absolute',
+                zIndex: 1,
+                left: '50%',
+                top: 'calc(60% - 0.2em)',
+                width: '3.2em',
+              }}
+            />
+          )}
         </div>
       </div>
-      <div style={{ position: 'relative', flex: 1 }}>{children}</div>
+      <div
+        style={{
+          position: 'relative',
+          flex: 1,
+          overflow: 'hidden',
+          borderRadius: '0 0 0.75em 0.75em',
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };

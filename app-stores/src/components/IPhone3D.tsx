@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react';
 
-// public/iphone-01.png and iphone-02.png are 1281×2001 iPhones turned in 3D,
-// with their shadows, on transparent backgrounds: 01 turns its right side
-// away, 02 its left side. Their screens are opaque white.
-const image = { width: 1281, height: 2001 };
+// public/iphone-01.png and iphone-02.png are iPhones turned in 3D, with their
+// shadows, on transparent backgrounds: 01 lies slightly tilted back, its top
+// farther away, 02 turns its left side away. Their screens are opaque white.
 
 type Corner = readonly [number, number];
 type Corners = {
+  // The image size in pixels.
+  width: number;
+  height: number;
   topLeft: Corner;
   topRight: Corner;
   bottomRight: Corner;
@@ -17,12 +19,16 @@ type Corners = {
 // would meet without the rounded corners.
 const phones = {
   '01': {
-    topLeft: [300.5, 98.5],
-    topRight: [988.7, 146.7],
-    bottomRight: [984.5, 1683.2],
-    bottomLeft: [303.4, 1742.8],
+    width: 1634,
+    height: 2114,
+    topLeft: [454.8, 88.5],
+    topRight: [1178.2, 88.8],
+    bottomRight: [1206.5, 1688.4],
+    bottomLeft: [426.5, 1688.4],
   },
   '02': {
+    width: 1281,
+    height: 2001,
     topLeft: [66, 120],
     topRight: [770, 77.8],
     bottomRight: [770, 1710.5],
@@ -151,49 +157,55 @@ type Props = {
 };
 
 // Renders children on the screen of an iPhone turned in 3D.
-export const IPhone3D = ({ width, phone = '01', children }: Props) => (
-  <div
-    style={{
-      position: 'relative',
-      width,
-      height: (width * image.height) / image.width,
-    }}
-  >
+export const IPhone3D = ({ width, phone = '01', children }: Props) => {
+  const image = phones[phone];
+
+  return (
     <div
       style={{
-        position: 'absolute',
-        left: 0,
-        top: 0,
-        width: image.width,
-        height: image.height,
-        transform: `scale(${width / image.width})`,
-        transformOrigin: '0 0',
+        position: 'relative',
+        width,
+        height: (width * image.height) / image.width,
       }}
     >
-      <img
-        src={`${import.meta.env.BASE_URL}iphone-${phone}.png`}
-        style={{ position: 'absolute', width: '100%', height: '100%' }}
-      />
       <div
         style={{
           position: 'absolute',
           left: 0,
           top: 0,
-          width: screen.width,
-          height: screen.height,
-          transform: projection(phones[phone]),
+          width: image.width,
+          height: image.height,
+          transform: `scale(${width / image.width})`,
           transformOrigin: '0 0',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          // Clears the status bar and the Dynamic Island. The screen is
-          // the image's white, so the content has no background.
-          padding: '12% 3%',
         }}
       >
-        <StatusBar />
-        {children}
+        <img
+          src={`${import.meta.env.BASE_URL}iphone-${phone}.png`}
+          style={{ position: 'absolute', width: '100%', height: '100%' }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: screen.width,
+            height: screen.height,
+            transform: projection(phones[phone]),
+            transformOrigin: '0 0',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            // Clears the status bar and the Dynamic Island. The screen is
+            // the image's white, so the content has no background. In the
+            // screen's points: percentages would resolve against the
+            // image's width, not the screen's.
+            padding: '154px 38px',
+          }}
+        >
+          <StatusBar />
+          {children}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};

@@ -31,6 +31,7 @@ const popupTranslations: Record<Language, Record<string, string>> = {
 const body = '#1f1f1f';
 const muted = '#5c5c5c';
 const field = '#f2f2f2';
+const primary = '#0050ff';
 
 const Icon = ({ path, style }: { path: string; style?: CSSProperties }) => (
   <svg
@@ -89,6 +90,13 @@ type Props = {
   search?: string;
   // Points a tail from the bottom center of the popup to what was clicked.
   tail?: boolean;
+  // The edge the tail sticks out of, the bottom by default.
+  tailSide?: 'top' | 'bottom';
+  // Moves the tail sideways from the center by this CSS length, e.g.
+  // '-10em' or '20%'; negative values move it left.
+  tailOffset?: string;
+  // The width of the tail's base, a CSS length; its height is half of it.
+  tailSize?: string;
   // The popup content, usually an <AnalysisItem>.
   children: ReactNode;
   style?: CSSProperties;
@@ -103,6 +111,9 @@ export const ExtensionPopup = ({
   sourceLanguage,
   search,
   tail = false,
+  tailSide = 'bottom',
+  tailOffset = '0em',
+  tailSize = '2.4em',
   children,
   style,
 }: Props) => {
@@ -158,24 +169,46 @@ export const ExtensionPopup = ({
         />
       </div>
       {search !== undefined && (
+        // Drawn focused, with a primary border, a focus ring and a text
+        // caret after the query, so it reads as a field being typed in.
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             borderRadius: '0.5em',
-            background: field,
+            background: '#fff',
+            border: `0.12em solid ${primary}`,
+            boxShadow: `0 0 0 0.25em rgba(0, 80, 255, 0.15)`,
             overflow: 'hidden',
           }}
         >
-          <span style={{ flex: 1, padding: '0.75em 1em' }}>{search}</span>
+          <span
+            style={{
+              flex: 1,
+              display: 'flex',
+              alignItems: 'center',
+              padding: '0.75em 1em',
+            }}
+          >
+            {search}
+            <span
+              style={{
+                display: 'inline-block',
+                width: '0.1em',
+                height: '1.25em',
+                marginLeft: '0.08em',
+                background: primary,
+              }}
+            />
+          </span>
           <span
             style={{
               alignSelf: 'stretch',
               display: 'flex',
               alignItems: 'center',
-              padding: '0 0.7em',
-              background: '#e3e3e3',
-              color: muted,
+              padding: '0 0.8em',
+              background: primary,
+              color: '#fff',
             }}
           >
             <Icon path={magnify} style={{ width: '1.5em', height: '1.5em' }} />
@@ -196,15 +229,16 @@ export const ExtensionPopup = ({
           fill="#fff"
           style={{
             position: 'absolute',
-            top: '100%',
-            left: '50%',
-            width: '2.4em',
-            height: '1.2em',
-            marginLeft: '-1.2em',
-            marginTop: '-0.05em',
+            [tailSide === 'top' ? 'bottom' : 'top']: '100%',
+            left: `calc(50% + ${tailOffset})`,
+            width: tailSize,
+            height: `calc(${tailSize} / 2)`,
+            marginLeft: `calc(${tailSize} / -2)`,
+            // Overlaps the popup a little, so no seam shows between them.
+            [tailSide === 'top' ? 'marginBottom' : 'marginTop']: '-0.05em',
           }}
         >
-          <path d="M0,0H24L12,12Z" />
+          <path d={tailSide === 'top' ? 'M0,12H24L12,0Z' : 'M0,0H24L12,12Z'} />
         </svg>
       )}
     </div>
