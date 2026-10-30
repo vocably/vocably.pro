@@ -27,6 +27,8 @@ type Props = {
   // Shows the add button as the mobile app's plus-circle-outline icon
   // instead of the extension's "Learn" button.
   learnIcon?: boolean;
+  // Leaves the add button out, and the room kept for it.
+  hideLearn?: boolean;
   // Merged over the root styles, so it can override them.
   style?: CSSProperties;
 };
@@ -84,6 +86,7 @@ export const AnalysisItem = ({
   highlightLearn = true,
   pointAtLearn = false,
   learnIcon = false,
+  hideLearn = false,
   style,
 }: Props) => {
   // Falls back to the untranslated value, like the mobile app does.
@@ -112,7 +115,7 @@ export const AnalysisItem = ({
       }}
     >
       {/* The add button of a card that is not in the deck yet. */}
-      {learnIcon ? (
+      {hideLearn ? null : learnIcon ? (
         // Material Design Icons "plus-circle-outline".
         <svg
           viewBox="0 0 24 24"
@@ -171,11 +174,11 @@ export const AnalysisItem = ({
         </div>
       )}
 
-      <div style={{ paddingRight: '2.125em' }}>
+      <div style={{ paddingRight: hideLearn ? 0 : '2.125em' }}>
         <div
           style={{
             // Room for the "Learn" button; the icon fits in the padding above.
-            paddingRight: learnIcon ? 0 : '3.125em',
+            paddingRight: hideLearn || learnIcon ? 0 : '3.125em',
             marginBottom: '0.575em',
           }}
         >

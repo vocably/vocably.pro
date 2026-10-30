@@ -88,6 +88,9 @@ type Props = {
   sourceLanguage: GoogleLanguage;
   // Shows the popup's search field with this query typed in.
   search?: string;
+  // Leaves the "I study" / "I speak" selects out, for formats with little
+  // room.
+  hideSelects?: boolean;
   // Points a tail from the bottom center of the popup to what was clicked.
   tail?: boolean;
   // The edge the tail sticks out of, the bottom by default.
@@ -110,6 +113,7 @@ export const ExtensionPopup = ({
   language,
   sourceLanguage,
   search,
+  hideSelects = false,
   tail = false,
   tailSide = 'bottom',
   tailOffset = '0em',
@@ -154,20 +158,22 @@ export const ExtensionPopup = ({
           style={{ width: '1.6em', height: '1.6em', color: '#bababa' }}
         />
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.6em' }}>
-        <Select
-          label={t['translation.i_study']}
-          value={languageName(sourceLanguage)}
-        />
-        <Icon
-          path={menuRight}
-          style={{ width: '1.4em', height: '1.4em', color: muted }}
-        />
-        <Select
-          label={t['translation.i_speak']}
-          value={languageName(language)}
-        />
-      </div>
+      {!hideSelects && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6em' }}>
+          <Select
+            label={t['translation.i_study']}
+            value={languageName(sourceLanguage)}
+          />
+          <Icon
+            path={menuRight}
+            style={{ width: '1.4em', height: '1.4em', color: muted }}
+          />
+          <Select
+            label={t['translation.i_speak']}
+            value={languageName(language)}
+          />
+        </div>
+      )}
       {search !== undefined && (
         // Drawn focused, with a primary border, a focus ring and a text
         // caret after the query, so it reads as a field being typed in.

@@ -19,6 +19,8 @@ type ChromeWebStore = {
   // badges.
   appStoreBadge: string;
   googlePlayBadge: string;
+  // The headline of the small promo tile, one phrase per line.
+  promoTile: string;
 };
 
 type Translations = {
@@ -259,6 +261,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: 'Download on the',
       googlePlayBadge: 'GET IT ON',
+      promoTile: 'Select,\n*translate*,\nand *learn*',
     },
     article: magicArticle,
     subtitle: magicSubtitle,
@@ -387,6 +390,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: 'Descárgalo en el',
       googlePlayBadge: 'DISPONIBLE EN',
+      promoTile: 'Selecciona,\n*traduce*\ny *aprende*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -517,6 +521,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: 'Baixar na',
       googlePlayBadge: 'DISPONÍVEL NO',
+      promoTile: 'Selecione,\n*traduza*\ne *aprenda*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -651,6 +656,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: 'Загрузите в',
       googlePlayBadge: 'ДОСТУПНО В',
+      promoTile: 'Выделяйте,\n*переводите*\nи *учите*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -794,6 +800,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: 'Завантажте в',
       googlePlayBadge: 'ДОСТУПНО В',
+      promoTile: 'Виділяйте,\n*перекладайте*\nй *вивчайте*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -940,6 +947,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: 'Şimdi indirin',
       googlePlayBadge: 'ŞİMDİ EDİNİN',
+      promoTile: 'Seç,\n*çevir*\nve *öğren*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -1072,6 +1080,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: 'Tải về trên',
       googlePlayBadge: 'TẢI NỘI DUNG TRÊN',
+      promoTile: 'Chọn,\n*dịch*\nvà *học*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -1211,6 +1220,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: '下载于',
       googlePlayBadge: '立即获取',
+      promoTile: '选中，\n*翻译*\n并*学习*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -1329,6 +1339,7 @@ export const localization: Record<Language, Translations> = {
       ],
       appStoreBadge: '下載於',
       googlePlayBadge: '立即取得',
+      promoTile: '選取，\n*翻譯*\n並*學習*',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
