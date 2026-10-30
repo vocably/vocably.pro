@@ -183,7 +183,7 @@ const SelectionLookup = ({ language }: { language: Language }) => {
 
   return (
     <>
-      <At style={{ left: '94cqmin', top: '12cqmin', width: '90cqmin' }}>
+      <At style={{ left: '94cqmin', top: '12cqmin', width: '82cqmin' }}>
         <ChromeWindow
           url="www.news.com"
           title="Good News"
@@ -411,7 +411,7 @@ export const ChromeScreenshot = () => (
           <Screenshot>
             <At style={{ left: '14cqmin', top: '10cqmin', width: '70cqmin' }}>
               <ChromeWindow
-                url="app.vocably.pro"
+                url="vocably.pro/app"
                 title="Vocably"
                 style={{ height: '80cqmin', fontSize: '1.5cqmin' }}
               >
