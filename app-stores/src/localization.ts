@@ -370,7 +370,7 @@ export const localization: Record<Language, Translations> = {
       phoneFeatures: [
         'Sincronizado entre dispositivos',
         'Aplicación móvil de alta calidad',
-        'Un diccionario siempre contigo',
+        'Un diccionario que siempre está contigo',
       ],
       everywhere: [
         '*Traduce* hagas lo que hagas',
@@ -498,7 +498,7 @@ export const localization: Record<Language, Translations> = {
       phoneFeatures: [
         'Sincronizado entre dispositivos',
         'Aplicativo móvel de alta qualidade',
-        'Um dicionário sempre com você',
+        'Um dicionário que está sempre com você',
       ],
       everywhere: [
         '*Traduza* não importa o que esteja fazendo',
@@ -630,7 +630,7 @@ export const localization: Record<Language, Translations> = {
       phoneFeatures: [
         'Синхронизация между устройствами',
         'Качественное мобильное приложение',
-        'Словарь всегда с вами',
+        'Словарь, который всегда с вами',
       ],
       everywhere: [
         '*Переводите*, чем бы вы ни занимались',
@@ -771,7 +771,7 @@ export const localization: Record<Language, Translations> = {
       phoneFeatures: [
         'Синхронізація між пристроями',
         'Якісний мобільний застосунок',
-        'Словник завжди з вами',
+        'Словник, який завжди з вами',
       ],
       everywhere: [
         '*Перекладайте*, хоч би чим ви займалися',
@@ -915,7 +915,7 @@ export const localization: Record<Language, Translations> = {
       phoneFeatures: [
         'Cihazlar arasında senkronize',
         'Yüksek kaliteli mobil uygulama',
-        'Her zaman yanınızda bir sözlük',
+        'Her zaman yanınızda olan bir sözlük',
       ],
       everywhere: [
         'Ne yaparsanız yapın *çevirin*',
@@ -1045,7 +1045,7 @@ export const localization: Record<Language, Translations> = {
       phoneFeatures: [
         'Đồng bộ giữa các thiết bị',
         'Ứng dụng di động chất lượng cao',
-        'Từ điển luôn bên bạn',
+        'Một cuốn từ điển luôn ở bên bạn',
       ],
       everywhere: [
         '*Dịch* dù bạn đang làm gì',

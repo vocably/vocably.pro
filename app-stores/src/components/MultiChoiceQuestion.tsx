@@ -194,6 +194,7 @@ export const MultiChoiceQuestion = ({
             >
               <div
                 style={{
+                  display: 'flex',
                   padding: '0.75em 0.5em',
                   border: `0.0625em solid ${primary}`,
                   borderRadius: '1em',
@@ -202,17 +203,27 @@ export const MultiChoiceQuestion = ({
                   textAlign: 'center',
                 }}
               >
-                <span style={{ position: 'relative', fontSize: '1.125em' }}>
-                  {answer}
+                {/* Two equal halves of the room the text leaves keep it
+                    centered; the pointer goes in the right one. */}
+                <span style={{ flex: '1 1 0' }} />
+                <span style={{ fontSize: '1.125em' }}>{answer}</span>
+                <span
+                  style={{
+                    flex: '1 1 0',
+                    position: 'relative',
+                    fontSize: '1.125em',
+                  }}
+                >
                   {chosen && (
                     // A mouse pointer just past the end of the text, so it
-                    // stays clear of answers of any length. Its tip is
-                    // 0.33em into its box.
+                    // stays clear of answers of any length, but moved back
+                    // when the text is too long for it to fit in the
+                    // button. Its tip is 0.33em into its box.
                     <Arrow
                       direction="up-left"
                       style={{
                         position: 'absolute',
-                        left: 'calc(100% + 2em)',
+                        left: 'min(2em, calc(100% - 1em))',
                         top: '60%',
                         width: '2.6em',
                       }}
