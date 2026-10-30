@@ -127,9 +127,7 @@ export const ChromeSmallPromoTile = () => (
               columns={FLAG_COUNT}
               size={Math.min(format.width, format.height) * 0.09}
             />
-            <div style={{ fontSize: '7.5cqmin' }}>
-              {copy.languageCount.replace(/[.。]$/, '')}
-            </div>
+            <div style={{ fontSize: '7.5cqmin' }}>{copy.languageCount}</div>
           </At>
         </Screenshot>
       );

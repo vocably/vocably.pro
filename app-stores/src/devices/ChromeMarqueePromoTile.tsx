@@ -206,9 +206,7 @@ export const ChromeMarqueePromoTile = () => (
               columns={flags[language].languages.length}
               size={Math.min(format.width, format.height) * 0.075}
             />
-            <div style={{ fontSize: '5.6cqmin' }}>
-              {copy.languageCount.replace(/[.。]$/, '')}
-            </div>
+            <div style={{ fontSize: '5.6cqmin' }}>{copy.languageCount}</div>
           </At>
         </Screenshot>
       );
