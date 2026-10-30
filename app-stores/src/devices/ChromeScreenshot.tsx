@@ -1,5 +1,5 @@
-import { useLayoutEffect, useRef, useState } from 'react';
-import type { CSSProperties, ReactNode, RefObject } from 'react';
+import { useRef } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Accent } from '../components/Accent';
@@ -14,6 +14,7 @@ import { MultiChoiceQuestion } from '../components/MultiChoiceQuestion';
 import { StoreBadges } from '../components/StoreBadges';
 import { VideoCall } from '../components/VideoCall';
 import { YouTubePlayer } from '../components/YouTubePlayer';
+import { useTailOffset } from '../components/useTailOffset';
 import { flags } from '../flags';
 import type { Language } from '../languages';
 import { localization } from '../localization';
@@ -127,43 +128,6 @@ const PhoneScreen = ({
     {children}
   </div>
 );
-
-// How far the popup's tail has to move from the popup's center to point at
-// the middle of the word inside `target`. The word sits at a different spot
-// in every language, so it is measured after every render and again once
-// the fonts have loaded.
-const useTailOffset = (
-  target: RefObject<HTMLElement | null>,
-  popup: RefObject<HTMLElement | null>
-) => {
-  const [tailOffset, setTailOffset] = useState('0px');
-
-  useLayoutEffect(() => {
-    let active = true;
-    const measure = () => {
-      const word = target.current?.querySelector('[data-word]');
-      if (!active || !word || !popup.current) {
-        return;
-      }
-      const w = word.getBoundingClientRect();
-      const p = popup.current.getBoundingClientRect();
-      // The preview scales the canvas down; offsetWidth is unscaled.
-      const scale = p.width / popup.current.offsetWidth;
-      const offset = (w.left + w.width / 2 - (p.left + p.width / 2)) / scale;
-      setTailOffset(`${offset}px`);
-    };
-    measure();
-    document.fonts.ready.then(measure);
-    return () => {
-      active = false;
-    };
-    // No dependencies: it re-measures after every render, so moving or
-    // resizing either element keeps the tail on the word. Once the offset
-    // settles, setting the same string again does not re-render.
-  });
-
-  return tailOffset;
-};
 
 // A web page with a word selected and the extension popup below it, its
 // tail pointing at the middle of the word.

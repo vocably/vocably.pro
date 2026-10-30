@@ -21,6 +21,8 @@ type ChromeWebStore = {
   googlePlayBadge: string;
   // The headline of the small promo tile, one phrase per line.
   promoTile: string;
+  // The line under the headline of the marquee promo tile.
+  marqueeSub: string;
 };
 
 type Translations = {
@@ -262,6 +264,8 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: 'Download on the',
       googlePlayBadge: 'GET IT ON',
       promoTile: 'Select,\n*translate*,\nand *learn*',
+      marqueeSub:
+        'Translate any word or phrase instantly and learn it on your phone.',
     },
     article: magicArticle,
     subtitle: magicSubtitle,
@@ -391,6 +395,8 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: 'Descárgalo en el',
       googlePlayBadge: 'DISPONIBLE EN',
       promoTile: 'Selecciona,\n*traduce*\ny *aprende*',
+      marqueeSub:
+        'Traduce cualquier palabra o frase al instante y apréndela en tu teléfono.',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -522,6 +528,8 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: 'Baixar na',
       googlePlayBadge: 'DISPONÍVEL NO',
       promoTile: 'Selecione,\n*traduza*\ne *aprenda*',
+      marqueeSub:
+        'Traduza qualquer palavra ou frase na hora e aprenda no seu celular.',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -657,6 +665,8 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: 'Загрузите в',
       googlePlayBadge: 'ДОСТУПНО В',
       promoTile: 'Выделяйте,\n*переводите*\nи *учите*',
+      marqueeSub:
+        'Мгновенно переводите любые слова и фразы и учите их на телефоне.',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -801,6 +811,8 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: 'Завантажте в',
       googlePlayBadge: 'ДОСТУПНО В',
       promoTile: 'Виділяйте,\n*перекладайте*\nй *вивчайте*',
+      marqueeSub:
+        'Миттєво перекладайте будь-які слова й фрази та вивчайте їх на телефоні.',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -948,6 +960,8 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: 'Şimdi indirin',
       googlePlayBadge: 'ŞİMDİ EDİNİN',
       promoTile: 'Seç,\n*çevir*\nve *öğren*',
+      marqueeSub:
+        'Herhangi bir kelimeyi veya ifadeyi anında çevir ve telefonunda öğren.',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -1081,6 +1095,8 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: 'Tải về trên',
       googlePlayBadge: 'TẢI NỘI DUNG TRÊN',
       promoTile: 'Chọn,\n*dịch*\nvà *học*',
+      marqueeSub:
+        'Dịch tức thì bất kỳ từ hay cụm từ nào và học chúng trên điện thoại.',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -1221,6 +1237,7 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: '下载于',
       googlePlayBadge: '立即获取',
       promoTile: '选中，\n*翻译*\n并*学习*',
+      marqueeSub: '即时翻译任何单词或短语，并在手机上学习。',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
@@ -1340,6 +1357,7 @@ export const localization: Record<Language, Translations> = {
       appStoreBadge: '下載於',
       googlePlayBadge: '立即取得',
       promoTile: '選取，\n*翻譯*\n並*學習*',
+      marqueeSub: '即時翻譯任何單字或片語，並在手機上學習。',
     },
     article: reliableArticle,
     subtitle: reliableSubtitle,
