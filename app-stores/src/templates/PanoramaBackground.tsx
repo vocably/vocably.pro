@@ -73,17 +73,17 @@ const ribbons: Ribbon[] = [
 // thickness that swells and thins along the way.
 const ribbonPath = (
   ribbon: Ribbon,
-  count: number,
+  span: number,
   width: number,
   height: number,
   minSide: number
 ) => {
-  const steps = Math.max(48, count * 48);
+  const steps = Math.max(48, Math.ceil(span * 48));
   const top: string[] = [];
   const bottom: string[] = [];
   for (let s = 0; s <= steps; s++) {
     // Start and end past the panorama's edges so the ends never show.
-    const u = -0.1 + ((count + 0.2) * s) / steps;
+    const u = -0.1 + ((span + 0.2) * s) / steps;
     const wave = Math.sin(2 * Math.PI * ribbon.frequency * u + ribbon.phase);
     const swell =
       0.55 + 0.45 * Math.sin(2 * Math.PI * ribbon.frequency * 0.6 * u + 1.3);
@@ -99,15 +99,15 @@ const ribbonPath = (
 // The centerline of a ribbon, drawn as a fine bright line along its middle.
 const ribbonLine = (
   ribbon: Ribbon,
-  count: number,
+  span: number,
   width: number,
   height: number,
   offset: number
 ) => {
-  const steps = Math.max(48, count * 48);
+  const steps = Math.max(48, Math.ceil(span * 48));
   const points: string[] = [];
   for (let s = 0; s <= steps; s++) {
-    const u = -0.1 + ((count + 0.2) * s) / steps;
+    const u = -0.1 + ((span + 0.2) * s) / steps;
     const wave = Math.sin(
       2 * Math.PI * ribbon.frequency * u + ribbon.phase + offset
     );
@@ -130,7 +130,8 @@ type Props = {
 
 // One background spread over every screenshot of a language, so the store
 // listing reads as a single continuous strip. Each screenshot shows its own
-// slice. The slices meet edge to edge; the store's gap is left out.
+// slice. The panorama runs on through the store's gap between two
+// screenshots, so the ribbons line up across it.
 export const PanoramaBackground = ({ format, index, count }: Props) => {
   const id = useId();
   const { width, height } = format;
@@ -140,7 +141,10 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
   // with its neighbours.
   const grainFrequency = 420 / minSide;
   const fibreFrequency = 28 / minSide;
-  const fullWidth = count * width;
+  // From one screenshot's left edge to the next one's.
+  const stride = width + (format.gap ?? 0);
+  const fullWidth = count * stride - (format.gap ?? 0);
+  const span = fullWidth / width;
 
   // Rows of about 1/16 of the shorter side.
   const row = minSide / 16;
@@ -154,7 +158,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
       style={{
         position: 'absolute',
         top: 0,
-        left: -index * width,
+        left: -index * stride,
         width: fullWidth,
         height,
         backgroundColor: base,
@@ -192,13 +196,12 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           ))}
           <linearGradient id={`${id}-gutter`} x1={0} y1={0} x2={1} y2={0}>
             <stop offset={0} stopColor={rgb(gutterColor, 0)} />
-            <stop offset={0.5} stopColor={rgb(gutterColor, 0.07)} />
-            <stop offset={1} stopColor={rgb(gutterColor, 0)} />
+            <stop offset={1} stopColor={rgb(gutterColor, 0.07)} />
           </linearGradient>
           <filter
             id={`${id}-fibres`}
             filterUnits="userSpaceOnUse"
-            x={index * width}
+            x={index * stride}
             y={0}
             width={width}
             height={height}
@@ -219,7 +222,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           <filter
             id={`${id}-grain`}
             filterUnits="userSpaceOnUse"
-            x={index * width}
+            x={index * stride}
             y={0}
             width={width}
             height={height}
@@ -236,28 +239,39 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
         {Array.from({ length: count }, (_, page) => (
           <line
             key={page}
-            x1={page * width + margin}
+            x1={page * stride + margin}
             y1={0}
-            x2={page * width + margin}
+            x2={page * stride + margin}
             y2={height}
             stroke={ruleColor}
             strokeWidth={line * 1.6}
           />
         ))}
+        {/* Darkest at the seam: the right edge of one page and the left
+            edge of the next, mirrored. */}
         {Array.from({ length: count - 1 }, (_, seam) => (
-          <rect
-            key={seam}
-            x={(seam + 1) * width - gutter}
-            y={0}
-            width={gutter * 2}
-            height={height}
-            fill={`url(#${id}-gutter)`}
-          />
+          <g key={seam}>
+            <rect
+              x={seam * stride + width - gutter}
+              y={0}
+              width={gutter}
+              height={height}
+              fill={`url(#${id}-gutter)`}
+            />
+            <rect
+              x={(seam + 1) * stride}
+              y={0}
+              width={gutter}
+              height={height}
+              fill={`url(#${id}-gutter)`}
+              transform={`rotate(180 ${(seam + 1) * stride + gutter / 2} ${height / 2})`}
+            />
+          </g>
         ))}
         {ribbons.map((ribbon, r) => (
           <path
             key={r}
-            d={ribbonPath(ribbon, count, width, height, minSide)}
+            d={ribbonPath(ribbon, span, width, height, minSide)}
             fill={`url(#${id}-ribbon-${r})`}
             opacity={ribbon.opacity}
           />
@@ -266,7 +280,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           [0, 0.35].map((offset) => (
             <path
               key={`${r}-${offset}`}
-              d={ribbonLine(ribbon, count, width, height, offset)}
+              d={ribbonLine(ribbon, span, width, height, offset)}
               fill="none"
               stroke={`url(#${id}-ribbon-${r})`}
               strokeWidth={minSide * 0.004}
@@ -276,7 +290,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           ))
         )}
         <rect
-          x={index * width}
+          x={index * stride}
           y={0}
           width={width}
           height={height}
@@ -285,7 +299,7 @@ export const PanoramaBackground = ({ format, index, count }: Props) => {
           style={{ mixBlendMode: 'multiply' }}
         />
         <rect
-          x={index * width}
+          x={index * stride}
           y={0}
           width={width}
           height={height}
