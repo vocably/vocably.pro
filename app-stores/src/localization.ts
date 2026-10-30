@@ -40,6 +40,11 @@ type Translations = {
   phoneSearchItems: AnalysisItem[];
   // Wrong answers for `searchItem` in the multi-choice study screenshot.
   incorrectTranslations: [string, string, string];
+  // The grade buttons of the flashcard study screenshot, as the mobile app
+  // words them (study.swipeGrade): not yet, almost, got it.
+  grades: [string, string, string];
+  // The hint above the grade buttons of the flashcard study screenshot.
+  revealHint: string;
   // The add button and the examples label of the analysis item, as the
   // extension words them.
   learnButton: string;
@@ -217,6 +222,8 @@ export const localization: Record<Language, Translations> = {
     ],
     incorrectTranslations: ['luck', 'mystery', 'dream'],
     learnButton: 'Learn',
+    grades: ['Not yet', 'Almost', 'Got it!'],
+    revealHint: 'Tap to see the translation',
     example: 'Example:',
     translate: 'Translate',
     translateSub: 'any words or phrases.',
@@ -343,6 +350,8 @@ export const localization: Record<Language, Translations> = {
     ],
     incorrectTranslations: ['rápido, veloz', 'caro, costoso', 'frágil, débil'],
     learnButton: 'Aprender',
+    grades: ['Aún no', 'Casi', '¡Lo tengo!'],
+    revealHint: 'Toca para ver la traducción',
     example: 'Ejemplo:',
     translate: 'Traduce',
     translateSub: 'cualquier palabra o frase.',
@@ -471,6 +480,8 @@ export const localization: Record<Language, Translations> = {
     ],
     incorrectTranslations: ['rápido, veloz', 'caro, custoso', 'frágil, fraco'],
     learnButton: 'Aprender',
+    grades: ['Ainda não', 'Quase', 'Acertei!'],
+    revealHint: 'Toque para ver a tradução',
     example: 'Exemplo:',
     translate: 'Traduza',
     translateSub: 'quaisquer palavras ou frases.',
@@ -603,6 +614,8 @@ export const localization: Record<Language, Translations> = {
       'хрупкий, слабый',
     ],
     learnButton: 'Учить',
+    grades: ['Ещё нет', 'Почти', 'Знаю!'],
+    revealHint: 'Нажмите для перевода',
     example: 'Пример:',
     translate: 'Переводите',
     translateSub: 'любые слова и фразы.',
@@ -744,6 +757,8 @@ export const localization: Record<Language, Translations> = {
       'крихкий, слабкий',
     ],
     learnButton: 'Вчити',
+    grades: ['Ще ні', 'Майже', 'Знаю!'],
+    revealHint: 'Натисніть для перекладу',
     example: 'Приклад:',
     translate: 'Перекладайте',
     translateSub: 'будь-які слова та фрази.',
@@ -888,6 +903,8 @@ export const localization: Record<Language, Translations> = {
       'kırılgan, zayıf',
     ],
     learnButton: 'Öğren',
+    grades: ['Henüz değil', 'Neredeyse', 'Biliyorum!'],
+    revealHint: 'Çeviriyi görmek için dokun',
     example: 'Örnek:',
     translate: 'Çevirin',
     translateSub: 'her türlü kelime ve ifadeyi.',
@@ -1018,6 +1035,8 @@ export const localization: Record<Language, Translations> = {
       'mong manh, yếu ớt',
     ],
     learnButton: 'Học',
+    grades: ['Chưa biết', 'Gần đúng', 'Đã nhớ!'],
+    revealHint: 'Chạm để xem bản dịch',
     example: 'Ví dụ:',
     translate: 'Dịch',
     translateSub: 'bất kỳ từ hoặc cụm từ nào.',
@@ -1168,6 +1187,8 @@ export const localization: Record<Language, Translations> = {
       '易碎的，脆弱的',
     ],
     learnButton: '学习',
+    grades: ['还不会', '快会了', '会了！'],
+    revealHint: '轻触查看翻译',
     example: '例句：',
     translate: '翻译',
     translateSub: '任何单词或短语。',
@@ -1284,6 +1305,8 @@ export const localization: Record<Language, Translations> = {
       '易碎的，脆弱的',
     ],
     learnButton: '學習',
+    grades: ['還不會', '快會了', '會了！'],
+    revealHint: '輕觸查看翻譯',
     example: '例句：',
     translate: '翻譯',
     translateSub: '任何單字或片語。',

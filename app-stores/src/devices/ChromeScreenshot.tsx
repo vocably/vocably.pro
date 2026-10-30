@@ -6,6 +6,7 @@ import { Accent } from '../components/Accent';
 import { AnalysisItem } from '../components/AnalysisItem';
 import { ChromeWindow } from '../components/ChromeWindow';
 import { ExtensionPopup } from '../components/ExtensionPopup';
+import { Flashcard } from '../components/Flashcard';
 import { IPhone3D } from '../components/IPhone3D';
 import { Languages } from '../components/Languages';
 import { MobileTranslation } from '../components/MobileTranslation';
@@ -336,22 +337,21 @@ export const ChromeScreenshot = () => (
             </At>
             <At style={{ left: '27cqmin', top: '12cqmin' }}>
               <IPhone3D width={Math.min(format.width, format.height) * 0.7}>
-                {/* Centered between the 62pt status bar and the bottom of
-                    the screen: the negative margins undo the screen's
-                    154pt padding, and widen it so the longest answer
-                    (Russian) fits on one line. */}
+                {/* From the 62pt status bar down to the home indicator:
+                    the negative margins undo most of the screen's 154pt
+                    padding, and widen it so the longest grade fits. */}
                 <PhoneScreen
                   style={{
                     flexGrow: 1,
-                    justifyContent: 'center',
                     width: 'calc(100% + 24px)',
-                    margin: '-92px 0 -154px',
+                    margin: '-92px 0 -120px',
                   }}
                 >
-                  <MultiChoiceQuestion
+                  <Flashcard
                     item={copy.searchItem}
-                    incorrect={copy.incorrectTranslations}
                     language={language}
+                    grades={copy.grades}
+                    hint={copy.revealHint}
                     style={{ fontSize: '6.6cqmin' }}
                   />
                 </PhoneScreen>

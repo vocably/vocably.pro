@@ -1,53 +1,9 @@
 import type { CSSProperties } from 'react';
 import type { AnalysisItem } from '@vocably/model';
-import { languageTranslations } from '@vocably/i18n';
 import type { Language } from '../languages';
 import { Arrow } from './Arrow';
-
-// Colors of the mobile app's light theme (mobile-app/src/ThemeProvider.tsx).
-const primary = 'rgb(0, 80, 255)';
-const secondary = 'rgb(0, 0, 0)';
-const onBackground = 'rgb(106, 106, 106)';
-const background = 'rgb(255, 255, 255)';
-// React Native Paper's MD3 light onSurfaceVariant, for muted text.
-const muted = 'rgb(73, 69, 79)';
-const inputBg = 'rgba(106, 106, 106, 0.1)';
-
-// Material "play-circle", as PlaySound draws it.
-const PlayIcon = ({ size, opacity }: { size: string; opacity: number }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill={onBackground}
-    style={{
-      display: 'inline-block',
-      width: size,
-      height: size,
-      flexShrink: 0,
-      opacity,
-    }}
-  >
-    <path d="M10,16.5V7.5L16,12M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
-  </svg>
-);
-
-// mobile-app/src/Tag.tsx
-const Tag = ({ children }: { children: string }) => (
-  <span
-    style={{
-      padding: '0.125em 0.625em 0.25em',
-      borderRadius: '0.75em',
-      background: inputBg,
-      fontSize: '0.8125em',
-      fontWeight: 500,
-      letterSpacing: '0.0231em',
-      lineHeight: '1.2308em',
-      color: muted,
-      whiteSpace: 'nowrap',
-    }}
-  >
-    {children}
-  </span>
-);
+import { CardFront } from './CardFront';
+import { background, onBackground, primary } from './mobileTheme';
 
 type Props = {
   // The card being studied.
@@ -83,16 +39,9 @@ export const MultiChoiceQuestion = ({
   answered = false,
   style,
 }: Props) => {
-  // Falls back to the untranslated value, like the mobile app does.
-  const partOfSpeech =
-    item.partOfSpeech &&
-    (languageTranslations[language][item.partOfSpeech] ?? item.partOfSpeech);
   const answers = [...incorrect];
   answers.splice(correctIndex, 0, item.translation);
   if (hideLastAnswer) answers.pop();
-  const examples = hideExamples ? [] : (item.examples ?? []);
-
-  const tags = [partOfSpeech, item.g].filter(Boolean) as string[];
 
   return (
     <div
@@ -105,74 +54,7 @@ export const MultiChoiceQuestion = ({
         ...style,
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.25em' }}>
-        <PlayIcon size="1.5em" opacity={0.5} />
-        <span
-          style={{
-            fontSize: '2.125em',
-            fontWeight: 600,
-            letterSpacing: '-0.0088em',
-            color: secondary,
-          }}
-        >
-          {item.source}
-        </span>
-      </div>
-
-      {(item.ipa || tags.length > 0) && (
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            gap: '0.5em',
-            marginTop: '0.225em',
-          }}
-        >
-          {item.ipa && (
-            <span style={{ color: muted }}>
-              /{item.ipa.replace(/[/[\]]/g, '')}/
-            </span>
-          )}
-          {tags.map((tag, index) => (
-            <Tag key={index}>{tag}</Tag>
-          ))}
-        </div>
-      )}
-
-      {examples.length > 0 && (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.375em',
-            marginTop: '1.25em',
-            fontSize: '1.125em',
-          }}
-        >
-          {examples.map((example, index) => (
-            <div
-              key={index}
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '0.25em',
-              }}
-            >
-              <span
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  height: '1.3em',
-                }}
-              >
-                <PlayIcon size="1em" opacity={0.2} />
-              </span>
-              <span>{example}</span>
-            </div>
-          ))}
-        </div>
-      )}
+      <CardFront item={item} language={language} hideExamples={hideExamples} />
 
       <div
         style={{
