@@ -31,8 +31,7 @@ const checkCircle =
 
 type Side = 'left' | 'right';
 
-// Where the text starts on the last two screenshots, which the store shows
-// side by side.
+// Where the text starts on the last screenshot.
 const textTop = '30cqmin';
 
 // The heading of a screenshot and what follows it, in a column on one side
@@ -312,10 +311,31 @@ export const ChromeScreenshot = () => (
             <SelectionLookup language={language} />
           </Screenshot>
 
-          {/* Studying in the mobile app. */}
+          {/* Studying in the web app and in the mobile app. */}
           <Screenshot>
-            <At style={{ left: '1cqmin', top: '4.5cqmin' }}>
-              <IPhone3D width={Math.min(format.width, format.height) * 0.82}>
+            {/* Beneath the phone, which covers its right part, so the
+                question sits on the left. */}
+            <At style={{ left: '8cqmin', top: '22cqmin', width: '50cqmin' }}>
+              <ChromeWindow
+                url="vocably.pro/app"
+                title="Vocably"
+                style={{ height: '58cqmin', fontSize: '1.2cqmin' }}
+              >
+                <MultiChoiceQuestion
+                  item={copy.searchItem}
+                  incorrect={copy.incorrectTranslations}
+                  language={language}
+                  answered
+                  style={{
+                    width: '27cqmin',
+                    margin: '4cqmin 0 0 4cqmin',
+                    fontSize: '1.7cqmin',
+                  }}
+                />
+              </ChromeWindow>
+            </At>
+            <At style={{ left: '27cqmin', top: '12cqmin' }}>
+              <IPhone3D width={Math.min(format.width, format.height) * 0.7}>
                 {/* Centered between the 62pt status bar and the bottom of
                     the screen: the negative margins undo the screen's
                     154pt padding, and widen it so the longest answer
@@ -337,7 +357,7 @@ export const ChromeScreenshot = () => (
                 </PhoneScreen>
               </IPhone3D>
             </At>
-            <Text side="right" inset="21cqmin" heading={copy.cws.phone}>
+            <Text side="right" inset="14cqmin" heading={copy.cws.study}>
               <div
                 style={{
                   display: 'flex',
@@ -405,35 +425,6 @@ export const ChromeScreenshot = () => (
                 <Item language={language} />
               </ExtensionPopup>
             </At>
-          </Screenshot>
-
-          {/* Studying in the web app. */}
-          <Screenshot>
-            <At style={{ left: '14cqmin', top: '10cqmin', width: '70cqmin' }}>
-              <ChromeWindow
-                url="vocably.pro/app"
-                title="Vocably"
-                style={{ height: '80cqmin', fontSize: '1.5cqmin' }}
-              >
-                <MultiChoiceQuestion
-                  item={copy.searchItem}
-                  incorrect={copy.incorrectTranslations}
-                  language={language}
-                  answered
-                  style={{
-                    width: '42cqmin',
-                    margin: '5cqmin auto 0',
-                    fontSize: '2.1cqmin',
-                  }}
-                />
-              </ChromeWindow>
-            </At>
-            <Text
-              side="right"
-              inset="14cqmin"
-              top={textTop}
-              heading={copy.cws.browser}
-            />
           </Screenshot>
 
           {/* The whole ecosystem: the mobile apps. */}

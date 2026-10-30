@@ -10,9 +10,9 @@ type ChromeWebStore = {
   save: Heading;
   youtube: Heading;
   calls: Heading;
-  browser: Heading;
-  phone: Heading;
-  // The highlights listed on the phone screenshot.
+  // The phone and the browser together.
+  study: Heading;
+  // The highlights listed on the study screenshot.
   phoneFeatures: [string, string, string];
   everywhere: Heading;
   // The small line above the store name on the App Store and Google Play
@@ -237,18 +237,14 @@ export const localization: Record<Language, Translations> = {
         '*Translate* and *save* during video calls',
         'Perfect for anyone taking lessons with an online tutor.',
       ],
-      browser: [
-        '*Study* right in your browser',
-        'Quizzes and interactive questions help the saved words stick.',
-      ],
-      phone: [
-        '*Learn* your words on your *phone*',
-        'Review saved words using spaced repetition.',
+      study: [
+        '*Study* them *everywhere*',
+        'Review saved words with spaced repetition on your phone or in your browser.',
       ],
       phoneFeatures: [
         'Synced across devices',
-        'AI flashcard generation from a prompt',
-        'A dictionary that is always at hand',
+        'High-quality mobile app',
+        'A dictionary that is always with you',
       ],
       everywhere: [
         '*Translate* no matter what you are doing',
@@ -367,18 +363,14 @@ export const localization: Record<Language, Translations> = {
         '*Traduce* y *guarda* durante videollamadas',
         'Ideal para quienes toman clases con un profesor en línea.',
       ],
-      browser: [
-        '*Estudia* en tu navegador',
-        'Los cuestionarios y las preguntas interactivas te ayudan a fijar las palabras guardadas.',
-      ],
-      phone: [
-        '*Aprende* tus palabras en el *móvil*',
-        'Repasa las palabras guardadas con repetición espaciada.',
+      study: [
+        '*Estúdialas* en *cualquier lugar*',
+        'Repasa las palabras guardadas con repetición espaciada en el móvil o en el navegador.',
       ],
       phoneFeatures: [
         'Sincronizado entre dispositivos',
-        'Tarjetas generadas por IA a partir de una petición',
-        'Un diccionario siempre a mano',
+        'Aplicación móvil de alta calidad',
+        'Un diccionario siempre contigo',
       ],
       everywhere: [
         '*Traduce* hagas lo que hagas',
@@ -499,18 +491,14 @@ export const localization: Record<Language, Translations> = {
         '*Traduza* e *salve* durante videochamadas',
         'Perfeito para quem tem aulas com um professor on-line.',
       ],
-      browser: [
-        '*Estude* no seu navegador',
-        'Testes e perguntas interativas ajudam a fixar as palavras salvas.',
-      ],
-      phone: [
-        '*Aprenda* suas palavras no *celular*',
-        'Revise as palavras salvas com repetição espaçada.',
+      study: [
+        '*Estude-as* em *qualquer lugar*',
+        'Revise as palavras salvas com repetição espaçada no celular ou no navegador.',
       ],
       phoneFeatures: [
         'Sincronizado entre dispositivos',
-        'Cartões gerados por IA a partir de um pedido',
-        'Um dicionário sempre à mão',
+        'Aplicativo móvel de alta qualidade',
+        'Um dicionário sempre com você',
       ],
       everywhere: [
         '*Traduza* não importa o que esteja fazendo',
@@ -635,18 +623,14 @@ export const localization: Record<Language, Translations> = {
         '*Переводите* и *сохраняйте* во время видеозвонков',
         'Идеально для тех, кто занимается с онлайн-репетитором.',
       ],
-      browser: [
-        '*Учите* слова прямо в браузере',
-        'Тесты и интерактивные вопросы помогут запомнить сохраненные слова.',
-      ],
-      phone: [
-        '*Учите* слова на *телефоне*',
-        'Повторяйте сохраненные слова по методу интервальных повторений.',
+      study: [
+        '*Учите* их *где угодно*',
+        'Повторяйте сохраненные слова по методу интервальных повторений на телефоне или в браузере.',
       ],
       phoneFeatures: [
         'Синхронизация между устройствами',
-        'Генерация карточек ИИ по запросу',
-        'Словарь всегда под рукой',
+        'Качественное мобильное приложение',
+        'Словарь всегда с вами',
       ],
       everywhere: [
         '*Переводите*, чем бы вы ни занимались',
@@ -780,18 +764,14 @@ export const localization: Record<Language, Translations> = {
         '*Перекладайте* та *зберігайте* під час відеодзвінків',
         'Ідеально для тих, хто займається з онлайн-репетитором.',
       ],
-      browser: [
-        '*Вчіть* слова просто в браузері',
-        'Тести та інтерактивні запитання допоможуть запам’ятати збережені слова.',
-      ],
-      phone: [
-        '*Вчіть* слова на *телефоні*',
-        'Повторюйте збережені слова за методом інтервальних повторень.',
+      study: [
+        '*Вчіть* їх *будь-де*',
+        'Повторюйте збережені слова за методом інтервальних повторень на телефоні або в браузері.',
       ],
       phoneFeatures: [
         'Синхронізація між пристроями',
-        'Генерація карток ШІ за запитом',
-        'Словник завжди під рукою',
+        'Якісний мобільний застосунок',
+        'Словник завжди з вами',
       ],
       everywhere: [
         '*Перекладайте*, хоч би чим ви займалися',
@@ -928,18 +908,14 @@ export const localization: Record<Language, Translations> = {
         'Görüntülü görüşmelerde *çevirin* ve *kaydedin*',
         'Çevrim içi bir öğretmenle ders alan herkes için ideal.',
       ],
-      browser: [
-        'Doğrudan tarayıcınızda *çalışın*',
-        'Testler ve etkileşimli sorular kaydettiğiniz kelimeleri pekiştirir.',
-      ],
-      phone: [
-        'Kelimelerinizi *telefonunuzda* *öğrenin*',
-        'Kaydettiğiniz kelimeleri aralıklı tekrarla gözden geçirin.',
+      study: [
+        'Onları *her yerde* *çalışın*',
+        'Kaydettiğiniz kelimeleri telefonunuzda veya tarayıcınızda aralıklı tekrarla gözden geçirin.',
       ],
       phoneFeatures: [
         'Cihazlar arasında senkronize',
-        'İstemle yapay zekâ kart oluşturma',
-        'Her zaman elinizin altında bir sözlük',
+        'Yüksek kaliteli mobil uygulama',
+        'Her zaman yanınızda bir sözlük',
       ],
       everywhere: [
         'Ne yaparsanız yapın *çevirin*',
@@ -1062,18 +1038,14 @@ export const localization: Record<Language, Translations> = {
         '*Dịch* và *lưu* trong khi gọi video',
         'Lý tưởng cho những ai học cùng gia sư trực tuyến.',
       ],
-      browser: [
-        '*Học* ngay trong trình duyệt',
-        'Các bài kiểm tra và câu hỏi tương tác giúp bạn ghi nhớ các từ đã lưu.',
-      ],
-      phone: [
-        '*Học* từ vựng trên *điện thoại*',
-        'Ôn lại các từ đã lưu bằng phương pháp lặp lại ngắt quãng.',
+      study: [
+        '*Học* chúng ở *mọi nơi*',
+        'Ôn lại các từ đã lưu bằng phương pháp lặp lại ngắt quãng trên điện thoại hoặc trình duyệt.',
       ],
       phoneFeatures: [
         'Đồng bộ giữa các thiết bị',
-        'AI tạo thẻ ghi nhớ theo yêu cầu',
-        'Từ điển luôn trong tầm tay',
+        'Ứng dụng di động chất lượng cao',
+        'Từ điển luôn bên bạn',
       ],
       everywhere: [
         '*Dịch* dù bạn đang làm gì',
@@ -1210,9 +1182,8 @@ export const localization: Record<Language, Translations> = {
         'Vocably 会翻译这个单词，并帮你记住它。',
       ],
       calls: ['视频通话时也能*翻译*和*保存*', '非常适合跟着在线老师上课的人。'],
-      browser: ['直接在浏览器中*学习*', '通过测验和互动问题，牢记保存的单词。'],
-      phone: ['在*手机*上*学习*你的单词', '用间隔重复复习保存的单词。'],
-      phoneFeatures: ['多设备同步', 'AI 根据提示生成单词卡', '随时可用的词典'],
+      study: ['随时随地*学习*', '在手机或浏览器上用间隔重复复习保存的单词。'],
+      phoneFeatures: ['多设备同步', '高品质移动应用', '随身携带的词典'],
       everywhere: [
         '无论做什么，都能随时*翻译*',
         'Vocably 是专为积极使用外语的人打造的生态系统。',
@@ -1327,12 +1298,8 @@ export const localization: Record<Language, Translations> = {
         'Vocably 會翻譯這個單字，並幫你記住它。',
       ],
       calls: ['視訊通話時也能*翻譯*和*儲存*', '非常適合跟著線上老師上課的人。'],
-      browser: [
-        '直接在瀏覽器中*學習*',
-        '透過測驗和互動式問題，牢記儲存的單字。',
-      ],
-      phone: ['在*手機*上*學習*你的單字', '用間隔重複複習儲存的單字。'],
-      phoneFeatures: ['跨裝置同步', 'AI 依提示產生單字卡', '隨時可用的字典'],
+      study: ['隨時隨地*學習*', '在手機或瀏覽器上用間隔重複複習儲存的單字。'],
+      phoneFeatures: ['跨裝置同步', '高品質行動應用程式', '隨身攜帶的字典'],
       everywhere: [
         '無論做什麼，都能隨時*翻譯*',
         'Vocably 是專為積極使用外語的人打造的生態系統。',
