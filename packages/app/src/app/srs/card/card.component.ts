@@ -139,6 +139,16 @@ export class CardComponent {
 
   public onFlip() {
     this.isFlipped = !this.isFlipped;
+  }
+
+  public onFlipTransitionEnd(event: TransitionEvent) {
+    if (
+      event.target !== event.currentTarget ||
+      event.propertyName !== 'transform'
+    ) {
+      return;
+    }
+
     this.flip.emit(this.isFlipped);
   }
 }

@@ -5,7 +5,7 @@
     [@card]="userAnswer"
     (click)="onFlip()"
   >
-    <div class="card-inner">
+    <div class="card-inner" (transitionend)="onFlipTransitionEnd($event)">
       <div appTextLength class="side front srs-card-font">
         <div class="side-content">
           <ng-content select="[front]"></ng-content>
