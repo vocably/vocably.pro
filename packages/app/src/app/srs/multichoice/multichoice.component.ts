@@ -21,7 +21,7 @@ import { hideAnimation } from '../hide-animation';
   styleUrl: './multichoice.component.scss',
   animations: [hideAnimation],
   host: {
-    '[@hide]': 'correct',
+    '[@hide]': 'hiding',
     '(@hide.done)': 'onHideAnimationCompleted()',
   },
 })
@@ -50,6 +50,8 @@ export class CardMultichoiceComponent implements OnInit {
 
   correct: boolean = false;
 
+  hiding: boolean = false;
+
   options: CardItem[];
 
   wrongfullySelected: CardItem[] = [];
@@ -71,10 +73,17 @@ export class CardMultichoiceComponent implements OnInit {
     }
 
     this.correct = true;
+
+    // Let the correct answer paint before the hide animation starts
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        this.hiding = true;
+      })
+    );
   };
 
   onHideAnimationCompleted = () => {
-    if (!this.correct) {
+    if (!this.hiding) {
       return;
     }
 
