@@ -131,57 +131,59 @@ export const AnalysisItem = ({
         >
           <path d="M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M13,7H11V11H7V13H11V17H13V13H17V11H13V7Z" />
         </svg>
-      ) : (
-        <div
-          style={{
-            position: 'absolute',
-            top: '-0.3em',
-            right: 0,
-            display: 'inline-flex',
-            alignItems: 'center',
-            height: '2em',
-            paddingLeft: '0.125em',
-            paddingRight: '0.5em',
-            border: `0.094em solid ${primary}`,
-            borderRadius: '1em',
-            boxShadow: highlightLearn
-              ? '0 0 0.75em rgba(0, 80, 255, 0.35)'
-              : 'none',
-            color: primary,
-          }}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            style={{ display: 'block', width: '1.5em', height: '1.5em' }}
-          >
-            <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-          </svg>
-          <span style={{ marginLeft: '0.125em' }}>{learn}</span>
-          {/* Anchored to the button, so it follows it whatever the width
-              of its text in every language. */}
-          {pointAtLearn && (
-            <Arrow
-              direction="up-left"
-              style={{
-                position: 'absolute',
-                left: 'calc(100% - 0.7em)',
-                top: 'calc(100% - 0.6em)',
-                width: '1.75em',
-              }}
-            />
-          )}
-        </div>
-      )}
+      ) : null}
 
       <div style={{ paddingRight: hideLearn ? 0 : '2.125em' }}>
-        <div
-          style={{
-            // Room for the "Learn" button; the icon fits in the padding above.
-            paddingRight: hideLearn || learnIcon ? 0 : '3.125em',
-            marginBottom: '0.575em',
-          }}
-        >
+        <div style={{ marginBottom: '0.575em' }}>
+          {/* The "Learn" button; the icon fits in the padding above. */}
+          {!hideLearn && !learnIcon && (
+            <div
+              style={{
+                // Floated, so the first line wraps around it whatever the width
+                // of its text. The negative margins pull it to the card's
+                // right edge and keep it from pushing the second line in.
+                position: 'relative',
+                float: 'right',
+                marginTop: '-0.3em',
+                marginRight: '-2.125em',
+                marginBottom: '-0.75em',
+                marginLeft: '0.5em',
+                display: 'flex',
+                alignItems: 'center',
+                height: '2em',
+                paddingLeft: '0.125em',
+                paddingRight: '0.5em',
+                border: `0.094em solid ${primary}`,
+                borderRadius: '1em',
+                boxShadow: highlightLearn
+                  ? '0 0 0.75em rgba(0, 80, 255, 0.35)'
+                  : 'none',
+                color: primary,
+              }}
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                style={{ display: 'block', width: '1.5em', height: '1.5em' }}
+              >
+                <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+              </svg>
+              <span style={{ marginLeft: '0.125em' }}>{learn}</span>
+              {/* Anchored to the button, so it follows it whatever the width
+                  of its text in every language. */}
+              {pointAtLearn && (
+                <Arrow
+                  direction="up-left"
+                  style={{
+                    position: 'absolute',
+                    left: 'calc(100% - 0.7em)',
+                    top: 'calc(100% - 0.6em)',
+                    width: '1.75em',
+                  }}
+                />
+              )}
+            </div>
+          )}
           {/* vocably-icon-play-circle */}
           <svg
             viewBox="0 0 24 24"

@@ -17,7 +17,7 @@ import { IPhone16Max } from '../components/IPhone16Max';
 const format = getFormat('ios-iphone-6.5');
 
 export const IPhone65 = () => (
-  <Device format={format}>
+  <Device format={format} textScale={1.35}>
     {(language) => (
       <>
         <Screenshot>
@@ -34,12 +34,12 @@ export const IPhone65 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.12}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].translate}</div>
@@ -64,17 +64,18 @@ export const IPhone65 = () => (
                 language={language}
                 learn={localization[language].learnButton}
                 example={localization[language].example}
+                style={{ fontSize: '5.2cqmin' }}
               />
             </div>
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.12}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].learn}</div>
@@ -91,12 +92,12 @@ export const IPhone65 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.12}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].customLists}</div>
@@ -111,12 +112,17 @@ export const IPhone65 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle backdrop={<SafariCorner />}>
+          <Placeholder
+            format={format}
+            fixedTitle
+            titleTop={0.12}
+            backdrop={<SafariCorner offset={[12, 10]} />}
+          >
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].extension}</div>
@@ -125,7 +131,11 @@ export const IPhone65 = () => (
               </div>
             </div>
             <SafariExtension
-              style={{ marginTop: language === 'en' ? '10cqmin' : '14cqmin' }}
+              style={{
+                marginTop: '4cqmin',
+                transform: 'scale(0.85)',
+                transformOrigin: 'top center',
+              }}
               text={localization[language].pageText}
             >
               <AnalysisItem
@@ -139,12 +149,12 @@ export const IPhone65 = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle>
+          <Placeholder format={format} fixedTitle titleTop={0.12}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">

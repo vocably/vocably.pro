@@ -17,7 +17,7 @@ import { AndroidEbookLookUp } from '../components/AndroidEbookLookUp';
 const format = getFormat('play-phone');
 
 export const PlayPhone = () => (
-  <Device format={format}>
+  <Device format={format} textScale={1.35}>
     {(language) => (
       <>
         <Screenshot>
@@ -34,12 +34,12 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle titleTop={0.1}>
+          <Placeholder format={format} fixedTitle titleTop={0.08}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].translate}</div>
@@ -64,17 +64,20 @@ export const PlayPhone = () => (
                 language={language}
                 learn={localization[language].learnButton}
                 example={localization[language].example}
+                // The German card of English is too long to fit with them.
+                hideExamples={language === 'en'}
+                style={{ fontSize: '5.2cqmin' }}
               />
             </div>
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle titleTop={0.1}>
+          <Placeholder format={format} fixedTitle titleTop={0.08}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].learn}</div>
@@ -97,12 +100,12 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle titleTop={0.1}>
+          <Placeholder format={format} fixedTitle titleTop={0.08}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].customLists}</div>
@@ -117,12 +120,12 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle titleTop={0.1}>
+          <Placeholder format={format} fixedTitle titleTop={0.08}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">
@@ -133,23 +136,22 @@ export const PlayPhone = () => (
               </div>
             </div>
             <AndroidSelection
-              style={{ marginTop: '12cqmin' }}
+              style={{ marginTop: '4cqmin' }}
               text={localization[language].pageText}
               webSearch={localization[language].webSearch}
             />
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle titleTop={0.1}>
+          <Placeholder format={format} fixedTitle titleTop={0.08}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">{localization[language].ebook}</div>
-              <div className="subtitle">{localization[language].ebookSub}</div>
             </div>
             <AndroidEbookLookUp
               text={localization[language].pageText}
@@ -163,12 +165,12 @@ export const PlayPhone = () => (
           </Placeholder>
         </Screenshot>
         <Screenshot>
-          <Placeholder format={format} fixedTitle titleTop={0.1}>
+          <Placeholder format={format} fixedTitle titleTop={0.08}>
             <div
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '2.4em',
+                gap: '4.5cqmin',
               }}
             >
               <div className="title">

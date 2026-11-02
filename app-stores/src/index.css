@@ -122,18 +122,21 @@ body {
 
 .title {
   font-family: 'Merriweather', serif;
-  font-size: 8cqmin;
+  /* --text-scale is set per format by <Device textScale>. */
+  font-size: calc(8cqmin * var(--text-scale, 1));
   font-weight: 700;
   text-align: center;
   letter-spacing: -0.02em;
   white-space: pre-line;
+  text-wrap: balance;
   color: #0a0a0a;
 }
 
 .subtitle {
-  font-size: 6cqmin;
+  font-size: calc(6cqmin * var(--text-scale, 1));
   text-align: center;
   white-space: pre-line;
+  text-wrap: balance;
 }
 
 .logo {

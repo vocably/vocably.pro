@@ -79,10 +79,8 @@ type Translations = {
   androidExtensionSub: string;
   // The Android text selection menu item that searches the selected text.
   webSearch: string;
-  // The headline of the Android e-book screenshot and the line under it. It
-  // shows `pageText` too.
+  // The headline of the Android e-book screenshot, which shows `pageText` too.
   ebook: string;
-  ebookSub: string;
   // The button that closes the app's share sheet, `common.done` in the app.
   done: string;
   // The headline of the desktop browser extension screenshot and the line
@@ -273,13 +271,11 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Select, translate,\nand save',
     androidExtensionSub: 'words while surfing the web\nin any mobile browser.',
     webSearch: 'Web search',
-    ebook: 'Long-press on\nany word while\nreading e-books.',
-    ebookSub: 'Vocably integrates with most\nAndroid e-book readers.',
+    ebook: 'Integrates with most Android e-\u2060book readers.',
     done: 'Done',
     desktopExtension: 'Browse the web\nand watch YouTube',
-    desktopExtensionSub:
-      'with the Vocably extension\nfor Chrome, Safari, and Edge\ndesktop browsers.',
-    customLists: 'Generate custom\ncard lists',
+    desktopExtensionSub: 'on your computer with the Vocably extension.',
+    customLists: 'Generate card lists',
     customListsSub: 'by prompting the AI.',
     customListsPrompt: 'popular verbs',
     customListsCards: [
@@ -405,14 +401,11 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'palabras mientras navegas por la web en cualquier navegador móvil.',
     webSearch: 'Búsqueda web',
-    ebook: 'Pulsa cualquier palabra al leer libros electrónicos.',
-    ebookSub:
-      'Vocably se integra con la mayoría de los lectores de libros electrónicos para Android.',
+    ebook: 'Se integra con la mayoría de lectores de e-\u2060books de Android.',
     done: 'Listo',
     desktopExtension: 'Navega por la web y mira YouTube',
-    desktopExtensionSub:
-      'con la extensión de Vocably para los navegadores de escritorio Chrome, Safari y Edge.',
-    customLists: 'Genera listas de tarjetas personalizadas',
+    desktopExtensionSub: 'en tu computadora con la extensión de Vocably.',
+    customLists: 'Genera listas de tarjetas',
     customListsSub: 'pidiéndoselo a la IA.',
     customListsPrompt: 'verbos populares',
     customListsCards: withTranslations([
@@ -538,14 +531,12 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'palavras enquanto navega na web em qualquer navegador móvel.',
     webSearch: 'Pesquisa na web',
-    ebook: 'Toque em qualquer palavra ao ler e-books.',
-    ebookSub:
-      'O Vocably se integra à maioria dos leitores de e-books para Android.',
+    ebook:
+      'Integra-\u2060se à maioria dos leitores de e-\u2060books para Android.',
     done: 'Concluído',
     desktopExtension: 'Navegue na web e assista ao YouTube',
-    desktopExtensionSub:
-      'com a extensão do Vocably para os navegadores de desktop Chrome, Safari e Edge.',
-    customLists: 'Gere listas de cartões personalizadas',
+    desktopExtensionSub: 'no seu computador com a extensão do Vocably.',
+    customLists: 'Gere listas de cartões',
     customListsSub: 'pedindo à IA.',
     customListsPrompt: 'verbos populares',
     customListsCards: withTranslations([
@@ -633,7 +624,7 @@ export const localization: Record<Language, Translations> = {
     translate: 'Переводите',
     translateSub: 'любые слова и фразы.',
     learn: 'Учите',
-    learnSub: 'при помощи тестов и интерактивных вопросов.',
+    learnSub: 'при помощи интерактивных вопросов.',
     extension: 'Переводите и сохраняйте',
     extensionSub: 'в один клик с помощью расширения Safari для iOS.',
     cws: {
@@ -675,13 +666,11 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'слова, просматривая сайты в любом мобильном браузере.',
     webSearch: 'Веб-поиск',
-    ebook: 'Нажмите на любое слово, читая электронные книги.',
-    ebookSub: 'Vocably интегрируется с большинством читалок для Android.',
+    ebook: 'Интегрируется с\u00a0большинством читалок для\u00a0Android.',
     done: 'Готово',
     desktopExtension: 'Читайте сайты и смотрите YouTube',
-    desktopExtensionSub:
-      'с расширением Vocably для десктопных браузеров Chrome, Safari и Edge.',
-    customLists: 'Создавайте свои списки карточек',
+    desktopExtensionSub: 'с\u00a0расширением Vocably на\u00a0компьютере.',
+    customLists: 'Создавайте списки карточек',
     customListsSub: 'запросом к ИИ.',
     customListsPrompt: 'популярные глаголы',
     customListsCards: withTranslations([
@@ -779,7 +768,7 @@ export const localization: Record<Language, Translations> = {
     translate: 'Перекладайте',
     translateSub: 'будь-які слова та фрази.',
     learn: 'Вчіть',
-    learnSub: 'за допомогою тестів та інтерактивних запитань.',
+    learnSub: 'за допомогою інтерактивних запитань.',
     extension: 'Перекладайте та зберігайте',
     extensionSub: 'в один клік за допомогою розширення Safari для iOS.',
     cws: {
@@ -821,13 +810,11 @@ export const localization: Record<Language, Translations> = {
     androidExtensionSub:
       'слова, переглядаючи сайти в будь-якому мобільному браузері.',
     webSearch: 'Пошук в Інтернеті',
-    ebook: 'Натисніть на будь-яке слово, читаючи електронні книги.',
-    ebookSub: 'Vocably інтегрується з більшістю читалок для Android.',
+    ebook: 'Інтегрується з\u00a0більшістю читалок для\u00a0Android.',
     done: 'Готово',
     desktopExtension: 'Читайте сайти та дивіться YouTube',
-    desktopExtensionSub:
-      'з розширенням Vocably для десктопних браузерів Chrome, Safari та Edge.',
-    customLists: 'Створюйте власні списки карток',
+    desktopExtensionSub: 'з\u00a0розширенням Vocably на\u00a0комп’ютері.',
+    customLists: 'Створюйте списки карток',
     customListsSub: 'запитом до ШІ.',
     customListsPrompt: 'популярні дієслова',
     customListsCards: withTranslations([
@@ -969,13 +956,11 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Kelimeleri seçin, çevirin ve kaydedin',
     androidExtensionSub: "herhangi bir mobil tarayıcıda web'de gezinirken.",
     webSearch: "Web'de ara",
-    ebook: 'E-kitap okurken herhangi bir kelimeye basın.',
-    ebookSub: 'Vocably, çoğu Android e-kitap okuyucusuyla entegre olur.',
+    ebook: 'Çoğu Android e-\u2060kitap okuyucusuyla entegre olur.',
     done: 'Tamam',
     desktopExtension: "Web'de gezinin ve YouTube izleyin",
-    desktopExtensionSub:
-      'Chrome, Safari ve Edge masaüstü tarayıcıları için Vocably uzantısıyla.',
-    customLists: 'Özel kart listeleri oluşturun',
+    desktopExtensionSub: 'bilgisayarınızda Vocably uzantısıyla.',
+    customLists: 'Kart listeleri oluşturun',
     customListsSub: 'yapay zekâya istem yazarak.',
     customListsPrompt: 'popüler fiiller',
     customListsCards: withTranslations([
@@ -1104,14 +1089,12 @@ export const localization: Record<Language, Translations> = {
     androidExtension: 'Chọn, dịch và lưu',
     androidExtensionSub: 'từ khi lướt web trên bất kỳ trình duyệt di động nào.',
     webSearch: 'Tìm kiếm trên web',
-    ebook: 'Chạm vào từ bất kỳ khi đọc sách điện tử.',
-    ebookSub:
-      'Vocably tích hợp với hầu hết các ứng dụng đọc sách điện tử trên Android.',
+    ebook: 'Tích hợp với hầu hết trình đọc sách điện\u00a0tử Android.',
     done: 'Xong',
     desktopExtension: 'Duyệt web và xem YouTube',
     desktopExtensionSub:
-      'với tiện ích mở rộng Vocably cho trình duyệt máy tính Chrome, Safari và Edge.',
-    customLists: 'Tạo danh sách thẻ tùy chỉnh',
+      'trên máy tính với tiện\u00a0ích mở\u00a0rộng Vocably.',
+    customLists: 'Tạo danh sách thẻ',
     customListsSub: 'bằng cách gửi yêu cầu cho AI.',
     customListsPrompt: 'động từ phổ biến',
     customListsCards: withTranslations([
@@ -1220,7 +1203,7 @@ export const localization: Record<Language, Translations> = {
     learn: '学习',
     learnSub: '通过测验和互动问题。',
     extension: '翻译并保存',
-    extensionSub: '只需一键，借助\niOS Safari 扩展程序即可完成。',
+    extensionSub: '只需一键，借助 iOS Safari 扩展程序即可完成。',
     cws: {
       save: ['保存*翻译过*的单词', '一款 AI 词典，\n帮你保存新单词和短语。'],
       youtube: [
@@ -1248,13 +1231,11 @@ export const localization: Record<Language, Translations> = {
     androidExtension: '选择、翻译并保存单词',
     androidExtensionSub: '在任意移动浏览器中\n浏览网页时即可使用。',
     webSearch: '网页搜索',
-    ebook: '阅读电子书时，\n长按任意单词即可。',
-    ebookSub: 'Vocably 支持大多数\nAndroid 电子书阅读器。',
+    ebook: '支持大多数\nAndroid\n电子书阅读器。',
     done: '完成',
     desktopExtension: '浏览网页、\n观看 YouTube',
-    desktopExtensionSub:
-      '使用适用于 Chrome、Safari\n和 Edge 桌面浏览器的\nVocably 扩展程序。',
-    customLists: '生成自定义单词卡列表',
+    desktopExtensionSub: '在电脑上使用 Vocably 扩展程序。',
+    customLists: '生成单词卡列表',
     customListsSub: '只需向 AI 发出请求。',
     customListsPrompt: '常用动词',
     customListsCards: withTranslations([
@@ -1343,7 +1324,7 @@ export const localization: Record<Language, Translations> = {
     learn: '學習',
     learnSub: '透過測驗和互動式問題。',
     extension: '翻譯並儲存',
-    extensionSub: '只要一鍵，透過\niOS Safari 擴充功能即可完成。',
+    extensionSub: '只要一鍵，透過 iOS Safari 擴充功能即可完成。',
     cws: {
       save: ['儲存*翻譯過*的單字', '一款 AI 字典，\n幫你儲存新單字和片語。'],
       youtube: [
@@ -1371,13 +1352,11 @@ export const localization: Record<Language, Translations> = {
     androidExtension: '選取、翻譯並儲存單字',
     androidExtensionSub: '在任何行動瀏覽器中\n瀏覽網頁時即可使用。',
     webSearch: '網頁搜尋',
-    ebook: '閱讀電子書時，\n長按任何單字即可。',
-    ebookSub: 'Vocably 支援大多數\nAndroid 電子書閱讀器。',
+    ebook: '支援大多數\nAndroid\n電子書閱讀器。',
     done: '完成',
     desktopExtension: '瀏覽網頁、\n觀看 YouTube',
-    desktopExtensionSub:
-      '使用適用於 Chrome、Safari\n和 Edge 桌面瀏覽器的\nVocably 擴充功能。',
-    customLists: '產生自訂單字卡清單',
+    desktopExtensionSub: '在電腦上使用 Vocably 擴充功能。',
+    customLists: '產生單字卡清單',
     customListsSub: '只需向 AI 提出要求。',
     customListsPrompt: '常用動詞',
     customListsCards: withTranslations([

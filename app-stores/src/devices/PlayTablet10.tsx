@@ -150,7 +150,6 @@ export const PlayTablet10 = () => (
               }}
             >
               <div className="title">{localization[language].ebook}</div>
-              <div className="subtitle">{localization[language].ebookSub}</div>
             </div>
             <AndroidEbookLookUp
               text={localization[language].pageText}

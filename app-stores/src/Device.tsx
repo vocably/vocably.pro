@@ -4,6 +4,7 @@ import {
   Fragment,
   isValidElement,
   useContext,
+  type CSSProperties,
   type ReactNode,
 } from 'react';
 import { Canvas } from './Canvas';
@@ -33,6 +34,9 @@ type DeviceProps = {
   format: AssetFormat;
   // Defaults to every interface language.
   languages?: readonly Language[];
+  // Multiplies the size of the .title and .subtitle text, e.g. to keep it
+  // readable on formats the store shows as small thumbnails.
+  textScale?: number;
   // Renders the screenshots of one language, in the order they are exported.
   children: (language: Language) => ReactNode;
 };
@@ -42,6 +46,7 @@ type DeviceProps = {
 export const Device = ({
   format,
   languages: deviceLanguages = languages,
+  textScale,
   children,
 }: DeviceProps) => (
   <FormatContext value={format}>
@@ -52,6 +57,11 @@ export const Device = ({
           key={language}
           className="language-group"
           data-language={language}
+          style={
+            textScale === undefined
+              ? undefined
+              : ({ '--text-scale': textScale } as CSSProperties)
+          }
         >
           <h3>
             {languageNames[language]} <small>{language}</small>
