@@ -18,13 +18,17 @@ Run from `app-stores/`:
 
 ```bash
 npm install
-npm run app-stores   # Vite dev server (http://localhost:5173 by default)
+npm run app-stores   # Vite dev server on http://localhost:8060 (fixed port, fails if taken), opens the page in the browser
 npm run build        # tsc -b type-check + vite build into dist/
 npm run lint         # oxlint (config in .oxlintrc.json)
 npm run preview      # serve the dist/ build
 ```
 
 There is no `dev` script; the dev server script is named `app-stores`. There are no tests.
+
+## Validating changes
+
+Validate every change on http://localhost:8060 before calling it done. If the dev server isn't already running, start it with `npm run app-stores`. The port is fixed (`strictPort` in `vite.config.ts`), so if 8060 is taken, a dev server is probably already running: reuse it rather than starting another one on a different port. Open the affected format in Chrome (claude-in-chrome tools), check the preview of every changed screenshot and language, and read the console for errors. `npm run build` and `npm run lint` passing is not enough on its own.
 
 ## Structure
 
