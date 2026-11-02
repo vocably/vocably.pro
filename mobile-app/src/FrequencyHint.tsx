@@ -39,6 +39,8 @@ type Props = {
   // 1 (rare) to 10 (most common)
   frequency: number;
   level: 1 | 2 | 3;
+  // False once a free user has used up today's time with the frequency.
+  isAvailable: boolean;
   visible: boolean;
   isSharedLookup: boolean;
   onClose: () => void;
@@ -52,6 +54,7 @@ type Props = {
 export const FrequencyHint: FC<Props> = ({
   frequency,
   level,
+  isAvailable,
   visible,
   isSharedLookup,
   onClose,
@@ -231,44 +234,60 @@ export const FrequencyHint: FC<Props> = ({
             style={styles.content}
             contentContainerStyle={styles.contentContainer}
           >
-            <View style={styles.header}>
-              <Text
-                variant="titleLarge"
-                style={[styles.title, { color: theme.colors.onSurface }]}
-              >
-                {t(`common.frequency_${level}`)}
-              </Text>
-              <Text
-                variant="titleMedium"
-                style={[styles.score, { color: theme.colors.onSurfaceVariant }]}
-              >
-                {t('frequencyHint.score', { score, max: MAX_FREQUENCY })}
-              </Text>
-            </View>
-            <View
-              style={[
-                styles.scale,
-                { backgroundColor: theme.colors.elevation.level5 },
-              ]}
-            >
-              <Animated.View
-                style={[
-                  styles.scaleFill,
-                  {
-                    width: `${(score / MAX_FREQUENCY) * 100}%`,
-                    backgroundColor: theme.colors.primary,
-                    transform: [{ scaleX: scaleFill }],
-                  },
-                ]}
-              />
-            </View>
-            <Text
-              variant="bodyLarge"
-              style={{ color: theme.colors.onSurfaceVariant }}
-            >
-              {t(`frequencyHint.description_${level}`)}
-            </Text>
-            {!isPremium && (
+            {isAvailable ? (
+              <>
+                <View style={styles.header}>
+                  <Text
+                    variant="titleLarge"
+                    style={[styles.title, { color: theme.colors.onSurface }]}
+                  >
+                    {t(`common.frequency_${level}`)}
+                  </Text>
+                  <Text
+                    variant="titleMedium"
+                    style={[
+                      styles.score,
+                      { color: theme.colors.onSurfaceVariant },
+                    ]}
+                  >
+                    {t('frequencyHint.score', { score, max: MAX_FREQUENCY })}
+                  </Text>
+                </View>
+                <View
+                  style={[
+                    styles.scale,
+                    { backgroundColor: theme.colors.elevation.level5 },
+                  ]}
+                >
+                  <Animated.View
+                    style={[
+                      styles.scaleFill,
+                      {
+                        width: `${(score / MAX_FREQUENCY) * 100}%`,
+                        backgroundColor: theme.colors.primary,
+                        transform: [{ scaleX: scaleFill }],
+                      },
+                    ]}
+                  />
+                </View>
+                <Text
+                  variant="bodyLarge"
+                  style={{ color: theme.colors.onSurfaceVariant }}
+                >
+                  {t(`frequencyHint.description_${level}`)}
+                </Text>
+              </>
+            ) : (
+              <View style={styles.header}>
+                <Text
+                  variant="titleLarge"
+                  style={[styles.title, { color: theme.colors.onSurface }]}
+                >
+                  {t('frequencyHint.unavailable')}
+                </Text>
+              </View>
+            )}
+            {(!isPremium || !isAvailable) && (
               <View
                 style={[
                   styles.premium,
@@ -295,7 +314,9 @@ export const FrequencyHint: FC<Props> = ({
                   variant="bodyLarge"
                   style={{ color: theme.colors.onSurfaceVariant }}
                 >
-                  {t('frequencyHint.premium')}
+                  {isAvailable
+                    ? t('frequencyHint.premium')
+                    : t('frequencyHint.unavailablePremium')}
                 </Text>
                 {showSettingsHint ? (
                   <Text

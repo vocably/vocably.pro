@@ -34,3 +34,24 @@ export const usePremium = () => {
 
   return isPremium(authStatus, customerInfoStatus);
 };
+
+export type PremiumStatus = 'unknown' | 'premium' | 'free';
+
+/**
+ * Unlike `usePremium`, tells a free user apart from a user whose subscription
+ * hasn't been loaded yet.
+ */
+export const usePremiumStatus = (): PremiumStatus => {
+  const customerInfoStatus = useContext(CustomerInfoContext);
+  const authStatus = useContext(AuthContext);
+
+  if (isPremium(authStatus, customerInfoStatus)) {
+    return 'premium';
+  }
+
+  if (customerInfoStatus.status === 'loaded') {
+    return 'free';
+  }
+
+  return 'unknown';
+};

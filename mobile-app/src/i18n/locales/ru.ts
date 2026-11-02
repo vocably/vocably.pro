@@ -757,6 +757,9 @@ const translations: BaseTranslations = {
     premiumBadge: 'Premium',
     premium:
       'Частотность слов — функция Premium. Бесплатно её можно попробовать, а с Premium она доступна для каждого слова, которое вы ищете.',
+    unavailable: 'Частотность пока ограничена',
+    unavailablePremium:
+      'Частотность слов — функция Premium, и бесплатным пользователям она доступна не всегда. Оформите Premium, чтобы видеть частотность каждого слова, которое вы ищете, в любое время и без ограничений.',
     accessibilityHint: 'Показывает, что означает частотность',
   },
   language: languageTranslations.ru,

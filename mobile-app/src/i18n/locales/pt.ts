@@ -738,6 +738,9 @@ const translations: BaseTranslations = {
     premiumBadge: 'Premium',
     premium:
       'A frequência de palavras é um recurso Premium. Usuários gratuitos podem experimentá-la, e com o Premium você a vê em cada palavra que pesquisa.',
+    unavailable: 'A frequência está limitada por enquanto',
+    unavailablePremium:
+      'A frequência de palavras é um recurso Premium e nem sempre está disponível para usuários gratuitos. Assine o Premium para ver a frequência de cada palavra que você pesquisa, a qualquer momento e sem limites.',
     accessibilityHint: 'Mostra o que significa a frequência',
   },
   language: languageTranslations.pt,

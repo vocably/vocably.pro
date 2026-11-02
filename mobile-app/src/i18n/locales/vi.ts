@@ -723,6 +723,9 @@ const translations: BaseTranslations = {
     premiumBadge: 'Premium',
     premium:
       'Tần suất từ là tính năng Premium. Người dùng miễn phí có thể dùng thử, còn với Premium bạn sẽ thấy nó ở mọi từ bạn tra.',
+    unavailable: 'Tần suất hiện đang bị giới hạn',
+    unavailablePremium:
+      'Tần suất từ là tính năng Premium và không phải lúc nào cũng có sẵn cho người dùng miễn phí. Nâng cấp lên Premium để xem tần suất của mọi từ bạn tra, bất cứ lúc nào và không giới hạn.',
     accessibilityHint: 'Hiển thị ý nghĩa của tần suất',
   },
   language: languageTranslations.vi,
