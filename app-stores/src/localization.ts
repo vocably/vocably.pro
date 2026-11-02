@@ -232,7 +232,7 @@ export const localization: Record<Language, Translations> = {
     learn: 'Learn',
     learnSub: 'with interactive practice.',
     extension: 'Translate and save',
-    extensionSub: 'with a single click using\nthe iOS Safari Extension.',
+    extensionSub: 'with a single click\nusing the iOS Safari Extension.',
     cws: {
       save: [
         'Save *translated* words',
