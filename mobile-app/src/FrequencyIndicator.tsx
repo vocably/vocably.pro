@@ -10,7 +10,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FrequencyHint } from './FrequencyHint';
+import { useIsFrequencyAvailable } from './useIsFrequencyAvailable';
 
 const FREQUENCY_BARS = 3;
 const BAR_HEIGHTS = [5, 8, 11];
@@ -51,6 +53,7 @@ export const FrequencyIndicator: FC<Props> = ({
   const posthog = usePostHog();
   const fontScale = PixelRatio.getFontScale();
   const [isHintVisible, setIsHintVisible] = useState(false);
+  const isAvailable = useIsFrequencyAvailable();
 
   const level = frequencyToLevel(frequency);
 
@@ -61,6 +64,7 @@ export const FrequencyIndicator: FC<Props> = ({
       language,
       frequency,
       level,
+      isAvailable,
     });
   };
 
@@ -70,6 +74,7 @@ export const FrequencyIndicator: FC<Props> = ({
       language,
       frequency,
       level,
+      isAvailable,
       isSharedLookup,
     });
   };
@@ -83,7 +88,11 @@ export const FrequencyIndicator: FC<Props> = ({
         onPress={openHint}
         hitSlop={{ top: 8, bottom: 8, left: 4, right: 4 }}
         accessibilityRole="button"
-        accessibilityLabel={t(`common.frequency_${level}`)}
+        accessibilityLabel={
+          isAvailable
+            ? t(`common.frequency_${level}`)
+            : t('frequencyHint.unavailable')
+        }
         accessibilityHint={t('frequencyHint.accessibilityHint')}
         style={{
           // Bars grow from a shared baseline, like a signal-strength meter.
@@ -116,25 +125,36 @@ export const FrequencyIndicator: FC<Props> = ({
                   opacity: isActive ? 0.12 : 0,
                 }}
               />
-              {Array.from({ length: FREQUENCY_BARS }, (_, index) => (
-                <View
-                  key={index}
-                  style={{
-                    width: 3 * fontScale,
-                    height: BAR_HEIGHTS[index] * fontScale,
-                    borderRadius: 1,
-                    backgroundColor: theme.colors.primary,
-                    opacity:
-                      index < level
-                        ? isActive
-                          ? 1
-                          : 0.8
-                        : isActive
-                          ? 0.25
-                          : 0.15,
-                  }}
+              {/* Once the free time is over, the bars make way for an
+                  hourglass: the frequency is back tomorrow. */}
+              {!isAvailable && (
+                <Icon
+                  name="timer-sand"
+                  size={BAR_HEIGHTS[FREQUENCY_BARS - 1] * fontScale + 2}
+                  color={theme.colors.primary}
+                  style={{ opacity: isActive ? 1 : 0.8 }}
                 />
-              ))}
+              )}
+              {isAvailable &&
+                Array.from({ length: FREQUENCY_BARS }, (_, index) => (
+                  <View
+                    key={index}
+                    style={{
+                      width: 3 * fontScale,
+                      height: BAR_HEIGHTS[index] * fontScale,
+                      borderRadius: 1,
+                      backgroundColor: theme.colors.primary,
+                      opacity:
+                        index < level
+                          ? isActive
+                            ? 1
+                            : 0.8
+                          : isActive
+                            ? 0.25
+                            : 0.15,
+                    }}
+                  />
+                ))}
             </>
           );
         }}
@@ -142,6 +162,7 @@ export const FrequencyIndicator: FC<Props> = ({
       <FrequencyHint
         frequency={frequency}
         level={level}
+        isAvailable={isAvailable}
         visible={isHintVisible}
         isSharedLookup={isSharedLookup}
         onClose={() => setIsHintVisible(false)}

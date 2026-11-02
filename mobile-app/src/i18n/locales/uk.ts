@@ -754,6 +754,9 @@ const translations: BaseTranslations = {
     premiumBadge: 'Premium',
     premium:
       'Частотність слів — функція Premium. Безкоштовно її можна спробувати, а з Premium вона доступна для кожного слова, яке ви шукаєте.',
+    unavailable: 'Частотність поки що обмежена',
+    unavailablePremium:
+      'Частотність слів — функція Premium, і безкоштовним користувачам вона доступна не завжди. Оформіть Premium, щоб бачити частотність кожного слова, яке ви шукаєте, будь-коли й без обмежень.',
     accessibilityHint: 'Показує, що означає частотність',
   },
   language: languageTranslations.uk,

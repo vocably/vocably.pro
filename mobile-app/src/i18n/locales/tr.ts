@@ -736,6 +736,9 @@ const translations: BaseTranslations = {
     premiumBadge: 'Premium',
     premium:
       'Kelime sıklığı bir Premium özelliğidir. Ücretsiz kullanıcılar onu deneyebilir, Premium ile ise aradığınız her kelimede görürsünüz.',
+    unavailable: 'Sıklık şimdilik sınırlı',
+    unavailablePremium:
+      "Kelime sıklığı bir Premium özelliğidir ve ücretsiz kullanıcılar için her zaman kullanılamaz. Aradığınız her kelimenin sıklığını istediğiniz zaman ve sınırsız görmek için Premium'a geçin.",
     accessibilityHint: 'Sıklığın ne anlama geldiğini gösterir',
   },
   language: languageTranslations.tr,

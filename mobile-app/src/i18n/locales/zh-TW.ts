@@ -691,6 +691,9 @@ const translations: BaseTranslations = {
     premiumBadge: 'Premium',
     premium:
       '字詞頻率是 Premium 功能。免費使用者可以試用，而 Premium 使用者在查詢每個字詞時都能看到。',
+    unavailable: '字詞頻率暫時受限',
+    unavailablePremium:
+      '字詞頻率是 Premium 功能，免費使用者並非隨時都能使用。升級到 Premium，就能隨時無限制地查看每個字詞的頻率。',
     accessibilityHint: '顯示字詞頻率的含義',
   },
   language: languageTranslations['zh-TW'],

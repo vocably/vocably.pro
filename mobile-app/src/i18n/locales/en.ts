@@ -739,6 +739,9 @@ const translations = {
     premiumBadge: 'Premium',
     premium:
       'Word frequency is a Premium feature. Free users get a taste of it, while Premium users see it for every word they look up.',
+    unavailable: 'Frequency is limited for now',
+    unavailablePremium:
+      'Word frequency is a Premium feature and is not always available to free users. Upgrade to Premium to see the frequency of every word you look up, any time, without limits.',
     accessibilityHint: 'Shows what the frequency means',
   },
   language: languageTranslations.en,
