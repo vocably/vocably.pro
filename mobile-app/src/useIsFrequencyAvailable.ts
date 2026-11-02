@@ -4,7 +4,7 @@ import { mmkvStorage } from './mmkvStorage';
 import { usePremiumStatus } from './usePremium';
 
 // Free users see word frequency for this long once in a period.
-const FREE_FREQUENCY_MINUTES = 10;
+const FREE_FREQUENCY_MINUTES = 15;
 const FREE_FREQUENCY_PERIOD_HOURS = 4;
 const FREE_FREQUENCY_MS = FREE_FREQUENCY_MINUTES * 60 * 1000;
 const PERIOD_MS = FREE_FREQUENCY_PERIOD_HOURS * 60 * 60 * 1000;
