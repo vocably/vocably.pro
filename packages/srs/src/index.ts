@@ -6,4 +6,4 @@ export { isSuitableForArrangingByLetters } from './isSuitableForArrangingByLette
 export { createSrsItem } from './item';
 export { STUDY_DELAY_MS, hasStudied, slice } from './slice';
 export * from './studyFlow';
-export { studyPlan } from './studyPlan';
+export { isNotStarted, studyPlan } from './studyPlan';

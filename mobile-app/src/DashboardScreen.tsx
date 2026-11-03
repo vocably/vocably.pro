@@ -45,7 +45,11 @@ import { useSelectedDeck } from './languageDeck/useSelectedDeck';
 import { LanguagesContext } from './languages/LanguagesContainer';
 import { LanguageSelector } from './LanguageSelector';
 import { Loader } from './loaders/Loader';
-import { getRandomizerEnabled } from './Settings/StudySettingsScreen';
+import {
+  getMaximumCardsPerSession,
+  getMaximumNeverStudiedCardsPerDay,
+  getRandomizerEnabled,
+} from './Settings/StudySettingsScreen';
 import { swipeListButtonPressOpacity } from './stupidConstants';
 import { mainPadding } from './styles';
 import { TagsSelector } from './TagsSelector';
@@ -153,6 +157,10 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const languageName = useCurrentLanguageName();
   const [isRandomEnabledResult] = useAsync(getRandomizerEnabled);
+  const [maximumCardsPerSessionResult] = useAsync(getMaximumCardsPerSession);
+  const [maximumNewCardsPerDayResult] = useAsync(
+    getMaximumNeverStudiedCardsPerDay
+  );
   const [isStatsViewEnabledResult, setIsStatsViewEnabled] = useAsync(
     getStatsViewEnabled,
     storeStatsViewEnabled
@@ -230,7 +238,24 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
       .filter(filterByLowercasedText(searchText.toLowerCase()));
   }, [filteredCards, searchText, isSearching]);
 
-  const plan = useMemo(() => studyPlan(new Date(), cards), [cards]);
+  const maxCards =
+    maximumCardsPerSessionResult.status === 'loaded'
+      ? maximumCardsPerSessionResult.value
+      : 0;
+  const maxNeverStudiedCards =
+    maximumNewCardsPerDayResult.status === 'loaded'
+      ? maximumNewCardsPerDayResult.value
+      : 0;
+  const plan = useMemo(
+    () =>
+      studyPlan({
+        today: new Date(),
+        list: cards,
+        maxCards,
+        maxNeverStudiedCards,
+      }),
+    [cards, maxCards, maxNeverStudiedCards]
+  );
   const [collapsedSections, setCollapsedSections] = useState<string[]>([
     'expired',
     'notStarted',
@@ -316,7 +341,9 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   if (
     (deck.cards.length === 0 && status === 'loading') ||
     isRandomEnabledResult.status !== 'loaded' ||
-    isStatsViewEnabledResult.status !== 'loaded'
+    isStatsViewEnabledResult.status !== 'loaded' ||
+    maximumCardsPerSessionResult.status !== 'loaded' ||
+    maximumNewCardsPerDayResult.status !== 'loaded'
   ) {
     return <Loader>{t('dashboard.loadingCards')}</Loader>;
   }
