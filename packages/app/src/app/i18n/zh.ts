@@ -305,7 +305,7 @@ export const zh = {
   'settings.respond_everyone': '每条消息我都会回复。',
   'settings.study_settings': '学习设置',
   'settings.max_cards': '每次学习的卡片数量上限',
-  'settings.max_new_cards_per_day': '每次学习的新卡片数量上限',
+  'settings.max_new_cards_per_day': '每日新卡片数量上限',
   'settings.max_new_cards_per_day_hint':
     '此选项仅适用于“新卡片”分组中积累了大量新卡片的资深用户。',
   'settings.random_select': '随机选择要学习的卡片',

@@ -328,7 +328,7 @@ export const vi = {
   'settings.respond_everyone': 'Tôi trả lời tất cả mọi người.',
   'settings.study_settings': 'Cài đặt học tập',
   'settings.max_cards': 'Số thẻ tối đa mỗi phiên học',
-  'settings.max_new_cards_per_day': 'Số thẻ mới tối đa mỗi phiên học',
+  'settings.max_new_cards_per_day': 'Số thẻ mới tối đa mỗi ngày',
   'settings.max_new_cards_per_day_hint':
     'Tùy chọn này chỉ phù hợp với người dùng đã có kinh nghiệm và tồn nhiều thẻ mới trong nhóm «Mới».',
   'settings.random_select': 'Chọn thẻ ngẫu nhiên để học',

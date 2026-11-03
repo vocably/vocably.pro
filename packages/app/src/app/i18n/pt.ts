@@ -335,8 +335,7 @@ export const pt = {
   'settings.respond_everyone': 'Respondo a todos.',
   'settings.study_settings': 'Configurações de estudo',
   'settings.max_cards': 'Máximo de cartões por sessão de estudo',
-  'settings.max_new_cards_per_day':
-    'Máximo de cartões novos por sessão de estudo',
+  'settings.max_new_cards_per_day': 'Máximo de cartões novos por dia',
   'settings.max_new_cards_per_day_hint':
     'Esta opção só faz sentido para usuários experientes que têm muitos cartões novos acumulados no grupo «Novos».',
   'settings.random_select': 'Selecionar cartões aleatoriamente para estudar',

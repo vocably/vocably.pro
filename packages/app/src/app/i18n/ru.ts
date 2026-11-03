@@ -338,7 +338,7 @@ export const ru = {
   'settings.respond_everyone': 'Я отвечаю всем.',
   'settings.study_settings': 'Настройки учёбы',
   'settings.max_cards': 'Максимум карточек за учебную сессию',
-  'settings.max_new_cards_per_day': 'Максимум новых карточек за учебную сессию',
+  'settings.max_new_cards_per_day': 'Максимум новых карточек в день',
   'settings.max_new_cards_per_day_hint':
     'Этот параметр имеет смысл только для опытных пользователей, у которых накопилось много новых карточек в группе «Новые».',
   'settings.random_select': 'Случайный выбор карточек для изучения',

@@ -32,6 +32,11 @@ import { increaseStudyStreak } from '../../../../increaseStudyStreak';
 import { dateToString, timeout } from '@vocably/sulna';
 import { AuthService } from '../../../auth/auth.service';
 import { getStudySettings } from '../../../../study-settings';
+import {
+  getNewCardsSliceLimit,
+  isNeverStudied,
+  trackNewCardStudied,
+} from '../../../../newCardsStudiedToday';
 import { shuffle } from 'lodash-es';
 import { analysisItemToCardItem } from '../../../../analysisItemToCardItem';
 import { getLanguageTagStorage } from '../../../../tagsStorage';
@@ -150,7 +155,7 @@ export class StudyPageComponent implements OnInit, OnDestroy {
       this.cards = slice(
         new Date(),
         studySettings.cardsPerSession,
-        studySettings.maxNewCardsPerDay,
+        getNewCardsSliceLimit(studySettings.maxNewCardsPerDay, this.allCards),
         this.allCards
       );
     }
@@ -161,6 +166,10 @@ export class StudyPageComponent implements OnInit, OnDestroy {
 
   onGrade(gradeResult: GradeResult) {
     this.answered.update((count) => count + 1);
+
+    if (isNeverStudied(gradeResult.cardItem)) {
+      trackNewCardStudied(gradeResult.cardItem);
+    }
 
     if (!this.necessaryData.hasValue()) {
       return;

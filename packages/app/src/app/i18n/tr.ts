@@ -339,8 +339,7 @@ export const tr = {
   'settings.respond_everyone': 'Herkese yanıt veriyorum.',
   'settings.study_settings': 'Çalışma ayarları',
   'settings.max_cards': 'Çalışma oturumu başına maksimum kart sayısı',
-  'settings.max_new_cards_per_day':
-    'Çalışma oturumu başına maksimum yeni kart sayısı',
+  'settings.max_new_cards_per_day': 'Günlük maksimum yeni kart sayısı',
   'settings.max_new_cards_per_day_hint':
     'Bu seçenek yalnızca «Yeni» grubunda birikmiş çok sayıda yeni kartı olan deneyimli kullanıcılar için anlamlıdır.',
   'settings.random_select': 'Çalışmak için kartları rastgele seç',

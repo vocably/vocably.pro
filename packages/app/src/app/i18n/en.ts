@@ -333,7 +333,7 @@ export const en = {
   'settings.respond_everyone': 'I respond to everyone.',
   'settings.study_settings': 'Study settings',
   'settings.max_cards': 'Maximum cards per study session',
-  'settings.max_new_cards_per_day': 'Maximum new cards per study session',
+  'settings.max_new_cards_per_day': 'Maximum new cards per day',
   'settings.max_new_cards_per_day_hint':
     'This option only makes sense for experienced users who have a lot of new cards stacked in the "New" group.',
   'settings.random_select': 'Randomly select cards to study',
