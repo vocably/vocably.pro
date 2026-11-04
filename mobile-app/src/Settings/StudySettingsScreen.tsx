@@ -14,8 +14,8 @@ import { useAsync } from '../useAsync';
 import { StudySteps } from './StudySteps';
 
 const RANDOMIZER_ENABLED_KEY = 'isRandomizerEnabled';
-const MAXIMUM_CARDS_PER_SESSION_KEY = 'maximumCardsPerSession';
-const MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY =
+export const MAXIMUM_CARDS_PER_SESSION_KEY = 'maximumCardsPerSession';
+export const MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY =
   'maximumNeverStudiedCardsPerDay';
 const PLAY_RANDOM_EXAMPLE_KEY = 'playRandomExample';
 

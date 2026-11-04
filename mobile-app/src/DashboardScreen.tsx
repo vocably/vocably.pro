@@ -49,6 +49,8 @@ import {
   getMaximumCardsPerSession,
   getMaximumNeverStudiedCardsPerDay,
   getRandomizerEnabled,
+  MAXIMUM_CARDS_PER_SESSION_KEY,
+  MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY,
 } from './Settings/StudySettingsScreen';
 import { swipeListButtonPressOpacity } from './stupidConstants';
 import { mainPadding } from './styles';
@@ -59,6 +61,7 @@ import { ScreenLayout } from './ui/ScreenLayout';
 import { Tag } from './ui/Tag';
 import { useAsync } from './useAsync';
 import { useCurrentLanguageName } from './useCurrentLanguageName';
+import { useRefreshOnStorageChange } from './useRefreshOnStorageChange';
 import { usePresentPaywall } from './usePresentPaywall';
 import { UserMetadataContext } from './UserMetadataContainer';
 
@@ -157,9 +160,17 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const languageName = useCurrentLanguageName();
   const [isRandomEnabledResult] = useAsync(getRandomizerEnabled);
-  const [maximumCardsPerSessionResult] = useAsync(getMaximumCardsPerSession);
-  const [maximumNewCardsPerDayResult] = useAsync(
-    getMaximumNeverStudiedCardsPerDay
+  const [maximumCardsPerSessionResult, , refreshMaximumCardsPerSession] =
+    useAsync(getMaximumCardsPerSession);
+  const [maximumNewCardsPerDayResult, , refreshMaximumNewCardsPerDay] =
+    useAsync(getMaximumNeverStudiedCardsPerDay);
+  useRefreshOnStorageChange(
+    [MAXIMUM_CARDS_PER_SESSION_KEY],
+    refreshMaximumCardsPerSession
+  );
+  useRefreshOnStorageChange(
+    [MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY],
+    refreshMaximumNewCardsPerDay
   );
   const [isStatsViewEnabledResult, setIsStatsViewEnabled] = useAsync(
     getStatsViewEnabled,
