@@ -25,7 +25,7 @@ const setRandomizerEnabled = (isEnabled: boolean) =>
   setItem(RANDOMIZER_ENABLED_KEY, isEnabled ? 'true' : 'false');
 
 export const getMaximumCardsPerSession = () =>
-  getItem(MAXIMUM_CARDS_PER_SESSION_KEY).then((res) => Number(res ?? 40));
+  getItem(MAXIMUM_CARDS_PER_SESSION_KEY).then((res) => Number(res ?? 100));
 
 export const setMaximumCardsPerSession = (cardsPerSession: number) =>
   setItem(MAXIMUM_CARDS_PER_SESSION_KEY, cardsPerSession.toString());
@@ -137,7 +137,7 @@ export const StudySettingsScreen: FC<Props> = () => {
             <View testID="study-settings-cards-per-session" style={{ flex: 1 }}>
               <Slider
                 minimumValue={5}
-                maximumValue={100}
+                maximumValue={200}
                 step={5}
                 minimumTrackTintColor={theme.colors.primary}
                 thumbTintColor={theme.colors.primary}
@@ -182,7 +182,7 @@ export const StudySettingsScreen: FC<Props> = () => {
             <View testID="study-settings-new-cards-per-day" style={{ flex: 1 }}>
               <Slider
                 minimumValue={0}
-                maximumValue={40}
+                maximumValue={80}
                 step={1}
                 minimumTrackTintColor={theme.colors.primary}
                 thumbTintColor={theme.colors.primary}
