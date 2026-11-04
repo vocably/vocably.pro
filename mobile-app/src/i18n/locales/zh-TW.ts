@@ -216,6 +216,21 @@ const translations: BaseTranslations = {
       noCardsForTags: '找不到符合所選標籤的卡片。',
       curious: '你很有好奇心，我喜歡你這一點。',
     },
+    fewCards: {
+      title_other: '目前只有 {{count}} 張卡片',
+      message:
+        '卡片這麼少，Vocably 很難發揮作用，你也幾乎感受不到變化。間隔重複只有在卡片集不斷擴充時才能真正發揮威力。',
+      habit: '養成習慣：每遇到一個新單字，就立刻存進 Vocably。',
+      lookUpTitle: '遇到新單字？馬上查',
+      lookUpDescription: '每次發現新單字都打開字典，一鍵儲存。',
+      generatorTitle: '批次產生卡片',
+      generatorDescription: '選擇一個主題，一次加入十幾個實用單字。',
+      safariTitle: '直接在 Safari 中翻譯',
+      safariDescription: '啟用 Vocably 擴充功能，瀏覽任何網站時都能儲存單字。',
+      androidTitle: '在任何 App 中翻譯',
+      androidDescription:
+        '在瀏覽器中選取單字，開啟選單，然後選擇「Translate with Vocably」。',
+    },
     mayBeStudiedIn_other: '{{count}} 分鐘後可以學習。',
     dueDate: {
       tomorrow: '明天',

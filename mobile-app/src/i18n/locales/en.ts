@@ -231,6 +231,26 @@ const translations = {
       noCardsForTags: 'No cards found for the selected tags.',
       curious: 'You are curious, and I like that about you.',
     },
+    fewCards: {
+      title_one: 'Only {{count}} card so far',
+      title_other: 'Only {{count}} cards so far',
+      message:
+        'With so few cards, Vocably has little to work with, and you will hardly feel the difference. Spaced repetition shines when your collection keeps growing.',
+      habit:
+        'Make it a habit: every new word you meet goes straight into Vocably.',
+      lookUpTitle: 'Met a new word? Look it up',
+      lookUpDescription:
+        'Open the dictionary every time you discover a word and save it in one tap.',
+      generatorTitle: 'Generate a batch of cards',
+      generatorDescription:
+        'Pick a topic and add a dozen useful words at once.',
+      safariTitle: 'Translate right in Safari',
+      safariDescription:
+        'Turn on the Vocably extension and save words while you read any website.',
+      androidTitle: 'Translate in any app',
+      androidDescription:
+        'Select a word in your browser, open the menu and choose "Translate with Vocably".',
+    },
     mayBeStudiedIn_one: 'May be studied in {{count}} minute.',
     mayBeStudiedIn_other: 'May be studied in {{count}} minutes.',
     dueDate: {

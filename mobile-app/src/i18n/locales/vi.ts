@@ -228,6 +228,26 @@ const translations: BaseTranslations = {
       noCardsForTags: 'Không tìm thấy thẻ nào cho các tag đã chọn.',
       curious: 'Bạn là người ham học hỏi, và vì thế tôi quý bạn.',
     },
+    fewCards: {
+      title_one: 'Mới có {{count}} thẻ',
+      title_other: 'Mới có {{count}} thẻ',
+      message:
+        'Với quá ít thẻ, Vocably khó phát huy tác dụng và bạn sẽ khó cảm nhận được sự khác biệt. Lặp lại ngắt quãng chỉ thật sự hiệu quả khi bộ sưu tập của bạn không ngừng lớn lên.',
+      habit:
+        'Hãy biến nó thành thói quen: mỗi từ mới bạn gặp đều đi thẳng vào Vocably.',
+      lookUpTitle: 'Gặp từ mới? Tra ngay',
+      lookUpDescription:
+        'Mở từ điển mỗi khi bạn phát hiện một từ và lưu chỉ với một chạm.',
+      generatorTitle: 'Tạo nhiều thẻ cùng lúc',
+      generatorDescription:
+        'Chọn một chủ đề và thêm cả chục từ hữu ích trong một lần.',
+      safariTitle: 'Dịch ngay trong Safari',
+      safariDescription:
+        'Bật tiện ích Vocably và lưu từ khi đang đọc bất kỳ trang web nào.',
+      androidTitle: 'Dịch trong mọi ứng dụng',
+      androidDescription:
+        'Chọn một từ trong trình duyệt, mở menu và chọn "Translate with Vocably".',
+    },
     mayBeStudiedIn_other: 'Có thể học sau {{count}} phút.',
     dueDate: {
       tomorrow: 'ngày mai',

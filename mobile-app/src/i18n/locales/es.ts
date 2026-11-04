@@ -234,6 +234,26 @@ const translations: BaseTranslations = {
         'No se encontraron tarjetas para las etiquetas seleccionadas.',
       curious: 'Eres una persona curiosa, y por eso me caes bien.',
     },
+    fewCards: {
+      title_one: 'Solo tienes {{count}} tarjeta',
+      title_other: 'Solo tienes {{count}} tarjetas',
+      message:
+        'Con tan pocas tarjetas, Vocably tiene poco con qué trabajar y apenas notarás la diferencia. La repetición espaciada brilla cuando tu colección no deja de crecer.',
+      habit:
+        'Conviértelo en un hábito: cada palabra nueva que encuentres va directo a Vocably.',
+      lookUpTitle: '¿Una palabra nueva? Búscala',
+      lookUpDescription:
+        'Abre el diccionario cada vez que descubras una palabra y guárdala con un toque.',
+      generatorTitle: 'Genera un lote de tarjetas',
+      generatorDescription:
+        'Elige un tema y añade una docena de palabras útiles de una vez.',
+      safariTitle: 'Traduce directamente en Safari',
+      safariDescription:
+        'Activa la extensión de Vocably y guarda palabras mientras lees cualquier sitio web.',
+      androidTitle: 'Traduce en cualquier aplicación',
+      androidDescription:
+        'Selecciona una palabra en tu navegador, abre el menú y elige "Translate with Vocably".',
+    },
     mayBeStudiedIn_one: 'Se podrá estudiar en {{count}} minuto.',
     mayBeStudiedIn_other: 'Se podrá estudiar en {{count}} minutos.',
     dueDate: {

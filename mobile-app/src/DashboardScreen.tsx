@@ -36,6 +36,7 @@ import { SwipeListView } from 'react-native-swipe-list-view';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CardListItem, Separator } from './CardListItem';
 import { DashboardEmptyState } from './DashboardEmptyState';
+import { DashboardFewCards, FEW_CARDS_THRESHOLD } from './DashboardFewCards';
 import {
   DashboardSearchInput,
   DashboardSearchInputRef,
@@ -312,6 +313,9 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   }, [plan, collapsedSections, t]);
 
   const searchInputRef = useRef<DashboardSearchInputRef>(null);
+  // The list remounts whenever a section is expanded or collapsed,
+  // so the footer animates its appearance only the first time.
+  const hasFewCardsAppearedRef = useRef(false);
 
   const now = new Date();
   const [nowTs, setNowTs] = useState(now.getTime());
@@ -360,6 +364,8 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   }
 
   const isEmpty = deck.cards.length === 0;
+  const hasFewCards =
+    !isEmpty && deck.cards.length <= FEW_CARDS_THRESHOLD && cards.length > 0;
 
   const fontScale = Math.max(1, PixelRatio.getFontScale());
 
@@ -895,6 +901,18 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                 searchText={searchText}
                 selectedTags={selectedTags}
               />
+            }
+            ListFooterComponent={
+              hasFewCards ? (
+                <DashboardFewCards
+                  language={deck.language}
+                  cardsCount={deck.cards.length}
+                  skipEntering={hasFewCardsAppearedRef.current}
+                  onAppear={() => {
+                    hasFewCardsAppearedRef.current = true;
+                  }}
+                />
+              ) : null
             }
             ListHeaderComponentStyle={{
               paddingHorizontal: mainPadding,

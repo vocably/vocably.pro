@@ -37,7 +37,7 @@ const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const pressSpring = { damping: 15, stiffness: 300 };
 
-const ScalePressable: FC<
+export const ScalePressable: FC<
   Omit<PressableProps, 'style'> & {
     pressedScale: number;
     style?: StyleProp<ViewStyle>;
@@ -161,7 +161,7 @@ const CardsIllustration: FC<{ onPress: () => void }> = ({ onPress }) => {
   );
 };
 
-const ActionTile: FC<{
+export const ActionTile: FC<{
   icon: string;
   title: string;
   description: string;
@@ -169,7 +169,17 @@ const ActionTile: FC<{
   index: number;
   onPress: () => void;
   testID: string;
-}> = ({ icon, title, description, highlighted, index, onPress, testID }) => {
+  animated?: boolean;
+}> = ({
+  icon,
+  title,
+  description,
+  highlighted,
+  index,
+  onPress,
+  testID,
+  animated = true,
+}) => {
   const theme = useAppTheme();
   const foreground = highlighted
     ? theme.colors.onPrimary
@@ -177,9 +187,13 @@ const ActionTile: FC<{
 
   return (
     <Animated.View
-      entering={FadeInDown.delay(200 + index * 80)
-        .springify()
-        .damping(18)}
+      entering={
+        animated
+          ? FadeInDown.delay(200 + index * 80)
+              .springify()
+              .damping(18)
+          : undefined
+      }
     >
       <ScalePressable
         testID={testID}

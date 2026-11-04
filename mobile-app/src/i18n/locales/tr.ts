@@ -231,6 +231,26 @@ const translations: BaseTranslations = {
       noCardsForTags: 'Seçili etiketler için kart bulunamadı.',
       curious: 'Meraklı birisin ve bu yüzden seni sevdim.',
     },
+    fewCards: {
+      title_one: 'Şimdilik yalnızca {{count}} kart',
+      title_other: 'Şimdilik yalnızca {{count}} kart',
+      message:
+        "Bu kadar az kartla Vocably'nin üzerinde çalışabileceği pek bir şey yok ve farkı neredeyse hissetmezsiniz. Aralıklı tekrar, koleksiyonunuz büyüdükçe parlar.",
+      habit:
+        "Bunu alışkanlık hâline getirin: karşılaştığınız her yeni kelime doğrudan Vocably'ye.",
+      lookUpTitle: 'Yeni bir kelime mi? Hemen arayın',
+      lookUpDescription:
+        'Her yeni kelime keşfettiğinizde sözlüğü açın ve tek dokunuşla kaydedin.',
+      generatorTitle: 'Toplu kart oluşturun',
+      generatorDescription:
+        'Bir konu seçin ve tek seferde bir düzine faydalı kelime ekleyin.',
+      safariTitle: "Doğrudan Safari'de çevirin",
+      safariDescription:
+        'Vocably uzantısını açın ve herhangi bir siteyi okurken kelimeleri kaydedin.',
+      androidTitle: 'Her uygulamada çevirin',
+      androidDescription:
+        'Tarayıcıda bir kelime seçin, menüyü açın ve "Translate with Vocably"yi seçin.',
+    },
     mayBeStudiedIn_one: '{{count}} dakika sonra çalışılabilir.',
     mayBeStudiedIn_other: '{{count}} dakika sonra çalışılabilir.',
     dueDate: {
