@@ -49,6 +49,7 @@
         [total]="total"
         [saving]="pendingSaves() > 0"
         [studyStreak]="studyStreak"
+        [hasCardsLeftForToday]="hasCardsLeftForToday()"
         [prerenderedCards]="necessaryData.value().predefinedCards"
         (grade)="onGrade($event)"
         (oneMoreRound)="reloadCards()"

@@ -46,6 +46,7 @@ export class ListComponent {
   @Input() total = 0;
   @Input() saving = false;
   @Input() studyStreak!: StudyStreak | null;
+  @Input() hasCardsLeftForToday = false;
   @Output() grade = new EventEmitter<GradeResult>();
   @Output() oneMoreRound = new EventEmitter();
 

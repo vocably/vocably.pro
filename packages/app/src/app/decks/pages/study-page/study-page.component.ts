@@ -20,6 +20,7 @@ import {
   filterStudyFlow,
   grade,
   slice,
+  studyPlan,
 } from '@vocably/srs';
 import { finalize, mergeMap, Subject, takeUntil } from 'rxjs';
 import { BackButtonComponent } from '../../../components/back-button/back-button.component';
@@ -54,6 +55,7 @@ export class StudyPageComponent implements OnInit, OnDestroy {
   public total = 0;
   public pendingSaves = signal(0);
   public answered = signal(0);
+  public hasCardsLeftForToday = signal(false);
 
   public studyStreak: StudyStreak | null = null;
 
@@ -133,13 +135,33 @@ export class StudyPageComponent implements OnInit, OnDestroy {
     this.reloadCards();
   }
 
+  private filteredDeckCards(): CardItem[] {
+    const deck = this.deckStore.deck$.value;
+    return filterByTags(deck.cards, getLanguageTagStorage(deck.language));
+  }
+
+  private updateHasCardsLeftForToday() {
+    const studySettings = getStudySettings();
+    const cards = this.filteredDeckCards();
+
+    if (studySettings.random) {
+      this.hasCardsLeftForToday.set(cards.length > 0);
+      return;
+    }
+
+    const plan = studyPlan({
+      today: new Date(),
+      list: cards,
+      maxCards: studySettings.cardsPerSession,
+      maxNewCards: studySettings.maxNewCardsPerDay,
+    });
+    this.hasCardsLeftForToday.set(plan.today.length > 0);
+  }
+
   reloadCards() {
     const studySettings = getStudySettings();
-    const deck = this.deckStore.deck$.value;
 
-    const tagStorage = getLanguageTagStorage(deck.language);
-
-    this.allCards = filterByTags(deck.cards, tagStorage);
+    this.allCards = this.filteredDeckCards();
 
     if (studySettings.random) {
       this.cards = shuffle(this.allCards).slice(
@@ -215,7 +237,12 @@ export class StudyPageComponent implements OnInit, OnDestroy {
           }
           this.studyStreak = increaseResult.value;
         }),
-        finalize(() => this.pendingSaves.update((count) => count - 1))
+        finalize(() => {
+          this.pendingSaves.update((count) => count - 1);
+          if (this.pendingSaves() === 0) {
+            this.updateHasCardsLeftForToday();
+          }
+        })
       )
       .pipe(takeUntil(this.destroy$))
       .subscribe();

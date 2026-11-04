@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
 })
 export class SuccessComponent implements OnInit {
   @Input() studyStreak!: StudyStreak | null;
+  @Input() hasCardsLeftForToday = false;
   @Output() oneMoreRound = new EventEmitter();
 
   streakAnimationShown = false;
