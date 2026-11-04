@@ -305,6 +305,9 @@ export const zh = {
   'settings.respond_everyone': '每条消息我都会回复。',
   'settings.study_settings': '学习设置',
   'settings.max_cards': '每次学习的卡片数量上限',
+  'settings.max_new_cards_per_day': '每日新卡片数量上限',
+  'settings.max_new_cards_per_day_hint':
+    '此选项仅适用于“新卡片”分组中积累了大量新卡片的资深用户。',
   'settings.random_select': '随机选择要学习的卡片',
   'settings.random_warning':
     '启用此选项通常是个<strong>坏主意</strong>。此选项会关闭智能学习算法。关闭智能学习算法的人，最终往往会对自己的学习进度感到沮丧。',

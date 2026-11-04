@@ -136,9 +136,7 @@ const translations: BaseTranslations = {
   },
   studySettings: {
     maxCardsPerSession: '每個學習階段的卡片數量上限',
-    maxNeverStudiedPerDay: '每天可選取的「從未學習」卡片數量上限',
-    maxNeverStudiedHint:
-      '此選項僅適用於「從未學習」群組中累積了大量新卡片的資深使用者。',
+    maxNewPerDay: '每天可選取的新卡片數量上限',
     pronounceExample: '朗讀例句',
     pronounceExampleHint:
       '此選項會讓應用程式在學習階段中適時隨機播放一個例句。必須開啟 <icon /> 選項——它位於「學習」畫面的右上角。',
@@ -198,7 +196,7 @@ const translations: BaseTranslations = {
     section: {
       today: '今日計畫',
       expired: '待補進度',
-      notStarted: '從未學習',
+      notStarted: '新卡片',
       tomorrow: '明天',
       future: '已排定',
     },

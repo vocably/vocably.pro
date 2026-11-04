@@ -79,6 +79,23 @@
           </div>
         </div>
         <div class="row row-stacked">
+          <div class="row-label">
+            {{ 'settings.max_new_cards_per_day' | transloco }}
+          </div>
+          <div class="slider">
+            <mat-slider min="0" max="40" step="1" color="accent">
+              <input
+                matSliderThumb
+                [(ngModel)]="studySettings.maxNewCardsPerDay"
+                (ngModelChange)="onStudySettingsChange()"
+              />
+            </mat-slider>
+            <span class="slider-value">{{
+              studySettings.maxNewCardsPerDay
+            }}</span>
+          </div>
+        </div>
+        <div class="row row-stacked">
           <div class="row-inline">
             <div class="row-label">
               {{ 'settings.random_select' | transloco }}

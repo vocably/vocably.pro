@@ -341,6 +341,9 @@ export const es = {
   'settings.respond_everyone': 'Respondo a todos.',
   'settings.study_settings': 'Configuración de estudio',
   'settings.max_cards': 'Máximo de tarjetas por sesión de estudio',
+  'settings.max_new_cards_per_day': 'Máximo de tarjetas nuevas por día',
+  'settings.max_new_cards_per_day_hint':
+    'Esta opción solo tiene sentido para usuarios con experiencia que tengan muchas tarjetas nuevas acumuladas en el grupo «Nuevas».',
   'settings.random_select': 'Seleccionar tarjetas aleatoriamente para estudiar',
   'settings.random_warning':
     'Activar esta opción generalmente es una <strong>mala idea</strong>. Esta opción desactiva el algoritmo de estudio inteligente. Las personas que desactivan el algoritmo de estudio inteligente terminan frustrándose con su progreso.',

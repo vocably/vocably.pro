@@ -1,5 +1,5 @@
 import { Slider } from '@miblanchard/react-native-slider';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Linking, PixelRatio, View } from 'react-native';
 import { Trans, useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
@@ -14,9 +14,8 @@ import { useAsync } from '../useAsync';
 import { StudySteps } from './StudySteps';
 
 const RANDOMIZER_ENABLED_KEY = 'isRandomizerEnabled';
-const MAXIMUM_CARDS_PER_SESSION_KEY = 'maximumCardsPerSession';
-const MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY =
-  'maximumNeverStudiedCardsPerDay';
+export const MAXIMUM_CARDS_PER_SESSION_KEY = 'maximumCardsPerSession';
+export const MAXIMUM_NEW_CARDS_PER_DAY_KEY = 'maximumNeverStudiedCardsPerDay';
 const PLAY_RANDOM_EXAMPLE_KEY = 'playRandomExample';
 
 export const getRandomizerEnabled = () =>
@@ -31,13 +30,11 @@ export const getMaximumCardsPerSession = () =>
 export const setMaximumCardsPerSession = (cardsPerSession: number) =>
   setItem(MAXIMUM_CARDS_PER_SESSION_KEY, cardsPerSession.toString());
 
-export const getMaximumNeverStudiedCardsPerDay = () =>
-  getItem(MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY).then((res) =>
-    Number(res ?? 40)
-  );
+export const getMaximumNewCardsPerDay = () =>
+  getItem(MAXIMUM_NEW_CARDS_PER_DAY_KEY).then((res) => Number(res ?? 40));
 
-export const setMaximumNeverStudiedCardsPerDay = (cardsPerDay: number) =>
-  setItem(MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY, cardsPerDay.toString());
+export const setMaximumNewCardsPerDay = (cardsPerDay: number) =>
+  setItem(MAXIMUM_NEW_CARDS_PER_DAY_KEY, cardsPerDay.toString());
 
 export const getPlayRandomExample = () =>
   getItem(PLAY_RANDOM_EXAMPLE_KEY).then((res) => res !== 'false');
@@ -62,11 +59,20 @@ export const StudySettingsScreen: FC<Props> = () => {
     setMaximumCardsPerSession
   );
 
-  const [maximumNeverStudiedCardsPerDay, mutateMaximumNeverStudiedCardsPerDay] =
-    useAsync(
-      getMaximumNeverStudiedCardsPerDay,
-      setMaximumNeverStudiedCardsPerDay
-    );
+  const [maximumNewCardsPerDay, mutateMaximumNewCardsPerDay] = useAsync(
+    getMaximumNewCardsPerDay,
+    setMaximumNewCardsPerDay
+  );
+
+  // Slider values are kept locally while dragging and persisted only when
+  // sliding completes. Persisting on every tick triggers storage listeners
+  // (e.g. the dashboard refresh) and makes the slider jittery.
+  const [draftCardsPerSession, setDraftCardsPerSession] = useState<
+    number | null
+  >(null);
+  const [draftNewCardsPerDay, setDraftNewCardsPerDay] = useState<number | null>(
+    null
+  );
 
   const [playRandomExample, mutatePlayRandomExample] = useAsync(
     getPlayRandomExample,
@@ -126,7 +132,7 @@ export const StudySettingsScreen: FC<Props> = () => {
             }}
           >
             <Text style={{ fontSize: 16, width: 36 * fontScale }}>
-              {maximumCardsPerSession.value}
+              {draftCardsPerSession ?? maximumCardsPerSession.value}
             </Text>
             <View testID="study-settings-cards-per-session" style={{ flex: 1 }}>
               <Slider
@@ -135,9 +141,13 @@ export const StudySettingsScreen: FC<Props> = () => {
                 step={5}
                 minimumTrackTintColor={theme.colors.primary}
                 thumbTintColor={theme.colors.primary}
-                value={maximumCardsPerSession.value}
+                value={draftCardsPerSession ?? maximumCardsPerSession.value}
                 onValueChange={(value) => {
-                  mutateMaximumCardsPerSession(value[0]);
+                  setDraftCardsPerSession(value[0]);
+                }}
+                onSlidingComplete={async (value) => {
+                  await mutateMaximumCardsPerSession(value[0]);
+                  setDraftCardsPerSession(null);
                 }}
               ></Slider>
             </View>
@@ -147,7 +157,7 @@ export const StudySettingsScreen: FC<Props> = () => {
 
       <CustomSurface
         style={{
-          marginBottom: 8,
+          marginBottom: 32,
           gap: 16,
           padding: 16,
           paddingHorizontal: 32,
@@ -155,10 +165,10 @@ export const StudySettingsScreen: FC<Props> = () => {
       >
         <View>
           <Text style={{ fontSize: 16 }}>
-            {t('studySettings.maxNeverStudiedPerDay')}
+            {t('studySettings.maxNewPerDay')}
           </Text>
         </View>
-        {maximumNeverStudiedCardsPerDay.status === 'loaded' && (
+        {maximumNewCardsPerDay.status === 'loaded' && (
           <View
             style={{
               flexDirection: 'row',
@@ -167,7 +177,7 @@ export const StudySettingsScreen: FC<Props> = () => {
             }}
           >
             <Text style={{ fontSize: 16, width: 36 * fontScale }}>
-              {maximumNeverStudiedCardsPerDay.value}
+              {draftNewCardsPerDay ?? maximumNewCardsPerDay.value}
             </Text>
             <View testID="study-settings-new-cards-per-day" style={{ flex: 1 }}>
               <Slider
@@ -176,23 +186,19 @@ export const StudySettingsScreen: FC<Props> = () => {
                 step={1}
                 minimumTrackTintColor={theme.colors.primary}
                 thumbTintColor={theme.colors.primary}
-                value={maximumNeverStudiedCardsPerDay.value}
+                value={draftNewCardsPerDay ?? maximumNewCardsPerDay.value}
                 onValueChange={(value) => {
-                  mutateMaximumNeverStudiedCardsPerDay(value[0]);
+                  setDraftNewCardsPerDay(value[0]);
+                }}
+                onSlidingComplete={async (value) => {
+                  await mutateMaximumNewCardsPerDay(value[0]);
+                  setDraftNewCardsPerDay(null);
                 }}
               ></Slider>
             </View>
           </View>
         )}
       </CustomSurface>
-      <View
-        style={{
-          paddingHorizontal: 8,
-          marginBottom: 32,
-        }}
-      >
-        <Text>{t('studySettings.maxNeverStudiedHint')}</Text>
-      </View>
 
       {playRandomExample.status === 'loaded' && (
         <>

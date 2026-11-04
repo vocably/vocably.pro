@@ -1,7 +1,6 @@
 import { CardItem } from '@vocably/model';
 import { shuffle } from 'lodash-es';
-import { studyPlan } from './studyPlan';
-import { isToday } from '@vocably/sulna';
+import { isNotStarted, studyPlan } from './studyPlan';
 
 export const STUDY_DELAY_MS = 1_800_000; // 1_800_000 is 30 minutes in milliseconds
 
@@ -15,21 +14,10 @@ export const hasStudied =
     return now - item.data.lastStudied > STUDY_DELAY_MS;
   };
 
-const calculateNewCardsPickedUpToday = (list: CardItem[]): number => {
-  let pickedUpToday = 0;
-  for (const cardItem of list) {
-    if (isToday(cardItem.data.firstStudied)) {
-      pickedUpToday += 1;
-    }
-  }
-
-  return pickedUpToday;
-};
-
 export const slice = (
   today: Date,
   maxCards: number,
-  maxNeverStudiedCards: number,
+  maxNewCards: number,
   list: CardItem[],
   planSection?: string
 ): CardItem[] => {
@@ -37,7 +25,7 @@ export const slice = (
     return [];
   }
 
-  const plan = studyPlan(today, list);
+  const plan = studyPlan({ today, list, maxCards, maxNewCards });
 
   const now = new Date().getTime();
 
@@ -50,30 +38,14 @@ export const slice = (
     return shuffle(plan[planSection]).slice(0, maxCards);
   }
 
-  const result = shuffle(plan.today).slice(0, maxCards);
+  if (plan.today.length > 0) {
+    // Due cards come in random order, new cards go last
+    const notStarted = isNotStarted(today);
 
-  if (result.length >= maxCards) {
-    return result;
-  }
-
-  result.push(...shuffle(plan.expired.slice(0, maxCards - result.length)));
-
-  if (result.length >= maxCards) {
-    return result;
-  }
-
-  const pickedUpToday = calculateNewCardsPickedUpToday(list);
-
-  if (pickedUpToday < maxNeverStudiedCards) {
-    result.push(
-      ...plan.notStarted
-        .slice(0, maxCards - result.length)
-        .slice(0, maxNeverStudiedCards - pickedUpToday)
-    );
-  }
-
-  if (result.length > 0) {
-    return result;
+    return [
+      ...shuffle(plan.today.filter((item) => !notStarted(item))),
+      ...plan.today.filter(notStarted),
+    ];
   }
 
   const tomorrowCandidates = shuffle(plan.tomorrow.filter(hasStudied(now)));
@@ -85,11 +57,9 @@ export const slice = (
   const futureCards = shuffle(plan.tomorrow).concat(plan.future);
 
   let futureCandidates = futureCards.filter(hasStudied(now));
-  if (result.length === 0 && futureCandidates.length === 0) {
+  if (futureCandidates.length === 0) {
     futureCandidates = futureCards;
   }
 
-  result.push(...futureCandidates.slice(0, maxCards - result.length));
-
-  return result;
+  return futureCandidates.slice(0, maxCards);
 };

@@ -143,10 +143,7 @@ const translations = {
   },
   studySettings: {
     maxCardsPerSession: 'Maximum cards per study session',
-    maxNeverStudiedPerDay:
-      'Maximum "never studied" cards that can be picked up per day',
-    maxNeverStudiedHint:
-      'This option only makes sense for experienced users who have a lot of new cards stacked in the "Never studied" group.',
+    maxNewPerDay: 'Maximum new cards that can be picked up per day',
     pronounceExample: 'Pronounce an example sentence',
     pronounceExampleHint:
       'This option makes the app play a random example sentence when appropriate during the study session. The <icon /> option should be turned on — it is in the top-right corner of the Study screen.',
@@ -211,7 +208,7 @@ const translations = {
     section: {
       today: 'Planned for today',
       expired: 'To catch up',
-      notStarted: 'Never studied',
+      notStarted: 'New',
       tomorrow: 'Tomorrow',
       future: 'Planned',
     },
