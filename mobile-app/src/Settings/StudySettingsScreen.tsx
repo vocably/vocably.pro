@@ -147,7 +147,7 @@ export const StudySettingsScreen: FC<Props> = () => {
 
       <CustomSurface
         style={{
-          marginBottom: 8,
+          marginBottom: 32,
           gap: 16,
           padding: 16,
           paddingHorizontal: 32,
@@ -185,14 +185,6 @@ export const StudySettingsScreen: FC<Props> = () => {
           </View>
         )}
       </CustomSurface>
-      <View
-        style={{
-          paddingHorizontal: 8,
-          marginBottom: 32,
-        }}
-      >
-        <Text>{t('studySettings.maxNeverStudiedHint')}</Text>
-      </View>
 
       {playRandomExample.status === 'loaded' && (
         <>

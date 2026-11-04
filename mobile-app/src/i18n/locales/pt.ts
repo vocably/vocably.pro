@@ -146,8 +146,6 @@ const translations: BaseTranslations = {
     maxCardsPerSession: 'Máximo de cartões por sessão de estudo',
     maxNeverStudiedPerDay:
       'Máximo de cartões «nunca estudados» que podem ser selecionados por dia',
-    maxNeverStudiedHint:
-      'Esta opção só faz sentido para usuários experientes que têm muitos cartões novos acumulados no grupo «Nunca estudados».',
     pronounceExample: 'Pronunciar uma frase de exemplo',
     pronounceExampleHint:
       'Esta opção faz o app tocar uma frase de exemplo aleatória nos momentos apropriados durante a sessão. A opção <icon /> deve estar ativada — fica no canto superior direito da tela de Estudo.',

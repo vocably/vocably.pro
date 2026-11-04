@@ -146,8 +146,6 @@ const translations: BaseTranslations = {
     maxCardsPerSession: 'Her çalışma oturumundaki maksimum kart sayısı',
     maxNeverStudiedPerDay:
       'Günde alınabilecek maksimum «hiç çalışılmamış» kart sayısı',
-    maxNeverStudiedHint:
-      'Bu seçenek yalnızca «Hiç çalışılmamış» grubunda birikmiş çok sayıda yeni kartı olan deneyimli kullanıcılar için anlamlıdır.',
     pronounceExample: 'Örnek cümleyi seslendir',
     pronounceExampleHint:
       'Bu seçenek, çalışma sırasında uygun anlarda rastgele bir örnek cümle çalmasını sağlar. <icon /> seçeneği açık olmalıdır — bu seçenek Çalışma ekranının sağ üst köşesindedir.',

@@ -135,8 +135,6 @@ const translations: BaseTranslations = {
   studySettings: {
     maxCardsPerSession: '每次学习的卡片数量上限',
     maxNeverStudiedPerDay: '每天可加入学习的“从未学习”卡片数量上限',
-    maxNeverStudiedHint:
-      '此选项仅适用于“从未学习”分组中积累了大量新卡片的资深用户。',
     pronounceExample: '朗读例句',
     pronounceExampleHint:
       '此选项会让应用在学习过程中适时随机播放一个例句。需要打开 <icon /> 选项——它位于“学习”页面的右上角。',
