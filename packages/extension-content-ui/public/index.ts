@@ -605,3 +605,15 @@ translationSuccess.result = successfulTranslationResult;
 translationSuccess.canCongratulate = true;
 
 // ----
+
+// ---
+
+['frequencyEnabled', 'frequencyDisabled'].forEach((id) => {
+  const cardSource = document.getElementById(
+    id
+  ) as HTMLVocablyCardSourceElement;
+  const card = simpletonTranslationResult.value.deck.cards[0];
+  cardSource.card = { ...card, data: { ...card.data, frequency: 8 } };
+  cardSource.isLoggedIn = true;
+  cardSource.paymentLink = 'https://app.vocably.pro/subscribe';
+});

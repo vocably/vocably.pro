@@ -116,4 +116,7 @@ export const uk = {
   'frequency_hint.premium_badge': 'Premium',
   'frequency_hint.premium':
     'Частотність слів — функція Premium. Безкоштовно її можна спробувати, а з Premium вона доступна для кожного слова, яке ви шукаєте.',
+  'frequency_hint.unavailable': 'Оцінка частотності обмежена',
+  'frequency_hint.unavailable_premium':
+    'Частотність слів — функція Premium, і безкоштовним користувачам вона доступна не завжди. Оформіть Premium, щоб бачити частотність кожного слова, яке ви шукаєте, будь-коли й без обмежень.',
 };

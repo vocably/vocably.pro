@@ -121,4 +121,7 @@ export const es = {
   'frequency_hint.premium_badge': 'Premium',
   'frequency_hint.premium':
     'La frecuencia de palabras es una función Premium. Los usuarios gratuitos pueden probarla, y con Premium la ves en cada palabra que buscas.',
+  'frequency_hint.unavailable': 'La puntuación de frecuencia está limitada',
+  'frequency_hint.unavailable_premium':
+    'La frecuencia de palabras es una función Premium y no siempre está disponible para los usuarios gratuitos. Pásate a Premium para ver la frecuencia de cada palabra que buscas, en cualquier momento y sin límites.',
 };

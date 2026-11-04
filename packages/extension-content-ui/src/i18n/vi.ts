@@ -114,4 +114,7 @@ export const vi = {
   'frequency_hint.premium_badge': 'Premium',
   'frequency_hint.premium':
     'Tần suất từ là tính năng Premium. Người dùng miễn phí có thể dùng thử, còn với Premium bạn sẽ thấy nó ở mọi từ bạn tra.',
+  'frequency_hint.unavailable': 'Điểm tần suất bị giới hạn',
+  'frequency_hint.unavailable_premium':
+    'Tần suất từ là tính năng Premium và không phải lúc nào cũng có sẵn cho người dùng miễn phí. Nâng cấp lên Premium để xem tần suất của mọi từ bạn tra, bất cứ lúc nào và không giới hạn.',
 };

@@ -683,7 +683,7 @@ const translations: BaseTranslations = {
     premiumBadge: 'Premium',
     premium:
       '词频是 Premium 功能。免费用户可以试用，而 Premium 用户查每个词时都能看到。',
-    unavailable: '词频暂时受限',
+    unavailable: '词频得分受限',
     unavailablePremium:
       '词频是 Premium 功能，免费用户并非随时都能使用。升级到 Premium，即可随时无限制地查看每个词的词频。',
     accessibilityHint: '显示词频的含义',

@@ -106,4 +106,7 @@ export const zhTW = {
   'frequency_hint.premium_badge': 'Premium',
   'frequency_hint.premium':
     '字詞頻率是 Premium 功能。免費使用者可以試用，而 Premium 使用者在查詢每個字詞時都能看到。',
+  'frequency_hint.unavailable': '字詞頻率分數受限',
+  'frequency_hint.unavailable_premium':
+    '字詞頻率是 Premium 功能，免費使用者並非隨時都能使用。升級到 Premium，就能隨時無限制地查看每個字詞的頻率。',
 };

@@ -38,6 +38,9 @@ let hintIdCounter = 0;
 export class VocablyCardSource {
   @Element() el: HTMLElement;
   @Prop() card: TranslationCard;
+  // When false, the bars stay unfilled and the hint explains that the
+  // frequency score is limited instead of describing it.
+  @Prop() isFrequencyEnabled: boolean = true;
   @Prop() isPaid: boolean = false;
   @Prop() isLoggedIn: boolean = false;
   @Prop() paymentLink: string = '';
@@ -107,7 +110,11 @@ export class VocablyCardSource {
 
   private renderFrequency(frequency: number) {
     const level = frequencyToLevel(frequency);
-    const label = t(`card_source.frequency_${level}`);
+    const isEnabled = this.isFrequencyEnabled;
+    // Disabled bars stay unfilled, so they don't give the level away.
+    const label = isEnabled
+      ? t(`card_source.frequency_${level}`)
+      : t('frequency_hint.unavailable');
 
     return (
       <Fragment>
@@ -128,6 +135,7 @@ export class VocablyCardSource {
                 language: this.card.data.language,
                 frequency,
                 level,
+                isAvailable: isEnabled,
               });
             }
             this.holdFrequencyHint('anchorHover', true);
@@ -140,7 +148,7 @@ export class VocablyCardSource {
             <span
               class={{
                 'vocably-frequency-bar': true,
-                'vocably-frequency-bar-filled': index < level,
+                'vocably-frequency-bar-filled': isEnabled && index < level,
               }}
               aria-hidden="true"
             />
@@ -155,6 +163,7 @@ export class VocablyCardSource {
           <vocably-frequency-hint
             id={this.frequencyHintId}
             frequency={frequency}
+            isAvailable={isEnabled}
             isPaid={this.isPaid}
             isLoggedIn={this.isLoggedIn}
             paymentLink={this.paymentLink}

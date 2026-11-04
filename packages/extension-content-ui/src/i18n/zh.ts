@@ -106,4 +106,7 @@ export const zh = {
   'frequency_hint.premium_badge': 'Premium',
   'frequency_hint.premium':
     '词频是 Premium 功能。免费用户可以试用，而 Premium 用户查每个词时都能看到。',
+  'frequency_hint.unavailable': '词频得分受限',
+  'frequency_hint.unavailable_premium':
+    '词频是 Premium 功能，免费用户并非随时都能使用。升级到 Premium，即可随时无限制地查看每个词的词频。',
 };

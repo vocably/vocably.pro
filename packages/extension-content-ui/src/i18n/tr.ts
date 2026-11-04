@@ -119,4 +119,7 @@ export const tr = {
   'frequency_hint.premium_badge': 'Premium',
   'frequency_hint.premium':
     'Kelime sıklığı bir Premium özelliğidir. Ücretsiz kullanıcılar onu deneyebilir, Premium ile ise aradığınız her kelimede görürsünüz.',
+  'frequency_hint.unavailable': 'Sıklık puanı sınırlı',
+  'frequency_hint.unavailable_premium':
+    "Kelime sıklığı bir Premium özelliğidir ve ücretsiz kullanıcılar için her zaman kullanılamaz. Aradığınız her kelimenin sıklığını istediğiniz zaman ve sınırsız görmek için Premium'a geçin.",
 };

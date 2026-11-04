@@ -10,7 +10,6 @@ import {
   ViewStyle,
 } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FrequencyHint } from './FrequencyHint';
 import { useIsFrequencyAvailable } from './useIsFrequencyAvailable';
 
@@ -125,36 +124,27 @@ export const FrequencyIndicator: FC<Props> = ({
                   opacity: isActive ? 0.12 : 0,
                 }}
               />
-              {/* Once the free time is over, the bars make way for an
-                  hourglass: the frequency is back tomorrow. */}
-              {!isAvailable && (
-                <Icon
-                  name="timer-sand"
-                  size={BAR_HEIGHTS[FREQUENCY_BARS - 1] * fontScale + 2}
-                  color={theme.colors.primary}
-                  style={{ opacity: isActive ? 1 : 0.8 }}
+              {/* Once the free time is over, the bars stay unfilled, so they
+                  don't give the level away. */}
+              {Array.from({ length: FREQUENCY_BARS }, (_, index) => (
+                <View
+                  key={index}
+                  style={{
+                    width: 3 * fontScale,
+                    height: BAR_HEIGHTS[index] * fontScale,
+                    borderRadius: 1,
+                    backgroundColor: theme.colors.primary,
+                    opacity:
+                      isAvailable && index < level
+                        ? isActive
+                          ? 1
+                          : 0.8
+                        : isActive
+                          ? 0.25
+                          : 0.15,
+                  }}
                 />
-              )}
-              {isAvailable &&
-                Array.from({ length: FREQUENCY_BARS }, (_, index) => (
-                  <View
-                    key={index}
-                    style={{
-                      width: 3 * fontScale,
-                      height: BAR_HEIGHTS[index] * fontScale,
-                      borderRadius: 1,
-                      backgroundColor: theme.colors.primary,
-                      opacity:
-                        index < level
-                          ? isActive
-                            ? 1
-                            : 0.8
-                          : isActive
-                            ? 0.25
-                            : 0.15,
-                    }}
-                  />
-                ))}
+              ))}
             </>
           );
         }}
