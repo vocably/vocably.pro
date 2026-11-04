@@ -111,10 +111,4 @@ export const vi = {
     'Bạn sẽ thỉnh thoảng gặp từ này. Đáng để học từ này.',
   'frequency_hint.description_3':
     'Từ này nằm trong số những từ bạn đọc và nghe thường xuyên. Học nó sẽ mang lại lợi ích ngay lập tức.',
-  'frequency_hint.premium_badge': 'Premium',
-  'frequency_hint.premium':
-    'Tần suất từ là tính năng Premium. Người dùng miễn phí có thể dùng thử, còn với Premium bạn sẽ thấy nó ở mọi từ bạn tra.',
-  'frequency_hint.unavailable': 'Điểm tần suất bị giới hạn',
-  'frequency_hint.unavailable_premium':
-    'Tần suất từ là tính năng Premium và không phải lúc nào cũng có sẵn cho người dùng miễn phí. Nâng cấp lên Premium để xem tần suất của mọi từ bạn tra, bất cứ lúc nào và không giới hạn.',
 };

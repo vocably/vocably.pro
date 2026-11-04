@@ -12,7 +12,6 @@ import {
   getInternalSourceLanguage,
   getLanguagePairs,
   getCardsLimit,
-  changeFrequencyAvailability,
   getSettings,
   isLoggedIn,
   removeCard,
@@ -48,7 +47,6 @@ export const environment = merge(environmentLocal, {
   askForRating: askForRating,
   saveAskForRatingResponse: saveAskForRatingResponse,
   getCardsLimit: getCardsLimit,
-  changeFrequencyAvailability: changeFrequencyAvailability,
   analyzeUnitsOfSpeech: analyzeUnitsOfSpeech,
   analyticsCapture: analyticsCapture,
 });

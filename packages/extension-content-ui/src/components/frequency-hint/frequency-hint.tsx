@@ -1,10 +1,7 @@
 import {
   Component,
   Element,
-  Event,
-  EventEmitter,
   forceUpdate,
-  Fragment,
   h,
   Host,
   Prop,
@@ -37,17 +34,9 @@ export class VocablyFrequencyHint {
   @Element() el: HTMLElement;
   // 1 (rare) to 10 (most common)
   @Prop() frequency: number;
-  // When false, the frequency exists but is hidden from the user, so the hint
-  // explains why instead of describing it.
-  @Prop() isAvailable: boolean = true;
-  @Prop() isPaid: boolean = false;
-  @Prop() isLoggedIn: boolean = false;
-  @Prop() paymentLink: string = '';
   @Prop() visible: boolean = false;
   // The element the arrow points to.
   @Prop() anchor: HTMLElement | undefined;
-
-  @Event({ bubbles: false }) watchMePaying: EventEmitter<void>;
 
   private unsubLocale: (() => void) | undefined;
   private contentEl: HTMLElement | undefined;
@@ -182,55 +171,23 @@ export class VocablyFrequencyHint {
             class="vocably-frequency-hint-content"
             ref={(el) => (this.contentEl = el)}
           >
-            {this.isAvailable ? (
-              <Fragment>
-                <div class="vocably-frequency-hint-header">
-                  <span class="vocably-frequency-hint-title">
-                    {t(`card_source.frequency_${level}`)}
-                  </span>
-                  <span class="vocably-frequency-hint-score">
-                    {t('frequency_hint.score', { score, max: MAX_FREQUENCY })}
-                  </span>
-                </div>
-                <div class="vocably-frequency-hint-scale">
-                  <div
-                    class="vocably-frequency-hint-scale-fill"
-                    style={{ width: `${(score / MAX_FREQUENCY) * 100}%` }}
-                  />
-                </div>
-                <div class="vocably-frequency-hint-text">
-                  {t(`frequency_hint.description_${level}`)}
-                </div>
-              </Fragment>
-            ) : (
-              <div class="vocably-frequency-hint-header">
-                <span class="vocably-frequency-hint-title">
-                  {t('frequency_hint.unavailable')}
-                </span>
-              </div>
-            )}
-            {(!this.isPaid || !this.isAvailable) && (
-              <div class="vocably-frequency-hint-premium">
-                <span class="vocably-frequency-hint-badge">
-                  {t('frequency_hint.premium_badge')}
-                </span>
-                <span class="vocably-frequency-hint-text">
-                  {this.isAvailable
-                    ? t('frequency_hint.premium')
-                    : t('frequency_hint.unavailable_premium')}
-                </span>
-                {this.isLoggedIn && this.paymentLink && (
-                  <a
-                    href={this.paymentLink}
-                    target="_blank"
-                    class="vocably-frequency-hint-upgrade"
-                    onClick={() => this.watchMePaying.emit()}
-                  >
-                    {t('translation.upgrade')}
-                  </a>
-                )}
-              </div>
-            )}
+            <div class="vocably-frequency-hint-header">
+              <span class="vocably-frequency-hint-title">
+                {t(`card_source.frequency_${level}`)}
+              </span>
+              <span class="vocably-frequency-hint-score">
+                {t('frequency_hint.score', { score, max: MAX_FREQUENCY })}
+              </span>
+            </div>
+            <div class="vocably-frequency-hint-scale">
+              <div
+                class="vocably-frequency-hint-scale-fill"
+                style={{ width: `${(score / MAX_FREQUENCY) * 100}%` }}
+              />
+            </div>
+            <div class="vocably-frequency-hint-text">
+              {t(`frequency_hint.description_${level}`)}
+            </div>
           </div>
         </div>
       </Host>

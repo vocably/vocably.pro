@@ -114,10 +114,4 @@ export const pt = {
     'Você vai encontrar esta palavra de vez em quando. Vale a pena aprendê-la.',
   'frequency_hint.description_3':
     'Esta palavra está entre as que você lê e ouve o tempo todo. Aprendê-la traz resultados imediatamente.',
-  'frequency_hint.premium_badge': 'Premium',
-  'frequency_hint.premium':
-    'A frequência de palavras é um recurso Premium. Usuários gratuitos podem experimentá-la, e com o Premium você a vê em cada palavra que pesquisa.',
-  'frequency_hint.unavailable': 'A pontuação de frequência está limitada',
-  'frequency_hint.unavailable_premium':
-    'A frequência de palavras é um recurso Premium e nem sempre está disponível para usuários gratuitos. Assine o Premium para ver a frequência de cada palavra que você pesquisa, a qualquer momento e sem limites.',
 };

@@ -111,10 +111,4 @@ export const en = {
     'You will meet this word from time to time. It is worth learning it.',
   'frequency_hint.description_3':
     'This word is among those you read and hear all the time. Learning it pays off right away.',
-  'frequency_hint.premium_badge': 'Premium',
-  'frequency_hint.premium':
-    'Word frequency is a Premium feature. Free users get a taste of it, while Premium users see it for every word they look up.',
-  'frequency_hint.unavailable': 'The frequency score is limited',
-  'frequency_hint.unavailable_premium':
-    'Word frequency is a Premium feature and is not always available to free users. Upgrade to Premium to see the frequency of every word you look up, any time, without limits.',
 };

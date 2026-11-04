@@ -55,7 +55,6 @@ export class VocablyTranslationCards {
   @Prop({ mutable: true }) disabled = false;
   @Prop() isLightweight = false;
   @Prop() isLoggedInUser = false;
-  @Prop() isFrequencyEnabled = true;
   // Hides the add and remove buttons while the deck they depend on is still
   // unknown. The space they occupy is reserved by `.vocably-safe-action-area`,
   // so revealing them later doesn't reflow the card.
@@ -543,11 +542,6 @@ export class VocablyTranslationCards {
                 <div class="vocably-safe-action-area">
                   <vocably-card-source
                     card={card}
-                    isFrequencyEnabled={this.isFrequencyEnabled}
-                    isPaid={this.isPaid}
-                    isLoggedIn={this.isLoggedInUser}
-                    paymentLink={this.paymentLink}
-                    onWatchMePaying={() => this.watchMePaying.emit()}
                     playAudioPronunciation={this.playAudioPronunciation}
                     style={{
                       marginBottom: '6px',

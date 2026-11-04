@@ -38,17 +38,10 @@ let hintIdCounter = 0;
 export class VocablyCardSource {
   @Element() el: HTMLElement;
   @Prop() card: TranslationCard;
-  // When false, the bars stay unfilled and the hint explains that the
-  // frequency score is limited instead of describing it.
-  @Prop() isFrequencyEnabled: boolean = true;
-  @Prop() isPaid: boolean = false;
-  @Prop() isLoggedIn: boolean = false;
-  @Prop() paymentLink: string = '';
   @Prop() playAudioPronunciation: (
     payload: AudioPronunciationPayload
   ) => Promise<Result<true>>;
 
-  @Event({ bubbles: false }) watchMePaying: EventEmitter<void>;
   // Bubbles out of the shadow roots, so whoever renders `vocably-translation`
   // can report it to analytics.
   @Event() frequencyHover: EventEmitter<FrequencyHoverPayload>;
@@ -110,11 +103,7 @@ export class VocablyCardSource {
 
   private renderFrequency(frequency: number) {
     const level = frequencyToLevel(frequency);
-    const isEnabled = this.isFrequencyEnabled;
-    // Disabled bars stay unfilled, so they don't give the level away.
-    const label = isEnabled
-      ? t(`card_source.frequency_${level}`)
-      : t('frequency_hint.unavailable');
+    const label = t(`card_source.frequency_${level}`);
 
     return (
       <Fragment>
@@ -135,7 +124,6 @@ export class VocablyCardSource {
                 language: this.card.data.language,
                 frequency,
                 level,
-                isAvailable: isEnabled,
               });
             }
             this.holdFrequencyHint('anchorHover', true);
@@ -148,7 +136,7 @@ export class VocablyCardSource {
             <span
               class={{
                 'vocably-frequency-bar': true,
-                'vocably-frequency-bar-filled': isEnabled && index < level,
+                'vocably-frequency-bar-filled': index < level,
               }}
               aria-hidden="true"
             />
@@ -163,11 +151,6 @@ export class VocablyCardSource {
           <vocably-frequency-hint
             id={this.frequencyHintId}
             frequency={frequency}
-            isAvailable={isEnabled}
-            isPaid={this.isPaid}
-            isLoggedIn={this.isLoggedIn}
-            paymentLink={this.paymentLink}
-            onWatchMePaying={() => this.watchMePaying.emit()}
             visible={this.isFrequencyHintVisible}
             anchor={this.frequencyEl}
             onMouseEnter={() => this.holdFrequencyHint('hintHover', true)}

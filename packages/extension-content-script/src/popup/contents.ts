@@ -84,14 +84,6 @@ export const setContents = async ({
     waitForSignInIntervalId = undefined;
   };
 
-  // A host that can't tell (the website, which has no service worker to ask)
-  // shows the frequency rather than locking it.
-  const changeFrequencyAvailability = () =>
-    api.changeFrequencyAvailability().catch((error) => {
-      console.error('Unable to check the frequency availability', error);
-      return true;
-    });
-
   const setTranslation = async () => {
     const userKnowsHowToAdd = await api.isUserKnowsHowToAdd();
     const extensionPlatform = detectExtensionPlatform();
@@ -115,22 +107,19 @@ export const setContents = async ({
     }: AnalyzePayload = {}) => {
       translation.loading = true;
 
-      const [translationResult, cardsLimit, isFrequencyEnabled] =
-        await Promise.all([
-          api.analyze({
-            source,
-            // @ts-ignore
-            sourceLanguage,
-            targetLanguage,
-            context,
-            initiator: initiator ?? 'content-script',
-          }),
-          api.getCardsLimit(),
-          changeFrequencyAvailability(),
-        ]);
+      const [translationResult, cardsLimit] = await Promise.all([
+        api.analyze({
+          source,
+          // @ts-ignore
+          sourceLanguage,
+          targetLanguage,
+          context,
+          initiator: initiator ?? 'content-script',
+        }),
+        api.getCardsLimit(),
+      ]);
 
       translation.cardsLimit = cardsLimit;
-      translation.isFrequencyEnabled = isFrequencyEnabled;
       translation.loading = false;
 
       if (translationResult.success === false) {
@@ -278,7 +267,6 @@ export const setContents = async ({
         if (cardsLimit === 'unlimited') {
           clearInterval(waitForPaymentIntervalId);
           waitForPaymentIntervalId = undefined;
-          translation.isFrequencyEnabled = await changeFrequencyAvailability();
         }
       }, 10_000);
     });
@@ -339,11 +327,7 @@ export const setContents = async ({
       translation.isLoggedInUser = true;
 
       try {
-        [translation.cardsLimit, translation.isFrequencyEnabled] =
-          await Promise.all([
-            api.getCardsLimit(),
-            changeFrequencyAvailability(),
-          ]);
+        translation.cardsLimit = await api.getCardsLimit();
 
         const result = translation.result;
 

@@ -30,8 +30,6 @@ import {
   onGetLanguagePairs,
   onGetLocationLanguageRequest,
   onGetCardsLimitRequest,
-  onChangeFrequencyAvailability,
-  onChangeFrequencyAvailabilityExternal,
   onGetProxyLanguage,
   onGetSettingsExternalRequest,
   onGetSettingsRequest,
@@ -91,7 +89,6 @@ import {
   storeAskForRatingCounter,
 } from './askForRatingCounter';
 import { browserEnv, hasOffscreen } from './browserEnv';
-import { changeFreeFrequencyAvailability } from './frequencyAvailability';
 import { getCardsLimit } from './getCardsLimit';
 import { getUserAttributes } from './getUserAttributes';
 import { addLanguage, getUserLanguages, removeLanguage } from './languageList';
@@ -249,30 +246,6 @@ export const registerServiceWorker = (
       return sendResponse('unlimited');
     }
     return sendResponse(await getCardsLimit());
-  });
-
-  /**
-   * Paying users always see the frequency. Everybody else, signed out visitors
-   * included, sees it within the free window only.
-   */
-  const changeFrequencyAvailability = async (): Promise<boolean> => {
-    if (registerServiceWorkerOptions.unlimitedMaxCards) {
-      return true;
-    }
-
-    if ((await getCardsLimit()) === 'unlimited') {
-      return true;
-    }
-
-    return changeFreeFrequencyAvailability();
-  };
-
-  onChangeFrequencyAvailability(async (sendResponse) => {
-    return sendResponse(await changeFrequencyAvailability());
-  });
-
-  onChangeFrequencyAvailabilityExternal(async (sendResponse) => {
-    return sendResponse(await changeFrequencyAvailability());
   });
 
   onGetUserEmail(async (sendResponse) => {

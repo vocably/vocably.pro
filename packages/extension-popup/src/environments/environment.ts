@@ -13,7 +13,6 @@ import {
   getInternalSourceLanguage,
   getLanguagePairs,
   getCardsLimit,
-  changeFrequencyAvailability,
   getSettings,
   isLoggedIn,
   removeCard,
@@ -342,13 +341,6 @@ const getCardsLimitMock: typeof getCardsLimit = async () => {
   };
 };
 
-// Mirrors the free user from `getCardsLimitMock`, outside the free window.
-const changeFrequencyAvailabilityMock: typeof changeFrequencyAvailability =
-  async () => {
-    await timeout(500);
-    return false;
-  };
-
 const mockAnalyzeUnitsOfSpeech: typeof analyzeUnitsOfSpeech = async (
   payload
 ) => {
@@ -398,7 +390,6 @@ export const environment = merge(environmentLocal, {
   askForRating: askForRatingMock,
   saveAskForRatingResponse: saveAskForRatingResponseMock,
   getCardsLimit: getCardsLimitMock,
-  changeFrequencyAvailability: changeFrequencyAvailabilityMock,
   analyzeUnitsOfSpeech: mockAnalyzeUnitsOfSpeech,
   analyticsCapture: mockAnalyticsCapture,
 });

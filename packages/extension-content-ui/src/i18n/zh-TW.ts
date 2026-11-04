@@ -103,10 +103,4 @@ export const zhTW = {
   'frequency_hint.description_2': '你偶爾會遇到這個字，值得學起來。',
   'frequency_hint.description_3':
     '這是你經常讀到和聽到的字之一。學會它馬上就能派上用場。',
-  'frequency_hint.premium_badge': 'Premium',
-  'frequency_hint.premium':
-    '字詞頻率是 Premium 功能。免費使用者可以試用，而 Premium 使用者在查詢每個字詞時都能看到。',
-  'frequency_hint.unavailable': '字詞頻率分數受限',
-  'frequency_hint.unavailable_premium':
-    '字詞頻率是 Premium 功能，免費使用者並非隨時都能使用。升級到 Premium，就能隨時無限制地查看每個字詞的頻率。',
 };
