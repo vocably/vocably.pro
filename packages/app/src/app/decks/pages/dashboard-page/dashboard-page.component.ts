@@ -18,7 +18,6 @@ import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
 import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown.component';
 import { filterByTags } from '../../../../filterByTags';
 import { getStudySettings } from '../../../../study-settings';
-import { getNewCardsSliceLimit } from '../../../../newCardsStudiedToday';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -98,10 +97,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
           today,
           list: this.cardItems,
           maxCards: studySettings.cardsPerSession,
-          maxNeverStudiedCards: getNewCardsSliceLimit(
-            studySettings.maxNewCardsPerDay,
-            this.cardItems
-          ),
+          maxNeverStudiedCards: studySettings.maxNewCardsPerDay,
         });
         this.stats = {
           due: plan.today.length,
