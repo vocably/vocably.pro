@@ -23,7 +23,7 @@ import { useSelectedDeck } from '../languageDeck/useSelectedDeck';
 import { Loader } from '../loaders/Loader';
 import {
   getMaximumCardsPerSession,
-  getMaximumNeverStudiedCardsPerDay,
+  getMaximumNewCardsPerDay,
   getPlayRandomExample,
   getRandomizerEnabled,
 } from '../Settings/StudySettingsScreen';
@@ -86,9 +86,7 @@ export const StudyScreen: Props = ({ route, navigation }) => {
 
   const [isRandomizerEnabledResult] = useAsync(getRandomizerEnabled);
   const [maximumCardsPerSessionResult] = useAsync(getMaximumCardsPerSession);
-  const [maximumNewCardsPerDayResult] = useAsync(
-    getMaximumNeverStudiedCardsPerDay
-  );
+  const [maximumNewCardsPerDayResult] = useAsync(getMaximumNewCardsPerDay);
 
   const [cards, setCards] = useState<CardItem[]>();
   const [currentCardIndex, setCurrentCardIndex] = useState(0);

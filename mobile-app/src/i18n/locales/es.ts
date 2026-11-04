@@ -144,8 +144,7 @@ const translations: BaseTranslations = {
   },
   studySettings: {
     maxCardsPerSession: 'Máximo de tarjetas por sesión de estudio',
-    maxNeverStudiedPerDay:
-      'Máximo de tarjetas nuevas que se pueden tomar al día',
+    maxNewPerDay: 'Máximo de tarjetas nuevas que se pueden tomar al día',
     pronounceExample: 'Pronunciar una frase de ejemplo',
     pronounceExampleHint:
       'Esta opción hace que la app reproduzca una frase de ejemplo aleatoria cuando corresponda durante la sesión. La opción <icon /> debe estar activada — está en la esquina superior derecha de la pantalla de Estudio.',

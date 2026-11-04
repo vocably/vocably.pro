@@ -47,10 +47,10 @@ import { LanguageSelector } from './LanguageSelector';
 import { Loader } from './loaders/Loader';
 import {
   getMaximumCardsPerSession,
-  getMaximumNeverStudiedCardsPerDay,
+  getMaximumNewCardsPerDay,
   getRandomizerEnabled,
   MAXIMUM_CARDS_PER_SESSION_KEY,
-  MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY,
+  MAXIMUM_NEW_CARDS_PER_DAY_KEY,
 } from './Settings/StudySettingsScreen';
 import { swipeListButtonPressOpacity } from './stupidConstants';
 import { mainPadding } from './styles';
@@ -163,13 +163,13 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   const [maximumCardsPerSessionResult, , refreshMaximumCardsPerSession] =
     useAsync(getMaximumCardsPerSession);
   const [maximumNewCardsPerDayResult, , refreshMaximumNewCardsPerDay] =
-    useAsync(getMaximumNeverStudiedCardsPerDay);
+    useAsync(getMaximumNewCardsPerDay);
   useRefreshOnStorageChange(
     [MAXIMUM_CARDS_PER_SESSION_KEY],
     refreshMaximumCardsPerSession
   );
   useRefreshOnStorageChange(
-    [MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY],
+    [MAXIMUM_NEW_CARDS_PER_DAY_KEY],
     refreshMaximumNewCardsPerDay
   );
   const [isStatsViewEnabledResult, setIsStatsViewEnabled] = useAsync(
@@ -253,7 +253,7 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
     maximumCardsPerSessionResult.status === 'loaded'
       ? maximumCardsPerSessionResult.value
       : 0;
-  const maxNeverStudiedCards =
+  const maxNewCards =
     maximumNewCardsPerDayResult.status === 'loaded'
       ? maximumNewCardsPerDayResult.value
       : 0;
@@ -263,9 +263,9 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
         today: new Date(),
         list: cards,
         maxCards,
-        maxNeverStudiedCards,
+        maxNewCards,
       }),
-    [cards, maxCards, maxNeverStudiedCards]
+    [cards, maxCards, maxNewCards]
   );
   const [collapsedSections, setCollapsedSections] = useState<string[]>([
     'expired',

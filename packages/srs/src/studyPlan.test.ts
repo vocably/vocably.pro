@@ -32,7 +32,7 @@ const card = (id: string, data: Partial<SrsItem> = {}): CardItem => {
 const studied = (id: string, dueDate: number): CardItem =>
   card(id, { dueDate, interval: 1, repetition: 1 });
 
-const neverStudied = (id: string, dueDate = todayTs - DAY): CardItem =>
+const newCard = (id: string, dueDate = todayTs - DAY): CardItem =>
   card(id, { dueDate });
 
 const ids = (items: CardItem[]) => items.map((item) => item.id);
@@ -44,7 +44,7 @@ describe('studyPlan', () => {
 
   it('returns empty sections for an empty list', () => {
     expect(
-      studyPlan({ today, list: [], maxCards: 10, maxNeverStudiedCards: 10 })
+      studyPlan({ today, list: [], maxCards: 10, maxNewCards: 10 })
     ).toEqual({
       today: [],
       expired: [],
@@ -58,7 +58,7 @@ describe('studyPlan', () => {
     const list = [
       studied('due', todayTs),
       studied('expired', todayTs - DAY),
-      neverStudied('new'),
+      newCard('new'),
       studied('tomorrow', tomorrowTs),
       studied('future', tomorrowTs + DAY),
     ];
@@ -67,7 +67,7 @@ describe('studyPlan', () => {
       today,
       list,
       maxCards: 1,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     expect(ids(plan.today)).toEqual(['due']);
@@ -77,9 +77,9 @@ describe('studyPlan', () => {
     expect(ids(plan.future)).toEqual(['future']);
   });
 
-  it('fills today with due, then expired, then never studied cards', () => {
+  it('fills today with due, then expired, then new cards', () => {
     const list = [
-      neverStudied('new'),
+      newCard('new'),
       studied('expired', todayTs - DAY),
       studied('due', todayTs),
     ];
@@ -88,7 +88,7 @@ describe('studyPlan', () => {
       today,
       list,
       maxCards: 10,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     expect(ids(plan.today)).toEqual(['due', 'expired', 'new']);
@@ -102,14 +102,14 @@ describe('studyPlan', () => {
       studied('due2', todayTs),
       studied('expired1', todayTs - DAY),
       studied('expired2', todayTs - 2 * DAY),
-      neverStudied('new'),
+      newCard('new'),
     ];
 
     const plan = studyPlan({
       today,
       list,
       maxCards: 3,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     // due cards are sorted by creation date, newest first
@@ -129,7 +129,7 @@ describe('studyPlan', () => {
       today,
       list,
       maxCards: 1,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     expect(ids(plan.today)).toEqual(['due2']);
@@ -147,56 +147,48 @@ describe('studyPlan', () => {
       today,
       list,
       maxCards: 2,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     expect(ids(plan.today)).toEqual(['recent', 'middle']);
     expect(ids(plan.expired)).toEqual(['old']);
   });
 
-  it('limits never studied cards with maxNeverStudiedCards', () => {
-    const list = [
-      neverStudied('new1'),
-      neverStudied('new2'),
-      neverStudied('new3'),
-    ];
+  it('limits new cards with maxNewCards', () => {
+    const list = [newCard('new1'), newCard('new2'), newCard('new3')];
 
     const plan = studyPlan({
       today,
       list,
       maxCards: 10,
-      maxNeverStudiedCards: 2,
+      maxNewCards: 2,
     });
 
-    // never studied cards are sorted by creation date, newest first
+    // new cards are sorted by creation date, newest first
     expect(ids(plan.today)).toEqual(['new3', 'new2']);
     expect(ids(plan.notStarted)).toEqual(['new1']);
   });
 
-  it('limits never studied cards with the space left by maxCards', () => {
-    const list = [
-      studied('due', todayTs),
-      neverStudied('new1'),
-      neverStudied('new2'),
-    ];
+  it('limits new cards with the space left by maxCards', () => {
+    const list = [studied('due', todayTs), newCard('new1'), newCard('new2')];
 
     const plan = studyPlan({
       today,
       list,
       maxCards: 2,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     expect(ids(plan.today)).toEqual(['due', 'new2']);
     expect(ids(plan.notStarted)).toEqual(['new1']);
   });
 
-  it('counts never studied cards picked up today against the limit', () => {
+  it('counts new cards picked up today against the limit', () => {
     const list = [
       studied('pickedUp1', tomorrowTs),
       studied('pickedUp2', tomorrowTs),
-      neverStudied('new1'),
-      neverStudied('new2'),
+      newCard('new1'),
+      newCard('new2'),
     ];
     list[0].data.firstStudied = today.getTime() - 1000;
     list[1].data.firstStudied = today.getTime() - 2000;
@@ -205,22 +197,22 @@ describe('studyPlan', () => {
       today,
       list,
       maxCards: 10,
-      maxNeverStudiedCards: 3,
+      maxNewCards: 3,
     });
 
     expect(ids(plan.today)).toEqual(['new2']);
     expect(ids(plan.notStarted)).toEqual(['new1']);
   });
 
-  it('adds no never studied cards when the daily limit is reached', () => {
-    const list = [studied('pickedUp', tomorrowTs), neverStudied('new')];
+  it('adds no new cards when the daily limit is reached', () => {
+    const list = [studied('pickedUp', tomorrowTs), newCard('new')];
     list[0].data.firstStudied = today.getTime();
 
     const plan = studyPlan({
       today,
       list,
       maxCards: 10,
-      maxNeverStudiedCards: 1,
+      maxNewCards: 1,
     });
 
     expect(plan.today).toEqual([]);
@@ -228,13 +220,13 @@ describe('studyPlan', () => {
   });
 
   it('treats today created cards simply as today', () => {
-    const list = [neverStudied('newDueToday', todayTs), neverStudied('new')];
+    const list = [newCard('newDueToday', todayTs), newCard('new')];
 
     const plan = studyPlan({
       today,
       list,
       maxCards: 10,
-      maxNeverStudiedCards: 1,
+      maxNewCards: 1,
     });
 
     expect(ids(plan.today)).toEqual(['new']);
@@ -242,13 +234,13 @@ describe('studyPlan', () => {
   });
 
   it('puts nothing into today when maxCards is 0', () => {
-    const list = [studied('due', todayTs), neverStudied('new')];
+    const list = [studied('due', todayTs), newCard('new')];
 
     const plan = studyPlan({
       today,
       list,
       maxCards: 0,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     expect(plan.today).toEqual([]);
@@ -260,14 +252,14 @@ describe('studyPlan', () => {
     const list = [
       studied('due', todayTs),
       studied('expired', todayTs - DAY),
-      neverStudied('new'),
+      newCard('new'),
     ];
 
     const plan = studyPlan({
       today,
       list,
       maxCards: Infinity,
-      maxNeverStudiedCards: 0,
+      maxNewCards: 0,
     });
 
     expect(ids(plan.today)).toEqual(['due', 'expired']);
@@ -285,7 +277,7 @@ describe('studyPlan', () => {
       today,
       list,
       maxCards: 10,
-      maxNeverStudiedCards: 10,
+      maxNewCards: 10,
     });
 
     expect(ids(plan.future)).toEqual(['near', 'far']);
@@ -297,8 +289,8 @@ describe('studyPlan', () => {
       studied('due2', todayTs),
       studied('expired1', todayTs - DAY),
       studied('expired2', todayTs - 3 * DAY),
-      neverStudied('new1'),
-      neverStudied('new2'),
+      newCard('new1'),
+      newCard('new2'),
       studied('tomorrow', tomorrowTs),
       studied('future', tomorrowTs + DAY),
     ];
@@ -307,7 +299,7 @@ describe('studyPlan', () => {
       today,
       list,
       maxCards: 3,
-      maxNeverStudiedCards: 1,
+      maxNewCards: 1,
     });
 
     const all = [
@@ -322,11 +314,11 @@ describe('studyPlan', () => {
 });
 
 describe('isNotStarted', () => {
-  it('is true only for never studied cards due before today', () => {
+  it('is true only for new cards due before today', () => {
     const notStarted = isNotStarted(today);
 
-    expect(notStarted(neverStudied('new'))).toBe(true);
-    expect(notStarted(neverStudied('newDueToday', todayTs))).toBe(false);
+    expect(notStarted(newCard('new'))).toBe(true);
+    expect(notStarted(newCard('newDueToday', todayTs))).toBe(false);
     expect(notStarted(studied('expired', todayTs - DAY))).toBe(false);
   });
 });

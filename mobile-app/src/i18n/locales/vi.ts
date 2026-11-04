@@ -143,7 +143,7 @@ const translations: BaseTranslations = {
   },
   studySettings: {
     maxCardsPerSession: 'Số thẻ tối đa mỗi phiên học',
-    maxNeverStudiedPerDay: 'Số thẻ mới tối đa có thể chọn mỗi ngày',
+    maxNewPerDay: 'Số thẻ mới tối đa có thể chọn mỗi ngày',
     pronounceExample: 'Phát âm câu ví dụ',
     pronounceExampleHint:
       'Tùy chọn này khiến ứng dụng phát một câu ví dụ ngẫu nhiên vào thời điểm phù hợp trong phiên học. Tùy chọn <icon /> phải được bật — nó nằm ở góc trên bên phải màn hình Học.',

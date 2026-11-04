@@ -97,7 +97,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
           today,
           list: this.cardItems,
           maxCards: studySettings.cardsPerSession,
-          maxNeverStudiedCards: studySettings.maxNewCardsPerDay,
+          maxNewCards: studySettings.maxNewCardsPerDay,
         });
         this.stats = {
           due: plan.today.length,

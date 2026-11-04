@@ -14,7 +14,7 @@ export type StudyPlanOptions = {
   today: Date;
   list: CardItem[];
   maxCards: number;
-  maxNeverStudiedCards: number;
+  maxNewCards: number;
 };
 
 const startOfUtcDay = (date: Date, dayOffset = 0): number =>
@@ -25,7 +25,7 @@ const startOfUtcDay = (date: Date, dayOffset = 0): number =>
   );
 
 /**
- * Whether the card belongs to the never studied cards of the plan, as
+ * Whether the card belongs to the new cards of the plan, as
  * opposed to cards that are due (today or expired).
  */
 export const isNotStarted =
@@ -46,8 +46,8 @@ const countNewCardsPickedUpToday = (list: CardItem[], today: Date): number =>
  *
  * 1. cards due today,
  * 2. expired cards, most recently due first,
- * 3. never studied cards, newest first, as long as fewer than
- *    `maxNeverStudiedCards` were picked up today,
+ * 3. new cards, newest first, as long as fewer than
+ *    `maxNewCards` were picked up today,
  *
  * up to `maxCards` in total. Due cards that do not fit stay in `expired`,
  * new cards that do not fit stay in `notStarted`. Every card ends up in
@@ -57,7 +57,7 @@ export const studyPlan = ({
   today,
   list,
   maxCards,
-  maxNeverStudiedCards,
+  maxNewCards,
 }: StudyPlanOptions): StudyPlan => {
   const todayTs = startOfUtcDay(today);
   const tomorrowTs = startOfUtcDay(today, 1);
@@ -95,7 +95,7 @@ export const studyPlan = ({
     0,
     Math.min(
       limit - todayCards.length,
-      maxNeverStudiedCards - countNewCardsPickedUpToday(list, today)
+      maxNewCards - countNewCardsPickedUpToday(list, today)
     )
   );
   todayCards.push(...notStarted.slice(0, newCardsAllowance));

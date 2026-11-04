@@ -144,7 +144,7 @@ const translations: BaseTranslations = {
   },
   studySettings: {
     maxCardsPerSession: 'Her çalışma oturumundaki maksimum kart sayısı',
-    maxNeverStudiedPerDay: 'Günde alınabilecek maksimum yeni kart sayısı',
+    maxNewPerDay: 'Günde alınabilecek maksimum yeni kart sayısı',
     pronounceExample: 'Örnek cümleyi seslendir',
     pronounceExampleHint:
       'Bu seçenek, çalışma sırasında uygun anlarda rastgele bir örnek cümle çalmasını sağlar. <icon /> seçeneği açık olmalıdır — bu seçenek Çalışma ekranının sağ üst köşesindedir.',

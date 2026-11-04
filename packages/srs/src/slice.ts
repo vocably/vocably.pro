@@ -17,7 +17,7 @@ export const hasStudied =
 export const slice = (
   today: Date,
   maxCards: number,
-  maxNeverStudiedCards: number,
+  maxNewCards: number,
   list: CardItem[],
   planSection?: string
 ): CardItem[] => {
@@ -25,7 +25,7 @@ export const slice = (
     return [];
   }
 
-  const plan = studyPlan({ today, list, maxCards, maxNeverStudiedCards });
+  const plan = studyPlan({ today, list, maxCards, maxNewCards });
 
   const now = new Date().getTime();
 
@@ -39,7 +39,7 @@ export const slice = (
   }
 
   if (plan.today.length > 0) {
-    // Due cards come in random order, never studied cards go last
+    // Due cards come in random order, new cards go last
     const notStarted = isNotStarted(today);
 
     return [

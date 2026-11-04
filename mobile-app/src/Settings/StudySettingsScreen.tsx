@@ -15,8 +15,7 @@ import { StudySteps } from './StudySteps';
 
 const RANDOMIZER_ENABLED_KEY = 'isRandomizerEnabled';
 export const MAXIMUM_CARDS_PER_SESSION_KEY = 'maximumCardsPerSession';
-export const MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY =
-  'maximumNeverStudiedCardsPerDay';
+export const MAXIMUM_NEW_CARDS_PER_DAY_KEY = 'maximumNeverStudiedCardsPerDay';
 const PLAY_RANDOM_EXAMPLE_KEY = 'playRandomExample';
 
 export const getRandomizerEnabled = () =>
@@ -31,13 +30,11 @@ export const getMaximumCardsPerSession = () =>
 export const setMaximumCardsPerSession = (cardsPerSession: number) =>
   setItem(MAXIMUM_CARDS_PER_SESSION_KEY, cardsPerSession.toString());
 
-export const getMaximumNeverStudiedCardsPerDay = () =>
-  getItem(MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY).then((res) =>
-    Number(res ?? 40)
-  );
+export const getMaximumNewCardsPerDay = () =>
+  getItem(MAXIMUM_NEW_CARDS_PER_DAY_KEY).then((res) => Number(res ?? 40));
 
-export const setMaximumNeverStudiedCardsPerDay = (cardsPerDay: number) =>
-  setItem(MAXIMUM_NEVER_STUDIED_CARDS_PER_DAY_KEY, cardsPerDay.toString());
+export const setMaximumNewCardsPerDay = (cardsPerDay: number) =>
+  setItem(MAXIMUM_NEW_CARDS_PER_DAY_KEY, cardsPerDay.toString());
 
 export const getPlayRandomExample = () =>
   getItem(PLAY_RANDOM_EXAMPLE_KEY).then((res) => res !== 'false');
@@ -62,11 +59,10 @@ export const StudySettingsScreen: FC<Props> = () => {
     setMaximumCardsPerSession
   );
 
-  const [maximumNeverStudiedCardsPerDay, mutateMaximumNeverStudiedCardsPerDay] =
-    useAsync(
-      getMaximumNeverStudiedCardsPerDay,
-      setMaximumNeverStudiedCardsPerDay
-    );
+  const [maximumNewCardsPerDay, mutateMaximumNewCardsPerDay] = useAsync(
+    getMaximumNewCardsPerDay,
+    setMaximumNewCardsPerDay
+  );
 
   const [playRandomExample, mutatePlayRandomExample] = useAsync(
     getPlayRandomExample,
@@ -155,10 +151,10 @@ export const StudySettingsScreen: FC<Props> = () => {
       >
         <View>
           <Text style={{ fontSize: 16 }}>
-            {t('studySettings.maxNeverStudiedPerDay')}
+            {t('studySettings.maxNewPerDay')}
           </Text>
         </View>
-        {maximumNeverStudiedCardsPerDay.status === 'loaded' && (
+        {maximumNewCardsPerDay.status === 'loaded' && (
           <View
             style={{
               flexDirection: 'row',
@@ -167,7 +163,7 @@ export const StudySettingsScreen: FC<Props> = () => {
             }}
           >
             <Text style={{ fontSize: 16, width: 36 * fontScale }}>
-              {maximumNeverStudiedCardsPerDay.value}
+              {maximumNewCardsPerDay.value}
             </Text>
             <View testID="study-settings-new-cards-per-day" style={{ flex: 1 }}>
               <Slider
@@ -176,9 +172,9 @@ export const StudySettingsScreen: FC<Props> = () => {
                 step={1}
                 minimumTrackTintColor={theme.colors.primary}
                 thumbTintColor={theme.colors.primary}
-                value={maximumNeverStudiedCardsPerDay.value}
+                value={maximumNewCardsPerDay.value}
                 onValueChange={(value) => {
-                  mutateMaximumNeverStudiedCardsPerDay(value[0]);
+                  mutateMaximumNewCardsPerDay(value[0]);
                 }}
               ></Slider>
             </View>
