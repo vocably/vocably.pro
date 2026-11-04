@@ -7,7 +7,7 @@ export interface StudySettings {
 const STUDY_SETTINGS_KEY = 'studySettings';
 
 const defaultStudySettings: StudySettings = {
-  cardsPerSession: 10,
+  cardsPerSession: 100,
   random: false,
   maxNewCardsPerDay: 40,
 };

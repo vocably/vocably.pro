@@ -66,7 +66,7 @@
         <div class="row row-stacked">
           <div class="row-label">{{ 'settings.max_cards' | transloco }}</div>
           <div class="slider">
-            <mat-slider min="5" max="100" step="1" color="accent">
+            <mat-slider min="5" max="200" step="1" color="accent">
               <input
                 matSliderThumb
                 [(ngModel)]="studySettings.cardsPerSession"
@@ -83,7 +83,7 @@
             {{ 'settings.max_new_cards_per_day' | transloco }}
           </div>
           <div class="slider">
-            <mat-slider min="0" max="40" step="1" color="accent">
+            <mat-slider min="0" max="80" step="1" color="accent">
               <input
                 matSliderThumb
                 [(ngModel)]="studySettings.maxNewCardsPerDay"
