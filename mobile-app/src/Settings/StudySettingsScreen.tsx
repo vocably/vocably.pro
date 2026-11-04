@@ -1,5 +1,5 @@
 import { Slider } from '@miblanchard/react-native-slider';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Linking, PixelRatio, View } from 'react-native';
 import { Trans, useTranslation } from 'react-i18next';
 import { Text, useTheme } from 'react-native-paper';
@@ -64,6 +64,16 @@ export const StudySettingsScreen: FC<Props> = () => {
     setMaximumNewCardsPerDay
   );
 
+  // Slider values are kept locally while dragging and persisted only when
+  // sliding completes. Persisting on every tick triggers storage listeners
+  // (e.g. the dashboard refresh) and makes the slider jittery.
+  const [draftCardsPerSession, setDraftCardsPerSession] = useState<
+    number | null
+  >(null);
+  const [draftNewCardsPerDay, setDraftNewCardsPerDay] = useState<number | null>(
+    null
+  );
+
   const [playRandomExample, mutatePlayRandomExample] = useAsync(
     getPlayRandomExample,
     setPlayRandomExample
@@ -122,7 +132,7 @@ export const StudySettingsScreen: FC<Props> = () => {
             }}
           >
             <Text style={{ fontSize: 16, width: 36 * fontScale }}>
-              {maximumCardsPerSession.value}
+              {draftCardsPerSession ?? maximumCardsPerSession.value}
             </Text>
             <View testID="study-settings-cards-per-session" style={{ flex: 1 }}>
               <Slider
@@ -131,9 +141,13 @@ export const StudySettingsScreen: FC<Props> = () => {
                 step={5}
                 minimumTrackTintColor={theme.colors.primary}
                 thumbTintColor={theme.colors.primary}
-                value={maximumCardsPerSession.value}
+                value={draftCardsPerSession ?? maximumCardsPerSession.value}
                 onValueChange={(value) => {
-                  mutateMaximumCardsPerSession(value[0]);
+                  setDraftCardsPerSession(value[0]);
+                }}
+                onSlidingComplete={async (value) => {
+                  await mutateMaximumCardsPerSession(value[0]);
+                  setDraftCardsPerSession(null);
                 }}
               ></Slider>
             </View>
@@ -163,7 +177,7 @@ export const StudySettingsScreen: FC<Props> = () => {
             }}
           >
             <Text style={{ fontSize: 16, width: 36 * fontScale }}>
-              {maximumNewCardsPerDay.value}
+              {draftNewCardsPerDay ?? maximumNewCardsPerDay.value}
             </Text>
             <View testID="study-settings-new-cards-per-day" style={{ flex: 1 }}>
               <Slider
@@ -172,9 +186,13 @@ export const StudySettingsScreen: FC<Props> = () => {
                 step={1}
                 minimumTrackTintColor={theme.colors.primary}
                 thumbTintColor={theme.colors.primary}
-                value={maximumNewCardsPerDay.value}
+                value={draftNewCardsPerDay ?? maximumNewCardsPerDay.value}
                 onValueChange={(value) => {
-                  mutateMaximumNewCardsPerDay(value[0]);
+                  setDraftNewCardsPerDay(value[0]);
+                }}
+                onSlidingComplete={async (value) => {
+                  await mutateMaximumNewCardsPerDay(value[0]);
+                  setDraftNewCardsPerDay(null);
                 }}
               ></Slider>
             </View>
