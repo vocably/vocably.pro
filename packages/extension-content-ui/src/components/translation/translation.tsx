@@ -477,25 +477,24 @@ export class VocablyTranslation {
               >
                 {this.explanation.state !== 'none' && (
                   <div class="vocably-pt-12">
-                    <div class="panel">
+                    <section
+                      class={{
+                        'explanation-panel': true,
+                        'explanation-panel-error':
+                          this.explanation.state === 'error',
+                      }}
+                    >
                       {this.explanation.state === 'loading' && (
-                        <Fragment>
-                          <span
-                            style={{
-                              display: 'inline-block',
-                              verticalAlign: 'middle',
-                              fontSize: '13px',
-                            }}
-                          >
-                            {t('translation.requesting_ai')}
-                          </span>
-                          <vocably-inline-loader
-                            style={{ marginLeft: '8px' }}
-                          ></vocably-inline-loader>
-                        </Fragment>
+                        <div class="explanation-status">
+                          {t('translation.requesting_ai')}
+                          <vocably-inline-loader class="explanation-loader"></vocably-inline-loader>
+                        </div>
                       )}
-                      {this.explanation.state === 'error' &&
-                        this.explanation.error}
+                      {this.explanation.state === 'error' && (
+                        <div class="explanation-status">
+                          {this.explanation.error}
+                        </div>
+                      )}
                       {this.explanation.state === 'loaded' && (
                         <div
                           class="explanation"
@@ -504,7 +503,7 @@ export class VocablyTranslation {
                           )}
                         ></div>
                       )}
-                    </div>
+                    </section>
                   </div>
                 )}
                 {this.extraCards.length > 0 && (

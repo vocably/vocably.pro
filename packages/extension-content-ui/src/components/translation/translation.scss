@@ -115,31 +115,107 @@ $section-margin: 8px;
   opacity: 1;
 }
 
-.panel {
-  background: $v-light-color-elevation-2;
-  border: none;
-  border-radius: $v-border-radius;
-  padding: $input-padding-x;
+.explanation-panel {
+  --accent: #{$v-light-color-primary};
+
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    rgba($v-light-color-primary, 0.06) 0%,
+    rgba($v-light-color-primary, 0.02) 100%
+  );
+  border: 1px solid rgba($v-light-color-primary, 0.14);
+  border-radius: 12px;
+  padding: 12px $input-padding-x;
+  margin-bottom: 8px;
+  font-size: 15px;
+  line-height: 22px;
+
+  &.explanation-panel-error {
+    --accent: #{$v-light-color-danger};
+
+    background: rgba($v-light-color-danger, 0.06);
+    border-color: rgba($v-light-color-danger, 0.2);
+  }
+}
+
+.explanation-loader {
+  --color: var(--accent);
+  margin-left: 6px;
+}
+
+.explanation-status {
+  font-size: 13px;
+  line-height: 18px;
+  color: $v-light-color-body;
+}
+
+.explanation-panel-error .explanation-status {
+  color: $v-light-color-danger-active;
 }
 
 .explanation {
+  color: $v-light-color-body;
+
   p,
   ol,
   ul {
-    margin: 0 0 12px 0;
+    margin: 0 0 10px 0;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
 
-  ol,
   ul {
-    padding-inline-start: 1.2em;
+    list-style: none;
+    padding: 0;
+  }
+
+  ol {
+    padding-inline-start: 1.3em;
+  }
+
+  li {
+    position: relative;
+
+    & + li {
+      margin-top: 8px;
+    }
+  }
+
+  ul > li {
+    padding-left: 14px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 9px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.7;
+    }
   }
 
   strong {
     font-weight: bold;
+    color: $v-light-color-emphasize;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  code {
+    font-family: inherit;
+    padding: 0 4px;
+    border-radius: 4px;
+    background: rgba($v-light-color-primary, 0.08);
+    color: $v-light-color-emphasize;
   }
 }
 

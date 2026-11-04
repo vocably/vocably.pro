@@ -397,7 +397,8 @@ translationWithExtraLoading.result = extra;
 translationWithExtraLoading.isLoadingExtraWords = true;
 translationWithExtraLoading.explanation = {
   state: 'loaded',
-  value: 'Explanation goes here',
+  value:
+    '* **"Vocably"**: Это название приложения или метода. Не пытайтесь перевести его, это имя собственное.\n* **"designed to help you use a new language in everyday life"**: Основная цель – помочь вам применять новый язык в повседневной жизни. Это ключевой момент.\n* **"because everyday use is the best and most natural way to learn"**: Это объяснение, почему именно повседневное использование является лучшим методом. Подчеркивает естественность и эффективность такого подхода.',
 };
 
 console.log(translationWithExtraLoading);
