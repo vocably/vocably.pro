@@ -77,7 +77,7 @@ describe('studyPlan', () => {
     expect(ids(plan.future)).toEqual(['future']);
   });
 
-  it('fills today with due, then expired, then new cards', () => {
+  it('fills today with new, then due, then expired cards', () => {
     const list = [
       newCard('new'),
       studied('expired', todayTs - DAY),
@@ -91,7 +91,7 @@ describe('studyPlan', () => {
       maxNewCards: 10,
     });
 
-    expect(ids(plan.today)).toEqual(['due', 'expired', 'new']);
+    expect(ids(plan.today)).toEqual(['new', 'due', 'expired']);
     expect(plan.expired).toEqual([]);
     expect(plan.notStarted).toEqual([]);
   });
@@ -179,7 +179,7 @@ describe('studyPlan', () => {
       maxNewCards: 10,
     });
 
-    expect(ids(plan.today)).toEqual(['due', 'new2']);
+    expect(ids(plan.today)).toEqual(['new2', 'due']);
     expect(ids(plan.notStarted)).toEqual(['new1']);
   });
 
