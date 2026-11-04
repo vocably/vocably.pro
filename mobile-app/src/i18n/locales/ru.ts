@@ -146,7 +146,7 @@ const translations: BaseTranslations = {
   studySettings: {
     maxCardsPerSession: 'Максимум карточек за одну сессию',
     maxNeverStudiedPerDay:
-      'Максимум «не изученных» карточек, которые можно взять в день',
+      'Максимум новых карточек, которые можно взять в день',
     pronounceExample: 'Произносить пример',
     pronounceExampleHint:
       'Этот параметр позволяет приложению воспроизводить случайный пример во время занятия. Опция <icon /> должна быть включена — она находится в правом верхнем углу экрана обучения.',
@@ -220,7 +220,7 @@ const translations: BaseTranslations = {
     section: {
       today: 'На сегодня',
       expired: 'Нужно наверстать',
-      notStarted: 'Не изучалось',
+      notStarted: 'Новые',
       tomorrow: 'На завтра',
       future: 'На будущее',
     },

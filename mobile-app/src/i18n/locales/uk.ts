@@ -144,8 +144,7 @@ const translations: BaseTranslations = {
   },
   studySettings: {
     maxCardsPerSession: 'Максимум карток за одне заняття',
-    maxNeverStudiedPerDay:
-      'Максимум «не вивчених» карток, які можна взяти за день',
+    maxNeverStudiedPerDay: 'Максимум нових карток, які можна взяти за день',
     pronounceExample: 'Озвучувати приклад речення',
     pronounceExampleHint:
       'Ця опція дозволяє застосунку відтворювати випадкове речення-приклад у відповідні моменти заняття. Опція <icon /> має бути увімкнена — вона у верхньому правому куті екрана навчання.',
@@ -219,7 +218,7 @@ const translations: BaseTranslations = {
     section: {
       today: 'На сьогодні',
       expired: 'Треба надолужити',
-      notStarted: 'Ніколи не вивчали',
+      notStarted: 'Нові',
       tomorrow: 'На завтра',
       future: 'На майбутнє',
     },
