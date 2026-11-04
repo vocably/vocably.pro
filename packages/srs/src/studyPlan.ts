@@ -98,7 +98,7 @@ export const studyPlan = ({
       maxNewCards - countNewCardsPickedUpToday(list, today)
     )
   );
-  todayCards.push(...notStarted.slice(0, newCardsAllowance));
+  todayCards.unshift(...notStarted.slice(0, newCardsAllowance));
 
   return {
     today: todayCards,
