@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { StudyCardDefinition } from '../StudyCardDefinition';
 import { CardExample, CardExampleRef, Mask } from '../../CardExample';
 import { studySmallFontSize } from '../../styles';
-import { useAppTheme } from '../../ThemeProvider';
 import { SectionLabel } from './SectionLabel';
 import { maskTheWord } from '../../maskTheWord';
 
@@ -24,7 +23,6 @@ type Props = {
 export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
   ({ card, hasChecked, onPress, deckSettings }, ref) => {
     const { t } = useTranslation();
-    const theme = useAppTheme();
 
     let examples = card.data.example ? explode(card.data.example) : [];
 
@@ -64,24 +62,15 @@ export const ReverseCardFront = forwardRef<ReverseCardFrontRef, Props>(
                 count: examples.length,
               })}
             </SectionLabel>
-            <View
-              style={{
-                paddingStart: 12,
-                borderStartWidth: 3,
-                borderStartColor: theme.colors.divider,
-                borderRadius: 2,
-              }}
-            >
-              <CardExample
-                ref={cardExampleRef}
-                mask={mask}
-                example={join(examples)}
-                language={card.data.language}
-                textStyle={{ fontSize: studySmallFontSize }}
-                onPress={onPress}
-                hideBul={true}
-              />
-            </View>
+            <CardExample
+              ref={cardExampleRef}
+              mask={mask}
+              example={join(examples)}
+              language={card.data.language}
+              textStyle={{ fontSize: studySmallFontSize }}
+              onPress={onPress}
+              hideBul={true}
+            />
           </View>
         )}
       </View>

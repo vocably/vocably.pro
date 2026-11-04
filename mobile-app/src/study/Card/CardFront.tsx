@@ -162,15 +162,7 @@ export const CardFront: FC<Props> = ({
         </View>
       )}
       {card.data.example && (
-        <View
-          style={{
-            marginTop: 20,
-            paddingStart: 12,
-            borderStartWidth: 3,
-            borderStartColor: theme.colors.divider,
-            borderRadius: 2,
-          }}
-        >
+        <View style={{ marginTop: 20 }}>
           <CardExample
             ref={cardExampleRef}
             example={card.data.example}

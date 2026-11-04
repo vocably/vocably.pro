@@ -22,8 +22,12 @@
         }
       </div>
     }
-    @for (definition of definitions; track $index) {
-      <div class="definition" dir="auto">{{ definition }}</div>
+    @if (definitions.length > 0) {
+      <div class="definitions">
+        @for (definition of definitions; track $index) {
+          <div dir="auto">{{ definition }}</div>
+        }
+      </div>
     }
   </div>
 }

@@ -38,7 +38,10 @@
   color: var(--emphasize-color);
 }
 
-.definition {
+.definitions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
   font-size: 0.67em;
   line-height: 1.4;
 }
@@ -59,10 +62,7 @@
 .examples-list {
   display: flex;
   flex-direction: column;
-  gap: 0.25em;
-  padding-inline-start: 0.75rem;
-  border-inline-start: 3px solid var(--border-color);
-  border-radius: 2px;
+  gap: 0.35em;
   font-size: 0.6em;
   line-height: 1.4;
 }

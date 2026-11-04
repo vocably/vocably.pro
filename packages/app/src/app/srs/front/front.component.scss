@@ -64,11 +64,8 @@
 .examples {
   display: flex;
   flex-direction: column;
-  gap: 0.25em;
+  gap: 0.35em;
   margin-top: 0.6em;
-  padding-inline-start: 0.75rem;
-  border-inline-start: 3px solid var(--border-color);
-  border-radius: 2px;
   font-size: max(1rem, 0.53em);
   line-height: 1.4;
 }

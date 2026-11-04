@@ -30,6 +30,14 @@
   line-height: 1.4;
 }
 
+.definitions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  font-size: 0.67em;
+  line-height: 1.4;
+}
+
 .inflections {
   display: flex;
   flex-direction: column;
