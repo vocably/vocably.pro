@@ -330,6 +330,7 @@ const translations: BaseTranslations = {
     joinDiscord: 'Unirse a Discord',
     sendMessage: 'Enviar un mensaje',
     conductingAnalysis: 'Realizando un análisis más detallado...',
+    explanationTitle: 'Explicación',
     selectLanguageLearning: 'Elige el idioma que estás aprendiendo.',
     selectMotherTongue: 'Elige tu lengua materna',
     searchHintForExample: 'Por ejemplo:',

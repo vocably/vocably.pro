@@ -342,6 +342,7 @@ const translations: BaseTranslations = {
     joinDiscord: 'Приєднатися в Discord',
     sendMessage: 'Надіслати повідомлення',
     conductingAnalysis: 'Проводжу детальний аналіз...',
+    explanationTitle: 'Пояснення',
     selectLanguageLearning: 'Оберіть мову, яку ви вивчаєте.',
     selectMotherTongue: 'Оберіть вашу рідну мову',
     searchHintForExample: 'Наприклад:',

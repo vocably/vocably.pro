@@ -321,6 +321,7 @@ const translations: BaseTranslations = {
     joinDiscord: 'Tham gia Discord',
     sendMessage: 'Gửi tin nhắn',
     conductingAnalysis: 'Đang phân tích kỹ hơn...',
+    explanationTitle: 'Giải thích',
     selectLanguageLearning: 'Chọn ngôn ngữ bạn đang học.',
     selectMotherTongue: 'Chọn tiếng mẹ đẻ của bạn',
     searchHintForExample: 'Ví dụ:',

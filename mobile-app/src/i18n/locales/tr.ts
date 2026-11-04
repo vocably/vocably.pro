@@ -328,6 +328,7 @@ const translations: BaseTranslations = {
     joinDiscord: "Discord'a katıl",
     sendMessage: 'Mesaj gönder',
     conductingAnalysis: 'Daha ayrıntılı analiz yapılıyor...',
+    explanationTitle: 'Açıklama',
     selectLanguageLearning: 'Öğrendiğin dili seç.',
     selectMotherTongue: 'Anadilini seç',
     searchHintForExample: 'Örneğin:',

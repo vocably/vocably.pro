@@ -327,6 +327,7 @@ const translations = {
     joinDiscord: 'Join Discord',
     sendMessage: 'Send a message',
     conductingAnalysis: 'Conducting further analysis...',
+    explanationTitle: 'Explanation',
     selectLanguageLearning: "Select the language you're learning.",
     selectMotherTongue: 'Select your mother tongue',
     searchHintForExample: 'For example:',

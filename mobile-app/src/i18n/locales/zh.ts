@@ -302,6 +302,7 @@ const translations: BaseTranslations = {
     joinDiscord: '加入 Discord',
     sendMessage: '发送消息',
     conductingAnalysis: '正在进一步分析…',
+    explanationTitle: '解析',
     selectLanguageLearning: '选择你正在学习的语言。',
     selectMotherTongue: '选择你的母语',
     searchHintForExample: '例如：',

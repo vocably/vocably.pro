@@ -51,6 +51,7 @@ import { SearchHint } from './LookUpScreen/SearchHint';
 import { useLookUpCount } from './LookUpScreen/useLookUpCount';
 import { getHistoryItemText, useHistory } from './LookUpScreen/useHistory';
 import { LookUpHistory } from './LookUpScreen/LookUpHistory';
+import { SentenceExplanation } from './LookUpScreen/SentenceExplanation';
 
 const padding = 16;
 
@@ -79,6 +80,7 @@ type ExplainStatus =
   | {
       status: 'loaded';
       value: {
+        explanation: string;
         unitsOfSpeech: UnitOfSpeech[];
       };
     }
@@ -281,11 +283,16 @@ export const LookUpScreen: FC<Props> = ({
       return;
     }
 
-    if (explainResult.value.unitsOfSpeech.length > 0) {
+    const explanation = (explainResult.value.explanation ?? '').trim();
+    // Single-word look ups come without units of speech
+    const unitsOfSpeech = explainResult.value.unitsOfSpeech ?? [];
+
+    if (explanation || unitsOfSpeech.length > 0) {
       setExplainStatus({
         status: 'loaded',
         value: {
-          unitsOfSpeech: explainResult.value.unitsOfSpeech,
+          explanation,
+          unitsOfSpeech,
         },
       });
     }
@@ -624,28 +631,48 @@ export const LookUpScreen: FC<Props> = ({
                 )}
                 {explainStatus.status === 'loaded' && (
                   <>
-                    <UnitsOfSpeechAnalyze
-                      sourceLanguage={lookUpResult.value.sourceLanguage}
-                      targetLanguage={lookUpResult.value.targetLanguage}
-                      unitsOfSpeech={explainStatus.value.unitsOfSpeech}
-                      cards={deck.deck.cards}
-                      deck={deck}
-                      onRemove={onRemove}
-                      onAdd={(card) => {
-                        posthog.capture('generator-add', card.card);
-                        return onAdd(card);
-                      }}
-                      onTagsChange={onTagsChange}
-                      wrapperStyle={{
-                        paddingLeft: insets.left + padding + 8,
-                        paddingRight: insets.right + padding + 8,
-                      }}
-                      alwaysShowSeparator={true}
-                      leftInset={insets.left}
-                      rightInset={insets.right}
-                      cardsLimit={cardsLimit}
-                      requestFeedback={true}
-                    />
+                    {explainStatus.value.explanation !== '' && (
+                      <Animated.View
+                        entering={FadeIn}
+                        style={{
+                          paddingLeft: insets.left + padding + 8,
+                          paddingRight: insets.right + padding + 8,
+                          paddingTop: 8,
+                          paddingBottom: 16,
+                        }}
+                      >
+                        <SentenceExplanation
+                          explanation={explainStatus.value.explanation}
+                        />
+                      </Animated.View>
+                    )}
+                    {explainStatus.value.unitsOfSpeech.length > 0 && (
+                      <UnitsOfSpeechAnalyze
+                        sourceLanguage={lookUpResult.value.sourceLanguage}
+                        targetLanguage={lookUpResult.value.targetLanguage}
+                        unitsOfSpeech={explainStatus.value.unitsOfSpeech}
+                        cards={deck.deck.cards}
+                        deck={deck}
+                        onRemove={onRemove}
+                        onAdd={(card) => {
+                          posthog.capture('generator-add', card.card);
+                          return onAdd(card);
+                        }}
+                        onTagsChange={onTagsChange}
+                        wrapperStyle={{
+                          paddingLeft: insets.left + padding + 8,
+                          paddingRight: insets.right + padding + 8,
+                        }}
+                        // The explanation box already separates the cards from the result above
+                        alwaysShowSeparator={
+                          explainStatus.value.explanation === ''
+                        }
+                        leftInset={insets.left}
+                        rightInset={insets.right}
+                        cardsLimit={cardsLimit}
+                        requestFeedback={true}
+                      />
+                    )}
                   </>
                 )}
               </>
