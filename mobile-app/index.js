@@ -5,6 +5,7 @@
 // component renders. Covers both the main app and the share extension because
 // both are registered through this same entry file.
 import './src/i18n';
+import { limitDevPerformanceMeasure } from './src/limitDevPerformanceMeasure';
 import {
   initializePushNotifications,
   onTokenReceived,
@@ -26,6 +27,8 @@ import 'react-native-url-polyfill/auto';
 import { AuthStorage } from './src/auth/AuthStorage';
 import { awsConfig } from './src/aws-config';
 import { registerPushToken, setPushToken } from './src/registerPushToken';
+
+limitDevPerformanceMeasure();
 
 Amplify.configure(awsConfig);
 cognitoUserPoolsTokenProvider.setKeyValueStorage(new AuthStorage());
