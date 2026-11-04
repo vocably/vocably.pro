@@ -144,10 +144,7 @@ const translations: BaseTranslations = {
   },
   studySettings: {
     maxCardsPerSession: 'Máximo de cartões por sessão de estudo',
-    maxNeverStudiedPerDay:
-      'Máximo de cartões «nunca estudados» que podem ser selecionados por dia',
-    maxNeverStudiedHint:
-      'Esta opção só faz sentido para usuários experientes que têm muitos cartões novos acumulados no grupo «Nunca estudados».',
+    maxNewPerDay: 'Máximo de cartões novos que podem ser selecionados por dia',
     pronounceExample: 'Pronunciar uma frase de exemplo',
     pronounceExampleHint:
       'Esta opção faz o app tocar uma frase de exemplo aleatória nos momentos apropriados durante a sessão. A opção <icon /> deve estar ativada — fica no canto superior direito da tela de Estudo.',
@@ -212,7 +209,7 @@ const translations: BaseTranslations = {
     section: {
       today: 'Planejados para hoje',
       expired: 'Para colocar em dia',
-      notStarted: 'Nunca estudados',
+      notStarted: 'Novos',
       tomorrow: 'Amanhã',
       future: 'Planejados',
     },

@@ -1,9 +1,16 @@
 export interface StudySettings {
   cardsPerSession: number;
   random: boolean;
+  maxNewCardsPerDay: number;
 }
 
 const STUDY_SETTINGS_KEY = 'studySettings';
+
+const defaultStudySettings: StudySettings = {
+  cardsPerSession: 10,
+  random: false,
+  maxNewCardsPerDay: 40,
+};
 
 export function getStudySettings(): StudySettings {
   const stored = localStorage.getItem(STUDY_SETTINGS_KEY);
@@ -14,17 +21,21 @@ export function getStudySettings(): StudySettings {
         cardsPerSession:
           typeof parsed.cardsPerSession === 'number'
             ? parsed.cardsPerSession
-            : 10,
-        random: typeof parsed.random === 'boolean' ? parsed.random : false,
+            : defaultStudySettings.cardsPerSession,
+        random:
+          typeof parsed.random === 'boolean'
+            ? parsed.random
+            : defaultStudySettings.random,
+        maxNewCardsPerDay:
+          typeof parsed.maxNewCardsPerDay === 'number'
+            ? parsed.maxNewCardsPerDay
+            : defaultStudySettings.maxNewCardsPerDay,
       };
     } catch (e) {
       console.error('Failed to parse study settings', e);
     }
   }
-  return {
-    cardsPerSession: 10,
-    random: false,
-  };
+  return { ...defaultStudySettings };
 }
 
 export function setStudySettings(settings: StudySettings): void {

@@ -45,7 +45,13 @@ import { useSelectedDeck } from './languageDeck/useSelectedDeck';
 import { LanguagesContext } from './languages/LanguagesContainer';
 import { LanguageSelector } from './LanguageSelector';
 import { Loader } from './loaders/Loader';
-import { getRandomizerEnabled } from './Settings/StudySettingsScreen';
+import {
+  getMaximumCardsPerSession,
+  getMaximumNewCardsPerDay,
+  getRandomizerEnabled,
+  MAXIMUM_CARDS_PER_SESSION_KEY,
+  MAXIMUM_NEW_CARDS_PER_DAY_KEY,
+} from './Settings/StudySettingsScreen';
 import { swipeListButtonPressOpacity } from './stupidConstants';
 import { mainPadding } from './styles';
 import { TagsSelector } from './TagsSelector';
@@ -55,6 +61,7 @@ import { ScreenLayout } from './ui/ScreenLayout';
 import { Tag } from './ui/Tag';
 import { useAsync } from './useAsync';
 import { useCurrentLanguageName } from './useCurrentLanguageName';
+import { useRefreshOnStorageChange } from './useRefreshOnStorageChange';
 import { usePresentPaywall } from './usePresentPaywall';
 import { UserMetadataContext } from './UserMetadataContainer';
 
@@ -153,6 +160,18 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   const insets = useSafeAreaInsets();
   const languageName = useCurrentLanguageName();
   const [isRandomEnabledResult] = useAsync(getRandomizerEnabled);
+  const [maximumCardsPerSessionResult, , refreshMaximumCardsPerSession] =
+    useAsync(getMaximumCardsPerSession);
+  const [maximumNewCardsPerDayResult, , refreshMaximumNewCardsPerDay] =
+    useAsync(getMaximumNewCardsPerDay);
+  useRefreshOnStorageChange(
+    [MAXIMUM_CARDS_PER_SESSION_KEY],
+    refreshMaximumCardsPerSession
+  );
+  useRefreshOnStorageChange(
+    [MAXIMUM_NEW_CARDS_PER_DAY_KEY],
+    refreshMaximumNewCardsPerDay
+  );
   const [isStatsViewEnabledResult, setIsStatsViewEnabled] = useAsync(
     getStatsViewEnabled,
     storeStatsViewEnabled
@@ -230,7 +249,24 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
       .filter(filterByLowercasedText(searchText.toLowerCase()));
   }, [filteredCards, searchText, isSearching]);
 
-  const plan = useMemo(() => studyPlan(new Date(), cards), [cards]);
+  const maxCards =
+    maximumCardsPerSessionResult.status === 'loaded'
+      ? maximumCardsPerSessionResult.value
+      : 0;
+  const maxNewCards =
+    maximumNewCardsPerDayResult.status === 'loaded'
+      ? maximumNewCardsPerDayResult.value
+      : 0;
+  const plan = useMemo(
+    () =>
+      studyPlan({
+        today: new Date(),
+        list: cards,
+        maxCards,
+        maxNewCards,
+      }),
+    [cards, maxCards, maxNewCards]
+  );
   const [collapsedSections, setCollapsedSections] = useState<string[]>([
     'expired',
     'notStarted',
@@ -316,7 +352,9 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
   if (
     (deck.cards.length === 0 && status === 'loading') ||
     isRandomEnabledResult.status !== 'loaded' ||
-    isStatsViewEnabledResult.status !== 'loaded'
+    isStatsViewEnabledResult.status !== 'loaded' ||
+    maximumCardsPerSessionResult.status !== 'loaded' ||
+    maximumNewCardsPerDayResult.status !== 'loaded'
   ) {
     return <Loader>{t('dashboard.loadingCards')}</Loader>;
   }

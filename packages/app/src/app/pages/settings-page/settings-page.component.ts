@@ -49,7 +49,7 @@ import { storeLocale } from '../../i18n/resolve-locale';
   ],
 })
 export class SettingsPageComponent implements OnInit {
-  studySettings: StudySettings = { cardsPerSession: 10, random: false };
+  studySettings: StudySettings = getStudySettings();
   interfaceLanguage: Locale = 'en';
   isLoggedIn$ = this.auth.isLoggedIn$;
   email$ = this.auth.userData$.pipe(map((userData) => userData.email));

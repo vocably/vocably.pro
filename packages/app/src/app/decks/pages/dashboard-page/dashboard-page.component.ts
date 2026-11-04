@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { byDate, CardItem, TagItem } from '@vocably/model';
-import { studyPlan } from '@vocably/srs';
+import { isNotStarted, studyPlan } from '@vocably/srs';
 import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
 import { isDesktop } from '../../../../browser';
 import { CardComponent } from '../../card/card.component';
@@ -17,6 +17,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatChip, MatChipRemove, MatChipSet } from '@angular/material/chips';
 import { TagsDropdownComponent } from '../../../tags/tags-dropdown/tags-dropdown.component';
 import { filterByTags } from '../../../../filterByTags';
+import { getStudySettings } from '../../../../study-settings';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -89,9 +90,17 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
           tagIds: selectedTags.map((tag) => tag.id),
         });
 
-        const plan = studyPlan(new Date(), this.cardItems);
+        // Same limits as the study page applies to `slice`
+        const studySettings = getStudySettings();
+        const today = new Date();
+        const plan = studyPlan({
+          today,
+          list: this.cardItems,
+          maxCards: studySettings.cardsPerSession,
+          maxNewCards: studySettings.maxNewCardsPerDay,
+        });
         this.stats = {
-          due: plan.today.length + plan.expired.length,
+          due: plan.today.length,
           new: plan.notStarted.length,
         };
       });
