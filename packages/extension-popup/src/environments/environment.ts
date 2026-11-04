@@ -13,6 +13,7 @@ import {
   getInternalSourceLanguage,
   getLanguagePairs,
   getCardsLimit,
+  changeFrequencyAvailability,
   getSettings,
   isLoggedIn,
   removeCard,
@@ -104,6 +105,7 @@ const mockAnalyze: typeof analyze = async () => {
                 '* (iets dat nog niet bestond) laten ontstaan\n* (iets dat kapot is) zorgen dat het weer heel is',
               translation: 'to make',
               partOfSpeech: 'verb',
+              frequency: 9,
               interval: 0,
               repetition: 0,
               eFactor: 2.5,
@@ -123,6 +125,7 @@ const mockAnalyze: typeof analyze = async () => {
           definitions: ['als iets niet natuurlijk is of gebeurt'],
           translation: 'made',
           partOfSpeech: 'adjective',
+          frequency: 5,
         },
         {
           source: 'maken',
@@ -135,6 +138,7 @@ const mockAnalyze: typeof analyze = async () => {
           ],
           translation: 'to make',
           partOfSpeech: 'verb',
+          frequency: 9,
         },
       ],
     },
@@ -338,6 +342,13 @@ const getCardsLimitMock: typeof getCardsLimit = async () => {
   };
 };
 
+// Mirrors the free user from `getCardsLimitMock`, outside the free window.
+const changeFrequencyAvailabilityMock: typeof changeFrequencyAvailability =
+  async () => {
+    await timeout(500);
+    return false;
+  };
+
 const mockAnalyzeUnitsOfSpeech: typeof analyzeUnitsOfSpeech = async (
   payload
 ) => {
@@ -387,6 +398,7 @@ export const environment = merge(environmentLocal, {
   askForRating: askForRatingMock,
   saveAskForRatingResponse: saveAskForRatingResponseMock,
   getCardsLimit: getCardsLimitMock,
+  changeFrequencyAvailability: changeFrequencyAvailabilityMock,
   analyzeUnitsOfSpeech: mockAnalyzeUnitsOfSpeech,
   analyticsCapture: mockAnalyticsCapture,
 });

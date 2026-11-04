@@ -58,6 +58,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     cardsPerDay: 1,
   };
   paymentLink: string = '';
+  isFrequencyEnabled = true;
   extensionPlatform = detectExtensionPlatform();
   askForRating: boolean = false;
   isRetrying = false;
@@ -187,7 +188,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
     this.isSearching = true;
 
-    const [analyzeResult, cardsLimit] = await Promise.all([
+    const [analyzeResult, cardsLimit, isFrequencyEnabled] = await Promise.all([
       environment.analyze(
         values.isReversed
           ? {
@@ -204,10 +205,12 @@ export class HomePageComponent implements OnInit, OnDestroy {
             }
       ),
       environment.getCardsLimit(),
+      environment.changeFrequencyAvailability(),
     ]);
 
     this.searchResult = analyzeResult;
     this.cardsLimit = cardsLimit;
+    this.isFrequencyEnabled = isFrequencyEnabled;
 
     this.isSearching = false;
 

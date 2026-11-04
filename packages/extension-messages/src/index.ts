@@ -77,6 +77,21 @@ export const [getCardsLimit, onGetCardsLimitRequest] = createScopedMessage<
   CardsLimit
 >('getCardsLimit');
 
+/**
+ * Resolves to whether word frequency can be shown. Free users get it for a
+ * limited window once in a period, and the window starts with the first
+ * call, so call it only when the frequency is about to be shown.
+ */
+export const [changeFrequencyAvailability, onChangeFrequencyAvailability] =
+  createScopedMessage<void, boolean>('changeFrequencyAvailability');
+
+export const [
+  changeFrequencyAvailabilityExternal,
+  onChangeFrequencyAvailabilityExternal,
+] = createExternalMessage<void, boolean>(
+  'vocably.changeFrequencyAvailabilityExternal'
+);
+
 export const [getUserEmail, onGetUserEmail] = createScopedMessage<
   void,
   Result<string>

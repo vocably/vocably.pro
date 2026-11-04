@@ -115,6 +115,8 @@ export class VocablyTranslation {
   @Prop() isLightweight = false;
   @Prop() isLoadingExtraWords = false;
   @Prop() isLoggedInUser = false;
+  // Whether word frequency can be shown. See `vocably-card-source`.
+  @Prop() isFrequencyEnabled = true;
   // Keeps the add and remove buttons out of the first render while the deck is
   // still unknown, so a card that is already in the collection doesn't flash a
   // Learn button before it turns into the remove button.
@@ -448,6 +450,7 @@ export class VocablyTranslation {
                 disabled={this.disabled}
                 isLightweight={this.isLightweight}
                 isLoggedInUser={this.isLoggedInUser}
+                isFrequencyEnabled={this.isFrequencyEnabled}
                 hideActions={this.hideActions}
                 playAudioPronunciation={this.playAudioPronunciation}
                 updateCard={this.updateCard}
@@ -517,6 +520,7 @@ export class VocablyTranslation {
                       disabled={this.disabled}
                       isLightweight={this.isLightweight}
                       isLoggedInUser={this.isLoggedInUser}
+                      isFrequencyEnabled={this.isFrequencyEnabled}
                       hideActions={this.hideActions}
                       playAudioPronunciation={this.playAudioPronunciation}
                       updateCard={this.updateCard}
