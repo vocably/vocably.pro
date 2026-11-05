@@ -1,109 +1,200 @@
-<div class="dashboard">
-  <section class="study">
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-value accent">{{ stats.due }}</div>
-        <div class="stat-label">{{ 'decks.dashboard.due' | transloco }}</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">{{ stats.new }}</div>
-        <div class="stat-label">{{ 'decks.dashboard.new' | transloco }}</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value">{{ cardItems.length }}</div>
-        <div class="stat-label">{{ 'decks.dashboard.total' | transloco }}</div>
-      </div>
-    </div>
+<div class="container bottom">
+  <div class="dashboard">
+    <section class="study">
+      <div class="study-inner">
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-value accent">{{ stats.due }}</div>
+            <div class="stat-label">
+              {{ 'decks.dashboard.due' | transloco }}
+            </div>
+          </div>
+          @if (stats.expired > 0) {
+            <ng-container
+              *ngTemplateOutlet="
+                studyableStat;
+                context: {
+                  count: stats.expired,
+                  label: 'decks.dashboard.expired',
+                  section: 'expired',
+                }
+              "
+            ></ng-container>
+          }
+          @if (stats.new > 0) {
+            <ng-container
+              *ngTemplateOutlet="
+                studyableStat;
+                context: {
+                  count: stats.new,
+                  label: 'decks.dashboard.new',
+                  section: 'notStarted',
+                }
+              "
+            ></ng-container>
+          }
+          @if (stats.tomorrow > 0) {
+            <ng-container
+              *ngTemplateOutlet="
+                studyableStat;
+                context: {
+                  count: stats.tomorrow,
+                  label: 'decks.dashboard.tomorrow',
+                  section: 'tomorrow',
+                }
+              "
+            ></ng-container>
+          }
+          <div class="stat">
+            <div class="stat-value">{{ cardItems.length }}</div>
+            <div class="stat-label">
+              {{ 'decks.dashboard.total' | transloco }}
+            </div>
+          </div>
+        </div>
 
-    @if (isDesktop) {
-      <div class="study-actions">
-        <a
-          class="button study-button track-click"
-          id="practice-button"
-          [routerLink]="['study']"
-        >
-          <mat-icon class="button-icon">school</mat-icon>
-          {{ 'decks.dashboard.study' | transloco }}
-        </a>
-        @if (tags.length > 0) {
-          <app-tags-dropdown
-            [tags]="tags"
-            [noTags]="noTags$.value"
-            [selectedTags]="selectedTags$.value"
-            (onSelect)="onSelectTags($event)"
-            (onNoTags)="onNoTags($event)"
-          >
-            <button
-              class="button outline tags-button"
-              [attr.aria-label]="'decks.dashboard.tags' | transloco"
-            >
-              <mat-icon>sell</mat-icon>
-            </button>
-          </app-tags-dropdown>
+        @if (isDesktop) {
+          <div class="study-actions">
+            @if (stats.due > 0) {
+              <a
+                class="button study-button track-click"
+                id="practice-button"
+                [routerLink]="['study']"
+              >
+                <mat-icon class="button-icon">school</mat-icon>
+                {{ 'decks.dashboard.study' | transloco }}
+              </a>
+            } @else {
+              <button
+                class="button study-button"
+                id="practice-button"
+                disabled
+                aria-describedby="nothing-to-study"
+              >
+                <mat-icon class="button-icon">school</mat-icon>
+                {{ 'decks.dashboard.study' | transloco }}
+              </button>
+            }
+            @if (tags.length > 0) {
+              <app-tags-dropdown
+                [tags]="tags"
+                [noTags]="noTags$.value"
+                [selectedTags]="selectedTags$.value"
+                (onSelect)="onSelectTags($event)"
+                (onNoTags)="onNoTags($event)"
+              >
+                <button
+                  class="button tags-button"
+                  [attr.aria-label]="'decks.dashboard.tags' | transloco"
+                >
+                  <mat-icon>sell</mat-icon>
+                </button>
+              </app-tags-dropdown>
+            }
+          </div>
+
+          @if (stats.due === 0) {
+            <p class="nothing-to-study" id="nothing-to-study">
+              {{ 'decks.dashboard.nothing_to_study' | transloco }}
+            </p>
+          }
+
+          @if (noTags$.value || selectedTags$.value.length > 0) {
+            <div class="selected-tags">
+              <span class="selected-tags-label">
+                {{ 'decks.dashboard.tags' | transloco }}
+              </span>
+              <mat-chip-set>
+                @if (noTags$.value) {
+                  <mat-chip [disableRipple]="true">
+                    {{ 'decks.dashboard.cards_without_tags' | transloco }}
+                    <button matChipRemove (click)="noTags$.next(false)">
+                      <mat-icon>cancel</mat-icon>
+                    </button>
+                  </mat-chip>
+                } @else {
+                  @for (tag of selectedTags$.value; track tag.id) {
+                    <mat-chip [disableRipple]="true">
+                      {{ tag.data.title }}
+                      <button matChipRemove (click)="removeTag(tag)">
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip>
+                  }
+                }
+              </mat-chip-set>
+            </div>
+          }
         }
       </div>
+    </section>
 
-      @if (noTags$.value || selectedTags$.value.length > 0) {
-        <div class="selected-tags">
-          <span class="selected-tags-label">
-            {{ 'decks.dashboard.tags' | transloco }}
-          </span>
-          <mat-chip-set>
-            @if (noTags$.value) {
-              <mat-chip [disableRipple]="true">
-                {{ 'decks.dashboard.cards_without_tags' | transloco }}
-                <button matChipRemove (click)="noTags$.next(false)">
-                  <mat-icon>cancel</mat-icon>
-                </button>
-              </mat-chip>
-            } @else {
-              @for (tag of selectedTags$.value; track tag.id) {
-                <mat-chip [disableRipple]="true">
-                  {{ tag.data.title }}
-                  <button matChipRemove (click)="removeTag(tag)">
-                    <mat-icon>cancel</mat-icon>
-                  </button>
-                </mat-chip>
-              }
-            }
-          </mat-chip-set>
-        </div>
-      }
-    }
-  </section>
-
-  <section>
-    <div class="section-head">
-      <h2 class="section-title">
-        {{ 'decks.dashboard.recently_added' | transloco }}
-      </h2>
-      <a
-        [routerLink]="['edit']"
-        data-test="edit-button"
-        id="edit-deck"
-        class="track-click section-link"
-      >
-        {{ 'decks.dashboard.edit_deck' | transloco }}
-        <mat-icon class="inline-icon">arrow_forward</mat-icon>
-      </a>
-    </div>
-
-    <ul class="cards" data-test="dashboard-cards">
-      @for (item of cardItems.slice(0, 7); track item.id) {
-        <li class="card-row">
-          <app-card [item]="item"></app-card>
-        </li>
-      }
-    </ul>
-
-    @if (cardItems.length > 7) {
-      <div class="more">
-        <a [routerLink]="['edit']" class="button outline">
-          {{
-            'decks.dashboard.view_all' | transloco: { count: cardItems.length }
-          }}
+    <section>
+      <div class="section-head">
+        <h2 class="section-title">
+          {{ 'decks.dashboard.recently_added' | transloco }}
+        </h2>
+        <a
+          [routerLink]="['edit']"
+          data-test="edit-button"
+          id="edit-deck"
+          class="track-click section-link"
+        >
+          {{ 'decks.dashboard.edit_deck' | transloco }}
+          <mat-icon class="inline-icon">arrow_forward</mat-icon>
         </a>
       </div>
-    }
-  </section>
+
+      <ul class="cards" data-test="dashboard-cards">
+        @for (item of cardItems.slice(0, 7); track item.id) {
+          <li class="card-row">
+            <app-card [item]="item"></app-card>
+          </li>
+        }
+      </ul>
+
+      @if (cardItems.length > 7) {
+        <div class="more">
+          <a [routerLink]="['edit']" class="button outline">
+            {{
+              'decks.dashboard.view_all'
+                | transloco: { count: cardItems.length }
+            }}
+          </a>
+        </div>
+      }
+    </section>
+  </div>
 </div>
+
+<ng-template
+  #studyableStat
+  let-count="count"
+  let-label="label"
+  let-section="section"
+>
+  <div class="stat">
+    <div class="stat-value">
+      {{ count }}
+      @if (isDesktop) {
+        <a
+          class="stat-study track-click"
+          [id]="'study-' + section"
+          [routerLink]="['study']"
+          [queryParams]="{ section }"
+          [attr.aria-label]="
+            'decks.dashboard.study_section'
+              | transloco: { section: (label | transloco) }
+          "
+          [attr.title]="
+            'decks.dashboard.study_section'
+              | transloco: { section: (label | transloco) }
+          "
+        >
+          <mat-icon>school</mat-icon>
+        </a>
+      }
+    </div>
+    <div class="stat-label">{{ label | transloco }}</div>
+  </div>
+</ng-template>

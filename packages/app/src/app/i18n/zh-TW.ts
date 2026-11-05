@@ -151,6 +151,11 @@ export const zhTW = {
   'decks.dashboard.due': '今日待複習',
   'decks.dashboard.new': '新卡片',
   'decks.dashboard.total': '總計',
+  'decks.dashboard.expired': '待補進度',
+  'decks.dashboard.tomorrow': '明天',
+  'decks.dashboard.study_section': '學習：{{section}}',
+  'decks.dashboard.nothing_to_study':
+    '今天的單字卡已全部完成。明天再來繼續學習吧。',
   'decks.dashboard.recently_added': '最近新增',
   'decks.dashboard.view_all': '查看全部 {{count}} 張卡片',
   'decks.edit.export_deck': '匯出卡片集',

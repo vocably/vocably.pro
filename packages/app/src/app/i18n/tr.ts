@@ -173,6 +173,11 @@ export const tr = {
   'decks.dashboard.due': 'Bugün',
   'decks.dashboard.new': 'Yeni',
   'decks.dashboard.total': 'Toplam',
+  'decks.dashboard.expired': 'Yetiştirmek için',
+  'decks.dashboard.tomorrow': 'Yarın',
+  'decks.dashboard.study_section': 'Çalış: {{section}}',
+  'decks.dashboard.nothing_to_study':
+    'Bugünün tüm kartlarını bitirdin. Öğrenmeye devam etmek için yarın tekrar gel.',
   'decks.dashboard.recently_added': 'Son eklenenler',
   'decks.dashboard.view_all': '{{count}} kartın tümünü gör',
   'decks.edit.export_deck': 'Koleksiyonu dışa aktar',

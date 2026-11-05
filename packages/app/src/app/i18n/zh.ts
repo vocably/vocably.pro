@@ -150,6 +150,11 @@ export const zh = {
   'decks.dashboard.due': '今日待复习',
   'decks.dashboard.new': '新卡片',
   'decks.dashboard.total': '总计',
+  'decks.dashboard.expired': '待补复习',
+  'decks.dashboard.tomorrow': '明天',
+  'decks.dashboard.study_section': '学习：{{section}}',
+  'decks.dashboard.nothing_to_study':
+    '今天的单词卡已全部完成。明天再来继续学习吧。',
   'decks.dashboard.recently_added': '最近添加',
   'decks.dashboard.view_all': '查看全部 {{count}} 张卡片',
   'decks.edit.export_deck': '导出卡组',

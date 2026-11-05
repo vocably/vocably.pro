@@ -170,6 +170,11 @@ export const ru = {
   'decks.dashboard.due': 'На сегодня',
   'decks.dashboard.new': 'Новые',
   'decks.dashboard.total': 'Всего',
+  'decks.dashboard.expired': 'Нужно наверстать',
+  'decks.dashboard.tomorrow': 'На завтра',
+  'decks.dashboard.study_section': 'Учить: {{section}}',
+  'decks.dashboard.nothing_to_study':
+    'Все карточки на сегодня пройдены. Возвращайтесь завтра, чтобы продолжить обучение.',
   'decks.dashboard.recently_added': 'Недавно добавленные',
   'decks.dashboard.view_all': 'Все карточки ({{count}})',
   'decks.edit.export_deck': 'Экспорт коллекции',

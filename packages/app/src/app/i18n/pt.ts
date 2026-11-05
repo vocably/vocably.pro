@@ -167,6 +167,11 @@ export const pt = {
   'decks.dashboard.due': 'Para hoje',
   'decks.dashboard.new': 'Novos',
   'decks.dashboard.total': 'Total',
+  'decks.dashboard.expired': 'Para colocar em dia',
+  'decks.dashboard.tomorrow': 'Amanhã',
+  'decks.dashboard.study_section': 'Estudar: {{section}}',
+  'decks.dashboard.nothing_to_study':
+    'Você concluiu todos os cartões de hoje. Volte amanhã para continuar aprendendo.',
   'decks.dashboard.recently_added': 'Adicionados recentemente',
   'decks.dashboard.view_all': 'Ver todos os {{count}} cartões',
   'decks.edit.export_deck': 'Exportar coleção',

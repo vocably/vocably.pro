@@ -169,6 +169,11 @@ export const en = {
   'decks.dashboard.due': 'Due today',
   'decks.dashboard.new': 'New',
   'decks.dashboard.total': 'Total',
+  'decks.dashboard.expired': 'To catch up',
+  'decks.dashboard.tomorrow': 'Tomorrow',
+  'decks.dashboard.study_section': 'Study: {{section}}',
+  'decks.dashboard.nothing_to_study':
+    'All cards for today are done. Come back tomorrow to keep learning.',
   'decks.dashboard.recently_added': 'Recently added',
   'decks.dashboard.view_all': 'View all {{count}} cards',
   'decks.edit.export_deck': 'Export Collection',

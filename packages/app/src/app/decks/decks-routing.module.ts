@@ -28,6 +28,8 @@ const routes: Routes = [
             component: DashboardPageComponent,
             data: {
               hideYourCards: true,
+              cleanScreen: true,
+              hideHeader: false,
             },
           },
           {

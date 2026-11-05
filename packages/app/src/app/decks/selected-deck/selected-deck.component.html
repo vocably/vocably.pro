@@ -1,4 +1,4 @@
-<div *ngIf="!cleanScreen" class="container-xl top">
+<div *ngIf="!hideHeader" class="container-xl top">
   <app-header [title]="title" [dense]="true" [showYourCards]="!hideYourCards">
     <ng-container *ngIf="deckListStore.decks$ | async as deckList">
       <app-deck-selector
@@ -10,7 +10,7 @@
   </app-header>
 </div>
 <div [class.container]="!cleanScreen" [class.bottom]="!cleanScreen">
-  <div class="hero" [class.max]="cleanScreen" *ngIf="isLoading">
+  <div class="hero" [class.max]="hideHeader" *ngIf="isLoading">
     <div class="hero-body text-center">
       <ion-spinner name="dots" class="mr-1"></ion-spinner
       >{{ 'decks.loading_cards' | transloco }}

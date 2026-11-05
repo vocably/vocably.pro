@@ -163,6 +163,11 @@ export const vi = {
   'decks.dashboard.due': 'Cần ôn hôm nay',
   'decks.dashboard.new': 'Mới',
   'decks.dashboard.total': 'Tổng',
+  'decks.dashboard.expired': 'Cần ôn lại',
+  'decks.dashboard.tomorrow': 'Ngày mai',
+  'decks.dashboard.study_section': 'Học: {{section}}',
+  'decks.dashboard.nothing_to_study':
+    'Bạn đã học xong tất cả thẻ hôm nay. Hãy quay lại vào ngày mai để tiếp tục học.',
   'decks.dashboard.recently_added': 'Mới thêm gần đây',
   'decks.dashboard.view_all': 'Xem tất cả {{count}} thẻ',
   'decks.edit.export_deck': 'Xuất bộ sưu tập',

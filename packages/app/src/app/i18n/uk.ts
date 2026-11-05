@@ -170,6 +170,11 @@ export const uk = {
   'decks.dashboard.due': 'На сьогодні',
   'decks.dashboard.new': 'Нові',
   'decks.dashboard.total': 'Усього',
+  'decks.dashboard.expired': 'Треба надолужити',
+  'decks.dashboard.tomorrow': 'На завтра',
+  'decks.dashboard.study_section': 'Вчити: {{section}}',
+  'decks.dashboard.nothing_to_study':
+    'Усі картки на сьогодні пройдено. Повертайтеся завтра, щоб продовжити навчання.',
   'decks.dashboard.recently_added': 'Нещодавно додані',
   'decks.dashboard.view_all': 'Усі картки ({{count}})',
   'decks.edit.export_deck': 'Експорт колекції',

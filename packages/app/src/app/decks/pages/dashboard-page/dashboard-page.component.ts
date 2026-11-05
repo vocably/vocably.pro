@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import { byDate, CardItem, TagItem } from '@vocably/model';
-import { isNotStarted, studyPlan } from '@vocably/srs';
+import { studyPlan } from '@vocably/srs';
 import { BehaviorSubject, combineLatest, Subject, takeUntil } from 'rxjs';
 import { isDesktop } from '../../../../browser';
 import { CardComponent } from '../../card/card.component';
@@ -26,6 +27,7 @@ import { getStudySettings } from '../../../../study-settings';
   imports: [
     CardComponent,
     IonicModule,
+    NgTemplateOutlet,
     RouterLink,
     TranslocoModule,
     MatIcon,
@@ -47,7 +49,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
   public noTags$ = new BehaviorSubject<boolean>(false);
 
   public cardItems: CardItem[] = [];
-  public stats = { due: 0, new: 0 };
+  public stats = { due: 0, expired: 0, new: 0, tomorrow: 0 };
 
   public isDesktop = isDesktop;
 
@@ -101,7 +103,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         });
         this.stats = {
           due: plan.today.length,
+          expired: plan.expired.length,
           new: plan.notStarted.length,
+          tomorrow: plan.tomorrow.length,
         };
       });
   }

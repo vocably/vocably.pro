@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, resource, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { ActivatedRoute } from '@angular/router';
 import { TranslocoModule } from '@jsverse/transloco';
 import { IonicModule } from '@ionic/angular';
 import {
@@ -128,8 +129,17 @@ export class StudyPageComponent implements OnInit, OnDestroy {
     private deckStore: DeckStoreService,
     private deckService: DeckService,
     private dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
+
+  /**
+   * The study plan section picked on the dashboard
+   * (`expired`, `notStarted` or `tomorrow`).
+   */
+  private get planSection(): string | undefined {
+    return this.route.snapshot.queryParamMap.get('section') ?? undefined;
+  }
 
   ngOnInit(): void {
     this.reloadCards();
@@ -173,7 +183,8 @@ export class StudyPageComponent implements OnInit, OnDestroy {
         new Date(),
         studySettings.cardsPerSession,
         studySettings.maxNewCardsPerDay,
-        this.allCards
+        this.allCards,
+        this.planSection
       );
     }
 

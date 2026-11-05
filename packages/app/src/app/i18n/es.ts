@@ -170,6 +170,11 @@ export const es = {
   'decks.dashboard.due': 'Para hoy',
   'decks.dashboard.new': 'Nuevas',
   'decks.dashboard.total': 'Total',
+  'decks.dashboard.expired': 'Para ponerse al día',
+  'decks.dashboard.tomorrow': 'Mañana',
+  'decks.dashboard.study_section': 'Estudiar: {{section}}',
+  'decks.dashboard.nothing_to_study':
+    'Ya terminaste todas las tarjetas de hoy. Vuelve mañana para seguir aprendiendo.',
   'decks.dashboard.recently_added': 'Añadidas recientemente',
   'decks.dashboard.view_all': 'Ver las {{count}} tarjetas',
   'decks.edit.export_deck': 'Exportar colección',
