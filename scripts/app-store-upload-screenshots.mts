@@ -2,11 +2,13 @@
 
 // Uploads the screenshots exported by app-stores/ to App Store Connect.
 //
-//   ./scripts/upload-app-store-screenshots.mts ios-iphone-6.5 [--dry-run]
+//   ./scripts/app-store-upload-screenshots.mts ios-iphone-6.5 [--dry-run]
+//   ./scripts/app-store-upload-screenshots.mts all [--dry-run]
 //
 // Takes tmp/<format>.zip (one folder per interface language: en/01.png, …),
 // unpacks it into tmp/<format>/, and for every language replaces the
 // screenshots of that display type on the editable App Store version.
+// "all" uploads every format below and needs all of their ZIPs.
 //
 // ios-header and ios-search-results are not screenshot sets: their en/01.png
 // is uploaded to the app's Asset Library and placed as the product page
@@ -73,30 +75,35 @@ const editableStates = [
   'INVALID_BINARY',
 ];
 
+const allFormatIds = [
+  ...Object.keys(displayTypes),
+  ...Object.keys(placementTypes),
+];
+
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
-const formatId = basename(
+const formatArg = basename(
   args.find((arg) => !arg.startsWith('--')) ?? '',
   '.zip'
 );
 
-if (!displayTypes[formatId] && !placementTypes[formatId]) {
+if (formatArg !== 'all' && !allFormatIds.includes(formatArg)) {
   console.error(
-    `Usage: ./scripts/upload-app-store-screenshots.mts <${[
-      ...Object.keys(displayTypes),
-      ...Object.keys(placementTypes),
+    `Usage: ./scripts/app-store-upload-screenshots.mts <${[
+      ...allFormatIds,
+      'all',
     ].join('|')}> [--dry-run]`
   );
   process.exit(1);
 }
 
-const displayType = displayTypes[formatId];
-const placementType = placementTypes[formatId];
-const zipPath = `${rootDir}/tmp/${formatId}.zip`;
-const unpackedDir = `${rootDir}/tmp/${formatId}`;
+const formatIds = formatArg === 'all' ? allFormatIds : [formatArg];
+const zipPath = (formatId: string) => `${rootDir}/tmp/${formatId}.zip`;
+const unpackedDir = (formatId: string) => `${rootDir}/tmp/${formatId}`;
 
-if (!existsSync(zipPath)) {
-  console.error(`${zipPath} does not exist.`);
+const missingZips = formatIds.map(zipPath).filter((path) => !existsSync(path));
+if (missingZips.length > 0) {
+  console.error(`Missing ${missingZips.map((path) => `\n  ${path}`).join('')}`);
   process.exit(1);
 }
 
@@ -337,16 +344,6 @@ const uploadLibraryImage = async (
   throw new Error(`Timed out waiting for ${filePath} to be processed.`);
 };
 
-console.log(`Unpacking ${zipPath}...`);
-rmSync(unpackedDir, { recursive: true, force: true });
-mkdirSync(unpackedDir, { recursive: true });
-execFileSync('unzip', ['-q', zipPath, '-d', unpackedDir], { stdio: 'inherit' });
-
-const languageDirs = readdirSync(unpackedDir, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && !entry.name.startsWith('__'))
-  .map((entry) => entry.name)
-  .sort();
-
 const { data: apps } = await api<{ data: Resource[] }>(
   'GET',
   `/v1/apps?filter[bundleId]=${encodeURIComponent(bundleId)}`
@@ -367,7 +364,7 @@ if (!version) {
   );
 }
 console.log(
-  `${app.attributes.name} ${version.attributes.versionString} (${version.attributes.appStoreState}), ${displayType ?? placementType}`
+  `${app.attributes.name} ${version.attributes.versionString} (${version.attributes.appStoreState})`
 );
 
 const { data: localizations } = await api<{ data: Resource[] }>(
@@ -375,142 +372,122 @@ const { data: localizations } = await api<{ data: Resource[] }>(
   `/v1/appStoreVersions/${version.id}/appStoreVersionLocalizations?limit=200`
 );
 
-// Resolve everything up front, so nothing is deleted when the mapping is off.
-const jobs: {
-  language: string;
-  locale: string;
-  localizationId: string;
-  files: string[];
-}[] = [];
+let assetLibraryId: string | undefined;
 
-for (const language of languageDirs) {
-  const locales = localeMap[language];
-  if (!locales) {
-    console.warn(`⚠️  No App Store locale for "${language}", skipping.`);
-    continue;
-  }
-
-  const files = readdirSync(join(unpackedDir, language))
-    .filter((name) => name.toLowerCase().endsWith('.png'))
-    .sort()
-    .map((name) => join(unpackedDir, language, name));
-
-  if (files.length === 0) {
-    console.warn(`⚠️  No screenshots in ${language}/, skipping.`);
-    continue;
-  }
-
-  for (const locale of locales) {
-    const localization = localizations.find(
-      (l) => l.attributes.locale === locale
-    );
-    if (!localization) {
-      console.warn(
-        `⚠️  ${version.attributes.versionString} has no ${locale} localization, skipping ${language}/.`
-      );
-      continue;
-    }
-    jobs.push({ language, locale, localizationId: localization.id, files });
-  }
-}
-
-const assetLibraryId = placementType
-  ? (await api<{ data: Resource }>('GET', `/v1/apps/${app.id}/assetLibrary`))
-      .data.id
-  : undefined;
-
-// Asset Library image per language, shared by the locales it is placed on.
-const libraryImages = new Map<string, string>();
-
-// Screenshot sets to order once their screenshots are processed.
+// Screenshot sets of every format, ordered once all their screenshots are
+// processed.
 const uploadedSets: { setId: string; ids: string[]; files: string[] }[] = [];
 
-for (const { language, locale, localizationId, files } of jobs) {
-  if (placementType) {
-    const { data: existing } = await api<{ data: Resource[] }>(
-      'GET',
-      `/v1/appStoreVersionLocalizations/${localizationId}/placements?filter[placementType]=${placementType}`
-    );
+for (const formatId of formatIds) {
+  const displayType = displayTypes[formatId];
+  const placementType = placementTypes[formatId];
+  const formatDir = unpackedDir(formatId);
 
-    if (files.length > 1) {
-      console.warn(
-        `⚠️  ${language}/ has ${files.length} images, only ${basename(files[0])} is used.`
+  console.log(`\n${formatId} → ${displayType ?? placementType}`);
+  console.log(`Unpacking ${zipPath(formatId)}...`);
+  rmSync(formatDir, { recursive: true, force: true });
+  mkdirSync(formatDir, { recursive: true });
+  execFileSync('unzip', ['-q', zipPath(formatId), '-d', formatDir], {
+    stdio: 'inherit',
+  });
+
+  const languageDirs = readdirSync(formatDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith('__'))
+    .map((entry) => entry.name)
+    .sort();
+
+  // Resolve everything up front, so nothing is deleted when the mapping is off.
+  const jobs: {
+    language: string;
+    locale: string;
+    localizationId: string;
+    files: string[];
+  }[] = [];
+
+  for (const language of languageDirs) {
+    const locales = localeMap[language];
+    if (!locales) {
+      console.warn(`⚠️  No App Store locale for "${language}", skipping.`);
+      continue;
+    }
+
+    const files = readdirSync(join(formatDir, language))
+      .filter((name) => name.toLowerCase().endsWith('.png'))
+      .sort()
+      .map((name) => join(formatDir, language, name));
+
+    if (files.length === 0) {
+      console.warn(`⚠️  No screenshots in ${language}/, skipping.`);
+      continue;
+    }
+
+    for (const locale of locales) {
+      const localization = localizations.find(
+        (l) => l.attributes.locale === locale
       );
+      if (!localization) {
+        console.warn(
+          `⚠️  ${version.attributes.versionString} has no ${locale} localization, skipping ${language}/.`
+        );
+        continue;
+      }
+      jobs.push({ language, locale, localizationId: localization.id, files });
     }
-    console.log(
-      `${locale}: replacing ${existing.length} placement(s) with ${language}/${basename(files[0])}`
-    );
-    if (dryRun) continue;
-
-    if (!libraryImages.has(language)) {
-      console.log(`  ↑ ${language}/${basename(files[0])}`);
-      libraryImages.set(
-        language,
-        await uploadLibraryImage(
-          assetLibraryId!,
-          files[0],
-          `${formatId}-${language}.png`
-        )
-      );
-    }
-
-    for (const placement of existing) {
-      await api('DELETE', `/v1/appAssetLibraryPlacements/${placement.id}`);
-    }
-
-    await api('POST', '/v1/appAssetLibraryPlacements', {
-      data: {
-        type: 'appAssetLibraryPlacements',
-        attributes: { placementType },
-        relationships: {
-          image: {
-            data: {
-              type: 'appAssetLibraryImages',
-              id: libraryImages.get(language),
-            },
-          },
-          appStoreVersionLocalization: {
-            data: { type: 'appStoreVersionLocalizations', id: localizationId },
-          },
-        },
-      },
-    });
-    continue;
   }
 
-  const { data: sets } = await api<{ data: Resource[] }>(
-    'GET',
-    `/v1/appStoreVersionLocalizations/${localizationId}/appScreenshotSets?filter[screenshotDisplayType]=${displayType}`
-  );
-  let set = sets.find(
-    (s) => s.attributes.screenshotDisplayType === displayType
-  );
+  if (placementType && !assetLibraryId) {
+    assetLibraryId = (
+      await api<{ data: Resource }>('GET', `/v1/apps/${app.id}/assetLibrary`)
+    ).data.id;
+  }
 
-  const { data: existing } = set
-    ? await api<{ data: Resource[] }>(
+  // Asset Library image per language, shared by the locales it is placed on.
+  const libraryImages = new Map<string, string>();
+
+  for (const { language, locale, localizationId, files } of jobs) {
+    if (placementType) {
+      const { data: existing } = await api<{ data: Resource[] }>(
         'GET',
-        `/v1/appScreenshotSets/${set.id}/appScreenshots?limit=50`
-      )
-    : { data: [] as Resource[] };
+        `/v1/appStoreVersionLocalizations/${localizationId}/placements?filter[placementType]=${placementType}`
+      );
 
-  console.log(
-    `${locale}: replacing ${existing.length} screenshot(s) with ${files.length}`
-  );
-  if (dryRun) continue;
+      if (files.length > 1) {
+        console.warn(
+          `⚠️  ${language}/ has ${files.length} images, only ${basename(files[0])} is used.`
+        );
+      }
+      console.log(
+        `${locale}: replacing ${existing.length} placement(s) with ${language}/${basename(files[0])}`
+      );
+      if (dryRun) continue;
 
-  for (const screenshot of existing) {
-    await api('DELETE', `/v1/appScreenshots/${screenshot.id}`);
-  }
+      if (!libraryImages.has(language)) {
+        console.log(`  ↑ ${language}/${basename(files[0])}`);
+        libraryImages.set(
+          language,
+          await uploadLibraryImage(
+            assetLibraryId!,
+            files[0],
+            `${formatId}-${language}.png`
+          )
+        );
+      }
 
-  if (!set) {
-    ({ data: set } = await api<{ data: Resource }>(
-      'POST',
-      '/v1/appScreenshotSets',
-      {
+      for (const placement of existing) {
+        await api('DELETE', `/v1/appAssetLibraryPlacements/${placement.id}`);
+      }
+
+      await api('POST', '/v1/appAssetLibraryPlacements', {
         data: {
-          type: 'appScreenshotSets',
-          attributes: { screenshotDisplayType: displayType },
+          type: 'appAssetLibraryPlacements',
+          attributes: { placementType },
           relationships: {
+            image: {
+              data: {
+                type: 'appAssetLibraryImages',
+                id: libraryImages.get(language),
+              },
+            },
             appStoreVersionLocalization: {
               data: {
                 type: 'appStoreVersionLocalizations',
@@ -519,17 +496,63 @@ for (const { language, locale, localizationId, files } of jobs) {
             },
           },
         },
-      }
-    ));
-  }
+      });
+      continue;
+    }
 
-  const ids: string[] = [];
-  for (const file of files) {
-    console.log(`  ↑ ${basename(dirname(file))}/${basename(file)}`);
-    ids.push(await uploadScreenshot(set!.id, file));
-  }
+    const { data: sets } = await api<{ data: Resource[] }>(
+      'GET',
+      `/v1/appStoreVersionLocalizations/${localizationId}/appScreenshotSets?filter[screenshotDisplayType]=${displayType}`
+    );
+    let set = sets.find(
+      (s) => s.attributes.screenshotDisplayType === displayType
+    );
 
-  uploadedSets.push({ setId: set!.id, ids, files });
+    const { data: existing } = set
+      ? await api<{ data: Resource[] }>(
+          'GET',
+          `/v1/appScreenshotSets/${set.id}/appScreenshots?limit=50`
+        )
+      : { data: [] as Resource[] };
+
+    console.log(
+      `${locale}: replacing ${existing.length} screenshot(s) with ${files.length}`
+    );
+    if (dryRun) continue;
+
+    for (const screenshot of existing) {
+      await api('DELETE', `/v1/appScreenshots/${screenshot.id}`);
+    }
+
+    if (!set) {
+      ({ data: set } = await api<{ data: Resource }>(
+        'POST',
+        '/v1/appScreenshotSets',
+        {
+          data: {
+            type: 'appScreenshotSets',
+            attributes: { screenshotDisplayType: displayType },
+            relationships: {
+              appStoreVersionLocalization: {
+                data: {
+                  type: 'appStoreVersionLocalizations',
+                  id: localizationId,
+                },
+              },
+            },
+          },
+        }
+      ));
+    }
+
+    const ids: string[] = [];
+    for (const file of files) {
+      console.log(`  ↑ ${basename(dirname(file))}/${basename(file)}`);
+      ids.push(await uploadScreenshot(set!.id, file));
+    }
+
+    uploadedSets.push({ setId: set!.id, ids, files });
+  }
 }
 
 if (uploadedSets.length > 0) {

@@ -29,41 +29,35 @@ dotenv.config({ path: `${scriptsDir}/.env`, quiet: true });
 // version.
 const whatsNew: Record<string, string> = {
   en: [
-    '- The app interface is translated to Simplified and Traditional Chinese.',
-    '- Little visual tweaks for your aesthetic pleasure.',
+    '- Get explanations of complex sentences.',
+    '- The study plan is now easier to understand.',
   ].join('\n'),
   ru: [
-    '- Интерфейс приложения переведён на упрощённый и традиционный китайский.',
-    '- Небольшие визуальные улучшения для вашего эстетического удовольствия.',
+    '- Объяснение сложных предложений.',
+    '- План обучения стал понятнее.',
   ].join('\n'),
   uk: [
-    '- Інтерфейс застосунку перекладено спрощеною та традиційною китайською.',
-    '- Невеликі візуальні покращення для вашої естетичної насолоди.',
+    '- Пояснення складних речень.',
+    '- План навчання став зрозумілішим.',
   ].join('\n'),
   es: [
-    '- La interfaz de la app está traducida al chino simplificado y al chino tradicional.',
-    '- Pequeños retoques visuales para tu placer estético.',
+    '- Explicaciones de oraciones complejas.',
+    '- El plan de estudio ahora es más fácil de entender.',
   ].join('\n'),
   pt: [
-    '- A interface do app foi traduzida para o chinês simplificado e o chinês tradicional.',
-    '- Pequenos ajustes visuais para o seu prazer estético.',
+    '- Explicações de frases complexas.',
+    '- O plano de estudo ficou mais fácil de entender.',
   ].join('\n'),
   tr: [
-    '- Uygulama arayüzü Basitleştirilmiş ve Geleneksel Çinceye çevrildi.',
-    '- Estetik zevkiniz için küçük görsel iyileştirmeler.',
+    '- Karmaşık cümlelerin açıklamaları.',
+    '- Çalışma planı artık daha kolay anlaşılıyor.',
   ].join('\n'),
   vi: [
-    '- Giao diện ứng dụng đã được dịch sang tiếng Trung giản thể và phồn thể.',
-    '- Vài tinh chỉnh giao diện nhỏ để bạn thêm phần thích mắt.',
+    '- Giải thích các câu phức tạp.',
+    '- Kế hoạch học giờ đây dễ hiểu hơn.',
   ].join('\n'),
-  zh: [
-    '- 应用界面现已支持简体中文和繁体中文。',
-    '- 一些视觉细节优化，看起来更赏心悦目。',
-  ].join('\n'),
-  'zh-TW': [
-    '- 應用程式介面現已支援簡體中文和繁體中文。',
-    '- 一些視覺細節調整，看起來更賞心悅目。',
-  ].join('\n'),
+  zh: ['- 解释复杂的句子。', '- 学习计划变得更容易理解了。'].join('\n'),
+  'zh-TW': ['- 解釋複雜的句子。', '- 學習計畫變得更容易理解了。'].join('\n'),
 };
 
 // Appended to every "What's New".
