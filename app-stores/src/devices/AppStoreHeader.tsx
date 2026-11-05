@@ -29,7 +29,7 @@ export const AppStoreHeader = () => (
                 gap: '2cqmin',
               }}
             >
-              <Logo className="logo" style={{ width: '19cqmin' }} />
+              <Logo className="logo" style={{ width: '24cqmin' }} />
               {/*<div className="title" style={{ fontSize: '3.6cqmin' }}>*/}
               {/*  {localization[language].iosHeaderTitle}*/}
               {/*</div>*/}

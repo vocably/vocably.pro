@@ -1,10 +1,10 @@
 import { Device, Screenshot } from '../Device';
 import { getFormat } from '../formats';
 import { Languages } from '../components/Languages';
-import { Logo } from '../components/Logo';
 import { flags } from '../flags';
 import { localization } from '../localization';
 import { Placeholder } from '../templates/Placeholder';
+import { Accent } from '../components/Accent';
 
 const format = getFormat('ios-search-results');
 
@@ -13,15 +13,14 @@ export const AppStoreSearchResults = () => (
     {(language) => (
       <>
         <Screenshot>
-          <Placeholder format={format} paddingInline={format.width * 0.15}>
-            <Logo className="logo" style={{ width: '25cqmin' }} />
+          <Placeholder format={format}>
             <div className="title">
-              {localization[language].featureGraphicTitle}
+              <Accent text={localization[language].featureGraphicTitle} />
             </div>
             <Languages
               {...flags[language]}
               columns={flags[language].languages.length}
-              size={Math.min(format.width, format.height) * 0.12}
+              size={Math.min(format.width, format.height) * 0.09}
             />
             <div className="subtitle">
               {localization[language].languageCount}
