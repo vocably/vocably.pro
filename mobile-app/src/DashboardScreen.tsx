@@ -636,8 +636,8 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
                     onPress={() => toggleSection(section.section.id as string)}
                     style={{
                       zIndex: 1,
-                      paddingLeft: insets.left + mainPadding,
-                      paddingRight: insets.right + mainPadding,
+                      paddingLeft: mainPadding,
+                      paddingRight: mainPadding,
                       paddingTop: 16,
                       paddingBottom: 16,
                       // @ts-ignore
