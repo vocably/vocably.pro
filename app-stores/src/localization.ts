@@ -149,7 +149,7 @@ export const localization: Record<Language, Translations> = {
     title: 'A language-\nlearning tool.',
     iosHeaderTitle: 'A language-learning tool.',
     featureGraphicTitle:
-      'A fine combination of a dictionary and a learning system.',
+      'A fine combination of a *dictionary* and a *learning system*.',
     languageCount: '100+ languages.',
     search: 'magic',
     sourceLanguage: 'de',
@@ -295,7 +295,7 @@ export const localization: Record<Language, Translations> = {
     title: 'Una herramienta para aprender idiomas.',
     iosHeaderTitle: 'Una herramienta para aprender idiomas.',
     featureGraphicTitle:
-      'Una combinación bastante buena de diccionario y sistema de aprendizaje.',
+      'Una combinación bastante buena de *diccionario* y *sistema de aprendizaje*.',
     languageCount: 'Más de 100 idiomas.',
     search: 'confiable',
     sourceLanguage: 'en',
@@ -425,7 +425,7 @@ export const localization: Record<Language, Translations> = {
     title: 'Uma ferramenta para aprender idiomas.',
     iosHeaderTitle: 'Uma ferramenta para aprender idiomas.',
     featureGraphicTitle:
-      'Uma combinação bem boa de dicionário e sistema de aprendizado.',
+      'Uma combinação bem boa de *dicionário* e *sistema de aprendizado*.',
     languageCount: 'Mais de 100 idiomas.',
     search: 'confiável',
     sourceLanguage: 'en',
@@ -556,7 +556,7 @@ export const localization: Record<Language, Translations> = {
     title: 'Инструмент для изучения языков.',
     iosHeaderTitle: 'Инструмент для изучения языков.',
     featureGraphicTitle:
-      'Довольно качественная комбинация словаря и системы обучения.',
+      'Довольно качественная комбинация *словаря* и *системы обучения*.',
     languageCount: 'Более 100 языков.',
     search: 'надёжный',
     sourceLanguage: 'en',
@@ -690,7 +690,7 @@ export const localization: Record<Language, Translations> = {
     title: 'Інструмент для вивчення мов.',
     iosHeaderTitle: 'Інструмент для вивчення мов.',
     featureGraphicTitle:
-      'Досить якісне поєднання словника та системи навчання.',
+      'Досить якісне поєднання *словника* та *системи навчання*.',
     languageCount: 'Понад 100 мов.',
     search: 'надійний',
     sourceLanguage: 'en',
@@ -834,7 +834,7 @@ export const localization: Record<Language, Translations> = {
     title: 'Bir dil öğrenme aracı.',
     iosHeaderTitle: 'Bir dil öğrenme aracı.',
     featureGraphicTitle:
-      'Sözlük ve öğrenme sisteminin oldukça kaliteli bir birleşimi.',
+      '*Sözlük* ve *öğrenme sisteminin* oldukça kaliteli bir birleşimi.',
     languageCount: '100+ dil.',
     search: 'güvenilir',
     sourceLanguage: 'en',
@@ -980,7 +980,7 @@ export const localization: Record<Language, Translations> = {
     title: 'Công cụ học ngoại ngữ.',
     iosHeaderTitle: 'Công cụ học ngoại ngữ.',
     featureGraphicTitle:
-      'Sự kết hợp khá chất lượng giữa từ điển và hệ thống học tập.',
+      'Sự kết hợp khá chất lượng giữa *từ điển* và *hệ thống học tập*.',
     languageCount: 'Hơn 100 ngôn ngữ.',
     search: 'đáng tin cậy',
     sourceLanguage: 'en',
@@ -1113,7 +1113,7 @@ export const localization: Record<Language, Translations> = {
   zh: {
     title: '一款语言学习工具。',
     iosHeaderTitle: '一款语言学习工具。',
-    featureGraphicTitle: '词典与学习系统的出色结合。',
+    featureGraphicTitle: '*词典*与*学习系统*的出色结合。',
     languageCount: '支持 100 多种语言。',
     search: '可靠',
     sourceLanguage: 'en',
@@ -1254,7 +1254,7 @@ export const localization: Record<Language, Translations> = {
   'zh-TW': {
     title: '一款語言學習工具。',
     iosHeaderTitle: '一款語言學習工具。',
-    featureGraphicTitle: '字典與學習系統的絕佳結合。',
+    featureGraphicTitle: '*字典*與*學習系統*的絕佳結合。',
     languageCount: '支援 100 多種語言。',
     search: '可靠',
     sourceLanguage: 'en',
