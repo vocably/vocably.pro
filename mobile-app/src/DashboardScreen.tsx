@@ -85,6 +85,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  // Lets the few-cards footer tray stretch to the bottom of the screen.
+  fewCardsContentContainer: {
+    flexGrow: 1,
+  },
+  fewCardsFooter: {
+    flexGrow: 1,
+  },
 });
 
 const filterByLowercasedText =
@@ -893,7 +900,12 @@ export const DashboardScreen: FC<Props> = ({ navigation }) => {
             )}
             leftOpenValue={SWIPE_MENU_BUTTON_SIZE}
             rightOpenValue={-SWIPE_MENU_BUTTON_SIZE * 2}
-            contentContainerStyle={isEmpty && styles.emptyContentContainer}
+            contentContainerStyle={
+              isEmpty
+                ? styles.emptyContentContainer
+                : hasFewCards && styles.fewCardsContentContainer
+            }
+            ListFooterComponentStyle={hasFewCards && styles.fewCardsFooter}
             ListEmptyComponent={
               <DashboardEmptyState
                 language={deck.language}

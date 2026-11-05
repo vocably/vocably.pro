@@ -188,13 +188,22 @@ export const DashboardFewCards: FC<Props> = ({
   }, []);
 
   return (
+    // A tray set apart from the card list: a gap, a tinted
+    // background and rounded top corners running to the bottom.
     <View
       style={{
+        flexGrow: 1,
+        marginTop: 24,
         paddingHorizontal: mainPadding,
         paddingTop: 24,
         paddingBottom: mainPadding * 2,
         alignItems: 'center',
         width: '100%',
+        backgroundColor: theme.colors.elevation.level2,
+        borderTopLeftRadius: 28,
+        borderTopRightRadius: 28,
+        borderTopWidth: StyleSheet.hairlineWidth,
+        borderColor: theme.colors.outlineVariant,
       }}
     >
       <View style={{ width: '100%', maxWidth: 480, gap: 12 }}>
