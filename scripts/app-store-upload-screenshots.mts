@@ -13,7 +13,10 @@
 // ios-header and ios-search-results are not screenshot sets: their en/01.png
 // is uploaded to the app's Asset Library and placed as the product page
 // header or the search results image of the version localization, replacing
-// the previous one. Apple reviews it with the version.
+// the previous one. Apple reviews it with the version. Their progress is kept
+// in scripts/app-store-upload-screenshots-stats.json under the MD5 of the ZIP,
+// so a run that fails or times out resumes where it stopped: uploaded images
+// are reused and locales that already got their placement are skipped.
 //
 // Needs an App Store Connect API key with the App Manager or Admin role:
 // APP_STORE_CONNECT_API_KEY_KEY_ID, APP_STORE_CONNECT_API_KEY_ISSUER_ID and
@@ -26,8 +29,13 @@ import {
   existsSync,
   mkdirSync,
   readFileSync,
+  closeSync,
+  openSync,
   readdirSync,
+  renameSync,
   rmSync,
+  statSync,
+  writeFileSync,
 } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -180,6 +188,69 @@ const api = async <T = any,>(
   return response.status === 204 ? (undefined as T) : response.json();
 };
 
+// Progress of placement formats, keyed by the MD5 of their ZIP.
+type PlacementProgress = {
+  formatId: string;
+  versionId: string;
+  // Asset Library image per language; ready once it can be placed.
+  libraryImages: Record<string, { id: string; ready: boolean }>;
+  // Locales whose placement already points at the language's image.
+  placedLocales: string[];
+};
+
+const statsPath = `${scriptsDir}/app-store-upload-screenshots-stats.json`;
+
+const readStats = (): Record<string, PlacementProgress> =>
+  existsSync(statsPath) ? JSON.parse(readFileSync(statsPath, 'utf8')) : {};
+
+const stats = readStats();
+
+// Several uploads may run in parallel, each with its own ZIPs, so the file is
+// updated under a lock, and only the given entry is written: the others are
+// taken from disk as the other runs left them.
+const statsLockPath = `${statsPath}.lock`;
+const staleLockAge = 30 * 1000;
+
+const withStatsLock = (update: () => void) => {
+  for (;;) {
+    try {
+      closeSync(openSync(statsLockPath, 'wx'));
+      break;
+    } catch (error: any) {
+      if (error.code !== 'EEXIST') throw error;
+      try {
+        // A run killed while holding the lock leaves it behind.
+        if (Date.now() - statSync(statsLockPath).mtimeMs > staleLockAge) {
+          rmSync(statsLockPath, { force: true });
+          continue;
+        }
+      } catch {
+        continue; // Released meanwhile.
+      }
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 50);
+    }
+  }
+  try {
+    update();
+  } finally {
+    rmSync(statsLockPath, { force: true });
+  }
+};
+
+const saveStats = (zipHash: string) => {
+  if (dryRun) return;
+  withStatsLock(() => {
+    const onDisk = readStats();
+    if (stats[zipHash]) onDisk[zipHash] = stats[zipHash];
+    else delete onDisk[zipHash];
+
+    // Written aside and renamed, so readers never see a half-written file.
+    const tmpPath = `${statsPath}.${process.pid}.tmp`;
+    writeFileSync(tmpPath, `${JSON.stringify(onDisk, null, 2)}\n`);
+    renameSync(tmpPath, statsPath);
+  });
+};
+
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // Sends the file's parts to the upload operations App Store Connect reserved.
@@ -287,7 +358,8 @@ const waitForProcessing = async (
   }
 };
 
-// Uploads the file to the Asset Library and waits until it can be placed.
+// Uploads the file to the Asset Library. Use waitForLibraryImage before
+// placing it.
 const uploadLibraryImage = async (
   assetLibraryId: string,
   filePath: string,
@@ -325,23 +397,34 @@ const uploadLibraryImage = async (
     },
   });
 
-  for (let attempt = 0; attempt < 60; attempt++) {
+  return image.id;
+};
+
+class LibraryImageRejected extends Error {}
+
+// Asset Library images can also take many minutes to process.
+const libraryImageTimeout = 15 * 60 * 1000;
+
+// Waits until the uploaded Asset Library image can be placed.
+const waitForLibraryImage = async (imageId: string, filePath: string) => {
+  const deadline = Date.now() + libraryImageTimeout;
+  while (Date.now() < deadline) {
     const { data } = await api<{ data: Resource }>(
       'GET',
-      `/v1/appAssetLibraryImages/${image.id}?fields[appAssetLibraryImages]=state,stateDetails`
+      `/v1/appAssetLibraryImages/${imageId}?fields[appAssetLibraryImages]=state,stateDetails`
     );
     const { state, stateDetails } = data.attributes;
     if (state === 'FAILED') {
-      throw new Error(
+      throw new LibraryImageRejected(
         `App Store Connect rejected ${filePath}: ${JSON.stringify(stateDetails)}`
       );
     }
-    if (state !== 'AWAITING_UPLOAD' && state !== 'UPLOAD_COMPLETE') {
-      return image.id;
-    }
-    await sleep(2000);
+    if (state !== 'AWAITING_UPLOAD' && state !== 'UPLOAD_COMPLETE') return;
+    await sleep(5000);
   }
-  throw new Error(`Timed out waiting for ${filePath} to be processed.`);
+  throw new Error(
+    `Timed out waiting for ${filePath} to be processed. Run the script again to resume.`
+  );
 };
 
 const { data: apps } = await api<{ data: Resource[] }>(
@@ -441,11 +524,38 @@ for (const formatId of formatIds) {
     ).data.id;
   }
 
-  // Asset Library image per language, shared by the locales it is placed on.
-  const libraryImages = new Map<string, string>();
+  // Progress of this ZIP, shared by the locales its images are placed on.
+  // Images live in the app's Asset Library, so they survive a version change,
+  // placements don't.
+  const zipHash = placementType
+    ? createHash('md5')
+        .update(readFileSync(zipPath(formatId)))
+        .digest('hex')
+    : '';
+  if (placementType) {
+    const previous = stats[zipHash];
+    stats[zipHash] = {
+      formatId,
+      versionId: version.id,
+      libraryImages: previous?.libraryImages ?? {},
+      placedLocales:
+        previous?.versionId === version.id ? previous.placedLocales : [],
+    };
+    if (previous) {
+      console.log(
+        `Resuming: ${stats[zipHash].placedLocales.length} locale(s) already placed.`
+      );
+    }
+  }
 
   for (const { language, locale, localizationId, files } of jobs) {
     if (placementType) {
+      const progress = stats[zipHash];
+      if (progress.placedLocales.includes(locale)) {
+        console.log(`${locale}: already placed, skipping`);
+        continue;
+      }
+
       const { data: existing } = await api<{ data: Resource[] }>(
         'GET',
         `/v1/appStoreVersionLocalizations/${localizationId}/placements?filter[placementType]=${placementType}`
@@ -461,16 +571,36 @@ for (const formatId of formatIds) {
       );
       if (dryRun) continue;
 
-      if (!libraryImages.has(language)) {
+      if (!progress.libraryImages[language]) {
         console.log(`  ↑ ${language}/${basename(files[0])}`);
-        libraryImages.set(
-          language,
-          await uploadLibraryImage(
+        progress.libraryImages[language] = {
+          id: await uploadLibraryImage(
             assetLibraryId!,
             files[0],
             `${formatId}-${language}.png`
-          )
-        );
+          ),
+          ready: false,
+        };
+        saveStats(zipHash);
+      }
+
+      const image = progress.libraryImages[language];
+      if (!image.ready) {
+        try {
+          await waitForLibraryImage(image.id, files[0]);
+        } catch (error) {
+          // A rejected or deleted image is uploaded again on the next run.
+          if (
+            error instanceof LibraryImageRejected ||
+            String(error).includes('failed: 404')
+          ) {
+            delete progress.libraryImages[language];
+            saveStats(zipHash);
+          }
+          throw error;
+        }
+        image.ready = true;
+        saveStats(zipHash);
       }
 
       for (const placement of existing) {
@@ -485,7 +615,7 @@ for (const formatId of formatIds) {
             image: {
               data: {
                 type: 'appAssetLibraryImages',
-                id: libraryImages.get(language),
+                id: image.id,
               },
             },
             appStoreVersionLocalization: {
@@ -497,6 +627,8 @@ for (const formatId of formatIds) {
           },
         },
       });
+      progress.placedLocales.push(locale);
+      saveStats(zipHash);
       continue;
     }
 
@@ -552,6 +684,12 @@ for (const formatId of formatIds) {
     }
 
     uploadedSets.push({ setId: set!.id, ids, files });
+  }
+
+  // Every locale is placed, the next run of this ZIP starts over.
+  if (placementType && !dryRun) {
+    delete stats[zipHash];
+    saveStats(zipHash);
   }
 }
 

@@ -1,3 +1,5 @@
 .env.local
 _test.mjs
 invoices/
+app-store-upload-screenshots-stats.json
+app-store-upload-screenshots-stats.json.*
