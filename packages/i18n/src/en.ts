@@ -587,7 +587,7 @@ export const en: Record<LanguageTranslationOption, string> = {
   interrogative: 'interrogative',
   relative: 'relative',
   phrase: 'phrase',
-  sentence: 'sentece',
+  sentence: 'sentence',
   'phrasal verb': 'phrasal verb',
   'modal verb': 'modal verb',
   idiom: 'idiom',

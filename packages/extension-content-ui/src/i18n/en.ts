@@ -103,6 +103,9 @@ export const en = {
   'card_source.frequency_1': 'Rare word',
   'card_source.frequency_2': 'Fairly common word',
   'card_source.frequency_3': 'Common word',
+  'card_source.present_tenses': '(present: {value})',
+  'card_source.past_tenses': '(past: {value})',
+  'card_source.plural': '(plural: {value})',
   // frequency-hint
   'frequency_hint.score': 'Score {score}/{max}',
   'frequency_hint.description_1':

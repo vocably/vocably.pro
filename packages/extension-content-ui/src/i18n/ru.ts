@@ -105,6 +105,9 @@ export const ru = {
   'card_source.frequency_1': 'Редкое слово',
   'card_source.frequency_2': 'Довольно распространённое слово',
   'card_source.frequency_3': 'Распространённое слово',
+  'card_source.present_tenses': '(настоящее: {value})',
+  'card_source.past_tenses': '(прошедшее: {value})',
+  'card_source.plural': '(мн.ч.: {value})',
   // frequency-hint
   'frequency_hint.score': 'Оценка {score}/{max}',
   'frequency_hint.description_1':

@@ -30,6 +30,14 @@ const HINT_HIDE_DELAY = 200;
 
 let hintIdCounter = 0;
 
+// Parts of speech come from the AI analysis and may be outside the
+// translated list, in which case they're shown as is.
+const translatePartOfSpeech = (partOfSpeech: string): string => {
+  const key = `language.${partOfSpeech}`;
+  const translated = t(key);
+  return translated === key ? partOfSpeech : translated;
+};
+
 @Component({
   tag: 'vocably-card-source',
   styleUrl: 'card-source.scss',
@@ -200,7 +208,7 @@ export class VocablyCardSource {
           <Fragment>
             <span class="vocably-invisible-space ">&nbsp;</span>
             <span class="vocably-muted vocably-small vocably-translation-margin-left">
-              {this.card.data.partOfSpeech}
+              {translatePartOfSpeech(this.card.data.partOfSpeech)}
             </span>
           </Fragment>
         )}
@@ -208,7 +216,9 @@ export class VocablyCardSource {
           <Fragment>
             {past && <br />}
             <span class="vocably-muted vocably-small vocably-translation-margin-left">
-              (present: {this.card.data.presentTenses})
+              {t('card_source.present_tenses', {
+                value: this.card.data.presentTenses,
+              })}
             </span>
           </Fragment>
         )}
@@ -216,7 +226,7 @@ export class VocablyCardSource {
           <Fragment>
             {this.card.data.presentTenses && <br />}
             <span class="vocably-muted vocably-small vocably-translation-margin-left">
-              (past: {past})
+              {t('card_source.past_tenses', { value: past })}
             </span>
           </Fragment>
         )}
@@ -224,7 +234,9 @@ export class VocablyCardSource {
         {this.card.data.number === 'singular' &&
           isGoodPlural(this.card.data.pluralForm) && (
             <span class="vocably-muted vocably-small vocably-translation-margin-left">
-              (plural: {this.card.data.pluralForm})
+              {t('card_source.plural', {
+                value: this.card.data.pluralForm ?? '',
+              })}
             </span>
           )}
       </Host>

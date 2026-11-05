@@ -106,6 +106,9 @@ export const pt = {
   'card_source.frequency_1': 'Palavra rara',
   'card_source.frequency_2': 'Palavra razoavelmente comum',
   'card_source.frequency_3': 'Palavra comum',
+  'card_source.present_tenses': '(presente: {value})',
+  'card_source.past_tenses': '(passado: {value})',
+  'card_source.plural': '(plural: {value})',
   // frequency-hint
   'frequency_hint.score': 'Pontuação {score}/{max}',
   'frequency_hint.description_1':

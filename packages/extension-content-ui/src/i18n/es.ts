@@ -110,6 +110,9 @@ export const es = {
   'card_source.frequency_1': 'Palabra poco común',
   'card_source.frequency_2': 'Palabra bastante común',
   'card_source.frequency_3': 'Palabra común',
+  'card_source.present_tenses': '(presente: {value})',
+  'card_source.past_tenses': '(pasado: {value})',
+  'card_source.plural': '(plural: {value})',
   // frequency-hint
   'frequency_hint.score': 'Puntuación {score}/{max}',
   'frequency_hint.description_1':

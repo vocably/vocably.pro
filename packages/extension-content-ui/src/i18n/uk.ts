@@ -105,6 +105,9 @@ export const uk = {
   'card_source.frequency_1': 'Рідковживане слово',
   'card_source.frequency_2': 'Досить поширене слово',
   'card_source.frequency_3': 'Поширене слово',
+  'card_source.present_tenses': '(теперішній: {value})',
+  'card_source.past_tenses': '(минулий: {value})',
+  'card_source.plural': '(мн.: {value})',
   // frequency-hint
   'frequency_hint.score': 'Оцінка {score}/{max}',
   'frequency_hint.description_1':

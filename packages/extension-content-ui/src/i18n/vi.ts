@@ -103,6 +103,9 @@ export const vi = {
   'card_source.frequency_1': 'Từ hiếm gặp',
   'card_source.frequency_2': 'Từ khá phổ biến',
   'card_source.frequency_3': 'Từ phổ biến',
+  'card_source.present_tenses': '(hiện tại: {value})',
+  'card_source.past_tenses': '(quá khứ: {value})',
+  'card_source.plural': '(số nhiều: {value})',
   // frequency-hint
   'frequency_hint.score': 'Điểm {score}/{max}',
   'frequency_hint.description_1':

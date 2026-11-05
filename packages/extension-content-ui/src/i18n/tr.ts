@@ -108,6 +108,9 @@ export const tr = {
   'card_source.frequency_1': 'Nadir kelime',
   'card_source.frequency_2': 'Oldukça yaygın kelime',
   'card_source.frequency_3': 'Yaygın kelime',
+  'card_source.present_tenses': '(şimdiki: {value})',
+  'card_source.past_tenses': '(geçmiş: {value})',
+  'card_source.plural': '(çoğul: {value})',
   // frequency-hint
   'frequency_hint.score': 'Puan {score}/{max}',
   'frequency_hint.description_1':

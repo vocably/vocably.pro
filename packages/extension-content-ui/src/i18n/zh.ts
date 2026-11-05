@@ -96,6 +96,9 @@ export const zh = {
   'card_source.frequency_1': '罕见词',
   'card_source.frequency_2': '较常见词',
   'card_source.frequency_3': '常见词',
+  'card_source.present_tenses': '（现在时：{value}）',
+  'card_source.past_tenses': '（过去时：{value}）',
+  'card_source.plural': '（复数：{value}）',
   // frequency-hint
   'frequency_hint.score': '得分 {score}/{max}',
   'frequency_hint.description_1':

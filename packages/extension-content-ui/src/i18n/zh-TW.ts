@@ -96,6 +96,9 @@ export const zhTW = {
   'card_source.frequency_1': '罕見字詞',
   'card_source.frequency_2': '相當常見的字詞',
   'card_source.frequency_3': '常見字詞',
+  'card_source.present_tenses': '（現在式：{value}）',
+  'card_source.past_tenses': '（過去式：{value}）',
+  'card_source.plural': '（複數：{value}）',
   // frequency-hint
   'frequency_hint.score': '分數 {score}/{max}',
   'frequency_hint.description_1':
