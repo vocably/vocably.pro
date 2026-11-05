@@ -58,6 +58,31 @@ body {
   color: #3730a3;
 }
 
+.sidebar .store-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 16px 0 8px;
+}
+
+.sidebar .store-header h2 {
+  margin: 0;
+}
+
+.sidebar button.download-all {
+  width: auto;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: #4f46e5;
+  white-space: nowrap;
+}
+
+.sidebar button.download-all:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 .sidebar small {
   color: #9ca3af;
 }

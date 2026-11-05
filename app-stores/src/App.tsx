@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { devices } from './devices';
-import { exportZip } from './exportZip';
+import { exportAllZip, exportZip } from './exportZip';
 import { formats, type Store } from './formats';
 
 const storeNames: Record<Store, string> = {
@@ -15,6 +16,8 @@ const formatIdFromUrl = () =>
 export const App = () => {
   const [formatId, setFormatId] = useState(formatIdFromUrl);
   const [progress, setProgress] = useState<string | null>(null);
+  // The store whose formats are being exported by "Download all".
+  const [exportingStore, setExportingStore] = useState<Store | null>(null);
   const screenshotsRef = useRef<HTMLDivElement>(null);
 
   const format = formats.find((f) => f.id === formatId) ?? formats[0];
@@ -45,12 +48,46 @@ export const App = () => {
     }
   };
 
+  const onExportStore = async (store: Store) => {
+    const initialId = formatId;
+    setExportingStore(store);
+    setProgress('Exporting…');
+    try {
+      await exportAllZip(
+        store,
+        formats.filter((f) => f.store === store),
+        async (f) => {
+          // Render the format synchronously, then give the browser a frame
+          // to lay it out before it is captured.
+          flushSync(() => setFormatId(f.id));
+          await new Promise(requestAnimationFrame);
+          if (!screenshotsRef.current) throw new Error('No screenshots node');
+          return screenshotsRef.current;
+        },
+        (_, done, total) => setProgress(`${done}/${total}…`)
+      );
+    } finally {
+      setFormatId(initialId);
+      setExportingStore(null);
+      setProgress(null);
+    }
+  };
+
   return (
     <div className="layout">
       <aside className="sidebar">
         {(Object.keys(storeNames) as Store[]).map((store) => (
           <section key={store}>
-            <h2>{storeNames[store]}</h2>
+            <div className="store-header">
+              <h2>{storeNames[store]}</h2>
+              <button
+                className="download-all"
+                onClick={() => onExportStore(store)}
+                disabled={progress !== null}
+              >
+                {exportingStore === store ? progress : 'Download all'}
+              </button>
+            </div>
             {formats
               .filter((f) => f.store === store)
               .map((f) => (
@@ -74,7 +111,9 @@ export const App = () => {
             {storeNames[format.store]} · {format.name}
           </span>
           <button onClick={onExport} disabled={progress !== null}>
-            {progress ?? 'Download ZIP'}
+            {exportingStore === null && progress !== null
+              ? progress
+              : 'Download ZIP'}
           </button>
         </div>
         <div ref={screenshotsRef} className="device">
