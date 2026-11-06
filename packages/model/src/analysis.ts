@@ -82,7 +82,7 @@ export type ValidAnalysisItems = [AnalysisItem, ...AnalysisItem[]];
 
 export const inputTypes = [
   'word',
-  'compound word',
+  'collocation',
   'phrasal verb',
   'phrase',
   'sentence',
@@ -99,7 +99,7 @@ export const isDetectedInputType = (
 
 export const unitOfSpeechTypes: DetectedInputType[] = [
   'word',
-  'compound word',
+  'collocation',
   'phrasal verb',
   'idiom',
 ];

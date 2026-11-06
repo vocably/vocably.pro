@@ -81,8 +81,8 @@ export const detectInputTypeJev = async ({
                   not_for: 'Multi-word units',
                   examples: ['house', 'melancholisch', '猫'],
                 },
-                'compound word': {
-                  what: 'Several words that together name a single concept (a lexicalised noun group or open compound)',
+                collocation: {
+                  what: 'Several words that habitually go together and name a single concept (a lexicalised noun group or open compound)',
                   not_for: 'Free phrases or idioms',
                   examples: ['ice cream', 'train station', 'железная дорога'],
                 },
