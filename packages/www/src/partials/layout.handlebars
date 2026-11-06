@@ -197,6 +197,17 @@
                     data-umami-event-label='iOS app'
                   >Get started</a>
                 </div>
+              {{else}}
+                {{#if signInButton}}
+                  <div class="d-user-none">
+                    <a
+                      href="/app"
+                      class="btn btn-outline-primary rounded-pill"
+                      style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 1rem; --bs-btn-font-size: .75rem;"
+                      data-umami-event="Sign In Click"
+                    >Sign In</a>
+                  </div>
+                {{/if}}
               {{/unless}}
               <div class="d-anonymous-none">
                 <a href="/app" class="btn btn-primary rounded-pill" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: 1rem; --bs-btn-font-size: .75rem;">Your cards</a>
