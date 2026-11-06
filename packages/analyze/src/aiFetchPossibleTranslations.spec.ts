@@ -29,7 +29,7 @@ describe('aiReverseTranslate', () => {
     }
 
     const variants =
-      'deksel, cover, bedekking, omslag, bedekken, coveren, dekken, hoes, kaft, hoever, dekking, afdekken, omslaan';
+      'deksel, cover, bedekking, omslag, bedekken, coveren, dekken, hoes, kaft, hoever, dekking, afdekken, omslaan, omvatten';
 
     expect(result.value.length).toBeGreaterThanOrEqual(3);
     expect(result.value[0].target).toHaveSomeOf(variants);
@@ -48,6 +48,8 @@ describe('aiReverseTranslate', () => {
       expect(result.reason).toBeFalsy();
       return;
     }
+
+    inspect(result.value);
 
     expect(result.value[0].target).toHaveSomeOf([
       'telefoonhoes',
@@ -153,6 +155,22 @@ describe('aiReverseTranslate', () => {
   });
 
   describe('gemini', () => {
+    it('a word that can have multiple translations', async () => {
+      const result = await translateWithGemini({
+        sourceLanguage: 'en',
+        targetLanguage: 'nl',
+        source: 'cover',
+      });
+
+      if (result.success === false) {
+        throw 'Unexpected result';
+      }
+
+      console.log(inspect(result.value));
+
+      expect(result.value.length).toBeGreaterThan(1);
+    });
+
     it('follows the direction of translation', async () => {
       const result = await translateWithGemini({
         sourceLanguage: 'ru',
@@ -184,7 +202,7 @@ describe('aiReverseTranslate', () => {
 
       console.log(inspect(result.value));
 
-      expect(result.value.every((e) => /^[a-z ]+$/.test(e.target))).toEqual(
+      expect(result.value.every((e) => /^[a-zö ]+$/.test(e.target))).toEqual(
         true
       );
     });

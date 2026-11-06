@@ -108,6 +108,7 @@ export const getGeminiTranslateGenerateContentParameters = (
         `Provide possible translations into ${
           languageList[payload.targetLanguage]
         } and only in ${languageList[payload.targetLanguage]}.`,
+        `Include the common synonyms and the translations of each common meaning, most common first. Keep the part of speech of the input.`,
         `Avoid splitting. Don't split. Translate it as single unit of speech.`,
       ],
       thinkingConfig: {
