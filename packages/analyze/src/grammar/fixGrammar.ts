@@ -38,7 +38,10 @@ export const fixGrammar = async ({
             `You are a teacher of ${languageList[language]}`,
             `User provides a text and an optional context`,
             `Fix the text according to ${languageList[language]} grammar rules and explain the reasoning`,
-            `Ignore punctuation and capitalization`,
+            `Make the smallest possible changes: keep the original tense, word choice, and meaning whenever they are grammatically possible`,
+            `Preserve the original punctuation exactly: never add, remove, or change punctuation marks`,
+            `Do not fix capitalization of sentence beginnings, the pronoun "I", or people's names`,
+            `Capitalize names of countries, cities, languages, and nationalities when the language requires it`,
             text.indexOf(`\n`) > -1 ? `Keep the line breaks` : '',
           ].filter(Boolean),
           thinkingConfig: {
