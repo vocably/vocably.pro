@@ -9,137 +9,50 @@
   color: var(--color);
   font-size: 80%;
 
-  .useful-links-eyebrow {
-    margin-bottom: 0.5rem;
-    color: fade-out($white, 0.45);
-    font-size: 0.75em;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
   .useful-links-title {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     color: $white;
-    font-size: 1.5em;
+    font-family: $headings-font-family;
+    font-size: 1.1em;
+    font-weight: 600;
   }
 
   .useful-links-lead {
     max-width: 40rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    color: fade-out($white, 0.35);
   }
 
   .useful-links-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    max-width: 40rem;
     margin-bottom: 0;
 
-    // all cards share one row from md up (the container is 720px there),
-    // otherwise they stack — never a 2 + 1 split
-    @include media-breakpoint-up(md) {
-      grid-template-columns: none;
-      grid-auto-flow: column;
-      grid-auto-columns: 1fr;
+    li {
+      display: flex;
+      gap: 0.75rem;
     }
-  }
 
-  .useful-link-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    height: 100%;
-    padding: 1.25rem;
-    border: 1px solid fade-out($white, 0.88);
-    border-radius: 1rem;
-    background-color: fade-out($white, 0.95);
-    color: var(--color);
-    text-decoration: none;
-    transition:
-      transform 0.2s ease,
-      background-color 0.2s ease,
-      border-color 0.2s ease,
-      box-shadow 0.2s ease;
+    li + li {
+      margin-top: 1rem;
+    }
 
-    &:hover,
-    &:focus-visible {
-      transform: translateY(-2px);
-      border-color: fade-out($white, 0.75);
-      background-color: fade-out($white, 0.92);
-      box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 0.12);
-      color: var(--color);
-      text-decoration: none;
-
-      .useful-link-cta .bi {
-        transform: translateX(4px);
-      }
+    a {
+      color: $white;
+      font-weight: 500;
     }
   }
 
   .useful-link-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 3rem;
-    height: 3rem;
-    margin-bottom: 0.5rem;
-    border-radius: 0.75rem;
-    color: $white;
-    font-size: 1.4rem;
-
-    &--dictionary {
-      background-color: #3a5ff0;
-    }
-
-    &--grammar {
-      background-color: #18a88f;
-    }
-
-    &--ai {
-      background-color: #c45ec4;
-    }
-  }
-
-  .useful-link-badge {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    padding: 0.15rem 0.6rem;
-    border-radius: 50rem;
-    background-color: fade-out($white, 0.88);
-    color: fade-out($white, 0.2);
-    font-size: 0.7em;
-    font-weight: 500;
-  }
-
-  .useful-link-name {
-    color: $white;
-    font-family: $headings-font-family;
-    font-size: 1.05em;
-    font-weight: 600;
-    line-height: 1.3;
-  }
-
-  .useful-link-description {
-    flex-grow: 1;
-    color: fade-out($white, 0.3);
-    font-size: 0.9em;
+    flex-shrink: 0;
+    color: fade-out($white, 0.4);
+    font-size: 1.1em;
     line-height: 1.5;
   }
 
-  .useful-link-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: 0.5rem;
-    color: $white;
-    font-size: 0.9em;
-    font-weight: 500;
-
-    .bi {
-      transition: transform 0.2s ease;
-    }
+  .useful-link-description {
+    display: block;
+    color: fade-out($white, 0.4);
+    line-height: 1.5;
   }
 }
 

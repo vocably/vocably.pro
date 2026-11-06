@@ -211,45 +211,38 @@
     </div>
 
     <footer class="useful-links">
-      <div class="container-lg py-5" aria-label="Tools and ideas">
-        <div style="margin-bottom: 3rem;">
+      <div class="container-md py-5" aria-label="Tools and ideas">
+        <div style="margin-bottom: 2rem;">
           <a href="/"><img src="/assets/logo-dark.svg" alt="Vocably" style="height: 1em;opacity: 0.8"/></a>
         </div>
-        <p class="useful-links-eyebrow">Free tools for learners</p>
-        <p class="h4 useful-links-title">Language acquisition through real-life usage</p>
-        <p class="useful-links-lead">If you use your target language in everyday life, you will likely appreciate these tools and techniques:</p>
+        <p class="useful-links-title">Language acquisition through real-life usage</p>
+        <p class="useful-links-lead">If you use your target language in everyday life, you will likely appreciate these free tools and techniques:</p>
         <ul class="useful-links-list list-unstyled">
           {{#unless (eq url "/search.html")}}
             <li>
-              <a href="/search.html" class="useful-link-card" data-umami-event="Useful Link Click" data-umami-event-label="Online Dictionary">
-                <span class="useful-link-icon useful-link-icon--dictionary"><i class="bi bi-translate" aria-hidden="true"></i></span>
-                <span class="useful-link-badge">Free</span>
-                <span class="useful-link-name">Online Dictionary</span>
+              <i class="bi bi-translate useful-link-icon" aria-hidden="true"></i>
+              <div>
+                <a href="/search.html" data-umami-event="Useful Link Click" data-umami-event-label="Online Dictionary">Online Dictionary</a>
                 <span class="useful-link-description">A dictionary created specifically for language learners: translations, definitions and examples in one place.</span>
-                <span class="useful-link-cta">Look up a word <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
-              </a>
+              </div>
             </li>
           {{/unless}}
           {{#unless (eq url "/grammar.html")}}
             <li>
-              <a href="/grammar.html" class="useful-link-card" data-umami-event="Useful Link Click" data-umami-event-label="AI Grammar Checker">
-                <span class="useful-link-icon useful-link-icon--grammar"><i class="bi bi-spellcheck" aria-hidden="true"></i></span>
-                <span class="useful-link-badge">Free</span>
-                <span class="useful-link-name">AI Grammar Checker</span>
+              <i class="bi bi-spellcheck useful-link-icon" aria-hidden="true"></i>
+              <div>
+                <a href="/grammar.html" data-umami-event="Useful Link Click" data-umami-event-label="AI Grammar Checker">AI Grammar Checker</a>
                 <span class="useful-link-description">The only checker that not only corrects your grammar, but also explains why.</span>
-                <span class="useful-link-cta">Check any text <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
-              </a>
+              </div>
             </li>
           {{/unless}}
           {{#unless (eq url "/ai.html")}}
             <li>
-              <a href="/ai.html" class="useful-link-card" data-umami-event="Useful Link Click" data-umami-event-label="AI Guide">
-                <span class="useful-link-icon useful-link-icon--ai"><i class="bi bi-stars" aria-hidden="true"></i></span>
-                <span class="useful-link-badge">3-step guide</span>
-                <span class="useful-link-name">How to Use AI as a Language Learner</span>
+              <i class="bi bi-stars useful-link-icon" aria-hidden="true"></i>
+              <div>
+                <a href="/ai.html" data-umami-event="Useful Link Click" data-umami-event-label="AI Guide">How to Use AI as a Language Learner</a>
                 <span class="useful-link-description">Turn ChatGPT, Gemini, or Claude into a language-learning companion.</span>
-                <span class="useful-link-cta">Read the guide <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
-              </a>
+              </div>
             </li>
           {{/unless}}
         </ul>
