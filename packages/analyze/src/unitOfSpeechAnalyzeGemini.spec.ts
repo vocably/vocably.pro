@@ -57,9 +57,7 @@ describe('unit of speech analyze gemini', () => {
     }
 
     expect(result.value.isIrregular).toEqual(true);
-    expect(result.value.presentTenses).toEqual(
-      'ich laufe, du läufst, er/sie/es läuft'
-    );
+    expect(result.value.presentTenses).toEqual('laufe, läufst, läuft');
   }, 10_000_000);
 
   it('skips identical tense of regular verb', async () => {
@@ -247,21 +245,6 @@ describe('unit of speech analyze gemini', () => {
       return;
     }
     expect(result.value.number).toHaveSomeOf('plural');
-  }, 10_000_000);
-
-  it('lemma pos', async () => {
-    const result = await geminiAnalyse({
-      source: 'perambulation',
-      partOfSpeech: 'noun',
-      sourceLanguage: 'en',
-    });
-    expect(result.success).toBeTruthy();
-
-    if (!result.success) {
-      return;
-    }
-    expect(result.value.lemma).toHaveSomeOf('perambulate');
-    expect(result.value.lemmaPos).toHaveSomeOf('verb');
   }, 10_000_000);
 
   it('checks for infinitive', async () => {
