@@ -184,7 +184,7 @@ variable "public_api_throttle_burst_limit" {
 
 variable "www_search_seo_data_folder" {
   type    = string
-  default = "search-data-dev"
+  default = "search-data-prod"
 }
 
 # Public API route-specific throttle limits

@@ -284,8 +284,14 @@ resource "null_resource" "www_upload" {
   }
 
   provisioner "local-exec" {
-    # Three passes whose filters partition the dist, so "--delete" on each one
-    # still removes everything that disappeared from the build.
+    # Three s5cmd copies whose filters partition the dist. s5cmd uploads with a
+    # far larger worker pool than "aws s3 cp", and its filters match the path
+    # relative to the wildcard, e.g. "assets/*". Nothing is synced, because
+    # listing the bucket on every deploy is what made the upload slow. Files that
+    # disappeared from the build are deleted afterwards by
+    # scripts/www-delete-removed.mjs, which compares the dist with the previous
+    # build that CircleCI restores into $WWW_PREVIOUS_DIST (and falls back to
+    # listing the bucket when there is none, e.g. on a local run).
     #
     # Only the webpack-emitted files carry a content hash in their name, so only
     # they can be immutable. src/assets is copied verbatim by CopyPlugin and
@@ -296,28 +302,28 @@ resource "null_resource" "www_upload" {
     # apple-app-site-association has no extension, so it has to be re-uploaded
     # with an explicit content type for Apple to accept it.
     #
-    # Unchanged SEO pages carry an old mtime (see seo/buildStaticSearchPages.ts),
-    # so the sync skips them. The raised concurrency speeds up the deploys where
-    # every page does change, e.g. a new bundle hash.
+    # The deletion runs after the upload so that no page ever references a file
+    # that is already gone.
     #
     # Production then pings IndexNow with the URLs whose sitemap lastmod changed
     # (collected by the build in seo/indexnow-urls.json). It waits for the
     # invalidation first so crawlers don't fetch the stale edge copies.
     command = <<EOT
-aws configure set default.s3.max_concurrent_requests 64
+s5cmd cp --cache-control "public, max-age=31536000, immutable" \
+  --include "*.js" --include "*.css" --include "*.js.map" \
+  "${local.www_dist}/*" s3://${aws_s3_bucket.www.id}/ > /dev/null
 
-aws s3 sync ${local.www_dist} s3://${aws_s3_bucket.www.id} --delete \
-  --exclude "*" --include "*.js" --include "*.css" --include "*.js.map" \
-  --cache-control "public, max-age=31536000, immutable"
+s5cmd cp --cache-control "public, max-age=86400" \
+  "${local.www_dist}/assets/*" s3://${aws_s3_bucket.www.id}/assets/ > /dev/null
 
-aws s3 sync ${local.www_dist}/assets s3://${aws_s3_bucket.www.id}/assets --delete \
-  --cache-control "public, max-age=86400"
-
-aws s3 sync ${local.www_dist} s3://${aws_s3_bucket.www.id} --delete \
+s5cmd cp --cache-control "public, max-age=0, must-revalidate" \
   --exclude "assets/*" --exclude "*.js" --exclude "*.css" --exclude "*.js.map" \
-  --cache-control "public, max-age=0, must-revalidate"
+  "${local.www_dist}/*" s3://${aws_s3_bucket.www.id}/ > /dev/null
 
-aws s3 cp ${local.www_dist}/.well-known/apple-app-site-association s3://${aws_s3_bucket.www.id}/.well-known/apple-app-site-association --content-type application/json --cache-control "public, max-age=0, must-revalidate"
+s5cmd cp --content-type application/json --cache-control "public, max-age=0, must-revalidate" \
+  ${local.www_dist}/.well-known/apple-app-site-association s3://${aws_s3_bucket.www.id}/.well-known/apple-app-site-association
+
+node ${abspath("../scripts/www-delete-removed.mjs")} ${local.www_dist} "$WWW_PREVIOUS_DIST" ${aws_s3_bucket.www.id}
 
 INVALIDATION_ID=$(aws cloudfront create-invalidation --distribution-id ${aws_cloudfront_distribution.www.id} --paths '/*' --query Invalidation.Id --output text)
 %{if terraform.workspace == "prod"~}
