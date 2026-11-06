@@ -6,7 +6,6 @@
   navbarSpacing="mb-2 mb-lg-0"
   navbarContainerClass="container-lg"
   nonStickyNavbar=true
-  logoClass="d-anonymous-none"
 }}
   <script type="application/ld+json">
     {
@@ -58,9 +57,17 @@
       position: relative;
     }
 
+    /* Tall enough for the absolutely positioned slides: slide height + navigation
+       buttons (~74px) + the 50px downward offset of .vertical-center, with some room below. */
     @media (min-width: 768px) {
       .hero-container {
-        min-height: 530px;
+        min-height: 725px;
+      }
+    }
+
+    @media (min-width: 1400px) {
+      .hero-container {
+        min-height: 645px;
       }
     }
 
@@ -144,13 +151,94 @@
     .navigation-button:disabled {
       color: #ccc;
     }
+
+    .main-search {
+      --navbar-height: 4.5rem;
+
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: calc(100vh - var(--navbar-height));
+      min-height: calc(100svh - var(--navbar-height));
+      padding-bottom: var(--navbar-height);
+
+      & .main-search-form {
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+    }
+
+    .scroll-cue {
+      position: absolute;
+      left: 50%;
+      bottom: 1.5rem;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      border: none;
+      background: none;
+      color: var(--bs-secondary-color);
+      font-size: 0.875rem;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--v-color-primary);
+      }
+
+      & .bi {
+        font-size: 1.25rem;
+        line-height: 1;
+        animation: scroll-cue-bounce 2s ease-in-out infinite;
+      }
+    }
+
+    @keyframes scroll-cue-bounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(6px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-cue .bi {
+        animation: none;
+      }
+    }
+
+    /* The navbar gets a 3rem bottom margin below 1280px. */
+    @media (max-width: 1279.98px) {
+      .main-search {
+        --navbar-height: 7.5rem;
+      }
+    }
   </style>
-  <div class="hero-container">
+  <section class="main-search container-lg px-4" aria-label="Search">
+    <div class="main-search-form">
+      {{> search-form-light }}
+    </div>
+    <button type="button" class="scroll-cue" data-umami-event="Scroll Cue Click">
+      <span>What is Vocably?</span>
+      <i class="bi bi-chevron-down" aria-hidden="true"></i>
+    </button>
+    <script>
+      // A button rather than a link: Umami follows the href of tracked links, which would set the location hash.
+      document.querySelector('.scroll-cue').addEventListener('click', () => {
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        document.getElementById('about').scrollIntoView({
+          behavior: reduceMotion ? 'auto' : 'smooth',
+        });
+      });
+    </script>
+  </section>
+  <div class="hero-container" id="about">
     <div class="headline d-flex flex-column align-items-md-end justify-content-center z-1 ps-md-0">
       <div class="p-4 py-md-0 me-md-5" style="pointer-events: all">
-        <div class="mb-3 d-user-none">
-          <img src="assets/logo.svg" style="height: 1.5rem;" alt="Vocably" />
-        </div>
         <h1 class="headline-text gradient-headline mb-2">
           A language-<span style="white-space: nowrap;">learning tool</span>
         </h1>
@@ -204,10 +292,6 @@
             Save and learn every word you discover.
           </li>
         </ul>
-
-        <div class="my-5 d-block d-md-none">
-          {{> search-form-light }}
-        </div>
 
         <script>
           const wordCarousel = document.getElementById('word-carousel');
@@ -790,10 +874,6 @@
         </script>
       </div>
     </div>
-  </div>
-
-  <div class="container-lg px-4 text-center my-5 d-none d-md-block">
-    {{> search-form-light }}
   </div>
 
   <div class="container-lg px-4 d-md-none my-5">
