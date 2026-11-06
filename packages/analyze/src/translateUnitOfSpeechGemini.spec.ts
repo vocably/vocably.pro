@@ -1,7 +1,6 @@
 import '@vocably/jest';
 import { configureTestAnalyzer } from './test/configureTestAnalyzer';
 import { translateUnitOfSpeechGemini } from './translateUnitOfSpeechGemini';
-import { inspect } from '@vocably/node-sulna';
 
 configureTestAnalyzer();
 
