@@ -1,4 +1,4 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import { createUserContent, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import { inputTypes, languageList, Result, resultify } from '@vocably/model';
 import { config } from './config';
@@ -26,16 +26,21 @@ export const detectInputTypeGemini = async ({
   const result = await resultify(
     timeout(
       genAI.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.5-flash-lite',
         contents: createUserContent([source]),
         config: {
           abortSignal,
           systemInstruction: [
             `Act as a precise linguistic classification API`,
             `Analyze the provided text input`,
+            ...(quiteLikelyAWord
+              ? [
+                  `isDirect: whether the input is a ${languageList[language]} word. Loanwords used in ${languageList[language]} and misspellings of ${languageList[language]} words are ${languageList[language]}. Foreign words are not ${languageList[language]}, even when ${languageList[language]} has a similar-looking cognate (e.g. English "table" is not Dutch "tabel", English "music" is not German "Musik")`,
+                ]
+              : []),
           ],
           thinkingConfig: {
-            thinkingBudget: 0, // Disables thinking
+            thinkingLevel: ThinkingLevel.MINIMAL,
           },
           temperature: 0,
           responseMimeType: 'application/json',

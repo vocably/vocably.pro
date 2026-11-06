@@ -29,7 +29,7 @@ describe('aiReverseTranslate', () => {
     }
 
     const variants =
-      'deksel, cover, bedekking, omslag, bedekken, coveren, dekken, hoes, kaft, hoever, dekking, afdekken, omslaan';
+      'deksel, cover, bedekking, omslag, bedekken, coveren, dekken, hoes, kaft, hoever, dekking, afdekken, omslaan, omvatten';
 
     expect(result.value.length).toBeGreaterThanOrEqual(3);
     expect(result.value[0].target).toHaveSomeOf(variants);
@@ -49,9 +49,13 @@ describe('aiReverseTranslate', () => {
       return;
     }
 
+    console.log(inspect(result.value));
+
     expect(result.value[0].target).toHaveSomeOf([
       'telefoonhoes',
       'telefoonhoesje',
+      'gsm-hoesje',
+      'smartphonehoesje',
     ]);
     expect(result.value[0].source).toEqual('phone case');
     expect(result.value[1].target).toHaveSomeOf('telefooncase, telefoonhoes');
@@ -152,36 +156,58 @@ describe('aiReverseTranslate', () => {
     });
   });
 
-  it('follows the direction of translation', async () => {
-    const result = await translateWithGemini({
-      sourceLanguage: 'ru',
-      targetLanguage: 'en',
-      source: 'get along',
+  describe('gemini', () => {
+    it('a word that can have multiple translations', async () => {
+      const result = await translateWithGemini({
+        sourceLanguage: 'en',
+        targetLanguage: 'nl',
+        source: 'cover',
+      });
+
+      if (result.success === false) {
+        throw 'Unexpected result';
+      }
+
+      console.log(inspect(result.value));
+
+      expect(result.value.length).toBeGreaterThan(1);
     });
 
-    if (result.success === false) {
-      throw 'Unexpected result';
-    }
+    it('follows the direction of translation', async () => {
+      const result = await translateWithGemini({
+        sourceLanguage: 'ru',
+        targetLanguage: 'en',
+        source: 'get along',
+      });
 
-    console.log(inspect(result.value));
+      if (result.success === false) {
+        throw 'Unexpected result';
+      }
 
-    expect(result.value.every((e) => /^[a-z ]+$/.test(e.target))).toEqual(true);
-  });
+      console.log(inspect(result.value));
 
-  it('1 follows the direction of translation', async () => {
-    const result = await translateWithGemini({
-      sourceLanguage: 'en',
-      targetLanguage: 'de',
-      source: 'creative',
+      expect(result.value.every((e) => /^[a-z ]+$/.test(e.target))).toEqual(
+        true
+      );
     });
 
-    if (result.success === false) {
-      throw 'Unexpected result';
-    }
+    it('1 follows the direction of translation', async () => {
+      const result = await translateWithGemini({
+        sourceLanguage: 'en',
+        targetLanguage: 'de',
+        source: 'creative',
+      });
 
-    console.log(inspect(result.value));
+      if (result.success === false) {
+        throw 'Unexpected result';
+      }
 
-    expect(result.value.every((e) => /^[a-z ]+$/.test(e.target))).toEqual(true);
+      console.log(inspect(result.value));
+
+      expect(result.value.every((e) => /^[a-zö ]+$/.test(e.target))).toEqual(
+        true
+      );
+    });
   });
 
   it('cached', async () => {

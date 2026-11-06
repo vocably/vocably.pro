@@ -1,4 +1,4 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import { createUserContent, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { chatGptRequest, GPT_4O } from '@vocably/lambda-shared';
 import {
   ExplainPayload,
@@ -24,7 +24,7 @@ export const explainGemini = async ({
 
   const result = await resultify(
     genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: createUserContent([source]),
       config: {
         systemInstruction: [
@@ -34,7 +34,7 @@ export const explainGemini = async ({
           `Avoid introduction.`,
         ],
         thinkingConfig: {
-          thinkingBudget: 0, // Disables thinking
+          thinkingLevel: ThinkingLevel.MINIMAL,
         },
         temperature: 0,
         responseMimeType: 'text/plain',

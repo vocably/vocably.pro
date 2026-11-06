@@ -2,6 +2,7 @@ import {
   createUserContent,
   GenerateContentParameters,
   GoogleGenAI,
+  ThinkingLevel,
 } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import { languageList, Result, resultify } from '@vocably/model';
@@ -80,7 +81,7 @@ const getGeminiGenerationContentParams = ({
   const examplesMd = examples?.length > 0 ? [`#Examples`, ...examples] : [];
 
   return {
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.5-flash-lite',
     contents: createUserContent([source, ...definitionsMd, ...examplesMd]),
     config: {
       systemInstruction: [
@@ -103,7 +104,7 @@ const getGeminiGenerationContentParams = ({
         `Sort results by commonality`,
       ],
       thinkingConfig: {
-        thinkingBudget: 0, // Disables thinking
+        thinkingLevel: ThinkingLevel.MINIMAL,
       },
       temperature: 0,
       responseMimeType: 'application/json',

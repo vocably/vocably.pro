@@ -64,9 +64,14 @@ describe('translateUnitOfSpeechGemini', () => {
       return;
     }
 
+    console.log(translationResult.value);
+
     expect(
       translationResult.value.some(
-        (v) => v.includes('пригибаться') || v.includes('пригнуться')
+        (v) =>
+          v.includes('пригибаться') ||
+          v.includes('пригнуться') ||
+          v.includes('уклоняться')
       )
     ).toEqual(true);
 

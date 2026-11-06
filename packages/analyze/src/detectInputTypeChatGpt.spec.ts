@@ -85,7 +85,7 @@ describe('detectInputTypeChatGpt', () => {
     if (responseResult.success === false) {
       return;
     }
-    expect(responseResult.value.type).toHaveSomeOf(['word', 'compound word']);
+    expect(responseResult.value.type).toHaveSomeOf(['word', 'collocation']);
     expect(responseResult.value.isDirect).toEqual(true);
   });
 
@@ -137,7 +137,7 @@ describe('detectInputTypeChatGpt', () => {
     expect(responseResult.value.isDirect).toEqual(false);
   });
 
-  it('compound word', async () => {
+  it('collocation', async () => {
     const responseResult = await detectInputTypeChatGpt({
       language: 'ru',
       source: 'лопатка для готовки',
@@ -149,7 +149,7 @@ describe('detectInputTypeChatGpt', () => {
     if (responseResult.success === false) {
       return;
     }
-    expect(responseResult.value.type).toEqual('compound word');
+    expect(responseResult.value.type).toEqual('collocation');
     expect(responseResult.value.isDirect).toEqual(true);
   });
 

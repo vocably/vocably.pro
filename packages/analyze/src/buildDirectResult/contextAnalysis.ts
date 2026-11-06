@@ -33,7 +33,7 @@ export const directContextAnalysis = async ({
   isDirect,
   inputType,
 }: Payload): Promise<Result<DirectAnalysis>> => {
-  const source = ['word', 'compound word'].includes(inputType)
+  const source = ['word', 'collocation'].includes(inputType)
     ? trimSenselessArticle(sourceLanguage, rawSource).trim()
     : rawSource.trim();
 

@@ -1,4 +1,4 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import { createUserContent, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
   ExplainPayload,
@@ -21,7 +21,7 @@ export const mineUnitsOfSpeech = async ({
 
   const result = await resultify(
     genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: createUserContent([source]),
       config: {
         systemInstruction: [
@@ -38,7 +38,7 @@ export const mineUnitsOfSpeech = async ({
           `- determiners`,
         ],
         thinkingConfig: {
-          thinkingBudget: 0,
+          thinkingLevel: ThinkingLevel.MINIMAL,
         },
         temperature: 0,
         maxOutputTokens: 2500,

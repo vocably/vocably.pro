@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
   isGoogleLanguage,
@@ -29,7 +29,7 @@ export const generateUnitsOfSpeech = async ({
 
   const result = await resultify(
     genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: messages.map((message) => {
         if (message.role === 'user') {
           return {
@@ -61,7 +61,7 @@ export const generateUnitsOfSpeech = async ({
             : '',
         ].filter((s) => !!s),
         thinkingConfig: {
-          thinkingBudget: 0, // Disables thinking
+          thinkingLevel: ThinkingLevel.MINIMAL,
         },
         maxOutputTokens: 2500,
         temperature: 0,

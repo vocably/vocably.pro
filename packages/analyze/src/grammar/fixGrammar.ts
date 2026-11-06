@@ -1,4 +1,4 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import { createUserContent, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
   FixGrammarPayload,
@@ -27,7 +27,7 @@ export const fixGrammar = async ({
   const result = await resultify(
     timeout(
       genAI.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.5-flash-lite',
         contents: createUserContent([
           `text: ${text}`,
           `context: ${context ?? ''}`,
@@ -38,11 +38,14 @@ export const fixGrammar = async ({
             `You are a teacher of ${languageList[language]}`,
             `User provides a text and an optional context`,
             `Fix the text according to ${languageList[language]} grammar rules and explain the reasoning`,
-            `Ignore punctuation and capitalization`,
+            `Make the smallest possible changes: keep the original tense, word choice, and meaning whenever they are grammatically possible`,
+            `Preserve the original punctuation exactly: never add, remove, or change punctuation marks`,
+            `Do not fix capitalization of sentence beginnings, the pronoun "I", or people's names`,
+            `Capitalize names of countries, cities, languages, and nationalities when the language requires it`,
             text.indexOf(`\n`) > -1 ? `Keep the line breaks` : '',
           ].filter(Boolean),
           thinkingConfig: {
-            thinkingBudget: 0, // Disables thinking
+            thinkingLevel: ThinkingLevel.MINIMAL,
           },
           temperature: 0,
           responseMimeType: 'application/json',

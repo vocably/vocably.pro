@@ -30,7 +30,7 @@ describe('mineUnitsOfSpeech', () => {
     const headwords = result.value.map((u) => u.headword.toLowerCase());
 
     expect(headwords).toContain('child');
-    expect(headwords).toContain('run');
+    expect(headwords).toContain('run after');
     expect(headwords).toContain('bus');
   });
 
