@@ -49,11 +49,13 @@ describe('aiReverseTranslate', () => {
       return;
     }
 
-    inspect(result.value);
+    console.log(inspect(result.value));
 
     expect(result.value[0].target).toHaveSomeOf([
       'telefoonhoes',
       'telefoonhoesje',
+      'gsm-hoesje',
+      'smartphonehoesje',
     ]);
     expect(result.value[0].source).toEqual('phone case');
     expect(result.value[1].target).toHaveSomeOf('telefooncase, telefoonhoes');
