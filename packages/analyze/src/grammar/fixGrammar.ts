@@ -1,4 +1,4 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import { createUserContent, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
   FixGrammarPayload,
@@ -27,7 +27,7 @@ export const fixGrammar = async ({
   const result = await resultify(
     timeout(
       genAI.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.5-flash-lite',
         contents: createUserContent([
           `text: ${text}`,
           `context: ${context ?? ''}`,
@@ -42,7 +42,7 @@ export const fixGrammar = async ({
             text.indexOf(`\n`) > -1 ? `Keep the line breaks` : '',
           ].filter(Boolean),
           thinkingConfig: {
-            thinkingBudget: 0, // Disables thinking
+            thinkingLevel: ThinkingLevel.MINIMAL,
           },
           temperature: 0,
           responseMimeType: 'application/json',

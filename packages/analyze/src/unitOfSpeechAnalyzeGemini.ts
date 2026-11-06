@@ -4,6 +4,7 @@ import {
   GoogleGenAI,
   HarmBlockThreshold,
   HarmCategory,
+  ThinkingLevel,
 } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import { languageList, Result, resultify } from '@vocably/model';
@@ -72,7 +73,7 @@ const getGeminiGenerateContentParameters = ({
   );
 
   return {
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.5-flash-lite',
     contents: createUserContent([source]),
     config: {
       safetySettings: [
@@ -103,7 +104,7 @@ const getGeminiGenerateContentParameters = ({
         `Treat the input strictly as a ${partOfSpeech}`,
       ].filter((s) => s.length > 0),
       thinkingConfig: {
-        thinkingBudget: 0, // Disables thinking
+        thinkingLevel: ThinkingLevel.MINIMAL,
       },
       temperature: 0,
       responseMimeType: 'application/json',

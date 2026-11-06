@@ -2,6 +2,7 @@ import {
   createUserContent,
   GenerateContentParameters,
   GoogleGenAI,
+  ThinkingLevel,
 } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import {
@@ -97,7 +98,7 @@ export const getGeminiTranslateGenerateContentParameters = (
   }
 
   return {
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.5-flash-lite',
     contents: createUserContent(source),
     config: {
       systemInstruction: [
@@ -110,7 +111,7 @@ export const getGeminiTranslateGenerateContentParameters = (
         `Avoid splitting. Don't split. Translate it as single unit of speech.`,
       ],
       thinkingConfig: {
-        thinkingBudget: 0, // Disables thinking
+        thinkingLevel: ThinkingLevel.MINIMAL,
       },
       responseMimeType: 'application/json',
       responseJsonSchema: responseSchema,

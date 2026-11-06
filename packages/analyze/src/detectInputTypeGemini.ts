@@ -1,4 +1,4 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import { createUserContent, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import { inputTypes, languageList, Result, resultify } from '@vocably/model';
 import { config } from './config';
@@ -26,7 +26,7 @@ export const detectInputTypeGemini = async ({
   const result = await resultify(
     timeout(
       genAI.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.5-flash-lite',
         contents: createUserContent([source]),
         config: {
           abortSignal,
@@ -35,7 +35,7 @@ export const detectInputTypeGemini = async ({
             `Analyze the provided text input`,
           ],
           thinkingConfig: {
-            thinkingBudget: 0, // Disables thinking
+            thinkingLevel: ThinkingLevel.MINIMAL,
           },
           temperature: 0,
           responseMimeType: 'application/json',

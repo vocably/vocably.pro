@@ -1,4 +1,4 @@
-import { createUserContent, GoogleGenAI } from '@google/genai';
+import { createUserContent, GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { parseJson } from '@vocably/api';
 import { chatGptRequest, GPT_4O, GPT_4O_MINI } from '@vocably/lambda-shared';
 import {
@@ -69,7 +69,7 @@ export const translateFromContextGemini = async (
 
   const result = await resultify(
     genAI.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.5-flash-lite',
       contents: createUserContent([payload.context, safeSource]),
       config: {
         systemInstruction: [
@@ -94,7 +94,7 @@ export const translateFromContextGemini = async (
             : '',
         ],
         thinkingConfig: {
-          thinkingBudget: 0, // Disables thinking
+          thinkingLevel: ThinkingLevel.MINIMAL,
         },
         temperature: 0,
         responseMimeType: 'application/json',

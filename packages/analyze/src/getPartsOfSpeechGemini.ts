@@ -2,6 +2,7 @@ import {
   createUserContent,
   GenerateContentParameters,
   GoogleGenAI,
+  ThinkingLevel,
 } from '@google/genai';
 
 import { parseJson } from '@vocably/api';
@@ -29,7 +30,7 @@ export const getPartsOfSpeechGeminiParameters = ({
   language,
 }: GetPartsOfSpeechPayload): GenerateContentParameters => {
   return {
-    model: 'gemini-2.5-flash',
+    model: 'gemini-3.5-flash-lite',
     contents: createUserContent([source]),
     config: {
       systemInstruction: [
@@ -44,7 +45,7 @@ export const getPartsOfSpeechGeminiParameters = ({
         `- lemmaPos - part of speech of the lemma in English`,
       ],
       thinkingConfig: {
-        thinkingBudget: 0, // Disables thinking
+        thinkingLevel: ThinkingLevel.MINIMAL,
       },
       temperature: 0,
       responseMimeType: 'application/json',
