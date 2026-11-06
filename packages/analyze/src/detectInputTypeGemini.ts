@@ -33,6 +33,11 @@ export const detectInputTypeGemini = async ({
           systemInstruction: [
             `Act as a precise linguistic classification API`,
             `Analyze the provided text input`,
+            ...(quiteLikelyAWord
+              ? [
+                  `isDirect: whether the input is a ${languageList[language]} word. Loanwords used in ${languageList[language]} and misspellings of ${languageList[language]} words are ${languageList[language]}. Foreign words are not ${languageList[language]}, even when ${languageList[language]} has a similar-looking cognate (e.g. English "table" is not Dutch "tabel", English "music" is not German "Musik")`,
+                ]
+              : []),
           ],
           thinkingConfig: {
             thinkingLevel: ThinkingLevel.MINIMAL,
