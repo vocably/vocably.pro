@@ -75,6 +75,7 @@ type Options = {
   basePath: string;
   deployedBaseUrl: string;
   searchPageFileName: string;
+  onPageCompiled?: (compiledPages: number) => void;
 };
 
 type StaticPage = {
@@ -107,6 +108,7 @@ export const buildStaticSearchPages = async ({
   basePath,
   deployedBaseUrl,
   searchPageFileName,
+  onPageCompiled,
 }: Options): Promise<StaticPage[]> => {
   const dataFiles = getAllFilesSync(searchDataFolder);
 
@@ -141,6 +143,7 @@ export const buildStaticSearchPages = async ({
   }
 
   const result: StaticPage[] = [];
+  let compiledPages = 0;
   const buildId = sha256(templateHtml).slice(0, 8);
 
   for (const dataFileName of dataFiles) {
@@ -300,6 +303,7 @@ ${JSON.stringify({
         fileName: htmlFilename,
         size: rendered.html.length,
       });
+      onPageCompiled?.(++compiledPages);
     }
 
     const sitemap = generateSeoSearchSitemap({
