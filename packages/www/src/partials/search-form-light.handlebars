@@ -34,51 +34,9 @@
         0 22px 44px -10px rgba(var(--v-color-primary-rgb), 0.45);
     }
 
-    .language-selector-wrapper {
-      padding: 0 1rem;
-      font-size: 60%;
-      font-weight: bold;
-      color: var(--v-color-primary);
-
-      &:first-child {
-        border-radius: var(--border-radius) 0 0 var(--border-radius);
-        padding-left: 1.5rem;
-      }
-
-      /* The focus ring goes around the whole wrapper (rounded for the first
-         one) rather than the button inside the filter select. */
-      &:has(vocably-filter-select.focus-visible) {
-        outline: auto;
-        outline-color: Highlight;
-        outline-color: -webkit-focus-ring-color;
-      }
-
-      vocably-filter-select {
-        display: block;
-        height: var(--height);
-        text-transform: uppercase;
-
-        &::part(trigger):focus-visible {
-          outline: none;
-        }
-      }
-
-      .label {
-        width: 2rem;
-        text-align: center;
-        height: var(--height);
-        line-height: var(--height);
-      }
-
-      &.delimiter {
-        border-right: 1px solid rgba(var(--v-color-primary-rgb), 0.3);
-        padding-left: 1rem;
-        margin-right: 1rem;
-      }
-    }
-
     .text-input {
       flex: 1;
+      padding-left: 1.75rem;
       border: none;
       font-weight: 400;
       outline: none;
@@ -123,23 +81,110 @@
     @media (max-width: 600px) {
       gap: 0.1rem;
 
+      .text-input {
+        padding-left: 1.25rem;
+      }
+
       .submit-button {
         --size: calc(var(--height) - 1rem);
         margin-right: 0.25rem;
       }
+    }
+  }
 
-      .language-selector-wrapper {
-        padding: 0 0.2rem;
+  .search-form-languages {
+    margin: 0 0 1rem 1.75rem;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    text-align: left;
+    transition: opacity 0.2s ease;
 
-        &.delimiter {
-          padding-left: 0.4rem;
-          margin-right: 0.4rem;
+    /* Hidden (space still reserved) until the language selects are
+       rendered; index.ts adds .ready. */
+    &:not(.ready) {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    /* Each clause wraps as a whole, so "and I speak X" moves to the next
+       line together rather than leaving the select dangling. */
+    .clause {
+      white-space: nowrap;
+    }
+
+    /* The label is plain text in the light DOM, so the line is laid out the
+       same before, during and after the select's upgrade; the select's
+       (empty) trigger button is stretched over it to handle the clicks. */
+    .language-selector {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+      font-weight: 600;
+      color: var(--v-color-primary);
+
+      vocably-filter-select {
+        position: absolute;
+        inset: 0 -0.25em;
+        display: block;
+
+        &::part(trigger) {
+          border-radius: 0.25rem;
         }
 
-        &:first-child {
-          border-radius: var(--border-radius) 0 0 var(--border-radius);
-          padding-left: 0.8rem;
+        &::part(trigger):focus-visible {
+          outline-offset: 0;
         }
+      }
+
+      .label-text {
+        text-decoration: underline dashed;
+        text-decoration-color: rgba(var(--v-color-primary-rgb), 0.55);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.3em;
+        transition: text-decoration-color 0.2s ease;
+      }
+
+      .chevron {
+        display: inline-block;
+        width: 0.6em;
+        height: 0.6em;
+        margin-left: 0.3em;
+        vertical-align: 0.05em;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.75;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover .label-text {
+        text-decoration-color: var(--v-color-primary);
+      }
+
+      &:hover .chevron {
+        transform: translateY(1px);
+      }
+
+      &:has(vocably-filter-select.open) .chevron {
+        transform: rotate(180deg);
+      }
+    }
+
+    /* Small screens: a fixed two-row layout ("I study X" / "I speak Y")
+       instead of a sentence wrapping wherever the language names push it.
+       Always two rows, so the height doesn't depend on the names either. */
+    @media (max-width: 600px) {
+      margin-left: 1.25rem;
+      font-size: 1rem;
+      line-height: 1.75;
+
+      .clause {
+        display: block;
+      }
+
+      .conjunction {
+        display: none;
       }
     }
   }
@@ -179,32 +224,36 @@
   role='search'
   aria-label='Translate a word or phrase'
 >
+  <p class='search-form-languages'>
+    <span class='clause'>I study
+      <span class='language-selector'><span
+          class='label-text'
+          translate='no'
+        ></span><svg class='chevron' viewBox='0 0 12 8' aria-hidden='true'><path
+            d='M1.5 1.75 6 6.25l4.5-4.5'
+          /></svg><vocably-filter-select
+          variant='plain'
+          label='Language I study'
+        ><span slot='trigger'></span></vocably-filter-select><input
+          type='hidden'
+          name='sourceLanguage'
+        /></span><span class='conjunction'>,</span></span>
+    <span class='clause'><span class='conjunction'>and</span>
+      I speak
+      <span class='language-selector'><span
+          class='label-text'
+          translate='no'
+        ></span><svg class='chevron' viewBox='0 0 12 8' aria-hidden='true'><path
+            d='M1.5 1.75 6 6.25l4.5-4.5'
+          /></svg><vocably-filter-select
+          variant='plain'
+          label='Language I speak'
+        ><span slot='trigger'></span></vocably-filter-select><input
+          type='hidden'
+          name='targetLanguage'
+        /></span><span class='too' hidden> too.</span></span>
+  </p>
   <div class='search-input'>
-    <div class='language-selector-wrapper'>
-      <vocably-filter-select
-        variant='plain'
-        label='Source language'
-      ><div
-          slot='trigger'
-          class='label'
-          aria-hidden='true'
-          translate='no'
-        ></div></vocably-filter-select>
-      <input type='hidden' name='sourceLanguage' />
-    </div>
-    <i class='bi bi-chevron-compact-right' aria-hidden='true'></i>
-    <div class='language-selector-wrapper delimiter'>
-      <vocably-filter-select
-        variant='plain'
-        label='Target language'
-      ><div
-          slot='trigger'
-          class='label'
-          aria-hidden='true'
-          translate='no'
-        ></div></vocably-filter-select>
-      <input type='hidden' name='targetLanguage' />
-    </div>
     <input
       type='text'
       class='text-input'

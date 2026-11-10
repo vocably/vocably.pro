@@ -261,17 +261,18 @@ searchForms.forEach((searchForm: HTMLFormElement) => {
   const setUpLanguageSelect = (
     wrapper: HTMLElement,
     input: HTMLInputElement,
-    initialValue: string
+    initialValue: string,
+    localStorageKey: string
   ) => {
     const select = wrapper.querySelector(
       'vocably-filter-select'
     ) as LanguageSelect;
-    const label = wrapper.querySelector('.label') as HTMLElement;
+    const label = wrapper.querySelector('.label-text') as HTMLElement;
 
     const setValue = (value: string) => {
       input.value = value;
       select.value = value;
-      label.textContent = value.slice(0, 2);
+      label.textContent = languageList[value] ?? value;
     };
 
     select.optionGroups = languageGroups;
@@ -279,6 +280,11 @@ searchForms.forEach((searchForm: HTMLFormElement) => {
 
     select.addEventListener('choose', (event: CustomEvent<string>) => {
       setValue(event.detail);
+      try {
+        localStorage.setItem(localStorageKey, event.detail);
+      } catch {
+        // Private windows and blocked site data: the choice lasts for this page.
+      }
       updatePlaceholder();
       languageChangeListeners.forEach((listener) => listener());
     });
@@ -291,17 +297,48 @@ searchForms.forEach((searchForm: HTMLFormElement) => {
   }
 
   setUpLanguageSelect(
-    sourceLanguageInput.closest('.language-selector-wrapper'),
+    sourceLanguageInput.closest('.language-selector'),
     sourceLanguageInput,
-    sourceLanguage
+    sourceLanguage,
+    searchConfig.sourceLanguageLocalStorageKey
   );
   setUpLanguageSelect(
-    targetLanguageInput.closest('.language-selector-wrapper'),
+    targetLanguageInput.closest('.language-selector'),
     targetLanguageInput,
-    targetLanguage
+    targetLanguage,
+    searchConfig.targetLanguageLocalStorageKey
   );
 
   updatePlaceholder();
+
+  // "…, and I speak English too." when both languages are the same.
+  const tooText = searchForm.querySelector<HTMLElement>(
+    '.search-form-languages .too'
+  );
+  const updateToo = () => {
+    if (tooText) {
+      tooText.hidden = sourceLanguageInput.value !== targetLanguageInput.value;
+    }
+  };
+  updateToo();
+  languageChangeListeners.push(updateToo);
+
+  // Reveal the language sentence once both selects have rendered, so the
+  // unstyled pre-upgrade markup never shows up and shifts the layout.
+  const languagesContainer = searchForm.querySelector('.search-form-languages');
+  customElements.whenDefined('vocably-filter-select').then(() =>
+    Promise.all(
+      Array.from(
+        searchForm.querySelectorAll('vocably-filter-select'),
+        (select) =>
+          (
+            select as HTMLElement & {
+              componentOnReady: () => Promise<unknown>;
+            }
+          ).componentOnReady()
+      )
+    ).then(() => languagesContainer?.classList.add('ready'))
+  );
 
   const setUpExample = () => {
     const exampleContainer = searchForm.querySelector('.search-form-hint');
