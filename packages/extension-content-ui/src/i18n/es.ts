@@ -44,6 +44,9 @@ export const es = {
   'search.i_speak': 'Hablo',
   'search.preferred_languages': 'Idiomas preferidos',
   'search.available_languages': 'Idiomas disponibles',
+  // filter-select
+  'select.filter_placeholder': 'Buscar',
+  'select.no_results': 'No se encontró nada',
   'search.placeholder_default': 'Cualquier palabra o frase',
   'search.swap_direction': 'Cambiar la dirección de traducción',
   'search.submit': 'Traducir',

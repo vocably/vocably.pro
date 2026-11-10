@@ -44,6 +44,9 @@ export const pt = {
   'search.i_speak': 'Falo',
   'search.preferred_languages': 'Idiomas preferidos',
   'search.available_languages': 'Idiomas disponíveis',
+  // filter-select
+  'select.filter_placeholder': 'Pesquisar',
+  'select.no_results': 'Nada encontrado',
   'search.placeholder_default': 'Qualquer palavra ou frase',
   'search.swap_direction': 'Inverter a direção da tradução',
   'search.submit': 'Traduzir',

@@ -1,6 +1,13 @@
 import { defineCustomElements } from '@vocably/extension-content-ui/loader';
 
-import { Result, TagItem, TranslationCards } from '@vocably/model';
+import {
+  languageList,
+  Result,
+  TagItem,
+  TranslationCards,
+} from '@vocably/model';
+import { languageAliases } from '../src/components/filter-select/language-aliases';
+import { FilterSelectGroup } from '../src/components/filter-select/types';
 
 export { Components, JSX } from '../src/components';
 
@@ -606,3 +613,92 @@ translationSuccess.result = successfulTranslationResult;
 translationSuccess.canCongratulate = true;
 
 // ----
+
+// ---- Filter select
+
+const languageOption = (code: string) => ({
+  value: code,
+  label: (languageList as Record<string, string>)[code],
+  aliases: languageAliases(code),
+});
+const preferredLanguages = ['de', 'nl', 'en'];
+const languageGroups: FilterSelectGroup[] = [
+  {
+    label: 'Preferred Languages',
+    options: preferredLanguages.map(languageOption),
+  },
+  {
+    label: 'Available Languages',
+    options: Object.keys(languageList)
+      .filter((code) => !preferredLanguages.includes(code))
+      .map(languageOption),
+  },
+];
+
+const filterSelectLanguages = document.getElementById(
+  'filterSelectLanguages'
+) as HTMLVocablyFilterSelectElement;
+filterSelectLanguages.optionGroups = languageGroups;
+filterSelectLanguages.value = 'de';
+filterSelectLanguages.addEventListener('choose', ((
+  event: CustomEvent<string>
+) => {
+  document.getElementById('filterSelectLanguagesValue')!.textContent =
+    event.detail;
+}) as EventListener);
+
+const filterSelectFruits = document.getElementById(
+  'filterSelectFruits'
+) as HTMLVocablyFilterSelectElement;
+filterSelectFruits.optionGroups = [
+  {
+    label: '',
+    options: [
+      { value: 'apple', label: 'Apple', aliases: ['manzana', 'pome'] },
+      { value: 'banana', label: 'Banana', aliases: ['plátano'] },
+      { value: 'lemon', label: 'Lemon', aliases: ['citrus', 'limón'] },
+      { value: 'orange', label: 'Orange', aliases: ['citrus', 'naranja'] },
+      { value: 'strawberry', label: 'Strawberry', aliases: ['berry', 'fresa'] },
+      { value: 'blueberry', label: 'Blueberry', aliases: ['berry'] },
+    ],
+  },
+];
+filterSelectFruits.value = 'banana';
+
+const hintSelector = document.getElementById(
+  'hintSelector'
+) as HTMLVocablyHintSelectorElement;
+hintSelector.optionGroups = [
+  [
+    '',
+    Object.entries(languageList).map(
+      ([code, name]) => [code, name, languageAliases(code)] as any
+    ),
+  ],
+];
+hintSelector.value = 'nl';
+hintSelector.addEventListener('choose', ((event: CustomEvent<string>) => {
+  hintSelector.value = event.detail;
+}) as EventListener);
+
+const filterSelectPlain = document.getElementById(
+  'filterSelectPlain'
+) as HTMLVocablyFilterSelectElement;
+filterSelectPlain.optionGroups = languageGroups;
+filterSelectPlain.value = 'fr';
+filterSelectPlain.addEventListener('choose', ((event: CustomEvent<string>) => {
+  document.getElementById('filterSelectPlainLabel')!.textContent =
+    event.detail.slice(0, 2);
+}) as EventListener);
+
+const filterSelectDisabled = document.getElementById(
+  'filterSelectDisabled'
+) as HTMLVocablyFilterSelectElement;
+filterSelectDisabled.optionGroups = filterSelectFruits.optionGroups;
+filterSelectDisabled.value = 'apple';
+
+const filterSelectClipped = document.getElementById(
+  'filterSelectClipped'
+) as HTMLVocablyFilterSelectElement;
+filterSelectClipped.optionGroups = languageGroups;
+filterSelectClipped.value = 'en';

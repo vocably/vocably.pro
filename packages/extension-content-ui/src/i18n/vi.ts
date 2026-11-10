@@ -42,6 +42,9 @@ export const vi = {
   'search.i_speak': 'Tôi nói',
   'search.preferred_languages': 'Ngôn ngữ ưa thích',
   'search.available_languages': 'Ngôn ngữ có sẵn',
+  // filter-select
+  'select.filter_placeholder': 'Tìm kiếm',
+  'select.no_results': 'Không tìm thấy kết quả',
   'search.placeholder_default': 'Bất kỳ từ hoặc cụm từ nào',
   'search.swap_direction': 'Đổi chiều dịch',
   'search.submit': 'Dịch',

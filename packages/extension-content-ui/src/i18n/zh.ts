@@ -40,6 +40,9 @@ export const zh = {
   'search.i_speak': '我会说',
   'search.preferred_languages': '常用语言',
   'search.available_languages': '可用语言',
+  // filter-select
+  'select.filter_placeholder': '搜索',
+  'select.no_results': '未找到结果',
   'search.placeholder_default': '任意单词或短语',
   'search.swap_direction': '切换翻译方向',
   'search.submit': '翻译',

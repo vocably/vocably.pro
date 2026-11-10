@@ -45,34 +45,29 @@
         padding-left: 1.5rem;
       }
 
-      &:has(:focus) {
-        outline: none;
-      }
-
-      &:has(:focus-visible) {
+      /* The focus ring goes around the whole wrapper (rounded for the first
+         one) rather than the button inside the filter select. */
+      &:has(vocably-filter-select.focus-visible) {
         outline: auto;
         outline-color: Highlight;
         outline-color: -webkit-focus-ring-color;
       }
 
-      position: relative;
+      vocably-filter-select {
+        display: block;
+        height: var(--height);
+        text-transform: uppercase;
+
+        &::part(trigger):focus-visible {
+          outline: none;
+        }
+      }
 
       .label {
-        text-transform: uppercase;
         width: 2rem;
         text-align: center;
         height: var(--height);
         line-height: var(--height);
-      }
-
-      select {
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        opacity: 0;
-        appearance: none;
       }
 
       &.delimiter {
@@ -186,21 +181,29 @@
 >
   <div class='search-input'>
     <div class='language-selector-wrapper'>
-      <div class='label' aria-hidden='true' translate='no'></div>
-      <select name='sourceLanguage' aria-label='Source language'>
-        {{#each htmlWebpackPlugin.options.environment.languages}}
-          <option value='{{this.code}}'>{{this.label}}</option>
-        {{/each}}
-      </select>
+      <vocably-filter-select
+        variant='plain'
+        label='Source language'
+      ><div
+          slot='trigger'
+          class='label'
+          aria-hidden='true'
+          translate='no'
+        ></div></vocably-filter-select>
+      <input type='hidden' name='sourceLanguage' />
     </div>
     <i class='bi bi-chevron-compact-right' aria-hidden='true'></i>
     <div class='language-selector-wrapper delimiter'>
-      <div class='label' aria-hidden='true' translate='no'></div>
-      <select name='targetLanguage' aria-label='Target language'>
-        {{#each htmlWebpackPlugin.options.environment.languages}}
-          <option value='{{this.code}}'>{{this.label}}</option>
-        {{/each}}
-      </select>
+      <vocably-filter-select
+        variant='plain'
+        label='Target language'
+      ><div
+          slot='trigger'
+          class='label'
+          aria-hidden='true'
+          translate='no'
+        ></div></vocably-filter-select>
+      <input type='hidden' name='targetLanguage' />
     </div>
     <input
       type='text'

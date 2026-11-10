@@ -43,6 +43,9 @@ export const uk = {
   'search.i_speak': 'Переклад:',
   'search.preferred_languages': 'Бажані мови',
   'search.available_languages': 'Доступні мови',
+  // filter-select
+  'select.filter_placeholder': 'Пошук',
+  'select.no_results': 'Нічого не знайдено',
   'search.placeholder_default': 'Будь-яке слово або фраза',
   'search.swap_direction': 'Змінити напрямок перекладу',
   'search.submit': 'Перекласти',

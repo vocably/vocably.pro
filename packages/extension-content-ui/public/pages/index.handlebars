@@ -23,6 +23,45 @@
       <h1>Search form</h1>
       {{> search-form }}
 
+      <h1>Filter select</h1>
+
+      <h2>Languages: groups, aliases (code, English and native names)</h2>
+      <div class="mb-3" style="max-width: 360px">
+        <vocably-filter-select id="filterSelectLanguages" label="Language"></vocably-filter-select>
+        <div class="small text-muted mt-1">
+          Chosen: <span id="filterSelectLanguagesValue">de</span>.
+          Try "deutsch", "日本", "pt" or "espanol".
+        </div>
+      </div>
+
+      <h2>Custom aliases, no groups</h2>
+      <div class="mb-3" style="max-width: 240px">
+        <vocably-filter-select id="filterSelectFruits" label="Fruit"></vocably-filter-select>
+        <div class="small text-muted mt-1">Try "citrus", "berry" or "manzana".</div>
+      </div>
+
+      <h2>Hint selector</h2>
+      <div class="mb-3" style="max-width: 360px">
+        <vocably-hint-selector id="hintSelector" hint="I study" shrink-small></vocably-hint-selector>
+      </div>
+
+      <h2>Plain variant with a custom trigger</h2>
+      <div class="mb-3">
+        <vocably-filter-select id="filterSelectPlain" variant="plain" label="Language" style="display: inline-block; width: 3rem; height: 2.5rem; font-weight: bold; text-transform: uppercase; border: 1px solid #ddd; border-radius: 0.5rem"><span slot="trigger" id="filterSelectPlainLabel">fr</span></vocably-filter-select>
+      </div>
+
+      <h2>Disabled</h2>
+      <div class="mb-3" style="max-width: 240px">
+        <vocably-filter-select id="filterSelectDisabled" disabled></vocably-filter-select>
+      </div>
+
+      <h2>At the bottom of a scrollable container</h2>
+      <div class="mb-3 border rounded p-2" style="max-width: 360px; height: 140px; overflow: auto">
+        <div style="height: 80px"></div>
+        <vocably-filter-select id="filterSelectClipped" label="Language"></vocably-filter-select>
+        <div style="height: 120px"></div>
+      </div>
+
       <h1>None-logged-in</h1>
       <vocably-popup><vocably-translation
         phrase='gemaakt'

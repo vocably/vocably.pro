@@ -43,6 +43,9 @@ export const ru = {
   'search.i_speak': 'Я знаю',
   'search.preferred_languages': 'Предпочтительные языки',
   'search.available_languages': 'Доступные языки',
+  // filter-select
+  'select.filter_placeholder': 'Поиск',
+  'select.no_results': 'Ничего не найдено',
   'search.placeholder_default': 'Любое слово или фраза',
   'search.swap_direction': 'Сменить направление перевода',
   'search.submit': 'Перевести',

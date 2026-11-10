@@ -1,0 +1,262 @@
+@import '../../styles/variables';
+
+$padding-x: 14px;
+$padding-y: 10px;
+
+:host {
+  display: block;
+  // Reddit sets visibility: hidden for custom elements
+  visibility: visible !important;
+}
+
+.trigger {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  margin: 0;
+  padding: $padding-y $padding-x;
+  border: none;
+  border-radius: $v-border-radius;
+  background-color: $v-light-color-contrast;
+  color: inherit;
+  font: inherit;
+  font-size: var(--font-size, #{$base-font-size * 0.9});
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  text-align: start;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 200ms;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover:not(:disabled),
+  :host(.open) & {
+    background-color: $v-light-color-contrast-2;
+  }
+
+  &:focus-visible {
+    background-color: $v-light-color-contrast-2;
+    box-shadow: 0 0 0 2px rgba($v-light-color-primary, 0.45);
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  .value {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .chevron {
+    flex-shrink: 0;
+    width: 11px;
+    height: 7px;
+    margin-left: 4px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 0.8;
+    stroke-linecap: round;
+    transition: transform 200ms;
+  }
+}
+
+:host(.open) .trigger .chevron {
+  transform: rotate(180deg);
+}
+
+:host(.variant-plain) .trigger {
+  padding: 0;
+  font-size: inherit;
+  border-radius: 0;
+  background: none;
+  height: 100%;
+  justify-content: center;
+
+  &:focus-visible {
+    box-shadow: none;
+    outline: auto;
+    outline-color: Highlight;
+    outline-color: -webkit-focus-ring-color;
+  }
+
+  .value {
+    flex: none;
+  }
+}
+
+.panel {
+  // Reset the user agent popover styles.
+  position: fixed;
+  inset: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  overflow: hidden;
+
+  z-index: 2147483647;
+  box-sizing: border-box;
+  display: none;
+  flex-direction: column;
+  border-radius: $v-border-radius + 2px;
+  background: $v-light-color-body-bg;
+  color: $v-light-color-body;
+  font-family: inherit;
+  font-size: var(--filter-select-font-size, 15px);
+  font-weight: normal;
+  line-height: 1.35;
+  text-transform: none;
+  text-align: start;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.08),
+    0 2px 4px rgba(15, 23, 42, 0.08),
+    0 12px 32px -6px rgba(15, 23, 42, 0.25);
+  animation: panel-in 120ms ease-out;
+
+  &.open {
+    display: flex;
+  }
+
+  &.above {
+    flex-direction: column-reverse;
+    animation-name: panel-in-above;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes panel-in-above {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.filter {
+  flex-shrink: 0;
+  position: relative;
+  padding: 6px;
+  border-bottom: 1px solid $v-light-color-border-muted;
+
+  .above & {
+    border-bottom: none;
+    border-top: 1px solid $v-light-color-border-muted;
+  }
+
+  .filter-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    width: 18px;
+    height: 18px;
+    transform: translateY(-50%);
+    fill: $v-light-color-muted;
+    pointer-events: none;
+  }
+
+  .filter-input {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 8px 10px 8px 36px;
+    border: none;
+    border-radius: $v-border-radius;
+    background-color: $v-light-color-elevation-2;
+    color: $v-light-color-emphasize;
+    font: inherit;
+    // 16px keeps iOS Safari from zooming the page in on focus.
+    font-size: max(16px, 1em);
+    outline: none;
+    box-shadow: none;
+
+    &::placeholder {
+      color: $v-light-color-muted;
+    }
+
+    &:focus {
+      background-color: $v-light-color-elevation-3;
+    }
+  }
+}
+
+.list,
+.group-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0;
+
+  &:empty {
+    display: none;
+  }
+}
+
+.group-label {
+  padding: 8px 14px 4px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: $v-light-color-muted;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 4px;
+  padding: 8px 10px;
+  border-radius: $v-border-radius - 2px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  .option-label {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  &.active {
+    background-color: $v-light-color-elevation-3;
+  }
+
+  &.selected {
+    color: $v-light-color-emphasize;
+    font-weight: bold;
+  }
+
+  .check {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    fill: $v-light-color-primary;
+  }
+}
+
+.no-results {
+  padding: 14px;
+  color: $v-light-color-muted;
+  text-align: center;
+}

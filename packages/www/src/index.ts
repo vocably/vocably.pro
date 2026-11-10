@@ -1,7 +1,9 @@
 import { initializePaddle } from '@paddle/paddle-js';
 import '@sneas/telephone/iphone-16-max';
 import '@sneas/telephone/pixel-9-pro';
-import { isGoogleLanguage } from '@vocably/model';
+import { FilterSelectGroup } from '@vocably/extension-content-ui/src/components/filter-select/types';
+import { languageAliases } from '@vocably/extension-content-ui/src/components/filter-select/language-aliases';
+import { isGoogleLanguage, languageList } from '@vocably/model';
 import * as Bowser from 'bowser';
 import { track } from './analytics';
 import './bootstrap.scss';
@@ -204,118 +206,160 @@ const getSourceLanguage = () => {
   );
 };
 
-document
-  .querySelectorAll('#searchForm')
-  .forEach((searchForm: HTMLFormElement) => {
-    const sourceLanguageSelect = searchForm.querySelector(
-      '[name=sourceLanguage]'
-    ) as HTMLSelectElement;
-    const targetLanguageSelect = searchForm.querySelector(
-      '[name=targetLanguage]'
-    ) as HTMLSelectElement;
+type LanguageSelect = HTMLElement & {
+  value: string;
+  optionGroups: FilterSelectGroup[];
+};
 
-    sourceLanguageSelect.value = getSourceLanguage();
-    let targetLanguage: string = getPreferredTargetLanguage();
-    if (targetLanguage === 'en-GB' && sourceLanguageSelect.value === 'en') {
-      targetLanguage = 'en';
+const languageGroups: FilterSelectGroup[] = [
+  {
+    label: '',
+    options: Object.entries(languageList)
+      .map(([code, label]) => ({
+        value: code,
+        label,
+        aliases: languageAliases(code),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label)),
+  },
+];
+
+const searchForms = document.querySelectorAll<HTMLFormElement>('#searchForm');
+
+if (searchForms.length > 0) {
+  import('@vocably/extension-content-ui/loader').then(
+    ({ defineCustomElements }) => defineCustomElements()
+  );
+}
+
+searchForms.forEach((searchForm: HTMLFormElement) => {
+  // The hidden inputs carry the values when the form is submitted.
+  const sourceLanguageInput = searchForm.querySelector(
+    'input[name=sourceLanguage]'
+  ) as HTMLInputElement;
+  const targetLanguageInput = searchForm.querySelector(
+    'input[name=targetLanguage]'
+  ) as HTMLInputElement;
+  const textInput = searchForm.querySelector('[name=text]') as HTMLInputElement;
+
+  const updatePlaceholder = () => {
+    if (window.innerWidth < 600) {
+      textInput.placeholder = 'Search...';
+      return;
     }
-    targetLanguageSelect.value = targetLanguage;
-    const textInput = searchForm.querySelector(
-      '[name=text]'
-    ) as HTMLInputElement;
 
-    const updatePlaceholder = () => {
-      if (window.innerWidth < 600) {
-        textInput.placeholder = 'Search...';
-        return;
-      }
+    if (sourceLanguageInput.value === targetLanguageInput.value) {
+      textInput.placeholder = 'Search for any word...';
+      return;
+    }
 
-      if (sourceLanguageSelect.value === targetLanguageSelect.value) {
-        textInput.placeholder = 'Search for any word...';
-        return;
-      }
+    textInput.placeholder = 'Search for any word or phrase...';
+  };
 
-      textInput.placeholder = 'Search for any word or phrase...';
+  const languageChangeListeners: Array<() => void> = [];
+
+  const setUpLanguageSelect = (
+    wrapper: HTMLElement,
+    input: HTMLInputElement,
+    initialValue: string
+  ) => {
+    const select = wrapper.querySelector(
+      'vocably-filter-select'
+    ) as LanguageSelect;
+    const label = wrapper.querySelector('.label') as HTMLElement;
+
+    const setValue = (value: string) => {
+      input.value = value;
+      select.value = value;
+      label.textContent = value.slice(0, 2);
     };
 
-    updatePlaceholder();
+    select.optionGroups = languageGroups;
+    setValue(initialValue);
 
-    searchForm
-      .querySelectorAll('.language-selector-wrapper')
-      .forEach((languageSelectorWrapper) => {
-        const label = languageSelectorWrapper.querySelector('.label');
-        const select = languageSelectorWrapper.querySelector('select');
+    select.addEventListener('choose', (event: CustomEvent<string>) => {
+      setValue(event.detail);
+      updatePlaceholder();
+      languageChangeListeners.forEach((listener) => listener());
+    });
+  };
 
-        const setLabel = () => {
-          label.innerHTML = select.value.slice(0, 2);
-        };
+  const sourceLanguage = getSourceLanguage();
+  let targetLanguage: string = getPreferredTargetLanguage();
+  if (targetLanguage === 'en-GB' && sourceLanguage === 'en') {
+    targetLanguage = 'en';
+  }
 
-        select.addEventListener('change', () => {
-          setLabel();
-          updatePlaceholder();
-        });
+  setUpLanguageSelect(
+    sourceLanguageInput.closest('.language-selector-wrapper'),
+    sourceLanguageInput,
+    sourceLanguage
+  );
+  setUpLanguageSelect(
+    targetLanguageInput.closest('.language-selector-wrapper'),
+    targetLanguageInput,
+    targetLanguage
+  );
 
-        setLabel();
-      });
+  updatePlaceholder();
 
-    const setUpExample = () => {
-      const exampleContainer = searchForm.querySelector('.search-form-hint');
+  const setUpExample = () => {
+    const exampleContainer = searchForm.querySelector('.search-form-hint');
 
-      if (!exampleContainer) {
+    if (!exampleContainer) {
+      return;
+    }
+
+    const sourceExampleButton = searchForm.querySelector(
+      '[data-search-source-example]'
+    ) as HTMLButtonElement;
+    const translationExampleContainer = searchForm.querySelector(
+      `[data-search-relevant-target]`
+    );
+    const targetExampleButton = searchForm.querySelector(
+      '[data-search-target-example]'
+    ) as HTMLButtonElement;
+
+    const onLanguageChange = () => {
+      if (
+        !isGoogleLanguage(sourceLanguageInput.value) ||
+        !isGoogleLanguage(targetLanguageInput.value)
+      ) {
+        return;
+      }
+      const isRelevantTranslationLanguage =
+        sourceLanguageInput.value !== targetLanguageInput.value;
+      sourceExampleButton.innerHTML = words[sourceLanguageInput.value];
+      targetExampleButton.innerHTML = words[targetLanguageInput.value];
+      if (!isRelevantTranslationLanguage) {
+        translationExampleContainer.classList.add('d-none');
+        targetExampleButton.disabled = true;
+      } else {
+        translationExampleContainer.classList.remove('d-none');
+        targetExampleButton.disabled = false;
+      }
+      exampleContainer.classList.remove('invisible');
+    };
+
+    onLanguageChange();
+    languageChangeListeners.push(onLanguageChange);
+
+    const onExampleClick = (e: Event) => {
+      const word = e.target['innerHTML'];
+      if (!word) {
         return;
       }
 
-      const sourceExampleButton = searchForm.querySelector(
-        '[data-search-source-example]'
-      ) as HTMLButtonElement;
-      const translationExampleContainer = searchForm.querySelector(
-        `[data-search-relevant-target]`
-      );
-      const targetExampleButton = searchForm.querySelector(
-        '[data-search-target-example]'
-      ) as HTMLButtonElement;
-
-      const onLanguageChange = () => {
-        if (
-          !isGoogleLanguage(sourceLanguageSelect.value) ||
-          !isGoogleLanguage(targetLanguageSelect.value)
-        ) {
-          return;
-        }
-        const isRelevantTranslationLanguage =
-          sourceLanguageSelect.value !== targetLanguageSelect.value;
-        sourceExampleButton.innerHTML = words[sourceLanguageSelect.value];
-        targetExampleButton.innerHTML = words[targetLanguageSelect.value];
-        if (!isRelevantTranslationLanguage) {
-          translationExampleContainer.classList.add('d-none');
-          targetExampleButton.disabled = true;
-        } else {
-          translationExampleContainer.classList.remove('d-none');
-          targetExampleButton.disabled = false;
-        }
-        exampleContainer.classList.remove('invisible');
-      };
-
-      onLanguageChange();
-      sourceLanguageSelect.addEventListener('change', onLanguageChange);
-      targetLanguageSelect.addEventListener('change', onLanguageChange);
-
-      const onExampleClick = (e: Event) => {
-        const word = e.target['innerHTML'];
-        if (!word) {
-          return;
-        }
-
-        textInput.value = word;
-        searchForm.submit();
-      };
-
-      sourceExampleButton.addEventListener('click', onExampleClick);
-      targetExampleButton.addEventListener('click', onExampleClick);
+      textInput.value = word;
+      searchForm.submit();
     };
 
-    setUpExample();
-  });
+    sourceExampleButton.addEventListener('click', onExampleClick);
+    targetExampleButton.addEventListener('click', onExampleClick);
+  };
+
+  setUpExample();
+});
 
 initializePaddle({
   token: window['paddleClientSideToken'],

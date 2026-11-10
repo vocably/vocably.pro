@@ -44,6 +44,9 @@ export const tr = {
   'search.i_speak': 'Çeviri Dili:',
   'search.preferred_languages': 'Tercih Edilen Diller',
   'search.available_languages': 'Mevcut Diller',
+  // filter-select
+  'select.filter_placeholder': 'Ara',
+  'select.no_results': 'Sonuç bulunamadı',
   'search.placeholder_default': 'Herhangi bir kelime veya cümle',
   'search.swap_direction': 'Çeviri yönünü değiştir',
   'search.submit': 'Çevir',

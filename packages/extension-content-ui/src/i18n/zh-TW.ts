@@ -40,6 +40,9 @@ export const zhTW = {
   'search.i_speak': '我會說',
   'search.preferred_languages': '偏好語言',
   'search.available_languages': '可用語言',
+  // filter-select
+  'select.filter_placeholder': '搜尋',
+  'select.no_results': '找不到結果',
   'search.placeholder_default': '任何單字或片語',
   'search.swap_direction': '切換翻譯方向',
   'search.submit': '翻譯',

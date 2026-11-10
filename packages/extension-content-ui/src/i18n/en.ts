@@ -42,6 +42,9 @@ export const en = {
   'search.i_speak': 'I speak',
   'search.preferred_languages': 'Preferred Languages',
   'search.available_languages': 'Available Languages',
+  // filter-select
+  'select.filter_placeholder': 'Search',
+  'select.no_results': 'Nothing found',
   'search.placeholder_default': 'Any word or phrase',
   'search.swap_direction': 'Swap translation direction',
   'search.submit': 'Translate',
