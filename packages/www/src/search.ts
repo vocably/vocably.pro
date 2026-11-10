@@ -163,7 +163,51 @@ const applyValuesToDom = (values: SearchValues) => {
     });
 };
 
-if (!existingSearchForm) {
+/**
+ * A prerendered SEO page (e.g. `/de-en/exercise-in-german.html`) ships its
+ * languages in the search form's `values` attribute. They become the visitor's
+ * search languages, but only where none have been picked yet.
+ */
+const rememberPrerenderedLanguages = (form: Element) => {
+  let values: unknown;
+  try {
+    values = JSON.parse(form.getAttribute('values') ?? '');
+  } catch {
+    return;
+  }
+
+  if (!isObject(values)) {
+    return;
+  }
+
+  const { sourceLanguage, targetLanguage } = values as Partial<SearchValues>;
+
+  if (
+    sourceLanguage &&
+    isGoogleLanguage(sourceLanguage) &&
+    !localStorage.getItem(searchConfig.sourceLanguageLocalStorageKey)
+  ) {
+    localStorage.setItem(
+      searchConfig.sourceLanguageLocalStorageKey,
+      sourceLanguage
+    );
+  }
+
+  if (
+    targetLanguage &&
+    isGoogleLanguage(targetLanguage) &&
+    !localStorage.getItem(searchConfig.targetLanguageLocalStorageKey)
+  ) {
+    localStorage.setItem(
+      searchConfig.targetLanguageLocalStorageKey,
+      targetLanguage
+    );
+  }
+};
+
+if (existingSearchForm) {
+  rememberPrerenderedLanguages(existingSearchForm);
+} else {
   const initialSearchValues = getInitialSearchValues();
   applyValuesToDom(initialSearchValues);
   searchContainer.appendChild(searchForm);
