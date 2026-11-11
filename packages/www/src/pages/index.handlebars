@@ -882,146 +882,421 @@
   </div>
 
   <style>
-    /* Base Layout */
     .vocab-wall-section {
-      background-color: #f9f9f9;
+      --wall-bg: #f6f7f9;
+
+      position: relative;
+      background:
+        radial-gradient(60rem 30rem at 50% 0%, rgba(var(--v-color-primary-rgb), 0.07), transparent 70%),
+        var(--wall-bg);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .wall-container {
+      padding-top: 4rem;
+      padding-bottom: 3rem;
+    }
+
+    @media (min-width: 992px) {
+      .wall-container {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+      }
     }
 
     .wall-intro {
-      margin-bottom: 2rem;
+      max-width: 48rem;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .wall-eyebrow {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: var(--v-color-primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
     .wall-title {
-      margin-bottom: 0.5rem;
-      font-size: 1.75rem;
-      line-height: 1.25;
+      margin-bottom: 0.75rem;
+      font-size: 2rem;
+      line-height: 1.2;
     }
 
     .wall-subtitle {
-      margin: 0;
+      margin: 0 0 1.75rem;
       color: var(--bs-secondary-color);
-      font-size: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .review-tabs {
+      display: inline-grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.25rem;
+      width: 100%;
+      max-width: 40rem;
+      padding: 0.25rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 1.25rem;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+    }
+
+    .review-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.125rem;
+      min-width: 0;
+      padding: 0.625rem 0.75rem;
+      border: 1px solid transparent;
+      border-radius: 1rem;
+      background: none;
+      color: var(--bs-secondary-color);
+      line-height: 1.3;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+      &:hover {
+        color: var(--bs-body-color);
+        background: rgba(var(--v-color-primary-rgb), 0.04);
+      }
+
+      &:focus-visible {
+        outline: 2px solid var(--v-color-primary);
+        outline-offset: 2px;
+      }
+
+      &[aria-selected='true'] {
+        border-color: rgba(var(--v-color-primary-rgb), 0.2);
+        background: rgba(var(--v-color-primary-rgb), 0.08);
+        color: var(--bs-body-color);
+      }
+    }
+
+    .review-tab-name {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .review-tab-stats {
+      font-size: 0.8rem;
+      white-space: nowrap;
+
+      & .bi {
+        color: #f5a524;
+      }
+    }
+
+    .review-tab-count::before {
+      content: ' \00B7  ';
+      white-space: pre;
+    }
+
+    @media (max-width: 575.98px) {
+      .review-tab {
+        padding: 0.5rem 0.25rem;
+      }
+
+      .review-tab-name {
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        white-space: normal;
+        text-align: center;
+
+        & .platform-logo {
+          margin-right: 0;
+          width: 1.25rem;
+          height: 1.25rem;
+          font-size: 1.25rem;
+        }
+      }
+
+      .review-tab-stats {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.75rem;
+        line-height: 1.35;
+      }
+
+      .review-tab-rating {
+        font-weight: 600;
+      }
+
+      .review-tab-count::before {
+        content: none;
+      }
     }
 
     @media (min-width: 768px) {
       .wall-title {
-        font-size: 2.25rem;
+        font-size: 2.75rem;
       }
     }
 
-    /* The Wrapper controls the visibility/height */
     .wall-wrapper {
       position: relative;
-      max-height: 300px; /* Initial visible height */
+      max-height: 560px;
       overflow: hidden;
-      transition: max-height 0.5s ease-in-out;
     }
 
-    /* Class added via JS to reveal all */
     .wall-wrapper.expanded {
       max-height: none;
       overflow: visible;
     }
 
-    /* Masonry Layout using CSS Columns */
     .wall-grid {
       column-count: 3;
-      column-gap: 0.5rem;
+      column-gap: 1.25rem;
     }
 
-    /* Responsive columns */
-    @media (max-width: 768px) {
+    @media (max-width: 991.98px) {
       .wall-grid { column-count: 2; }
     }
-    @media (max-width: 480px) {
+
+    @media (max-width: 575.98px) {
       .wall-grid { column-count: 1; }
     }
 
-    /* Individual Card Styling */
     .review-card {
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 0.5rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-      break-inside: avoid; /* Prevents card from splitting across columns */
-    }
-
-    .review-header {
+      position: relative;
       display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .name {
-      font-weight: bold;
-      font-size: 0.95rem;
-      color: var(--bs-body-color);
-    }
-
-    a.name {
-      text-decoration: none;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding: 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 1rem;
+      background: #fff;
+      box-shadow:
+        0 1px 2px rgba(16, 24, 40, 0.04),
+        0 4px 16px rgba(16, 24, 40, 0.04);
+      break-inside: avoid;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 
       &:hover {
-        text-decoration: underline;
+        transform: translateY(-2px);
+        border-color: rgba(var(--v-color-primary-rgb), 0.18);
+        box-shadow:
+          0 2px 4px rgba(16, 24, 40, 0.04),
+          0 12px 32px rgba(16, 24, 40, 0.08);
+      }
+
+      &::after {
+        content: '\201C';
+        position: absolute;
+        top: 0.25rem;
+        right: 1.25rem;
+        color: rgba(var(--v-color-primary-rgb), 0.1);
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 4.5rem;
+        line-height: 1;
+        pointer-events: none;
       }
     }
 
-    .stars {
-      color: #ffb400; /* Gold color */
-      letter-spacing: 2px;
+    @media (prefers-reduced-motion: reduce) {
+      .review-card,
+      .review-card:hover {
+        transition: none;
+        transform: none;
+      }
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 0.125rem;
+      color: #f5a524;
+      font-size: 0.875rem;
     }
 
     .review-text {
-      font-size: 0.9rem;
-      line-height: 1.5;
       margin: 0;
+      color: var(--bs-body-color);
+      font-size: 0.975rem;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
     }
 
-    /* The Fade Overlay and Button */
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .review-avatar {
+      position: relative;
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      overflow: hidden;
+      background: rgba(var(--v-color-primary-rgb), 0.1);
+      color: var(--v-color-primary);
+
+      & img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .review-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      line-height: 1.3;
+    }
+
+    .review-name {
+      overflow: hidden;
+      color: var(--bs-body-color);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    a.review-name:hover {
+      color: var(--v-color-primary);
+    }
+
+    .review-source {
+      display: inline-flex;
+      align-items: center;
+      color: var(--bs-secondary-color);
+      font-size: 0.775rem;
+
+      & .platform-logo {
+        width: 0.875rem;
+        height: 0.875rem;
+        font-size: 0.875rem;
+      }
+    }
+
+    .platform-logo {
+      flex: none;
+      width: 1rem;
+      height: 1rem;
+      margin-right: 0.35rem;
+      font-size: 1rem;
+      line-height: 1;
+
+      &.bi-google-play {
+        color: #01875f;
+      }
+
+      &.bi-apple {
+        color: #333;
+      }
+    }
+
+    .review-title {
+      margin-bottom: -0.5rem;
+      padding-right: 2rem;
+      color: var(--bs-body-color);
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
     .wall-fade-overlay {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(to bottom, rgba(249,249,249,0), rgba(249,249,249,1) 80%);
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding-bottom: 20px;
-      pointer-events: none; /* Allows clicks to pass through top part of fade */
+      width: 100%;
+      height: 240px;
+      padding-bottom: 1.5rem;
+      background: linear-gradient(to bottom, rgba(246, 247, 249, 0), var(--wall-bg) 75%);
+      pointer-events: none;
     }
 
-    .wall-fade-overlay button {
+    .wall-more-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 999px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.08);
+      color: var(--bs-body-color);
+      font-size: 0.9rem;
+      font-weight: 500;
       pointer-events: auto;
+      transition: box-shadow 0.2s ease, color 0.2s ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--v-color-primary);
+        box-shadow: 0 6px 18px rgba(16, 24, 40, 0.12);
+      }
     }
 
-    /* Hide overlay when expanded */
     .wall-wrapper.expanded .wall-fade-overlay {
       display: none;
     }
   </style>
 
-  <section class="vocab-wall-section" data-nosnippet>
-    <div class="container-xl py-5">
-      <div class="wall-intro text-lg-center">
-        <h2 class="wall-title gradient-headline">Loved by active language users</h2>
+  <section class="vocab-wall-section" aria-labelledby="reviews-title" data-nosnippet>
+    <div class="wall-container container-xl px-4">
+      <div class="wall-intro">
+        <span class="wall-eyebrow">Reviews</span>
+        <h2 class="wall-title gradient-headline" id="reviews-title">Loved by active language users</h2>
         <p class="wall-subtitle">People who read, watch, and speak in the language they learn.</p>
+        <div class="review-tabs" role="tablist" aria-label="Review platform">
+            <button type="button" class="review-tab" role="tab" id="review-tab-chromeWebStore" aria-controls="review-panel-chromeWebStore" aria-selected="true"
+              data-platform="chromeWebStore" data-umami-event="Reviews Tab Click" data-umami-event-platform="chromeWebStore">
+              <span class="review-tab-name">{{> review-platform-icon platform='chromeWebStore' }}<span>Chrome<span class="d-none d-sm-inline"> Web Store</span></span></span>
+              <span class="review-tab-stats"><span class="review-tab-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 5.0</span><span class="review-tab-count">160 reviews</span></span>
+            </button>
+            <button type="button" class="review-tab" role="tab" id="review-tab-playStore" aria-controls="review-panel-playStore" aria-selected="false" tabindex="-1"
+              data-platform="playStore" data-umami-event="Reviews Tab Click" data-umami-event-platform="playStore">
+              <span class="review-tab-name">{{> review-platform-icon platform='playStore' }}Google Play</span>
+              <span class="review-tab-stats"><span class="review-tab-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.9</span><span class="review-tab-count">158 reviews</span></span>
+            </button>
+            <button type="button" class="review-tab" role="tab" id="review-tab-appStore" aria-controls="review-panel-appStore" aria-selected="false" tabindex="-1"
+              data-platform="appStore" data-umami-event="Reviews Tab Click" data-umami-event-platform="appStore">
+              <span class="review-tab-name">{{> review-platform-icon platform='appStore' }}App Store</span>
+              <span class="review-tab-stats"><span class="review-tab-rating"><i class="bi bi-star-fill" aria-hidden="true"></i> 4.9</span><span class="review-tab-count">122 reviews</span></span>
+            </button>
+        </div>
       </div>
 
-      <div class="wall-wrapper" id="wallWrapper" >
-        <div class="wall-grid">
-          {{#each htmlWebpackPlugin.options.environment.reviews}}
-            <div class="review-card {{#if (is-greater @index 10)}}d-none d-md-block{{/if}}" translate="no">
-              <div class="review-header">
-                <a href="{{this.url}}" class="name" target="_blank">{{this.name}}</a>
-                <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
-              </div>
-              <p class="review-text">{{this.text}}</p>
-            </div>
+      <div class="wall-wrapper" id="wallWrapper">
+        <div class="wall-grid" role="tabpanel" id="review-panel-chromeWebStore" aria-labelledby="review-tab-chromeWebStore">
+          {{#each htmlWebpackPlugin.options.environment.reviews.chromeWebStore}}
+            {{> review-card review=this index=@index platform='chromeWebStore' }}
+          {{/each}}
+        </div>
+        <div class="wall-grid" role="tabpanel" id="review-panel-playStore" aria-labelledby="review-tab-playStore" hidden>
+          {{#each htmlWebpackPlugin.options.environment.reviews.playStore}}
+            {{> review-card review=this index=@index platform='playStore' }}
+          {{/each}}
+        </div>
+        <div class="wall-grid" role="tabpanel" id="review-panel-appStore" aria-labelledby="review-tab-appStore" hidden>
+          {{#each htmlWebpackPlugin.options.environment.reviews.appStore}}
+            {{> review-card review=this index=@index platform='appStore' }}
           {{/each}}
         </div>
 
@@ -1030,12 +1305,11 @@
         </div>
 
         <div class="wall-fade-overlay" id="wallOverlay">
-          <button class="btn btn-dark btn-sm rounded-pill px-5 text-sm" id="showMoreBtn"
+          <button type="button" class="wall-more-button" id="showMoreBtn"
             data-umami-event='Show more reviews'
-          >Show more reviews</button>
+          >Show more reviews <i class="bi bi-chevron-down" aria-hidden="true"></i></button>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -1044,6 +1318,40 @@
       const wrapper = document.getElementById('wallWrapper');
       wrapper.classList.add('expanded');
     });
+
+    (() => {
+      const tabs = Array.from(document.querySelectorAll('.review-tab'));
+
+      const selectTab = (tab, focus) => {
+        tabs.forEach((t) => {
+          const selected = t === tab;
+          t.setAttribute('aria-selected', selected ? 'true' : 'false');
+          t.tabIndex = selected ? 0 : -1;
+          document.getElementById(t.getAttribute('aria-controls')).hidden = !selected;
+        });
+        if (focus) {
+          tab.focus();
+        }
+      };
+
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => selectTab(tab));
+        tab.addEventListener('keydown', (event) => {
+          const offset = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+          if (offset) {
+            event.preventDefault();
+            selectTab(tabs[(i + offset + tabs.length) % tabs.length], true);
+          }
+        });
+      });
+
+      // Preselect the store matching the visitor's platform.
+      const ua = navigator.userAgent;
+      const isAndroid = /android/i.test(ua);
+      const isIos = /iPad|iPhone|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+      const platform = isAndroid ? 'playStore' : isIos ? 'appStore' : 'chromeWebStore';
+      selectTab(document.getElementById('review-tab-' + platform));
+    })();
   </script>
 
 {{/layout}}
