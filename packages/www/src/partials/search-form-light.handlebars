@@ -92,10 +92,23 @@
     }
   }
 
+  /* A single soft pill split into two halves, each with a caption
+     ("I study" / "I speak") above the chosen language. It's borderless and
+     shares the search bar's rounding, so it reads as part of the search bar
+     rather than as more boxes stacked on top of it. Each half is a tap
+     target, and the height doesn't depend on the language names. */
   .search-form-languages {
-    margin: 0 0 1rem 1.75rem;
-    font-size: 1.15rem;
-    line-height: 1.6;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0 0 1.5rem;
+    padding: 0.25rem;
+    background: rgba(var(--v-color-primary-rgb), 0.06);
+    border-radius: 3rem;
+    font-size: 0.8rem;
+    line-height: 1.3;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: rgba(var(--v-color-body-rgb), 0.7);
     text-align: left;
     transition: opacity 0.2s ease;
 
@@ -106,29 +119,64 @@
       opacity: 0;
     }
 
-    /* Each clause wraps as a whole, so "and I speak X" moves to the next
-       line together rather than leaving the select dangling. */
     .clause {
-      white-space: nowrap;
+      position: relative;
+      display: block;
+      min-width: 0;
+      /* Keeps the hover/open highlight clear of the divider. */
+      --gap: 2px;
+      margin: 0 var(--gap) 0 0;
+      padding: 0.5rem 1.25rem 0.55rem 1.5rem;
+      /* Round on the outer side, flatter where the two halves meet. */
+      --outer-radius: 3rem;
+      --inner-radius: 0.5rem;
+      --radius: var(--outer-radius) var(--inner-radius) var(--inner-radius)
+        var(--outer-radius);
+      border-radius: var(--radius);
+      transition: background-color 0.2s ease;
+
+      & + .clause {
+        margin: 0 0 0 var(--gap);
+        --radius: var(--inner-radius) var(--outer-radius) var(--outer-radius)
+          var(--inner-radius);
+      }
+
+      &:hover,
+      &:has(vocably-filter-select.open) {
+        background: rgba(var(--v-color-primary-rgb), 0.08);
+      }
+
+      /* Divider between the halves. */
+      & + .clause::before {
+        content: '';
+        position: absolute;
+        left: calc(-1 * var(--gap) - 0.5px);
+        top: 25%;
+        bottom: 25%;
+        border-left: 1px solid rgba(var(--v-color-primary-rgb), 0.18);
+      }
     }
 
-    /* The label is plain text in the light DOM, so the line is laid out the
+    /* The label is plain text in the light DOM, so the field is laid out the
        same before, during and after the select's upgrade; the select's
-       (empty) trigger button is stretched over it to handle the clicks. */
+       (empty) trigger button is stretched over the whole half (positioned
+       against .clause) to handle the clicks. */
     .language-selector {
-      position: relative;
-      display: inline-block;
-      vertical-align: top;
+      display: flex;
+      align-items: center;
+      margin-top: 0.1rem;
+      font-size: 1.1rem;
       font-weight: 600;
+      letter-spacing: normal;
       color: var(--v-color-primary);
 
       vocably-filter-select {
         position: absolute;
-        inset: 0 -0.25em;
+        inset: 0;
         display: block;
 
         &::part(trigger) {
-          border-radius: 0.25rem;
+          border-radius: var(--radius);
         }
 
         &::part(trigger):focus-visible {
@@ -136,20 +184,21 @@
         }
       }
 
+      /* Shrinks (with an ellipsis) but doesn't grow, so the chevron stays
+         right next to the language name. */
       .label-text {
-        text-decoration: underline dashed;
-        text-decoration-color: rgba(var(--v-color-primary-rgb), 0.55);
-        text-decoration-thickness: 1px;
-        text-underline-offset: 0.3em;
-        transition: text-decoration-color 0.2s ease;
+        flex: 0 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .chevron {
-        display: inline-block;
+        flex-shrink: 0;
         width: 0.6em;
         height: 0.6em;
         margin-left: 0.3em;
-        vertical-align: 0.05em;
         fill: none;
         stroke: currentColor;
         stroke-width: 1.75;
@@ -157,34 +206,27 @@
         stroke-linejoin: round;
         transition: transform 0.2s ease;
       }
-
-      &:hover .label-text {
-        text-decoration-color: var(--v-color-primary);
-      }
-
-      &:hover .chevron {
-        transform: translateY(1px);
-      }
-
-      &:has(vocably-filter-select.open) .chevron {
-        transform: rotate(180deg);
-      }
     }
 
-    /* Small screens: a fixed two-row layout ("I study X" / "I speak Y")
-       instead of a sentence wrapping wherever the language names push it.
-       Always two rows, so the height doesn't depend on the names either. */
+    .clause:hover .chevron {
+      transform: translateY(1px);
+    }
+
+    .clause:has(vocably-filter-select.open) .chevron {
+      transform: rotate(180deg);
+    }
+
     @media (max-width: 600px) {
-      margin-left: 1.25rem;
-      font-size: 1rem;
-      line-height: 1.75;
+      margin: 0 0.5rem 1.25rem;
+      padding: 0.2rem;
+      font-size: 0.75rem;
 
       .clause {
-        display: block;
+        padding: 0.4rem 1rem 0.45rem 1.25rem;
       }
 
-      .conjunction {
-        display: none;
+      .language-selector {
+        font-size: 1rem;
       }
     }
   }
@@ -237,9 +279,8 @@
         ><span slot='trigger'></span></vocably-filter-select><input
           type='hidden'
           name='sourceLanguage'
-        /></span><span class='conjunction'>,</span></span>
-    <span class='clause'><span class='conjunction'>and</span>
-      I speak
+        /></span></span>
+    <span class='clause'>I speak
       <span class='language-selector'><span
           class='label-text'
           translate='no'
@@ -251,7 +292,7 @@
         ><span slot='trigger'></span></vocably-filter-select><input
           type='hidden'
           name='targetLanguage'
-        /></span><span class='too' hidden> too.</span></span>
+        /></span></span>
   </p>
   <div class='search-input'>
     <input

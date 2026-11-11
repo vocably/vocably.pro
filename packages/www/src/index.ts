@@ -311,19 +311,7 @@ searchForms.forEach((searchForm: HTMLFormElement) => {
 
   updatePlaceholder();
 
-  // "…, and I speak English too." when both languages are the same.
-  const tooText = searchForm.querySelector<HTMLElement>(
-    '.search-form-languages .too'
-  );
-  const updateToo = () => {
-    if (tooText) {
-      tooText.hidden = sourceLanguageInput.value !== targetLanguageInput.value;
-    }
-  };
-  updateToo();
-  languageChangeListeners.push(updateToo);
-
-  // Reveal the language sentence once both selects have rendered, so the
+  // Reveal the language selector once both selects have rendered, so the
   // unstyled pre-upgrade markup never shows up and shifts the layout.
   const languagesContainer = searchForm.querySelector('.search-form-languages');
   customElements.whenDefined('vocably-filter-select').then(() =>
