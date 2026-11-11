@@ -1,0 +1,29 @@
+<figure class="review-card {{#if (is-greater index 10)}}d-none d-md-flex{{/if}}" translate="no">
+  <div class="review-stars" role="img" aria-label="{{review.stars}} out of 5 stars">
+    {{star-icons review.stars}}
+  </div>
+  {{#if review.title}}
+    <div class="review-title">{{review.title}}</div>
+  {{/if}}
+  <blockquote class="review-text">{{review.text}}</blockquote>
+  {{#if review.name}}
+    <figcaption class="review-author">
+      <span class="review-avatar" aria-hidden="true">
+        <i class="bi bi-person-fill"></i>
+        {{#if review.image}}
+          <img src="{{review.image}}" alt="" width="40" height="40" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()" />
+        {{/if}}
+      </span>
+      <span class="review-meta">
+        {{#if review.url}}
+          <a href="{{review.url}}" class="review-name" target="_blank" rel="noopener">{{review.name}}</a>
+        {{else}}
+          <span class="review-name">{{review.name}}</span>
+        {{/if}}
+        <span class="review-source">{{> review-platform-icon platform=platform }}{{review.date}}</span>
+      </span>
+    </figcaption>
+  {{else}}
+    <figcaption class="review-author review-source">{{review.date}}</figcaption>
+  {{/if}}
+</figure>
