@@ -789,13 +789,13 @@ module.exports = {
       ],
       playStore: [
         {
-          name: 'Cholo Barin',
-          date: '10 November 2026',
-          text: 'Better than other flashcards I have used so far. It even has Tagalog translation.',
+          name: 'Michele Garau',
+          date: '19 October 2026',
+          text: 'The best dictionary, the only one I would really recommend',
           stars: 5,
-          url: 'https://play.google.com/store/apps/details?id=com.vocablypro&reviewId=3896ee4b-79ac-45e4-bd41-0788aeb321ba',
+          url: 'https://play.google.com/store/apps/details?id=com.vocablypro&reviewId=1040d5f2-9f3f-433e-b259-dcb7a4f7e151',
           image:
-            'https://play-lh.googleusercontent.com/a-/ALV-UjVpPbe2Bxr56lDOkvudkuzNP8u593jgiWESjR_04y5TA1jaxRZEOA=s32-rw',
+            'https://play-lh.googleusercontent.com/a-/ALV-UjXvyLhtmuEkgUdHa5WvPnfcEURoPgZjg5AkB7nqKZL7b4Wzym0J=s32-rw',
         },
         {
           name: 'ngoc pham',
@@ -814,15 +814,6 @@ module.exports = {
           url: 'https://play.google.com/store/apps/details?id=com.vocablypro&reviewId=d7cea196-6608-49de-8395-77e04f3f32e3',
           image:
             'https://play-lh.googleusercontent.com/a/ACg8ocIYNHSxs9LQlH7nc99N7LUJCcOnXBaGoIZXhkKcwxzvGs71ng=s32-rw',
-        },
-        {
-          name: 'Michele Garau',
-          date: '19 October 2026',
-          text: 'The best dictionary, the only one I would really recommend',
-          stars: 5,
-          url: 'https://play.google.com/store/apps/details?id=com.vocablypro&reviewId=1040d5f2-9f3f-433e-b259-dcb7a4f7e151',
-          image:
-            'https://play-lh.googleusercontent.com/a-/ALV-UjXvyLhtmuEkgUdHa5WvPnfcEURoPgZjg5AkB7nqKZL7b4Wzym0J=s32-rw',
         },
         {
           name: 'erspra',
@@ -1376,6 +1367,25 @@ module.exports = {
       ],
       appStore: [
         {
+          title: 'One of the best of its kind',
+          date: 'May 6, 2026',
+          text: 'I have tried many vocabulary builder tools but none has been as handy as this',
+          stars: 5,
+        },
+        {
+          title:
+            'Everything is focused on what matters most — quickly adding vocabulary and reviewing it effectively.',
+          date: 'Nov 21, 2025',
+          text: 'Vocably is one of the most convenient apps for learning new words. It’s stylish, minimalistic, functional, and free of clutter or unnecessary features. 5 ⭐️',
+          stars: 5,
+        },
+        {
+          title: 'Very useful',
+          date: 'Nov 18, 2025',
+          text: 'The app keeps improving! Only piece of AI powered software I use.',
+          stars: 5,
+        },
+        {
           title: 'The best',
           date: 'Nov 1, 2026',
           text: '最好用的单词软件。界面简洁干净，释义权威准确。可同时充当词典和背单词软件，查询、记录及单词卡的归档体验都非常丝滑。而且同时支持多语言同时学习！分语言的词卡分别归类，简单切换就可以分别查询和复习。可以说一个app就可以满足所有语言的查询、学习、记忆。推荐给所有人！',
@@ -1385,12 +1395,6 @@ module.exports = {
           title: 'Convenient to use.',
           date: 'Oct 8, 2026',
           text: 'Love it!',
-          stars: 5,
-        },
-        {
-          title: 'Searched far and wide for this app',
-          date: 'Sep 24, 2026',
-          text: 'So I was looking for pretty much exactly that app: - free - open source iOS - allows to translate and add translations as word - nice clean and simple look - no exaggerated AI overuse I cannot thank the dev enough for this one, really great job! 🫶',
           stars: 5,
         },
         {
@@ -1424,12 +1428,6 @@ module.exports = {
           stars: 5,
         },
         {
-          title: 'One of the best of its kind',
-          date: 'May 6, 2026',
-          text: 'I have tried many vocabulary builder tools but none has been as handy as this',
-          stars: 5,
-        },
-        {
           title: 'Cool design',
           date: 'Feb 3, 2026',
           text: 'And convenient mechanics.',
@@ -1448,16 +1446,9 @@ module.exports = {
           stars: 5,
         },
         {
-          title:
-            'Everything is focused on what matters most — quickly adding vocabulary and reviewing it effectively.',
-          date: 'Nov 21, 2025',
-          text: 'Vocably is one of the most convenient apps for learning new words. It’s stylish, minimalistic, functional, and free of clutter or unnecessary features. 5 ⭐️',
-          stars: 5,
-        },
-        {
-          title: 'Very useful',
-          date: 'Nov 18, 2025',
-          text: 'The app keeps improving! Only piece of AI powered software I use.',
+          title: 'Searched far and wide for this app',
+          date: 'Sep 24, 2026',
+          text: 'So I was looking for pretty much exactly that app: - free - open source iOS - allows to translate and add translations as word - nice clean and simple look - no exaggerated AI overuse I cannot thank the dev enough for this one, really great job! 🫶',
           stars: 5,
         },
         {
