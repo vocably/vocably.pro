@@ -14,13 +14,11 @@ import {
   View,
 } from 'react-native';
 import { Button, Text } from 'react-native-paper';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { mainPadding } from './styles';
 import { primaryShadow, useAppTheme } from './ThemeProvider';
+import { ModalSafeAreaProvider } from './ui/ModalSafeAreaProvider';
 import { usePremium } from './usePremium';
 import { usePresentPaywall } from './usePresentPaywall';
 
@@ -69,10 +67,22 @@ export const FrequencyHint: FC<Props> = ({
   // The modal stays mounted while the drawer slides out.
   const [isModalVisible, setIsModalVisible] = useState(visible);
   const [showSettingsHint, setShowSettingsHint] = useState(false);
-  const [drawerHeight, setDrawerHeight] = useState(screenHeight);
   const progress = useRef(new Animated.Value(0)).current;
   const dragY = useRef(new Animated.Value(0)).current;
   const scaleFill = useRef(new Animated.Value(0)).current;
+  // An animated value rather than state, so a layout change doesn't re-render
+  // the drawer in the middle of the animation.
+  const drawerHeight = useRef(new Animated.Value(screenHeight)).current;
+  const translateY = useRef(
+    Animated.add(
+      Animated.multiply(Animated.subtract(1, progress), drawerHeight),
+      dragY
+    )
+  ).current;
+  // The drawer slides in only once it's laid out, so it starts from its real
+  // height instead of jumping mid-animation.
+  const isLaidOutRef = useRef(false);
+  const isOpenPendingRef = useRef(false);
   // The paywall can't be presented on top of the drawer modal, so it waits
   // until the modal is gone.
   const afterDismissRef = useRef<(() => void) | undefined>(undefined);
@@ -85,29 +95,49 @@ export const FrequencyHint: FC<Props> = ({
     action?.();
   };
 
+  const open = () => {
+    isOpenPendingRef.current = false;
+    Animated.parallel([
+      Animated.timing(progress, {
+        toValue: 1,
+        duration: OPEN_DURATION,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleFill, {
+        toValue: 1,
+        duration: 500,
+        delay: 200,
+        easing: Easing.bezier(0.2, 0.8, 0.2, 1),
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
+
+  const onDrawerLayout = (height: number) => {
+    drawerHeight.setValue(height);
+    isLaidOutRef.current = true;
+    if (isOpenPendingRef.current) {
+      open();
+    }
+  };
+
   useEffect(() => {
     if (visible) {
       setIsModalVisible(true);
       setShowSettingsHint(false);
       dragY.setValue(0);
       scaleFill.setValue(0);
-      Animated.parallel([
-        Animated.timing(progress, {
-          toValue: 1,
-          duration: OPEN_DURATION,
-          easing: Easing.out(Easing.cubic),
-          useNativeDriver: true,
-        }),
-        Animated.timing(scaleFill, {
-          toValue: 1,
-          duration: 500,
-          delay: 200,
-          easing: Easing.bezier(0.2, 0.8, 0.2, 1),
-          useNativeDriver: true,
-        }),
-      ]).start();
+      // Reopened before the drawer finished closing.
+      if (isLaidOutRef.current) {
+        open();
+      } else {
+        isOpenPendingRef.current = true;
+      }
       return;
     }
+
+    isOpenPendingRef.current = false;
 
     Animated.timing(progress, {
       toValue: 0,
@@ -120,6 +150,7 @@ export const FrequencyHint: FC<Props> = ({
       }
 
       setIsModalVisible(false);
+      isLaidOutRef.current = false;
       // onDismiss is iOS-only, while Android can go on right away.
       if (Platform.OS !== 'ios') {
         runAfterDismiss();
@@ -181,10 +212,7 @@ export const FrequencyHint: FC<Props> = ({
       onRequestClose={onClose}
       onDismiss={runAfterDismiss}
     >
-      {/* The app isn't edge-to-edge on Android, so the insets of the app's
-          provider are zero there, while this modal draws under the
-          navigation bar. Its own provider measures the modal's window. */}
-      <SafeAreaProvider>
+      <ModalSafeAreaProvider>
         <Animated.View
           style={[
             StyleSheet.absoluteFill,
@@ -201,23 +229,13 @@ export const FrequencyHint: FC<Props> = ({
         </Animated.View>
         <Animated.View
           accessibilityViewIsModal
-          onLayout={(event) => setDrawerHeight(event.nativeEvent.layout.height)}
+          onLayout={(event) => onDrawerLayout(event.nativeEvent.layout.height)}
           style={[
             styles.drawer,
             {
               maxHeight: screenHeight * MAX_HEIGHT_RATIO,
               backgroundColor: theme.colors.elevation.level1,
-              transform: [
-                {
-                  translateY: Animated.add(
-                    progress.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [drawerHeight, 0],
-                    }),
-                    dragY
-                  ),
-                },
-              ],
+              transform: [{ translateY }],
             },
           ]}
         >
@@ -347,7 +365,7 @@ export const FrequencyHint: FC<Props> = ({
           </ScrollView>
           <BottomInset />
         </Animated.View>
-      </SafeAreaProvider>
+      </ModalSafeAreaProvider>
     </Modal>
   );
 };
