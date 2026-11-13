@@ -20,15 +20,19 @@ export const AppStoreSearchResults = () => (
           <Placeholder
             format={format}
             paddingInline={(format.width * (1 - SAFE_WIDTH)) / 2}
-            gap={Math.min(format.width, format.height) * 0.04}
+            gap={Math.min(format.width, format.height) * 0.02}
           >
-            <div className="title">
+            <div
+              className="title"
+              // Slightly smaller than .title's 8cqmin.
+              style={{ fontSize: 'calc(7cqmin * var(--text-scale, 1))' }}
+            >
               <Accent text={localization[language].featureGraphicTitle} />
             </div>
             <Languages
               {...flags[language]}
               columns={flags[language].languages.length}
-              size={Math.min(format.width, format.height) * 0.06}
+              size={Math.min(format.width, format.height) * 0.05}
             />
             <div className="subtitle">
               {localization[language].languageCount}
