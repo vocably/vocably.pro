@@ -29,35 +29,28 @@ dotenv.config({ path: `${scriptsDir}/.env`, quiet: true });
 // version.
 const whatsNew: Record<string, string> = {
   en: [
-    '- Get explanations of complex sentences.',
-    '- The study plan is now easier to understand.',
+    '- Spotted a bad card? Let the author know, and it will be improved for everyone.',
   ].join('\n'),
   ru: [
-    '- Объяснение сложных предложений.',
-    '- План обучения стал понятнее.',
+    '- Заметили неудачную карточку? Сообщите автору, и она станет лучше для всех.',
   ].join('\n'),
   uk: [
-    '- Пояснення складних речень.',
-    '- План навчання став зрозумілішим.',
+    '- Помітили невдалу картку? Повідомте автора, і вона стане кращою для всіх.',
   ].join('\n'),
   es: [
-    '- Explicaciones de oraciones complejas.',
-    '- El plan de estudio ahora es más fácil de entender.',
+    '- ¿Encontraste una tarjeta mala? Avísale al autor y se mejorará para todos.',
   ].join('\n'),
   pt: [
-    '- Explicações de frases complexas.',
-    '- O plano de estudo ficou mais fácil de entender.',
+    '- Encontrou um cartão ruim? Avise o autor e ele será melhorado para todos.',
   ].join('\n'),
   tr: [
-    '- Karmaşık cümlelerin açıklamaları.',
-    '- Çalışma planı artık daha kolay anlaşılıyor.',
+    '- Kötü bir kart mı fark ettiniz? Geliştiriciye bildirin, herkes için iyileştirilsin.',
   ].join('\n'),
   vi: [
-    '- Giải thích các câu phức tạp.',
-    '- Kế hoạch học giờ đây dễ hiểu hơn.',
+    '- Thấy thẻ chưa tốt? Hãy báo cho tác giả, thẻ sẽ được cải thiện cho mọi người.',
   ].join('\n'),
-  zh: ['- 解释复杂的句子。', '- 学习计划变得更容易理解了。'].join('\n'),
-  'zh-TW': ['- 解釋複雜的句子。', '- 學習計畫變得更容易理解了。'].join('\n'),
+  zh: ['- 发现有问题的单词卡？告诉作者，它将为所有人改进。'].join('\n'),
+  'zh-TW': ['- 發現有問題的單字卡？告訴作者，它將為所有人改進。'].join('\n'),
 };
 
 // Appended to every "What's New".
