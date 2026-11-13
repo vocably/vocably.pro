@@ -14,6 +14,8 @@ type Props = {
   titleTop?: number;
   // Left and right padding, in the format's pixels.
   paddingInline?: number;
+  // Space between the children, in the format's pixels.
+  gap?: number;
   // Drawn behind the content, e.g. a decoration positioned absolutely
   // against the canvas.
   backdrop?: ReactNode;
@@ -25,6 +27,7 @@ export const Placeholder = ({
   fixedTitle,
   titleTop = TITLE_TOP,
   paddingInline,
+  gap,
   backdrop,
   children,
 }: Props) => {
@@ -46,7 +49,7 @@ export const Placeholder = ({
         padding: minSide * 0.06,
         paddingTop: fixedTitle ? format.height * titleTop : minSide * 0.06,
         paddingInline: paddingInline ?? minSide * 0.06,
-        gap: minSide * 0.08,
+        gap: gap ?? minSide * 0.08,
         color: 'rgb(26, 26, 26)',
         fontFamily: "'Roboto', sans-serif",
         fontWeight: '400',
