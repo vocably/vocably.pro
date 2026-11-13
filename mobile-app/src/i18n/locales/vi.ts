@@ -747,6 +747,14 @@ const translations: BaseTranslations = {
       'Tần suất từ là tính năng Premium và không phải lúc nào cũng có sẵn cho người dùng miễn phí. Nâng cấp lên Premium để xem tần suất của mọi từ bạn tra, bất cứ lúc nào và không giới hạn.',
     accessibilityHint: 'Hiển thị ý nghĩa của tần suất',
   },
+  cardVote: {
+    title: 'Hãy đánh giá thẻ này để giúp Vocably tốt hơn',
+    description:
+      'Thẻ này có chất lượng tốt không? Hãy đánh giá bằng nút thích hoặc không thích. Mỗi lượt bình chọn giúp thẻ của Vocably tốt hơn.',
+    voteUp: 'Thẻ tốt',
+    voteDown: 'Thẻ chưa tốt',
+    accessibilityLabel: 'Đánh giá thẻ',
+  },
   language: languageTranslations.vi,
 };
 

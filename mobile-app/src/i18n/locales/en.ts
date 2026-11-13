@@ -762,6 +762,14 @@ const translations = {
       'Word frequency is a Premium feature and is not always available to free users. Upgrade to Premium to see the frequency of every word you look up, any time, without limits.',
     accessibilityHint: 'Shows what the frequency means',
   },
+  cardVote: {
+    title: 'Rate this card to help improve Vocably',
+    description:
+      'Is this card of good quality? Rate it with a thumbs up or a thumbs down. Every vote helps make Vocably cards better.',
+    voteUp: 'Good card',
+    voteDown: 'Bad card',
+    accessibilityLabel: 'Rate the card',
+  },
   language: languageTranslations.en,
 };
 

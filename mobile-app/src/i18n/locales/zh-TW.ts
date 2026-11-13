@@ -710,6 +710,14 @@ const translations: BaseTranslations = {
       '字詞頻率是 Premium 功能，免費使用者並非隨時都能使用。升級到 Premium，就能隨時無限制地查看每個字詞的頻率。',
     accessibilityHint: '顯示字詞頻率的含義',
   },
+  cardVote: {
+    title: '為這張單字卡評分，幫助改進 Vocably',
+    description:
+      '這張單字卡的品質好嗎？請按讚或倒讚。每一票都能讓 Vocably 的單字卡變得更好。',
+    voteUp: '單字卡不錯',
+    voteDown: '單字卡不好',
+    accessibilityLabel: '為單字卡評分',
+  },
   language: languageTranslations['zh-TW'],
 };
 

@@ -764,6 +764,14 @@ const translations: BaseTranslations = {
       'La frecuencia de palabras es una función Premium y no siempre está disponible para los usuarios gratuitos. Pásate a Premium para ver la frecuencia de cada palabra que buscas, en cualquier momento y sin límites.',
     accessibilityHint: 'Muestra qué significa la frecuencia',
   },
+  cardVote: {
+    title: 'Califica esta tarjeta para ayudar a mejorar Vocably',
+    description:
+      '¿Es de buena calidad esta tarjeta? Califícala con un pulgar arriba o abajo. Cada voto ayuda a mejorar las tarjetas de Vocably.',
+    voteUp: 'Buena tarjeta',
+    voteDown: 'Mala tarjeta',
+    accessibilityLabel: 'Calificar la tarjeta',
+  },
   language: languageTranslations.es,
 };
 

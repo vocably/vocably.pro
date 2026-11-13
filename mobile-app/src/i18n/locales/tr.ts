@@ -759,6 +759,14 @@ const translations: BaseTranslations = {
       "Kelime sıklığı bir Premium özelliğidir ve ücretsiz kullanıcılar için her zaman kullanılamaz. Aradığınız her kelimenin sıklığını istediğiniz zaman ve sınırsız görmek için Premium'a geçin.",
     accessibilityHint: 'Sıklığın ne anlama geldiğini gösterir',
   },
+  cardVote: {
+    title: "Vocably'yi geliştirmeye yardımcı olmak için bu kartı değerlendirin",
+    description:
+      'Bu kart kaliteli mi? Başparmak yukarı veya aşağı ile değerlendirin. Her oy, Vocably kartlarını daha iyi hale getirir.',
+    voteUp: 'İyi kart',
+    voteDown: 'Kötü kart',
+    accessibilityLabel: 'Kartı değerlendir',
+  },
   language: languageTranslations.tr,
 };
 

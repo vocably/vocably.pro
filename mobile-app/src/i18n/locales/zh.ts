@@ -704,6 +704,14 @@ const translations: BaseTranslations = {
       '词频是 Premium 功能，免费用户并非随时都能使用。升级到 Premium，即可随时无限制地查看每个词的词频。',
     accessibilityHint: '显示词频的含义',
   },
+  cardVote: {
+    title: '为这张单词卡评分，帮助改进 Vocably',
+    description:
+      '这张单词卡的质量好吗？请点赞或点踩。每一票都能让 Vocably 的单词卡变得更好。',
+    voteUp: '单词卡不错',
+    voteDown: '单词卡不好',
+    accessibilityLabel: '为单词卡评分',
+  },
   language: languageTranslations['zh'],
 };
 

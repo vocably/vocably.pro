@@ -2,6 +2,7 @@ import {
   Analysis,
   CardItem,
   CardsLimit,
+  isReverseAnalysis,
   Result,
   TagItem,
 } from '@vocably/model';
@@ -16,6 +17,7 @@ import { Displayer } from '../study/Displayer';
 import { UserMetadataContext } from '../UserMetadataContainer';
 import { AnalyzeResultItem } from './AnalyzeResultItem';
 import { associateCards, AssociatedCard } from './associateCards';
+import { CardVoteContext } from './CardVoteButton';
 import { makeCards } from './makeCards';
 
 const cardKey = (card: AssociatedCard): string =>
@@ -52,6 +54,15 @@ export const AnalyzeResult: FC<Props> = ({
   requestFeedback = false,
 }) => {
   const associatedCards = associateCards(makeCards(analysis), cards);
+
+  const isReverse = isReverseAnalysis(analysis);
+  const voteContext: CardVoteContext = {
+    cards: associatedCards.map((associatedCard) => associatedCard.card),
+    query: isReverse ? analysis.target : analysis.source,
+    sourceLanguage: analysis.sourceLanguage,
+    targetLanguage: analysis.targetLanguage,
+    direction: isReverse ? 'reverse' : 'direct',
+  };
 
   const { userMetadata } = useContext(UserMetadataContext);
   // The card which addition has triggered the feedback request.
@@ -91,6 +102,7 @@ export const AnalyzeResult: FC<Props> = ({
             deck={deck}
             cardsLimit={cardsLimit}
             isSharedLookup={isSharedLookup}
+            voteContext={voteContext}
           />
           {!isSharedLookup &&
             requestFeedback &&

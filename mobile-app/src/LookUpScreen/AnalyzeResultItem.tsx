@@ -10,6 +10,7 @@ import { mainPadding } from '../styles';
 import { TagsSelector } from '../TagsSelector';
 import { AddLimitationMessage } from './AddLimitationMessage';
 import { AssociatedCard } from './associateCards';
+import { CardVoteButton, CardVoteContext } from './CardVoteButton';
 
 type AnalyzeResultItem = FC<{
   onAdd: (card: AssociatedCard) => Promise<Result<CardItem>>;
@@ -23,6 +24,8 @@ type AnalyzeResultItem = FC<{
   cardsLimit?: CardsLimit;
   style?: StyleProp<ViewStyle>;
   isSharedLookup?: boolean;
+  // Shows the card quality vote button when present.
+  voteContext?: CardVoteContext;
 }>;
 
 export const AnalyzeResultItem: AnalyzeResultItem = ({
@@ -37,6 +40,7 @@ export const AnalyzeResultItem: AnalyzeResultItem = ({
   cardsLimit = 'unlimited',
   style,
   isSharedLookup = false,
+  voteContext,
 }) => {
   const theme = useTheme();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -121,8 +125,11 @@ export const AnalyzeResultItem: AnalyzeResultItem = ({
           <View
             style={{
               marginTop: Platform.OS === 'android' ? 12 : 10,
-              // To prevent jumping
-              height: 90,
+              // Stretches to the card height, so the vote button sits at the
+              // bottom of the card.
+              alignSelf: 'stretch',
+              // To prevent jumping when the tags button appears
+              minHeight: (voteContext ? 3 : 2) * (24 * fontScale + 16) + 10,
             }}
           >
             <IconButton
@@ -151,6 +158,13 @@ export const AnalyzeResultItem: AnalyzeResultItem = ({
                   />
                 )}
               />
+            )}
+            {voteContext && (
+              // The card has 16px bottom padding, the button has 8px of its
+              // own, so the icon lines up with the bottom of the card content.
+              <View style={{ marginTop: 'auto', paddingBottom: 8 }}>
+                <CardVoteButton card={item.card} context={voteContext} />
+              </View>
             )}
           </View>
         )}
