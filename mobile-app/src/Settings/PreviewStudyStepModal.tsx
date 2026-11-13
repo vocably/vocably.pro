@@ -1,6 +1,6 @@
 import { NavigationProp, Route } from '@react-navigation/native';
 import { CardItem, DeckSettings } from '@vocably/model';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { View } from 'react-native';
 import { Text, useTheme } from 'react-native-paper';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,6 +10,9 @@ import { Card } from '../study/Card';
 import { MultiChoice } from '../study/MultiChoice';
 import { SwipeGrade } from '../study/SwipeGrade';
 import { ScreenLayout } from '../ui/ScreenLayout';
+import { usePremium } from '../usePremium';
+import { usePresentPaywall } from '../usePresentPaywall';
+import { StudyStepPreviewed } from './StudyStepPreviewed';
 
 type PreviewParams = {
   card: CardItem;
@@ -25,25 +28,62 @@ type Props = {
 export const PreviewStudyStepModal: FC<Props> = ({ route, navigation }) => {
   const { card, step, deckSettings } = route.params as PreviewParams;
 
-  if (!card || !step || !deckSettings) {
-    navigation.goBack();
-    return;
-  }
-
   const insets = useSafeAreaInsets();
   const theme = useTheme();
+  const isPremium = usePremium();
+  const presentPaywall = usePresentPaywall();
+  const [isPreviewed, setIsPreviewed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+
+  if (!card || !step || !deckSettings) {
+    navigation.goBack();
+    return null;
+  }
+
+  const needsPremium = step.step === 'ab' && !isPremium;
 
   const onGrade = () => {
     setTimeout(
-      () => navigation.goBack(),
+      () => setIsPreviewed(true),
       ['ab', 'mf', 'mb'].includes(step.step) ? 100 : 0
     );
   };
+
+  const tryAgain = () => {
+    setAttempt((attempt) => attempt + 1);
+    setIsPreviewed(false);
+  };
+
+  const upgrade = () => {
+    navigation.goBack();
+    presentPaywall();
+  };
+
+  if (isPreviewed) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingBottom: insets.bottom,
+        }}
+      >
+        <StudyStepPreviewed
+          needsPremium={needsPremium}
+          onTryAgain={tryAgain}
+          onUpgrade={upgrade}
+          onClose={() => navigation.goBack()}
+        />
+      </View>
+    );
+  }
 
   return (
     <ScreenLayout
       content={
         <View
+          key={attempt}
           style={{
             flexGrow: 1,
             justifyContent: 'center',

@@ -163,6 +163,12 @@ const translations = {
     preview: 'Preview',
     premiumOnly: 'Available to premium users',
     upgradeToPremium: 'Upgrade to Premium',
+    previewedTitle: 'Preview complete',
+    previewedText: 'This is how the step works during study.',
+    previewedPremiumText:
+      'Upgrade to Premium to add this step to your studies.',
+    previewTryAgain: 'Try again',
+    previewClose: 'Close',
     heading: 'Study steps per card',
     rearrangeHintBefore: 'Use ',
     rearrangeHintAfter: ' to rearrange the steps.',

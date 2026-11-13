@@ -164,6 +164,12 @@ const translations: BaseTranslations = {
     preview: 'Pré-visualização',
     premiumOnly: 'Disponível para usuários Premium',
     upgradeToPremium: 'Assinar Premium',
+    previewedTitle: 'Pré-visualização concluída',
+    previewedText: 'É assim que esta etapa funciona durante o estudo.',
+    previewedPremiumText:
+      'Assine o Premium para adicionar esta etapa aos seus estudos.',
+    previewTryAgain: 'Tentar novamente',
+    previewClose: 'Fechar',
     heading: 'Etapas de estudo por cartão',
     rearrangeHintBefore: 'Use ',
     rearrangeHintAfter: ' para reorganizar as etapas.',

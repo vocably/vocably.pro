@@ -165,6 +165,12 @@ const translations: BaseTranslations = {
     preview: 'Предпросмотр',
     premiumOnly: 'Доступно пользователям Premium',
     upgradeToPremium: 'Перейти на Premium',
+    previewedTitle: 'Предпросмотр завершён',
+    previewedText: 'Так этот шаг работает во время изучения.',
+    previewedPremiumText:
+      'Перейдите на Premium, чтобы добавить этот шаг в изучение.',
+    previewTryAgain: 'Попробовать ещё раз',
+    previewClose: 'Закрыть',
     heading: 'Шаги обучения для карточки',
     rearrangeHintBefore: 'Используйте ',
     rearrangeHintAfter: ', чтобы менять порядок шагов.',

@@ -164,6 +164,12 @@ const translations: BaseTranslations = {
     preview: 'Попередній перегляд',
     premiumOnly: 'Доступно користувачам Premium',
     upgradeToPremium: 'Перейти на Premium',
+    previewedTitle: 'Попередній перегляд завершено',
+    previewedText: 'Так цей крок працює під час навчання.',
+    previewedPremiumText:
+      'Перейдіть на Premium, щоб додати цей крок до навчання.',
+    previewTryAgain: 'Спробувати ще раз',
+    previewClose: 'Закрити',
     heading: 'Кроки навчання для картки',
     rearrangeHintBefore: 'Використовуйте ',
     rearrangeHintAfter: ', щоб змінити порядок кроків.',

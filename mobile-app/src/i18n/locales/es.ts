@@ -164,6 +164,12 @@ const translations: BaseTranslations = {
     preview: 'Vista previa',
     premiumOnly: 'Disponible para usuarios Premium',
     upgradeToPremium: 'Pasar a Premium',
+    previewedTitle: 'Vista previa completada',
+    previewedText: 'Así funciona este paso durante el estudio.',
+    previewedPremiumText:
+      'Pasa a Premium para añadir este paso a tus estudios.',
+    previewTryAgain: 'Intentar de nuevo',
+    previewClose: 'Cerrar',
     heading: 'Pasos de estudio por tarjeta',
     rearrangeHintBefore: 'Usa ',
     rearrangeHintAfter: ' para reordenar los pasos.',
