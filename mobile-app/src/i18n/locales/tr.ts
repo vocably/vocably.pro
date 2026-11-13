@@ -706,6 +706,7 @@ const translations: BaseTranslations = {
     receivingText: 'Metin alınıyor...',
   },
   paymentSuccess: {
+    title: "Premium'a hoş geldin",
     thankYou:
       "Vocably'ye şans verdiğin için teşekkürler. Desteğin benim için çok değerli.",
     rateButton: "Vocably'yi {{storeName}}'da değerlendir",
@@ -713,6 +714,7 @@ const translations: BaseTranslations = {
       'Bir şey eksikse veya beğenmediğin bir şey varsa, bana her zaman Discord, Telegram veya',
     feedbackLink: 'doğrudan uygulamadan',
     feedbackAfter: ' yazabilirsin. Her geri bildirimi ciddiye alıyorum.',
+    continue: 'Öğrenmeye devam et',
   },
   requestFeedback: {
     question:

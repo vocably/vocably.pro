@@ -711,6 +711,7 @@ const translations: BaseTranslations = {
     receivingText: 'Recibiendo el texto...',
   },
   paymentSuccess: {
+    title: 'Bienvenido a Premium',
     thankYou:
       'Gracias por darle una oportunidad a Vocably. Tu apoyo significa mucho para mí.',
     rateButton: 'Valorar Vocably en {{storeName}}',
@@ -718,6 +719,7 @@ const translations: BaseTranslations = {
       'Si te falta algo o no te gusta, siempre puedes decírmelo en Discord, Telegram o',
     feedbackLink: 'desde la propia app',
     feedbackAfter: '. Me tomo en serio cada comentario.',
+    continue: 'Seguir aprendiendo',
   },
   requestFeedback: {
     question:

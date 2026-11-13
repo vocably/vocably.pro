@@ -724,6 +724,7 @@ const translations: BaseTranslations = {
     receivingText: 'Отримую текст...',
   },
   paymentSuccess: {
+    title: 'Ласкаво просимо до Premium',
     thankYou:
       'Дякую, що дали Вокеблі шанс. Ваша підтримка багато для мене значить.',
     rateButton: 'Оцінити Вокеблі у {{storeName}}',
@@ -731,6 +732,7 @@ const translations: BaseTranslations = {
       'Якщо вам чогось не вистачає або щось не подобається, ви завжди можете повідомити мене в Discord, Telegram чи',
     feedbackLink: 'прямо у застосунку',
     feedbackAfter: '. Я серйозно ставлюся до кожного відгуку.',
+    continue: 'Продовжити навчання',
   },
   requestFeedback: {
     question:

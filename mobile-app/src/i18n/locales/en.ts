@@ -707,6 +707,7 @@ const translations = {
     receivingText: 'Receiving the text...',
   },
   paymentSuccess: {
+    title: 'Welcome to Premium',
     thankYou:
       'Thank you for giving Vocably a chance. Your support means a lot to me.',
     rateButton: 'Rate Vocably on {{storeName}}',
@@ -714,6 +715,7 @@ const translations = {
       "If you are missing or don't like anything, you can always let me know in Discord, Telegram, or",
     feedbackLink: 'right in the app',
     feedbackAfter: '. I take every feedback seriously.',
+    continue: 'Keep learning',
   },
   requestFeedback: {
     question:

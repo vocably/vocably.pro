@@ -655,12 +655,14 @@ const translations: BaseTranslations = {
     receivingText: '正在接收文本…',
   },
   paymentSuccess: {
+    title: '欢迎使用 Premium',
     thankYou: '感谢你给 Vocably 一个机会。你的支持对我意义重大。',
     rateButton: '到 {{storeName}} 为 Vocably 评分',
     feedbackBefore:
       '如果你觉得缺少什么或有不喜欢的地方，随时可以通过 Discord、Telegram 或',
     feedbackLink: '直接在应用中',
     feedbackAfter: '告诉我。我会认真看待每一条反馈。',
+    continue: '继续学习',
   },
   requestFeedback: {
     question:
