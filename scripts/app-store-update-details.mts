@@ -45,7 +45,7 @@ const eula =
 const details: Record<string, Details> = {
   en: {
     name: 'Vocably: Dictionary Flashcards',
-    subtitle: 'Translate and build vocabulary',
+    subtitle: 'English, Spanish, German, etc.',
     description: `A dictionary focused on the needs of language learners.
 
 Translate any word or phrase. Save your translations as high-quality flashcards. Memorize them with quizzes and questions.
@@ -73,12 +73,12 @@ Mastering a language means using it and remembering every word. That's what Voca
 
 Terms of Use (EULA): ${eula}`,
     keywords:
-      'translator,english,german,spanish,french,italian,danish,dutch,norwegian,finnish,swedish,korean,greek',
+      'translator,french,italian,danish,dutch,norwegian,finnish,swedish,korean,greek,translate,vocabulary',
     promo: '',
   },
   ru: {
     name: 'Vocably: словарь и карточки',
-    subtitle: 'Перевод и обучение',
+    subtitle: 'Английский, немецкий и др.',
     description: `Словарь, созданный специально для людей, изучающих язык.
 
 Переводите любые слова и фразы. Сохраняйте переводы в виде качественных карточек. Выучивайте свои сохранённые слова при помощью интерактивных тестов и вопросов.
@@ -106,12 +106,12 @@ Terms of Use (EULA): ${eula}`,
 
 Условия использования (EULA): ${eula}`,
     keywords:
-      'переводчик,английский,немецкий,французский,испанский,итальянский,польский,слова,языки,учить,японский',
+      'переводчик,испанский,французский,итальянский,польский,слова,языки,учить,японский,перевод,лексика',
     promo: '',
   },
   uk: {
     name: 'Vocably: словник і картки',
-    subtitle: 'Переклад і вивчення слів',
+    subtitle: 'Англійська, німецька тощо',
     description: `Словник, створений спеціально для тих, хто вивчає мови.
 
 Перекладайте будь-які слова та фрази. Зберігайте переклади у вигляді якісних карток. Запам'ятовуйте їх за допомогою тестів і запитань.
@@ -139,12 +139,12 @@ Terms of Use (EULA): ${eula}`,
 
 Умови використання (EULA): ${eula}`,
     keywords:
-      'перекладач,англійська,німецька,іспанська,французька,італійська,польська,лексика,мови,навчання,вимова',
+      'перекладач,іспанська,французька,італійська,польська,лексика,мови,навчання,вимова,переклад,слова',
     promo: '',
   },
   es: {
     name: 'Vocably: diccionario y fichas',
-    subtitle: 'Traduce y aprende vocabulario',
+    subtitle: 'Inglés, alemán, francés, etc.',
     description: `Un diccionario pensado para las necesidades de quienes aprenden idiomas.
 
 Traduce cualquier palabra o frase. Guarda tus traducciones como fichas de alta calidad. Memorízalas con cuestionarios y preguntas.
@@ -172,12 +172,12 @@ Dominar un idioma significa usarlo y recordar cada palabra. Para eso existe Voca
 
 Condiciones de uso (EULA): ${eula}`,
     keywords:
-      'traductor,inglés,alemán,francés,italiano,portugués,idiomas,palabras,aprender,flashcards,coreano,ruso',
+      'traductor,italiano,portugués,idiomas,palabras,aprender,flashcards,coreano,ruso,traducir,vocabulario',
     promo: '',
   },
   pt: {
     name: 'Vocably: dicionário e cartões',
-    subtitle: 'Traduza e aprenda vocabulário',
+    subtitle: 'Inglês, alemão, espanhol, etc.',
     description: `Um dicionário pensado nas necessidades de quem aprende idiomas.
 
 Traduza qualquer palavra ou frase. Salve suas traduções como flashcards de alta qualidade. Memorize-as com quizzes e perguntas.
@@ -205,12 +205,12 @@ Dominar um idioma significa usá-lo e lembrar de cada palavra. É para isso que 
 
 Termos de Uso (EULA): ${eula}`,
     keywords:
-      'tradutor,inglês,espanhol,alemão,francês,italiano,idiomas,palavras,aprender,flashcards,chinês,coreano',
+      'tradutor,francês,italiano,idiomas,palavras,aprender,flashcards,chinês,coreano,traduzir,vocabulário',
     promo: '',
   },
   tr: {
     name: 'Vocably: Sözlük ve Kartlar',
-    subtitle: 'Çevir ve kelime öğren',
+    subtitle: 'İngilizce, Almanca, Korece vb.',
     description: `Dil öğrenenlerin ihtiyaçlarına odaklanan bir sözlük.
 
 Herhangi bir kelimeyi veya ifadeyi çevirin. Çevirilerinizi yüksek kaliteli bilgi kartları olarak kaydedin. Testler ve sorularla ezberleyin.
@@ -238,12 +238,12 @@ Bir dili öğrenmek, onu kullanmak ve her kelimeyi hatırlamak demektir. Vocably
 
 Kullanım Koşulları (EULA): ${eula}`,
     keywords:
-      'çevirmen,ingilizce,almanca,ispanyolca,fransızca,italyanca,rusça,dil,öğrenme,flashcard,japonca,korece',
+      'çevirmen,ispanyolca,fransızca,italyanca,rusça,dil,öğrenme,flashcard,japonca,çeviri,kelime',
     promo: '',
   },
   vi: {
     name: 'Vocably: Từ điển & Flashcard',
-    subtitle: 'Dịch và học từ vựng',
+    subtitle: 'Tiếng Anh, Hàn, Nhật, v.v.',
     description: `Từ điển được thiết kế cho nhu cầu của người học ngoại ngữ.
 
 Dịch bất kỳ từ hoặc cụm từ nào. Lưu bản dịch thành flashcard chất lượng cao. Ghi nhớ chúng qua các bài kiểm tra và câu hỏi.
@@ -271,12 +271,12 @@ Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ
 
 Điều khoản sử dụng (EULA): ${eula}`,
     keywords:
-      'tiếng anh,tiếng hàn,tiếng nhật,tiếng trung,tiếng pháp,tiếng đức,ngoại ngữ,từ mới,phát âm,ghi nhớ,ipa',
+      'tiếng trung,tiếng pháp,tiếng đức,ngoại ngữ,từ mới,phát âm,ghi nhớ,ipa,dịch,từ vựng',
     promo: '',
   },
   zh: {
     name: 'Vocably：词典与单词卡',
-    subtitle: '翻译并积累词汇',
+    subtitle: '英语、日语、韩语、法语、德语、西班牙语、俄语、意大利语等',
     description: `一款专为语言学习者打造的词典。
 
 翻译任意单词或短语。将翻译保存为高质量的单词卡。通过测验和问题牢记它们。
@@ -304,12 +304,12 @@ Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ
 
 使用条款（EULA）：${eula}`,
     keywords:
-      '英语,日语,韩语,法语,德语,西班牙语,意大利语,俄语,葡萄牙语,阿拉伯语,背单词,记单词,外语,学习,发音,音标,例句,记忆卡,生词本,复习,测验,释义,荷兰语,口语,听力,字典,在线翻译,间隔重复',
+      '葡萄牙语,阿拉伯语,背单词,记单词,外语,学习,发音,音标,例句,记忆卡,生词本,复习,测验,释义,荷兰语,口语,听力,字典,在线翻译,间隔重复,翻译,词汇',
     promo: '',
   },
   'zh-TW': {
     name: 'Vocably：字典與單字卡',
-    subtitle: '翻譯並累積字彙',
+    subtitle: '英文、日文、韓文、法文、德文、西班牙文、俄文、義大利文等',
     description: `一款專為語言學習者打造的字典。
 
 翻譯任何單字或片語。將翻譯儲存為高品質的單字卡。透過測驗和問題牢記它們。
@@ -337,7 +337,7 @@ Thành thạo một ngôn ngữ nghĩa là sử dụng nó và nhớ từng từ
 
 使用條款（EULA）：${eula}`,
     keywords:
-      '英文,日文,韓文,法文,德文,西班牙文,義大利文,俄文,葡萄牙文,阿拉伯文,背單字,記單字,外語,學習,發音,音標,例句,記憶卡,單字本,複習,測驗,荷蘭文,越南文,口說,聽力,查單字,辭典,間隔重複',
+      '葡萄牙文,阿拉伯文,背單字,記單字,外語,學習,發音,音標,例句,記憶卡,單字本,複習,測驗,荷蘭文,越南文,口說,聽力,查單字,辭典,間隔重複,翻譯,字彙',
     promo: '',
   },
 };

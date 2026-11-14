@@ -29,14 +29,14 @@ export const AppStoreHeader = () => (
                 gap: '2cqmin',
               }}
             >
-              <Logo className="logo" style={{ width: '24cqmin' }} />
-              {/* <div className="title" style={{ fontSize: '3.6cqmin' }}>
+              <Logo className="logo" style={{ width: '18cqmin' }} />
+              <div className="title" style={{ fontSize: '3.6cqmin' }}>
                 {localization[language].iosHeaderTitle}
-              </div> */}
+              </div>
               <Languages
                 {...flags[language]}
                 columns={flags[language].languages.length}
-                size={Math.min(format.width, format.height) * 0.025}
+                size={Math.min(format.width, format.height) * 0.035}
               />
               <div className="subtitle" style={{ fontSize: '2.7cqmin' }}>
                 {localization[language].languageCount}
