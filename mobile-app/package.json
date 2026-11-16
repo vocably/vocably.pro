@@ -89,13 +89,13 @@
     "@react-native/jest-preset": "0.85.3",
     "@react-native/metro-config": "0.85.3",
     "@react-native/typescript-config": "0.85.3",
+    "@testing-library/react-native": "^14.1.0",
     "@tsconfig/react-native": "^3.0.0",
     "@types/jest": "^29.5.13",
     "@types/metro-config": "^0.76.3",
     "@types/react": "^19.1.1",
     "@types/react-native-share-menu": "^5.0.5",
     "@types/react-native-vector-icons": "^6.4.12",
-    "@types/react-test-renderer": "^19.1.0",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "babel-jest": "^29.6.3",
@@ -105,11 +105,11 @@
     "patch-package": "^8.0.0",
     "react-native-dotenv": "^3.4.8",
     "react-native-share-menu": "^6.0.0",
-    "react-test-renderer": "19.2.3",
+    "test-renderer": "^1.3.1",
     "typescript": "5.0.4"
   },
   "jest": {
-    "preset": "react-native",
+    "preset": "@react-native/jest-preset",
     "moduleFileExtensions": [
       "ts",
       "tsx",
@@ -120,7 +120,18 @@
     ],
     "moduleNameMapper": {
       "^lodash-es$": "lodash"
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?|react-native-.*|@react-navigation|uuid|nanoid)/)"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/ios/",
+      "/android/"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.ts"
+    ]
   },
   "engines": {
     "node": ">=18"

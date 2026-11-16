@@ -35,7 +35,18 @@ npm run list-devices      # List available iOS simulators
 
 ### Testing & Linting
 
-There is no testing or linting configured for this project.
+```bash
+npm test                              # Jest (preset @react-native/jest-preset)
+npm test -- src/TagsSelector          # Single folder or file
+```
+
+- Specs are co-located with the source as `*.spec.ts` / `*.spec.tsx`.
+- Components and hooks are tested with React Native Testing Library 14 (`render`, `renderHook`, `userEvent`; all async, so `await` them). Query by `testID`.
+- No mocks: no `jest.mock` and no `jest.fn()`. Callbacks record into plain arrays, state lives in small harness components, and third-party clients run in their real disabled mode (e.g. `new PostHog(key, { disabled: true })`). Fake timers are used only to let animations and countdowns finish inside `act()`.
+- `jest.setup.ts` initialises i18next with the English resources, so `t()` returns real English text.
+- Modules that load a native module with no JS fallback at import time (`react-native-localize` via `src/i18n`, `react-native-mmkv`/Nitro, `react-native-sound` via `PlaySound`, clipboard, gesture handler) cannot be loaded in Jest without mocks. Keep testable logic in modules that don't import them.
+
+There is no linting configured for this project.
 
 ## Driving the App in the iOS Simulator
 
