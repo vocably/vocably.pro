@@ -1,5 +1,5 @@
 import { Result } from '@vocably/model';
-import { loadAuthStatusFromStorage } from './auth/AuthContainer';
+import { loadAuthStatusFromStorage } from './auth/authStatusStorage';
 
 export const isAnonymousUser = async (): Promise<boolean> => {
   const authStatus = await loadAuthStatusFromStorage();

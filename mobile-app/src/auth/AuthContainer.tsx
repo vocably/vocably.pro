@@ -23,6 +23,14 @@ import { useAsync } from '../useAsync';
 import { getSessionAttributes } from './getSessionAttributes';
 import { apiEventBus } from '../apiEventBus';
 import { safeFetchAuthSession } from './safeFunctions';
+import {
+  AuthStatus,
+  loadAuthStatusFromStorage,
+  saveAuthStatusToStorage,
+} from './authStatusStorage';
+
+export type { AuthStatus };
+export { loadAuthStatusFromStorage };
 
 type LoginStatus =
   | {
@@ -30,24 +38,6 @@ type LoginStatus =
     }
   | {
       reason: 'logged-out';
-    };
-
-export type AuthStatus =
-  | {
-      status: 'undefined';
-    }
-  | {
-      status: 'not-logged-in';
-    }
-  | {
-      status: 'anonymous-logged-in';
-      id: string;
-    }
-  | {
-      status: 'logged-in';
-      sub: string;
-      email: string;
-      isPaidGroup: boolean;
     };
 
 type AuthErrorCode =
@@ -73,22 +63,6 @@ export const AuthContext = createContext<ExtendedAuthStatus>({
   createAnonymousUser: async () => {},
   reset: async () => {},
 });
-
-export const loadAuthStatusFromStorage = async (): Promise<AuthStatus> => {
-  const status = await asyncAppStorage.getItem('vocablyAuthStatus');
-
-  if (!status) {
-    return {
-      status: 'undefined',
-    };
-  }
-
-  return JSON.parse(status);
-};
-
-const saveAuthStatusToStorage = async (status: AuthStatus) => {
-  await asyncAppStorage.setItem('vocablyAuthStatus', JSON.stringify(status));
-};
 
 export const loadLoginStatusFromStorage = async (): Promise<LoginStatus> => {
   const status = await asyncAppStorage.getItem('loginStatus');

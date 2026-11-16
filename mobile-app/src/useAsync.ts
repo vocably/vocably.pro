@@ -1,8 +1,16 @@
 import { isError, Result } from '@vocably/model';
 import { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
-import { i18n } from './i18n';
-import { Sentry } from './BetterSentry';
+import i18n from 'i18next';
+import type { Sentry } from './BetterSentry';
+
+// Loaded on demand: `@sentry/react-native` starts a timer when it is imported,
+// which keeps Jest from exiting. The app has already loaded and initialised
+// Sentry in `index.js` by the time anything fails here.
+const captureException: typeof Sentry.captureException = (...args) =>
+  (
+    require('./BetterSentry') as typeof import('./BetterSentry')
+  ).Sentry.captureException(...args);
 
 type AsyncSuccess<T> = {
   status: 'loaded';
@@ -41,7 +49,7 @@ export const useAsync = <T>(
             error: value,
           });
 
-          Sentry.captureException(
+          captureException(
             new Error('Unable to perform async request in the component.'),
             {
               extra: value,
@@ -57,7 +65,7 @@ export const useAsync = <T>(
         });
       })
       .catch((error) => {
-        Sentry.captureException(error);
+        captureException(error);
 
         setResult({
           status: 'failed',

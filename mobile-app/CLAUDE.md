@@ -44,7 +44,10 @@ npm test -- src/TagsSelector          # Single folder or file
 - Components and hooks are tested with React Native Testing Library 14 (`render`, `renderHook`, `userEvent`; all async, so `await` them). Query by `testID`.
 - No mocks: no `jest.mock` and no `jest.fn()`. Callbacks record into plain arrays, state lives in small harness components, and third-party clients run in their real disabled mode (e.g. `new PostHog(key, { disabled: true })`). Fake timers are used only to let animations and countdowns finish inside `act()`.
 - `jest.setup.ts` initialises i18next with the English resources, so `t()` returns real English text.
-- Modules that load a native module with no JS fallback at import time (`react-native-localize` via `src/i18n`, `react-native-mmkv`/Nitro, `react-native-sound` via `PlaySound`, clipboard, gesture handler) cannot be loaded in Jest without mocks. Keep testable logic in modules that don't import them.
+- Modules that load a native module with no JS fallback at import time (`react-native-localize` via `src/i18n`, `react-native-sound` via `PlaySound`, `@aws-amplify/*`, clipboard, gesture handler) cannot be loaded in Jest without mocks. Keep testable logic in modules that don't import them (e.g. `src/auth/authStatusStorage.ts` instead of `AuthContainer`, `i18next` instead of `src/i18n`).
+- `react-native-mmkv` (and so `asyncAppStorage`) works in Jest: it switches to its own in-memory store, and `jest.setup.ts` puts the Nitro proxy in `global` so the import doesn't fail. Clear it with `asyncAppStorage.clearAll()` between tests.
+- Don't import `@sentry/react-native` at module level in code under test: it starts a timer on import that keeps Jest from exiting (see the lazy `require` in `src/useAsync.ts`).
+- Code that calls the API is tested against an in-process HTTP server configured through `configureApi` (see `src/languages/LanguagesContainer.spec.tsx`), not a mocked client.
 
 There is no linting configured for this project.
 

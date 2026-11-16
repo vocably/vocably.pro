@@ -11,3 +11,12 @@ void i18n.use(initReactI18next).init({
   compatibilityJSON: 'v4',
   react: { useSuspense: false },
 });
+
+// `react-native-mmkv` keeps its data in memory when it runs under Jest
+// (`createMockMMKV`), but it imports `react-native-nitro-modules` first, which
+// installs itself through a native TurboModule at import time. Nitro skips
+// that step when its proxy is already in `global`, so MMKV's in-memory mode
+// can take over. Calling into the proxy (any real HybridObject) still fails.
+(global as { NitroModulesProxy?: unknown }).NitroModulesProxy = {
+  version: require('react-native-nitro-modules/package.json').version,
+};

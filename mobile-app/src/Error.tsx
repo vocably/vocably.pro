@@ -1,4 +1,3 @@
-import { signOut } from '@aws-amplify/auth';
 import { FC, PropsWithChildren, useCallback, useState } from 'react';
 import { Alert, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
@@ -39,6 +38,8 @@ export const Error: Error = ({ children, onRetry }) => {
         text: t('common.yes'),
         onPress: async () => {
           await clearAll();
+          // Loaded on demand: Amplify needs native modules at import time.
+          const { signOut } = await import('@aws-amplify/auth');
           await signOut();
         },
         style: 'destructive',
