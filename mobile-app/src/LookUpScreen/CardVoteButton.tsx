@@ -60,21 +60,9 @@ export const CardVoteButton: FC<Props> = ({ card, context }) => {
   // The modal stays mounted while the drawer slides out.
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [vote, setVote] = useState<CardVote | null>(null);
+  const [drawerHeight, setDrawerHeight] = useState(screenHeight);
   const progress = useRef(new Animated.Value(0)).current;
   const dragY = useRef(new Animated.Value(0)).current;
-  // An animated value rather than state, so a layout change doesn't re-render
-  // the drawer in the middle of the animation.
-  const drawerHeight = useRef(new Animated.Value(screenHeight)).current;
-  const translateY = useRef(
-    Animated.add(
-      Animated.multiply(Animated.subtract(1, progress), drawerHeight),
-      dragY
-    )
-  ).current;
-  // The drawer slides in only once it's laid out, so it starts from its real
-  // height instead of jumping mid-animation.
-  const isLaidOutRef = useRef(false);
-  const isOpenPendingRef = useRef(false);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
@@ -88,38 +76,18 @@ export const CardVoteButton: FC<Props> = ({ card, context }) => {
 
   useEffect(() => () => clearTimeout(closeTimeoutRef.current), []);
 
-  const open = () => {
-    isOpenPendingRef.current = false;
-    Animated.timing(progress, {
-      toValue: 1,
-      duration: OPEN_DURATION,
-      easing: Easing.out(Easing.cubic),
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const onDrawerLayout = (height: number) => {
-    drawerHeight.setValue(height);
-    isLaidOutRef.current = true;
-    if (isOpenPendingRef.current) {
-      open();
-    }
-  };
-
   useEffect(() => {
     if (visible) {
       setIsModalVisible(true);
       dragY.setValue(0);
-      // Reopened before the drawer finished closing.
-      if (isLaidOutRef.current) {
-        open();
-      } else {
-        isOpenPendingRef.current = true;
-      }
+      Animated.timing(progress, {
+        toValue: 1,
+        duration: OPEN_DURATION,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
       return;
     }
-
-    isOpenPendingRef.current = false;
 
     Animated.timing(progress, {
       toValue: 0,
@@ -129,7 +97,6 @@ export const CardVoteButton: FC<Props> = ({ card, context }) => {
     }).start(({ finished }) => {
       if (finished) {
         setIsModalVisible(false);
-        isLaidOutRef.current = false;
       }
     });
   }, [visible, progress, dragY]);
@@ -223,14 +190,24 @@ export const CardVoteButton: FC<Props> = ({ card, context }) => {
           <Animated.View
             accessibilityViewIsModal
             onLayout={(event) =>
-              onDrawerLayout(event.nativeEvent.layout.height)
+              setDrawerHeight(event.nativeEvent.layout.height)
             }
             style={[
               styles.drawer,
               {
                 maxHeight: screenHeight * MAX_HEIGHT_RATIO,
                 backgroundColor: theme.colors.elevation.level1,
-                transform: [{ translateY }],
+                transform: [
+                  {
+                    translateY: Animated.add(
+                      progress.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [drawerHeight, 0],
+                      }),
+                      dragY
+                    ),
+                  },
+                ],
               },
             ]}
           >
