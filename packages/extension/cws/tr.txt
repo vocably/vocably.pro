@@ -1,39 +1,30 @@
 Language: Turkish
 
-Web sitelerini okurken ve YouTube videoları izlerken yabancı kelimeleri çevirin. Vocably, çevirilerinizi otomatik olarak çalışma kartlarına dönüştürür ve bunları mobil veya web uygulamasında öğrenmenize olanak tanır.
+Öğrendiğiniz dildeki makaleler, bloglar, haberler ve videolar gibi gerçek içeriklerle dil öğrenen herkes için tasarlandı. Aynı kelimeyi tekrar tekrar aramaya son verin. Kaydettiğiniz her kelime, tam unutmak üzereyken iOS ve Android uygulamasında veya web'de tekrar için karşınıza çıkar.
 
-Sözlük; 🇬🇧 İngilizce, 🇪🇸 İspanyolca, 🇩🇪 Almanca, 🇫🇷 Fransızca, 🇮🇹 İtalyanca ve daha birçok dil dahil olmak üzere 109 dili destekler.
+Vocably; İngilizce, Almanca, Fransızca, İspanyolca, İtalyanca ve Japonca dahil 109 dil arasında çeviri yapar. Böylece ana diliniz ne olursa olsun istediğiniz dili öğrenebilirsiniz.
 
-Baktığınız kelimeleri unutmayı bırakacaksınız ve kelime dağarcığınızı akıcılık düzeyine kadar geliştireceksiniz.
+＋ Gezinirken kelimeleri çevirin
 
-Vocably, gerçek dünya tarama deneyimi için tasarlanmış akıllı bir dil asistanıdır. Herhangi bir web sitesinde veya YouTube videosunda anında metin çevirin ve uzun vadeli hafıza için kişisel koleksiyonunuza kaydedin.
+Bağlam içinde çeviri: Bir web sitesinde herhangi bir kelimeyi veya ifadeyi seçerek çevirisini, tanımını, okunuşunu ve örnek cümleleri görün.
 
-Bilimsel olarak kanıtlanmış Aralıklı Tekrar Sistemini (SRS) kullanan Vocably, ilerlemenizi takip eder ve kelimeleri tam unutmak üzereyken size tekrar etmenizi hatırlatır. Günlük internet kullanımınızı keyifli bir öğrenme alışkanlığına dönüştürün.
+YouTube altyazıları: Öğrendiğiniz dilde video izlerken Alt tuşunu (Mac'te Option ⌥) basılı tutarak kelimeleri doğrudan YouTube altyazılarında seçin ve çevirin.
 
-＋ Zahmetsiz Çeviri ve Keşif
+Aynı anda birden fazla dil: Birden fazla dil mi öğreniyorsunuz? Her dil için ayrı bir koleksiyon tutun, uzantıda ve uygulamada aralarında geçiş yapın.
 
-Anında Çeviri: Herhangi bir web sayfasındaki herhangi bir kelimeyi veya ifadeyi seçerek çevirisini ve yeni kelime hakkında ayrıntılı bilgiyi alın.
+＋ Aralıklı tekrar kartlarıyla kelimeleri hatırlayın
 
-YouTube Entegrasyonu: YouTube altyazılarından doğrudan yabancı kelimeleri vurgulamak ve kaydetmek için Alt (veya Option ⌥) tuşunu basılı tutun.
+Otomatik kartlar: Kaydettiğiniz her kelime; çevirisi, tanımı ve örnekleriyle birlikte bir bilgi kartına dönüşür. Elle kart oluşturmanız gerekmez.
 
-Ayrıntılı Bilgi: Vocably net ve doğru tanımlar, fonetik transkripsiyon, örnekler ve diğer yararlı bilgileri sağlar.
+Aralıklı tekrar (SRS): Vocably, yeni kelimelerin kısa süreli bellekten uzun süreli belleğe geçmesi için tekrarlarınızı planlar.
 
-Çok Dil Desteği: Vocably birden fazla dil öğrenmenize ve uzantı ile uygulama arayüzlerinde aralarında kolayca geçiş yapmanıza olanak tanır.
+Mobil uygulama: Kelimeleriniz iOS ve Android için Vocably uygulamasıyla senkronize edilir, böylece her yerde tekrar yapabilirsiniz.
 
-＋ Kaydedilen Kelimeleri Aralıklı Tekrarla Öğrenin
+＋ Nasıl çalışır?
 
-Aralıklı Tekrar (SRS): Otomatik tekrar programlarıyla kelimeleri kısa vadeli bellekten uzun vadeli belleğe verimli şekilde taşıyın.
+1. Öğrendiğiniz dilde bir makale, blog yazısı veya YouTube videosu açın.
+2. Bilmediğiniz bir kelimeyi veya ifadeyi seçin ve çevirmek için Vocably düğmesine tıklayın.
+3. Kelimeyi tek tıkla koleksiyonunuza kaydedin.
+4. Kartlarınızı Vocably uygulamasında veya web'de tekrar edin.
 
-Mobil Senkronizasyon: Kaydedilen kelimeleriniz her zaman yanınızda. iOS ve Android uygulamalarımızla istediğiniz zaman tekrar edin. Kelime dağarcığınızı genişletin ve akıcılık düzeyine ulaşın.
-
-Kişiselleştirilmiş Kartlar: Çevirdiğiniz her kelime otomatik olarak bir çalışma kartına dönüşür — manuel giriş gerekmez.
-
-＋ Nasıl Başlanır
-
-Seç ve Çevir: Bir web sitesinde herhangi bir kelimeyi veya ifadeyi seçin ve açılan Vocably düğmesine tıklayın.
-
-Kaydet: Kelimeyi ve tanımını tek tıklamayla koleksiyonunuza ekleyin.
-
-Öğren: Kaydedilen kelimelerinizi size uygun bir zamanda çalışmak için Vocably mobil uygulamasını veya web sitesini açın.
-
-Her makaleyi, blog yazısını ve YouTube videosunu kişisel bir dil dersine dönüştürün. Vocably'yi Chrome'a ekleyin ve dil öğreniminde hiç olmadığı kadar ilerlemeye başlayın.
+Zaten okumaktan ve izlemekten keyif aldığınız içeriklerle dil öğrenin. Her web sitesi ve her YouTube videosu dil pratiğine dönüşür.

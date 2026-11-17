@@ -1,39 +1,30 @@
 Language: Vietnamese
 
-Dịch những từ lạ ngay khi đọc trang web và xem video YouTube. Vocably tự động biến các bản dịch của bạn thành những thẻ học và cho phép bạn học chúng trong ứng dụng di động hoặc web.
+Dành cho bất kỳ ai học ngoại ngữ qua nội dung thực tế: bài báo, blog, tin tức và video bằng ngôn ngữ bạn đang học. Không còn phải tra đi tra lại cùng một từ. Mỗi từ bạn lưu sẽ quay lại để ôn tập ngay trước khi bạn kịp quên, trên điện thoại với ứng dụng cho iOS và Android hoặc trên web.
 
-Từ điển hỗ trợ 109 ngôn ngữ, bao gồm 🇬🇧 tiếng Anh, 🇪🇸 tiếng Tây Ban Nha, 🇩🇪 tiếng Đức, 🇫🇷 tiếng Pháp, 🇮🇹 tiếng Ý và nhiều ngôn ngữ khác.
+Vocably dịch giữa 109 ngôn ngữ, bao gồm tiếng Anh, tiếng Đức, tiếng Pháp, tiếng Tây Ban Nha, tiếng Ý và tiếng Nhật, nên bạn có thể học bất kỳ ngôn ngữ nào dù tiếng mẹ đẻ của bạn là gì.
 
-Bạn sẽ không còn quên những từ đã tra cứu và mở rộng vốn từ vựng đến mức thành thạo.
+＋ Dịch từ khi lướt web
 
-Vocably là trợ lý ngôn ngữ thông minh được thiết kế cho việc duyệt web thực tế. Dịch ngay lập tức văn bản trên bất kỳ trang web hoặc video YouTube nào và lưu vào bộ sưu tập cá nhân để ghi nhớ lâu dài.
+Dịch theo ngữ cảnh: Chọn bất kỳ từ hoặc cụm từ nào trên trang web để xem bản dịch, định nghĩa, phiên âm và câu ví dụ.
 
-Sử dụng Hệ thống Lặp lại Cách quãng (SRS) đã được khoa học chứng minh, Vocably theo dõi tiến trình của bạn và nhắc nhở bạn ôn tập từ vựng đúng lúc bạn sắp quên chúng. Biến việc sử dụng internet hàng ngày thành thói quen học tập thú vị.
+Phụ đề YouTube: Giữ phím Alt (Option ⌥ trên Mac) để chọn và dịch từ ngay trong phụ đề YouTube khi xem video bằng ngôn ngữ bạn đang học.
 
-＋ Dịch thuật và Khám phá không tốn công sức
+Học nhiều ngôn ngữ cùng lúc: Bạn học nhiều hơn một ngôn ngữ? Hãy tạo bộ sưu tập riêng cho từng ngôn ngữ và chuyển đổi giữa chúng trong tiện ích và ứng dụng.
 
-Dịch tức thì: Chọn bất kỳ từ hoặc cụm từ nào trên trang web để nhận bản dịch và thông tin chi tiết về từ mới.
+＋ Ghi nhớ từ bằng thẻ ghi nhớ lặp lại ngắt quãng
 
-Tích hợp YouTube: Giữ Alt (hoặc Option ⌥) để tô sáng và lưu những từ lạ trực tiếp từ phụ đề YouTube.
+Thẻ ghi nhớ tự động: Mỗi từ bạn lưu sẽ trở thành một thẻ ghi nhớ kèm bản dịch, định nghĩa và ví dụ. Không cần tạo thẻ thủ công.
 
-Thông tin chi tiết: Vocably cung cấp định nghĩa rõ ràng, chính xác, phiên âm, ví dụ và các thông tin hữu ích khác.
+Lặp lại ngắt quãng (SRS): Vocably lên lịch ôn tập để chuyển từ mới từ trí nhớ ngắn hạn sang trí nhớ dài hạn.
 
-Hỗ trợ đa ngôn ngữ: Học nhiều ngôn ngữ và dễ dàng chuyển đổi giữa chúng trong giao diện tiện ích mở rộng và ứng dụng.
+Ứng dụng di động: Từ vựng của bạn được đồng bộ với ứng dụng Vocably cho iOS và Android, để bạn ôn tập mọi lúc mọi nơi.
 
-＋ Học từ đã lưu bằng Lặp lại Cách quãng
+＋ Cách hoạt động
 
-Lặp lại cách quãng (SRS): Chuyển các từ từ bộ nhớ ngắn hạn sang bộ nhớ dài hạn một cách hiệu quả với lịch ôn tập tự động.
+1. Mở một bài báo, bài blog hoặc video YouTube bằng ngôn ngữ bạn đang học.
+2. Chọn một từ hoặc cụm từ bạn chưa biết và nhấn nút Vocably để dịch.
+3. Lưu từ vào bộ sưu tập của bạn chỉ với một cú nhấp.
+4. Ôn tập thẻ ghi nhớ trong ứng dụng Vocably hoặc trên web.
 
-Đồng bộ di động: Những từ đã lưu luôn ở bên bạn. Ôn tập chúng bất cứ lúc nào thuận tiện với ứng dụng iOS và Android. Mở rộng vốn từ và đạt đến mức thành thạo.
-
-Thẻ học cá nhân hóa: Mỗi từ bạn dịch tự động trở thành thẻ học — không cần nhập thủ công.
-
-＋ Cách bắt đầu
-
-Chọn và Dịch: Tô sáng bất kỳ từ hoặc cụm từ nào trên trang web và nhấp vào nút bật lên Vocably.
-
-Lưu: Thêm từ và định nghĩa vào bộ sưu tập của bạn chỉ với một cú nhấp chuột.
-
-Học: Mở ứng dụng di động Vocably hoặc trang web để học những từ đã lưu vào thời gian thuận tiện cho bạn.
-
-Biến mỗi bài báo, blog và video YouTube thành bài học ngôn ngữ cá nhân. Thêm Vocably vào Chrome và bắt đầu tiến bộ trong việc học ngôn ngữ như chưa từng có.
+Học ngoại ngữ từ chính những nội dung bạn vẫn thích đọc và xem. Mỗi trang web và video YouTube đều trở thành bài luyện tập ngôn ngữ.

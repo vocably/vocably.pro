@@ -1,39 +1,30 @@
 Language: Portuguese (Brazil)
 
-Traduza palavras desconhecidas enquanto navega em sites e assiste a vídeos no YouTube. O Vocably transforma automaticamente suas traduções em cartões de estudo e permite que você as aprenda no aplicativo móvel ou web.
+Feito para quem aprende um idioma com conteúdo real: artigos, blogs, notícias e vídeos no idioma que você está aprendendo. Pare de pesquisar a mesma palavra várias vezes. Cada palavra que você salva volta para revisão logo antes de você esquecê-la, no seu celular com o app para iOS e Android ou na web.
 
-O dicionário oferece suporte a 109 idiomas, incluindo 🇬🇧 inglês, 🇪🇸 espanhol, 🇩🇪 alemão, 🇫🇷 francês, 🇮🇹 italiano e muitos outros.
+O Vocably traduz entre 109 idiomas, incluindo inglês, espanhol, alemão, francês, italiano e japonês, então você pode aprender qualquer idioma, seja qual for a sua língua materna.
 
-Você vai parar de esquecer as palavras que traduziu e vai expandir seu vocabulário até a fluência.
+＋ Traduza palavras enquanto navega
 
-O Vocably é o assistente de idiomas inteligente criado para a navegação no mundo real. Traduza instantaneamente textos em qualquer site ou vídeo do YouTube e salve-os em sua coleção pessoal para retenção a longo prazo.
+Tradução em contexto: Selecione qualquer palavra ou frase em um site para ver a tradução, a definição, a transcrição e frases de exemplo.
 
-Utilizando um Sistema de Repetição Espaçada (SRS) comprovado cientificamente, o Vocably acompanha seu progresso e lembra você de revisar as palavras exatamente quando você está prestes a esquecê-las. Transforme seu uso diário da internet em um hábito de aprendizado prazeroso.
+Legendas do YouTube: Segure Alt (Option ⌥ no Mac) para selecionar e traduzir palavras diretamente nas legendas do YouTube enquanto assiste a vídeos no idioma que você está estudando.
 
-＋ Tradução e Descoberta Sem Esforço
+Vários idiomas ao mesmo tempo: Aprende mais de um idioma? Mantenha uma coleção separada para cada idioma e alterne entre elas na extensão e no app.
 
-Tradução Instantânea: Selecione qualquer palavra ou frase em qualquer página da web para obter uma tradução e informações detalhadas sobre o novo termo.
+＋ Memorize palavras com flashcards de repetição espaçada
 
-Integração com YouTube: Segure Alt (ou Option ⌥) para destacar e salvar palavras desconhecidas diretamente das legendas do YouTube.
+Flashcards automáticos: Cada palavra que você salva vira um flashcard com tradução, definição e exemplos. Sem criar cartões manualmente.
 
-Informações Detalhadas: O Vocably fornece definições claras e precisas, transcrições fonéticas, exemplos e outras informações úteis.
+Repetição espaçada (SRS): O Vocably agenda suas revisões para levar as palavras novas da memória de curto prazo para a de longo prazo.
 
-Suporte Multilíngue: Aprenda vários idiomas e alterne convenientemente entre eles nas interfaces da extensão e do aplicativo.
+App para celular: Seu vocabulário é sincronizado com o app Vocably para iOS e Android, para você revisar palavras em qualquer lugar.
 
-＋ Aprenda Palavras Salvas com Repetição Espaçada
+＋ Como funciona
 
-Repetição Espaçada (SRS): Mova palavras da memória de curto prazo para a de longo prazo de forma eficiente com cronogramas de revisão automatizados.
+1. Abra um artigo, post de blog ou vídeo do YouTube no idioma que você está aprendendo.
+2. Selecione uma palavra ou frase que você não conhece e clique no botão do Vocably para traduzi-la.
+3. Salve a palavra na sua coleção com um clique.
+4. Revise seus flashcards no app Vocably ou na web.
 
-Sincronização Móvel: Suas palavras salvas estão sempre com você. Revise-as a qualquer momento com nossos aplicativos para iOS e Android. Expanda seu vocabulário e alcance a fluência.
-
-Flashcards Personalizados: Cada palavra que você traduz torna-se automaticamente um cartão de estudo — sem necessidade de digitação manual.
-
-＋ Como Começar
-
-Selecione e Traduza: Destaque qualquer palavra ou frase em um site e clique no botão flutuante do Vocably.
-
-Salve: Adicione a palavra e sua definição à sua coleção com um único clique.
-
-Aprenda: Abra o aplicativo móvel ou o site do Vocably para estudar suas palavras salvas quando for melhor para você.
-
-Transforme cada artigo, post de blog e vídeo do YouTube em uma aula de idioma pessoal. Adicione o Vocably ao Chrome e comece a progredir no aprendizado de idiomas como nunca antes.
+Aprenda um idioma com o conteúdo que você já gosta de ler e assistir. Cada site e cada vídeo do YouTube vira prática do idioma.

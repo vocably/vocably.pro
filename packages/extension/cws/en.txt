@@ -1,39 +1,30 @@
 Language: English
 
-Translate new words while reading websites and watching YouTube videos. Vocably automatically turns your translations into flashcards and lets you learn them in the mobile or web app.
+Made for anyone learning a language from real content: articles, blogs, news, and videos in the language you're learning. Stop looking up the same word again and again. Every word you save comes back for review right before you would forget it, on your phone with the app for iOS and Android or on the web.
 
-The dictionary supports 109 languages, including 🇬🇧 English, 🇪🇸 Spanish, 🇩🇪 German, 🇫🇷 French, 🇮🇹 Italian, and more.
+Vocably translates between 109 languages, including Spanish, German, French, Italian, English, Japanese, and Portuguese, so you can learn any language from any native language.
 
-You'll stop forgetting the words you've looked up and expand your vocabulary all the way to fluency.
+＋ Translate Words While Browsing
 
-Vocably is the intelligent language assistant designed for real-world browsing. Instantly translate text on any website or YouTube video and save it to your personal collection for long-term retention.
+Translate in context: Select any word or phrase on a website to see its translation, definition, transcription, and example sentences.
 
-Using a scientifically-proven Spaced Repetition System (SRS), Vocably tracks your progress and reminds you to review words exactly when you're about to forget them. Transform your daily internet usage into an enjoyable learning habit.
+YouTube subtitles: Hold Alt (Option ⌥ on Mac) to select and translate words directly in YouTube subtitles while watching videos in your target language.
 
-＋ Translation & Discovery Without Effort
+Several languages at once: Learning more than one language? Keep a separate collection for each language and switch between them in the extension and the app.
 
-Instant Translation: Select any word or phrase on any webpage to get a translation and detailed information about the new word.
+＋ Remember Words with Spaced Repetition Flashcards
 
-YouTube Integration: Hold Alt (or Option ⌥) to highlight and save unfamiliar words directly from YouTube subtitles.
+Automatic flashcards: Every word you save becomes a flashcard with its translation, definition, and examples. No manual card creation.
 
-Detailed Information: Vocably provides clear, accurate definitions, phonetic transcriptions, examples, and other useful information.
+Spaced repetition (SRS): Vocably schedules your reviews to move new words from short-term to long-term memory.
 
-Multi-Language Support: Learn multiple languages and conveniently switch between them in the extension and app interfaces.
+Mobile app: Your vocabulary syncs to the Vocably app for iOS and Android, so you can review words on the go.
 
-＋ Learn Saved Words with Spaced Repetition
+＋ How It Works
 
-Spaced Repetition (SRS): Efficiently move words from short-term to long-term memory with automated review schedules.
+1. Open an article, blog post, or YouTube video in the language you're learning.
+2. Select a word or phrase you don't know and click the Vocably button to translate it.
+3. Save the word to your collection with one click.
+4. Review your flashcards in the Vocably app or on the web.
 
-Mobile Sync: Your saved words are always with you. Review them at any convenient time with our iOS and Android apps. Expand your vocabulary and reach fluency.
-
-Personalized Flashcards: Every word you translate automatically becomes a study card — no manual entry required.
-
-＋ How to Get Started
-
-Select & Translate: Highlight any word or phrase on a website and click the Vocably popup button.
-
-Save: Add the word and its definition to your collection with a single click.
-
-Learn: Open the Vocably mobile app or website to study your saved words whenever it suits you.
-
-Turn every article, blog post, and YouTube video into a personal language lesson. Add Vocably to Chrome and start progressing in your language learning like never before.
+Learn a language from the content you already enjoy reading and watching. Every website and YouTube video becomes language practice.
