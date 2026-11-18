@@ -10,6 +10,13 @@ export const es = {
   'sign_in.benefit.study': 'Estudia tus tarjetas en el móvil o en el navegador',
   'sign_in.benefit.export': 'Exporta tus tarjetas en CSV',
   'sign_in.platforms': 'Disponible en',
+  // quality vote
+  'quality_vote.title': 'Califica esta tarjeta para ayudar a mejorar Vocably',
+  'quality_vote.description':
+    '¿Es de buena calidad esta tarjeta? Califícala con un pulgar arriba o abajo. Cada voto ayuda a mejorar las tarjetas de Vocably.',
+  'quality_vote.vote_up': 'Buena tarjeta',
+  'quality_vote.vote_down': 'Mala tarjeta',
+  'quality_vote.button': 'Calificar la tarjeta',
   // subscribe
   'subscribe.trial_message':
     'Solicita una prueba gratuita de 7 días para continuar.',

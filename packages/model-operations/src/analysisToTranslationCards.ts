@@ -1,4 +1,9 @@
-import { Analysis, LanguageDeck, TranslationCards } from '@vocably/model';
+import {
+  Analysis,
+  isReverseAnalysis,
+  LanguageDeck,
+  TranslationCards,
+} from '@vocably/model';
 
 /**
  * Combines an analysis with the collection it has to be shown against.
@@ -17,6 +22,7 @@ export const analysisToTranslationCards = (
   deck,
   explanation: analysis.explanation ?? '',
   source: analysis.source,
+  ...(isReverseAnalysis(analysis) ? { target: analysis.target } : {}),
   sourceLanguage: analysis.sourceLanguage,
   targetLanguage: analysis.targetLanguage,
   isDirect: analysis.isDirect,

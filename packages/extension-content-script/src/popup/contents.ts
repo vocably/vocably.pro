@@ -247,6 +247,7 @@ export const setContents = async ({
     translation.detachTag = api.detachTag;
     translation.deleteTag = api.deleteTag;
     translation.updateTag = api.updateTag;
+    translation.qualityVote = api.qualityVote;
 
     // @ts-ignore
     translation.addEventListener(

@@ -14,6 +14,9 @@ export type TranslationCard = CardItem | DetachedCardItem;
 
 export type TranslationCards = {
   source: string;
+  // Set for a reverse analysis: the text the user looked up in the target
+  // language.
+  target?: string;
   explanation: string;
   sourceLanguage: GoogleLanguage;
   targetLanguage: GoogleLanguage;
@@ -33,6 +36,25 @@ export type RemoveCardPayload = {
 export type AddCardPayload = {
   translationCards: TranslationCards;
   card: DetachedCardItem;
+};
+
+export type QualityVote = 'up' | 'down';
+
+/**
+ * The user's opinion on the quality of a card, along with what the card was
+ * created from.
+ */
+export type QualityVotePayload = {
+  // null when the user takes their vote back.
+  vote: QualityVote | null;
+  // Set when the user changes their mind.
+  previousVote: QualityVote | null;
+  card: DetachedCard;
+  cards: DetachedCard[];
+  query: string;
+  sourceLanguage: GoogleLanguage;
+  targetLanguage: GoogleLanguage;
+  direction: 'direct' | 'reverse';
 };
 
 export type TagCandidate = TagItem | Pick<TagItem, 'data'>;

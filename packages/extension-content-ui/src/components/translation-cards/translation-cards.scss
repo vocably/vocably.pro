@@ -4,7 +4,7 @@
 $input-padding-x: 14px;
 
 // How far the card action sticks out above the card container, to visually
-// align the buttons with the card text. The sign in cover compensates for it,
+// align the buttons with the card text. The card cover compensates for it,
 // so keep both usages in sync.
 $card-action-offset: 0.3em;
 
@@ -40,7 +40,7 @@ $card-action-offset: 0.3em;
 .vocably-card {
   .vocably-card-container {
     position: relative;
-    // A single stacking cell, so the sign in cover can be placed on top of
+    // A single stacking cell, so the card cover can be placed on top of
     // the card content and stretch the card if it needs more space.
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -81,6 +81,41 @@ $card-action-offset: 0.3em;
       width: $size;
       height: $size;
       overflow: hidden;
+    }
+  }
+
+  // Sits in the bottom right corner of the card. Its top margin reserves room
+  // for the tallest set of actions above it (remove and tags), so the two never
+  // overlap on a short card and revealing the actions doesn't reflow it.
+  .vocably-card-vote-button {
+    grid-area: 1 / 1;
+    align-self: end;
+    justify-self: end;
+    // Centered under the 24px wide actions above it
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 18px;
+    margin-top: 60px;
+    line-height: 0;
+
+    // Quiet on purpose, so it doesn't compete with the card content
+    vocably-icon-thumbs-up-down {
+      --size: 16px;
+      --color: #{$v-light-color-muted};
+      opacity: 0.8;
+      transition: opacity 200ms;
+    }
+
+    &:hover,
+    &:active {
+      filter: none;
+    }
+
+    &:hover vocably-icon-thumbs-up-down,
+    &:focus-visible vocably-icon-thumbs-up-down {
+      opacity: 1;
     }
   }
 
@@ -219,10 +254,10 @@ vocably-play-sound {
   }
 }
 
-// Keep in sync with signInSlideDuration in translation-cards.tsx
-$sign-in-slide-duration: 300ms;
+// Keep in sync with coverSlideDuration in translation-cards.tsx
+$cover-slide-duration: 300ms;
 
-.vocably-sign-in-cover {
+.vocably-card-cover {
   grid-area: 1 / 1;
   z-index: 2;
   // The card action sticks out above the grid area, so the cover has to start
@@ -235,18 +270,18 @@ $sign-in-slide-duration: 300ms;
   min-width: 100%;
 }
 
-.vocably-sign-in-cover-panel {
+.vocably-card-cover-panel {
   box-sizing: border-box;
   height: 100%;
   background: $v-light-color-body-bg;
-  animation: vocably-sign-in-slide-in $sign-in-slide-duration ease-out;
+  animation: vocably-card-cover-slide-in $cover-slide-duration ease-out;
 }
 
-.vocably-sign-in-cover-hiding .vocably-sign-in-cover-panel {
-  animation: vocably-sign-in-slide-out $sign-in-slide-duration ease-in forwards;
+.vocably-card-cover-hiding .vocably-card-cover-panel {
+  animation: vocably-card-cover-slide-out $cover-slide-duration ease-in forwards;
 }
 
-@keyframes vocably-sign-in-slide-in {
+@keyframes vocably-card-cover-slide-in {
   from {
     transform: translateX(100%);
   }
@@ -255,7 +290,7 @@ $sign-in-slide-duration: 300ms;
   }
 }
 
-@keyframes vocably-sign-in-slide-out {
+@keyframes vocably-card-cover-slide-out {
   from {
     transform: translateX(0);
   }

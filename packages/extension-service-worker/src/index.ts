@@ -62,6 +62,7 @@ import {
   onAnalyzeUnitsOfSpeech,
   onLoadLanguageDeck,
   onAnalyticsCapture,
+  onQualityVote,
 } from '@vocably/extension-messages';
 import {
   Analysis,
@@ -462,6 +463,12 @@ export const registerServiceWorker = (
 
   onAnalyticsCapture(async (sendResponse, { event, properties }) => {
     posthog.capture(event, properties);
+    return sendResponse();
+  });
+
+  // The same event and properties as the mobile app sends.
+  onQualityVote(async (sendResponse, payload) => {
+    posthog.capture('cardQualityVoted', payload);
     return sendResponse();
   });
 

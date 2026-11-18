@@ -10,6 +10,13 @@ export const vi = {
   'sign_in.benefit.study': 'Học thẻ trên điện thoại hoặc trong trình duyệt',
   'sign_in.benefit.export': 'Xuất thẻ của bạn dưới dạng CSV',
   'sign_in.platforms': 'Có trên',
+  // quality vote
+  'quality_vote.title': 'Hãy đánh giá thẻ này để giúp Vocably tốt hơn',
+  'quality_vote.description':
+    'Thẻ này có chất lượng tốt không? Hãy đánh giá bằng nút thích hoặc không thích. Mỗi lượt bình chọn giúp thẻ của Vocably tốt hơn.',
+  'quality_vote.vote_up': 'Thẻ tốt',
+  'quality_vote.vote_down': 'Thẻ chưa tốt',
+  'quality_vote.button': 'Đánh giá thẻ',
   // subscribe
   'subscribe.trial_message': 'Yêu cầu dùng thử miễn phí 7 ngày để tiếp tục.',
   'subscribe.message': 'Vui lòng đăng ký để tiếp tục.',

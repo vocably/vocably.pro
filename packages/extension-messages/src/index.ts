@@ -12,6 +12,7 @@ import {
   GoogleLanguage,
   LanguageDeck,
   LanguagePairs,
+  QualityVotePayload,
   RateInteractionPayload,
   RemoveCardPayload,
   Result,
@@ -269,6 +270,11 @@ export const [loadLanguageDeck, onLoadLanguageDeck] = createScopedMessage<
   GoogleLanguage,
   Result<LanguageDeck>
 >('loadLanguageDeck');
+
+export const [qualityVote, onQualityVote] = createScopedMessage<
+  QualityVotePayload,
+  void
+>('qualityVote');
 
 export type AnalyticsCapturePayload = {
   event: string;

@@ -10,6 +10,13 @@ export const en = {
   'sign_in.benefit.study': 'Study your cards on mobile or in a browser',
   'sign_in.benefit.export': 'Export your cards as CSV',
   'sign_in.platforms': 'Available on',
+  // quality vote
+  'quality_vote.title': 'Rate this card to help improve Vocably',
+  'quality_vote.description':
+    'Is this card of good quality? Rate it with a thumbs up or a thumbs down. Every vote helps make Vocably cards better.',
+  'quality_vote.vote_up': 'Good card',
+  'quality_vote.vote_down': 'Bad card',
+  'quality_vote.button': 'Rate the card',
   // subscribe
   'subscribe.trial_message': 'Request a 7 day free trial to proceed.',
   'subscribe.message': 'Please subscribe to proceed.',

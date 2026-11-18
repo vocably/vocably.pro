@@ -24,6 +24,7 @@ import {
   isDetachedCardItem,
   isGoogleTTSLanguage,
   languageList,
+  QualityVotePayload,
   RateInteractionPayload,
   RemoveCardPayload,
   Result,
@@ -104,6 +105,7 @@ export class VocablyTranslation {
   @Prop() deleteTag: (
     data: DeleteTagPayload
   ) => Promise<Result<TranslationCards>>;
+  @Prop() qualityVote?: (payload: QualityVotePayload) => Promise<void>;
   @Prop({ mutable: true }) disabled = false;
   @Prop() showLanguages: boolean = true;
   @Prop() hideChatGpt: boolean = false;
@@ -455,6 +457,7 @@ export class VocablyTranslation {
                 detachTag={this.detachTag}
                 updateTag={this.updateTag}
                 deleteTag={this.deleteTag}
+                qualityVote={this.qualityVote}
                 onRemoveCard={(e) => this.removeCard.emit(e.detail)}
                 onAddCard={(e) => {
                   e.stopPropagation();
@@ -523,6 +526,7 @@ export class VocablyTranslation {
                       detachTag={this.detachTag}
                       updateTag={this.updateTag}
                       deleteTag={this.deleteTag}
+                      qualityVote={this.qualityVote}
                       onRemoveCard={(e) => this.removeCard.emit(e.detail)}
                       onAddCard={(e) => this.addCard.emit(e.detail)}
                       onAddCardIntent={(e) => {

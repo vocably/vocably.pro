@@ -10,6 +10,13 @@ export const zhTW = {
   'sign_in.benefit.study': '在手機或瀏覽器上學習你的卡片',
   'sign_in.benefit.export': '將卡片匯出為 CSV',
   'sign_in.platforms': '適用平台',
+  // quality vote
+  'quality_vote.title': '為這張單字卡評分，幫助改進 Vocably',
+  'quality_vote.description':
+    '這張單字卡的品質好嗎？請按讚或倒讚。每一票都能讓 Vocably 的單字卡變得更好。',
+  'quality_vote.vote_up': '單字卡不錯',
+  'quality_vote.vote_down': '單字卡不好',
+  'quality_vote.button': '為單字卡評分',
   // subscribe
   'subscribe.trial_message': '開始 7 天免費試用以繼續。',
   'subscribe.message': '請訂閱以繼續。',

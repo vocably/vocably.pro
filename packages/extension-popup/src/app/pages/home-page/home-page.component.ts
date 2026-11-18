@@ -26,6 +26,7 @@ import {
   TranslationCards,
   UpdateCardPayload,
   UpdateTagPayload,
+  QualityVotePayload,
   CardsLimit,
   GoogleLanguage,
 } from '@vocably/model';
@@ -359,6 +360,9 @@ export class HomePageComponent implements OnInit, OnDestroy {
   async updateCard(payload: UpdateCardPayload) {
     this.searchResult = await environment.updateCard(payload);
     return this.searchResult;
+  }
+  async qualityVote(payload: QualityVotePayload): Promise<void> {
+    await environment.qualityVote(payload);
   }
   async playAudioPronunciation(
     payload: AudioPronunciationPayload

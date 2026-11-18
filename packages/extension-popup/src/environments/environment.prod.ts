@@ -14,6 +14,7 @@ import {
   getCardsLimit,
   getSettings,
   isLoggedIn,
+  qualityVote,
   removeCard,
   saveAskForRatingResponse,
   setInternalProxyLanguage,
@@ -49,4 +50,5 @@ export const environment = merge(environmentLocal, {
   getCardsLimit: getCardsLimit,
   analyzeUnitsOfSpeech: analyzeUnitsOfSpeech,
   analyticsCapture: analyticsCapture,
+  qualityVote: qualityVote,
 });

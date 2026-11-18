@@ -1,0 +1,99 @@
+@import '../../styles/component';
+
+$vote-button-size: 56px;
+
+:host {
+  @include base-font();
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  // Reddit sets visibility: hidden for custom elements
+  visibility: visible !important;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 4px 16px 16px;
+}
+
+// The title and the close button share the first row to save vertical space
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  // Pulls the close button towards the corner
+  margin-right: -12px;
+}
+
+.close {
+  flex: 0 0 auto;
+}
+
+.title {
+  // Lines the first line of the title up with the close button
+  padding-top: 8px;
+  color: $v-light-color-emphasize;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  color: $v-light-color-body;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  // Pins the buttons to the bottom when the parent is taller than the content
+  margin-top: auto;
+  padding-top: 4px;
+}
+
+.vote-button {
+  @include unstyled();
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $vote-button-size;
+  height: $vote-button-size;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba($v-light-color-primary, 0.12);
+  color: $v-light-color-primary;
+  transition:
+    background-color 200ms,
+    color 200ms,
+    transform 200ms;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba($v-light-color-primary, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+
+  &.selected {
+    background: $v-light-color-primary;
+    color: $v-light-btn-color;
+  }
+}
+
+.vote-icon {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}

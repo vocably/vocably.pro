@@ -10,6 +10,14 @@ export const tr = {
   'sign_in.benefit.study': 'Kartlarını telefonda veya tarayıcıda çalış',
   'sign_in.benefit.export': 'Kartlarını CSV olarak dışa aktar',
   'sign_in.platforms': 'Şuralarda kullanılabilir',
+  // quality vote
+  'quality_vote.title':
+    "Vocably'yi geliştirmeye yardımcı olmak için bu kartı değerlendirin",
+  'quality_vote.description':
+    'Bu kart kaliteli mi? Başparmak yukarı veya aşağı ile değerlendirin. Her oy, Vocably kartlarını daha iyi hale getirir.',
+  'quality_vote.vote_up': 'İyi kart',
+  'quality_vote.vote_down': 'Kötü kart',
+  'quality_vote.button': 'Kartı değerlendir',
   // subscribe
   'subscribe.trial_message':
     'Devam etmek için 7 günlük ücretsiz deneme talep edin.',

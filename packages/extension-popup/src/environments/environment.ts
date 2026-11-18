@@ -15,6 +15,7 @@ import {
   getCardsLimit,
   getSettings,
   isLoggedIn,
+  qualityVote,
   removeCard,
   saveAskForRatingResponse,
   setInternalProxyLanguage,
@@ -368,6 +369,10 @@ const mockAnalyticsCapture: typeof analyticsCapture = async (
   console.log('Analytics capture', event, properties);
 };
 
+const mockQualityVote: typeof qualityVote = async (payload) => {
+  console.log('Quality vote', payload);
+};
+
 export const environment = merge(environmentLocal, {
   production: false,
   analyze: mockAnalyze,
@@ -392,4 +397,5 @@ export const environment = merge(environmentLocal, {
   getCardsLimit: getCardsLimitMock,
   analyzeUnitsOfSpeech: mockAnalyzeUnitsOfSpeech,
   analyticsCapture: mockAnalyticsCapture,
+  qualityVote: mockQualityVote,
 });

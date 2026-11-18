@@ -22,6 +22,7 @@ import {
   DetachTagPayload,
   isCardItem,
   isDetachedCardItem,
+  QualityVotePayload,
   RemoveCardPayload,
   Result,
   TagCandidate,
@@ -32,12 +33,19 @@ import {
   UpdateTagPayload,
 } from '@vocably/model';
 import { subscribeToLocale, t } from '../../i18n';
+import { QualityVoteChange } from '../quality-vote/quality-vote';
 import { getSelectedTagIds } from '../translation/getSelectedTagIds';
 import { toLocationHash } from '@vocably/sulna';
 import { cardToLocationHash } from '@vocably/model-operations';
 
-// Keep in sync with $sign-in-slide-duration in translation-cards.scss
-const signInSlideDuration = 300;
+// Keep in sync with $cover-slide-duration in translation-cards.scss
+const coverSlideDuration = 300;
+// The quality vote cover closes this long after the vote, so the highlighted
+// button is seen.
+const closeAfterVoteDelay = 500;
+
+// What slides over a card: the sign in invitation or the quality vote.
+type CoverType = 'sign-in' | 'quality-vote';
 
 @Component({
   tag: 'vocably-translation-cards',
@@ -77,6 +85,7 @@ export class VocablyTranslationCards {
   @Prop() deleteTag: (
     data: DeleteTagPayload
   ) => Promise<Result<TranslationCards>>;
+  @Prop() qualityVote?: (payload: QualityVotePayload) => Promise<void>;
 
   @Event() removeCard: EventEmitter<RemoveCardPayload>;
   @Event() addCard: EventEmitter<AddCardPayload>;
@@ -91,8 +100,8 @@ export class VocablyTranslationCards {
   @State() addedItemIndex = -1;
   @State() congratulateItemIndex = -1;
   @State() addAttemptIndex = -1;
-  @State() signInItemIndex = -1;
-  @State() signInHiding = false;
+  @State() cover: { type: CoverType; itemIndex: number } | null = null;
+  @State() coverHiding = false;
   @State() removing: {
     card: CardItem;
     tag: TagItem;
@@ -101,7 +110,8 @@ export class VocablyTranslationCards {
   @Element() el: HTMLElement;
 
   private unsubLocale: (() => void) | undefined;
-  private signInHideTimeout: ReturnType<typeof setTimeout> | undefined;
+  private coverHideTimeout: ReturnType<typeof setTimeout> | undefined;
+  private closeAfterVoteTimeout: ReturnType<typeof setTimeout> | undefined;
 
   // Signed out visitors get 'unlimited' as well, so the limit alone does not
   // tell a premium user apart.
@@ -115,7 +125,8 @@ export class VocablyTranslationCards {
 
   disconnectedCallback() {
     this.unsubLocale?.();
-    clearTimeout(this.signInHideTimeout);
+    clearTimeout(this.coverHideTimeout);
+    clearTimeout(this.closeAfterVoteTimeout);
   }
 
   /**
@@ -140,20 +151,88 @@ export class VocablyTranslationCards {
     this.congratulateItemIndex = this.cards.indexOf(card);
   }
 
-  private showSignIn = (itemIndex: number) => {
-    clearTimeout(this.signInHideTimeout);
-    this.signInHiding = false;
-    this.signInItemIndex = itemIndex;
+  private showCover = (type: CoverType, itemIndex: number) => {
+    clearTimeout(this.coverHideTimeout);
+    clearTimeout(this.closeAfterVoteTimeout);
+    this.coverHiding = false;
+    this.cover = { type, itemIndex };
   };
 
-  private hideSignIn = () => {
-    clearTimeout(this.signInHideTimeout);
-    this.signInHiding = true;
-    this.signInHideTimeout = setTimeout(() => {
-      this.signInItemIndex = -1;
-      this.signInHiding = false;
-    }, signInSlideDuration);
+  private hideCover = () => {
+    clearTimeout(this.coverHideTimeout);
+    clearTimeout(this.closeAfterVoteTimeout);
+    this.coverHiding = true;
+    this.coverHideTimeout = setTimeout(() => {
+      this.cover = null;
+      this.coverHiding = false;
+    }, coverSlideDuration);
   };
+
+  private onQualityVote = (
+    card: TranslationCard,
+    { vote, previousVote }: QualityVoteChange
+  ) => {
+    const translationCards = this.translationCards;
+
+    this.qualityVote?.({
+      vote,
+      previousVote,
+      card: card.data,
+      cards: this.cards.map((card) => card.data),
+      // A reverse look up starts from the text in the target language.
+      query: translationCards.target ?? translationCards.source,
+      sourceLanguage: translationCards.sourceLanguage,
+      targetLanguage: translationCards.targetLanguage,
+      direction: translationCards.target === undefined ? 'direct' : 'reverse',
+    });
+
+    clearTimeout(this.closeAfterVoteTimeout);
+    // After taking the vote back, the cover stays, so the user can vote again.
+    if (vote === null) {
+      return;
+    }
+    this.closeAfterVoteTimeout = setTimeout(
+      this.hideCover,
+      closeAfterVoteDelay
+    );
+  };
+
+  private renderCover(card: TranslationCard, itemIndex: number) {
+    if (this.cover === null || this.cover.itemIndex !== itemIndex) {
+      return null;
+    }
+
+    if (this.cover.type === 'sign-in' && this.isLoggedInUser) {
+      return null;
+    }
+
+    return (
+      <div
+        data-test={`${this.cover.type}-cover`}
+        class={{
+          'vocably-card-cover': true,
+          'vocably-card-cover-hiding': this.coverHiding,
+        }}
+      >
+        <div class="vocably-card-cover-panel">
+          {this.cover.type === 'sign-in' && (
+            <vocably-sign-in
+              onDismiss={this.hideCover}
+              source={card.data.source}
+              sourceLanguage={this.translationCards.sourceLanguage}
+              targetLanguage={this.translationCards.targetLanguage}
+            ></vocably-sign-in>
+          )}
+          {this.cover.type === 'quality-vote' && (
+            <vocably-quality-vote
+              onDismiss={this.hideCover}
+              onVote={(event) => this.onQualityVote(card, event.detail)}
+            ></vocably-quality-vote>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   private overlay: HTMLElement | null = null;
   private tagsMenu: HTMLElement | null = null;
@@ -495,7 +574,7 @@ export class VocablyTranslationCards {
                             translationCards: this.translationCards,
                             card,
                           });
-                          this.showSignIn(itemIndex);
+                          this.showCover('sign-in', itemIndex);
                           return;
                         }
 
@@ -600,24 +679,16 @@ export class VocablyTranslationCards {
                     </div>
                   )}
                 </div>
-                {this.signInItemIndex === itemIndex && !this.isLoggedInUser && (
-                  <div
-                    data-test="sign-in-cover"
-                    class={{
-                      'vocably-sign-in-cover': true,
-                      'vocably-sign-in-cover-hiding': this.signInHiding,
-                    }}
-                  >
-                    <div class="vocably-sign-in-cover-panel">
-                      <vocably-sign-in
-                        onDismiss={this.hideSignIn}
-                        source={card.data.source}
-                        sourceLanguage={this.translationCards.sourceLanguage}
-                        targetLanguage={this.translationCards.targetLanguage}
-                      ></vocably-sign-in>
-                    </div>
-                  </div>
-                )}
+                <button
+                  class="vocably-card-action-button vocably-card-vote-button"
+                  data-test="quality-vote-button"
+                  title={t('quality_vote.button')}
+                  aria-label={t('quality_vote.button')}
+                  onClick={() => this.showCover('quality-vote', itemIndex)}
+                >
+                  <vocably-icon-thumbs-up-down></vocably-icon-thumbs-up-down>
+                </button>
+                {this.renderCover(card, itemIndex)}
               </div>
             </div>
           </div>

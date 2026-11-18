@@ -403,6 +403,9 @@ registerContentScript({
           });
         }, 1000)
       ),
+    qualityVote: async (payload) => {
+      console.log('Quality vote', payload);
+    },
     getCardsLimit: () => {
       return new Promise((resolve) =>
         setTimeout(() => {
