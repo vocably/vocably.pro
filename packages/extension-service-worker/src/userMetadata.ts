@@ -2,7 +2,7 @@ import {
   getUserMetadata as apiGetUserMetadata,
   saveUserMetadata as apiSaveUserMetadata,
 } from '@vocably/api';
-import { Result, UserMetadata } from '@vocably/model';
+import { PartialUserMetadata, Result, UserMetadata } from '@vocably/model';
 
 let userMetadata: UserMetadata | null = null;
 
@@ -32,10 +32,17 @@ export const invalidateUserMetadata = (): void => {
   userMetadata = null;
 };
 
+/**
+ * Sends only the changed fields: the API merges them into the freshly loaded
+ * metadata, so a stale cached copy never overwrites values saved elsewhere
+ * (e.g. the mobile app's rate responses).
+ */
 export const saveUserMetadata = async (
-  payloadMetadata: UserMetadata
+  payloadMetadata: PartialUserMetadata
 ): Promise<Result<UserMetadata>> => {
-  userMetadata = payloadMetadata;
+  const result = await apiSaveUserMetadata(payloadMetadata);
 
-  return apiSaveUserMetadata(payloadMetadata);
+  userMetadata = result.success ? result.value : null;
+
+  return result;
 };

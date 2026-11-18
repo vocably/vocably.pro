@@ -109,11 +109,8 @@ import {
 } from './selectedLanguage/sourceLanguage';
 import { isInPaidGroup, isSignedIn } from './session';
 import { getSettings, setSettings } from './settings';
-import {
-  getUserMetadata,
-  invalidateUserMetadata,
-  saveUserMetadata,
-} from './userMetadata';
+import { getRateResponse, saveRateResponse } from './rateResponse';
+import { invalidateUserMetadata } from './userMetadata';
 
 /**
  * Keeps the flat shape the extension entry points build from their Terraform
@@ -558,28 +555,16 @@ export const registerServiceWorker = (
   });
 
   onAskForRating(async (sendResponse, payload) => {
-    if (!(await isSignedIn())) {
-      return sendResponse(false);
-    }
-
     if (payload.translationResult.success === false) {
       return sendResponse(false);
     }
-
-    const userMetadataResult = await getUserMetadata();
-
-    if (userMetadataResult.success === false) {
-      return sendResponse(false);
-    }
-
-    const userMetadata = userMetadataResult.value;
 
     const platform: Platform =
       payload.extensionPlatform === 'iosSafariExtension'
         ? 'safariExtension'
         : payload.extensionPlatform;
 
-    const rateResponse = userMetadata.rate[platform];
+    const rateResponse = await getRateResponse(platform);
 
     if (
       rateResponse !== undefined &&
@@ -617,26 +602,17 @@ export const registerServiceWorker = (
       response: payload.rateInteraction,
     });
 
-    invalidateUserMetadata();
-    const userMetadataResult = await getUserMetadata();
-
-    if (userMetadataResult.success === false) {
-      return sendResponse();
-    }
-
-    const userMetadata = userMetadataResult.value;
-
     const platform: Platform =
       payload.extensionPlatform === 'iosSafariExtension'
         ? 'safariExtension'
         : payload.extensionPlatform;
 
-    userMetadata.rate[platform] = {
+    invalidateUserMetadata();
+    await saveRateResponse(platform, {
       response: payload.rateInteraction,
       isoDate: new Date().toISOString(),
-    };
+    });
 
-    await saveUserMetadata(userMetadata);
     await resetAskForRatingCounter();
     return sendResponse();
   });

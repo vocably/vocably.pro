@@ -1,6 +1,7 @@
 import { loadLanguageDeck } from '@vocably/api';
 import { GoogleLanguage } from '@vocably/model';
 import { browserEnv } from './browserEnv';
+import { isSignedIn } from './session';
 
 const storage = browserEnv.storage.sync;
 const storageKey = 'askForRatingCounter';
@@ -12,6 +13,11 @@ export const getAskForRatingCounter = async (
 
   if (storageResult[storageKey] !== undefined) {
     return storageResult[storageKey];
+  }
+
+  if (!(await isSignedIn())) {
+    await storage.set({ [storageKey]: 1 });
+    return 1;
   }
 
   const languageDeckResult = await loadLanguageDeck(language);
