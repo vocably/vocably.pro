@@ -222,6 +222,12 @@ const api: ContentScriptApi = {
   // Rating prompts are about the extension stores.
   askForRating: async () => false,
   saveAskForRatingResponse: async () => undefined,
+
+  // PostHog is only loaded once somebody actually votes.
+  qualityVote: async (payload) => {
+    const { captureQualityVote } = await import('./posthog');
+    await captureQualityVote(payload);
+  },
 };
 
 /**

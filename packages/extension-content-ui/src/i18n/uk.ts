@@ -10,6 +10,13 @@ export const uk = {
   'sign_in.benefit.study': 'Вчіть картки на телефоні або в браузері',
   'sign_in.benefit.export': 'Експорт карток у CSV',
   'sign_in.platforms': 'Доступно на',
+  // quality vote
+  'quality_vote.title': 'Оцініть картку, щоб допомогти покращити Vocably',
+  'quality_vote.description':
+    'Чи якісна ця картка? Оцініть її пальцем угору або вниз. Кожен голос допомагає робити картки Vocably кращими.',
+  'quality_vote.vote_up': 'Хороша картка',
+  'quality_vote.vote_down': 'Погана картка',
+  'quality_vote.button': 'Оцінити картку',
   // subscribe
   'subscribe.trial_message':
     'Запитайте 7-денний безкоштовний пробний період, щоб продовжити.',

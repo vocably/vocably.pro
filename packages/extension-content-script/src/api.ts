@@ -33,6 +33,7 @@ import {
   analyzeUnitsOfSpeech,
   loadLanguageDeck,
   analyticsCapture,
+  qualityVote,
 } from '@vocably/extension-messages';
 
 export const api = {
@@ -71,6 +72,7 @@ export const api = {
   analyzeUnitsOfSpeech,
   loadLanguageDeck,
   analyticsCapture,
+  qualityVote,
 };
 
 export type ApiConfigOptions = Partial<typeof api>;

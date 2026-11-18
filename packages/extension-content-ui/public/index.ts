@@ -702,3 +702,14 @@ const filterSelectClipped = document.getElementById(
 ) as HTMLVocablyFilterSelectElement;
 filterSelectClipped.optionGroups = languageGroups;
 filterSelectClipped.value = 'en';
+
+// ----
+
+// Quality votes are only logged here.
+document
+  .querySelectorAll<HTMLVocablyTranslationElement>('vocably-translation')
+  .forEach((translation) => {
+    translation.qualityVote = async (payload) => {
+      console.log('Quality vote', payload);
+    };
+  });

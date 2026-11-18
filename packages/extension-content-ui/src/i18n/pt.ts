@@ -10,6 +10,13 @@ export const pt = {
   'sign_in.benefit.study': 'Estude seus cartões no celular ou no navegador',
   'sign_in.benefit.export': 'Exporte seus cartões em CSV',
   'sign_in.platforms': 'Disponível em',
+  // quality vote
+  'quality_vote.title': 'Avalie este cartão para ajudar a melhorar o Vocably',
+  'quality_vote.description':
+    'Este cartão tem boa qualidade? Avalie com um polegar para cima ou para baixo. Cada voto ajuda a melhorar os cartões do Vocably.',
+  'quality_vote.vote_up': 'Cartão bom',
+  'quality_vote.vote_down': 'Cartão ruim',
+  'quality_vote.button': 'Avaliar o cartão',
   // subscribe
   'subscribe.trial_message':
     'Solicite um período de teste gratuito de 7 dias para continuar.',

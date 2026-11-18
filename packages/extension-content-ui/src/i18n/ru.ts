@@ -10,6 +10,13 @@ export const ru = {
   'sign_in.benefit.study': 'Учите карточки на телефоне или в браузере',
   'sign_in.benefit.export': 'Экспорт карточек в CSV',
   'sign_in.platforms': 'Доступно на',
+  // quality vote
+  'quality_vote.title': 'Оцените карточку, чтобы помочь улучшить Vocably',
+  'quality_vote.description':
+    'Хорошего ли качества эта карточка? Оцените её пальцем вверх или вниз. Каждый голос помогает делать карточки Vocably лучше.',
+  'quality_vote.vote_up': 'Хорошая карточка',
+  'quality_vote.vote_down': 'Плохая карточка',
+  'quality_vote.button': 'Оценить карточку',
   // subscribe
   'subscribe.trial_message':
     'Запросите бесплатный пробный период на 7 дней, чтобы продолжить.',
