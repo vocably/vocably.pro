@@ -2,7 +2,7 @@ Language: Turkish
 
 Öğrendiğiniz dildeki makaleler, bloglar, haberler ve videolar gibi gerçek içeriklerle dil öğrenen herkes için tasarlandı. Aynı kelimeyi tekrar tekrar aramaya son verin. Kaydettiğiniz her kelime, tam unutmak üzereyken iOS ve Android uygulamasında veya web'de tekrar için karşınıza çıkar.
 
-Vocably; İngilizce, Almanca, Fransızca, İspanyolca, İtalyanca ve Japonca dahil 109 dil arasında çeviri yapar. Böylece ana diliniz ne olursa olsun istediğiniz dili öğrenebilirsiniz.
+Vocably; 🇬🇧 İngilizce, 🇩🇪 Almanca, 🇫🇷 Fransızca, 🇪🇸 İspanyolca, 🇮🇹 İtalyanca ve 🇯🇵 Japonca dahil 109 dil arasında çeviri yapar. Böylece ana diliniz ne olursa olsun istediğiniz dili öğrenebilirsiniz.
 
 ＋ Gezinirken kelimeleri çevirin
 

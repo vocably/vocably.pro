@@ -2,7 +2,7 @@ Language: Vietnamese
 
 Dành cho bất kỳ ai học ngoại ngữ qua nội dung thực tế: bài báo, blog, tin tức và video bằng ngôn ngữ bạn đang học. Không còn phải tra đi tra lại cùng một từ. Mỗi từ bạn lưu sẽ quay lại để ôn tập ngay trước khi bạn kịp quên, trên điện thoại với ứng dụng cho iOS và Android hoặc trên web.
 
-Vocably dịch giữa 109 ngôn ngữ, bao gồm tiếng Anh, tiếng Đức, tiếng Pháp, tiếng Tây Ban Nha, tiếng Ý và tiếng Nhật, nên bạn có thể học bất kỳ ngôn ngữ nào dù tiếng mẹ đẻ của bạn là gì.
+Vocably dịch giữa 109 ngôn ngữ, bao gồm 🇬🇧 tiếng Anh, 🇩🇪 tiếng Đức, 🇫🇷 tiếng Pháp, 🇪🇸 tiếng Tây Ban Nha, 🇮🇹 tiếng Ý và 🇯🇵 tiếng Nhật, nên bạn có thể học bất kỳ ngôn ngữ nào dù tiếng mẹ đẻ của bạn là gì.
 
 ＋ Dịch từ khi lướt web
 

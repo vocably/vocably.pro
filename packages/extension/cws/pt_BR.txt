@@ -2,7 +2,7 @@ Language: Portuguese (Brazil)
 
 Feito para quem aprende um idioma com conteúdo real: artigos, blogs, notícias e vídeos no idioma que você está aprendendo. Pare de pesquisar a mesma palavra várias vezes. Cada palavra que você salva volta para revisão logo antes de você esquecê-la, no seu celular com o app para iOS e Android ou na web.
 
-O Vocably traduz entre 109 idiomas, incluindo inglês, espanhol, alemão, francês, italiano e japonês, então você pode aprender qualquer idioma, seja qual for a sua língua materna.
+O Vocably traduz entre 109 idiomas, incluindo 🇬🇧 inglês, 🇪🇸 espanhol, 🇩🇪 alemão, 🇫🇷 francês, 🇮🇹 italiano e 🇯🇵 japonês, então você pode aprender qualquer idioma, seja qual for a sua língua materna.
 
 ＋ Traduza palavras enquanto navega
 
