@@ -42,7 +42,7 @@ import { cardToLocationHash } from '@vocably/model-operations';
 const coverSlideDuration = 300;
 // The quality vote cover closes this long after the vote, so the highlighted
 // button is seen.
-const closeAfterVoteDelay = 1000;
+const closeAfterVoteDelay = 500;
 
 // What slides over a card: the sign in invitation or the quality vote.
 type CoverType = 'sign-in' | 'quality-vote';

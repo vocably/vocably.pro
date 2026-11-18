@@ -91,12 +91,26 @@ $card-action-offset: 0.3em;
     grid-area: 1 / 1;
     align-self: end;
     justify-self: end;
-    height: 24px;
+    // Centered under the 24px wide actions above it
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 18px;
     margin-top: 60px;
     line-height: 0;
 
+    // Quiet on purpose, so it doesn't compete with the card content
     vocably-icon-thumbs-up-down {
-      opacity: 0.7;
+      --size: 16px;
+      --color: #{$v-light-color-muted};
+      opacity: 0.8;
+      transition: opacity 200ms;
+    }
+
+    &:hover,
+    &:active {
+      filter: none;
     }
 
     &:hover vocably-icon-thumbs-up-down,

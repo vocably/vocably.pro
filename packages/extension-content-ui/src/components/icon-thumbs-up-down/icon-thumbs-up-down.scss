@@ -2,13 +2,13 @@
 
 :host {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: var(--size, 24px);
+  height: var(--size, 24px);
 }
 
 .svg {
   height: 100%;
   width: auto;
 
-  fill: $v-light-color-primary;
+  fill: var(--color, #{$v-light-color-primary});
 }
