@@ -38,19 +38,6 @@ $card-action-offset: 0.3em;
 }
 
 .vocably-card {
-  .vocably-card-container {
-    position: relative;
-    // A single stacking cell, so the card cover can be placed on top of
-    // the card content and stretch the card if it needs more space.
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .vocably-safe-action-area {
-    grid-area: 1 / 1;
-    padding-right: 34px;
-  }
-
   &:first-child {
     border-top: none;
   }
@@ -84,22 +71,9 @@ $card-action-offset: 0.3em;
     }
   }
 
-  // Sits in the bottom right corner of the card. Its top margin reserves room
-  // for the tallest set of actions above it (remove and tags), so the two never
-  // overlap on a short card and revealing the actions doesn't reflow it.
+  // The layout of the card and the vote button is set inline in
+  // translation-cards.tsx, see `containerStyle`.
   .vocably-card-vote-button {
-    grid-area: 1 / 1;
-    align-self: end;
-    justify-self: end;
-    // Centered under the 24px wide actions above it
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px;
-    height: 18px;
-    margin-top: 60px;
-    line-height: 0;
-
     // Quiet on purpose, so it doesn't compete with the card content
     vocably-icon-thumbs-up-down {
       --size: 16px;

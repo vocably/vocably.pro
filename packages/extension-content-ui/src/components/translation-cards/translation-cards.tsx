@@ -47,6 +47,42 @@ const closeAfterVoteDelay = 500;
 // What slides over a card: the sign in invitation or the quality vote.
 type CoverType = 'sign-in' | 'quality-vote';
 
+// The card layout is set inline rather than in translation-cards.scss. On a
+// prerendered page `vocably-translation` moves the prerendered cards into its
+// shadow root when it hydrates, and this component's stylesheet reaches that
+// root only once the component renders again. Without the inline layout, the
+// vote button falls into the normal flow on the left for those frames.
+
+// A single stacking cell, so the card cover can be placed on top of the card
+// content and stretch the card if it needs more space.
+const containerStyle = {
+  position: 'relative',
+  display: 'grid',
+  gridTemplateColumns: 'minmax(0, 1fr)',
+};
+
+const safeActionAreaStyle = {
+  gridArea: '1 / 1',
+  paddingRight: '34px',
+};
+
+// Sits in the bottom right corner of the card, centered under the 24px wide
+// actions above it.
+const voteButtonStyle = {
+  gridArea: '1 / 1',
+  alignSelf: 'end',
+  justifySelf: 'end',
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '24px',
+  height: '18px',
+  padding: '0',
+  border: 'none',
+  background: 'none',
+  lineHeight: '0',
+};
+
 @Component({
   tag: 'vocably-translation-cards',
   styleUrl: 'translation-cards.scss',
@@ -482,7 +518,11 @@ export class VocablyTranslationCards {
                 'vocably-bottom-12-border': itemIndex < cardsArray.length - 1,
               }}
             >
-              <div key="container" class="vocably-card-container">
+              <div
+                key="container"
+                class="vocably-card-container"
+                style={containerStyle}
+              >
                 <div class="vocably-card-action">
                   {!this.hideActions && isCardItem(card) && (
                     <div
@@ -618,7 +658,10 @@ export class VocablyTranslationCards {
                     </button>
                   )}
                 </div>
-                <div class="vocably-safe-action-area">
+                <div
+                  class="vocably-safe-action-area"
+                  style={safeActionAreaStyle}
+                >
                   <vocably-card-source
                     card={card}
                     playAudioPronunciation={this.playAudioPronunciation}
@@ -682,6 +725,7 @@ export class VocablyTranslationCards {
                 <button
                   class="vocably-card-action-button vocably-card-vote-button"
                   data-test="quality-vote-button"
+                  style={voteButtonStyle}
                   title={t('quality_vote.button')}
                   aria-label={t('quality_vote.button')}
                   onClick={() => this.showCover('quality-vote', itemIndex)}
