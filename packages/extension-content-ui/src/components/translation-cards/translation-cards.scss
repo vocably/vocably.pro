@@ -256,13 +256,17 @@ vocably-play-sound {
 
 // Keep in sync with coverSlideDuration in translation-cards.tsx
 $cover-slide-duration: 300ms;
+// The card action offset is fractional (em based), so its edge and the cover
+// edge can round to different pixels and leave a sliver of the action button
+// visible above the cover. The cover reaches this much further to hide it.
+$cover-overshoot: 4px;
 
 .vocably-card-cover {
   grid-area: 1 / 1;
   z-index: 2;
   // The card action sticks out above the grid area, so the cover has to start
   // that much higher to fully cover the action buttons.
-  margin-top: -$card-action-offset;
+  margin-top: calc(-#{$card-action-offset} - #{$cover-overshoot});
   overflow: hidden;
   // Zero width does not contribute to the intrinsic width of the card,
   // so covering the card does not make the popup wider.
@@ -273,6 +277,8 @@ $cover-slide-duration: 300ms;
 .vocably-card-cover-panel {
   box-sizing: border-box;
   height: 100%;
+  // Keeps the cover content where it was before the overshoot
+  padding-top: $cover-overshoot;
   background: $v-light-color-body-bg;
   animation: vocably-card-cover-slide-in $cover-slide-duration ease-out;
 }
