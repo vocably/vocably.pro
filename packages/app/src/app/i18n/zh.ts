@@ -353,6 +353,10 @@ export const zh = {
   'feedback.apple_email':
     '这似乎是你注册时提供给我的 Apple 隐藏邮箱地址，不过别担心，它应该可以正常使用。',
   'feedback.placeholder': '请在此输入你的消息…',
+  'feedback.provide_email':
+    '请提供你的电子邮件地址，让我可以亲自回复你的反馈。',
+  'feedback.no_email': '请直接在消息中附上电子邮件地址，让我可以回复你。',
+  'feedback.send_anyway': '仍然发送',
   'feedback.submit': '提交',
   'feedback.success': '你的消息已成功发送。以下是你发送的内容：',
   'feedback.error': '很抱歉，提交反馈时出错了。请稍后重试。',

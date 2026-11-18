@@ -378,6 +378,11 @@ export const vi = {
   'feedback.apple_email':
     'Có vẻ đây là email bí mật Apple bạn đã cung cấp khi đăng ký, nhưng đừng lo — nó vẫn hoạt động tốt.',
   'feedback.placeholder': 'Vui lòng nhập tin nhắn của bạn ở đây...',
+  'feedback.provide_email':
+    'Vui lòng cung cấp địa chỉ email để tôi có thể gửi phản hồi cá nhân cho bạn.',
+  'feedback.no_email':
+    'Vui lòng đính kèm địa chỉ email ngay trong tin nhắn để tôi có thể phản hồi bạn.',
+  'feedback.send_anyway': 'Vẫn gửi',
   'feedback.submit': 'Gửi',
   'feedback.success':
     'Tin nhắn của bạn đã được gửi thành công. Đây là nội dung bạn đã gửi:',

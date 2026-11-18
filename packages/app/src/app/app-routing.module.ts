@@ -153,7 +153,6 @@ const routes: Routes = [
     path: 'feedback',
     title: 'page.feedback',
     component: FeedbackPageComponent,
-    canActivate: [CognitoAuthGuard],
   },
   {
     path: 'import',

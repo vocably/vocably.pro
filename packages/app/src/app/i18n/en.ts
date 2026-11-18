@@ -383,11 +383,16 @@ export const en = {
   'feedback.apple_email':
     'This seems like a secret Apple email you shared with me during registration, but no worries; it should work just fine.',
   'feedback.placeholder': 'Please type your message here...',
+  'feedback.provide_email':
+    'Please provide your email address so I can send a personal reply to your feedback.',
+  'feedback.no_email':
+    'Please include an email address right in the message so I can get back to you with an answer.',
+  'feedback.send_anyway': 'Send anyway',
   'feedback.submit': 'Submit',
   'feedback.success':
     'Your message has been successfully sent. Here is what you sent:',
   'feedback.error':
-    'Unfortunately, we encountered an error while submitting your feedback. Could you please try again later?',
+    'Unfortunately, an error occurred while submitting your feedback. Could you please try again later?',
 
   // Import
   'import.title': 'Import Cards from CSV',

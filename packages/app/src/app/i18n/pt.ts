@@ -385,11 +385,16 @@ export const pt = {
   'feedback.apple_email':
     'Parece um e-mail oculto da Apple que você compartilhou durante o registro, mas não se preocupe; deve funcionar perfeitamente.',
   'feedback.placeholder': 'Por favor, digite sua mensagem aqui...',
+  'feedback.provide_email':
+    'Por favor, informe seu endereço de e-mail para que eu possa lhe enviar uma resposta pessoal.',
+  'feedback.no_email':
+    'Por favor, inclua um endereço de e-mail diretamente na mensagem para que eu possa lhe responder.',
+  'feedback.send_anyway': 'Enviar mesmo assim',
   'feedback.submit': 'Enviar',
   'feedback.success':
     'Sua mensagem foi enviada com sucesso. Aqui está o que você enviou:',
   'feedback.error':
-    'Infelizmente, encontramos um erro ao enviar seu feedback. Poderia tentar novamente mais tarde?',
+    'Infelizmente, ocorreu um erro ao enviar seu feedback. Poderia tentar novamente mais tarde?',
 
   // Import
   'import.title': 'Importar cartões de CSV',

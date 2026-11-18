@@ -391,6 +391,11 @@ export const tr = {
   'feedback.apple_email':
     'Bu, kayıt sırasında bana verdiğiniz gizli bir Apple e-postası gibi görünüyor, ancak merak etmeyin; sorunsuz çalışmalıdır.',
   'feedback.placeholder': 'Lütfen mesajınızı buraya yazın...',
+  'feedback.provide_email':
+    'Geri bildirimine kişisel bir yanıt verebilmem için lütfen e-posta adresini yaz.',
+  'feedback.no_email':
+    'Lütfen sana yanıt verebilmem için mesajının içinde bir e-posta adresi ekle.',
+  'feedback.send_anyway': 'Yine de gönder',
   'feedback.submit': 'Gönder',
   'feedback.success': 'Mesajınız başarıyla gönderildi. İşte gönderdiğiniz:',
   'feedback.error':

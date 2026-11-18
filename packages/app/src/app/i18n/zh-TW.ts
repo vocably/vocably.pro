@@ -354,6 +354,10 @@ export const zhTW = {
   'feedback.apple_email':
     '這似乎是你註冊時提供的 Apple 隱藏電子郵件，不過別擔心，它應該可以正常運作。',
   'feedback.placeholder': '請在此輸入你的訊息…',
+  'feedback.provide_email':
+    '請提供你的電子郵件地址，讓我可以親自回覆你的意見回饋。',
+  'feedback.no_email': '請直接在訊息中附上電子郵件地址，讓我可以回覆你。',
+  'feedback.send_anyway': '仍要傳送',
   'feedback.submit': '送出',
   'feedback.success': '你的訊息已成功送出。以下是你送出的內容：',
   'feedback.error': '很抱歉，送出意見回饋時發生錯誤。可以請你稍後再試一次嗎？',

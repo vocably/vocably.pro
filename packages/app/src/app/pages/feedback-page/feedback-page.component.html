@@ -5,7 +5,7 @@
   <form
     class="feedback"
     (ngSubmit)="submitFeedback()"
-    *ngIf="userData$ | async as useData"
+    *ngIf="user$ | async as user"
   >
     <p class="intro">{{ 'feedback.p1' | transloco }}</p>
 
@@ -14,16 +14,20 @@
         <mat-icon class="fact-icon" aria-hidden="true">schedule</mat-icon>
         <span>{{ 'feedback.p2' | transloco }}</span>
       </li>
-      <li class="fact">
+      <li class="fact" *ngIf="user.isLoggedIn">
         <mat-icon class="fact-icon" aria-hidden="true">mail_outline</mat-icon>
         <span>
           {{ 'feedback.p3' | transloco }}
-          <strong class="email">{{ useData.email }}</strong
+          <strong class="email">{{ user.email }}</strong
           >.
-          <span class="muted" *ngIf="useData.email.includes('privaterelay')">
+          <span class="muted" *ngIf="user.email.includes('privaterelay')">
             {{ 'feedback.apple_email' | transloco }}
           </span>
         </span>
+      </li>
+      <li class="fact" *ngIf="!user.isLoggedIn" data-test="provide-email">
+        <mat-icon class="fact-icon" aria-hidden="true">mail_outline</mat-icon>
+        <span>{{ 'feedback.provide_email' | transloco }}</span>
       </li>
     </ul>
 
@@ -34,7 +38,9 @@
         [attr.aria-label]="'feedback.title' | transloco"
         [placeholder]="'feedback.placeholder' | transloco"
         [readonly]="isSubmitting"
-        [(ngModel)]="feedback"
+        data-test="message"
+        [ngModel]="feedback"
+        (ngModelChange)="onFeedbackChange($event)"
       ></textarea>
       <div class="card-foot">
         <ion-spinner *ngIf="isSubmitting" name="dots"></ion-spinner>
@@ -49,6 +55,31 @@
         </button>
       </div>
     </section>
+
+    <div
+      *ngIf="noEmailWarning"
+      class="callout"
+      role="alert"
+      data-test="no-email"
+    >
+      <mat-icon class="callout-icon" aria-hidden="true"
+        >alternate_email</mat-icon
+      >
+      <div class="callout-body">
+        {{ 'feedback.no_email' | transloco }}
+        <div class="callout-actions">
+          <button
+            type="button"
+            class="button outline"
+            data-test="send-anyway"
+            [disabled]="isSubmitting"
+            (click)="sendAnyway()"
+          >
+            {{ 'feedback.send_anyway' | transloco }}
+          </button>
+        </div>
+      </div>
+    </div>
 
     <div class="success" [class.expanded]="success" aria-live="polite">
       <div class="callout">
