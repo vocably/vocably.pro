@@ -36,9 +36,22 @@ data "archive_file" "seo_backend_build" {
   output_path = "seo_backend_build.zip"
 }
 
+# Holds nothing but copies of files from the repository, so it can be removed
+# at any time: force_destroy lets Terraform delete it with its objects, and
+# without versioning there are no old versions left behind to block that.
 resource "aws_s3_bucket" "seo" {
   bucket        = local.seo_bucket
   force_destroy = true
+}
+
+resource "aws_s3_bucket_versioning" "seo" {
+  bucket = aws_s3_bucket.seo.id
+
+  versioning_configuration {
+    # "Disabled" is only accepted for a bucket that never had versioning,
+    # which is the case for this one.
+    status = "Disabled"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "seo" {
