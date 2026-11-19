@@ -1,4 +1,5 @@
 import {
+  parseSeoLanguagePair,
   SeoLanguagePair,
   seoLanguagePairToString,
 } from '@vocably/model-operations';
@@ -56,6 +57,35 @@ type FunctionUrlEvent = {
   requestContext?: { http?: { method?: string } };
 };
 
+// Sent every 5 minutes by an EventBridge schedule (platform/seo.tf) with the
+// pairs to load, so a warm container already holds the search data that a
+// cold start would spend seconds downloading and parsing.
+type WarmUpEvent = {
+  warmUp: { pairs: string[] };
+};
+
+const isWarmUpEvent = (event: unknown): event is WarmUpEvent =>
+  Array.isArray((event as WarmUpEvent | undefined)?.warmUp?.pairs);
+
+const warmUp = async ({ warmUp: { pairs } }: WarmUpEvent) => {
+  const startedAt = Date.now();
+
+  await Promise.all([
+    getTemplate(),
+    ...pairs.map((pairString) => {
+      const pair = parseSeoLanguagePair(pairString);
+
+      if (pair === undefined) {
+        throw new Error(`Unknown language pair: ${pairString}`);
+      }
+
+      return getPageIndex(pair);
+    }),
+  ]);
+
+  console.log(`Warmed up ${pairs.join(', ')} in ${Date.now() - startedAt}ms`);
+};
+
 type FunctionUrlResult = {
   statusCode: number;
   headers: Record<string, string>;
@@ -76,8 +106,12 @@ const respond = (
 });
 
 export const handler = async (
-  event: FunctionUrlEvent
-): Promise<FunctionUrlResult> => {
+  event: FunctionUrlEvent | WarmUpEvent
+): Promise<FunctionUrlResult | void> => {
+  if (isWarmUpEvent(event)) {
+    return warmUp(event);
+  }
+
   const method = event.requestContext?.http?.method ?? 'GET';
 
   if (method !== 'GET' && method !== 'HEAD') {

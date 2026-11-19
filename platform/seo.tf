@@ -175,6 +175,32 @@ resource "aws_lambda_permission" "seo_render_cloudfront_invoke" {
   invoked_via_function_url = true
 }
 
+# Keeps a container of the renderer warm: a cold start downloads and parses
+# the search data before it can render anything, which is slow enough to hurt
+# the crawl budget. The handler recognizes the "warmUp" input and loads the
+# template and the listed pairs instead of rendering a page. Only one
+# container is kept warm; concurrent misses can still cold start.
+resource "aws_cloudwatch_event_rule" "seo_render_warm_up" {
+  name                = "vocably-${terraform.workspace}-seo-render-warm-up"
+  schedule_expression = "rate(5 minutes)"
+}
+
+resource "aws_cloudwatch_event_target" "seo_render_warm_up" {
+  arn  = aws_lambda_function.seo_render.arn
+  rule = aws_cloudwatch_event_rule.seo_render_warm_up.name
+  input = jsonencode({
+    warmUp = { pairs = sort(tolist(local.seo_language_pairs)) }
+  })
+}
+
+resource "aws_lambda_permission" "seo_render_warm_up" {
+  statement_id  = "AllowExecutionFromCloudWatch"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.seo_render.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.seo_render_warm_up.arn
+}
+
 locals {
   seo_render_origin_domain = trimsuffix(trimprefix(aws_lambda_function_url.seo_render.function_url, "https://"), "/")
 }
