@@ -66,8 +66,13 @@ export const getSearchDataPairs = (): string[] =>
  * Writes dist/<pair>/sitemap.xml for every search data file. A page's lastmod
  * changes when its data changes, which is also when collectIndexNowUrls picks
  * it up for IndexNow.
+ *
+ * baseUrl is the origin of the environment being built (https://vocably.pro in
+ * prod, https://dev.env.vocably.pro in dev, see www_base_url in
+ * platform/locals.tf). It is both where the deployed sitemap is fetched from
+ * and the origin of the listed pages.
  */
-export const buildSeoSitemaps = async (deployedBaseUrl: string) => {
+export const buildSeoSitemaps = async (baseUrl = 'https://vocably.pro') => {
   for (const pairString of getSearchDataPairs()) {
     const pair = parseSeoLanguagePair(pairString);
 
@@ -82,7 +87,7 @@ export const buildSeoSitemaps = async (deployedBaseUrl: string) => {
     );
 
     const deployed = new Map(
-      (await fetchSitemap(`${deployedBaseUrl}/${pairString}/sitemap.xml`)).map(
+      (await fetchSitemap(`${baseUrl}/${pairString}/sitemap.xml`)).map(
         (entry) => [entry.loc, entry]
       )
     );
@@ -96,7 +101,7 @@ export const buildSeoSitemaps = async (deployedBaseUrl: string) => {
     }
 
     const entries = [...pages.entries()].map(([path, word]) => {
-      const loc = `https://vocably.pro/${path}`;
+      const loc = `${baseUrl}/${path}`;
       const hash = getPageHash(word, searchData[word]);
       const existing = deployed.get(loc);
 

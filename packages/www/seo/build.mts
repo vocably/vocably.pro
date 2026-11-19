@@ -21,8 +21,8 @@ const elapsed = () => formatDuration(performance.now() - startedAt);
 // @ts-ignore
 await buildSeoSitemaps(environment.baseUrl);
 
-buildMainSitemap();
-await buildSitemapIndex();
+buildMainSitemap(environment.baseUrl);
+await buildSitemapIndex(environment.baseUrl);
 await collectIndexNowUrls(environment.baseUrl);
 
 console.log(`SEO build finished in ${elapsed()}`);

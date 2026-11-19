@@ -26,7 +26,7 @@ const generateSitemapIndex = (
   return `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${items}\n</sitemapindex>\n`;
 };
 
-export const buildSitemapIndex = async () => {
+export const buildSitemapIndex = async (baseUrl = 'https://vocably.pro') => {
   const outputPath = 'dist/sitemap.xml';
   const files = (await listFiles('./dist/**/sitemap*.xml')).filter(
     (f) => f.replace(/^\.\//, '') !== outputPath
@@ -34,7 +34,7 @@ export const buildSitemapIndex = async () => {
 
   const sitemaps = files.map((file) => {
     const content = readFileSync(file, 'utf-8');
-    const loc = `https://vocably.pro/${file.replace(/^(?:\.\/)?dist\//, '')}`;
+    const loc = `${baseUrl}/${file.replace(/^(?:\.\/)?dist\//, '')}`;
     const lastmod = getLastmod(content);
     return { loc, lastmod };
   });
