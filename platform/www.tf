@@ -12,7 +12,6 @@ module.exports = {
     paddleMonthlyPriceId: '${var.paddle_monthly_premium_id}',
     paddleYearlyPriceId: '${var.paddle_yearly_premium_id}',
     paddleLifetimePriceId: '${var.paddle_lifetime_premium_id}',
-    searchSeoDataFolder: '${var.www_search_seo_data_folder}',
   },
 };
   EOT
@@ -151,6 +150,27 @@ resource "aws_cloudfront_distribution" "www" {
     }
   }
 
+  # Renders the SEO search pages, see seo.tf.
+  origin {
+    domain_name              = local.seo_render_origin_domain
+    origin_id                = "seo-render"
+    origin_access_control_id = aws_cloudfront_origin_access_control.seo_render.id
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "https-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+
+    # A single regional cache in front of the lambda, so a page is rendered
+    # once rather than once per regional edge cache that misses it.
+    origin_shield {
+      enabled              = true
+      origin_shield_region = "eu-central-1"
+    }
+  }
+
   enabled             = true
   is_ipv6_enabled     = true
   http_version        = "http2and3"
@@ -219,6 +239,36 @@ resource "aws_cloudfront_distribution" "www" {
 
       cookies {
         forward = "none"
+      }
+    }
+  }
+
+  # /<pair>/*.html is rendered on demand, while /<pair>/sitemap.xml stays in
+  # the www bucket. The lambda's Cache-Control keeps a page at the edge for a
+  # year; it is invalidated when it has to change (see seo.tf).
+  dynamic "ordered_cache_behavior" {
+    for_each = keys(local.seo_language_pairs)
+
+    content {
+      path_pattern               = "/${ordered_cache_behavior.value}/*.html"
+      allowed_methods            = ["HEAD", "GET"]
+      cached_methods             = ["HEAD", "GET"]
+      target_origin_id           = "seo-render"
+      viewer_protocol_policy     = "redirect-to-https"
+      compress                   = true
+      response_headers_policy_id = local.www_response_headers_policy_id
+      min_ttl                    = 0
+      default_ttl                = 0
+      max_ttl                    = 31536000
+
+      # Nothing is forwarded: the page depends on the path alone, and the
+      # function URL rejects any Host header but its own.
+      forwarded_values {
+        query_string = false
+
+        cookies {
+          forward = "none"
+        }
       }
     }
   }

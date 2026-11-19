@@ -19,3 +19,9 @@
 - A page's `lastmod` in `sitemap-main.xml` is the date of the last git commit touching its `.handlebars` file (`seo/buildMainSitemap.ts`); changed `lastmod` values are also submitted to IndexNow on deploy.
 - To change a page without bumping its `lastmod` (e.g. visual-only changes), put `[skip sitemap]` in the commit message.
 - If a commit already landed without the marker, add its hash to `ignoredCommits` in `seo/buildMainSitemap.ts` — it's then ignored for every page's `lastmod`.
+
+## SEO search pages
+
+- `/<pair>/<word>-in-<language>.html` (e.g. `/de-en/apple-in-german.html`) are not built here: `packages/seo-backend` renders them on demand from `search.html` and the units-of-speech data, behind CloudFront (`platform/seo.tf`).
+- Language pairs and their word lists are configured in `scripts/seo/language-pairs.json`; the build only generates `dist/<pair>/sitemap.xml` from them (`seo/buildSeoSitemaps.ts`).
+- To see them locally, run `npm run serve` in `packages/seo-backend` next to `npm start` here; the dev server proxies `/<pair>/` to it.

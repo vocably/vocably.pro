@@ -5,7 +5,6 @@ const WebpackWatchPlugin = require('webpack-watch-files-plugin').default;
 const { environment } = require('./environment');
 const glob = require('glob');
 const { templateOptions } = require('./template-options');
-const { StaticSearchPagePlugin } = require('./seo/StaticSearchPagePlugin');
 const { indexNowKey } = require('./seo/indexNow');
 
 const pagesDir = `./src/pages`;
@@ -13,6 +12,12 @@ const handlebarsExtension = `handlebars`;
 const pagesPattern = `**/*${handlebarsExtension}`;
 
 const basePath = 'https://vocably.pro';
+
+// The SEO search pages (/de-en/<word>-in-german.html) are rendered by
+// packages/seo-backend. Run `npm run serve` there to see them in development.
+const seoLanguagePairs = require('../../scripts/seo/language-pairs.json').map(
+  ({ sourceLanguage, targetLanguage }) => `${sourceLanguage}-${targetLanguage}`
+);
 
 module.exports = (env) => {
   return {
@@ -101,13 +106,6 @@ module.exports = (env) => {
           },
         });
       }),
-      new StaticSearchPagePlugin({
-        searchDataFolder: `${__dirname}/seo/${environment.searchSeoDataFolder}`,
-        searchPageFilename: 'search.html',
-        basePath,
-        deployedBaseUrl: environment.baseUrl,
-        disabled: env.production,
-      }),
       new MiniCssExtractPlugin({
         filename: env.production ? '[name].[contenthash].css' : '[name].css',
       }),
@@ -135,6 +133,12 @@ module.exports = (env) => {
       hot: false,
       liveReload: true,
       proxy: {
+        ...Object.fromEntries(
+          seoLanguagePairs.map((pair) => [
+            `/${pair}/`,
+            { target: 'http://localhost:8060' },
+          ])
+        ),
         '/app': {
           target: 'http://localhost:8030', // the other app's real port
           changeOrigin: true, // rewrites the Host header to match target

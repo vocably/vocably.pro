@@ -1,5 +1,10 @@
 #!/usr/bin/env -S npx vite-node
 
+// Reports the German units of speech that the SEO pages (rendered on demand by
+// packages/seo-backend from the same data) are missing, and saves them as a
+// Claude batch. Mirrors packages/seo-backend/src/buildTranslationCards.ts,
+// reading local checkouts of the data repositories instead of S3.
+
 import {
   existsSync,
   mkdirSync,
@@ -33,7 +38,6 @@ const englishWordsFile = './seo/en-de.json';
 const reverseTranslationsFolder =
   '../../vocably-reverse-translations/data/de/en';
 const languagesFolderPathPrefix = '../../vocably-languages';
-const outputFile = '../packages/www/seo/search-data-prod/de-en.json';
 const missingTranslationsFile =
   '../batch-analyze/data/missing-translations.json';
 // Picked up by batch-analyze/claude-send-batch.mts. The payloads file maps
@@ -418,8 +422,6 @@ for (const word of englishWords) {
 console.log(
   `Built ${Object.keys(wordResults).length} words; ${missingReverseTranslations} words have no reverse translations`
 );
-
-writeFileSync(outputFile, JSON.stringify(wordResults, null, 2));
 
 const sortUnitsOfSpeech = (units: Map<string, UnitOfSpeech>): UnitOfSpeech[] =>
   [...units.values()].sort(
