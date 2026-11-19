@@ -14,10 +14,11 @@ const pagesPattern = `**/*${handlebarsExtension}`;
 const basePath = 'https://vocably.pro';
 
 // The SEO search pages (/de-en/<word>-in-german.html) are rendered by
-// packages/seo-backend. Run `npm run serve` there to see them in development.
-const seoLanguagePairs = require('../../scripts/seo/language-pairs.json').map(
-  ({ sourceLanguage, targetLanguage }) => `${sourceLanguage}-${targetLanguage}`
-);
+// packages/seo-backend from seo/search-data/<pair>.json. Run `npm run serve`
+// there to see them in development.
+const seoLanguagePairs = glob
+  .sync('*.json', { cwd: `${__dirname}/seo/search-data` })
+  .map((file) => file.replace(/\.json$/, ''));
 
 module.exports = (env) => {
   return {

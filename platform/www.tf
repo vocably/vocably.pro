@@ -245,9 +245,9 @@ resource "aws_cloudfront_distribution" "www" {
 
   # /<pair>/*.html is rendered on demand, while /<pair>/sitemap.xml stays in
   # the www bucket. The lambda's Cache-Control keeps a page at the edge for a
-  # year; it is invalidated when it has to change (see seo.tf).
+  # year; www_upload invalidates it with "/*" on every deploy (see seo.tf).
   dynamic "ordered_cache_behavior" {
-    for_each = keys(local.seo_language_pairs)
+    for_each = local.seo_language_pairs
 
     content {
       path_pattern               = "/${ordered_cache_behavior.value}/*.html"
@@ -327,10 +327,16 @@ resource "null_resource" "www_upload" {
     data.external.www_build,
     aws_s3_bucket.www,
     aws_cloudfront_distribution.www,
+    # The "/*" invalidation also refreshes the SEO pages, so their data has
+    # to be in place before it.
+    aws_s3_object.seo_search_data,
+    aws_lambda_function.seo_render,
   ]
 
   triggers = {
     sha1 = sha1(join("", [for f in fileset(local.www_dist, "**") : filesha1("${local.www_dist}/${f}")]))
+    # A new renderer must not keep serving pages cached by the old one.
+    seo_render = data.archive_file.seo_backend_build.output_base64sha256
   }
 
   provisioner "local-exec" {

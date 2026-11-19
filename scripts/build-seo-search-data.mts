@@ -1,9 +1,8 @@
 #!/usr/bin/env -S npx vite-node
 
-// Reports the German units of speech that the SEO pages (rendered on demand by
-// packages/seo-backend from the same data) are missing, and saves them as a
-// Claude batch. Mirrors packages/seo-backend/src/buildTranslationCards.ts,
-// reading local checkouts of the data repositories instead of S3.
+// Builds the search data the SEO pages are rendered from (on demand, by
+// packages/seo-backend) and the sitemap is generated from (packages/www). Also
+// saves the German units of speech that are missing data as a Claude batch.
 
 import {
   existsSync,
@@ -35,6 +34,7 @@ import { parseJson } from '@vocably/api';
 import { isArray } from 'lodash-es';
 
 const englishWordsFile = './seo/en-de.json';
+const outputFile = '../packages/www/seo/search-data/de-en.json';
 const reverseTranslationsFolder =
   '../../vocably-reverse-translations/data/de/en';
 const languagesFolderPathPrefix = '../../vocably-languages';
@@ -422,6 +422,8 @@ for (const word of englishWords) {
 console.log(
   `Built ${Object.keys(wordResults).length} words; ${missingReverseTranslations} words have no reverse translations`
 );
+
+writeFileSync(outputFile, JSON.stringify(wordResults, null, 2));
 
 const sortUnitsOfSpeech = (units: Map<string, UnitOfSpeech>): UnitOfSpeech[] =>
   [...units.values()].sort(

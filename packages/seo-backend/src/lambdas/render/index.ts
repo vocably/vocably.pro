@@ -3,18 +3,17 @@ import {
   seoLanguagePairToString,
 } from '@vocably/model-operations';
 import { createHash } from 'node:crypto';
-import { updatePageDependencies } from '../../dependencies';
 import { assertValidTemplate, templateFileName } from '../../renderSeoPage';
 import { resolveSeoPage } from '../../resolveSeoPage';
-import { cachedS3Object, s3DataSource } from '../../s3';
-import { buildWordIndex, getWordsKey } from '../../words';
+import { cachedS3Object } from '../../s3';
+import { buildPageIndex, getSearchDataKey, SeoPage } from '../../searchData';
 
 // Serves /<pair>/<word>-in-<language>.html through a Lambda function URL that
-// CloudFront uses as an origin. CloudFront keeps the page for a year; the
-// invalidate lambda drops it when its data changes and the www deploy drops
-// all of them when the template changes.
+// CloudFront uses as an origin. The page is built from the precomputed search
+// data (packages/www/seo/search-data/<pair>.json) and the search page
+// template, both of which only change with a deploy. CloudFront keeps the
+// page until the www deploy invalidates "/*".
 
-const unitsOfSpeechBucket = process.env.UNITS_OF_SPEECH_BUCKET as string;
 const seoBucket = process.env.SEO_BUCKET as string;
 const wwwBucket = process.env.WWW_BUCKET as string;
 
@@ -23,35 +22,33 @@ const getTemplate = cachedS3Object(wwwBucket, templateFileName, (html) => {
   return html;
 });
 
-const wordIndexLoaders = new Map<
+const pageIndexLoaders = new Map<
   string,
-  () => Promise<Map<string, string> | null>
+  () => Promise<Map<string, SeoPage> | null>
 >();
 
-const getWordIndex = (pair: SeoLanguagePair) => {
+// Search data is loaded per pair on first use, so adding pairs doesn't slow
+// down the others.
+const getPageIndex = (pair: SeoLanguagePair) => {
   const pairString = seoLanguagePairToString(pair);
-  let loader = wordIndexLoaders.get(pairString);
+  let loader = pageIndexLoaders.get(pairString);
 
   if (!loader) {
-    loader = cachedS3Object(seoBucket, getWordsKey(pairString), (contents) =>
-      buildWordIndex(JSON.parse(contents), pair)
+    loader = cachedS3Object(seoBucket, getSearchDataKey(pairString), (json) =>
+      buildPageIndex(JSON.parse(json), pair)
     );
-    wordIndexLoaders.set(pairString, loader);
+    pageIndexLoaders.set(pairString, loader);
   }
 
   return loader();
 };
 
-const dataSource = s3DataSource(unitsOfSpeechBucket);
-
 // The browser revalidates on every visit (the ETag makes that a 304 from the
 // edge), while CloudFront keeps the page until it's invalidated.
-const cacheForever = 'public, max-age=0, must-revalidate, s-maxage=31536000';
-// Pages whose dependencies couldn't be recorded can't be invalidated, so they
-// expire on their own.
-const cacheForADay = 'public, max-age=0, must-revalidate, s-maxage=86400';
-// A word may get its data later. The 404 is replaced by /404.html in
-// CloudFront, which caches it for error_caching_min_ttl.
+const cacheUntilInvalidated =
+  'public, max-age=0, must-revalidate, s-maxage=31536000';
+// The 404 is replaced by /404.html in CloudFront, which caches it for
+// error_caching_min_ttl.
 const cacheNotFound = 'public, max-age=0, s-maxage=300';
 
 type FunctionUrlEvent = {
@@ -90,8 +87,7 @@ export const handler = async (
   try {
     const result = await resolveSeoPage(event.rawPath, {
       getTemplate,
-      getWordIndex,
-      dataSource,
+      getPageIndex,
     });
 
     if (!result.found) {
@@ -99,25 +95,12 @@ export const handler = async (
       return respond(404, 'Not Found', { 'Cache-Control': cacheNotFound });
     }
 
-    let cacheControl = cacheForever;
-
-    try {
-      await updatePageDependencies(
-        seoBucket,
-        result.pagePath,
-        result.dependencies
-      );
-    } catch (error) {
-      console.error(
-        `Unable to record the dependencies of ${result.pagePath}`,
-        error
-      );
-      cacheControl = cacheForADay;
-    }
-
     return respond(200, result.html, {
-      'Cache-Control': cacheControl,
-      ETag: `"${createHash('sha256').update(result.html).digest('hex').slice(0, 32)}"`,
+      'Cache-Control': cacheUntilInvalidated,
+      ETag: `"${createHash('sha256')
+        .update(result.html)
+        .digest('hex')
+        .slice(0, 32)}"`,
     });
   } catch (error) {
     console.error(`Unable to render ${event.rawPath}`, error);

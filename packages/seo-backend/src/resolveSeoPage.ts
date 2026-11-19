@@ -2,29 +2,20 @@ import {
   parseSeoLanguagePair,
   SeoLanguagePair,
 } from '@vocably/model-operations';
-import { buildTranslationCards } from './buildTranslationCards';
-import { DataSource, recordAccess } from './dataSource';
 import { renderSeoPage } from './renderSeoPage';
+import { SeoPage } from './searchData';
 
 export type SeoPageSources = {
   getTemplate: () => Promise<string | null>;
   /**
-   * The slug → word index of the pair's word list (see buildWordIndex).
-   * Resolves to null when the pair has no word list.
+   * The slug → page index of the pair's search data (see buildPageIndex).
+   * Resolves to null when the pair has no search data.
    */
-  getWordIndex: (pair: SeoLanguagePair) => Promise<Map<string, string> | null>;
-  dataSource: DataSource;
+  getPageIndex: (pair: SeoLanguagePair) => Promise<Map<string, SeoPage> | null>;
 };
 
 export type SeoPageResult =
-  | {
-      found: true;
-      /** The page path without the leading slash, e.g. de-en/apple-in-german.html */
-      pagePath: string;
-      html: string;
-      /** The data keys the page was built from. */
-      dependencies: Set<string>;
-    }
+  | { found: true; html: string }
   | { found: false; reason: string };
 
 const pathExpression = /^\/([^/]+)\/([^/]+)\.html$/;
@@ -55,23 +46,16 @@ export const resolveSeoPage = async (
     return { found: false, reason: `Unknown language pair ${pairString}` };
   }
 
-  const wordIndex = await sources.getWordIndex(pair);
+  const pageIndex = await sources.getPageIndex(pair);
 
-  if (wordIndex === null) {
-    return { found: false, reason: `No word list for ${pairString}` };
+  if (pageIndex === null) {
+    return { found: false, reason: `No search data for ${pairString}` };
   }
 
-  const word = wordIndex.get(slug);
+  const page = pageIndex.get(slug);
 
-  if (word === undefined) {
-    return { found: false, reason: `${slug} isn't in the ${pairString} list` };
-  }
-
-  const dataSource = recordAccess(sources.dataSource);
-  const translationCards = await buildTranslationCards(dataSource, word, pair);
-
-  if (translationCards === undefined) {
-    return { found: false, reason: `No data for "${word}" (${pairString})` };
+  if (page === undefined) {
+    return { found: false, reason: `${slug} isn't in the ${pairString} data` };
   }
 
   const templateHtml = await sources.getTemplate();
@@ -82,8 +66,6 @@ export const resolveSeoPage = async (
 
   return {
     found: true,
-    pagePath: `${pairString}/${slug}.html`,
-    html: await renderSeoPage({ templateHtml, word, pair, translationCards }),
-    dependencies: dataSource.accessedKeys,
+    html: await renderSeoPage({ templateHtml, pair, ...page }),
   };
 };

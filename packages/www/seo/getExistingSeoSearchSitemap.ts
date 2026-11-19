@@ -4,6 +4,7 @@ export type SitemapEntry = {
   loc: string;
   lastmod: string;
   priority: string;
+  hash: string;
 };
 
 export const fetchSitemap = async (
@@ -41,5 +42,6 @@ export const parseSitemap = (xmlText: string): Array<SitemapEntry> => {
     loc: entry.loc || '',
     lastmod: entry.lastmod || '',
     priority: entry.priority || '',
+    hash: entry.hash || '',
   }));
 };

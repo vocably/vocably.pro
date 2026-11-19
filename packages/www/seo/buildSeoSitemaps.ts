@@ -1,45 +1,21 @@
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import {
   getSeoPagePath,
   parseSeoLanguagePair,
   seoLanguagePairToString,
 } from '@vocably/model-operations';
+import { TranslationCards } from '@vocably/model';
 import { fetchSitemap } from './getExistingSeoSearchSitemap';
 
 // The SEO search pages (/de-en/<word>-in-german.html) are rendered on demand
-// by packages/seo-backend, so the build only lists them. Each language pair
-// names the word list it's built from, relative to scripts/seo.
-const seoDir = '../../scripts/seo';
-const languagePairsFile = `${seoDir}/language-pairs.json`;
+// by packages/seo-backend from seo/search-data/<pair>.json, so the build only
+// lists them. Every file in that folder is a language pair.
+export const searchDataFolder = './seo/search-data';
 
-// The protocol allows 50,000 URLs per sitemap.
-const maxUrlsPerSitemap = 45000;
-
-const getSitemapFileName = (pair: string, index: number) =>
-  `${pair}/sitemap${index === 0 ? '' : `-${index + 1}`}.xml`;
-
-const generateSitemap = (
-  entries: Array<{ loc: string; lastmod: string }>
-): string => `<?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-${entries
-  .map(
-    ({ loc, lastmod }) => `
-<url>
-  <loc>${loc}</loc>
-  <lastmod>${lastmod}</lastmod>
-  <priority>0.5</priority>
-</url>
-`
-  )
-  .join('')}
-</urlset>
-`;
+// Bump to give every page a new lastmod, e.g. after a change of the page
+// layout that search engines should pick up.
+const globalVersion = 3;
 
 const escapeXml = (str: string) =>
   str
@@ -49,97 +25,93 @@ const escapeXml = (str: string) =>
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
 
-/** The lastmod of every deployed URL of the pair, across all its sitemaps. */
-const getDeployedLastmods = async (
-  deployedBaseUrl: string,
-  pair: string
-): Promise<Map<string, string>> => {
-  const lastmods = new Map<string, string>();
+// Kept identical to the hash of the build-time renderer, so the pages keep
+// the lastmod they were published with.
+const getPageHash = (word: string, translationCards: TranslationCards) =>
+  createHash('sha256')
+    .update(
+      JSON.stringify(JSON.stringify({ word, translationCards, globalVersion }))
+    )
+    .digest('hex');
 
-  for (let index = 0; ; index++) {
-    const entries = await fetchSitemap(
-      `${deployedBaseUrl}/${getSitemapFileName(pair, index)}`
-    );
+const generateSitemap = (
+  entries: Array<{ loc: string; lastmod: string; hash: string }>
+): string => `<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+${entries
+  .map(
+    ({ loc, lastmod, hash }) => `
+<url>
+  <loc>${escapeXml(loc)}</loc>
+  <lastmod>${lastmod}</lastmod>
+  <priority>0.5</priority>
+  <hash>${hash}</hash>
+</url>
+`
+  )
+  .join('')}
+</urlset>
+`;
 
-    if (entries.length === 0) {
-      return lastmods;
-    }
-
-    for (const { loc, lastmod } of entries) {
-      lastmods.set(loc, lastmod);
-    }
-  }
-};
+export const getSearchDataPairs = (): string[] =>
+  readdirSync(searchDataFolder)
+    .filter((file) => file.endsWith('.json'))
+    .map((file) => file.replace(/\.json$/, ''));
 
 /**
- * Writes dist/<pair>/sitemap.xml (and sitemap-2.xml etc. for long lists) for
- * every language pair. A page keeps the lastmod it was first published with:
- * its content changes are handled by CloudFront invalidation, not by the
- * build.
+ * Writes dist/<pair>/sitemap.xml for every search data file. A page's lastmod
+ * changes when its data changes, which is also when collectIndexNowUrls picks
+ * it up for IndexNow.
  */
 export const buildSeoSitemaps = async (deployedBaseUrl: string) => {
-  const languagePairs: Array<{
-    sourceLanguage: string;
-    targetLanguage: string;
-    words: string;
-  }> = JSON.parse(readFileSync(languagePairsFile, 'utf-8'));
-
-  for (const languagePair of languagePairs) {
-    const pairString = `${languagePair.sourceLanguage}-${languagePair.targetLanguage}`;
+  for (const pairString of getSearchDataPairs()) {
     const pair = parseSeoLanguagePair(pairString);
 
-    if (
-      pair === undefined ||
-      seoLanguagePairToString(pair) !== pairString ||
-      pair.sourceLanguage !== languagePair.sourceLanguage
-    ) {
+    if (pair === undefined || seoLanguagePairToString(pair) !== pairString) {
       throw new Error(
-        `${languagePairsFile}: unknown language pair ${pairString}`
+        `${searchDataFolder}/${pairString}.json: unknown language pair`
       );
     }
 
-    const words: string[] = JSON.parse(
-      readFileSync(`${seoDir}/${languagePair.words}`, 'utf-8')
+    const searchData: Record<string, TranslationCards> = JSON.parse(
+      readFileSync(`${searchDataFolder}/${pairString}.json`, 'utf-8')
     );
 
-    // Words whose slugs collide share a page.
-    const paths = [
-      ...new Set(
-        words
-          .filter((word) => typeof word === 'string' && word.trim() !== '')
-          .map((word) => getSeoPagePath(word, pair))
-      ),
-    ];
-
-    const deployedLastmods = await getDeployedLastmods(
-      deployedBaseUrl,
-      pairString
+    const deployed = new Map(
+      (await fetchSitemap(`${deployedBaseUrl}/${pairString}/sitemap.xml`)).map(
+        (entry) => [entry.loc, entry]
+      )
     );
     const now = new Date().toISOString();
 
-    const entries = paths.map((path) => {
-      const loc = `https://vocably.pro/${encodeURI(path)}`;
+    // Words whose slugs collide share a page, which shows the last one (see
+    // buildPageIndex in packages/seo-backend).
+    const pages = new Map<string, string>();
+    for (const word of Object.keys(searchData)) {
+      pages.set(getSeoPagePath(word, pair), word);
+    }
+
+    const entries = [...pages.entries()].map(([path, word]) => {
+      const loc = `https://vocably.pro/${path}`;
+      const hash = getPageHash(word, searchData[word]);
+      const existing = deployed.get(loc);
+
       return {
-        loc: escapeXml(loc),
-        // Sitemaps generated before the pages became dynamic listed
-        // non-ASCII URLs unencoded.
+        loc,
+        hash,
         lastmod:
-          deployedLastmods.get(loc) ||
-          deployedLastmods.get(`https://vocably.pro/${path}`) ||
-          now,
+          existing && existing.hash === hash && existing.lastmod
+            ? existing.lastmod
+            : now,
       };
     });
 
-    for (let i = 0; i * maxUrlsPerSitemap < entries.length; i++) {
-      const fileName = `./dist/${getSitemapFileName(pairString, i)}`;
-      mkdirSync(dirname(fileName), { recursive: true });
-      writeFileSync(
-        fileName,
-        generateSitemap(
-          entries.slice(i * maxUrlsPerSitemap, (i + 1) * maxUrlsPerSitemap)
-        )
-      );
-    }
+    mkdirSync(`./dist/${pairString}`, { recursive: true });
+    writeFileSync(`./dist/${pairString}/sitemap.xml`, generateSitemap(entries));
 
     console.log(`${pairString}: ${entries.length} SEO pages in the sitemap`);
   }

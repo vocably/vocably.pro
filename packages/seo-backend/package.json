@@ -2,7 +2,7 @@
   "name": "@vocably/seo-backend",
   "version": "0.0.0",
   "private": true,
-  "description": "Renders the SEO search pages (/de-en/<word>-in-german.html) on demand behind CloudFront",
+  "description": "Renders the SEO search pages (/de-en/<word>-in-german.html) on demand from the precomputed search data, behind CloudFront",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "serve": "npx vite-node ./scripts/serve.mts",
