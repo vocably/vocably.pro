@@ -83,6 +83,8 @@ const sha256 = (input: string): string =>
 type Options = {
   templateHtml: string;
   word: string;
+  /** The slug of the page URL (see getSeoWordSlug). */
+  wordSlug: string;
   pair: SeoLanguagePair;
   translationCards: TranslationCards;
 };
@@ -90,6 +92,7 @@ type Options = {
 export const renderSeoPage = async ({
   templateHtml,
   word,
+  wordSlug,
   pair,
   translationCards,
 }: Options): Promise<string> => {
@@ -98,7 +101,7 @@ export const renderSeoPage = async ({
   const pageName = getSeoPageName(word, sourceLanguage);
   const title = `${pageName} | Vocably`;
   const description = `${pageName} | Vocably - a dictionary for ${languageName} learners`;
-  const canonicalUrl = `${canonicalBaseUrl}/${getSeoPagePath(word, pair)}`;
+  const canonicalUrl = `${canonicalBaseUrl}/${getSeoPagePath(wordSlug, pair)}`;
 
   const searchValues = {
     text: word,

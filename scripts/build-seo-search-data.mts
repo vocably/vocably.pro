@@ -31,6 +31,7 @@ import {
   getClaudeAnalyzeBatchItemKey,
 } from '@vocably/analyze';
 import { parseJson } from '@vocably/api';
+import { getSeoWordSlug } from '@vocably/model-operations';
 import { isArray } from 'lodash-es';
 
 const englishWordsFile = './seo/en-de.json';
@@ -377,6 +378,9 @@ const englishWords: string[] = JSON.parse(
 
 console.log('Found', englishWords.length, 'English words');
 
+// Keyed by the word slug of the page URL ("a bag" → "a-bag"), which is all the
+// render lambda knows of the word. Words sharing a slug ("a bag", "a-bag")
+// share a page, which shows the last of them.
 const wordResults: Record<string, TranslationCards> = {};
 let missingReverseTranslations = 0;
 
@@ -402,7 +406,7 @@ for (const word of englishWords) {
     continue;
   }
 
-  wordResults[word] = {
+  wordResults[getSeoWordSlug(word)] = {
     source: word,
     sourceLanguage: 'de',
     targetLanguage: 'en',
@@ -420,7 +424,7 @@ for (const word of englishWords) {
 }
 
 console.log(
-  `Built ${Object.keys(wordResults).length} words; ${missingReverseTranslations} words have no reverse translations`
+  `Built ${Object.keys(wordResults).length} pages; ${missingReverseTranslations} words have no reverse translations`
 );
 
 writeFileSync(outputFile, JSON.stringify(wordResults, null, 2));

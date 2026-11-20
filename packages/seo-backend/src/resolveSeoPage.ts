@@ -83,6 +83,7 @@ export const resolveSeoPage = async (
       templateHtml,
       pair,
       word: translationCards.source,
+      wordSlug,
       translationCards,
     }),
   };

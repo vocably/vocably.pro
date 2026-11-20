@@ -5,16 +5,15 @@
 //
 // The search data goes through the same loader as in the lambda, but the S3
 // bucket is mocked: a key such as de-en/a-bag.json is answered from
-// packages/www/seo/search-data/de-en.json with the entry that
-// scripts/seo-upload-search-data.mts would upload under that key. The file is
-// read on every request, so edits to it show up on reload.
+// packages/www/seo/search-data/de-en.json, which is keyed by word slug like
+// the bucket. The file is read on every request, so edits to it show up on
+// reload.
 //
 // The template is the search page served by the www dev server.
 
 import { existsSync, readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { join, resolve } from 'node:path';
-import { getSeoWordSlug } from '@vocably/model-operations';
 import { resolveSeoPage } from '../src/resolveSeoPage';
 import { templateFileName } from '../src/renderSeoPage';
 import { ReadObject, translationCardsLoader } from '../src/searchData';
@@ -42,12 +41,9 @@ const readMockS3Object: ReadObject = async (key) => {
     readFileSync(file, 'utf-8')
   );
 
-  // Words sharing a slug overwrite each other on upload, so the last wins.
-  const word = Object.keys(searchData)
-    .filter((word) => getSeoWordSlug(word) === wordSlug)
-    .at(-1);
-
-  return word === undefined ? null : JSON.stringify(searchData[word]);
+  return Object.hasOwn(searchData, wordSlug)
+    ? JSON.stringify(searchData[wordSlug])
+    : null;
 };
 
 const getTranslationCards = translationCardsLoader(readMockS3Object);

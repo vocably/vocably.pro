@@ -6,11 +6,10 @@
 //   ./scripts/seo-upload-search-data.mts <source>-<target>
 //
 // e.g. ./scripts/seo-upload-search-data.mts de-en reads
-// packages/www/seo/search-data/de-en.json and uploads each of its values as
-// de-en/<word slug>.json: "a bag" becomes de-en/a-bag.json, the data of
-// /de-en/a-bag-in-german.html. The render lambda only knows the slug from the
-// URL, which is why the slug is the key. Words sharing a slug ("a bag",
-// "a-bag") share a page, which shows the last of them.
+// packages/www/seo/search-data/de-en.json, which is keyed by word slug, and
+// uploads each of its values as de-en/<word slug>.json: "a-bag" becomes
+// de-en/a-bag.json, the data of /de-en/a-bag-in-german.html. The render
+// lambda only knows the slug from the URL, which is why the slug is the key.
 //
 // Objects whose content didn't change are skipped, and objects of words that
 // are no longer in the file are deleted, so their pages turn into 404s.
@@ -29,7 +28,6 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3';
 import {
-  getSeoWordSlug,
   parseSeoLanguagePair,
   seoLanguagePairToString,
 } from '@vocably/model-operations';
@@ -71,14 +69,13 @@ const data: Record<string, unknown> = JSON.parse(
   readFileSync(dataFile, 'utf8')
 );
 
-// Object key → body. Later words overwrite earlier ones with the same slug.
-const objects = new Map<string, string>();
-for (const [word, translationCards] of Object.entries(data)) {
-  objects.set(
-    `${pairArgument}/${getSeoWordSlug(word)}.json`,
-    JSON.stringify(translationCards)
-  );
-}
+// Object key → body.
+const objects = new Map<string, string>(
+  Object.entries(data).map(([wordSlug, translationCards]) => [
+    `${pairArgument}/${wordSlug}.json`,
+    JSON.stringify(translationCards),
+  ])
+);
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
 
@@ -120,11 +117,9 @@ const removedKeys = [...existingEtags.keys()].filter(
 );
 
 console.log(
-  `${pairArgument}: ${objects.size} pages from ${
-    Object.keys(data).length
-  } words, uploading ${changedKeys.length} and deleting ${
-    removedKeys.length
-  } in s3://${bucket}/${pairArgument}/`
+  `${pairArgument}: ${objects.size} pages, uploading ${
+    changedKeys.length
+  } and deleting ${removedKeys.length} in s3://${bucket}/${pairArgument}/`
 );
 
 let uploaded = 0;

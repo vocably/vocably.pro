@@ -7,7 +7,8 @@ import {
 // The search data of a page lives in the SEO bucket as
 // <source>-<target>/<word slug>.json, e.g. de-en/a-bag.json for
 // /de-en/a-bag-in-german.html, uploaded from
-// packages/www/seo/search-data/<pair>.json by scripts/seo-upload-search-data.mts.
+// packages/www/seo/search-data/<pair>.json (keyed by the same slug) by
+// scripts/seo-upload-search-data.mts.
 // It's keyed by the slug rather than by the word because the URL only carries
 // the slug ("a bag" and "a-bag" share it).
 export const getSearchDataKey = (pair: string, wordSlug: string) =>

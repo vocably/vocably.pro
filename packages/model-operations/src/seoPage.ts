@@ -38,19 +38,14 @@ const slugify = (text: string): string =>
 
 /**
  * The word as it appears in the page URL ("a bag" → "a-bag"). It is lossy:
- * "a bag" and "a-bag" share it, so the search data of a page is stored under
- * this slug rather than under the word.
+ * "a bag" and "a-bag" share it, so the search data is keyed by this slug
+ * rather than by the word, from seo/search-data/<pair>.json to the bucket.
  */
 export const getSeoWordSlug = (word: string): string => slugify(word);
 
 /** The "-in-german" part of the page slug. */
 export const getSeoLanguageSuffix = (sourceLanguage: GoogleLanguage): string =>
   slugify(` in ${trimLanguage(languageList[sourceLanguage])}`);
-
-export const getSeoPageSlug = (
-  word: string,
-  sourceLanguage: GoogleLanguage
-): string => getSeoWordSlug(word) + getSeoLanguageSuffix(sourceLanguage);
 
 /**
  * The word slug of a page slug ("a-bag-in-german" → "a-bag"), or undefined
@@ -67,10 +62,15 @@ export const parseSeoPageSlug = (
     : undefined;
 };
 
-/** The path of the page without the leading slash. */
-export const getSeoPagePath = (word: string, pair: SeoLanguagePair): string =>
-  `${seoLanguagePairToString(pair)}/${getSeoPageSlug(
-    word,
+/**
+ * The path of the page of a word slug (see getSeoWordSlug) without the
+ * leading slash: "a-bag" → "de-en/a-bag-in-german.html".
+ */
+export const getSeoPagePath = (
+  wordSlug: string,
+  pair: SeoLanguagePair
+): string =>
+  `${seoLanguagePairToString(pair)}/${wordSlug}${getSeoLanguageSuffix(
     pair.sourceLanguage
   )}.html`;
 

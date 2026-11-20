@@ -26,11 +26,18 @@ const escapeXml = (str: string) =>
     .replace(/'/g, '&apos;');
 
 // Kept identical to the hash of the build-time renderer, so the pages keep
-// the lastmod they were published with.
-const getPageHash = (word: string, translationCards: TranslationCards) =>
+// the lastmod they were published with. The word is the one the page shows,
+// not the slug the search data is keyed by.
+const getPageHash = (translationCards: TranslationCards) =>
   createHash('sha256')
     .update(
-      JSON.stringify(JSON.stringify({ word, translationCards, globalVersion }))
+      JSON.stringify(
+        JSON.stringify({
+          word: translationCards.source,
+          translationCards,
+          globalVersion,
+        })
+      )
     )
     .digest('hex');
 
@@ -93,27 +100,23 @@ export const buildSeoSitemaps = async (baseUrl = 'https://vocably.pro') => {
     );
     const now = new Date().toISOString();
 
-    // Words whose slugs collide share a page, which shows the last one (see
-    // buildPageIndex in packages/seo-backend).
-    const pages = new Map<string, string>();
-    for (const word of Object.keys(searchData)) {
-      pages.set(getSeoPagePath(word, pair), word);
-    }
+    // Keyed by word slug, one page each.
+    const entries = Object.entries(searchData).map(
+      ([wordSlug, translationCards]) => {
+        const loc = `${baseUrl}/${getSeoPagePath(wordSlug, pair)}`;
+        const hash = getPageHash(translationCards);
+        const existing = deployed.get(loc);
 
-    const entries = [...pages.entries()].map(([path, word]) => {
-      const loc = `${baseUrl}/${path}`;
-      const hash = getPageHash(word, searchData[word]);
-      const existing = deployed.get(loc);
-
-      return {
-        loc,
-        hash,
-        lastmod:
-          existing && existing.hash === hash && existing.lastmod
-            ? existing.lastmod
-            : now,
-      };
-    });
+        return {
+          loc,
+          hash,
+          lastmod:
+            existing && existing.hash === hash && existing.lastmod
+              ? existing.lastmod
+              : now,
+        };
+      }
+    );
 
     mkdirSync(`./dist/${pairString}`, { recursive: true });
     writeFileSync(`./dist/${pairString}/sitemap.xml`, generateSitemap(entries));
