@@ -21,7 +21,7 @@ export {
   getGeminiTranslateBatchItem,
   getGeminiTranslateGenerateContentParameters,
   handleGeminiTranslateResponse,
-} from './aiFetchPossibleTranslations';
+} from './aiFetchPossibleTranslationGemini';
 export { aiAnalysisToItem } from './analyseAndTranslate';
 export * from './batchUnitOfSpeechAnalyse';
 export { buildBulkAnalysisResult } from './buildBulkAnalysisResult';
