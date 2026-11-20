@@ -82,7 +82,6 @@ const sha256 = (input: string): string =>
 
 type Options = {
   templateHtml: string;
-  word: string;
   /** The slug of the page URL (see getSeoWordSlug). */
   wordSlug: string;
   pair: SeoLanguagePair;
@@ -91,12 +90,12 @@ type Options = {
 
 export const renderSeoPage = async ({
   templateHtml,
-  word,
   wordSlug,
   pair,
   translationCards,
 }: Options): Promise<string> => {
   const { sourceLanguage, targetLanguage } = pair;
+  const word = translationCards.source;
   const languageName = trimLanguage(languageList[sourceLanguage]);
   const pageName = getSeoPageName(word, sourceLanguage);
   const title = `${pageName} | Vocably`;

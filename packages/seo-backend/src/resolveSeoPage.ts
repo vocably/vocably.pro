@@ -82,7 +82,6 @@ export const resolveSeoPage = async (
     html: await renderSeoPage({
       templateHtml,
       pair,
-      word: translationCards.source,
       wordSlug,
       translationCards,
     }),
