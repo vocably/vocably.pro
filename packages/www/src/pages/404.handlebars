@@ -31,10 +31,19 @@
     );
 
     if (match && match[1]) {
+      // pathname is percent-encoded ("a%20bit"); decode it so URLSearchParams
+      // doesn't encode it a second time ("a%2520bit").
+      let text = match[1];
+      try {
+        text = decodeURIComponent(text);
+      } catch (e) {
+        // Malformed escape sequence: fall back to the raw segment.
+      }
+
       const params = new URLSearchParams({
         sourceLanguage: 'de',
         targetLanguage: 'en',
-        text: match[1],
+        text,
       });
 
       // replace() so the broken URL doesn't linger in history behind us.
