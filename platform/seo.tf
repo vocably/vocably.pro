@@ -187,6 +187,27 @@ resource "aws_lambda_permission" "seo_render_cloudfront_invoke" {
   invoked_via_function_url = true
 }
 
+# Keeps a container warm, so visitors rarely hit a cold start. The handler
+# recognizes the warmUp input and only loads the template.
+resource "aws_cloudwatch_event_rule" "seo_render_warm_up" {
+  name                = "vocably-${terraform.workspace}-seo-render-warm-up"
+  schedule_expression = "rate(5 minutes)"
+}
+
+resource "aws_cloudwatch_event_target" "seo_render_warm_up" {
+  arn   = aws_lambda_function.seo_render.arn
+  rule  = aws_cloudwatch_event_rule.seo_render_warm_up.name
+  input = jsonencode({ warmUp = true })
+}
+
+resource "aws_lambda_permission" "seo_render_warm_up" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.seo_render.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.seo_render_warm_up.arn
+}
+
 locals {
   seo_render_origin_domain = trimsuffix(trimprefix(aws_lambda_function_url.seo_render.function_url, "https://"), "/")
 }

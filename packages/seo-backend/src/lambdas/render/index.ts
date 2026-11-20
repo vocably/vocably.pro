@@ -37,6 +37,13 @@ type FunctionUrlEvent = {
   requestContext?: { http?: { method?: string } };
 };
 
+// Sent every few minutes by an EventBridge rule (see platform/seo.tf) to keep
+// a container warm.
+type WarmUpEvent = { warmUp: true };
+
+const isWarmUpEvent = (event: unknown): event is WarmUpEvent =>
+  (event as WarmUpEvent | undefined)?.warmUp === true;
+
 type FunctionUrlResult = {
   statusCode: number;
   headers: Record<string, string>;
@@ -57,8 +64,15 @@ const respond = (
 });
 
 export const handler = async (
-  event: FunctionUrlEvent
-): Promise<FunctionUrlResult> => {
+  event: FunctionUrlEvent | WarmUpEvent
+): Promise<FunctionUrlResult | void> => {
+  if (isWarmUpEvent(event)) {
+    // Loading the template also opens the S3 connection and fills the
+    // template cache that the next page request uses.
+    await getTemplate();
+    return;
+  }
+
   const method = event.requestContext?.http?.method ?? 'GET';
 
   if (method !== 'GET' && method !== 'HEAD') {
