@@ -1,21 +1,38 @@
 #!/usr/bin/env -S npx vite-node
 
-// Uploads the SEO search data of a language pair to the SEO bucket (see
-// platform/seo.tf), one object per word.
+// Syncs the SEO search data of a language pair to the SEO bucket (see
+// platform/seo.tf), one object per page.
 //
 //   ./scripts/seo-upload-search-data.mts <source>-<target>
 //
 // e.g. ./scripts/seo-upload-search-data.mts de-en reads
-// packages/www/seo/search-data/de-en.json and uploads the value of each of its
-// keys as de-en/<key>.json.
+// packages/www/seo/search-data/de-en.json and uploads each of its values as
+// de-en/<word slug>.json: "a bag" becomes de-en/a-bag.json, the data of
+// /de-en/a-bag-in-german.html. The render lambda only knows the slug from the
+// URL, which is why the slug is the key. Words sharing a slug ("a bag",
+// "a-bag") share a page, which shows the last of them.
+//
+// Objects whose content didn't change are skipped, and objects of words that
+// are no longer in the file are deleted, so their pages turn into 404s.
 //
 // Reads SEO_BUCKET and AWS_REGION from the environment, scripts/.env.local
 // (dev bucket) or scripts/.env (prod bucket).
 
+import { createHash } from 'node:crypto';
 import { existsSync, readFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import {
+  DeleteObjectsCommand,
+  ListObjectsV2Command,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3';
+import {
+  getSeoWordSlug,
+  parseSeoLanguagePair,
+  seoLanguagePairToString,
+} from '@vocably/model-operations';
 import dotenv from 'dotenv';
 
 const scriptsDir = dirname(fileURLToPath(import.meta.url));
@@ -27,8 +44,9 @@ dotenv.config({ path: `${scriptsDir}/.env`, quiet: true });
 
 const concurrency = 50;
 
-const pair = process.argv[2];
-if (!pair || !/^[a-z]{2,3}(-[A-Za-z]+)?-[a-z]{2,3}(-[A-Za-z]+)?$/.test(pair)) {
+const pairArgument = process.argv[2] ?? '';
+const pair = parseSeoLanguagePair(pairArgument);
+if (!pair || seoLanguagePairToString(pair) !== pairArgument) {
   console.error(
     'Usage: ./scripts/seo-upload-search-data.mts <source>-<target>'
   );
@@ -41,54 +59,126 @@ if (!bucket) {
   process.exit(1);
 }
 
-const dataFile = `${scriptsDir}/../packages/www/seo/search-data/${pair}.json`;
+const dataFile = `${scriptsDir}/../packages/www/seo/search-data/${pairArgument}.json`;
 if (!existsSync(dataFile)) {
-  console.error(`No search data for ${pair}: ${dataFile} doesn't exist.`);
+  console.error(
+    `No search data for ${pairArgument}: ${dataFile} doesn't exist.`
+  );
   process.exit(1);
 }
 
 const data: Record<string, unknown> = JSON.parse(
   readFileSync(dataFile, 'utf8')
 );
-const keys = Object.keys(data);
 
-console.log(
-  `Uploading ${keys.length} items of ${pair} to s3://${bucket}/${pair}/`
-);
+// Object key → body. Later words overwrite earlier ones with the same slug.
+const objects = new Map<string, string>();
+for (const [word, translationCards] of Object.entries(data)) {
+  objects.set(
+    `${pairArgument}/${getSeoWordSlug(word)}.json`,
+    JSON.stringify(translationCards)
+  );
+}
 
 const s3 = new S3Client({ region: process.env.AWS_REGION });
+
+// A single-part upload's ETag is the MD5 of its body.
+const listExistingEtags = async (): Promise<Map<string, string>> => {
+  const etags = new Map<string, string>();
+  let continuationToken: string | undefined;
+
+  do {
+    const response = await s3.send(
+      new ListObjectsV2Command({
+        Bucket: bucket,
+        Prefix: `${pairArgument}/`,
+        ContinuationToken: continuationToken,
+      })
+    );
+
+    for (const { Key, ETag } of response.Contents ?? []) {
+      if (Key) {
+        etags.set(Key, (ETag ?? '').replace(/"/g, ''));
+      }
+    }
+
+    continuationToken = response.NextContinuationToken;
+  } while (continuationToken);
+
+  return etags;
+};
+
+const existingEtags = await listExistingEtags();
+
+const changedKeys = [...objects.keys()].filter(
+  (key) =>
+    existingEtags.get(key) !==
+    createHash('md5').update(objects.get(key)!).digest('hex')
+);
+const removedKeys = [...existingEtags.keys()].filter(
+  (key) => !objects.has(key)
+);
+
+console.log(
+  `${pairArgument}: ${objects.size} pages from ${
+    Object.keys(data).length
+  } words, uploading ${changedKeys.length} and deleting ${
+    removedKeys.length
+  } in s3://${bucket}/${pairArgument}/`
+);
 
 let uploaded = 0;
 const failed: string[] = [];
 let next = 0;
 
 const worker = async () => {
-  while (next < keys.length) {
-    const key = keys[next++];
+  while (next < changedKeys.length) {
+    const key = changedKeys[next++];
     try {
       await s3.send(
         new PutObjectCommand({
           Bucket: bucket,
-          Key: `${pair}/${key}.json`,
-          Body: JSON.stringify(data[key]),
+          Key: key,
+          Body: objects.get(key),
           ContentType: 'application/json',
         })
       );
       uploaded++;
       if (uploaded % 1000 === 0) {
-        console.log(`${uploaded}/${keys.length}`);
+        console.log(`${uploaded}/${changedKeys.length}`);
       }
     } catch (error) {
       failed.push(key);
-      console.error(`Failed to upload "${key}":`, error);
+      console.error(`Failed to upload ${key}:`, error);
     }
   }
 };
 
 await Promise.all(Array.from({ length: concurrency }, worker));
 
-console.log(`Uploaded ${uploaded}/${keys.length} items.`);
+// Deleted after the upload, like the www files, and in batches of 1000, the
+// most DeleteObjects accepts.
+for (let i = 0; i < removedKeys.length; i += 1000) {
+  const response = await s3.send(
+    new DeleteObjectsCommand({
+      Bucket: bucket,
+      Delete: {
+        Objects: removedKeys.slice(i, i + 1000).map((Key) => ({ Key })),
+        Quiet: true,
+      },
+    })
+  );
+
+  for (const error of response.Errors ?? []) {
+    failed.push(error.Key ?? '');
+    console.error(`Failed to delete ${error.Key}: ${error.Message}`);
+  }
+}
+
+console.log(
+  `Uploaded ${uploaded}/${changedKeys.length}, deleted ${removedKeys.length}.`
+);
 if (failed.length > 0) {
-  console.error(`${failed.length} items failed: ${failed.join(', ')}`);
+  console.error(`${failed.length} objects failed: ${failed.join(', ')}`);
   process.exit(1);
 }

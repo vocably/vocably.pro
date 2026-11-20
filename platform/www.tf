@@ -329,7 +329,7 @@ resource "null_resource" "www_upload" {
     aws_cloudfront_distribution.www,
     # The "/*" invalidation also refreshes the SEO pages, so their data has
     # to be in place before it.
-    aws_s3_object.seo_search_data,
+    null_resource.seo_search_data_upload,
     aws_lambda_function.seo_render,
   ]
 

@@ -7,10 +7,28 @@ const isMissingKey = (error: any): boolean =>
   error?.Code === 'NoSuchKey' ||
   error?.$metadata?.httpStatusCode === 404;
 
+/** Resolves to null when the object doesn't exist. */
+export const readS3Object = async (
+  bucket: string,
+  key: string
+): Promise<string | null> => {
+  try {
+    const response = await s3Client.send(
+      new GetObjectCommand({ Bucket: bucket, Key: key })
+    );
+    return (await response.Body?.transformToString('utf-8')) ?? null;
+  } catch (error) {
+    if (isMissingKey(error)) {
+      return null;
+    }
+    throw error;
+  }
+};
+
 /**
  * Keeps a parsed S3 object in memory between invocations and re-downloads it
  * only when its ETag changes, so a warm container never serves a stale
- * template or stale search data after a deploy.
+ * template after a deploy.
  */
 export const cachedS3Object = <T>(
   bucket: string,
