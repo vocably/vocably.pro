@@ -2,7 +2,13 @@
 
 // Builds the search data the SEO pages are rendered from (on demand, by
 // packages/seo-backend) and the sitemap is generated from (packages/www). Also
-// saves the German units of speech that are missing data as a Claude batch.
+// saves the units of speech that are missing data as a Claude batch.
+//
+//   ./scripts/build-seo-search-data.mts <words language>-<learning language>
+//
+// e.g. ./scripts/build-seo-search-data.mts en-de reads the English words of
+// scripts/seo/en-de.json and writes their German translations to
+// packages/www/seo/search-data/de-en.json.
 
 import {
   existsSync,
@@ -31,19 +37,40 @@ import {
   getClaudeAnalyzeBatchItemKey,
 } from '@vocably/analyze';
 import { parseJson } from '@vocably/api';
-import { getSeoWordSlug } from '@vocably/model-operations';
+import {
+  getSeoWordSlug,
+  parseSeoLanguagePair,
+  seoLanguagePairToString,
+} from '@vocably/model-operations';
 import { isArray } from 'lodash-es';
 
-const englishWordsFile = './seo/en-de.json';
-const outputFile = '../packages/www/seo/search-data/de-en.json';
-const reverseTranslationsFolder =
-  '../../vocably-reverse-translations/data/de/en';
+const pairArgument = process.argv[2] ?? '';
+const pair = parseSeoLanguagePair(pairArgument);
+if (!pair || seoLanguagePairToString(pair) !== pairArgument) {
+  console.error(
+    'Usage: ./scripts/build-seo-search-data.mts <words language>-<learning language>'
+  );
+  process.exit(1);
+}
+
+// The words are in the language of the pair's source ("en" of "en-de"); the
+// pages show their translations into the pair's target ("de"), so the pages
+// live under the reversed pair ("de-en").
+const { sourceLanguage: wordsLanguage, targetLanguage: learningLanguage } =
+  pair;
+const pagesPair = seoLanguagePairToString({
+  sourceLanguage: learningLanguage,
+  targetLanguage: wordsLanguage,
+});
+
+const wordsFile = `./seo/${pairArgument}.json`;
+const outputFile = `../packages/www/seo/search-data/${pagesPair}.json`;
+const reverseTranslationsFolder = `../../vocably-reverse-translations/data/${learningLanguage}/${wordsLanguage}`;
 const languagesFolderPathPrefix = '../../vocably-languages';
-const missingTranslationsFile =
-  '../batch-analyze/data/missing-translations.json';
+const missingTranslationsFile = `../batch-analyze/data/missing-translations-${pagesPair}.json`;
 // Picked up by batch-analyze/claude-send-batch.mts. The payloads file maps
 // batch custom_ids back to units of speech when handling the results.
-const missingUnitsOfSpeechBatchName = `claude-analyze-missing-units-of-speech-de-${Date.now()}`;
+const missingUnitsOfSpeechBatchName = `claude-analyze-missing-units-of-speech-${learningLanguage}-${Date.now()}`;
 const missingUnitsOfSpeechBatchFile = `../batch-analyze/data/batches/${missingUnitsOfSpeechBatchName}.jsonl`;
 const missingUnitsOfSpeechPayloadsFile = `../batch-analyze/data/claude-payloads/${missingUnitsOfSpeechBatchName}.json`;
 
@@ -241,7 +268,7 @@ type UnitOfSpeech = {
   partOfSpeech: string;
 };
 
-// German units of speech lacking a translations file or an analysis file,
+// Units of speech of the learning language lacking a translations file or an analysis file,
 // keyed by `source|partOfSpeech` to keep them unique.
 const missingTranslations = new Map<string, UnitOfSpeech>();
 const missingUnitsOfSpeech = new Map<string, UnitOfSpeech>();
@@ -286,8 +313,8 @@ const getAnalysisItemOrRecordMissing = (
   return itemResult.value;
 };
 
-// A reverse translation points from an English word to a German unit of
-// speech. Its lemma, when different, becomes an additional item.
+// A reverse translation points from a word to a unit of speech of the
+// learning language. Its lemma, when different, becomes an additional item.
 const translationToAnalysisItems = (
   translation: Translation
 ): AnalysisItem[] => {
@@ -372,11 +399,14 @@ const getReverseTranslations = (word: string): Translation[] => {
   return translations;
 };
 
-const englishWords: string[] = JSON.parse(
-  readFileSync(englishWordsFile, 'utf-8')
-);
+if (!existsSync(wordsFile)) {
+  console.error(`Words file ${wordsFile} does not exist`);
+  process.exit(1);
+}
 
-console.log('Found', englishWords.length, 'English words');
+const words: string[] = JSON.parse(readFileSync(wordsFile, 'utf-8'));
+
+console.log('Found', words.length, `${wordsLanguage} words`);
 
 // Keyed by the word slug of the page URL ("a bag" → "a-bag"), which is all the
 // render lambda knows of the word. Words sharing a slug ("a bag", "a-bag")
@@ -384,7 +414,7 @@ console.log('Found', englishWords.length, 'English words');
 const wordResults: Record<string, TranslationCards> = {};
 let missingReverseTranslations = 0;
 
-for (const word of englishWords) {
+for (const word of words) {
   const translations = getReverseTranslations(word);
 
   if (translations.length === 0) {
@@ -408,13 +438,13 @@ for (const word of englishWords) {
 
   wordResults[getSeoWordSlug(word)] = {
     source: word,
-    sourceLanguage: 'de',
-    targetLanguage: 'en',
+    sourceLanguage: learningLanguage,
+    targetLanguage: wordsLanguage,
     isDirect: false,
     deck: {
       cards: [],
       tags: [],
-      language: 'de',
+      language: learningLanguage,
     },
     items,
     detectedInputType: 'word',
@@ -442,7 +472,7 @@ writeFileSync(
 );
 
 console.log(
-  `Saved ${missingTranslations.size} German units of speech without translations to ${missingTranslationsFile}`
+  `Saved ${missingTranslations.size} ${learningLanguage} units of speech without translations to ${missingTranslationsFile}`
 );
 
 const missingUnitsOfSpeechPayloads = Object.fromEntries(
@@ -450,7 +480,7 @@ const missingUnitsOfSpeechPayloads = Object.fromEntries(
     const payload = {
       source,
       partOfSpeech,
-      sourceLanguage: 'de' as const,
+      sourceLanguage: learningLanguage,
     };
     return [getClaudeAnalyzeBatchItemKey(payload), payload];
   })
@@ -472,5 +502,5 @@ writeFileSync(
 );
 
 console.log(
-  `Saved ${missingUnitsOfSpeech.size} missing German units of speech as a Claude batch to ${missingUnitsOfSpeechBatchFile}`
+  `Saved ${missingUnitsOfSpeech.size} missing ${learningLanguage} units of speech as a Claude batch to ${missingUnitsOfSpeechBatchFile}`
 );
