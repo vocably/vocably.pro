@@ -5,15 +5,7 @@ export type SitemapEntry = {
   lastmod: string;
   priority: string;
   hash: string;
-  renderHash: string;
 };
-
-export const getExistingSeoSearchSitemap = (
-  baseUrl: string,
-  sourceLanguage: string,
-  targetLanguage: string
-): Promise<Array<SitemapEntry>> =>
-  fetchSitemap(`${baseUrl}/${sourceLanguage}-${targetLanguage}/sitemap.xml`);
 
 export const fetchSitemap = async (
   url: string
@@ -51,6 +43,5 @@ export const parseSitemap = (xmlText: string): Array<SitemapEntry> => {
     lastmod: entry.lastmod || '',
     priority: entry.priority || '',
     hash: entry.hash || '',
-    renderHash: entry.renderhash || '',
   }));
 };

@@ -2,7 +2,7 @@ Language: English
 
 Made for anyone learning a language from real content: articles, blogs, news, and videos in the language you're learning. Stop looking up the same word again and again. Every word you save comes back for review right before you would forget it, on your phone with the app for iOS and Android or on the web.
 
-Vocably translates between 109 languages, including 🇪🇸 Spanish, 🇩🇪 German, 🇫🇷 French, 🇮🇹 Italian, 🇬🇧 English, 🇯🇵 Japanese, and 🇧🇷 Portuguese, so you can learn any language from any native language.
+Vocably translates between 109 languages, including 🇬🇧 English, 🇪🇸 Spanish, 🇩🇪 German, 🇫🇷 French, 🇮🇹 Italian, 🇯🇵 Japanese, and 🇧🇷 Portuguese, so you can learn any language from any native language.
 
 ＋ Translate Words While Browsing
 

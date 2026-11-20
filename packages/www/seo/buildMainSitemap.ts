@@ -3,6 +3,7 @@ import { execSync } from 'node:child_process';
 import { memoize } from 'lodash-es';
 
 type GenerateSitemapParams = {
+  baseUrl: string;
   pages: Array<{
     path: string;
     priority: string;
@@ -10,7 +11,7 @@ type GenerateSitemapParams = {
   }>;
 };
 
-const generateSitemap = ({ pages }: GenerateSitemapParams): string => {
+const generateSitemap = ({ baseUrl, pages }: GenerateSitemapParams): string => {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -25,7 +26,7 @@ ${pages
   .map(
     ({ path, priority, lastMod }) => `
 <url>
-  <loc>https://vocably.pro/${path}</loc>
+  <loc>${baseUrl}/${path}</loc>
   <lastmod>${lastMod}</lastmod>
   <priority>${priority}</priority>
 </url>
@@ -92,7 +93,7 @@ const exclude = [
   '404.handlebars',
 ];
 
-export const buildMainSitemap = () => {
+export const buildMainSitemap = (baseUrl = 'https://vocably.pro') => {
   const pages = readdirSync('./src/pages').filter(
     (page) => !exclude.includes(page)
   );
@@ -105,6 +106,7 @@ export const buildMainSitemap = () => {
   ];
 
   const xml = generateSitemap({
+    baseUrl,
     pages: [
       {
         path: 'index.html',

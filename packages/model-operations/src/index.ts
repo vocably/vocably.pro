@@ -14,3 +14,4 @@ export * from './cardsToCsv';
 export * from './createExplainPayload';
 export * from './cardToLocationHash';
 export * from './analysisToTranslationCards';
+export * from './seoPage';
