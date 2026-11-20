@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import {
   type getClaudeAnalyzeBatchItem,
+  type getClaudeTranslateBatchItem,
   type getClaudeTranslationBatchItem,
 } from '@vocably/analyze';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
@@ -12,6 +13,34 @@ export const claudeBatchPrefix = 'claude-';
 export const claudeTranslateBatchPrefix = `${claudeBatchPrefix}translate-`;
 export const claudeAnalyzeBatchPrefix = `${claudeBatchPrefix}analyze-`;
 export const claudeFrequencyBatchPrefix = `${claudeBatchPrefix}frequency-`;
+export const claudeReverseTranslateBatchPrefix = `${claudeBatchPrefix}reverse-translate-`;
+
+export const reverseTranslationsDir =
+  './../../vocably-reverse-translations/data';
+export const seoWordListsDir = './../scripts/seo';
+
+export type ReverseTranslatePayload = Parameters<
+  typeof getClaudeTranslateBatchItem
+>[0];
+
+export type ClaudeReverseTranslatePayloads = Record<
+  string,
+  ReverseTranslatePayload
+>;
+
+/**
+ * Mirrors `getTranslationsCacheFileName` in
+ * packages/analyze/src/aiFetchPossibleTranslations.ts (without the inputType part),
+ * so the files can be uploaded to `_reverse-translations/` in S3 as is.
+ */
+export const getReverseTranslationFileName = ({
+  source,
+  sourceLanguage,
+  targetLanguage,
+}: ReverseTranslatePayload): string =>
+  `${reverseTranslationsDir}/${targetLanguage.toLowerCase()}/${sourceLanguage.toLowerCase()}/${source
+    .toLowerCase()
+    .replace(/\//g, '-')}.json`;
 
 const claudeJobsFile = './claude-jobs.jsonl';
 
