@@ -22,6 +22,12 @@ export {
   getGeminiTranslateGenerateContentParameters,
   handleGeminiTranslateResponse,
 } from './aiFetchPossibleTranslationGemini';
+export {
+  getClaudeTranslateBatchItem,
+  getClaudeTranslateBatchItemKey,
+  getClaudeTranslateParams,
+  handleClaudeTranslateResponse,
+} from './aiFetchPossibleTranslationClaude';
 export { aiAnalysisToItem } from './analyseAndTranslate';
 export * from './batchUnitOfSpeechAnalyse';
 export { buildBulkAnalysisResult } from './buildBulkAnalysisResult';
