@@ -3679,6 +3679,38 @@
         "frequency": 8
       },
       {
+        "source": "aptitudes",
+        "translation": "skills, abilities, aptitudes",
+        "definitions": [
+          "Capacidad natural para realizar una actividad",
+          "Habilidad para aprender o desarrollar una tarea"
+        ],
+        "examples": [
+          "Tiene aptitudes para la música",
+          "Demuestra aptitudes en matemáticas"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "apˈtituðes",
+        "g": "feminine",
+        "number": "plural"
+      },
+      {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "competencias",
         "translation": "skills, competencies, powers, competitions",
         "definitions": [
@@ -3854,6 +3886,22 @@
         "g": "feminine",
         "number": "singular",
         "pluralForm": "las habilidades"
+      },
+      {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "la competencia",
@@ -31418,6 +31466,22 @@
         "number": "singular",
         "pluralForm": "los males",
         "frequency": 7
+      },
+      {
+        "source": "el pesar",
+        "translation": "sorrow, regret, grief, remorse",
+        "definitions": [
+          "Sentimiento de pena o tristeza",
+          "Arrepentimiento o remordimiento"
+        ],
+        "examples": [
+          "El pesar por la pérdida",
+          "Sentir pesar por sus acciones"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "peˈsaɾ",
+        "g": "masculine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -52422,6 +52486,19 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 6
+      },
+      {
+        "source": "fijado",
+        "translation": "fixed, set, determined, established",
+        "definitions": [
+          "Que está sujeto o adherido a algo",
+          "Que no cambia o varía"
+        ],
+        "examples": ["precio fijado", "objetivo fijado"],
+        "partOfSpeech": "adjective",
+        "ipa": "fiˈxaðo",
+        "g": "masculine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -64938,6 +65015,17 @@
         "frequency": 6
       },
       {
+        "source": "pertinente",
+        "translation": "relevant, appropriate, pertinent",
+        "definitions": [
+          "Que es adecuado u oportuno en un momento o situación determinados."
+        ],
+        "examples": ["Comentario pertinente.", "Pregunta pertinente."],
+        "partOfSpeech": "adjective",
+        "ipa": "peɾtiˈnente",
+        "number": "singular"
+      },
+      {
         "source": "apropiado",
         "translation": "appropriate, suitable",
         "definitions": [
@@ -67040,6 +67128,19 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 6
+      },
+      {
+        "source": "fijado",
+        "translation": "fixed, set, determined, established",
+        "definitions": [
+          "Que está sujeto o adherido a algo",
+          "Que no cambia o varía"
+        ],
+        "examples": ["precio fijado", "objetivo fijado"],
+        "partOfSpeech": "adjective",
+        "ipa": "fiˈxaðo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "amueblado",
@@ -69380,6 +69481,17 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 7
+      },
+      {
+        "source": "pertinente",
+        "translation": "relevant, appropriate, pertinent",
+        "definitions": [
+          "Que es adecuado u oportuno en un momento o situación determinados."
+        ],
+        "examples": ["Comentario pertinente.", "Pregunta pertinente."],
+        "partOfSpeech": "adjective",
+        "ipa": "peɾtiˈnente",
+        "number": "singular"
       },
       {
         "source": "conveniente",
@@ -114311,6 +114423,22 @@
         "frequency": 3
       },
       {
+        "source": "la bandera",
+        "translation": "flag, banner",
+        "definitions": [
+          "Tela insignia de una nación, estado o institución",
+          "Señal o símbolo de un grupo o causa"
+        ],
+        "examples": [
+          "La bandera ondea en el mástil",
+          "Defendieron su bandera con orgullo"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "banˈdeɾa",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "el banner",
         "translation": "banner, flag, headline",
         "definitions": [
@@ -130318,6 +130446,22 @@
         "number": "singular",
         "pluralForm": "los gorros de lana",
         "frequency": 5
+      },
+      {
+        "source": "la gorra",
+        "translation": "cap, hat",
+        "definitions": [
+          "Prenda de vestir para la cabeza, generalmente con visera.",
+          "Sombrero de tela o lana, sin ala, que se ajusta a la cabeza."
+        ],
+        "examples": [
+          "Llevaba una gorra roja.",
+          "Se puso la gorra para protegerse del sol."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈɡora",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "el gorro de punto",
@@ -158040,6 +158184,24 @@
         "frequency": 7
       },
       {
+        "source": "el bote",
+        "translation": "boat, can, jar, container",
+        "definitions": [
+          "Embarcación pequeña sin cubierta",
+          "Recipiente cilíndrico para líquidos",
+          "Salto que da una pelota al chocar con el suelo"
+        ],
+        "examples": [
+          "El bote está en el lago.",
+          "Compré un bote de pintura.",
+          "El balón hizo un bote alto."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈbote",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la barca",
         "translation": "boat, skiff, dinghy",
         "definitions": [
@@ -159923,6 +160085,22 @@
         "number": "singular",
         "pluralForm": "los gorros",
         "frequency": 5
+      },
+      {
+        "source": "la gorra",
+        "translation": "cap, hat",
+        "definitions": [
+          "Prenda de vestir para la cabeza, generalmente con visera.",
+          "Sombrero de tela o lana, sin ala, que se ajusta a la cabeza."
+        ],
+        "examples": [
+          "Llevaba una gorra roja.",
+          "Se puso la gorra para protegerse del sol."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈɡora",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "el sombrero de mujer",
@@ -166449,6 +166627,22 @@
         "frequency": 8
       },
       {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el estuche",
         "translation": "case, box",
         "definitions": [
@@ -166582,6 +166776,22 @@
         "number": "plural",
         "pluralForm": "los cajones",
         "frequency": 6
+      },
+      {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "estuches",
@@ -168292,6 +168502,19 @@
     },
     "items": [
       {
+        "source": "el mocoso",
+        "translation": "brat, snotty kid, punk",
+        "definitions": ["Niño que tiene mocos", "Persona joven e inexperta"],
+        "examples": [
+          "El mocoso corre por el parque",
+          "Ese mocoso no sabe nada"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "moˈkoso",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el niño malcriado",
         "translation": "spoiled brat, brat",
         "definitions": [
@@ -169049,6 +169272,19 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "el pan",
+        "translation": "bread",
+        "definitions": [
+          "Alimento hecho con harina, agua y levadura, cocido al horno.",
+          "Conjunto de alimentos básicos para la subsistencia."
+        ],
+        "examples": ["Comer pan", "Hornear pan"],
+        "partOfSpeech": "noun",
+        "ipa": "pan",
+        "g": "masculine",
+        "number": "singular"
+      },
       {
         "source": "la hogaza",
         "translation": "loaf, round loaf",
@@ -199303,6 +199539,22 @@
     },
     "items": [
       {
+        "source": "la gorra",
+        "translation": "cap, hat",
+        "definitions": [
+          "Prenda de vestir para la cabeza, generalmente con visera.",
+          "Sombrero de tela o lana, sin ala, que se ajusta a la cabeza."
+        ],
+        "examples": [
+          "Llevaba una gorra roja.",
+          "Se puso la gorra para protegerse del sol."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈɡora",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "el gorro",
         "translation": "hat, beanie",
         "definitions": [
@@ -199450,6 +199702,22 @@
         "g": "feminine",
         "number": "singular",
         "pluralForm": "las habilidades"
+      },
+      {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "la competencia",
@@ -199865,6 +200133,22 @@
         "number": "singular",
         "pluralForm": "las competencias",
         "frequency": 7
+      },
+      {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "la calidad",
@@ -208942,6 +209226,22 @@
         "g": "feminine",
         "number": "singular",
         "frequency": 8
+      },
+      {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la urna",
@@ -227954,6 +228254,18 @@
     },
     "items": [
       {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
+      {
         "source": "animado",
         "translation": "lively, animated, spirited",
         "definitions": [
@@ -229305,6 +229617,22 @@
         "frequency": 5
       },
       {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el tórax",
         "translation": "thorax, chest",
         "definitions": [
@@ -229601,6 +229929,19 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "el pollo",
+        "translation": "chicken, chick",
+        "definitions": [
+          "Ave doméstica joven utilizada como alimento.",
+          "Carne de esta ave."
+        ],
+        "examples": ["Cocinar el pollo.", "Granja de pollos."],
+        "partOfSpeech": "noun",
+        "ipa": "ˈpoʎo",
+        "g": "masculine",
+        "number": "singular"
+      },
       {
         "source": "la gallina",
         "translation": "hen, coward",
@@ -248674,6 +249015,16 @@
     },
     "items": [
       {
+        "source": "nublado",
+        "translation": "cloudy, overcast",
+        "definitions": ["Cubierto de nubes", "Oscurecido por nubes"],
+        "examples": ["El cielo está nublado.", "Día nublado."],
+        "partOfSpeech": "adjective",
+        "ipa": "nuˈβlaðo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "nuboso",
         "translation": "cloudy, overcast, misty",
         "definitions": [
@@ -252707,6 +253058,22 @@
         "g": "feminine",
         "number": "singular",
         "frequency": 8
+      },
+      {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "el sarcófago",
@@ -272943,6 +273310,22 @@
         "frequency": 8
       },
       {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la habilidad",
         "translation": "ability, skill, talent",
         "definitions": [
@@ -273076,6 +273459,38 @@
         "g": "feminine",
         "number": "singular",
         "pluralForm": "las habilidades"
+      },
+      {
+        "source": "aptitudes",
+        "translation": "skills, abilities, aptitudes",
+        "definitions": [
+          "Capacidad natural para realizar una actividad",
+          "Habilidad para aprender o desarrollar una tarea"
+        ],
+        "examples": [
+          "Tiene aptitudes para la música",
+          "Demuestra aptitudes en matemáticas"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "apˈtituðes",
+        "g": "feminine",
+        "number": "plural"
+      },
+      {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "capacidades",
@@ -285284,6 +285699,24 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "el cono",
+        "translation": "cone",
+        "definitions": [
+          "Cuerpo geométrico con una base circular y un vértice.",
+          "Fruto de las coníferas.",
+          "Objeto con forma de cono."
+        ],
+        "examples": [
+          "El cono de helado.",
+          "Un cono de tráfico.",
+          "El cono de un pino."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈkono",
+        "g": "masculine",
+        "number": "singular"
+      },
       {
         "source": "el cucurucho",
         "translation": "cone, ice cream cone, paper cone, cone-shaped hood",
@@ -298859,6 +299292,22 @@
         "number": "singular",
         "pluralForm": "las vasijas",
         "frequency": 3
+      },
+      {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -308253,6 +308702,21 @@
         "frequency": 5
       },
       {
+        "source": "el cucharón",
+        "translation": "ladle, scoop",
+        "definitions": [
+          "Utensilio de cocina usado para servir líquidos o alimentos en porciones grandes."
+        ],
+        "examples": [
+          "Usa el cucharón para servir la sopa.",
+          "El cucharón está en el cajón."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kuʧaˈɾon",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la cuchara para cocinar",
         "translation": "cooking spoon, wooden spoon",
         "definitions": [
@@ -316194,6 +316658,35 @@
     },
     "items": [
       {
+        "source": "países",
+        "translation": "countries",
+        "definitions": [
+          "Territorio constituido en Estado soberano",
+          "Región, provincia o comarca"
+        ],
+        "examples": ["Los países europeos", "Viajar a diferentes países"],
+        "partOfSpeech": "noun",
+        "ipa": "paˈises",
+        "g": "masculine",
+        "number": "plural"
+      },
+      {
+        "source": "el país",
+        "translation": "country, nation",
+        "definitions": [
+          "Territorio constituido en Estado soberano.",
+          "Territorio con características geográficas o culturales comunes."
+        ],
+        "examples": [
+          "El país celebró su independencia.",
+          "Viajar por el país es fascinante."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "paˈis",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "naciones",
         "translation": "nations, countries, peoples",
         "definitions": [
@@ -316330,6 +316823,22 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "el país",
+        "translation": "country, nation",
+        "definitions": [
+          "Territorio constituido en Estado soberano.",
+          "Territorio con características geográficas o culturales comunes."
+        ],
+        "examples": [
+          "El país celebró su independencia.",
+          "Viajar por el país es fascinante."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "paˈis",
+        "g": "masculine",
+        "number": "singular"
+      },
       {
         "source": "el campo",
         "translation": "field, countryside, camp, realm, domain",
@@ -322107,6 +322616,22 @@
         "g": "feminine",
         "number": "singular",
         "frequency": 8
+      },
+      {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la jaula",
@@ -422348,6 +422873,22 @@
     },
     "items": [
       {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la gaveta",
         "translation": "drawer, desk drawer, chest of drawers",
         "definitions": [
@@ -499689,6 +500230,22 @@
         "frequency": 8
       },
       {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "facultades",
         "translation": "faculties, powers, schools, abilities",
         "definitions": [
@@ -521500,6 +522057,18 @@
         "frequency": 6
       },
       {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
+      {
         "source": "de fiesta",
         "translation": "festive, partying, holiday",
         "definitions": [
@@ -535017,6 +535586,19 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 6
+      },
+      {
+        "source": "fijado",
+        "translation": "fixed, set, determined, established",
+        "definitions": [
+          "Que está sujeto o adherido a algo",
+          "Que no cambia o varía"
+        ],
+        "examples": ["precio fijado", "objetivo fijado"],
+        "partOfSpeech": "adjective",
+        "ipa": "fiˈxaðo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "reparado",
@@ -563004,6 +563586,19 @@
         "frequency": 6
       },
       {
+        "source": "el pollo",
+        "translation": "chicken, chick",
+        "definitions": [
+          "Ave doméstica joven utilizada como alimento.",
+          "Carne de esta ave."
+        ],
+        "examples": ["Cocinar el pollo.", "Granja de pollos."],
+        "partOfSpeech": "noun",
+        "ipa": "ˈpoʎo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la gallina",
         "translation": "hen, coward",
         "definitions": [
@@ -569109,6 +569704,18 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
       {
         "source": "feliz",
         "translation": "happy, lucky, fortunate",
@@ -595569,6 +596176,18 @@
         "frequency": 5
       },
       {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
+      {
         "source": "atolondrado",
         "translation": "scatterbrained, reckless",
         "definitions": [
@@ -610140,6 +610759,18 @@
         "frequency": 6
       },
       {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
+      {
         "source": "jovial",
         "translation": "jovial, cheerful",
         "definitions": [
@@ -619821,6 +620452,16 @@
         "frequency": 3
       },
       {
+        "source": "nublado",
+        "translation": "cloudy, overcast",
+        "definitions": ["Cubierto de nubes", "Oscurecido por nubes"],
+        "examples": ["El cielo está nublado.", "Día nublado."],
+        "partOfSpeech": "adjective",
+        "ipa": "nuˈβlaðo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "sombrío",
         "translation": "gloomy, somber, dark, bleak, shadowy",
         "definitions": [
@@ -622742,6 +623383,16 @@
         "frequency": 3
       },
       {
+        "source": "nublado",
+        "translation": "cloudy, overcast",
+        "definitions": ["Cubierto de nubes", "Oscurecido por nubes"],
+        "examples": ["El cielo está nublado.", "Día nublado."],
+        "partOfSpeech": "adjective",
+        "ipa": "nuˈβlaðo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "sombrío",
         "translation": "gloomy, somber, dark, bleak, shadowy",
         "definitions": [
@@ -622965,6 +623616,22 @@
         "number": "singular",
         "pluralForm": "los duelos",
         "frequency": 5
+      },
+      {
+        "source": "el pesar",
+        "translation": "sorrow, regret, grief, remorse",
+        "definitions": [
+          "Sentimiento de pena o tristeza",
+          "Arrepentimiento o remordimiento"
+        ],
+        "examples": [
+          "El pesar por la pérdida",
+          "Sentir pesar por sus acciones"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "peˈsaɾ",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la aflicción",
@@ -634491,6 +635158,22 @@
         "frequency": 5
       },
       {
+        "source": "el entretiempo",
+        "translation": "halftime, interim, midseason",
+        "definitions": [
+          "Período de tiempo entre dos eventos",
+          "Estación del año entre el invierno y la primavera o entre el verano y el otoño"
+        ],
+        "examples": [
+          "El entretiempo es ideal para pasear",
+          "Durante el entretiempo, el clima es variable"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "entɾeˈtjempo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el intermedio",
         "translation": "intermission, interlude, interval",
         "definitions": [
@@ -637159,6 +637842,19 @@
         "number": "plural",
         "pluralForm": "los mangos",
         "frequency": 5
+      },
+      {
+        "source": "el mango",
+        "translation": "mango, handle",
+        "definitions": [
+          "Fruto del árbol del mango, de pulpa jugosa y dulce.",
+          "Árbol tropical que produce el fruto del mango."
+        ],
+        "examples": ["Comí un mango.", "El mango está maduro."],
+        "partOfSpeech": "noun",
+        "ipa": "ˈmaŋ.ɡo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "tiradores",
@@ -639997,6 +640693,18 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 7
+      },
+      {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
       },
       {
         "source": "dichoso",
@@ -645271,6 +645979,22 @@
         "number": "singular",
         "pluralForm": "los gorros",
         "frequency": 5
+      },
+      {
+        "source": "la gorra",
+        "translation": "cap, hat",
+        "definitions": [
+          "Prenda de vestir para la cabeza, generalmente con visera.",
+          "Sombrero de tela o lana, sin ala, que se ajusta a la cabeza."
+        ],
+        "examples": [
+          "Llevaba una gorra roja.",
+          "Se puso la gorra para protegerse del sol."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈɡora",
+        "g": "feminine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -676929,6 +677653,24 @@
         "frequency": 10
       },
       {
+        "source": "el horario",
+        "translation": "schedule, timetable",
+        "definitions": [
+          "Distribución de las horas en que se realiza una actividad",
+          "Tabla que indica las horas de salida y llegada de transportes",
+          "Conjunto de horas durante las cuales se desarrolla una actividad"
+        ],
+        "examples": [
+          "El horario de clases",
+          "Consulta el horario del tren",
+          "Mi horario de trabajo"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "oˈɾaɾjo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el momento",
         "translation": "moment, time, instant, while",
         "definitions": [
@@ -677226,6 +677968,24 @@
         "number": "singular",
         "pluralForm": "las horas",
         "frequency": 10
+      },
+      {
+        "source": "el horario",
+        "translation": "schedule, timetable",
+        "definitions": [
+          "Distribución de las horas en que se realiza una actividad",
+          "Tabla que indica las horas de salida y llegada de transportes",
+          "Conjunto de horas durante las cuales se desarrolla una actividad"
+        ],
+        "examples": [
+          "El horario de clases",
+          "Consulta el horario del tren",
+          "Mi horario de trabajo"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "oˈɾaɾjo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "horas de trabajo",
@@ -711061,6 +711821,18 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 7
+      },
+      {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
       },
       {
         "source": "animado",
@@ -768402,6 +769174,18 @@
     },
     "items": [
       {
+        "source": "el tarro",
+        "translation": "jar, pot",
+        "definitions": [
+          "Recipiente cilíndrico, generalmente de vidrio o cerámica, con boca ancha y tapa, usado para conservar alimentos u otros productos."
+        ],
+        "examples": ["tarro de mermelada", "tarro de miel"],
+        "partOfSpeech": "noun",
+        "ipa": "ˈtaro",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el frasco",
         "translation": "jar, bottle",
         "definitions": [
@@ -768437,6 +769221,24 @@
         "number": "singular",
         "pluralForm": "las jarras",
         "frequency": 5
+      },
+      {
+        "source": "el bote",
+        "translation": "boat, can, jar, container",
+        "definitions": [
+          "Embarcación pequeña sin cubierta",
+          "Recipiente cilíndrico para líquidos",
+          "Salto que da una pelota al chocar con el suelo"
+        ],
+        "examples": [
+          "El bote está en el lago.",
+          "Compré un bote de pintura.",
+          "El balón hizo un bote alto."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈbote",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la vasija",
@@ -773491,6 +774293,18 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
       {
         "source": "feliz",
         "translation": "happy, lucky, fortunate",
@@ -783810,6 +784624,18 @@
     },
     "items": [
       {
+        "source": "el fregadero",
+        "translation": "sink, kitchen sink",
+        "definitions": [
+          "Pila con grifo y desagüe donde se lavan los platos y utensilios de cocina."
+        ],
+        "examples": ["Lava los platos en el fregadero."],
+        "partOfSpeech": "noun",
+        "ipa": "fɾeɣaˈðeɾo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el lavaplatos",
         "translation": "dishwasher, dish washer",
         "definitions": [
@@ -785070,6 +785896,18 @@
     },
     "items": [
       {
+        "source": "el cuchillo",
+        "translation": "knife, blade",
+        "definitions": [
+          "Instrumento para cortar que consiste en una hoja de metal afilada y un mango."
+        ],
+        "examples": ["Corta con el cuchillo.", "El cuchillo está afilado."],
+        "partOfSpeech": "noun",
+        "ipa": "kuˈtʃiʎo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la navaja",
         "translation": "razor, clasp knife, jackknife",
         "definitions": [
@@ -785660,6 +786498,34 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "cuchillos",
+        "translation": "knives, cutlery",
+        "definitions": [
+          "Instrumento de corte que consiste en una hoja de metal afilada y un mango.",
+          "Arma blanca de hoja corta y puntiaguda."
+        ],
+        "examples": [
+          "Corta con los cuchillos.",
+          "Los cuchillos están afilados."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kuˈtʃiʎos",
+        "g": "masculine",
+        "number": "plural"
+      },
+      {
+        "source": "el cuchillo",
+        "translation": "knife, blade",
+        "definitions": [
+          "Instrumento para cortar que consiste en una hoja de metal afilada y un mango."
+        ],
+        "examples": ["Corta con el cuchillo.", "El cuchillo está afilado."],
+        "partOfSpeech": "noun",
+        "ipa": "kuˈtʃiʎo",
+        "g": "masculine",
+        "number": "singular"
+      },
       {
         "source": "navajas",
         "translation": "pocketknives, razor clams, tusks",
@@ -790111,6 +790977,21 @@
     },
     "items": [
       {
+        "source": "el cucharón",
+        "translation": "ladle, scoop",
+        "definitions": [
+          "Utensilio de cocina usado para servir líquidos o alimentos en porciones grandes."
+        ],
+        "examples": [
+          "Usa el cucharón para servir la sopa.",
+          "El cucharón está en el cajón."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kuʧaˈɾon",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el cazo",
         "translation": "saucepan, ladle, bucket",
         "definitions": [
@@ -791532,6 +792413,22 @@
         "frequency": 7
       },
       {
+        "source": "el país",
+        "translation": "country, nation",
+        "definitions": [
+          "Territorio constituido en Estado soberano.",
+          "Territorio con características geográficas o culturales comunes."
+        ],
+        "examples": [
+          "El país celebró su independencia.",
+          "Viajar por el país es fascinante."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "paˈis",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el suelo",
         "translation": "ground, floor, soil",
         "definitions": [
@@ -792448,6 +793345,35 @@
         "number": "singular",
         "pluralForm": "los territorios",
         "frequency": 7
+      },
+      {
+        "source": "países",
+        "translation": "countries",
+        "definitions": [
+          "Territorio constituido en Estado soberano",
+          "Región, provincia o comarca"
+        ],
+        "examples": ["Los países europeos", "Viajar a diferentes países"],
+        "partOfSpeech": "noun",
+        "ipa": "paˈises",
+        "g": "masculine",
+        "number": "plural"
+      },
+      {
+        "source": "el país",
+        "translation": "country, nation",
+        "definitions": [
+          "Territorio constituido en Estado soberano.",
+          "Territorio con características geográficas o culturales comunes."
+        ],
+        "examples": [
+          "El país celebró su independencia.",
+          "Viajar por el país es fascinante."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "paˈis",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "fincas",
@@ -822425,6 +823351,19 @@
         "frequency": 2
       },
       {
+        "source": "llevadero",
+        "translation": "bearable, manageable, tolerable",
+        "definitions": [
+          "Que se puede soportar o llevar con facilidad",
+          "Tolerable o fácil de sobrellevar"
+        ],
+        "examples": ["Trabajo llevadero", "Clima llevadero"],
+        "partOfSpeech": "adjective",
+        "ipa": "ʎeβaˈðeɾo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "soportable",
         "translation": "bearable, tolerable",
         "definitions": [
@@ -823252,6 +824191,18 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 4
+      },
+      {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
       },
       {
         "source": "vivaracho",
@@ -825123,6 +826074,19 @@
         "frequency": 3
       },
       {
+        "source": "el pan",
+        "translation": "bread",
+        "definitions": [
+          "Alimento hecho con harina, agua y levadura, cocido al horno.",
+          "Conjunto de alimentos básicos para la subsistencia."
+        ],
+        "examples": ["Comer pan", "Hornear pan"],
+        "partOfSpeech": "noun",
+        "ipa": "pan",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el pan de molde",
         "translation": "sandwich bread, sliced bread",
         "definitions": [
@@ -826297,6 +827261,22 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 6
+      },
+      {
+        "source": "el cajón",
+        "translation": "drawer, crate, coffin, chest, box",
+        "definitions": [
+          "Caja grande y generalmente rectangular que se usa para guardar o transportar cosas.",
+          "Compartimento deslizante en un mueble."
+        ],
+        "examples": [
+          "Guarda los papeles en el cajón.",
+          "El cajón está lleno de ropa."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kaˈxon",
+        "g": "masculine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -856822,6 +857802,24 @@
         "frequency": 4
       },
       {
+        "source": "la joya",
+        "translation": "jewel, gem, treasure",
+        "definitions": [
+          "Piedra preciosa o semipreciosa, especialmente trabajada para ser utilizada como adorno.",
+          "Objeto de gran valor o belleza.",
+          "Persona o cosa muy apreciada."
+        ],
+        "examples": [
+          "una joya de diamantes",
+          "es una joya de libro",
+          "la joya de la corona"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxoʝa",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la maestría",
         "translation": "master's degree, mastery",
         "definitions": [
@@ -870473,6 +871471,18 @@
     },
     "items": [
       {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
+      {
         "source": "feliz",
         "translation": "happy, lucky, fortunate",
         "definitions": [
@@ -881576,6 +882586,16 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 3
+      },
+      {
+        "source": "nublado",
+        "translation": "cloudy, overcast",
+        "definitions": ["Cubierto de nubes", "Oscurecido por nubes"],
+        "examples": ["El cielo está nublado.", "Día nublado."],
+        "partOfSpeech": "adjective",
+        "ipa": "nuˈβlaðo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "empañado",
@@ -898076,6 +899096,19 @@
         "frequency": 4
       },
       {
+        "source": "fijado",
+        "translation": "fixed, set, determined, established",
+        "definitions": [
+          "Que está sujeto o adherido a algo",
+          "Que no cambia o varía"
+        ],
+        "examples": ["precio fijado", "objetivo fijado"],
+        "partOfSpeech": "adjective",
+        "ipa": "fiˈxaðo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "enmarcado",
         "translation": "framed, set",
         "definitions": [
@@ -908805,6 +909838,18 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "la servilleta",
+        "translation": "napkin",
+        "definitions": [
+          "Pieza de tela o papel que se usa para limpiarse la boca y las manos al comer."
+        ],
+        "examples": ["Pásame una servilleta."],
+        "partOfSpeech": "noun",
+        "ipa": "seɾβiˈʎeta",
+        "g": "feminine",
+        "number": "singular"
+      },
       {
         "source": "el paño",
         "translation": "cloth, fabric, panel",
@@ -937160,6 +938205,19 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 5
+      },
+      {
+        "source": "fijado",
+        "translation": "fixed, set, determined, established",
+        "definitions": [
+          "Que está sujeto o adherido a algo",
+          "Que no cambia o varía"
+        ],
+        "examples": ["precio fijado", "objetivo fijado"],
+        "partOfSpeech": "adjective",
+        "ipa": "fiˈxaðo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "fanático",
@@ -969056,6 +970114,16 @@
     },
     "items": [
       {
+        "source": "nublado",
+        "translation": "cloudy, overcast",
+        "definitions": ["Cubierto de nubes", "Oscurecido por nubes"],
+        "examples": ["El cielo está nublado.", "Día nublado."],
+        "partOfSpeech": "adjective",
+        "ipa": "nuˈβlaðo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "cubierto",
         "translation": "covered, overcast, sheltered, set",
         "definitions": ["Que está tapado o cerrado", "Protegido del exterior"],
@@ -999873,6 +1000941,22 @@
     },
     "items": [
       {
+        "source": "la pimienta",
+        "translation": "pepper",
+        "definitions": [
+          "Fruto del pimentero, usado como especia.",
+          "Condimento picante obtenido de este fruto."
+        ],
+        "examples": [
+          "Añadir pimienta a la sopa.",
+          "La pimienta negra es común."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "piˈmjenta",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "el pimiento",
         "translation": "pepper, bell pepper",
         "definitions": [
@@ -1008488,6 +1009572,17 @@
     },
     "items": [
       {
+        "source": "pertinente",
+        "translation": "relevant, appropriate, pertinent",
+        "definitions": [
+          "Que es adecuado u oportuno en un momento o situación determinados."
+        ],
+        "examples": ["Comentario pertinente.", "Pregunta pertinente."],
+        "partOfSpeech": "adjective",
+        "ipa": "peɾtiˈnente",
+        "number": "singular"
+      },
+      {
         "source": "relevante",
         "translation": "relevant, important",
         "definitions": [
@@ -1011271,6 +1012366,24 @@
         "number": "plural",
         "pluralForm": "los giros",
         "frequency": 6
+      },
+      {
+        "source": "el giro",
+        "translation": "turn, twist, spin, change, draft",
+        "definitions": [
+          "Movimiento de rotación sobre un eje.",
+          "Cambio de dirección o rumbo.",
+          "Transferencia de dinero entre cuentas bancarias."
+        ],
+        "examples": [
+          "El giro del planeta.",
+          "Un giro inesperado en la trama.",
+          "Realizar un giro bancario."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxiɾo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "dichos",
@@ -1037448,6 +1038561,24 @@
         "number": "singular",
         "pluralForm": "las marmitas",
         "frequency": 4
+      },
+      {
+        "source": "el bote",
+        "translation": "boat, can, jar, container",
+        "definitions": [
+          "Embarcación pequeña sin cubierta",
+          "Recipiente cilíndrico para líquidos",
+          "Salto que da una pelota al chocar con el suelo"
+        ],
+        "examples": [
+          "El bote está en el lago.",
+          "Compré un bote de pintura.",
+          "El balón hizo un bote alto."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈbote",
+        "g": "masculine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -1074600,6 +1075731,22 @@
         "number": "singular",
         "pluralForm": "los suéteres",
         "frequency": 4
+      },
+      {
+        "source": "el jersey",
+        "translation": "sweater, jumper, pullover",
+        "definitions": [
+          "Prenda de vestir de punto, generalmente de lana, que cubre el torso y los brazos.",
+          "Isla del canal de la Mancha, perteneciente a Reino Unido."
+        ],
+        "examples": [
+          "Me puse un jersey para el frío.",
+          "Visitamos Jersey en verano."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxeɾ.sei",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "el pulóver",
@@ -1115054,6 +1116201,22 @@
         "frequency": 6
       },
       {
+        "source": "el pesar",
+        "translation": "sorrow, regret, grief, remorse",
+        "definitions": [
+          "Sentimiento de pena o tristeza",
+          "Arrepentimiento o remordimiento"
+        ],
+        "examples": [
+          "El pesar por la pérdida",
+          "Sentir pesar por sus acciones"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "peˈsaɾ",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el lamento",
         "translation": "lament, moan",
         "definitions": [
@@ -1120714,6 +1121877,17 @@
         "ipa": "releˈβante",
         "number": "singular",
         "frequency": 6
+      },
+      {
+        "source": "pertinente",
+        "translation": "relevant, appropriate, pertinent",
+        "definitions": [
+          "Que es adecuado u oportuno en un momento o situación determinados."
+        ],
+        "examples": ["Comentario pertinente.", "Pregunta pertinente."],
+        "partOfSpeech": "adjective",
+        "ipa": "peɾtiˈnente",
+        "number": "singular"
       },
       {
         "source": "importante",
@@ -1169077,6 +1170251,22 @@
         "frequency": 7
       },
       {
+        "source": "el pesar",
+        "translation": "sorrow, regret, grief, remorse",
+        "definitions": [
+          "Sentimiento de pena o tristeza",
+          "Arrepentimiento o remordimiento"
+        ],
+        "examples": [
+          "El pesar por la pérdida",
+          "Sentir pesar por sus acciones"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "peˈsaɾ",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la melancolía",
         "translation": "melancholy, sadness, gloom",
         "definitions": [
@@ -1181220,6 +1182410,24 @@
     },
     "items": [
       {
+        "source": "el horario",
+        "translation": "schedule, timetable",
+        "definitions": [
+          "Distribución de las horas en que se realiza una actividad",
+          "Tabla que indica las horas de salida y llegada de transportes",
+          "Conjunto de horas durante las cuales se desarrolla una actividad"
+        ],
+        "examples": [
+          "El horario de clases",
+          "Consulta el horario del tren",
+          "Mi horario de trabajo"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "oˈɾaɾjo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el programa",
         "translation": "program, syllabus, show, broadcast",
         "definitions": [
@@ -1181445,6 +1182653,19 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 5
+      },
+      {
+        "source": "fijado",
+        "translation": "fixed, set, determined, established",
+        "definitions": [
+          "Que está sujeto o adherido a algo",
+          "Que no cambia o varía"
+        ],
+        "examples": ["precio fijado", "objetivo fijado"],
+        "partOfSpeech": "adjective",
+        "ipa": "fiˈxaðo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "agendado",
@@ -1184582,6 +1185803,21 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "el cucharón",
+        "translation": "ladle, scoop",
+        "definitions": [
+          "Utensilio de cocina usado para servir líquidos o alimentos en porciones grandes."
+        ],
+        "examples": [
+          "Usa el cucharón para servir la sopa.",
+          "El cucharón está en el cajón."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kuʧaˈɾon",
+        "g": "masculine",
+        "number": "singular"
+      },
       {
         "source": "la pala",
         "translation": "shovel, blade, paddle, incisor",
@@ -1206205,6 +1207441,18 @@
     },
     "items": [
       {
+        "source": "la servilleta",
+        "translation": "napkin",
+        "definitions": [
+          "Pieza de tela o papel que se usa para limpiarse la boca y las manos al comer."
+        ],
+        "examples": ["Pásame una servilleta."],
+        "partOfSpeech": "noun",
+        "ipa": "seɾβiˈʎeta",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la toalla",
         "translation": "towel",
         "definitions": [
@@ -1211525,6 +1212773,19 @@
         "number": "singular",
         "pluralForm": "los astiles",
         "frequency": 2
+      },
+      {
+        "source": "el mango",
+        "translation": "mango, handle",
+        "definitions": [
+          "Fruto del árbol del mango, de pulpa jugosa y dulce.",
+          "Árbol tropical que produce el fruto del mango."
+        ],
+        "examples": ["Comí un mango.", "El mango está maduro."],
+        "partOfSpeech": "noun",
+        "ipa": "ˈmaŋ.ɡo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la vara",
@@ -1216879,6 +1218140,24 @@
         "number": "singular",
         "pluralForm": "los desplazamientos",
         "frequency": 6
+      },
+      {
+        "source": "el giro",
+        "translation": "turn, twist, spin, change, draft",
+        "definitions": [
+          "Movimiento de rotación sobre un eje.",
+          "Cambio de dirección o rumbo.",
+          "Transferencia de dinero entre cuentas bancarias."
+        ],
+        "examples": [
+          "El giro del planeta.",
+          "Un giro inesperado en la trama.",
+          "Realizar un giro bancario."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxiɾo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la variación",
@@ -1234277,6 +1235556,18 @@
     },
     "items": [
       {
+        "source": "el fregadero",
+        "translation": "sink, kitchen sink",
+        "definitions": [
+          "Pila con grifo y desagüe donde se lavan los platos y utensilios de cocina."
+        ],
+        "examples": ["Lava los platos en el fregadero."],
+        "partOfSpeech": "noun",
+        "ipa": "fɾeɣaˈðeɾo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el lavabo",
         "translation": "sink, washbasin, lavatory",
         "definitions": [
@@ -1235347,6 +1236638,23 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 8
+      },
+      {
+        "source": "la talla",
+        "translation": "size, carving, sculpture",
+        "definitions": [
+          "Dimensión o tamaño de una persona o cosa.",
+          "Medida convencional que se utiliza para clasificar el tamaño de la ropa.",
+          "Arte de esculpir o labrar figuras en madera, piedra u otros materiales."
+        ],
+        "examples": [
+          "La talla de la camisa es mediana.",
+          "La talla de la escultura es impresionante."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈtaʎa",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "la medida",
@@ -1236500,6 +1237808,22 @@
         "frequency": 7
       },
       {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la pericia",
         "translation": "expertise, skill",
         "definitions": [
@@ -1237182,6 +1238506,38 @@
         "number": "singular",
         "pluralForm": "las competencias",
         "frequency": 7
+      },
+      {
+        "source": "aptitudes",
+        "translation": "skills, abilities, aptitudes",
+        "definitions": [
+          "Capacidad natural para realizar una actividad",
+          "Habilidad para aprender o desarrollar una tarea"
+        ],
+        "examples": [
+          "Tiene aptitudes para la música",
+          "Demuestra aptitudes en matemáticas"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "apˈtituðes",
+        "g": "feminine",
+        "number": "plural"
+      },
+      {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "capacidades",
@@ -1261145,6 +1262501,22 @@
         "frequency": 8
       },
       {
+        "source": "el pesar",
+        "translation": "sorrow, regret, grief, remorse",
+        "definitions": [
+          "Sentimiento de pena o tristeza",
+          "Arrepentimiento o remordimiento"
+        ],
+        "examples": [
+          "El pesar por la pérdida",
+          "Sentir pesar por sus acciones"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "peˈsaɾ",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la aflicción",
         "translation": "affliction, grief, distress",
         "definitions": [
@@ -1274937,6 +1276309,22 @@
     },
     "items": [
       {
+        "source": "la cuchara",
+        "translation": "spoon, tablespoon",
+        "definitions": [
+          "Utensilio de cocina que se utiliza para servir o comer alimentos líquidos o semilíquidos.",
+          "Medida de capacidad equivalente a la cantidad que cabe en una cuchara."
+        ],
+        "examples": [
+          "Comer sopa con una cuchara.",
+          "Añadir una cuchara de azúcar."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kuˈtʃaɾa",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la cucharada",
         "translation": "spoonful, tablespoon",
         "definitions": [
@@ -1274954,6 +1276342,21 @@
         "number": "singular",
         "pluralForm": "las cucharadas",
         "frequency": 5
+      },
+      {
+        "source": "el cucharón",
+        "translation": "ladle, scoop",
+        "definitions": [
+          "Utensilio de cocina usado para servir líquidos o alimentos en porciones grandes."
+        ],
+        "examples": [
+          "Usa el cucharón para servir la sopa.",
+          "El cucharón está en el cajón."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "kuʧaˈɾon",
+        "g": "masculine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -1289430,6 +1290833,23 @@
         "frequency": 5
       },
       {
+        "source": "la talla",
+        "translation": "size, carving, sculpture",
+        "definitions": [
+          "Dimensión o tamaño de una persona o cosa.",
+          "Medida convencional que se utiliza para clasificar el tamaño de la ropa.",
+          "Arte de esculpir o labrar figuras en madera, piedra u otros materiales."
+        ],
+        "examples": [
+          "La talla de la camisa es mediana.",
+          "La talla de la escultura es impresionante."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈtaʎa",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la altura",
         "translation": "height, altitude, level",
         "definitions": [
@@ -1289505,6 +1290925,23 @@
         "number": "singular",
         "pluralForm": "las estaturas",
         "frequency": 5
+      },
+      {
+        "source": "la talla",
+        "translation": "size, carving, sculpture",
+        "definitions": [
+          "Dimensión o tamaño de una persona o cosa.",
+          "Medida convencional que se utiliza para clasificar el tamaño de la ropa.",
+          "Arte de esculpir o labrar figuras en madera, piedra u otros materiales."
+        ],
+        "examples": [
+          "La talla de la camisa es mediana.",
+          "La talla de la escultura es impresionante."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈtaʎa",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "la altura",
@@ -1324358,6 +1325795,18 @@
         "frequency": 5
       },
       {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
+      {
         "source": "radiante",
         "translation": "radiant, beaming, glowing",
         "definitions": [
@@ -1333290,6 +1334739,19 @@
         "ipa": "ˈbja.βle",
         "number": "singular",
         "frequency": 6
+      },
+      {
+        "source": "llevadero",
+        "translation": "bearable, manageable, tolerable",
+        "definitions": [
+          "Que se puede soportar o llevar con facilidad",
+          "Tolerable o fácil de sobrellevar"
+        ],
+        "examples": ["Trabajo llevadero", "Clima llevadero"],
+        "partOfSpeech": "adjective",
+        "ipa": "ʎeβaˈðeɾo",
+        "g": "masculine",
+        "number": "singular"
       }
     ],
     "detectedInputType": "word",
@@ -1334447,6 +1335909,22 @@
         "number": "singular",
         "pluralForm": "los suéteres",
         "frequency": 4
+      },
+      {
+        "source": "el jersey",
+        "translation": "sweater, jumper, pullover",
+        "definitions": [
+          "Prenda de vestir de punto, generalmente de lana, que cubre el torso y los brazos.",
+          "Isla del canal de la Mancha, perteneciente a Reino Unido."
+        ],
+        "examples": [
+          "Me puse un jersey para el frío.",
+          "Visitamos Jersey en verano."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxeɾ.sei",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la sudadera",
@@ -1346813,6 +1348291,22 @@
         "frequency": 3
       },
       {
+        "source": "la aptitud",
+        "translation": "aptitude, ability, skill, talent",
+        "definitions": [
+          "Capacidad para realizar una actividad o tarea",
+          "Disposición natural para aprender o desarrollar una habilidad"
+        ],
+        "examples": [
+          "Tiene aptitud para la música.",
+          "Demuestra gran aptitud en matemáticas."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "aptiˈtud",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la habilidad",
         "translation": "ability, skill, talent",
         "definitions": [
@@ -1349190,6 +1350684,24 @@
         "pastTenses": "disminuyó, ha disminuido",
         "tense": "present",
         "frequency": 6
+      },
+      {
+        "source": "el cono",
+        "translation": "cone",
+        "definitions": [
+          "Cuerpo geométrico con una base circular y un vértice.",
+          "Fruto de las coníferas.",
+          "Objeto con forma de cono."
+        ],
+        "examples": [
+          "El cono de helado.",
+          "Un cono de tráfico.",
+          "El cono de un pino."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈkono",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "la vela",
@@ -1379236,6 +1380748,19 @@
         "frequency": 2
       },
       {
+        "source": "estremecedor",
+        "translation": "shocking, chilling, harrowing, disturbing, unsettling",
+        "definitions": [
+          "Que causa una fuerte impresión emocional",
+          "Que produce miedo o conmoción"
+        ],
+        "examples": ["Un relato estremecedor", "Una noticia estremecedora"],
+        "partOfSpeech": "adjective",
+        "ipa": "estɾemeθeˈðoɾ",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "sensacional",
         "translation": "sensational, fantastic, spectacular",
         "definitions": [
@@ -1386137,6 +1387662,24 @@
     },
     "items": [
       {
+        "source": "el horario",
+        "translation": "schedule, timetable",
+        "definitions": [
+          "Distribución de las horas en que se realiza una actividad",
+          "Tabla que indica las horas de salida y llegada de transportes",
+          "Conjunto de horas durante las cuales se desarrolla una actividad"
+        ],
+        "examples": [
+          "El horario de clases",
+          "Consulta el horario del tren",
+          "Mi horario de trabajo"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "oˈɾaɾjo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el calendario",
         "translation": "calendar, schedule, timetable",
         "definitions": [
@@ -1386387,6 +1387930,24 @@
         "number": "singular",
         "pluralForm": "las latas de hojalata",
         "frequency": 4
+      },
+      {
+        "source": "el bote",
+        "translation": "boat, can, jar, container",
+        "definitions": [
+          "Embarcación pequeña sin cubierta",
+          "Recipiente cilíndrico para líquidos",
+          "Salto que da una pelota al chocar con el suelo"
+        ],
+        "examples": [
+          "El bote está en el lago.",
+          "Compré un bote de pintura.",
+          "El balón hizo un bote alto."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈbote",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "el envase de hojalata",
@@ -1387479,6 +1389040,18 @@
         "g": "masculine",
         "number": "singular",
         "frequency": 2
+      },
+      {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
       },
       {
         "source": "piripi",
@@ -1576523,6 +1578096,24 @@
         "frequency": 6
       },
       {
+        "source": "la joya",
+        "translation": "jewel, gem, treasure",
+        "definitions": [
+          "Piedra preciosa o semipreciosa, especialmente trabajada para ser utilizada como adorno.",
+          "Objeto de gran valor o belleza.",
+          "Persona o cosa muy apreciada."
+        ],
+        "examples": [
+          "una joya de diamantes",
+          "es una joya de libro",
+          "la joya de la corona"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxoʝa",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "la riqueza",
         "translation": "wealth, richness, fortune",
         "definitions": [
@@ -1576612,6 +1578203,40 @@
         "number": "singular",
         "pluralForm": "los tesoros",
         "frequency": 6
+      },
+      {
+        "source": "joyas",
+        "translation": "jewels, jewelry, gems",
+        "definitions": [
+          "Objeto de adorno personal, generalmente de metal precioso y a veces con piedras preciosas.",
+          "Cosa o persona de gran valor o belleza."
+        ],
+        "examples": [
+          "Las joyas de la corona.",
+          "Es una joya de la literatura."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxoʝas",
+        "g": "feminine",
+        "number": "plural"
+      },
+      {
+        "source": "la joya",
+        "translation": "jewel, gem, treasure",
+        "definitions": [
+          "Piedra preciosa o semipreciosa, especialmente trabajada para ser utilizada como adorno.",
+          "Objeto de gran valor o belleza.",
+          "Persona o cosa muy apreciada."
+        ],
+        "examples": [
+          "una joya de diamantes",
+          "es una joya de libro",
+          "la joya de la corona"
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxoʝa",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "riquezas",
@@ -1587208,6 +1588833,24 @@
     },
     "items": [
       {
+        "source": "el giro",
+        "translation": "turn, twist, spin, change, draft",
+        "definitions": [
+          "Movimiento de rotación sobre un eje.",
+          "Cambio de dirección o rumbo.",
+          "Transferencia de dinero entre cuentas bancarias."
+        ],
+        "examples": [
+          "El giro del planeta.",
+          "Un giro inesperado en la trama.",
+          "Realizar un giro bancario."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxiɾo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "el cambio radical",
         "translation": "radical change, drastic change",
         "definitions": [
@@ -1590650,6 +1592293,24 @@
     },
     "items": [
       {
+        "source": "el giro",
+        "translation": "turn, twist, spin, change, draft",
+        "definitions": [
+          "Movimiento de rotación sobre un eje.",
+          "Cambio de dirección o rumbo.",
+          "Transferencia de dinero entre cuentas bancarias."
+        ],
+        "examples": [
+          "El giro del planeta.",
+          "Un giro inesperado en la trama.",
+          "Realizar un giro bancario."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxiɾo",
+        "g": "masculine",
+        "number": "singular"
+      },
+      {
         "source": "la torsión",
         "translation": "torsion, twisting, torque",
         "definitions": [
@@ -1590789,6 +1592450,24 @@
         "number": "plural",
         "pluralForm": "los giros",
         "frequency": 6
+      },
+      {
+        "source": "el giro",
+        "translation": "turn, twist, spin, change, draft",
+        "definitions": [
+          "Movimiento de rotación sobre un eje.",
+          "Cambio de dirección o rumbo.",
+          "Transferencia de dinero entre cuentas bancarias."
+        ],
+        "examples": [
+          "El giro del planeta.",
+          "Un giro inesperado en la trama.",
+          "Realizar un giro bancario."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈxiɾo",
+        "g": "masculine",
+        "number": "singular"
       },
       {
         "source": "vueltas",
@@ -1612772,6 +1614451,18 @@
         "frequency": 6
       },
       {
+        "source": "alegre",
+        "translation": "happy, cheerful, joyful, merry, lively",
+        "definitions": [
+          "Que siente o manifiesta alegría.",
+          "Que es propenso a sentir alegría."
+        ],
+        "examples": ["niño alegre", "canción alegre"],
+        "partOfSpeech": "adjective",
+        "ipa": "aˈleɣɾe",
+        "number": "singular"
+      },
+      {
         "source": "positivo",
         "translation": "positive, favorable, affirmative, upbeat",
         "definitions": [
@@ -1634725,6 +1636416,22 @@
         "number": "singular",
         "pluralForm": "las gorras de visera",
         "frequency": 6
+      },
+      {
+        "source": "la gorra",
+        "translation": "cap, hat",
+        "definitions": [
+          "Prenda de vestir para la cabeza, generalmente con visera.",
+          "Sombrero de tela o lana, sin ala, que se ajusta a la cabeza."
+        ],
+        "examples": [
+          "Llevaba una gorra roja.",
+          "Se puso la gorra para protegerse del sol."
+        ],
+        "partOfSpeech": "noun",
+        "ipa": "ˈɡora",
+        "g": "feminine",
+        "number": "singular"
       },
       {
         "source": "el gorro con visera",
@@ -1701253,6 +1702960,19 @@
     },
     "items": [
       {
+        "source": "la cremallera",
+        "translation": "zipper, zip, rack",
+        "definitions": [
+          "Cierre que se utiliza para unir dos partes de una prenda o accesorio.",
+          "Mecanismo dentado que permite el movimiento de una pieza."
+        ],
+        "examples": ["Sube la cremallera.", "La cremallera está rota."],
+        "partOfSpeech": "noun",
+        "ipa": "kɾemaˈʎeɾa",
+        "g": "feminine",
+        "number": "singular"
+      },
+      {
         "source": "el cierre",
         "translation": "closing, fastener, end, zipper",
         "definitions": [
@@ -1701346,6 +1703066,19 @@
       "language": "es"
     },
     "items": [
+      {
+        "source": "la cremallera",
+        "translation": "zipper, zip, rack",
+        "definitions": [
+          "Cierre que se utiliza para unir dos partes de una prenda o accesorio.",
+          "Mecanismo dentado que permite el movimiento de una pieza."
+        ],
+        "examples": ["Sube la cremallera.", "La cremallera está rota."],
+        "partOfSpeech": "noun",
+        "ipa": "kɾemaˈʎeɾa",
+        "g": "feminine",
+        "number": "singular"
+      },
       {
         "source": "el cierre",
         "translation": "closing, fastener, end, zipper",
