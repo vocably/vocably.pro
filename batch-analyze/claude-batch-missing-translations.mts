@@ -17,11 +17,11 @@ import {
 
 config();
 
-const sourceLanguage = 'de';
+const sourceLanguage = 'es';
 const targetLanguage = 'en';
 
 const missingTranslationsFile =
-  process.argv[2] ?? './data/missing-translations.json';
+  process.argv[2] ?? './data/missing-translations-es-en.json';
 
 type MissingTranslation = {
   source: string;
