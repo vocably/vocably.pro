@@ -3,7 +3,6 @@ import { inspect } from '@vocably/node-sulna';
 import {
   aiFetchPossibleTranslations,
   aiFetchPossibleTranslationsCached,
-  translateWithGemini,
   truncateText,
 } from './aiFetchPossibleTranslations';
 import { configureTestAnalyzer } from './test/configureTestAnalyzer';
@@ -152,60 +151,6 @@ describe('aiReverseTranslate', () => {
       expect(result.value.length).toBeGreaterThanOrEqual(1);
       expect(result.value[0].transcript).toHaveSomeOf(
         "xīngqī èr, xīngqī'èr, xīng qī èr"
-      );
-    });
-  });
-
-  describe('gemini', () => {
-    it('a word that can have multiple translations', async () => {
-      const result = await translateWithGemini({
-        sourceLanguage: 'en',
-        targetLanguage: 'nl',
-        source: 'cover',
-      });
-
-      if (result.success === false) {
-        throw 'Unexpected result';
-      }
-
-      console.log(inspect(result.value));
-
-      expect(result.value.length).toBeGreaterThan(1);
-    });
-
-    it('follows the direction of translation', async () => {
-      const result = await translateWithGemini({
-        sourceLanguage: 'ru',
-        targetLanguage: 'en',
-        source: 'get along',
-      });
-
-      if (result.success === false) {
-        throw 'Unexpected result';
-      }
-
-      console.log(inspect(result.value));
-
-      expect(result.value.every((e) => /^[a-z ]+$/.test(e.target))).toEqual(
-        true
-      );
-    });
-
-    it('1 follows the direction of translation', async () => {
-      const result = await translateWithGemini({
-        sourceLanguage: 'en',
-        targetLanguage: 'de',
-        source: 'creative',
-      });
-
-      if (result.success === false) {
-        throw 'Unexpected result';
-      }
-
-      console.log(inspect(result.value));
-
-      expect(result.value.every((e) => /^[a-zö ]+$/.test(e.target))).toEqual(
-        true
       );
     });
   });
