@@ -36,11 +36,32 @@ const replaceExpressions = {
   ogDescription: new RegExp(`<meta property="og:description".*?>`, 'mi'),
   ogTitle: new RegExp(`<meta property="og:title".*?>`, 'mi'),
   ogUrl: new RegExp(`<meta property="og:url".*?>`, 'mi'),
-  repoLink: new RegExp(
-    `id="repo-link" href="https://github.com/vocably"`,
-    'mi'
-  ),
 };
+
+// Kept out of `replaceExpressions`: the page renders fine without these spans,
+// and a global expression would carry its `lastIndex` between `test()` calls.
+const languageReplacerExpression =
+  /<span class="language-replacer (prepend|replace)">(.*?)<\/span>/gi;
+
+/**
+ * Puts the study language into the `.language-replacer` spans the same way
+ * `applyStudyLanguage` in packages/www/src/search.ts does in the browser. The
+ * span's own text goes into `data-original`, which the browser uses to swap the
+ * language when the visitor picks another one.
+ */
+const replaceLanguage = (html: string, languageName: string): string =>
+  html.replace(
+    languageReplacerExpression,
+    (_, mode: string, original: string) =>
+      `<span class="language-replacer ${mode}" data-original="${original.replace(
+        /"/g,
+        '&quot;'
+      )}">${
+        mode.toLowerCase() === 'replace'
+          ? htmlSpecialChars(languageName)
+          : `${htmlSpecialChars(languageName)} ${original}`
+      }</span>`
+  );
 
 /** Throws when the template lacks a block the SEO page depends on. */
 export const assertValidTemplate = (templateHtml: string) => {
@@ -139,7 +160,7 @@ export const renderSeoPage = async ({
 
   // Function replacers, because the replacement strings contain user data in
   // which `$&` and friends would otherwise be interpreted.
-  const html = templateHtml
+  const html = replaceLanguage(templateHtml, languageName)
     .replace(
       replaceExpressions.container,
       () =>
@@ -175,10 +196,6 @@ export const renderSeoPage = async ({
       replaceExpressions.ogUrl,
       () =>
         `<meta property="og:url" content="${htmlSpecialChars(canonicalUrl)}" />`
-    )
-    .replace(
-      replaceExpressions.repoLink,
-      () => `id="repo-link" href="https://github.com/vocably/${sourceLanguage}"`
     )
     .replace(
       '</head>',

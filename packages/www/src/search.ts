@@ -7,10 +7,12 @@ import {
   AnalyzePayload,
   GoogleLanguage,
   isGoogleLanguage,
+  languageList,
   RemoveCardPayload,
   Result,
   TranslationCards,
 } from '@vocably/model';
+import { trimLanguage } from '@vocably/sulna';
 import { isObject } from 'lodash-es';
 import { track } from './analytics';
 import { analyze as requestAnalyze } from './search/analyze';
@@ -44,15 +46,37 @@ window.addEventListener('popstate', (event) => {
   window.location.reload();
 });
 
-const updateRepoUrls = (language: string) => {
-  let repoUrl = `https://github.com/vocably`;
-  if (isGoogleLanguage(language)) {
-    repoUrl += `/${language}`;
-  }
+/**
+ * Puts the study language into the `.language-replacer` spans of the page:
+ * `prepend` ones get it in front of their text ("dictionary" becomes "German
+ * dictionary"), `replace` ones get their text replaced with it.
+ *
+ * The span's own text is kept in `data-original` so the language can change any
+ * number of times. Prerendered SEO pages ship the attribute already filled in
+ * (see `packages/seo-backend/src/renderSeoPage.ts`).
+ */
+const applyStudyLanguage = (language: string) => {
+  const languageName = isGoogleLanguage(language)
+    ? trimLanguage(languageList[language])
+    : '';
 
-  document.querySelectorAll('.repo-link').forEach((link) => {
-    link['href'] = repoUrl;
-  });
+  document
+    .querySelectorAll<HTMLElement>('.language-replacer')
+    .forEach((element) => {
+      if (element.dataset.original === undefined) {
+        element.dataset.original = element.textContent ?? '';
+      }
+
+      const original = element.dataset.original;
+
+      if (!languageName) {
+        element.textContent = original;
+      } else if (element.classList.contains('replace')) {
+        element.textContent = languageName;
+      } else if (element.classList.contains('prepend')) {
+        element.textContent = `${languageName} ${original}`;
+      }
+    });
 };
 
 const isSearchValues = (value: any): value is SearchValues => {
@@ -120,7 +144,7 @@ const searchForm =
 const applyValuesToDom = (values: SearchValues) => {
   searchForm.values = values;
 
-  updateRepoUrls(values.sourceLanguage);
+  applyStudyLanguage(values.sourceLanguage);
 
   document
     .querySelectorAll('.social-share-btn')
@@ -424,7 +448,7 @@ const analyze = async (searchValues: SearchValues) => {
     ...searchValues,
   });
 
-  updateRepoUrls(searchValues.sourceLanguage);
+  applyStudyLanguage(searchValues.sourceLanguage);
 
   resultsContainer.innerHTML = `<vocably-skeleton-loader></vocably-skeleton-loader>`;
 
@@ -474,17 +498,6 @@ searchForm.addEventListener(
     }
 
     await analyze(e.detail);
-  }
-);
-
-searchForm.addEventListener(
-  'valuesChange',
-  async (e: CustomEvent<SearchValues>) => {
-    if (!isSearchValues(e.detail)) {
-      return;
-    }
-
-    updateRepoUrls(e.detail.sourceLanguage);
   }
 );
 

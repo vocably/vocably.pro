@@ -207,3 +207,14 @@
     }
   }
 }
+
+// tiny-cta.handlebars: the platforms row on its own, no big button.
+.tiny-cta {
+  margin-top: 0;
+  justify-content: flex-start;
+
+  & .cta-platforms a img {
+    filter: none;
+    opacity: 1;
+  }
+}

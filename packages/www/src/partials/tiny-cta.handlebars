@@ -1,0 +1,130 @@
+{{!--
+  Compact CTA: every platform as an icon, no big button. The visitor's
+  platform is rendered first (show-*) and dropped from the rest (hide-*) by
+  the platform detection in index.ts; other browsers keep the full list.
+--}}
+<div class='cta-platforms-row tiny-cta'>
+  <span class='cta-supports-label'>Available for</span>
+  <ul class='cta-platforms list-unstyled'>
+    <li class='show-chrome'>
+      <a
+        href='https://chrome.google.com/webstore/detail/vocably/baocigmmhhdemijfjnjdidbkfgpgogmb'
+        target='_blank'
+        title='Chrome'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Chrome Extension'
+      >
+        <img src='assets/chrome.svg' alt='' />
+        <span class='visually-hidden'>Chrome</span>
+      </a>
+    </li>
+    <li class='show-edge'>
+      <a
+        href='https://microsoftedge.microsoft.com/addons/detail/dahphaiflimmafjchchidjmgidlkajho'
+        target='_blank'
+        title='Edge'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Edge Extension'
+      >
+        <img src='assets/edge.svg' alt='' />
+        <span class='visually-hidden'>Edge</span>
+      </a>
+    </li>
+    <li class='show-safari'>
+      <a
+        href='https://apps.apple.com/app/id6464076425'
+        target='_blank'
+        title='Safari'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Safari Extension'
+      >
+        <img src='assets/safari.svg' alt='' />
+        <span class='visually-hidden'>Safari</span>
+      </a>
+    </li>
+    <li class='show-ios'>
+      <a
+        href='https://apps.apple.com/app/vocably-pro-language-cards/id1641258757'
+        target='_blank'
+        title='iOS'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='iOS App'
+      >
+        <img src='assets/apple.svg' alt='' />
+        <span class='visually-hidden'>iOS</span>
+      </a>
+    </li>
+    <li class='show-android'>
+      <a
+        href='https://play.google.com/store/apps/details?id=com.vocablypro'
+        target='_blank'
+        title='Android'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Android App'
+      >
+        <img src='assets/android.svg' alt='' />
+        <span class='visually-hidden'>Android</span>
+      </a>
+    </li>
+    <li class='hide-chrome'>
+      <a
+        href='https://chrome.google.com/webstore/detail/vocably/baocigmmhhdemijfjnjdidbkfgpgogmb'
+        target='_blank'
+        title='Chrome'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Chrome Extension'
+      >
+        <img src='assets/chrome.svg' alt='' />
+        <span class='visually-hidden'>Chrome</span>
+      </a>
+    </li>
+    <li class='hide-ios'>
+      <a
+        href='https://apps.apple.com/app/vocably-pro-language-cards/id1641258757'
+        target='_blank'
+        title='iOS'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='iOS App'
+      >
+        <img src='assets/apple.svg' alt='' />
+        <span class='visually-hidden'>iOS</span>
+      </a>
+    </li>
+    <li class='hide-android'>
+      <a
+        href='https://play.google.com/store/apps/details?id=com.vocablypro'
+        target='_blank'
+        title='Android'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Android App'
+      >
+        <img src='assets/android.svg' alt='' />
+        <span class='visually-hidden'>Android</span>
+      </a>
+    </li>
+    <li class='hide-safari'>
+      <a
+        href='https://apps.apple.com/app/id6464076425'
+        target='_blank'
+        title='Safari'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Safari Extension'
+      >
+        <img src='assets/safari.svg' alt='' />
+        <span class='visually-hidden'>Safari</span>
+      </a>
+    </li>
+    <li class='hide-edge'>
+      <a
+        href='https://microsoftedge.microsoft.com/addons/detail/dahphaiflimmafjchchidjmgidlkajho'
+        target='_blank'
+        title='Edge'
+        data-umami-event='{{eventPrefix}}CTA Click'
+        data-umami-event-label='Edge Extension'
+      >
+        <img src='assets/edge.svg' alt='' />
+        <span class='visually-hidden'>Edge</span>
+      </a>
+    </li>
+  </ul>
+</div>
