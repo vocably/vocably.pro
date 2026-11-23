@@ -122,3 +122,21 @@ resource "aws_lambda_permission" "allow_cloudwatch_to_call_cards_backupper_lambd
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.cards_backupper.arn
 }
+
+resource "aws_cloudwatch_metric_alarm" "cards_backupper_error" {
+  alarm_name          = "vocably-${terraform.workspace}-cards-backupper-error"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "Errors" // Includes both unhandled exceptions and timeouts
+  namespace           = "AWS/Lambda"
+  period              = "3600"
+  statistic           = "Sum"
+  threshold           = "0"
+  treat_missing_data  = "notBreaching"
+  alarm_description   = "${terraform.workspace}: cards backupper lambda failed (error or timeout)"
+  alarm_actions       = [aws_sns_topic.alarm.arn]
+  dimensions = {
+    FunctionName = aws_lambda_function.cards_backupper.function_name
+  }
+  insufficient_data_actions = []
+}
