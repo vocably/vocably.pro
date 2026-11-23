@@ -138,9 +138,9 @@ resource "aws_cloudwatch_metric_alarm" "auth_post_confirmation_error" {
   evaluation_periods        = "1"
   metric_name               = aws_cloudwatch_log_metric_filter.auth_post_confirmation_error.metric_transformation[0].name
   namespace                 = aws_cloudwatch_log_metric_filter.auth_post_confirmation_error.metric_transformation[0].namespace
-  period                    = "3600"
+  period                    = "18000"
   statistic                 = "Average"
-  threshold                 = "0"
+  threshold                 = "1"
   alarm_description         = "${terraform.workspace}: auth post confirmation lambda error"
   alarm_actions             = [aws_sns_topic.alarm.arn]
   insufficient_data_actions = []
