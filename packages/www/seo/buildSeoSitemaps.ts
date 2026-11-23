@@ -41,6 +41,8 @@ const getPageHash = (translationCards: TranslationCards) =>
     )
     .digest('hex');
 
+// The page hash is kept in a comment, as a <hash> element is not part of the
+// sitemap schema and fails validation. parseSitemap reads both forms.
 const generateSitemap = (
   entries: Array<{ loc: string; lastmod: string; hash: string }>
 ): string => `<?xml version="1.0" encoding="UTF-8"?>
@@ -56,7 +58,7 @@ ${entries
   <loc>${escapeXml(loc)}</loc>
   <lastmod>${lastmod}</lastmod>
   <priority>0.5</priority>
-  <hash>${hash}</hash>
+  <!-- hash:${hash} -->
 </url>
 `
   )

@@ -26,8 +26,27 @@ export const fetchSitemap = async (
   return parseSitemap(await response.text());
 };
 
+const hashCommentPrefix = 'hash:';
+
+// The hash is written as <!-- hash:<hash> --> (see buildSeoSitemaps), older
+// sitemaps have it in a <hash> element.
+const getHash = (entry: any): string => {
+  const comments: unknown[] = [entry['#comment'] ?? []].flat();
+  const hashComment = comments
+    .map((comment) => String(comment).trim())
+    .find((comment) => comment.startsWith(hashCommentPrefix));
+
+  return hashComment
+    ? hashComment.slice(hashCommentPrefix.length).trim()
+    : String(entry.hash ?? '');
+};
+
 export const parseSitemap = (xmlText: string): Array<SitemapEntry> => {
-  const parser = new XMLParser();
+  const parser = new XMLParser({
+    commentPropName: '#comment',
+    // Keep hashes like "0e12…" from being parsed as numbers.
+    parseTagValue: false,
+  });
   const parsed = parser.parse(xmlText);
 
   if (!parsed.urlset || !parsed.urlset.url) {
@@ -42,6 +61,6 @@ export const parseSitemap = (xmlText: string): Array<SitemapEntry> => {
     loc: entry.loc || '',
     lastmod: entry.lastmod || '',
     priority: entry.priority || '',
-    hash: entry.hash || '',
+    hash: getHash(entry),
   }));
 };
