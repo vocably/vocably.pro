@@ -15,7 +15,7 @@ export const searchDataFolder = './seo/search-data';
 
 // Bump to give every page a new lastmod, e.g. after a change of the page
 // layout that search engines should pick up.
-const globalVersion = 3;
+const globalVersion = 4;
 
 const escapeXml = (str: string) =>
   str
