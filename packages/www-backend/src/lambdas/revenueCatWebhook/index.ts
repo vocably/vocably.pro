@@ -1,8 +1,6 @@
 import { Webhook } from '@puzzmo/revenue-cat-webhook-types';
-import { parseJson } from '@vocably/api';
 import {
   getHeader,
-  nodeFetchS3File,
   nodeFetchUserStaticMetadata,
   nodeSaveUserStaticMetadata,
 } from '@vocably/lambda-shared';
@@ -14,7 +12,8 @@ import { buildErrorResponse } from '../../utils/buildErrorResponse';
 import { buildResponse } from '../../utils/buildResponse';
 import { getPartialStaticMetadata } from './getPartialStaticMetadata';
 import { getSubByAliases } from '../../utils/getSubByAliases';
-import { getEmailBySub } from '../../utils/getEmailBySub';
+import { checkSandboxSub } from './checkSandboxSub';
+import { handleTransfer, isTransferEvent } from './handleTransfer';
 
 export const revenueCatWebhook = async (
   event: APIGatewayProxyEvent
@@ -33,6 +32,19 @@ export const revenueCatWebhook = async (
         }
 
         const action: Webhook = JSON.parse(event.body);
+
+        if (isTransferEvent(action.event)) {
+          const transferResult = await handleTransfer(action.event);
+
+          if (transferResult.success === false) {
+            console.error('Transfer error', transferResult);
+          }
+
+          return buildResponse({
+            statusCode: transferResult.success ? 200 : 500,
+            body: JSON.stringify(transferResult),
+          });
+        }
 
         if (!(action.event.entitlement_ids ?? []).includes('premium')) {
           return buildResponse({
@@ -78,54 +90,14 @@ export const revenueCatWebhook = async (
         }
 
         if (get(action.event, 'environment') === 'SANDBOX') {
-          const emailResult = await getEmailBySub(subResult.value);
+          const sandboxCheck = await checkSandboxSub(subResult.value);
 
-          if (emailResult.success === false) {
+          if (sandboxCheck.success === false) {
             return buildResponse({
               statusCode: 200,
               body: JSON.stringify({
                 success: false,
-                reason: `Unable to get email for sub "${subResult.value}".`,
-              }),
-            });
-          }
-
-          const allowedSandboxEmailsResult = await nodeFetchS3File(
-            process.env.STATIC_USER_FILES_BUCKET,
-            'allowed-sandbox-emails.json'
-          );
-          if (allowedSandboxEmailsResult.success === false) {
-            return buildResponse({
-              statusCode: 200,
-              body: JSON.stringify({
-                success: false,
-                message: 'Unable to download allowed-sandbox-emails.json',
-              }),
-            });
-          }
-
-          const parseResult = parseJson(allowedSandboxEmailsResult.value);
-
-          if (parseResult.success === false) {
-            return buildResponse({
-              statusCode: 200,
-              body: JSON.stringify({
-                success: false,
-                message: 'Unable to parse allowed-sandbox-emails.json',
-              }),
-            });
-          }
-
-          if (
-            !get(parseResult.value, 'allowedEmails', []).includes(
-              emailResult.value
-            )
-          ) {
-            return buildResponse({
-              statusCode: 200,
-              body: JSON.stringify({
-                success: false,
-                message: `Unable to perform the operation for not allowed user ${emailResult.value}. The user should be mentioned in s3://${process.env.STATIC_USER_FILES_BUCKET}/allowed-sandbox-emails.json.`,
+                message: sandboxCheck.reason,
               }),
             });
           }
