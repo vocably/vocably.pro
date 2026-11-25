@@ -1,9 +1,18 @@
 export declare const vi: {
     'close_button.label': string;
+    'sign_in.title.lookups': string;
+    'sign_in.title.translations': string;
+    'sign_in.title.source': string;
     'sign_in.button': string;
     'sign_in.benefit.sync': string;
     'sign_in.benefit.study': string;
     'sign_in.benefit.export': string;
+    'sign_in.platforms': string;
+    'quality_vote.title': string;
+    'quality_vote.description': string;
+    'quality_vote.vote_up': string;
+    'quality_vote.vote_down': string;
+    'quality_vote.button': string;
     'subscribe.trial_message': string;
     'subscribe.message': string;
     'subscribe.trial_button': string;
@@ -31,6 +40,8 @@ export declare const vi: {
     'search.i_speak': string;
     'search.preferred_languages': string;
     'search.available_languages': string;
+    'select.filter_placeholder': string;
+    'select.no_results': string;
     'search.placeholder_default': string;
     'search.swap_direction': string;
     'search.submit': string;
@@ -74,4 +85,14 @@ export declare const vi: {
     'tags_menu.add': string;
     'tags_menu.edit': string;
     'tags_menu.error': string;
+    'card_source.frequency_1': string;
+    'card_source.frequency_2': string;
+    'card_source.frequency_3': string;
+    'card_source.present_tenses': string;
+    'card_source.past_tenses': string;
+    'card_source.plural': string;
+    'frequency_hint.score': string;
+    'frequency_hint.description_1': string;
+    'frequency_hint.description_2': string;
+    'frequency_hint.description_3': string;
 };

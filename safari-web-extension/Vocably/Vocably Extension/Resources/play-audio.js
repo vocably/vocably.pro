@@ -84,6 +84,8 @@ const createScopedMessage = createScope('vocably');
 const [isLoggedIn, onIsLoggedInRequest] = createScopedMessage('isLoggedIn');
 const [getSettings, onGetSettingsRequest] = createScopedMessage('getSettings');
 const [setSettings, onSetSettingsRequest] = createScopedMessage('setSettings');
+const [getSettingsExternal, onGetSettingsExternalRequest] = createExternalMessage('vocably.getSettingsExternal');
+const [setSettingsExternal, onSetSettingsExternalRequest] = createExternalMessage('vocably.setSettingsExternal');
 const [isActive, onIsActiveRequest] = createScopedMessage('isActive');
 const [isEligibleForTrial, onIsEligibleForTrialRequest] = createScopedMessage('isEligibleForTrial');
 const [getCardsLimit, onGetCardsLimitRequest] = createScopedMessage('getCardsLimit');
@@ -97,6 +99,8 @@ const [listTargetLanguages, onListTargetLanguagesRequest] = createScopedMessage(
 const [getLocationLanguage, onGetLocationLanguageRequest] = createScopedMessage('getLocationLanguage');
 const [saveLocationLanguage, onSaveLocationLanguageRequest] = createScopedMessage('saveLocationLanguage');
 const [getLanguagePairs, onGetLanguagePairs] = createScopedMessage('getLanguagePairs');
+const [getExternalLanguagePairs, onGetExternalLanguagePairs] = createExternalMessage('vocably.getExternalLanguagePairs');
+const [setExternalLanguagePairs, onSetExternalLanguagePairs] = createExternalMessage('vocably.setExternalLanguagePairs');
 const [ping, onPing] = createScopedMessage('ping');
 const [getInternalProxyLanguage, onGetInternalProxyLanuage] = createScopedMessage('getInternalProxyLanguage');
 const [setInternalProxyLanguage, onSetInternalProxyLanguage] = createScopedMessage('setInternalProxyLanguage');
@@ -122,6 +126,10 @@ const [updateTag, onUpdateTag] = createScopedMessage('updateTag');
 const [deleteTag, onDeleteTag] = createScopedMessage('deleteTag');
 const [analyzeUnitsOfSpeech, onAnalyzeUnitsOfSpeech] = createScopedMessage('analyzeUnitsOfSpeech');
 const [loadLanguageDeck, onLoadLanguageDeck] = createScopedMessage('loadLanguageDeck');
+const [qualityVote, onQualityVote] = createScopedMessage('qualityVote');
+const [sendAnalyticsCapture, onAnalyticsCapture] = createScopedMessage('analyticsCapture');
+const analyticsCapture = (event, properties) => sendAnalyticsCapture({ event, properties });
+
 
 ;// ./src/play-audio.ts
 var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {

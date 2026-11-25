@@ -5450,7 +5450,7 @@ function angularWebDetect() {
 function angularSSRDetect() {
     return ((processExists() &&
         typeof process.env === 'object' &&
-        "webpack --env production"?.startsWith('ng ')) ||
+        "npm run build-prod --prefix ../extension-popup && rimraf dist && webpack --env production && npm run build-dev --prefix ../extension-popup "?.startsWith('ng ')) ||
         false);
 }
 
@@ -12365,6 +12365,47 @@ const deserializeDeck = (serializedDeck) => {
     };
 };
 
+;// ../model/dist/esm/analysis.js
+const isTranslation = (o) => {
+    return (o &&
+        typeof o['source'] === 'string' &&
+        typeof o['sourceLanguage'] === 'string' &&
+        typeof o['target'] === 'string' &&
+        typeof o['targetLanguage'] === 'string');
+};
+const isDirectAnalyzePayload = (o) => {
+    return !(!o || !o.source || !o.targetLanguage);
+};
+const isReverseAnalyzePayload = (o) => {
+    return !(!o || !o.target || !o.sourceLanguage || !o.targetLanguage);
+};
+const isAnalysisNumber = (o) => {
+    return ['plural', 'singular'].includes(o);
+};
+const isTense = (o) => {
+    return ['present', 'past', 'future'].includes(o);
+};
+const inputTypes = (/* unused pure expression or super */ null && ([
+    'word',
+    'collocation',
+    'phrasal verb',
+    'phrase',
+    'sentence',
+    'idiom',
+]));
+const isDetectedInputType = (inputType) => {
+    return inputTypes.includes(inputType);
+};
+const unitOfSpeechTypes = (/* unused pure expression or super */ null && ([
+    'word',
+    'collocation',
+    'phrasal verb',
+    'idiom',
+]));
+const isReverseAnalysis = (o) => {
+    return !(!o || !o.target);
+};
+
 ;// ../model/dist/esm/language-list.js
 const languageList = {
     af: 'Afrikaans',
@@ -12774,6 +12815,35 @@ const isEligibleForTrial = (userData) => {
 };
 
 ;// ../model/dist/esm/user-metadata.js
+const locales = [
+    'en',
+    'ru',
+    'uk',
+    'vi',
+    'tr',
+    'es',
+    'pt',
+    'zh',
+    'zh-TW',
+];
+/**
+ * Maps a BCP 47 tag ("ru-RU", "PT", "zh-Hant-HK") to a supported interface
+ * locale. Chinese resolves by script: Traditional tags ("zh-Hant", "zh-TW",
+ * "zh-HK", "zh-MO") become "zh-TW", everything else ("zh", "zh-CN",
+ * "zh-Hans-TW", "zh-SG") becomes Simplified "zh".
+ */
+const parseLocale = (tag) => {
+    const parts = (tag ?? '').toLowerCase().split(/[-_]/);
+    if (parts[0] === 'zh') {
+        if (parts.includes('hans')) {
+            return 'zh';
+        }
+        return parts.some((part) => ['hant', 'tw', 'hk', 'mo'].includes(part))
+            ? 'zh-TW'
+            : 'zh';
+    }
+    return locales.find((locale) => locale === parts[0]);
+};
 const defaultUserMetadata = {
     onboardingFlow: {
         allowed: false,
@@ -12814,7 +12884,7 @@ const defaultUserStaticMetadata = {
     premium_status: 'NONE',
     premium_expiration_at_ms: null,
     premium_last_event_ms: 0,
-    max_cards: 100,
+    max_cards: 50,
     cards_per_day: 5,
     thanks_trial: 'none',
     management_url: null,
@@ -13883,50 +13953,79 @@ const createSrsItem = () => ({
 
 ;// ../srs/dist/esm/studyPlan.js
 /* unused harmony import specifier */ var byDate;
+/* unused harmony import specifier */ var studyPlan_isToday;
 /* unused harmony import specifier */ var isNew;
 
 
-const studyPlan = (today, list) => {
-    const todayTS = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
-    const tomorrowTs = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate() + 1);
-    const result = {
-        today: [],
-        expired: [],
-        notStarted: [],
-        tomorrow: [],
-        future: [],
-    };
+
+const startOfUtcDay = (date, dayOffset = 0) => Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + dayOffset);
+/**
+ * Whether the card belongs to the new cards of the plan, as
+ * opposed to cards that are due (today or expired).
+ */
+const isNotStarted = (today) => (item) => item.data.dueDate < startOfUtcDay(today) && isNew(item);
+const countNewCardsPickedUpToday = (list, today) => list.filter((item) => item.data.firstStudied !== undefined &&
+    studyPlan_isToday(item.data.firstStudied, today)).length;
+/**
+ * Splits the list into plan sections. `today` holds the cards to study
+ * today, picked the same way `slice` picks a session:
+ *
+ * 1. cards due today,
+ * 2. expired cards, most recently due first,
+ * 3. new cards, newest first, as long as fewer than
+ *    `maxNewCards` were picked up today,
+ *
+ * up to `maxCards` in total. Due cards that do not fit stay in `expired`,
+ * new cards that do not fit stay in `notStarted`. Every card ends up in
+ * exactly one section.
+ */
+const studyPlan = ({ today, list, maxCards, maxNewCards, }) => {
+    const todayTs = startOfUtcDay(today);
+    const tomorrowTs = startOfUtcDay(today, 1);
+    const dueToday = [];
+    const expired = [];
+    const notStarted = [];
+    const tomorrow = [];
+    const future = [];
     list.forEach((item) => {
-        if (item.data.dueDate === todayTS) {
-            result.today.push(item);
+        if (isNew(item)) {
+            notStarted.push(item);
         }
-        else if (item.data.dueDate > todayTS) {
-            if (item.data.dueDate === tomorrowTs) {
-                result.tomorrow.push(item);
-            }
-            else {
-                result.future.push(item);
-            }
+        else if (item.data.dueDate === todayTs) {
+            dueToday.push(item);
         }
-        else if (item.data.dueDate < todayTS && isNew(item)) {
-            result.notStarted.push(item);
+        else if (item.data.dueDate === tomorrowTs) {
+            tomorrow.push(item);
+        }
+        else if (item.data.dueDate > todayTs) {
+            future.push(item);
         }
         else {
-            result.expired.push(item);
+            expired.push(item);
         }
     });
-    result.today.sort(byDate);
-    result.expired.sort((a, b) => b.data.dueDate - a.data.dueDate);
-    result.notStarted.sort((a, b) => b.created - a.created);
-    result.future.sort((a, b) => a.data.dueDate - b.data.dueDate);
-    return result;
+    dueToday.sort(byDate);
+    expired.sort((a, b) => b.data.dueDate - a.data.dueDate);
+    notStarted.sort((a, b) => b.created - a.created);
+    future.sort((a, b) => a.data.dueDate - b.data.dueDate);
+    const limit = Math.max(0, maxCards);
+    const due = [...dueToday, ...expired];
+    const todayCards = due.slice(0, limit);
+    const newCardsAllowance = Math.max(0, Math.min(limit - todayCards.length, maxNewCards - countNewCardsPickedUpToday(list, today)));
+    todayCards.unshift(...notStarted.slice(0, newCardsAllowance));
+    return {
+        today: todayCards,
+        expired: due.slice(limit),
+        notStarted: notStarted.slice(newCardsAllowance),
+        tomorrow,
+        future,
+    };
 };
 
 ;// ../srs/dist/esm/slice.js
 /* unused harmony import specifier */ var slice_shuffle;
 /* unused harmony import specifier */ var slice_studyPlan;
-/* unused harmony import specifier */ var slice_isToday;
-
+/* unused harmony import specifier */ var slice_isNotStarted;
 
 
 const STUDY_DELAY_MS = 1_800_000; // 1_800_000 is 30 minutes in milliseconds
@@ -13936,47 +14035,26 @@ const hasStudied = (now) => (item) => {
     }
     return now - item.data.lastStudied > STUDY_DELAY_MS;
 };
-const calculateNewCardsPickedUpToday = (list) => {
-    let pickedUpToday = 0;
-    for (const cardItem of list) {
-        if (slice_isToday(cardItem.data.firstStudied)) {
-            pickedUpToday += 1;
-        }
-    }
-    return pickedUpToday;
-};
-const slice = (today, maxCards, maxNeverStudiedCards, list, planSection) => {
+const slice = (today, maxCards, maxNewCards, list, planSection) => {
     if (list.length === 0) {
         return [];
     }
-    const plan = slice_studyPlan(today, list);
+    const plan = slice_studyPlan({ today, list, maxCards, maxNewCards });
     const now = new Date().getTime();
     if (planSection && plan[planSection]) {
         const candidates = slice_shuffle(plan[planSection].filter(hasStudied(now)));
         if (candidates.length > 0) {
-            if (planSection === 'tomorrow') {
-                return candidates;
-            }
             return candidates.slice(0, maxCards);
         }
         return slice_shuffle(plan[planSection]).slice(0, maxCards);
     }
-    const result = slice_shuffle(plan.today);
-    if (result.length >= maxCards) {
-        return result;
-    }
-    result.push(...slice_shuffle(plan.expired.slice(0, maxCards - result.length)));
-    if (result.length >= maxCards) {
-        return result;
-    }
-    const pickedUpToday = calculateNewCardsPickedUpToday(list);
-    if (pickedUpToday < maxNeverStudiedCards) {
-        result.push(...plan.notStarted
-            .slice(0, maxCards - result.length)
-            .slice(0, maxNeverStudiedCards - pickedUpToday));
-    }
-    if (result.length > 0) {
-        return result;
+    if (plan.today.length > 0) {
+        // Due cards come in random order, new cards go last
+        const notStarted = slice_isNotStarted(today);
+        return [
+            ...slice_shuffle(plan.today.filter((item) => !notStarted(item))),
+            ...plan.today.filter(notStarted),
+        ];
     }
     const tomorrowCandidates = slice_shuffle(plan.tomorrow.filter(hasStudied(now)));
     if (tomorrowCandidates.length > 0) {
@@ -13984,11 +14062,10 @@ const slice = (today, maxCards, maxNeverStudiedCards, list, planSection) => {
     }
     const futureCards = slice_shuffle(plan.tomorrow).concat(plan.future);
     let futureCandidates = futureCards.filter(hasStudied(now));
-    if (result.length === 0 && futureCandidates.length === 0) {
+    if (futureCandidates.length === 0) {
         futureCandidates = futureCards;
     }
-    result.push(...futureCandidates.slice(0, maxCards - result.length));
-    return result;
+    return futureCandidates.slice(0, maxCards);
 };
 
 ;// ../srs/dist/esm/studyFlow.js
@@ -14060,7 +14137,7 @@ const analysisItemToCard = ({ language, analysisItem, }) => {
         tense: analysisItem.tense,
         pluralForm: analysisItem.pluralForm,
         tags: [],
-        ...lodash_es_pick(analysisItem, ['g']),
+        ...lodash_es_pick(analysisItem, ['g', 'frequency']),
         ...createSrsItem(),
     };
 };
@@ -14222,6 +14299,7 @@ const cardToLocationHash = (card) => {
 };
 
 ;// ../model-operations/dist/esm/analysisToTranslationCards.js
+
 /**
  * Combines an analysis with the collection it has to be shown against.
  *
@@ -14236,6 +14314,7 @@ const analysisToTranslationCards = (analysis, deck = {
     deck,
     explanation: analysis.explanation ?? '',
     source: analysis.source,
+    ...(isReverseAnalysis(analysis) ? { target: analysis.target } : {}),
     sourceLanguage: analysis.sourceLanguage,
     targetLanguage: analysis.targetLanguage,
     isDirect: analysis.isDirect,
@@ -14244,7 +14323,55 @@ const analysisToTranslationCards = (analysis, deck = {
     items: analysis.items,
 });
 
+;// ../model-operations/dist/esm/seoPage.js
+/* unused harmony import specifier */ var seoPage_isGoogleLanguage;
+/* unused harmony import specifier */ var seoPage_languageList;
+/* unused harmony import specifier */ var trimLanguage;
+
+
+const seoLanguagePairToString = ({ sourceLanguage, targetLanguage, }) => `${sourceLanguage}-${targetLanguage}`;
+/**
+ * Language codes may contain a hyphen themselves (pt-PT, zh-TW), so every
+ * hyphen is tried as the separator.
+ */
+const parseSeoLanguagePair = (pair) => {
+    for (let i = pair.indexOf('-'); i !== -1; i = pair.indexOf('-', i + 1)) {
+        const sourceLanguage = pair.slice(0, i);
+        const targetLanguage = pair.slice(i + 1);
+        if (seoPage_isGoogleLanguage(sourceLanguage) && seoPage_isGoogleLanguage(targetLanguage)) {
+            return { sourceLanguage, targetLanguage };
+        }
+    }
+    return undefined;
+};
+const slugify = (text) => text.toLowerCase().replace(/\P{L}/gu, '-');
+/**
+ * The word as it appears in the page URL ("a bag" → "a-bag"). It is lossy:
+ * "a bag" and "a-bag" share it, so the search data is keyed by this slug
+ * rather than by the word, from seo/search-data/<pair>.json to the bucket.
+ */
+const getSeoWordSlug = (word) => slugify(word);
+/** The "-in-german" part of the page slug. */
+const getSeoLanguageSuffix = (sourceLanguage) => slugify(` in ${trimLanguage(seoPage_languageList[sourceLanguage])}`);
+/**
+ * The word slug of a page slug ("a-bag-in-german" → "a-bag"), or undefined
+ * when the page slug doesn't end with the language of the pair.
+ */
+const parseSeoPageSlug = (pageSlug, sourceLanguage) => {
+    const suffix = getSeoLanguageSuffix(sourceLanguage);
+    return pageSlug.endsWith(suffix) && pageSlug.length > suffix.length
+        ? pageSlug.slice(0, -suffix.length)
+        : undefined;
+};
+/**
+ * The path of the page of a word slug (see getSeoWordSlug) without the
+ * leading slash: "a-bag" → "de-en/a-bag-in-german.html".
+ */
+const getSeoPagePath = (wordSlug, pair) => `${seoLanguagePairToString(pair)}/${wordSlug}${getSeoLanguageSuffix(pair.sourceLanguage)}.html`;
+const getSeoPageName = (word, sourceLanguage) => `"${word}" in ${trimLanguage(seoPage_languageList[sourceLanguage])}`;
+
 ;// ../model-operations/dist/esm/index.js
+
 
 
 
@@ -14670,6 +14797,22 @@ const recalibrateNotifications = async (payload) => {
             success: false,
             errorCode: 'RECALIBRATE_NOTIFICATIONS_REQUEST_FAILED',
             reason: 'Recalibrate notification request failed.',
+            extra: e,
+        };
+    }
+};
+const registerPushToken = async (payload) => {
+    try {
+        return await notifications_request('/push-token', {
+            method: 'POST',
+            body: JSON.stringify(payload),
+        });
+    }
+    catch (e) {
+        return {
+            success: false,
+            errorCode: 'REGISTER_PUSH_TOKEN_REQUEST_FAILED',
+            reason: 'Register push token request failed.',
             extra: e,
         };
     }
@@ -15178,11 +15321,19 @@ const tts = async (baseUrl, payload, abortController) => {
 
 ;// ../../node_modules/nanoid/index.browser.js
 
+
+
 let random = bytes => crypto.getRandomValues(new Uint8Array(bytes))
+
 let customRandom = (alphabet, defaultSize, getRandom) => {
   let mask = (2 << (Math.log(alphabet.length - 1) / Math.LN2)) - 1
+
+
+
   let step = -~((1.6 * mask * defaultSize) / alphabet.length)
+
   return (size = defaultSize) => {
+    if (size <= 0) return ''
     let id = ''
     while (true) {
       let bytes = getRandom(step)
@@ -15194,8 +15345,10 @@ let customRandom = (alphabet, defaultSize, getRandom) => {
     }
   }
 }
+
 let customAlphabet = (alphabet, size = 21) =>
   customRandom(alphabet, size, random)
+
 let nanoid = (size = 21) =>
   crypto.getRandomValues(new Uint8Array(size)).reduce((id, byte) => {
     byte &= 63
@@ -15210,6 +15363,7 @@ let nanoid = (size = 21) =>
     }
     return id
   }, '')
+
 
 
 ;// ../crud/dist/esm/index.js
@@ -15353,6 +15507,8 @@ const createScopedMessage = createScope('vocably');
 const [isLoggedIn, onIsLoggedInRequest] = createScopedMessage('isLoggedIn');
 const [getSettings, onGetSettingsRequest] = createScopedMessage('getSettings');
 const [setSettings, onSetSettingsRequest] = createScopedMessage('setSettings');
+const [getSettingsExternal, onGetSettingsExternalRequest] = createExternalMessage('vocably.getSettingsExternal');
+const [setSettingsExternal, onSetSettingsExternalRequest] = createExternalMessage('vocably.setSettingsExternal');
 const [isActive, onIsActiveRequest] = createScopedMessage('isActive');
 const [esm_isEligibleForTrial, onIsEligibleForTrialRequest] = createScopedMessage('isEligibleForTrial');
 const [getCardsLimit, onGetCardsLimitRequest] = createScopedMessage('getCardsLimit');
@@ -15366,6 +15522,8 @@ const [listTargetLanguages, onListTargetLanguagesRequest] = createScopedMessage(
 const [getLocationLanguage, onGetLocationLanguageRequest] = createScopedMessage('getLocationLanguage');
 const [saveLocationLanguage, onSaveLocationLanguageRequest] = createScopedMessage('saveLocationLanguage');
 const [getLanguagePairs, onGetLanguagePairs] = createScopedMessage('getLanguagePairs');
+const [getExternalLanguagePairs, onGetExternalLanguagePairs] = createExternalMessage('vocably.getExternalLanguagePairs');
+const [setExternalLanguagePairs, onSetExternalLanguagePairs] = createExternalMessage('vocably.setExternalLanguagePairs');
 const [ping, onPing] = createScopedMessage('ping');
 const [getInternalProxyLanguage, onGetInternalProxyLanuage] = createScopedMessage('getInternalProxyLanguage');
 const [setInternalProxyLanguage, onSetInternalProxyLanguage] = createScopedMessage('setInternalProxyLanguage');
@@ -15391,6 +15549,10 @@ const [esm_updateTag, onUpdateTag] = createScopedMessage('updateTag');
 const [esm_deleteTag, onDeleteTag] = createScopedMessage('deleteTag');
 const [esm_analyzeUnitsOfSpeech, onAnalyzeUnitsOfSpeech] = createScopedMessage('analyzeUnitsOfSpeech');
 const [esm_loadLanguageDeck, onLoadLanguageDeck] = createScopedMessage('loadLanguageDeck');
+const [qualityVote, onQualityVote] = createScopedMessage('qualityVote');
+const [sendAnalyticsCapture, onAnalyticsCapture] = createScopedMessage('analyticsCapture');
+const analyticsCapture = (event, properties) => sendAnalyticsCapture({ event, properties });
+
 
 ;// ../../node_modules/lodash-es/_setCacheAdd.js
 /** Used to stand-in for `undefined` hash values. */
@@ -17227,33 +17389,6 @@ const hasOffscreen = (browserEnv) => {
     return !!browserEnv['offscreen'];
 };
 
-;// ../extension-service-worker/dist/esm/askForRatingCounter.js
-
-
-const storage = browserEnv_browserEnv.storage.sync;
-const storageKey = 'askForRatingCounter';
-const getAskForRatingCounter = async (language) => {
-    const storageResult = await storage.get([storageKey]);
-    if (storageResult[storageKey] !== undefined) {
-        return storageResult[storageKey];
-    }
-    const languageDeckResult = await loadLanguageDeck(language);
-    if (languageDeckResult.success === false) {
-        return 1;
-    }
-    const newValue = languageDeckResult.value.cards.length >= 10
-        ? 10
-        : languageDeckResult.value.cards.length;
-    await storage.set({ [storageKey]: newValue });
-    return newValue;
-};
-const storeAskForRatingCounter = async (newCounterValue) => {
-    await storage.set({ [storageKey]: newCounterValue });
-};
-const resetAskForRatingCounter = async () => {
-    await storage.set({ [storageKey]: 1 });
-};
-
 ;// ../../node_modules/@aws-amplify/core/dist/esm/singleton/apis/fetchAuthSession.mjs
 
 
@@ -17295,6 +17430,38 @@ const isInPaidGroup = async () => {
 const getIdToken = async () => {
     const session = await fetchAuthSession_fetchAuthSession().catch(() => null);
     return session?.tokens?.idToken?.toString() ?? '';
+};
+
+;// ../extension-service-worker/dist/esm/askForRatingCounter.js
+
+
+
+const storage = browserEnv_browserEnv.storage.sync;
+const storageKey = 'askForRatingCounter';
+const getAskForRatingCounter = async (language) => {
+    const storageResult = await storage.get([storageKey]);
+    if (storageResult[storageKey] !== undefined) {
+        return storageResult[storageKey];
+    }
+    if (!(await isSignedIn())) {
+        await storage.set({ [storageKey]: 1 });
+        return 1;
+    }
+    const languageDeckResult = await loadLanguageDeck(language);
+    if (languageDeckResult.success === false) {
+        return 1;
+    }
+    const newValue = languageDeckResult.value.cards.length >= 10
+        ? 10
+        : languageDeckResult.value.cards.length;
+    await storage.set({ [storageKey]: newValue });
+    return newValue;
+};
+const storeAskForRatingCounter = async (newCounterValue) => {
+    await storage.set({ [storageKey]: newCounterValue });
+};
+const resetAskForRatingCounter = async () => {
+    await storage.set({ [storageKey]: 1 });
 };
 
 ;// ../extension-service-worker/dist/esm/getCardsLimit.js
@@ -17463,6 +17630,13 @@ const addLanguagePair = async (sourceLanguage, targetLanguage) => {
             ...languagePair.possibleTargetLanguages.filter((possibleTargetLanguage) => possibleTargetLanguage !== targetLanguage),
         ].slice(0, 3),
     };
+    await saveLanguagePairs();
+};
+const setLanguagePairs = async (newLanguagePairs) => {
+    for (const key of Object.keys(languagePairs)) {
+        delete languagePairs[key];
+    }
+    Object.assign(languagePairs, newLanguagePairs);
     await saveLanguagePairs();
 };
 const getLanguagePair = (language) => {
@@ -19093,6 +19267,456 @@ const pt_pt = {
     objective_zu: 'zulu',
 };
 
+;// ../browser-i18n/dist/esm/zh.js
+const zh = {
+    nominative_af: '南非荷兰语',
+    nominative_sq: '阿尔巴尼亚语',
+    nominative_am: '阿姆哈拉语',
+    nominative_ar: '阿拉伯语',
+    nominative_hy: '亚美尼亚语',
+    nominative_hyw: '亚美尼亚语（西部）',
+    nominative_az: '阿塞拜疆语',
+    nominative_eu: '巴斯克语',
+    nominative_be: '白俄罗斯语',
+    nominative_bn: '孟加拉语',
+    nominative_bs: '波斯尼亚语',
+    nominative_bg: '保加利亚语',
+    nominative_ca: '加泰罗尼亚语',
+    nominative_zh: '中文（简体）',
+    'nominative_zh-TW': '中文（繁体）',
+    nominative_co: '科西嘉语',
+    nominative_hr: '克罗地亚语',
+    nominative_cs: '捷克语',
+    nominative_da: '丹麦语',
+    nominative_nl: '荷兰语',
+    nominative_en: '英语（美国）',
+    'nominative_en-GB': '英语（英国）',
+    nominative_eo: '世界语',
+    nominative_et: '爱沙尼亚语',
+    nominative_fi: '芬兰语',
+    nominative_fr: '法语',
+    nominative_fy: '弗里斯兰语',
+    nominative_gl: '加利西亚语',
+    nominative_ka: '格鲁吉亚语',
+    nominative_de: '德语',
+    nominative_el: '希腊语',
+    nominative_gu: '古吉拉特语',
+    nominative_ht: '海地克里奥尔语',
+    nominative_ha: '豪萨语',
+    nominative_haw: '夏威夷语',
+    nominative_he: '希伯来语',
+    nominative_hi: '印地语',
+    nominative_hmn: '苗语',
+    nominative_hu: '匈牙利语',
+    nominative_is: '冰岛语',
+    nominative_ig: '伊博语',
+    nominative_id: '印度尼西亚语',
+    nominative_ga: '爱尔兰语',
+    nominative_it: '意大利语',
+    nominative_ja: '日语',
+    nominative_jv: '爪哇语',
+    nominative_kn: '卡纳达语',
+    nominative_kk: '哈萨克语',
+    nominative_km: '高棉语',
+    nominative_rw: '卢旺达语',
+    nominative_ko: '韩语',
+    nominative_ku: '库尔德语',
+    nominative_ky: '吉尔吉斯语',
+    nominative_lo: '老挝语',
+    nominative_lv: '拉脱维亚语',
+    nominative_lt: '立陶宛语',
+    nominative_lb: '卢森堡语',
+    nominative_mk: '马其顿语',
+    nominative_mg: '马尔加什语',
+    nominative_ms: '马来语',
+    nominative_ml: '马拉雅拉姆语',
+    nominative_mt: '马耳他语',
+    nominative_mi: '毛利语',
+    nominative_mr: '马拉地语',
+    nominative_mn: '蒙古语',
+    nominative_my: '缅甸语',
+    nominative_ne: '尼泊尔语',
+    nominative_no: '挪威语',
+    nominative_ny: '齐切瓦语',
+    nominative_or: '奥里亚语',
+    nominative_ps: '普什图语',
+    nominative_fa: '波斯语',
+    nominative_pl: '波兰语',
+    nominative_pt: '葡萄牙语（巴西）',
+    'nominative_pt-PT': '葡萄牙语（欧洲）',
+    nominative_pa: '旁遮普语',
+    nominative_ro: '罗马尼亚语',
+    nominative_ru: '俄语',
+    nominative_sm: '萨摩亚语',
+    nominative_gd: '苏格兰盖尔语',
+    nominative_sr: '塞尔维亚语',
+    nominative_st: '塞索托语',
+    nominative_sn: '绍纳语',
+    nominative_sd: '信德语',
+    nominative_si: '僧伽罗语',
+    nominative_sk: '斯洛伐克语',
+    nominative_sl: '斯洛文尼亚语',
+    nominative_so: '索马里语',
+    nominative_es: '西班牙语',
+    nominative_su: '巽他语',
+    nominative_sw: '斯瓦希里语',
+    nominative_sv: '瑞典语',
+    nominative_tl: '他加禄语（菲律宾语）',
+    nominative_tg: '塔吉克语',
+    nominative_ta: '泰米尔语',
+    nominative_tt: '鞑靼语',
+    nominative_te: '泰卢固语',
+    nominative_th: '泰语',
+    nominative_tr: '土耳其语',
+    nominative_tk: '土库曼语',
+    nominative_uk: '乌克兰语',
+    nominative_ur: '乌尔都语',
+    nominative_ug: '维吾尔语',
+    nominative_uz: '乌兹别克语',
+    nominative_vi: '越南语',
+    nominative_cy: '威尔士语',
+    nominative_xh: '科萨语',
+    nominative_yi: '意第绪语',
+    nominative_yo: '约鲁巴语',
+    nominative_zu: '祖鲁语',
+    //
+    objective_af: '南非荷兰语',
+    objective_sq: '阿尔巴尼亚语',
+    objective_am: '阿姆哈拉语',
+    objective_ar: '阿拉伯语',
+    objective_hy: '亚美尼亚语',
+    objective_hyw: '亚美尼亚语（西部）',
+    objective_az: '阿塞拜疆语',
+    objective_eu: '巴斯克语',
+    objective_be: '白俄罗斯语',
+    objective_bn: '孟加拉语',
+    objective_bs: '波斯尼亚语',
+    objective_bg: '保加利亚语',
+    objective_ca: '加泰罗尼亚语',
+    objective_zh: '中文（简体）',
+    'objective_zh-TW': '中文（繁体）',
+    objective_co: '科西嘉语',
+    objective_hr: '克罗地亚语',
+    objective_cs: '捷克语',
+    objective_da: '丹麦语',
+    objective_nl: '荷兰语',
+    objective_en: '英语（美国）',
+    'objective_en-GB': '英语（英国）',
+    objective_eo: '世界语',
+    objective_et: '爱沙尼亚语',
+    objective_fi: '芬兰语',
+    objective_fr: '法语',
+    objective_fy: '弗里斯兰语',
+    objective_gl: '加利西亚语',
+    objective_ka: '格鲁吉亚语',
+    objective_de: '德语',
+    objective_el: '希腊语',
+    objective_gu: '古吉拉特语',
+    objective_ht: '海地克里奥尔语',
+    objective_ha: '豪萨语',
+    objective_haw: '夏威夷语',
+    objective_he: '希伯来语',
+    objective_hi: '印地语',
+    objective_hmn: '苗语',
+    objective_hu: '匈牙利语',
+    objective_is: '冰岛语',
+    objective_ig: '伊博语',
+    objective_id: '印度尼西亚语',
+    objective_ga: '爱尔兰语',
+    objective_it: '意大利语',
+    objective_ja: '日语',
+    objective_jv: '爪哇语',
+    objective_kn: '卡纳达语',
+    objective_kk: '哈萨克语',
+    objective_km: '高棉语',
+    objective_rw: '卢旺达语',
+    objective_ko: '韩语',
+    objective_ku: '库尔德语',
+    objective_ky: '吉尔吉斯语',
+    objective_lo: '老挝语',
+    objective_lv: '拉脱维亚语',
+    objective_lt: '立陶宛语',
+    objective_lb: '卢森堡语',
+    objective_mk: '马其顿语',
+    objective_mg: '马尔加什语',
+    objective_ms: '马来语',
+    objective_ml: '马拉雅拉姆语',
+    objective_mt: '马耳他语',
+    objective_mi: '毛利语',
+    objective_mr: '马拉地语',
+    objective_mn: '蒙古语',
+    objective_my: '缅甸语',
+    objective_ne: '尼泊尔语',
+    objective_no: '挪威语',
+    objective_ny: '齐切瓦语',
+    objective_or: '奥里亚语',
+    objective_ps: '普什图语',
+    objective_fa: '波斯语',
+    objective_pl: '波兰语',
+    objective_pt: '葡萄牙语（巴西）',
+    'objective_pt-PT': '葡萄牙语（欧洲）',
+    objective_pa: '旁遮普语',
+    objective_ro: '罗马尼亚语',
+    objective_ru: '俄语',
+    objective_sm: '萨摩亚语',
+    objective_gd: '苏格兰盖尔语',
+    objective_sr: '塞尔维亚语',
+    objective_st: '塞索托语',
+    objective_sn: '绍纳语',
+    objective_sd: '信德语',
+    objective_si: '僧伽罗语',
+    objective_sk: '斯洛伐克语',
+    objective_sl: '斯洛文尼亚语',
+    objective_so: '索马里语',
+    objective_es: '西班牙语',
+    objective_su: '巽他语',
+    objective_sw: '斯瓦希里语',
+    objective_sv: '瑞典语',
+    objective_tl: '他加禄语（菲律宾语）',
+    objective_tg: '塔吉克语',
+    objective_ta: '泰米尔语',
+    objective_tt: '鞑靼语',
+    objective_te: '泰卢固语',
+    objective_th: '泰语',
+    objective_tr: '土耳其语',
+    objective_tk: '土库曼语',
+    objective_uk: '乌克兰语',
+    objective_ur: '乌尔都语',
+    objective_ug: '维吾尔语',
+    objective_uz: '乌兹别克语',
+    objective_vi: '越南语',
+    objective_cy: '威尔士语',
+    objective_xh: '科萨语',
+    objective_yi: '意第绪语',
+    objective_yo: '约鲁巴语',
+    objective_zu: '祖鲁语',
+};
+
+;// ../browser-i18n/dist/esm/zh-TW.js
+const zhTW = {
+    nominative_af: '南非荷蘭文',
+    nominative_sq: '阿爾巴尼亞文',
+    nominative_am: '阿姆哈拉文',
+    nominative_ar: '阿拉伯文',
+    nominative_hy: '亞美尼亞文',
+    nominative_hyw: '亞美尼亞文（西部）',
+    nominative_az: '亞塞拜然文',
+    nominative_eu: '巴斯克文',
+    nominative_be: '白俄羅斯文',
+    nominative_bn: '孟加拉文',
+    nominative_bs: '波士尼亞文',
+    nominative_bg: '保加利亞文',
+    nominative_ca: '加泰隆尼亞文',
+    nominative_zh: '中文（簡體）',
+    'nominative_zh-TW': '中文（繁體）',
+    nominative_co: '科西嘉文',
+    nominative_hr: '克羅埃西亞文',
+    nominative_cs: '捷克文',
+    nominative_da: '丹麥文',
+    nominative_nl: '荷蘭文',
+    nominative_en: '英文（美國）',
+    'nominative_en-GB': '英文（英國）',
+    nominative_eo: '世界語',
+    nominative_et: '愛沙尼亞文',
+    nominative_fi: '芬蘭文',
+    nominative_fr: '法文',
+    nominative_fy: '弗里斯蘭文',
+    nominative_gl: '加利西亞文',
+    nominative_ka: '喬治亞文',
+    nominative_de: '德文',
+    nominative_el: '希臘文',
+    nominative_gu: '古吉拉特文',
+    nominative_ht: '海地克里奧文',
+    nominative_ha: '豪薩文',
+    nominative_haw: '夏威夷文',
+    nominative_he: '希伯來文',
+    nominative_hi: '印地文',
+    nominative_hmn: '苗文',
+    nominative_hu: '匈牙利文',
+    nominative_is: '冰島文',
+    nominative_ig: '伊布文',
+    nominative_id: '印尼文',
+    nominative_ga: '愛爾蘭文',
+    nominative_it: '義大利文',
+    nominative_ja: '日文',
+    nominative_jv: '爪哇文',
+    nominative_kn: '卡納達文',
+    nominative_kk: '哈薩克文',
+    nominative_km: '高棉文',
+    nominative_rw: '盧安達文',
+    nominative_ko: '韓文',
+    nominative_ku: '庫德文',
+    nominative_ky: '吉爾吉斯文',
+    nominative_lo: '寮文',
+    nominative_lv: '拉脫維亞文',
+    nominative_lt: '立陶宛文',
+    nominative_lb: '盧森堡文',
+    nominative_mk: '馬其頓文',
+    nominative_mg: '馬達加斯加文',
+    nominative_ms: '馬來文',
+    nominative_ml: '馬拉雅拉姆文',
+    nominative_mt: '馬爾他文',
+    nominative_mi: '毛利文',
+    nominative_mr: '馬拉地文',
+    nominative_mn: '蒙古文',
+    nominative_my: '緬甸文',
+    nominative_ne: '尼泊爾文',
+    nominative_no: '挪威文',
+    nominative_ny: '尼揚賈文（齊切瓦文）',
+    nominative_or: '歐迪亞文（奧里亞文）',
+    nominative_ps: '普什圖文',
+    nominative_fa: '波斯文',
+    nominative_pl: '波蘭文',
+    nominative_pt: '葡萄牙文（巴西）',
+    'nominative_pt-PT': '葡萄牙文（歐洲）',
+    nominative_pa: '旁遮普文',
+    nominative_ro: '羅馬尼亞文',
+    nominative_ru: '俄文',
+    nominative_sm: '薩摩亞文',
+    nominative_gd: '蘇格蘭蓋爾文',
+    nominative_sr: '塞爾維亞文',
+    nominative_st: '塞索托文',
+    nominative_sn: '修納文',
+    nominative_sd: '信德文',
+    nominative_si: '僧伽羅文',
+    nominative_sk: '斯洛伐克文',
+    nominative_sl: '斯洛維尼亞文',
+    nominative_so: '索馬利文',
+    nominative_es: '西班牙文',
+    nominative_su: '巽他文',
+    nominative_sw: '史瓦希里文',
+    nominative_sv: '瑞典文',
+    nominative_tl: '塔加路族文（菲律賓文）',
+    nominative_tg: '塔吉克文',
+    nominative_ta: '坦米爾文',
+    nominative_tt: '韃靼文',
+    nominative_te: '泰盧固文',
+    nominative_th: '泰文',
+    nominative_tr: '土耳其文',
+    nominative_tk: '土庫曼文',
+    nominative_uk: '烏克蘭文',
+    nominative_ur: '烏都文',
+    nominative_ug: '維吾爾文',
+    nominative_uz: '烏茲別克文',
+    nominative_vi: '越南文',
+    nominative_cy: '威爾斯文',
+    nominative_xh: '科薩文',
+    nominative_yi: '意第緒文',
+    nominative_yo: '約魯巴文',
+    nominative_zu: '祖魯文',
+    //
+    objective_af: '南非荷蘭文',
+    objective_sq: '阿爾巴尼亞文',
+    objective_am: '阿姆哈拉文',
+    objective_ar: '阿拉伯文',
+    objective_hy: '亞美尼亞文',
+    objective_hyw: '亞美尼亞文（西部）',
+    objective_az: '亞塞拜然文',
+    objective_eu: '巴斯克文',
+    objective_be: '白俄羅斯文',
+    objective_bn: '孟加拉文',
+    objective_bs: '波士尼亞文',
+    objective_bg: '保加利亞文',
+    objective_ca: '加泰隆尼亞文',
+    objective_zh: '中文（簡體）',
+    'objective_zh-TW': '中文（繁體）',
+    objective_co: '科西嘉文',
+    objective_hr: '克羅埃西亞文',
+    objective_cs: '捷克文',
+    objective_da: '丹麥文',
+    objective_nl: '荷蘭文',
+    objective_en: '英文（美國）',
+    'objective_en-GB': '英文（英國）',
+    objective_eo: '世界語',
+    objective_et: '愛沙尼亞文',
+    objective_fi: '芬蘭文',
+    objective_fr: '法文',
+    objective_fy: '弗里斯蘭文',
+    objective_gl: '加利西亞文',
+    objective_ka: '喬治亞文',
+    objective_de: '德文',
+    objective_el: '希臘文',
+    objective_gu: '古吉拉特文',
+    objective_ht: '海地克里奧文',
+    objective_ha: '豪薩文',
+    objective_haw: '夏威夷文',
+    objective_he: '希伯來文',
+    objective_hi: '印地文',
+    objective_hmn: '苗文',
+    objective_hu: '匈牙利文',
+    objective_is: '冰島文',
+    objective_ig: '伊布文',
+    objective_id: '印尼文',
+    objective_ga: '愛爾蘭文',
+    objective_it: '義大利文',
+    objective_ja: '日文',
+    objective_jv: '爪哇文',
+    objective_kn: '卡納達文',
+    objective_kk: '哈薩克文',
+    objective_km: '高棉文',
+    objective_rw: '盧安達文',
+    objective_ko: '韓文',
+    objective_ku: '庫德文',
+    objective_ky: '吉爾吉斯文',
+    objective_lo: '寮文',
+    objective_lv: '拉脫維亞文',
+    objective_lt: '立陶宛文',
+    objective_lb: '盧森堡文',
+    objective_mk: '馬其頓文',
+    objective_mg: '馬達加斯加文',
+    objective_ms: '馬來文',
+    objective_ml: '馬拉雅拉姆文',
+    objective_mt: '馬爾他文',
+    objective_mi: '毛利文',
+    objective_mr: '馬拉地文',
+    objective_mn: '蒙古文',
+    objective_my: '緬甸文',
+    objective_ne: '尼泊爾文',
+    objective_no: '挪威文',
+    objective_ny: '尼揚賈文（齊切瓦文）',
+    objective_or: '歐迪亞文（奧里亞文）',
+    objective_ps: '普什圖文',
+    objective_fa: '波斯文',
+    objective_pl: '波蘭文',
+    objective_pt: '葡萄牙文（巴西）',
+    'objective_pt-PT': '葡萄牙文（歐洲）',
+    objective_pa: '旁遮普文',
+    objective_ro: '羅馬尼亞文',
+    objective_ru: '俄文',
+    objective_sm: '薩摩亞文',
+    objective_gd: '蘇格蘭蓋爾文',
+    objective_sr: '塞爾維亞文',
+    objective_st: '塞索托文',
+    objective_sn: '修納文',
+    objective_sd: '信德文',
+    objective_si: '僧伽羅文',
+    objective_sk: '斯洛伐克文',
+    objective_sl: '斯洛維尼亞文',
+    objective_so: '索馬利文',
+    objective_es: '西班牙文',
+    objective_su: '巽他文',
+    objective_sw: '史瓦希里文',
+    objective_sv: '瑞典文',
+    objective_tl: '塔加路族文（菲律賓文）',
+    objective_tg: '塔吉克文',
+    objective_ta: '坦米爾文',
+    objective_tt: '韃靼文',
+    objective_te: '泰盧固文',
+    objective_th: '泰文',
+    objective_tr: '土耳其文',
+    objective_tk: '土庫曼文',
+    objective_uk: '烏克蘭文',
+    objective_ur: '烏都文',
+    objective_ug: '維吾爾文',
+    objective_uz: '烏茲別克文',
+    objective_vi: '越南文',
+    objective_cy: '威爾斯文',
+    objective_xh: '科薩文',
+    objective_yi: '意第緒文',
+    objective_yo: '約魯巴文',
+    objective_zu: '祖魯文',
+};
+
 ;// ../browser-i18n/dist/esm/messages/en.js
 const messages_en_en = {
     // youtube
@@ -19142,7 +19766,23 @@ const messages_pt_pt = {
     'youtube.press_option_to_select': 'Pressione Option ⌥ para selecionar o texto',
 };
 
+;// ../browser-i18n/dist/esm/messages/zh.js
+const zh_zh = {
+    // youtube
+    'youtube.press_alt_to_select': '按住 Alt 键以选中文本',
+    'youtube.press_option_to_select': '按住 Option ⌥ 键以选中文本',
+};
+
+;// ../browser-i18n/dist/esm/messages/zh-TW.js
+const zh_TW_zhTW = {
+    // youtube
+    'youtube.press_alt_to_select': '按住 Alt 鍵以選取文字',
+    'youtube.press_option_to_select': '按住 Option ⌥ 鍵以選取文字',
+};
+
 ;// ../browser-i18n/dist/esm/messages/index.js
+
+
 
 
 
@@ -19158,6 +19798,8 @@ const messageTranslations = {
     tr: messages_tr_tr,
     es: messages_es_es,
     pt: messages_pt_pt,
+    zh: zh_zh,
+    'zh-TW': zh_TW_zhTW,
 };
 
 ;// ../browser-i18n/dist/esm/index.js
@@ -19168,7 +19810,9 @@ const messageTranslations = {
 
 
 
-const SUPPORTED_LOCALES = ['en', 'ru', 'uk', 'vi', 'tr', 'es', 'pt'];
+
+
+
 const detectLocale = () => {
     const languages = typeof navigator !== 'undefined'
         ? navigator.languages?.length
@@ -19176,9 +19820,9 @@ const detectLocale = () => {
             : [navigator.language]
         : ['en'];
     for (const lang of languages) {
-        const code = lang.split('-')[0].toLowerCase();
-        if (SUPPORTED_LOCALES.includes(code)) {
-            return code;
+        const locale = parseLocale(lang);
+        if (locale) {
+            return locale;
         }
     }
     return 'en';
@@ -19235,6 +19879,8 @@ const languageTranslations = {
     tr: tr_tr,
     es: es_es,
     pt: pt_pt,
+    zh: zh,
+    'zh-TW': zhTW,
 };
 
 ;// ../extension-service-worker/dist/esm/settings.js
@@ -19291,12 +19937,83 @@ const userMetadata_getUserMetadata = async () => {
 const invalidateUserMetadata = () => {
     userMetadata = null;
 };
+/**
+ * Sends only the changed fields: the API merges them into the freshly loaded
+ * metadata, so a stale cached copy never overwrites values saved elsewhere
+ * (e.g. the mobile app's rate responses).
+ */
 const userMetadata_saveUserMetadata = async (payloadMetadata) => {
-    userMetadata = payloadMetadata;
-    return saveUserMetadata(payloadMetadata);
+    const result = await saveUserMetadata(payloadMetadata);
+    userMetadata = result.success ? result.value : null;
+    return result;
+};
+
+;// ../extension-service-worker/dist/esm/rateResponse.js
+
+
+
+const rateResponse_storage = browserEnv_browserEnv.storage.sync;
+const rateResponse_storageKey = 'rateResponses';
+const getStoredRateResponses = async () => {
+    const { [rateResponse_storageKey]: stored } = await rateResponse_storage.get([rateResponse_storageKey]);
+    return stored ?? {};
+};
+const isNewer = (a, b) => b === undefined || a.isoDate > b.isoDate;
+/**
+ * Moves the responses collected while signed out (sync storage) into the
+ * user metadata and clears sync storage once the metadata is saved.
+ * A response already in the metadata wins when it is more recent.
+ */
+const migrateStoredRateResponses = async () => {
+    const metadataResult = await userMetadata_getUserMetadata();
+    if (metadataResult.success === false) {
+        return metadataResult;
+    }
+    const metadataRate = { ...metadataResult.value.rate };
+    const stored = await getStoredRateResponses();
+    const toBeSaved = {};
+    for (const [platform, response] of Object.entries(stored)) {
+        if (isNewer(response, metadataRate[platform])) {
+            toBeSaved[platform] = response;
+            metadataRate[platform] = response;
+        }
+    }
+    if (Object.keys(toBeSaved).length > 0) {
+        const saveResult = await userMetadata_saveUserMetadata({ rate: toBeSaved });
+        if (saveResult.success === false) {
+            return saveResult;
+        }
+    }
+    if (Object.keys(stored).length > 0) {
+        await rateResponse_storage.remove(rateResponse_storageKey);
+    }
+    return { success: true, value: metadataRate };
+};
+const getRateResponse = async (platform) => {
+    if (await isSignedIn()) {
+        const migrationResult = await migrateStoredRateResponses();
+        if (migrationResult.success) {
+            return migrationResult.value[platform];
+        }
+    }
+    // Signed out, or the metadata is unreachable: rely on sync storage.
+    return (await getStoredRateResponses())[platform];
+};
+const saveRateResponse = async (platform, response) => {
+    await rateResponse_storage.set({
+        [rateResponse_storageKey]: {
+            ...(await getStoredRateResponses()),
+            [platform]: response,
+        },
+    });
+    if (await isSignedIn()) {
+        // Copies the response to the metadata and clears sync storage on success.
+        await migrateStoredRateResponses();
+    }
 };
 
 ;// ../extension-service-worker/dist/esm/index.js
+
 
 
 
@@ -19564,6 +20281,15 @@ const registerServiceWorker = (registerServiceWorkerOptions) => {
         return sendResponse(await getUserLanguages());
     });
     onLoadLanguageDeck(async (sendResponse, language) => sendResponse(await loadLanguageDeck(language)));
+    onAnalyticsCapture(async (sendResponse, { event, properties }) => {
+        Ga.capture(event, properties);
+        return sendResponse();
+    });
+    // The same event and properties as the mobile app sends.
+    onQualityVote(async (sendResponse, payload) => {
+        Ga.capture('cardQualityVoted', payload);
+        return sendResponse();
+    });
     onListTargetLanguagesRequest(async (sendResponse) => {
         const sourceLanguage = await sourceLanguage_getSourceLanguage();
         if (!sourceLanguage) {
@@ -19634,21 +20360,13 @@ const registerServiceWorker = (registerServiceWorkerOptions) => {
         });
     });
     onAskForRating(async (sendResponse, payload) => {
-        if (!(await isSignedIn())) {
-            return sendResponse(false);
-        }
         if (payload.translationResult.success === false) {
             return sendResponse(false);
         }
-        const userMetadataResult = await userMetadata_getUserMetadata();
-        if (userMetadataResult.success === false) {
-            return sendResponse(false);
-        }
-        const userMetadata = userMetadataResult.value;
         const platform = payload.extensionPlatform === 'iosSafariExtension'
             ? 'safariExtension'
             : payload.extensionPlatform;
-        const rateResponse = userMetadata.rate[platform];
+        const rateResponse = await getRateResponse(platform);
         if (rateResponse !== undefined &&
             (rateResponse.response === 'never' || rateResponse.response === 'review')) {
             return sendResponse(false);
@@ -19672,20 +20390,14 @@ const registerServiceWorker = (registerServiceWorkerOptions) => {
         Ga.capture('extensionAskForRatingResponse', {
             response: payload.rateInteraction,
         });
-        invalidateUserMetadata();
-        const userMetadataResult = await userMetadata_getUserMetadata();
-        if (userMetadataResult.success === false) {
-            return sendResponse();
-        }
-        const userMetadata = userMetadataResult.value;
         const platform = payload.extensionPlatform === 'iosSafariExtension'
             ? 'safariExtension'
             : payload.extensionPlatform;
-        userMetadata.rate[platform] = {
+        invalidateUserMetadata();
+        await saveRateResponse(platform, {
             response: payload.rateInteraction,
             isoDate: new Date().toISOString(),
-        };
-        await userMetadata_saveUserMetadata(userMetadata);
+        });
         await resetAskForRatingCounter();
         return sendResponse();
     });
@@ -19700,6 +20412,12 @@ const registerServiceWorker = (registerServiceWorkerOptions) => {
         return sendResponse(await settings_getSettings());
     });
     onSetSettingsRequest(async (sendResponse, partialSettings) => {
+        return sendResponse(await settings_setSettings(partialSettings));
+    });
+    onGetSettingsExternalRequest(async (sendResponse) => {
+        return sendResponse(await settings_getSettings());
+    });
+    onSetSettingsExternalRequest(async (sendResponse, partialSettings) => {
         return sendResponse(await settings_setSettings(partialSettings));
     });
     onCanPlayOffScreen(async (sendResponse) => {
@@ -19881,6 +20599,13 @@ const registerServiceWorker = (registerServiceWorkerOptions) => {
     });
     onGetLanguagePairs(async (sendResponse) => {
         return sendResponse(languagePairs);
+    });
+    onGetExternalLanguagePairs(async (sendResponse) => {
+        return sendResponse(languagePairs);
+    });
+    onSetExternalLanguagePairs(async (sendResponse, newLanguagePairs) => {
+        await setLanguagePairs(newLanguagePairs);
+        return sendResponse();
     });
     onAnalyzeUnitsOfSpeech(async (sendResponse, payload) => {
         return sendResponse(await publicAnalyzeUnitsOfSpeech(payload));
@@ -20126,15 +20851,6 @@ const browserEnv_hasOffscreen = (browserEnv) => {
 };
 
 ;// ./src/service-worker.ts
-var service_worker_awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 
 
 
@@ -20153,6 +20869,7 @@ registerServiceWorker({
         getJwtToken: getIdToken,
     },
     facility: 'chrome-or-safari',
+    unlimitedMaxCards: true,
 });
 src_browserEnv_browserEnv.contextMenus.create({
     id: 'context-menu-item',
@@ -20164,18 +20881,6 @@ src_browserEnv_browserEnv.contextMenus.onClicked.addListener((info, tab) => {
         action: 'contextMenuTranslateClicked',
     });
 });
-chrome.runtime.onInstalled.addListener((details) => service_worker_awaiter(void 0, void 0, void 0, function* () {
-    if (details.reason === chrome.runtime.OnInstalledReason.INSTALL) {
-        yield chrome.tabs.create({
-            url: `${"https://vocably.pro/app"}/page/welcome`,
-        });
-    }
-}));
-chrome.runtime.setUninstallURL('https://app.vocably.pro/page/uninstall');
-// @ts-ignore
-self.clearStorage = () => {
-    chrome.storage.sync.clear();
-};
 
 })();
 
