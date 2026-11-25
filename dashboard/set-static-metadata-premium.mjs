@@ -1,3 +1,4 @@
+import { mapUserStaticMetadata } from '@vocably/model';
 import { exec } from 'child_process';
 import { config } from 'dotenv-flow';
 import { writeFileSync } from 'fs';
@@ -37,7 +38,7 @@ try {
 }
 
 writeFileSync('./metadata-static.json', metadataJson, 'utf8');
-const userStaticMetadata = JSON.parse(metadataJson);
+const userStaticMetadata = mapUserStaticMetadata(JSON.parse(metadataJson));
 
 set(userStaticMetadata, 'premium', true);
 
